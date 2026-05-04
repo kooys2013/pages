@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAINLAB 재활 가이드</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<style>
+/* ── Toss Design System Tokens ── */
+:root {
+  --toss-blue:     #3182F6;
+  --toss-blue-d:   #1B64DA;
+  --toss-blue-bg:  #EFF6FF;
+  --toss-dark:     #191F28;
+  --toss-gray-700: #4E5968;
+  --toss-gray-500: #8B95A1;
+  --toss-gray-300: #B0B8C1;
+  --toss-gray-100: #F2F4F6;
+  --toss-gray-50:  #F9FAFB;
+  --toss-white:    #FFFFFF;
+  --toss-green:    #00C471;
+  --toss-red:      #F04452;
+  --toss-orange:   #FF8C00;
+  --toss-border:   #E5E8EB;
+
+  --sp-4:4px; --sp-8:8px; --sp-12:12px; --sp-16:16px;
+  --sp-20:20px; --sp-24:24px; --sp-32:32px; --sp-48:48px;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+  --t:160ms ease;
+  --font:'Pretendard Variable','Apple SD Gothic Neo',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--toss-gray-50);color:var(--toss-dark);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* ── Header (Toss top-bar style) ── */
+.header{background:var(--toss-white);border-bottom:1px solid var(--toss-border);padding:0 var(--sp-24);height:56px;display:flex;align-items:center;}
+.header-inner{max-width:860px;margin:0 auto;width:100%;display:flex;align-items:center;gap:var(--sp-12);}
+.header-dot{width:8px;height:8px;background:var(--toss-blue);border-radius:50%;flex-shrink:0;}
+.header-title{font-size:15px;font-weight:800;color:var(--toss-dark);letter-spacing:-0.3px;}
+.header-sub{font-size:12px;color:var(--toss-gray-500);margin-left:var(--sp-4);}
+.header-badge{margin-left:auto;background:var(--toss-blue-bg);color:var(--toss-blue);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+
+/* ── Tabs ── */
+.tab-nav{background:var(--toss-white);border-bottom:1px solid var(--toss-border);position:sticky;top:0;z-index:100;}
+.tab-nav-inner{max-width:860px;margin:0 auto;padding:0 var(--sp-24);display:flex;overflow-x:auto;scrollbar-width:none;}
+.tab-nav-inner::-webkit-scrollbar{display:none;}
+.tab-btn{padding:14px var(--sp-16);font-size:13px;font-weight:600;color:var(--toss-gray-500);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(--font);transition:color var(--t),border-color var(--t);}
+.tab-btn:hover{color:var(--toss-dark);}
+.tab-btn.active{color:var(--toss-blue);border-bottom-color:var(--toss-blue);}
+
+/* ── Content ── */
+.tab-content{display:none;padding:var(--sp-24) 0 64px;}
+.tab-content.active{display:block;}
+.wrap{max-width:860px;margin:0 auto;padding:0 var(--sp-24);}
+@media(max-width:600px){.wrap,.header,.tab-nav-inner{padding-left:var(--sp-16);padding-right:var(--sp-16);}.header{padding:0 var(--sp-16);}}
+
+/* ── Section label (Toss style: uppercase small) ── */
+.sec{font-size:11px;font-weight:700;color:var(--toss-gray-500);letter-spacing:0.8px;text-transform:uppercase;margin:var(--sp-32) 0 var(--sp-12);}
+.sec:first-child{margin-top:0;}
+
+/* ── Card ── */
+.card{background:var(--toss-white);border:1px solid var(--toss-border);border-radius:var(--r-lg);padding:var(--sp-20) var(--sp-24);margin-bottom:var(--sp-12);box-shadow:var(--shadow-sm);transition:box-shadow var(--t);}
+.card:hover{box-shadow:var(--shadow-md);}
+.card-row{display:flex;align-items:flex-start;gap:var(--sp-12);margin-bottom:var(--sp-12);}
+.card-icon{width:36px;height:36px;background:var(--toss-blue-bg);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.card-ttl{font-size:15px;font-weight:800;color:var(--toss-dark);letter-spacing:-0.3px;}
+.card-meta{font-size:12px;color:var(--toss-gray-500);margin-top:2px;}
+
+h3{font-size:14px;font-weight:700;color:var(--toss-dark);margin:var(--sp-16) 0 var(--sp-8);}
+h4{font-size:13px;font-weight:700;color:var(--toss-gray-700);margin:var(--sp-12) 0 var(--sp-8);}
+p{font-size:14px;color:var(--toss-gray-700);margin-bottom:var(--sp-8);line-height:1.65;}
+ul,ol{padding-left:var(--sp-20);margin-bottom:var(--sp-12);}
+li{font-size:14px;color:var(--toss-gray-700);margin-bottom:var(--sp-4);line-height:1.65;}
+strong{color:var(--toss-dark);font-weight:700;}
+em{color:var(--toss-blue);font-style:normal;font-weight:600;}
+hr{border:none;border-top:1px solid var(--toss-border);margin:var(--sp-20) 0;}
+
+/* ── Tags ── */
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin:0 4px 8px 0;}
+.tag-b{background:var(--toss-blue-bg);color:var(--toss-blue);}
+.tag-g{background:#E8FBF3;color:#007D4B;}
+.tag-r{background:#FEF1F2;color:#B0202B;}
+.tag-o{background:#FFF4E5;color:#A05A00;}
+
+/* ── Callout ── */
+.callout{display:flex;gap:var(--sp-12);padding:var(--sp-16);border-radius:var(--r-md);margin:var(--sp-12) 0;border-left:3px solid;}
+.callout-ttl{font-size:13px;font-weight:700;margin-bottom:4px;}
+.callout-txt{font-size:13px;color:var(--toss-gray-700);line-height:1.6;margin:0;}
+.cb-blue{background:var(--toss-blue-bg);border-color:var(--toss-blue);}
+.cb-blue .callout-ttl{color:var(--toss-blue-d);}
+.cb-green{background:#E8FBF3;border-color:var(--toss-green);}
+.cb-green .callout-ttl{color:#007D4B;}
+.cb-red{background:#FEF1F2;border-color:var(--toss-red);}
+.cb-red .callout-ttl{color:#8B0F18;}
+
+/* ── Steps ── */
+.steps{display:flex;flex-direction:column;gap:var(--sp-12);margin:var(--sp-12) 0;}
+.step{display:flex;gap:var(--sp-12);align-items:flex-start;}
+.step-n{width:24px;height:24px;background:var(--toss-blue);color:white;font-size:12px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-lbl{font-size:14px;font-weight:700;color:var(--toss-dark);margin-bottom:3px;}
+.step-txt{font-size:13px;color:var(--toss-gray-700);line-height:1.6;margin:0;}
+
+/* ── Chain ── */
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4) var(--sp-8);margin:var(--sp-12) 0;}
+.chain-node{background:var(--toss-blue-bg);color:var(--toss-blue);font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.chain-arr{color:var(--toss-gray-300);font-size:14px;}
+
+/* ── Compare ── */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-12);margin:var(--sp-12) 0;}
+@media(max-width:500px){.compare{grid-template-columns:1fr;}}
+.cmp{border-radius:var(--r-md);padding:var(--sp-16);border:1px solid;}
+.cmp-bad{background:#FEF1F2;border-color:#FFC0C3;}
+.cmp-good{background:#E8FBF3;border-color:#A8EDD3;}
+.cmp-lbl{font-size:11px;font-weight:800;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:var(--sp-8);}
+.cmp-bad .cmp-lbl{color:var(--toss-red);}
+.cmp-good .cmp-lbl{color:var(--toss-green);}
+
+/* ── Thumbnail grid ── */
+.vg{display:flex;flex-wrap:wrap;gap:var(--sp-12);margin-top:var(--sp-16);}
+.thumb{width:180px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--toss-border);background:var(--toss-white);box-shadow:var(--shadow-sm);text-decoration:none;display:block;transition:box-shadow var(--t),transform var(--t);}
+.thumb:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.thumb-img{position:relative;aspect-ratio:16/9;background:var(--toss-gray-100);overflow:hidden;}
+.thumb-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-ov{position:absolute;inset:0;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--t);}
+.thumb:hover .thumb-ov{opacity:1;}
+.play{width:34px;height:34px;background:var(--toss-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.play::after{content:'';border-left:12px solid white;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px;}
+.thumb-info{padding:var(--sp-8) var(--sp-12) var(--sp-12);}
+.thumb-lbl{font-size:12px;font-weight:600;color:var(--toss-dark);line-height:1.4;}
+.thumb-dur{font-size:11px;color:var(--toss-gray-500);margin-top:2px;}
+
+/* ── Term ── */
+.term{background:var(--toss-white);border:1px solid var(--toss-border);border-left:3px solid var(--toss-blue);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-12);}
+.term-name{font-size:14px;font-weight:800;color:var(--toss-dark);margin-bottom:var(--sp-4);}
+.term-body{font-size:13px;color:var(--toss-gray-700);line-height:1.65;}
+.term-ex{margin-top:var(--sp-8);background:var(--toss-blue-bg);border-radius:var(--r-sm);padding:var(--sp-8) var(--sp-12);font-size:12px;color:var(--toss-blue);font-weight:500;}
+
+/* ── Quiz ── */
+.quiz{background:var(--toss-white);border:1px solid var(--toss-border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:var(--sp-12);}
+.quiz-q{padding:var(--sp-16) var(--sp-20);font-size:14px;font-weight:700;display:flex;align-items:flex-start;gap:var(--sp-12);border-bottom:1px solid var(--toss-gray-100);}
+.quiz-n{width:24px;height:24px;background:var(--toss-blue);color:white;font-size:12px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.quiz-act{padding:var(--sp-12) var(--sp-20);}
+.quiz-btn{font-size:13px;font-weight:700;color:var(--toss-blue);background:var(--toss-blue-bg);border:none;border-radius:var(--r-sm);padding:8px 18px;cursor:pointer;font-family:var(--font);transition:background var(--t);}
+.quiz-btn:hover{background:#D6E9FF;}
+.quiz-ans{display:none;padding:var(--sp-16) var(--sp-20);background:var(--toss-blue-bg);border-top:1px solid #C5DCFF;font-size:13px;color:var(--toss-gray-700);line-height:1.65;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-dot"></div>
+    <span class="header-title">PAINLAB 재활 가이드</span>
+    <span class="header-sub">기능재활 · 통증의 근본 원인</span>
+    <span class="header-badge">2026.05</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('t1',this)">강의 + 요약</button>
+    <button class="tab-btn" onclick="showTab('t2',this)">운동방법 & 팁</button>
+    <button class="tab-btn" onclick="showTab('t3',this)">알면 좋은 것</button>
+    <button class="tab-btn" onclick="showTab('t4',this)">용어집 & 퀴즈</button>
+  </div>
+</nav>
+
+
+<!-- TAB 1 -->
+<div id="t1" class="tab-content active"><div class="wrap">
+
+  <div class="callout cb-blue">
+    <span style="font-size:18px;flex-shrink:0;">🔬</span>
+    <div><div class="callout-ttl">PAINLAB 채널 소개</div>
+    <p class="callout-txt">기능재활 관점으로 <strong>왜 치료가 안 되는지</strong>를 파고드는 채널. 주사·수술보다 고유수용성 감각·근섬유 메커니즘·전신 연결을 강조.</p></div>
+  </div>
+
+  <p class="sec">핵심 이론</p>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🎯</div><div>
+      <div class="card-ttl">운동하는데 왜 계속 아플까? — 진짜 이유</div>
+      <div class="card-meta">5분</div>
+    </div></div>
+    <span class="tag tag-b">핵심 원칙</span>
+    <ul>
+      <li>근력도, 근지구력도 아닌 <strong>협응(Coordination) 능력</strong>이 문제</li>
+      <li>운동 경력이 많아도 <em>안정화 패턴이 깨진 상태</em>로 훈련하면 통증이 반복됨</li>
+      <li>"근육이 있다"와 "근육을 제대로 쓴다"는 완전히 다른 이야기</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"UHkm4kYs80Y","label":"운동하는데 왜 계속 아플까","dur":"5분"},{"id":"l7pJcpJJieE","label":"운동은 하는데 몸 안좋은 사람 특징","dur":"7분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🧠</div><div>
+      <div class="card-ttl">고유수용성 감각이 대체 뭐길래</div>
+      <div class="card-meta">5분</div>
+    </div></div>
+    <span class="tag tag-b">기초 개념</span>
+    <ul>
+      <li><strong>고유수용성 감각(Proprioception)</strong>: 내 몸의 위치·움직임·힘을 감지하는 능력</li>
+      <li>이 감각이 무뎌지면 → 안정화 근육이 제때 반응 못함 → 통증·부상 반복</li>
+      <li>재활 운동 = 고유수용성 감각을 <em>재교육</em>하는 과정</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"BNNJx3Km1zQ","label":"고유수용성 감각이 대체 뭐길래","dur":"5분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🦴</div><div>
+      <div class="card-ttl">재활할수록 견갑골이 망가지는 이유</div>
+      <div class="card-meta">11분</div>
+    </div></div>
+    <span class="tag tag-r">흔한 실수</span>
+    <ul>
+      <li>어깨·견갑골 재활을 <strong>잘못된 방법으로 반복</strong>하면 오히려 패턴이 나빠짐</li>
+      <li>어깨 소리·통증 → 견갑골 안정성 문제가 근본. 어깨만 치료하면 재발</li>
+      <li>흉곽 → 견갑골 → 어깨 순서의 연결이 깨진 것이 문제</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"csA80QyQ-60","label":"재활할수록 견갑골이 망가지는 이유","dur":"11분"},{"id":"ayT1pXd8e4g","label":"전거근 재활에 실패하는 이유","dur":"8분"},{"id":"frLpN4C8Ut0","label":"어깨 재활 열심히 해도 소용 없는 이유","dur":"7분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🔗</div><div>
+      <div class="card-ttl">삼각근·승모근·광배근 계속 뭉치는 이유</div>
+      <div class="card-meta">9분</div>
+    </div></div>
+    <span class="tag tag-b">전신 연결</span>
+    <ul>
+      <li>이 근육들이 뭉치는 것은 <strong>증상이지 원인이 아님</strong></li>
+      <li>하위 안정화 근육(전거근·흉곽)이 일 못할 때 이 근육들이 대신 과사용됨</li>
+      <li>풀어도 또 뭉기는 이유: 원인인 안정화 기능을 해결하지 않아서</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"7gAJtSNk0Dw","label":"삼각근·승모근·광배근 계속 뭉치는 이유","dur":"9분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">💨</div><div>
+      <div class="card-ttl">공황장애·과호흡과 횡격막의 연결</div>
+      <div class="card-meta">6분</div>
+    </div></div>
+    <span class="tag tag-o">전신 연결</span>
+    <ul>
+      <li>공황장애·불안 → 과호흡 → 횡격막 기능 저하 → 코어 불안정</li>
+      <li>자율신경, 소화, 어지럼까지 <em>하나로 연결</em>된 몸의 시스템</li>
+      <li>호흡 패턴을 바로잡으면 공황·불안 증상도 개선 가능</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"gELhhwHWmSc","label":"공황장애 과호흡 횡격막 연결","dur":"6분"},{"id":"UQPNW21DqKw","label":"허리통증 호흡·코어 기능","dur":"7분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">💉</div><div>
+      <div class="card-ttl">주사가 효과 없는 '진짜' 이유</div>
+      <div class="card-meta">4분</div>
+    </div></div>
+    <ul>
+      <li>주사는 통증 신호를 차단하는 것. <strong>기능 저하는 그대로</strong></li>
+      <li>치료받아도 그때뿐인 이유 = 기능적 접근 없이 통증만 잡는 것</li>
+      <li>주사 → 기능회복 운동 병행만이 재발 방지</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"WXiOTD78SlA","label":"주사가 효과 없는 진짜 이유","dur":"4분"},{"id":"sRTMxAg5_lA","label":"치료받아도 그때뿐인 이유","dur":"5분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🎯</div><div>
+      <div class="card-ttl">계속되는 목 통증 — 이 방법을 추천합니다</div>
+      <div class="card-meta">7분</div>
+    </div></div>
+    <ul>
+      <li>약하고 예민해진 목을 <strong>장기적으로 회복</strong>시키는 전략</li>
+      <li>목 자체 강화보다 전신 안정화 → 목 과부하 감소 순서</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"0Kdy5nmFWoM","label":"계속되는 목 통증 해결법","dur":"7분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 2 -->
+<div id="t2" class="tab-content"><div class="wrap">
+
+  <div class="callout cb-green">
+    <span style="font-size:18px;flex-shrink:0;">✅</span>
+    <div><div class="callout-ttl">PAINLAB 운동 철학</div>
+    <p class="callout-txt">세게 하지 말 것. 고유수용성 감각을 먼저 깨울 것. 느낌이 없으면 부하가 너무 높거나 잘못된 근육이 일하는 것.</p></div>
+  </div>
+
+  <p class="sec">장요근 훈련</p>
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🦵</div><div>
+      <div class="card-ttl">장요근 강화에 90%가 실패하는 이유</div>
+      <div class="card-meta">8분</div>
+    </div></div>
+    <span class="tag tag-r">흔한 실수</span>
+    <ul>
+      <li>고관절을 접을 때 가장 먼저 생각하는 근육이 장요근. 하지만 <strong>대부분 엉뚱한 근육이 대신 일함</strong></li>
+      <li>실패 이유: 부하가 너무 높거나 안정화 없이 진행</li>
+      <li>성공 조건: 국소 코어 세팅 → 아주 낮은 부하 → 장요근 느낌 찾기</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"mOhZecSEi0w","label":"장요근 강화에 90%가 실패하는 이유","dur":"8분"},{"id":"Out1vCX2IG8","label":"장요근 훈련 세상 어디에도 없는 방식","dur":"5분"},{"id":"utVLGrjdylY","label":"장요근 강화 스쿼트 전 필수지식","dur":"6분"}]'></div>
+  </div>
+
+  <p class="sec">전거근·견갑골 훈련</p>
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🪽</div><div>
+      <div class="card-ttl">견갑골 전인·후인 제대로 하는 방법</div>
+      <div class="card-meta">5분</div>
+    </div></div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">전인(Protraction): 날개뼈를 앞으로</div>
+        <p class="step-txt">억지로 어깨를 앞으로 모으는 게 아님. 날개뼈가 갈비뼈를 따라 자연스럽게 앞으로 이동하는 느낌.</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">후인(Retraction): 날개뼈를 뒤로</div>
+        <p class="step-txt">어깨를 강제로 뒤로 당기지 않음. 날개뼈가 척추 쪽으로 가볍게 모이는 느낌.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">겨드랑이 아래 느낌 확인</div>
+        <p class="step-txt">전인 시 겨드랑이 아래쪽이 당기면 전거근 활성화 성공.</p>
+      </div></div>
+    </div>
+    <div class="callout cb-red">
+      <span style="font-size:16px;flex-shrink:0;">⚠️</span>
+      <div><div class="callout-ttl">소흉근 스트레칭이 효과 없는 이유</div>
+      <p class="callout-txt">소흉근이 짧아진 것처럼 보여도 실제로는 전거근 약화로 인한 보상. 소흉근을 풀어도 전거근이 활성화 안 되면 재발.</p></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"EYMRPVsrmFQ","label":"견갑골 전인·후인 제대로 하는 법","dur":"5분"},{"id":"rqLd6AvPoIY","label":"소흉근 스트레칭이 효과 없는 이유","dur":"7분"},{"id":"bswTXjy7A3M","label":"스스로 어깨 재활하다 망가지는 이유","dur":"8분"}]'></div>
+  </div>
+
+  <p class="sec">전신 안정화</p>
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🌀</div><div>
+      <div class="card-ttl">운동제한의 진실 — 스트레칭이 답이 아니다</div>
+    </div></div>
+    <ul>
+      <li>관절 가동범위 제한 = 대부분 <strong>안정화 부족으로 인한 보호 반응</strong></li>
+      <li>억지로 늘리면(스트레칭) 오히려 보호 반응이 더 강해짐</li>
+      <li>안정화를 먼저 확보하면 가동범위가 자연히 늘어남</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"q_9XdRYHqJA","label":"운동제한 스트레칭이 답이 아니다","dur":"4분"},{"id":"neoamtWT6qg","label":"잠자는 동안 코어 강화 갈비뼈 안정화","dur":"5분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 3 -->
+<div id="t3" class="tab-content"><div class="wrap">
+
+  <p class="sec">핵심 마인드셋</p>
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">통증은 경보기, 원인이 아니다</div>
+        <p class="step-txt">통증 부위를 치료하는 것은 경보음을 끄는 것. 경보를 울리게 한 기능 저하를 찾아야 한다.</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">협응이 근력보다 우선</div>
+        <p class="step-txt">근육이 있어도 협응(coordination)이 안 되면 무용지물. 재활은 협응 재교육이다.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">고유수용성 감각이 재활의 열쇠</div>
+        <p class="step-txt">몸의 위치·움직임 감각이 무뎌지면 아무리 운동해도 효과 없음. 감각 재교육이 먼저.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <p class="sec">전신 연결 고리</p>
+  <div class="card">
+    <div class="chain">
+      <span class="chain-node">호흡 패턴</span><span class="chain-arr">→</span>
+      <span class="chain-node">횡격막</span><span class="chain-arr">→</span>
+      <span class="chain-node">복강내압</span><span class="chain-arr">→</span>
+      <span class="chain-node">흉곽 안정</span><span class="chain-arr">→</span>
+      <span class="chain-node">견갑골</span><span class="chain-arr">→</span>
+      <span class="chain-node">어깨·목</span>
+    </div>
+    <div class="chain" style="margin-top:var(--sp-8);">
+      <span class="chain-node">자율신경</span><span class="chain-arr">→</span>
+      <span class="chain-node">과호흡</span><span class="chain-arr">→</span>
+      <span class="chain-node">횡격막 약화</span><span class="chain-arr">→</span>
+      <span class="chain-node">공황·불안</span>
+    </div>
+  </div>
+
+  <p class="sec">오해 vs 올바른 접근</p>
+  <div class="compare">
+    <div class="cmp cmp-bad">
+      <div class="cmp-lbl">❌ 오해</div>
+      <ul>
+        <li>아프면 그 부위만 치료</li>
+        <li>스트레칭으로 가동범위 늘리기</li>
+        <li>주사 맞으면 해결</li>
+        <li>뭉친 근육 풀면 됨</li>
+        <li>운동 열심히 하면 나음</li>
+      </ul>
+    </div>
+    <div class="cmp cmp-good">
+      <div class="cmp-lbl">✅ 올바른 접근</div>
+      <ul>
+        <li>전신 연결 고리에서 원인 찾기</li>
+        <li>안정화 → 가동범위 자연 회복</li>
+        <li>주사 + 기능회복 운동 병행</li>
+        <li>왜 뭉치는지 원인 해결</li>
+        <li>협응·감각 재교육이 먼저</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="sec">증상별 영상 추천</p>
+  <div class="card">
+    <h4>어깨·견갑골 반복 통증</h4>
+    <div class="vg" data-vids='[{"id":"csA80QyQ-60","label":"견갑골이 망가지는 이유","dur":"11분"},{"id":"frLpN4C8Ut0","label":"어깨 재활 소용 없는 이유","dur":"7분"}]'></div>
+    <hr>
+    <h4>목·어깨 만성 통증</h4>
+    <div class="vg" data-vids='[{"id":"0Kdy5nmFWoM","label":"계속되는 목 통증 해결법","dur":"7분"},{"id":"pZoSRljo6qs","label":"고질적인 목어깨 반복 이유","dur":"5분"}]'></div>
+    <hr>
+    <h4>자율신경·공황·소화 불량</h4>
+    <div class="vg" data-vids='[{"id":"gELhhwHWmSc","label":"공황장애 과호흡 횡격막","dur":"6분"},{"id":"mNCaITNwRXc","label":"두근거림·어지럼·불면 하나로 연결","dur":"5분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 4 -->
+<div id="t4" class="tab-content"><div class="wrap">
+
+  <p class="sec">핵심 용어 사전</p>
+
+  <div class="term">
+    <div class="term-name">고유수용성 감각 (Proprioception)</div>
+    <p class="term-body">근육·관절·힘줄의 수용체가 뇌에 전달하는 <strong>몸의 위치·움직임·힘 정보</strong>. 이 감각이 떨어지면 근육이 제때 반응 못해 부상·통증 반복.</p>
+    <div class="term-ex">눈 감고 손가락을 코에 갖다 댈 수 있는 것 = 고유수용성 감각 덕분</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">협응 (Coordination)</div>
+    <p class="term-body">여러 근육이 <strong>적절한 타이밍·비율로 함께 일하는 능력</strong>. 근력이 있어도 협응이 안 되면 안정화 실패. 재활의 핵심 목표.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">반사적 안정화 (Reflexive Stabilization)</div>
+    <p class="term-body">움직임 중 자동으로 안정화 패턴이 발동되는 상태. 의식적으로 "조여야지"가 아니라 <strong>자동 반사로 작동</strong>하는 것이 목표.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">전거근 (Serratus Anterior)</div>
+    <p class="term-body">겨드랑이 옆구리 근육. 견갑골을 흉곽에 고정. 약해지면 <strong>견갑골이 뜨고 → 어깨·목으로 과부하 전달</strong>.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">흉곽출구증후군 (Thoracic Outlet Syndrome)</div>
+    <p class="term-body">쇄골·첫 번째 갈비뼈·소흉근 사이 공간이 좁아져 신경·혈관이 압박받는 상태. 팔 저림·어깨 통증 유발. 기능적 접근으로 해결 가능한 경우 많음.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">소흉근 (Pectoralis Minor)</div>
+    <p class="term-body">가슴 안쪽 작은 근육. 과긴장하면 견갑골을 앞으로 당겨 전거근 약화를 만듦. <strong>소흉근만 풀어도 안 되는 이유</strong>: 전거근이 활성화 안 되면 재발.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">자율신경 실조증</div>
+    <p class="term-body">교감·부교감신경 균형이 깨진 상태. 두근거림·어지럼·불면·소화불량·피로가 동시에 나타남. 횡격막 기능 저하·과호흡과 연결됨.</p>
+  </div>
+
+  <p class="sec">이해 확인 퀴즈</p>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">1</div>운동을 꾸준히 했는데 왜 계속 아플까?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q1')">정답 보기</button></div>
+    <div class="quiz-ans" id="q1"><strong>협응(Coordination) 문제.</strong> 근력이나 지구력이 아니라 안정화 패턴이 깨진 상태로 훈련을 반복했기 때문. 잘못된 패턴이 강화될 뿐 기능은 회복되지 않음. 먼저 고유수용성 감각을 재교육해야.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">2</div>풀어도 또 뭉기는 어깨·승모근의 진짜 원인은?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q2')">정답 보기</button></div>
+    <div class="quiz-ans" id="q2"><strong>하위 안정화 근육(전거근·흉곽)의 기능 저하.</strong> 이 근육들이 일을 못할 때 삼각근·승모근이 대신 과사용됨. 풀어도 원인을 해결하지 않으면 계속 뭉김.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">3</div>소흉근 스트레칭을 해도 효과가 없는 이유는?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q3')">정답 보기</button></div>
+    <div class="quiz-ans" id="q3"><strong>전거근 약화가 근본 원인이기 때문.</strong> 소흉근이 짧아 보이는 것은 전거근이 약해서 생긴 보상 패턴. 소흉근을 풀어도 전거근을 활성화하지 않으면 다시 짧아짐.</div>
+  </div>
+
+</div></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.vg[data-vids]').forEach(g=>{
+    JSON.parse(g.dataset.vids).forEach(v=>{
+      const a=document.createElement('a');
+      a.className='thumb';a.href=`https://www.youtube.com/watch?v=${v.id}`;
+      a.target='_blank';a.rel='noopener';
+      a.innerHTML=`<div class="thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="thumb-ov"><div class="play"></div></div></div><div class="thumb-info"><div class="thumb-lbl">${v.label}</div><div class="thumb-dur">${v.dur||''}</div></div>`;
+      g.appendChild(a);
+    });
+  });
+});
+function toggleQ(id){const el=document.getElementById(id);const btn=el.previousElementSibling.querySelector('.quiz-btn');const open=el.style.display==='block';el.style.display=open?'none':'block';btn.textContent=open?'정답 보기':'접기';}
+function showTab(id,btn){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+</script>
+</body>
+</html>

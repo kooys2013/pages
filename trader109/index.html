@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>트레이더109 쇼츠 분석</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<style>
+:root {
+  --bg:     #0D1117;
+  --bg2:    #161B22;
+  --bg3:    #21262D;
+  --border: #30363D;
+  --text:   #E6EDF3;
+  --muted:  #8B949E;
+  --gold:   #F0B429;
+  --gold-d: #D4991C;
+  --green:  #3FB950;
+  --red:    #F85149;
+  --blue:   #58A6FF;
+  --purple: #BC8CFF;
+
+  --sp-4:4px;--sp-8:8px;--sp-12:12px;--sp-16:16px;
+  --sp-20:20px;--sp-24:24px;--sp-32:32px;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+  --t:160ms ease;
+  --font:'Pretendard Variable','Apple SD Gothic Neo',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* Header */
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 var(--sp-24);height:58px;display:flex;align-items:center;}
+.header-inner{max-width:860px;margin:0 auto;width:100%;display:flex;align-items:center;gap:var(--sp-12);}
+.logo{width:32px;height:32px;background:var(--gold);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--bg);flex-shrink:0;letter-spacing:-1px;}
+.hdr-ttl{font-size:15px;font-weight:800;color:var(--text);}
+.hdr-sub{font-size:12px;color:var(--muted);margin-left:var(--sp-4);}
+.hdr-badge{margin-left:auto;background:rgba(240,180,41,.15);color:var(--gold);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;border:1px solid rgba(240,180,41,.3);}
+
+/* Tabs */
+.tab-nav{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.tab-nav-inner{max-width:860px;margin:0 auto;padding:0 var(--sp-24);display:flex;overflow-x:auto;scrollbar-width:none;}
+.tab-nav-inner::-webkit-scrollbar{display:none;}
+.tab-btn{padding:14px var(--sp-16);font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(--font);transition:color var(--t),border-color var(--t);}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* Content */
+.tab-content{display:none;padding:var(--sp-24) 0 64px;}
+.tab-content.active{display:block;}
+.wrap{max-width:860px;margin:0 auto;padding:0 var(--sp-24);}
+@media(max-width:600px){.wrap,.header,.tab-nav-inner{padding-left:var(--sp-16);padding-right:var(--sp-16);}.header{padding:0 var(--sp-16);}}
+
+.sec{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;margin:var(--sp-32) 0 var(--sp-12);}
+.sec:first-child{margin-top:0;}
+
+/* Card */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--sp-20) var(--sp-24);margin-bottom:var(--sp-12);transition:border-color var(--t);}
+.card:hover{border-color:var(--gold);}
+.card-row{display:flex;align-items:flex-start;gap:var(--sp-12);margin-bottom:var(--sp-12);}
+.card-icon{width:36px;height:36px;background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.3);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.card-ttl{font-size:15px;font-weight:800;color:var(--text);}
+.card-meta{font-size:12px;color:var(--muted);margin-top:2px;}
+
+h3{font-size:14px;font-weight:700;color:var(--text);margin:var(--sp-16) 0 var(--sp-8);}
+h4{font-size:13px;font-weight:700;color:var(--muted);margin:var(--sp-12) 0 var(--sp-8);}
+p{font-size:14px;color:#C9D1D9;margin-bottom:var(--sp-8);line-height:1.65;}
+ul,ol{padding-left:var(--sp-20);margin-bottom:var(--sp-12);}
+li{font-size:14px;color:#C9D1D9;margin-bottom:var(--sp-4);line-height:1.65;}
+strong{color:var(--text);font-weight:700;}
+em{color:var(--gold);font-style:normal;font-weight:600;}
+hr{border:none;border-top:1px solid var(--border);margin:var(--sp-20) 0;}
+
+/* Tags */
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin:0 4px 8px 0;}
+.tag-g{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.tag-r{background:rgba(248,81,73,.15);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.tag-y{background:rgba(240,180,41,.15);color:var(--gold);border:1px solid rgba(240,180,41,.3);}
+.tag-b{background:rgba(88,166,255,.15);color:var(--blue);border:1px solid rgba(88,166,255,.3);}
+.tag-p{background:rgba(188,140,255,.15);color:var(--purple);border:1px solid rgba(188,140,255,.3);}
+
+/* Callout */
+.callout{display:flex;gap:var(--sp-12);padding:var(--sp-16);border-radius:var(--r-md);margin:var(--sp-12) 0;border-left:3px solid;}
+.callout-ttl{font-size:13px;font-weight:700;margin-bottom:4px;}
+.callout-txt{font-size:13px;color:#C9D1D9;line-height:1.6;margin:0;}
+.cb-y{background:rgba(240,180,41,.08);border-color:var(--gold);}
+.cb-y .callout-ttl{color:var(--gold);}
+.cb-g{background:rgba(63,185,80,.08);border-color:var(--green);}
+.cb-g .callout-ttl{color:var(--green);}
+.cb-r{background:rgba(248,81,73,.08);border-color:var(--red);}
+.cb-r .callout-ttl{color:var(--red);}
+
+/* Stat boxes */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-12);margin:var(--sp-12) 0;}
+@media(max-width:500px){.stats{grid-template-columns:1fr 1fr;}}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-md);padding:var(--sp-16);text-align:center;}
+.stat-val{font-size:22px;font-weight:900;letter-spacing:-0.5px;line-height:1;}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:var(--sp-4);font-weight:600;}
+.green{color:var(--green);}
+.red{color:var(--red);}
+.gold{color:var(--gold);}
+
+/* Backtesting table */
+.bt-table{width:100%;border-collapse:collapse;margin:var(--sp-12) 0;font-size:13px;}
+.bt-table th{background:var(--bg3);color:var(--muted);font-weight:700;padding:var(--sp-8) var(--sp-12);text-align:left;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;}
+.bt-table td{padding:var(--sp-12);border-bottom:1px solid var(--border);color:#C9D1D9;vertical-align:middle;}
+.bt-table tr:last-child td{border-bottom:none;}
+.bt-table tr:hover td{background:rgba(255,255,255,.02);}
+.claimed{color:var(--red);font-weight:700;}
+.real{color:var(--green);font-weight:700;}
+.verdict-bad{background:rgba(248,81,73,.12);color:var(--red);font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;}
+.verdict-ok{background:rgba(63,185,80,.12);color:var(--green);font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;white-space:nowrap;}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:var(--sp-12);margin:var(--sp-12) 0;}
+.step{display:flex;gap:var(--sp-12);align-items:flex-start;}
+.step-n{width:24px;height:24px;background:var(--gold);color:var(--bg);font-size:12px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-lbl{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.step-txt{font-size:13px;color:#C9D1D9;line-height:1.6;margin:0;}
+
+/* Candlestick visual */
+.candle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-12);margin:var(--sp-12) 0;}
+@media(max-width:500px){.candle-grid{grid-template-columns:1fr;}}
+.candle-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-md);padding:var(--sp-16);}
+.candle-name{font-size:13px;font-weight:800;color:var(--text);margin-bottom:var(--sp-8);}
+.candle-type{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:var(--sp-8);}
+.bull{background:rgba(63,185,80,.15);color:var(--green);}
+.bear{background:rgba(248,81,73,.15);color:var(--red);}
+.candle-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* Shorts thumbnails (vertical 9:16) */
+.shorts-grid{display:flex;flex-wrap:wrap;gap:var(--sp-12);margin-top:var(--sp-16);}
+.short-card{width:130px;cursor:pointer;text-decoration:none;display:block;}
+.short-img{position:relative;aspect-ratio:9/16;background:var(--bg3);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);transition:border-color var(--t);}
+.short-card:hover .short-img{border-color:var(--gold);}
+.short-img img{width:100%;height:100%;object-fit:cover;}
+.short-ov{position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--t);}
+.short-card:hover .short-ov{opacity:1;}
+.short-play{width:32px;height:32px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.short-play::after{content:'';border-left:11px solid var(--bg);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px;}
+.short-lbl{font-size:11px;color:var(--muted);margin-top:var(--sp-8);line-height:1.4;font-weight:500;}
+
+/* Term */
+.term{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 var(--r-md) var(--r-md) 0;padding:var(--sp-16) var(--sp-20);margin-bottom:var(--sp-12);}
+.term-name{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:var(--sp-4);}
+.term-body{font-size:13px;color:#C9D1D9;line-height:1.65;}
+.term-ex{margin-top:var(--sp-8);background:rgba(240,180,41,.08);border-radius:var(--r-sm);padding:var(--sp-8) var(--sp-12);font-size:12px;color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">109</div>
+    <span class="hdr-ttl">트레이더109 쇼츠 분석</span>
+    <span class="hdr-sub">매매법 검증 · 백테스팅 · 캔들 패턴</span>
+    <span class="hdr-badge">Shorts 13개 분석</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('t1',this)">주장하는 바</button>
+    <button class="tab-btn" onclick="showTab('t2',this)">사용법</button>
+    <button class="tab-btn" onclick="showTab('t3',this)">백테스팅 구성</button>
+    <button class="tab-btn" onclick="showTab('t4',this)">용어집</button>
+  </div>
+</nav>
+
+
+<!-- TAB 1 — 주장하는 바 -->
+<div id="t1" class="tab-content active"><div class="wrap">
+
+  <div class="callout cb-y">
+    <span style="font-size:18px;flex-shrink:0;">📊</span>
+    <div><div class="callout-ttl">채널 핵심 주제</div>
+    <p class="callout-txt">"유명 매매법을 직접 백테스팅해서 실제 승률을 공개합니다." 온라인에 떠도는 과장된 수익률 주장을 데이터로 검증. 쇼츠 13개 = 검증 7개 + 캔들패턴 교육 6개.</p></div>
+  </div>
+
+  <p class="sec">검증 결과 요약</p>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">🔍</div><div>
+      <div class="card-ttl">바이럴 매매법 — 주장 vs 실제 승률</div>
+      <div class="card-meta">백테스팅 직접 검증</div>
+    </div></div>
+
+    <div style="overflow-x:auto;">
+    <table class="bt-table">
+      <thead>
+        <tr>
+          <th>영상 주제</th>
+          <th>주장 수익/승률</th>
+          <th>실제 승률</th>
+          <th>판정</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>승률 92% 매매법</td>
+          <td class="claimed">92%</td>
+          <td class="real">31.5%</td>
+          <td><span class="verdict-bad">과장 심각</span></td>
+        </tr>
+        <tr>
+          <td>390억 번 매매법</td>
+          <td class="claimed">390억 수익</td>
+          <td class="real">29~35%</td>
+          <td><span class="verdict-bad">재현 불가</span></td>
+        </tr>
+        <tr>
+          <td>15억 번 매매법</td>
+          <td class="claimed">15억 수익</td>
+          <td class="real">34%</td>
+          <td><span class="verdict-bad">재현 불가</span></td>
+        </tr>
+        <tr>
+          <td>1200% 수익률 매매법</td>
+          <td class="claimed">1200%</td>
+          <td class="real">45%</td>
+          <td><span class="verdict-ok">조건부 가능</span></td>
+        </tr>
+        <tr>
+          <td>15만→1억 매매법</td>
+          <td class="claimed">15만→1억</td>
+          <td class="real">49%</td>
+          <td><span class="verdict-ok">조건부 가능</span></td>
+        </tr>
+        <tr>
+          <td>폭락 직전 캔들 패턴</td>
+          <td class="claimed">"폭락 신호"</td>
+          <td class="real">62.18% (하락)</td>
+          <td><span class="verdict-ok">통계적 유효</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout cb-r" style="margin-top:var(--sp-16);">
+      <span style="font-size:16px;flex-shrink:0;">⚠️</span>
+      <div><div class="callout-ttl">핵심 결론</div>
+      <p class="callout-txt"><strong>대부분의 "~억 번 매매법"은 선택적 사례로 과장된 것.</strong> 실제 백테스팅 시 승률 30~35%. 다만 <em>리스크:리워드 비율 1:2 이상</em>이면 승률 45~50%로도 수익 가능.</p></div>
+    </div>
+  </div>
+
+  <p class="sec">핵심 메시지</p>
+
+  <div class="card">
+    <div class="card-row"><div class="card-icon">💡</div><div>
+      <div class="card-ttl">승률보다 리스크:리워드 비율이 중요</div>
+    </div></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val red">30%</div>
+        <div class="stat-lbl">대부분 검증된 실제 승률</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val gold">1:3</div>
+        <div class="stat-lbl">권장 리스크:리워드</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val green">흑자</div>
+        <div class="stat-lbl">30% 승률 + 1:3 R:R 시</div>
+      </div>
+    </div>
+    <ul>
+      <li>승률 30%여도 <strong>손실 1 : 수익 3 비율</strong>이면 장기적으로 수익 가능</li>
+      <li>바이럴 매매법은 <em>리스크 관리 없이 승률만 강조</em>하는 경우가 많음</li>
+      <li>62% 하락 확률 패턴도 나머지 38%에서 큰 손실이 나면 전체 마이너스</li>
+    </ul>
+  </div>
+
+  <p class="sec">쇼츠 전체 목록</p>
+  <div class="card">
+    <div class="shorts-grid" data-vids='[
+      {"id":"2KN7cZtU3HI","label":"승률 92% 매매법 진짜 승률"},
+      {"id":"aGPXOPXW2dU","label":"390억 매매법 따라하면?"},
+      {"id":"NhxlL1SXgmQ","label":"15억 매매법 따라하면?"},
+      {"id":"5g0w5GFY-T4","label":"1200% 수익률 진짜일까"},
+      {"id":"IKe15ZCWZV8","label":"15만→1억 매매법 해보면"},
+      {"id":"nrcvyNZGSJg","label":"폭락 직전 캔들 확률"},
+      {"id":"k7wftlghw_0","label":"상승 장악형 캔들"},
+      {"id":"oCJcpRF26xg","label":"라이징 웻지"},
+      {"id":"9D5_e-qUMZ8","label":"쓰리 마켓 패턴"},
+      {"id":"IUNeouoXTy8","label":"망치형 캔들"},
+      {"id":"1SDjkwZY68E","label":"적삼병 캔들"},
+      {"id":"q1jzUGIj-Fw","label":"비트코인 지금 사도 될까"}
+    ]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 2 — 사용법 -->
+<div id="t2" class="tab-content"><div class="wrap">
+
+  <div class="callout cb-y">
+    <span style="font-size:18px;flex-shrink:0;">📈</span>
+    <div><div class="callout-ttl">캔들 패턴 — 어떻게 사용하나</div>
+    <p class="callout-txt">캔들 패턴은 <strong>확률적 도구</strong>. 100% 예측이 아니라 유리한 확률을 쌓는 것. 리스크 관리와 함께 사용해야 의미 있음.</p></div>
+  </div>
+
+  <p class="sec">상승 신호 패턴</p>
+
+  <div class="candle-grid">
+    <div class="candle-card">
+      <div class="candle-name">상승 장악형 (Bullish Engulfing)</div>
+      <span class="candle-type bull">매수 신호</span>
+      <p class="candle-desc">이전 음봉을 완전히 감싸는 큰 양봉. 매도세가 완전히 뒤집혔다는 신호. 지지선 근처에서 더 유효.</p>
+    </div>
+    <div class="candle-card">
+      <div class="candle-name">망치형 (Hammer)</div>
+      <span class="candle-type bull">반전 신호</span>
+      <p class="candle-desc">긴 아래 꼬리 + 작은 몸통. 하락 중 저가에서 강한 매수세 진입. <strong>저항선 근처</strong>에서는 매도 신호(역망치형 참고).</p>
+    </div>
+    <div class="candle-card">
+      <div class="candle-name">적삼병 (Three White Soldiers)</div>
+      <span class="candle-type bull">강세 반전</span>
+      <p class="candle-desc">연속 3개 양봉, 각각 전봉의 몸통 내에서 시가. 강한 상승 전환 신호. 과매수 구간에서는 신뢰도 낮음.</p>
+    </div>
+    <div class="candle-card">
+      <div class="candle-name">쓰리 마켓 패턴</div>
+      <span class="candle-type bull">추세 신호</span>
+      <p class="candle-desc">세 번의 저점이 점진적으로 높아지는 패턴. 상승 추세 전환 가능성. 거래량 확인 필수.</p>
+    </div>
+  </div>
+
+  <p class="sec">하락 신호 패턴</p>
+
+  <div class="candle-grid">
+    <div class="candle-card">
+      <div class="candle-name">라이징 웻지 (Rising Wedge)</div>
+      <span class="candle-type bear">하락 지속</span>
+      <p class="candle-desc">상승하지만 고점·저점이 좁아지는 수렴 패턴. 상승세 약화 → 하락 전환 신호. 이탈 시 매도 진입.</p>
+    </div>
+    <div class="candle-card">
+      <div class="candle-name">폭락 직전 캔들 패턴</div>
+      <span class="candle-type bear">하락 확률</span>
+      <p class="candle-desc">백테스팅 기준 62.18% 하락 확률. 나머지 38%는 반등. <strong>단독 사용 금지, 다른 지표와 조합 필수.</strong></p>
+    </div>
+  </div>
+
+  <p class="sec">매매 원칙 (데이터 기반)</p>
+
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">패턴 확인 → 지지/저항선 위치 체크</div>
+        <p class="step-txt">패턴 단독보다 지지/저항선과 겹치는 위치에서 신뢰도 상승.</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">리스크:리워드 1:2 이상 확보 후 진입</div>
+        <p class="step-txt">손절가와 목표가를 먼저 설정. 1:2 미만이면 패스. 승률 40%도 1:2.5이면 수익 가능.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">패턴 하나만 믿지 않기</div>
+        <p class="step-txt">백테스팅 결과 어떤 패턴도 단독으로 60% 이상 승률 없음. 복합 조건 사용.</p>
+      </div></div>
+    </div>
+    <div class="callout cb-r">
+      <span style="font-size:16px;flex-shrink:0;">❌</span>
+      <div><div class="callout-ttl">절대 하지 말 것</div>
+      <p class="callout-txt">손절 없이 진입 / 리스크 무시하고 승률만 믿기 / "이번엔 다를 거야"라는 감정 매매</p></div>
+    </div>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 3 — 백테스팅 구성 -->
+<div id="t3" class="tab-content"><div class="wrap">
+
+  <div class="callout cb-g">
+    <span style="font-size:18px;flex-shrink:0;">🧪</span>
+    <div><div class="callout-ttl">트레이더109의 백테스팅 방법론</div>
+    <p class="callout-txt">주관적 느낌이 아니라 <strong>과거 차트 데이터를 전수 조사</strong>해서 실제 승률을 계산. "이 조건에서 몇 번 발생하고 몇 번 맞았나"를 세는 것.</p></div>
+  </div>
+
+  <p class="sec">백테스팅 진행 방식</p>
+
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">조건 정의</div>
+        <p class="step-txt">검증할 패턴의 조건을 명확히 정함. 예: "1시간봉에서 상승 장악형 발생 후 24시간 이내 X% 상승"</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">데이터 범위 설정</div>
+        <p class="step-txt">코스피·S&P500·나스닥·비트코인 등 여러 자산, 1시간봉~일봉 데이터 사용.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">전수 조사</div>
+        <p class="step-txt">조건에 해당하는 모든 케이스 카운트. 예: "이 패턴이 총 100번 발생, 이 중 34번 목표 달성 = 34% 승률"</p>
+      </div></div>
+      <div class="step"><div class="step-n">4</div><div>
+        <div class="step-lbl">R:R(리스크:리워드) 적용 시뮬레이션</div>
+        <p class="step-txt">승률 × 수익 - 패율 × 손실로 기댓값 계산. 승률 34% + R:R 1:2 = 수익 기댓값 양수.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <p class="sec">백테스팅 결과 해석법</p>
+
+  <div class="card">
+    <h4>기댓값(Expected Value) 계산</h4>
+    <div class="card" style="background:var(--bg3);border-color:var(--border);margin-bottom:var(--sp-12);">
+      <p style="font-family:monospace;font-size:13px;color:var(--gold);">
+        기댓값 = (승률 × 수익) - (패율 × 손실)<br><br>
+        예시: 승률 35%, R:R 1:2<br>
+        = (0.35 × 2) - (0.65 × 1)<br>
+        = 0.70 - 0.65 = <strong style="color:var(--green)">+0.05 → 수익</strong>
+      </p>
+    </div>
+    <h4>실제 검증 사례</h4>
+    <ul>
+      <li><strong>승률 92% 주장 → 실제 31.5%</strong>: R:R 1:1로는 장기 손실. 1:3 이상이어야 겨우 수익</li>
+      <li><strong>승률 62% 폭락 패턴</strong>: 유효하지만 나머지 38% 반등 시 손실 관리 필수</li>
+      <li><strong>승률 49% 1억 매매법</strong>: R:R 1:2 이상이면 실제로 수익 가능한 유일한 케이스</li>
+    </ul>
+    <div class="callout cb-y">
+      <span style="font-size:16px;flex-shrink:0;">💡</span>
+      <div><div class="callout-ttl">핵심 인사이트</div>
+      <p class="callout-txt">승률이 50% 미만이어도 <em>리스크:리워드만 충분하면 수익 가능</em>. 반대로 승률 92%여도 손절을 크게 잡으면 손실.</p></div>
+    </div>
+  </div>
+
+  <p class="sec">백테스팅의 한계</p>
+  <div class="card">
+    <ul>
+      <li><strong>과거 데이터 = 미래 보장 아님</strong>: 시장 구조가 바뀌면 패턴 유효성도 변함</li>
+      <li><strong>슬리피지·수수료 미포함</strong>: 실제 거래에서는 이 비용이 기댓값을 깎음</li>
+      <li><strong>심리적 실행력</strong>: 백테스팅은 100% 기계적 진입 가정. 실제는 감정이 개입</li>
+      <li><strong>오버피팅 위험</strong>: 과거에만 맞게 조건을 너무 세밀하게 설정하면 미래에 안 맞음</li>
+    </ul>
+  </div>
+
+</div></div>
+
+
+<!-- TAB 4 — 용어집 -->
+<div id="t4" class="tab-content"><div class="wrap">
+
+  <p class="sec">트레이딩 핵심 용어</p>
+
+  <div class="term">
+    <div class="term-name">백테스팅 (Backtesting)</div>
+    <p class="term-body">과거 차트 데이터를 이용해 특정 매매 전략의 성과를 검증하는 방법. 미래를 예측하는 것이 아니라 <strong>과거에 이 전략이 얼마나 유효했는지</strong>를 통계로 확인.</p>
+    <div class="term-ex">예: "이 패턴이 2020~2024년 코스피에서 100번 발생 → 60번 성공 = 승률 60%"</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">리스크:리워드 (Risk:Reward, R:R)</div>
+    <p class="term-body">손절가 대비 목표가 비율. <strong>1:2</strong> = 손실 1을 감수하고 수익 2를 노리는 것. 승률이 낮아도 R:R이 높으면 장기적으로 수익 가능.</p>
+    <div class="term-ex">손절 -1% / 목표 +2% → R:R = 1:2. 승률 40%여도 기댓값 = (0.4×2) - (0.6×1) = +0.2</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">기댓값 (Expected Value, EV)</div>
+    <p class="term-body">매매를 무한히 반복했을 때 평균적으로 얻는 수익. <strong>EV = (승률×수익) - (패율×손실)</strong>. 양수이면 장기적으로 수익, 음수이면 손실.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">장악형 캔들 (Engulfing Candle)</div>
+    <p class="term-body">이전 캔들의 몸통을 완전히 감싸는 캔들. <strong>상승 장악형</strong> = 음봉 다음에 더 큰 양봉. <strong>하락 장악형</strong> = 양봉 다음에 더 큰 음봉. 추세 전환 신호.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">라이징 웻지 (Rising Wedge)</div>
+    <p class="term-body">고점과 저점이 모두 상승하지만 점점 수렴하는 패턴. <strong>상승 중 하락 전환 신호</strong>. 삼각형 수렴선 이탈 시 하락 가속.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">망치형 캔들 (Hammer)</div>
+    <p class="term-body">몸통이 작고 아래 꼬리가 긴 캔들. 하락 중 강한 매수세 진입 신호. <strong>지지선 근처에서 유효</strong>. 저항선 근처에서는 반대 신호.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">적삼병 (Three White Soldiers)</div>
+    <p class="term-body">연속 3개의 강한 양봉. 강세 전환 신호. <strong>과매수 구간이나 급등 후</strong>에는 신뢰도 낮음. 거래량 증가와 함께여야 유효.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">오버피팅 (Overfitting)</div>
+    <p class="term-body">과거 데이터에 너무 잘 맞게 최적화해서 미래 데이터에는 맞지 않는 현상. 백테스팅 결과가 좋아도 실전에서 실패하는 주요 원인.</p>
+    <div class="term-ex">예: "조건을 너무 세밀하게 설정하면 과거엔 승률 80%지만 실전에선 40%"</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">슬리피지 (Slippage)</div>
+    <p class="term-body">주문 가격과 실제 체결 가격의 차이. 변동성 높을수록 커짐. 백테스팅에서는 무시되지만 실전에서는 수익을 깎는 중요한 비용.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">지지선 / 저항선 (Support / Resistance)</div>
+    <p class="term-body">과거에 가격이 여러 번 반등한 수준(지지) / 막힌 수준(저항). 캔들 패턴이 지지선에서 발생하면 신뢰도 상승, 저항선에서는 반대 신호로 해석.</p>
+  </div>
+
+</div></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  // Shorts (9:16 vertical thumbnails)
+  document.querySelectorAll('.shorts-grid[data-vids]').forEach(g=>{
+    JSON.parse(g.dataset.vids).forEach(v=>{
+      const a=document.createElement('a');
+      a.className='short-card';
+      a.href=`https://www.youtube.com/shorts/${v.id}`;
+      a.target='_blank';a.rel='noopener';
+      // Use hqdefault for shorts (mqdefault may not exist for all)
+      a.innerHTML=`<div class="short-img"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.label}" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${v.id}/mqdefault.jpg'"><div class="short-ov"><div class="short-play"></div></div></div><div class="short-lbl">${v.label}</div>`;
+      g.appendChild(a);
+    });
+  });
+});
+function showTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
