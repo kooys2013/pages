@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지예를 위한 발표 & 면접 가이드 🌸</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<style>
+/* ── Cute / Figma-inspired Design ── */
+:root {
+  --pink:     #FF6B9D;
+  --pink-l:   #FFE4EF;
+  --pink-m:   #FFB3CF;
+  --mint:     #3EC9B4;
+  --mint-l:   #D6F5F0;
+  --lavender: #9B7FE8;
+  --lav-l:    #EDE7FF;
+  --yellow:   #FFCA28;
+  --yel-l:    #FFF8DC;
+  --peach:    #FF8C69;
+  --peach-l:  #FFE8E0;
+  --sky:      #5BB8FF;
+  --sky-l:    #E0F2FF;
+  --bg:       #FFF5F8;
+  --white:    #FFFFFF;
+  --text:     #2D2D2D;
+  --gray-600: #5A5A7A;
+  --gray-400: #9999BB;
+  --gray-200: #E8E8F0;
+  --gray-100: #F5F5FC;
+  --border:   #F0E0EA;
+
+  --font: 'Pretendard Variable', 'Apple SD Gothic Neo', sans-serif;
+  --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 32px;
+  --shadow-sm: 0 2px 8px rgba(255,107,157,.12);
+  --shadow-md: 0 6px 24px rgba(255,107,157,.16);
+  --t: 200ms ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+
+/* ── Decorative blobs ── */
+body::before{content:'';position:fixed;top:-120px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,107,157,.15),transparent 70%);pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;bottom:-100px;left:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(62,201,180,.12),transparent 70%);pointer-events:none;z-index:0;}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#FFE4EF 0%,#EDE7FF 50%,#D6F5F0 100%);padding:28px var(--r-xl) 24px;position:relative;overflow:hidden;}
+.header::after{content:'✨';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:48px;opacity:.4;}
+.header-inner{max-width:820px;margin:0 auto;}
+.header-tag{display:inline-flex;align-items:center;gap:6px;background:var(--pink);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
+.header-title{font-size:22px;font-weight:900;color:var(--text);letter-spacing:-0.5px;line-height:1.3;}
+.header-title span{color:var(--pink);}
+.header-sub{font-size:13px;color:var(--gray-600);margin-top:6px;}
+@media(max-width:600px){.header{padding:24px 18px 20px;}.header-title{font-size:18px;}}
+
+/* ── Tab nav ── */
+.tab-nav{background:var(--white);border-bottom:2px solid var(--pink-l);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(255,107,157,.08);}
+.tab-nav-inner{max-width:820px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;}
+.tab-nav-inner::-webkit-scrollbar{display:none;}
+.tab-btn{padding:14px 16px;font-size:13px;font-weight:700;color:var(--gray-400);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(--font);transition:all var(--t);border-radius:var(--r-sm) var(--r-sm) 0 0;}
+.tab-btn:hover{color:var(--pink);background:var(--pink-l);}
+.tab-btn.active{color:var(--pink);border-bottom-color:var(--pink);}
+
+/* ── Content ── */
+.tab-content{display:none;padding:24px 0 80px;position:relative;z-index:1;}
+.tab-content.active{display:block;}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px;}
+
+/* ── Section label ── */
+.sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--pink);letter-spacing:.5px;text-transform:uppercase;margin:32px 0 14px;}
+.sec:first-child{margin-top:0;}
+.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--pink-l),transparent);border-radius:2px;}
+
+/* ── Card ── */
+.card{background:var(--white);border:2px solid var(--pink-l);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow-sm);transition:box-shadow var(--t),transform var(--t);}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+.card-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.icon-pink{background:var(--pink-l);}
+.icon-mint{background:var(--mint-l);}
+.icon-lav{background:var(--lav-l);}
+.icon-yel{background:var(--yel-l);}
+.icon-sky{background:var(--sky-l);}
+.icon-peach{background:var(--peach-l);}
+.card-ttl{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.3px;}
+.card-meta{font-size:12px;color:var(--gray-400);margin-top:3px;}
+
+h3{font-size:14px;font-weight:700;color:var(--text);margin:14px 0 8px;}
+h4{font-size:13px;font-weight:700;color:var(--gray-600);margin:12px 0 6px;}
+p{font-size:14px;color:var(--gray-600);margin-bottom:8px;line-height:1.65;}
+ul,ol{padding-left:18px;margin-bottom:12px;}
+li{font-size:14px;color:var(--gray-600);margin-bottom:4px;line-height:1.65;}
+strong{color:var(--text);font-weight:700;}
+em{color:var(--pink);font-style:normal;font-weight:700;}
+hr{border:none;border-top:2px dashed var(--pink-l);margin:20px 0;}
+
+/* ── Cute tags ── */
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin:0 4px 8px 0;border:1.5px solid;}
+.tag-p{background:var(--pink-l);color:var(--pink);border-color:var(--pink-m);}
+.tag-m{background:var(--mint-l);color:var(--mint);border-color:#8FE0D8;}
+.tag-l{background:var(--lav-l);color:var(--lavender);border-color:#C5B0F5;}
+.tag-y{background:var(--yel-l);color:#B38600;border-color:#FFE082;}
+.tag-s{background:var(--sky-l);color:var(--sky);border-color:#A8D9FF;}
+
+/* ── Callout ── */
+.callout{display:flex;gap:12px;padding:16px 18px;border-radius:var(--r-md);margin:12px 0;border:2px solid;}
+.callout-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.callout-ttl{font-size:13px;font-weight:800;margin-bottom:4px;}
+.callout-txt{font-size:13px;color:var(--gray-600);line-height:1.6;margin:0;}
+.cb-pink{background:var(--pink-l);border-color:var(--pink-m);}
+.cb-pink .callout-ttl{color:var(--pink);}
+.cb-mint{background:var(--mint-l);border-color:#8FE0D8;}
+.cb-mint .callout-ttl{color:var(--mint);}
+.cb-lav{background:var(--lav-l);border-color:#C5B0F5;}
+.cb-lav .callout-ttl{color:var(--lavender);}
+.cb-yel{background:var(--yel-l);border-color:#FFE082;}
+.cb-yel .callout-ttl{color:#9A7000;}
+
+/* ── Steps ── */
+.steps{display:flex;flex-direction:column;gap:12px;margin:12px 0;}
+.step{display:flex;gap:12px;align-items:flex-start;}
+.step-n{width:28px;height:28px;background:linear-gradient(135deg,var(--pink),#FF8CC4);color:white;font-size:13px;font-weight:900;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;box-shadow:0 3px 8px rgba(255,107,157,.3);}
+.step-lbl{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.step-txt{font-size:13px;color:var(--gray-600);line-height:1.6;margin:0;}
+
+/* ── Highlight box (for Jiyae tips) ── */
+.tip-box{background:linear-gradient(135deg,var(--pink-l),var(--lav-l));border:2px solid var(--pink-m);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:14px;position:relative;overflow:hidden;}
+.tip-box::before{content:'💝';position:absolute;right:16px;top:12px;font-size:32px;opacity:.3;}
+.tip-label{font-size:11px;font-weight:900;color:var(--pink);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
+.tip-title{font-size:15px;font-weight:900;color:var(--text);margin-bottom:10px;}
+.tip-content{font-size:14px;color:var(--gray-600);line-height:1.65;}
+
+/* ── Practice box ── */
+.practice{background:var(--yel-l);border:2px solid #FFE082;border-radius:var(--r-md);padding:16px 20px;margin:12px 0;}
+.practice-ttl{font-size:13px;font-weight:800;color:#7A5C00;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.practice-txt{font-size:13px;color:#5A4400;line-height:1.65;}
+
+/* ── Video thumbnails ── */
+.vg{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
+.thumb{width:175px;border-radius:var(--r-md);overflow:hidden;border:2px solid var(--pink-l);background:var(--white);box-shadow:var(--shadow-sm);text-decoration:none;display:block;transition:all var(--t);}
+.thumb:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--pink);}
+.thumb-img{position:relative;aspect-ratio:16/9;background:var(--pink-l);overflow:hidden;}
+.thumb-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-ov{position:absolute;inset:0;background:rgba(255,107,157,.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--t);}
+.thumb:hover .thumb-ov{opacity:1;}
+.play{width:36px;height:36px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(255,107,157,.4);}
+.play::after{content:'';border-left:13px solid white;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px;}
+.thumb-info{padding:8px 12px 12px;}
+.thumb-lbl{font-size:12px;font-weight:700;color:var(--text);line-height:1.4;}
+.thumb-dur{font-size:11px;color:var(--gray-400);margin-top:2px;}
+
+/* ── Problem-Solution card ── */
+.prob-sol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+@media(max-width:500px){.prob-sol{grid-template-columns:1fr;}}
+.prob{background:#FFF0F5;border:2px solid var(--pink-m);border-radius:var(--r-md);padding:14px 16px;}
+.sol{background:var(--mint-l);border:2px solid #8FE0D8;border-radius:var(--r-md);padding:14px 16px;}
+.ps-lbl{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
+.prob .ps-lbl{color:var(--pink);}
+.sol .ps-lbl{color:var(--mint);}
+
+/* ── Big tip cards (for Jiyae section) ── */
+.jiyae-card{background:var(--white);border:2px solid var(--pink-l);border-radius:var(--r-xl);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:all var(--t);}
+.jiyae-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+.jiyae-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:linear-gradient(135deg,var(--pink),#C060A8);color:white;font-size:15px;font-weight:900;border-radius:50%;margin-bottom:12px;box-shadow:0 3px 10px rgba(255,107,157,.3);}
+.jiyae-issue{font-size:12px;font-weight:700;color:var(--pink);background:var(--pink-l);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:8px;}
+.jiyae-ttl{font-size:16px;font-weight:900;color:var(--text);margin-bottom:10px;letter-spacing:-.3px;}
+.jiyae-desc{font-size:14px;color:var(--gray-600);margin-bottom:14px;line-height:1.65;}
+.jiyae-method{background:linear-gradient(135deg,#F0FFF9,#E8F0FF);border:2px solid #C5E8FF;border-radius:var(--r-md);padding:14px 18px;}
+.jiyae-method-ttl{font-size:12px;font-weight:800;color:var(--lavender);margin-bottom:8px;}
+
+/* ── Formula box ── */
+.formula{background:linear-gradient(135deg,var(--lav-l),var(--sky-l));border:2px solid #C5B0F5;border-radius:var(--r-md);padding:18px;margin:12px 0;text-align:center;}
+.formula-txt{font-size:18px;font-weight:900;color:var(--lavender);letter-spacing:-0.5px;}
+.formula-sub{font-size:12px;color:var(--gray-600);margin-top:6px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-tag">🌸 지예를 위한 특별 가이드</div>
+    <h1 class="header-title"><span>지예</span>의 발표 & 면접 완전정복 ✨</h1>
+    <p class="header-sub">happyspeech 임행복 강사 강의 정리 · 발표 / 면접 / 지예만을 위한 팁</p>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('t1',this)">🎤 발표 강의</button>
+    <button class="tab-btn" onclick="showTab('t2',this)">💼 면접 강의</button>
+    <button class="tab-btn" onclick="showTab('t3',this)">💝 지예를 위한 팁</button>
+  </div>
+</nav>
+
+
+<!-- ══ TAB 1 — 발표 강의 ══ -->
+<div id="t1" class="tab-content active"><div class="wrap">
+
+  <div class="callout cb-pink">
+    <span class="callout-icon">🌸</span>
+    <div><div class="callout-ttl">발표의 핵심 원칙</div>
+    <p class="callout-txt">대본을 외우지 말고 <strong>키워드로 말하세요</strong>. 자연스럽게 흘러가는 말이 가장 잘 들립니다. 완벽한 발표보다 <em>살아있는 발표</em>가 더 설득력 있어요 🎯</p></div>
+  </div>
+
+  <p class="sec">✨ 발표 잘하는 핵심 기술</p>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-lav">🗂️</div>
+      <div>
+        <div class="card-ttl">대본 외우지 말고 키워드로 말하기</div>
+        <div class="card-meta">happyspeech · 9분</div>
+      </div>
+    </div>
+    <span class="tag tag-p">핵심 기술</span>
+    <ul>
+      <li><strong>키워드 중심 구조</strong>: 전달할 내용을 키워드 3~5개로 압축</li>
+      <li>외운 대본은 잊어버리면 끝. 키워드는 잊어도 <em>맥락으로 이어갈 수 있음</em></li>
+      <li>키워드 → 이유(맥락) → 예시 순서로 자연스럽게 이어가기</li>
+    </ul>
+    <div class="practice">
+      <div class="practice-ttl">🏋️ 연습법</div>
+      <p class="practice-txt">발표 내용을 포스트잇 5장에 키워드만 적어보세요. 그 키워드만 보고 말하는 연습 3번 → 키워드도 없이 말하는 연습 3번</p>
+    </div>
+    <div class="vg" data-vids='[{"id":"BRQpeHrrUJA","label":"키워드로 말이 술술 나오는 훈련법","dur":"9분"},{"id":"AJVmJu3KrkQ","label":"10초 만에 조리있게 말하는 법","dur":"8분"},{"id":"Pp9ld0nIwfg","label":"횡설수설하지 않고 조리있게 말하기","dur":"6분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-mint">🎯</div>
+      <div>
+        <div class="card-ttl">설득하는 발표의 공식 — PRP</div>
+        <div class="card-meta">happyspeech · 8분</div>
+      </div>
+    </div>
+    <span class="tag tag-m">설득 구조</span>
+    <div class="formula">
+      <div class="formula-txt">Point → Reason → Point (재강조)</div>
+      <div class="formula-sub">핵심 주장 → 이유/근거 → 다시 핵심으로 마무리</div>
+    </div>
+    <ul>
+      <li><strong>Point</strong>: 먼저 결론부터. "저는 ~라고 생각합니다"</li>
+      <li><strong>Reason</strong>: 이유와 근거. "왜냐하면 ~이기 때문입니다"</li>
+      <li><strong>Point 재강조</strong>: "따라서 ~입니다" 로 마무리</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"FEagflVfOaM","label":"한 방에 상대를 설득시키는 방법","dur":"8분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-pink">😰</div>
+      <div>
+        <div class="card-ttl">발표 떨림·공포증 완전 해결</div>
+        <div class="card-meta">happyspeech · 7분</div>
+      </div>
+    </div>
+    <span class="tag tag-p">긴장 관리</span>
+    <ul>
+      <li>떨림의 진짜 원인: <strong>"실수하면 어쩌지"가 아니라 "나를 평가받는다"는 느낌</strong></li>
+      <li>해결법 1: 청중을 평가자가 아닌 <em>동료</em>로 인식 바꾸기</li>
+      <li>해결법 2: 발표 전 3분 루틴으로 신체 긴장 먼저 풀기</li>
+      <li>해결법 3: 완벽하게 하려 말고 <em>"전달"에만 집중</em>하기</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"oN5GAt2ZK_c","label":"발표공포증 원인 & 해결법","dur":"7분"},{"id":"hI26FOeTYXQ","label":"면접/발표 3분 전 루틴","dur":"12분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-yel">⭐</div>
+      <div>
+        <div class="card-ttl">미미미누 발표 기술 분석</div>
+        <div class="card-meta">happyspeech · 7분</div>
+      </div>
+    </div>
+    <span class="tag tag-y">실전 사례</span>
+    <ul>
+      <li>발표 첫 문장에 <strong>인용구 or 질문</strong>으로 주목 집중</li>
+      <li>중간에 <strong>수사적 질문</strong>으로 청중 참여 유도 ("여러분도 이런 경험 있으시죠?")</li>
+      <li>속도 변화: 중요한 부분에서 <em>의도적으로 느리게</em></li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"HRoQVpEhPMQ","label":"발표 잘하는법 미미미누 분석","dur":"7분"}]'></div>
+  </div>
+
+  <p class="sec">💬 발표 전 준비 루틴</p>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-sky">⏰</div>
+      <div>
+        <div class="card-ttl">발표/면접 3분 전 이 5가지만</div>
+        <div class="card-meta">happyspeech · 12분</div>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">발성 깨우기</div>
+        <p class="step-txt">"아에이오우" 크게 3번. 입과 목소리 워밍업.</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">발음 풀기</div>
+        <p class="step-txt">혀를 입천장·뺨에 돌려가며 30초. 발음이 선명해짐.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">표정 만들기</div>
+        <p class="step-txt">과한 웃음 표정 5초 유지 후 이완. 표정 근육 활성화.</p>
+      </div></div>
+      <div class="step"><div class="step-n">4</div><div>
+        <div class="step-lbl">긴장 방출</div>
+        <p class="step-txt">손을 세게 쥐었다 펴기 5회. 긴장 에너지 신체로 분출.</p>
+      </div></div>
+      <div class="step"><div class="step-n">5</div><div>
+        <div class="step-lbl">복식호흡으로 마음 안정</div>
+        <p class="step-txt">4초 코로 들이쉬기 → 4초 멈춤 → 8초 천천히 내쉬기. 3회 반복.</p>
+      </div></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"hI26FOeTYXQ","label":"면접/발표 3분 전 루틴","dur":"12분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- ══ TAB 2 — 면접 강의 ══ -->
+<div id="t2" class="tab-content"><div class="wrap">
+
+  <div class="callout cb-mint">
+    <span class="callout-icon">💼</span>
+    <div><div class="callout-ttl">면접의 핵심 원칙</div>
+    <p class="callout-txt">면접관은 <strong>정답을 듣고 싶은 게 아니에요.</strong> "이 사람이 우리 팀에서 일할 수 있을까?"를 봅니다. 당신만의 언어로, 진솔하게 말하는 것이 가장 좋은 면접입니다 🌿</p></div>
+  </div>
+
+  <p class="sec">💡 면접 핵심 기술</p>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-mint">🔑</div>
+      <div>
+        <div class="card-ttl">면접 대본 외우지 말고 키워드로</div>
+        <div class="card-meta">happyspeech · 9분</div>
+      </div>
+    </div>
+    <span class="tag tag-m">핵심 전략</span>
+    <ul>
+      <li>외운 대본 → 긴장하면 <strong>뇌가 blank</strong>. 키워드는 긴장해도 살아남음</li>
+      <li>자기소개: "저는 [키워드1], [키워드2], [키워드3]을 가진 사람입니다" 구조로</li>
+      <li>각 키워드마다 <em>경험 한 가지씩</em> 연결해서 자연스럽게 말하기</li>
+    </ul>
+    <div class="formula">
+      <div class="formula-txt">키워드 → 경험 → 결과 → 지원 동기 연결</div>
+      <div class="formula-sub">STAR 방식 변형 (Situation → Task → Action → Result)</div>
+    </div>
+    <div class="vg" data-vids='[{"id":"BRQpeHrrUJA","label":"키워드로 말이 술술 나오는 훈련법","dur":"9분"},{"id":"Pp9ld0nIwfg","label":"면접·회사 횡설수설 없애는 법","dur":"6분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-lav">💬</div>
+      <div>
+        <div class="card-ttl">자신감 있어 보이는 이미지 4가지</div>
+        <div class="card-meta">happyspeech · 7분</div>
+      </div>
+    </div>
+    <span class="tag tag-l">이미지 메이킹</span>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div>
+        <div class="step-lbl">표정 — 입꼬리를 2mm만 올려라</div>
+        <p class="step-txt">크게 웃지 않아도 돼요. 살짝 올린 입꼬리가 더 자연스럽고 따뜻해 보임.</p>
+      </div></div>
+      <div class="step"><div class="step-n">2</div><div>
+        <div class="step-lbl">눈맞춤 — 도망가지 말기</div>
+        <p class="step-txt">시선을 내리깔면 자신없어 보임. 면접관의 눈에서 코 사이를 보는 것만으로도 충분.</p>
+      </div></div>
+      <div class="step"><div class="step-n">3</div><div>
+        <div class="step-lbl">자세 — 어깨를 뒤로</div>
+        <p class="step-txt">앞으로 굽은 어깨 = 긴장 신호. 등받이 없이 앉을 때 등이 자연히 펴지도록 연습.</p>
+      </div></div>
+      <div class="step"><div class="step-n">4</div><div>
+        <div class="step-lbl">목소리 톤 — 한 음 낮춰라</div>
+        <p class="step-txt">긴장하면 목소리가 올라감. 의도적으로 한 음 낮게 시작하면 차분하고 신뢰감 있어 보임.</p>
+      </div></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"s6Ufwl8k6ZA","label":"자신감 이미지 만드는 4가지 비밀","dur":"7분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-yel">🔢</div>
+      <div>
+        <div class="card-ttl">숫자로 말하면 설득력이 올라간다</div>
+        <div class="card-meta">happyspeech · 5분</div>
+      </div>
+    </div>
+    <ul>
+      <li>"열심히 했습니다" → ❌ "3개월 동안 매일 2시간씩" → ✅</li>
+      <li>"많이 개선됐습니다" → ❌ "20% 향상됐습니다" → ✅</li>
+      <li>면접 답변에 숫자 1개만 넣어도 <em>기억에 남는 답변</em>이 됨</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"FAbASHgcAM8","label":"똑똑한 사람은 숫자로 이야기한다","dur":"5분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-peach">🚫</div>
+      <div>
+        <div class="card-ttl">손해 보는 말투 3가지 — 면접에서 절대 하지 말 것</div>
+        <div class="card-meta">happyspeech · 7분</div>
+      </div>
+    </div>
+    <ul>
+      <li><strong>끝 올림 억양</strong>: "했는데요~?" 처럼 마무리를 올리면 자신없어 보임 → 문장 끝은 내려야</li>
+      <li><strong>"어..." "음..." 필러 단어</strong>: 침묵이 낫다. 말하기 전 2초 생각하는 여유가 더 지적으로 보임</li>
+      <li><strong>자기 비하 표현</strong>: "제가 잘 못하지만..." → 삭제. 강점만 말해도 됨</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"iRrGrgWkpJo","label":"손해 보는 말투 3가지","dur":"7분"},{"id":"5O1jzmZBSOc","label":"어... 음... 말습관 없애는 법","dur":"4분"}]'></div>
+  </div>
+
+  <p class="sec">🧠 횡설수설 끝내기</p>
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-sky">💡</div>
+      <div>
+        <div class="card-ttl">횡설수설 끝내는 6가지 습관</div>
+        <div class="card-meta">happyspeech · 9분</div>
+      </div>
+    </div>
+    <ul>
+      <li>말하기 전 <strong>먼저 결론</strong> 한 문장 정하기</li>
+      <li>이유는 <strong>최대 3가지</strong>만 (그 이상은 흐트러짐)</li>
+      <li>말하다 길어지면 <em>"정리하면..."으로 회수</em>하기</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"MeCK3jEK8N4","label":"횡설수설 끝내는 6가지 습관","dur":"9분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<!-- ══ TAB 3 — 지예를 위한 팁 ══ -->
+<div id="t3" class="tab-content"><div class="wrap">
+
+  <div class="tip-box">
+    <div class="tip-label">💝 지예에게</div>
+    <div class="tip-title">지예야, 이 가이드는 너만을 위해 만들었어 🌸</div>
+    <p class="tip-content">급하게 말하는 거, 톤이 높아지는 거, 불안한 느낌 — 다 고칠 수 있어. 사실 이런 습관들은 "열심히 하려는 마음"에서 오거든. 그 마음은 그대로 두고 방법만 바꿔보자 💕</p>
+  </div>
+
+  <p class="sec">🎯 지예의 문제점별 처방</p>
+
+  <div class="jiyae-card">
+    <div class="jiyae-num">1</div>
+    <div class="jiyae-issue">🏃 너무 서둘러서 말함</div>
+    <div class="jiyae-ttl">쫓기는 것처럼 말하는 이유와 해결법</div>
+    <p class="jiyae-desc">빠르게 말하는 건 대부분 "빨리 말해야 해", "잊어버리면 어쩌지" 불안에서 나와. 청중은 지예가 생각하는 것보다 훨씬 여유 있게 들을 준비가 되어있어.</p>
+    <div class="jiyae-method">
+      <div class="jiyae-method-ttl">💜 처방</div>
+      <div class="steps" style="margin:0;">
+        <div class="step"><div class="step-n">①</div><div>
+          <div class="step-lbl">문장 끝에 1초 쉬기</div>
+          <p class="step-txt">말 끝에 의도적으로 1초 멈춤. 처음엔 어색하지만 청중에겐 여유롭게 들려.</p>
+        </div></div>
+        <div class="step"><div class="step-n">②</div><div>
+          <div class="step-lbl">녹음해서 들어보기</div>
+          <p class="step-txt">스스로 들어봐야 얼마나 빠른지 체감할 수 있어. 주 3번만 해도 달라짐.</p>
+        </div></div>
+        <div class="step"><div class="step-n">③</div><div>
+          <div class="step-lbl">발표 전 "천천히" 한 번 마음속으로</div>
+          <p class="step-txt">발표 시작 전 심호흡 + "천천히" 한 마디. 몸에 신호를 주는 것.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="jiyae-card">
+    <div class="jiyae-num">2</div>
+    <div class="jiyae-issue">🎵 목소리 톤이 차분하지 않음</div>
+    <div class="jiyae-ttl">긴장하면 목소리가 높아지는 이유</div>
+    <p class="jiyae-desc">긴장 → 어깨·목 근육 경직 → 성대가 조여서 목소리가 올라가. 자연스러운 반응이야. 이건 몸을 먼저 풀어야 해결돼.</p>
+    <div class="jiyae-method">
+      <div class="jiyae-method-ttl">💜 처방</div>
+      <div class="steps" style="margin:0;">
+        <div class="step"><div class="step-n">①</div><div>
+          <div class="step-lbl">발표 전 허밍으로 목소리 낮추기</div>
+          <p class="step-txt">"음~" 소리를 낮은 음으로 10초. 성대가 자연스럽게 이완됨.</p>
+        </div></div>
+        <div class="step"><div class="step-n">②</div><div>
+          <div class="step-lbl">첫 문장을 한 음 낮게 시작</div>
+          <p class="step-txt">첫 문장이 톤을 결정해. 의도적으로 낮게 시작하면 전체가 차분해져.</p>
+        </div></div>
+        <div class="step"><div class="step-n">③</div><div>
+          <div class="step-lbl">복식호흡 연습 (매일 5분)</div>
+          <p class="step-txt">배에 손 얹고 배가 나왔다 들어가는 호흡. 목소리가 깊어지고 톤이 낮아져.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="jiyae-card">
+    <div class="jiyae-num">3</div>
+    <div class="jiyae-issue">😟 불안도가 높음</div>
+    <div class="jiyae-ttl">발표/면접 불안을 다루는 방법</div>
+    <p class="jiyae-desc">불안은 "잘하고 싶다"는 마음에서 와. 나쁜 게 아니야. 다만 그 에너지를 "경계"로 쓰지 말고 "활력"으로 쓰는 게 핵심이야.</p>
+    <div class="jiyae-method">
+      <div class="jiyae-method-ttl">💜 처방</div>
+      <div class="steps" style="margin:0;">
+        <div class="step"><div class="step-n">①</div><div>
+          <div class="step-lbl">떨림을 흥분으로 재해석하기</div>
+          <p class="step-txt">"나 지금 떨려" → "나 지금 흥분됐어"로 바꿔 말하기. 뇌는 같은 각성 상태를 다르게 해석할 수 있어.</p>
+        </div></div>
+        <div class="step"><div class="step-n">②</div><div>
+          <div class="step-lbl">청중을 적으로 보지 말기</div>
+          <p class="step-txt">면접관·청중은 지예가 잘하길 바라고 있어. 평가자가 아니라 <em>응원단</em>이라고 생각해.</p>
+        </div></div>
+        <div class="step"><div class="step-n">③</div><div>
+          <div class="step-lbl">3분 전 루틴 반드시 지키기</div>
+          <p class="step-txt">발성 → 발음 → 표정 → 긴장 방출 → 복식호흡. 이 루틴만으로도 불안이 30% 줄어.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sec">📅 지예의 2주 연습 플랜</p>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-icon icon-yel">📆</div>
+      <div>
+        <div class="card-ttl">매일 10분 루틴</div>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">월</div><div>
+        <div class="step-lbl">복식호흡 5분 + 오늘 있었던 일 키워드 3개로 말하기</div>
+        <p class="step-txt">스피치 훈련 시작. 천천히, 내용은 쉬운 것부터.</p>
+      </div></div>
+      <div class="step"><div class="step-n">화</div><div>
+        <div class="step-lbl">1분 자기소개 녹음 → 들어보기</div>
+        <p class="step-txt">속도·톤 체크. 빠르면 다시. 목표: 1분을 55~65초에 맞추기.</p>
+      </div></div>
+      <div class="step"><div class="step-n">수</div><div>
+        <div class="step-lbl">PRP 구조로 의견 말하기 연습</div>
+        <p class="step-txt">주제 하나 정해서 "저는 ~입니다. 왜냐하면 ~. 따라서 ~입니다." 3번 반복.</p>
+      </div></div>
+      <div class="step"><div class="step-n">목</div><div>
+        <div class="step-lbl">3분 전 루틴 연습</div>
+        <p class="step-txt">발성 → 발음 → 표정 → 손 쥐기 → 호흡. 5가지를 근육 기억에 새기기.</p>
+      </div></div>
+      <div class="step"><div class="step-n">금</div><div>
+        <div class="step-lbl">거울 보며 눈맞춤 + 표정 연습</div>
+        <p class="step-txt">말하면서 자신의 눈을 1초 이상 보기. 처음엔 어색하지만 익숙해지면 자신감 생겨.</p>
+      </div></div>
+    </div>
+
+    <div class="callout cb-pink" style="margin-top:16px;">
+      <span class="callout-icon">💌</span>
+      <div><div class="callout-ttl">지예에게 한 마디</div>
+      <p class="callout-txt">완벽하게 할 필요 없어. 오늘보다 내일 조금만 더 나아지면 돼. 이 가이드 열심히 봐주는 것 자체가 이미 잘하고 있다는 증거야 💕</p></div>
+    </div>
+  </div>
+
+  <p class="sec">🎬 추천 영상 순서</p>
+  <div class="card">
+    <h4>1단계 — 먼저 이거 봐 (이론 이해)</h4>
+    <div class="vg" data-vids='[{"id":"oN5GAt2ZK_c","label":"발표공포증 원인 & 해결법","dur":"7분"},{"id":"s6Ufwl8k6ZA","label":"자신감 이미지 4가지","dur":"7분"}]'></div>
+    <hr>
+    <h4>2단계 — 말하기 구조 잡기</h4>
+    <div class="vg" data-vids='[{"id":"AJVmJu3KrkQ","label":"10초 만에 조리있게 말하기","dur":"8분"},{"id":"FEagflVfOaM","label":"PRP 설득 공식","dur":"8분"}]'></div>
+    <hr>
+    <h4>3단계 — 실전 훈련</h4>
+    <div class="vg" data-vids='[{"id":"hI26FOeTYXQ","label":"발표/면접 3분 전 루틴","dur":"12분"},{"id":"BRQpeHrrUJA","label":"키워드 말하기 훈련","dur":"9분"}]'></div>
+  </div>
+
+</div></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.vg[data-vids]').forEach(g=>{
+    JSON.parse(g.dataset.vids).forEach(v=>{
+      const a=document.createElement('a');
+      a.className='thumb';
+      a.href=`https://www.youtube.com/watch?v=${v.id}`;
+      a.target='_blank';a.rel='noopener';
+      a.innerHTML=`<div class="thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="thumb-ov"><div class="play"></div></div></div><div class="thumb-info"><div class="thumb-lbl">${v.label}</div><div class="thumb-dur">${v.dur||''}</div></div>`;
+      g.appendChild(a);
+    });
+  });
+});
+function showTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
