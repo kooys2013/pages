@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>치중진담 재활 가이드</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<style>
+/* ── Kakao Design Tokens ──────────────────────────────────────────── */
+:root {
+  --kk-yellow:      #FEE500;
+  --kk-yellow-d:    #F5DC00;
+  --kk-brown:       #3C1E1E;
+  --kk-dark:        #191919;
+  --kk-gray-700:    #444444;
+  --kk-gray-500:    #777777;
+  --kk-gray-300:    #BBBBBB;
+  --kk-gray-200:    #DDDDDD;
+  --kk-gray-100:    #F0F0F0;
+  --kk-gray-50:     #F7F7F7;
+  --kk-white:       #FFFFFF;
+  --kk-orange:      #FF7A00;
+  --kk-green:       #00B85C;
+  --kk-red:         #E42939;
+  --kk-blue:        #0064FF;
+
+  --sp-4:  4px; --sp-8:  8px;  --sp-12: 12px; --sp-16: 16px;
+  --sp-20: 20px; --sp-24: 24px; --sp-32: 32px; --sp-48: 48px;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.10);
+  --t: 180ms ease;
+  --font: 'Pretendard Variable', 'Apple SD Gothic Neo', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--kk-gray-50); color: var(--kk-dark); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ── Header ── */
+.header { background: var(--kk-yellow); padding: var(--sp-20) var(--sp-24); }
+.header-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; gap: var(--sp-12); flex-wrap: wrap; }
+.header-logo { width: 40px; height: 40px; background: var(--kk-brown); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.header-logo svg { width: 22px; height: 22px; fill: var(--kk-yellow); }
+.header-title { font-size: 17px; font-weight: 800; color: var(--kk-brown); letter-spacing: -0.4px; }
+.header-sub { font-size: 12px; color: var(--kk-brown); opacity: 0.65; margin-top: 2px; }
+.header-badge { margin-left: auto; background: var(--kk-brown); color: var(--kk-yellow); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+@media (max-width: 600px) { .header { padding: var(--sp-16); } }
+
+/* ── Tab nav ── */
+.tab-nav { background: var(--kk-white); border-bottom: 2px solid var(--kk-gray-100); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+.tab-nav-inner { max-width: 860px; margin: 0 auto; padding: 0 var(--sp-20); display: flex; overflow-x: auto; scrollbar-width: none; }
+.tab-nav-inner::-webkit-scrollbar { display: none; }
+.tab-btn { padding: var(--sp-16) var(--sp-16); font-size: 14px; font-weight: 600; color: var(--kk-gray-500); background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; font-family: var(--font); transition: color var(--t), border-color var(--t); }
+.tab-btn:hover { color: var(--kk-dark); }
+.tab-btn.active { color: var(--kk-brown); border-bottom-color: var(--kk-yellow); }
+
+/* ── Content ── */
+.tab-content { display: none; padding: var(--sp-24) 0 64px; }
+.tab-content.active { display: block; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 var(--sp-20); }
+@media (max-width: 600px) { .wrap { padding: 0 var(--sp-16); } }
+
+/* ── Section label ── */
+.sec { font-size: 11px; font-weight: 800; color: var(--kk-gray-500); letter-spacing: 1px; text-transform: uppercase; margin: var(--sp-32) 0 var(--sp-12); }
+.sec:first-child { margin-top: 0; }
+
+/* ── Card ── */
+.card { background: var(--kk-white); border-radius: var(--r-lg); padding: var(--sp-20) var(--sp-24); margin-bottom: var(--sp-12); box-shadow: var(--shadow-sm); border: 1px solid var(--kk-gray-100); transition: box-shadow var(--t); }
+.card:hover { box-shadow: var(--shadow-md); }
+.card-top { display: flex; align-items: flex-start; gap: var(--sp-12); margin-bottom: var(--sp-12); }
+.card-emoji { font-size: 22px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.card-ttl { font-size: 15px; font-weight: 800; color: var(--kk-dark); letter-spacing: -0.3px; }
+.card-meta { font-size: 12px; color: var(--kk-gray-500); margin-top: 2px; }
+
+h3 { font-size: 15px; font-weight: 700; color: var(--kk-dark); margin: var(--sp-16) 0 var(--sp-8); }
+h4 { font-size: 13px; font-weight: 700; color: var(--kk-gray-700); margin: var(--sp-12) 0 var(--sp-8); }
+p { font-size: 14px; color: var(--kk-gray-700); margin-bottom: var(--sp-8); line-height: 1.65; }
+ul, ol { padding-left: var(--sp-20); margin-bottom: var(--sp-12); }
+li { font-size: 14px; color: var(--kk-gray-700); margin-bottom: var(--sp-4); line-height: 1.65; }
+strong { color: var(--kk-dark); font-weight: 700; }
+em { color: var(--kk-orange); font-style: normal; font-weight: 600; }
+
+/* ── Tags ── */
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin: 0 4px 8px 0; }
+.tag-y  { background: var(--kk-yellow); color: var(--kk-brown); }
+.tag-g  { background: #E8F8EE; color: #00843E; }
+.tag-o  { background: #FFF0E0; color: #B35000; }
+.tag-r  { background: #FDEAEA; color: #B51C2C; }
+
+/* ── Callout ── */
+.callout { display: flex; gap: var(--sp-12); padding: var(--sp-16); border-radius: var(--r-md); margin: var(--sp-12) 0; }
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-ttl { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.callout-txt { font-size: 13px; line-height: 1.6; margin: 0; color: var(--kk-gray-700); }
+.callout-y  { background: #FFFBE6; border-left: 4px solid var(--kk-yellow); }
+.callout-y  .callout-ttl { color: var(--kk-brown); }
+.callout-g  { background: #E8F8EE; border-left: 4px solid var(--kk-green); }
+.callout-g  .callout-ttl { color: #00612F; }
+.callout-r  { background: #FDEAEA; border-left: 4px solid var(--kk-red); }
+.callout-r  .callout-ttl { color: #8B0000; }
+.callout-o  { background: #FFF0E0; border-left: 4px solid var(--kk-orange); }
+.callout-o  .callout-ttl { color: #7A3600; }
+
+/* ── Step list ── */
+.steps { display: flex; flex-direction: column; gap: var(--sp-12); margin: var(--sp-12) 0; }
+.step { display: flex; gap: var(--sp-12); align-items: flex-start; }
+.step-n { width: 26px; height: 26px; background: var(--kk-yellow); color: var(--kk-brown); font-size: 13px; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-lbl { font-size: 14px; font-weight: 700; color: var(--kk-dark); margin-bottom: 3px; }
+.step-txt { font-size: 13px; color: var(--kk-gray-700); line-height: 1.6; margin: 0; }
+
+/* ── Chain ── */
+.chain { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4) var(--sp-8); margin: var(--sp-12) 0; }
+.chain-node { background: var(--kk-yellow); color: var(--kk-brown); font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+.chain-arrow { color: var(--kk-gray-300); font-size: 16px; line-height: 1; }
+
+/* ── Compare ── */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-12); margin: var(--sp-12) 0; }
+@media (max-width: 500px) { .compare { grid-template-columns: 1fr; } }
+.cmp { border-radius: var(--r-md); padding: var(--sp-16); }
+.cmp-bad  { background: #FDEAEA; border: 1px solid #F5BEBE; }
+.cmp-good { background: #E8F8EE; border: 1px solid #B3E6CC; }
+.cmp-lbl { font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: var(--sp-8); }
+.cmp-bad  .cmp-lbl { color: var(--kk-red); }
+.cmp-good .cmp-lbl { color: var(--kk-green); }
+
+/* ── Exercise card ── */
+.ex-card { background: var(--kk-white); border-radius: var(--r-lg); padding: var(--sp-20) var(--sp-24); margin-bottom: var(--sp-12); box-shadow: var(--shadow-sm); border: 1px solid var(--kk-gray-100); }
+.ex-badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: var(--sp-12); }
+.lv1 { background: var(--kk-yellow); color: var(--kk-brown); }
+.lv2 { background: #E8F8EE; color: #00612F; }
+.lv3 { background: #E8EEFF; color: #1B3BA4; }
+
+/* ── Video thumbnails ── */
+.vg { display: flex; flex-wrap: wrap; gap: var(--sp-12); margin-top: var(--sp-16); }
+.thumb { width: 180px; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--kk-gray-100); background: var(--kk-white); box-shadow: var(--shadow-sm); text-decoration: none; display: block; transition: box-shadow var(--t), transform var(--t); cursor: pointer; }
+.thumb:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.thumb-img { position: relative; aspect-ratio: 16/9; background: var(--kk-gray-100); overflow: hidden; }
+.thumb-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.2); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity var(--t); }
+.thumb:hover .thumb-overlay { opacity: 1; }
+.play-btn { width: 36px; height: 36px; background: var(--kk-yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.play-btn::after { content: ''; border-left: 13px solid var(--kk-brown); border-top: 8px solid transparent; border-bottom: 8px solid transparent; margin-left: 3px; }
+.thumb-info { padding: var(--sp-8) var(--sp-12) var(--sp-12); }
+.thumb-lbl { font-size: 12px; font-weight: 600; color: var(--kk-dark); line-height: 1.4; }
+.thumb-dur { font-size: 11px; color: var(--kk-gray-500); margin-top: 2px; }
+
+/* ── Term ── */
+.term { background: var(--kk-white); border-radius: var(--r-md); border-left: 4px solid var(--kk-yellow); padding: var(--sp-16) var(--sp-20); margin-bottom: var(--sp-12); box-shadow: var(--shadow-sm); }
+.term-name { font-size: 14px; font-weight: 800; color: var(--kk-brown); margin-bottom: var(--sp-4); }
+.term-body { font-size: 13px; color: var(--kk-gray-700); line-height: 1.65; }
+.term-analogy { margin-top: var(--sp-8); background: var(--kk-yellow); border-radius: var(--r-sm); padding: var(--sp-8) var(--sp-12); font-size: 12px; color: var(--kk-brown); font-weight: 600; }
+
+/* ── Quiz ── */
+.quiz { background: var(--kk-white); border-radius: var(--r-lg); overflow: hidden; margin-bottom: var(--sp-12); box-shadow: var(--shadow-sm); border: 1px solid var(--kk-gray-100); }
+.quiz-q { padding: var(--sp-16) var(--sp-20); font-size: 14px; font-weight: 700; color: var(--kk-dark); display: flex; align-items: flex-start; gap: var(--sp-12); border-bottom: 1px solid var(--kk-gray-100); }
+.quiz-n { width: 26px; height: 26px; background: var(--kk-yellow); color: var(--kk-brown); font-size: 12px; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.quiz-act { padding: var(--sp-12) var(--sp-20); }
+.quiz-btn { font-size: 13px; font-weight: 700; color: var(--kk-brown); background: var(--kk-yellow); border: none; border-radius: var(--r-sm); padding: 8px 18px; cursor: pointer; font-family: var(--font); transition: background var(--t); }
+.quiz-btn:hover { background: var(--kk-yellow-d); }
+.quiz-ans { display: none; padding: var(--sp-16) var(--sp-20); background: #FFFBE6; font-size: 13px; color: var(--kk-gray-700); line-height: 1.65; border-top: 1px solid #F5DC00; }
+
+hr { border: none; border-top: 1px solid var(--kk-gray-100); margin: var(--sp-24) 0; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    </div>
+    <div>
+      <div class="header-title">치중진담 재활 가이드</div>
+      <div class="header-sub">Team CareFlow · 장회영 신경외과 · 남유미 마취통증의학과</div>
+    </div>
+    <span class="header-badge">2026.05 업데이트</span>
+  </div>
+</header>
+
+<!-- Tab nav -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('tab1',this)">강의 + 요약</button>
+    <button class="tab-btn" onclick="showTab('tab2',this)">운동방법 & 팁</button>
+    <button class="tab-btn" onclick="showTab('tab3',this)">알면 좋은 것</button>
+    <button class="tab-btn" onclick="showTab('tab4',this)">용어집 & 퀴즈</button>
+  </div>
+</nav>
+
+
+<!-- ══ TAB 1 ══ -->
+<div id="tab1" class="tab-content active">
+<div class="wrap">
+
+  <div class="callout callout-y">
+    <span class="callout-icon">💬</span>
+    <div>
+      <div class="callout-ttl">치중진담 (治中眞談)이란?</div>
+      <p class="callout-txt">치료에 대한 진실된 이야기. Team CareFlow (장회영 신경외과·남유미 마취통증의학과·물리치료사 김실장)가 함께 만드는 기능재활 채널. 남스어프로치와 같은 기능적 접근법을 공유함.</p>
+    </div>
+  </div>
+
+  <p class="sec">핵심 이론</p>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">🐢</span>
+      <div>
+        <div class="card-ttl">거북목 — 턱 당기기(Chin Tuck) 하지 마세요</div>
+        <div class="card-meta">6분 · 남유미 원장</div>
+      </div>
+    </div>
+    <span class="tag tag-r">오해 교정</span><span class="tag tag-y">거북목</span>
+    <ul>
+      <li><strong>거북목은 목만의 문제가 아님</strong>. 전신 기능 저하의 결과</li>
+      <li>턱 당기기를 열심히 해도 <em>뒷목이 더 아파지는 이유</em> → 근본 원인을 건드리지 않기 때문</li>
+      <li>먼저 호흡근·코어 기능을 회복해야 목 근육 과사용이 줄어든다</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"n5yZwJa-IEA","label":"거북목 턱 당기기 하지 마세요","dur":"6분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">💪</span>
+      <div>
+        <div class="card-ttl">기능회복운동 — 왜 세게 하면 안 되는가?</div>
+        <div class="card-meta">23분 · Team CareFlow</div>
+      </div>
+    </div>
+    <span class="tag tag-y">핵심 원칙</span>
+    <ul>
+      <li><strong>Henneman의 크기 원리(Size Principle)</strong>: 낮은 부하 → Type 1(안정화) 먼저 동원, 높은 부하 → Type 2(이동성)만 씀</li>
+      <li>세게 하면 <em>Type 2 섬유만 일하고 Type 1은 쉰다</em> → 재활 목적 달성 못함</li>
+      <li>낮은 부하로 Type 1을 충분히 활성화한 후 점진적으로 올려야</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"vnLfzT6HcLc","label":"기능회복운동 왜 세게 하면 안 되나","dur":"23분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">🔄</span>
+      <div>
+        <div class="card-ttl">반사적 안정화 (Reflexive Stabilization)</div>
+        <div class="card-meta">28분 · Team CareFlow</div>
+      </div>
+    </div>
+    <span class="tag tag-y">이론</span>
+    <ul>
+      <li>재활 훈련 중 <strong>자동으로 안정화 패턴이 만들어지게 하는 전략</strong></li>
+      <li>의식적으로 특정 근육을 조이는 것이 아니라 자연스러운 반사 반응을 유도</li>
+      <li>훈련이 쌓이면 일상 동작에서 자동으로 적용됨</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"xvtYH7Eb-24","label":"반사적 안정화 이론","dur":"28분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">🦴</span>
+      <div>
+        <div class="card-ttl">목·어깨 통증 — 허리·골반도 함께 치료해야 하는 이유</div>
+        <div class="card-meta">14분 · 장회영 원장</div>
+      </div>
+    </div>
+    <span class="tag tag-y">전신 연결</span>
+    <ul>
+      <li>목어깨 통증 환자의 <strong>허리·골반 기능 저하</strong>가 함께 존재하는 경우가 많음</li>
+      <li>전신 연결 고리: 골반 불안정 → 코어 약화 → 보조호흡근 과사용 → 목·어깨 과부하</li>
+      <li>목만 치료하면 재발. 전신 기능 회복이 필수</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"C9nw67Om_No","label":"목어깨 통증 허리골반 치료 이유","dur":"14분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">😣</span>
+      <div>
+        <div class="card-ttl">코어 운동 열심히 했는데 더 아픈 이유</div>
+        <div class="card-meta">20분 · 남유미 원장</div>
+      </div>
+    </div>
+    <span class="tag tag-r">흔한 실수</span>
+    <ul>
+      <li>잘못된 코어 운동 = Type 2 섬유만 자극 → 오히려 근육 긴장도 상승</li>
+      <li><em>복부를 억지로 조이거나 힘을 주면</em> 국소 코어(Type 1)가 아닌 외부 근육이 반응</li>
+      <li>낮은 부하 + 느린 속도 + 감각 인지가 먼저</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"IiRkhrzwIa0","label":"코어 운동 더 아픈 이유","dur":"20분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">💉</span>
+      <div>
+        <div class="card-ttl">주사만 맞고 운동 안 하면 100% 재발</div>
+        <div class="card-meta">10분 · 장회영 원장</div>
+      </div>
+    </div>
+    <ul>
+      <li>주사(신경차단술)는 통증을 줄여주지만 <strong>기능 저하는 해결 못함</strong></li>
+      <li>"통증이 줄어든 기회"를 운동으로 활용해야 재발 방지</li>
+      <li>주사 → 기능회복 운동 → 일상 관리 순서가 올바른 치료 흐름</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"mB-nxa5XYyY","label":"주사만 맞으면 100% 재발","dur":"10분"},{"id":"N1A5V77M20s","label":"허리통증 주사로 재발 못 막는 이유","dur":"10분"}]'></div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">🎯</span>
+      <div>
+        <div class="card-ttl">디스크 때문이라고 굳게 믿게 되는 환경</div>
+        <div class="card-meta">10분 · 장회영 원장</div>
+      </div>
+    </div>
+    <ul>
+      <li>MRI에서 디스크가 보인다고 <strong>그게 통증의 원인이라는 보장이 없음</strong></li>
+      <li>디스크 돌출 = 통증의 원인이라는 인식이 과잉 치료로 이어짐</li>
+      <li>기능적 접근으로 디스크 문제 없이도 회복 가능한 경우가 많다</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"NiVvchnW8Oo","label":"디스크 때문이라고 믿게 되는 환경","dur":"10분"},{"id":"xKyP24sJKhE","label":"허리 멀쩡한데 다리 저림 디스크 증상","dur":"9분"}]'></div>
+  </div>
+
+  <p class="sec">기능재활 CareFlow 기본 개념</p>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-emoji">🏎️</span>
+      <div>
+        <div class="card-ttl">CareFlow 삼두마차 — 환자·치료사·의사의 3인 경주</div>
+        <div class="card-meta">Team CareFlow</div>
+      </div>
+    </div>
+    <ul>
+      <li>기능재활은 <strong>환자·치료사·의사</strong> 셋이 함께 해야 효과</li>
+      <li>환자가 운동을 이해하고 집에서 실천해야 치료가 완성됨</li>
+      <li>치료받는 시간(30분)보다 나머지 23시간 30분이 더 중요</li>
+    </ul>
+    <div class="vg" data-vids='[{"id":"QMIpBt-RWJs","label":"회복 속도와 기대 속도의 차이","dur":"14분"},{"id":"CWUURuujdh4","label":"기능재활 왜 빨리 배울 수 없나","dur":"15분"}]'></div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══ TAB 2 ══ -->
+<div id="tab2" class="tab-content">
+<div class="wrap">
+
+  <div class="callout callout-g">
+    <span class="callout-icon">✅</span>
+    <div>
+      <div class="callout-ttl">운동 순서</div>
+      <p class="callout-txt"><strong>마사지(이완) → 복강내압 훈련 → 전거근 안정화 → 클램쉘(대둔근) → 장요근</strong> — 낮은 부하부터, 느리게, 감각을 찾으면서.</p>
+    </div>
+  </div>
+
+  <p class="sec">Step 0 — 이완 마사지</p>
+  <div class="ex-card">
+    <span class="ex-badge lv1">⓪ 준비</span>
+    <h3>마사지볼로 이완하기</h3>
+    <p>운동 전 딱딱한 근육을 풀어야 Type 1 섬유가 활성화됨. 허벅지→종아리→골반 순서.</p>
+    <div class="vg" data-vids='[{"id":"2ptH2Tz6_v8","label":"허벅지 마사지볼 이완","dur":"4분"},{"id":"y_xf6DmvFMM","label":"종아리 마사지볼 이완","dur":"5분"}]'></div>
+  </div>
+
+  <p class="sec">Step 1 — 복강내압(IAP) 훈련</p>
+  <div class="ex-card">
+    <span class="ex-badge lv1">① 기초</span>
+    <h3>3개월 아기 자세(Three-Month Position)에서 복강내압 훈련</h3>
+    <p>등을 바닥에 붙이고 엉덩이 90°, 무릎 90° 자세에서 균형 잡기.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><div class="step-lbl">자세 셋업</div><p class="step-txt">등을 바닥에, 고관절·무릎 각도 90°. 발목은 자연스럽게.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-lbl">배 압력 살짝 만들기</div><p class="step-txt">억지로 배를 조이는 게 아님. 숨을 멈추지 않고 자연스럽게 팽팽한 통 느낌.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-lbl">균형 유지</div><p class="step-txt">이 자세에서 흔들리지 않게 1분 버팀. 골반이 기울면 부하가 너무 높은 것.</p></div></div>
+    </div>
+    <div class="callout callout-r">
+      <span class="callout-icon">❌</span>
+      <div><div class="callout-ttl">잘못된 방법</div><p class="callout-txt">배를 최대로 꽉 조이기, 숨 참기, 배를 일부러 홀쭉하게 당기기 — 전부 Type 2 자극.</p></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"08FAMI2aGZM","label":"복강내압 훈련 실전","dur":"10분"},{"id":"7h-7NJnJcnU","label":"복강내압 3개월 자세 실습","dur":"17분"}]'></div>
+  </div>
+
+  <p class="sec">Step 2 — 전거근(날개뼈) 안정화</p>
+  <div class="ex-card">
+    <span class="ex-badge lv1">② 기초 · 목디스크 핵심</span>
+    <h3>앉아서 전거근 훈련 — 어깨 강제로 내리지 마세요</h3>
+    <p>날개뼈를 제자리에 고정하는 전거근을 활성화. 목·어깨 통증의 근본 원인 해결.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><div class="step-lbl">앉아서 자세 잡기</div><p class="step-txt">의자에 앉아 등이 흐트러지지 않게. 어깨를 억지로 내리거나 뒤로 당기지 않음.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-lbl">날개뼈 살짝 앞으로</div><p class="step-txt">벽을 손바닥으로 살짝 밀듯이. 강하게 밀면 Type 2 동원.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-lbl">겨드랑이 아래 느낌 기다리기</div><p class="step-txt">1분 후 겨드랑이 옆구리 아래쪽에서 당기는 느낌 = 전거근 활성화 성공.</p></div></div>
+    </div>
+    <div class="callout callout-r">
+      <span class="callout-icon">⚠️</span>
+      <div><div class="callout-ttl">흔한 실수</div><p class="callout-txt">어깨를 강제로 아래로 내리면 전거근이 아닌 다른 근육이 일함. 어깨 위치는 자연스럽게.</p></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"ZsWsny007LU","label":"전거근 운동 어깨 내리지 마세요","dur":"16분"},{"id":"hojlgr23CQ0","label":"전거근 안정성 훈련 1세트 실습","dur":"11분"}]'></div>
+  </div>
+
+  <p class="sec">Step 3 — 클램쉘 (대둔근 하부)</p>
+  <div class="ex-card">
+    <span class="ex-badge lv2">③ 중급 · 골반 안정화</span>
+    <h3>클램쉘 + 국소 코어 세팅</h3>
+    <p>대둔근 하부 섬유를 활성화해서 골반 안정성을 높이는 운동. 허리·목 통증 전신 연결 핵심.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><div class="step-lbl">옆으로 눕기 + 코어 세팅</div><p class="step-txt">국소 코어 느낌 먼저 잡고 시작. 코어 없이 하면 골반이 흔들림.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-lbl">무릎 조개처럼 천천히 벌리기</div><p class="step-txt">빠르게 하면 Type 2 동원. 2~3초에 걸쳐 천천히.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-lbl">골반이 뒤로 돌면 실패</div><p class="step-txt">골반 회전 = 대둔근이 아닌 다른 근육이 대신함. 범위를 줄여서 다시.</p></div></div>
+    </div>
+    <div class="vg" data-vids='[{"id":"jbzlxTX_7i0","label":"올바른 클램쉘 운동 가이드","dur":"10분"},{"id":"4GLUXn1OhO4","label":"클램쉘 국소코어세팅 가이드","dur":"9분"},{"id":"WjnpYfkMz4U","label":"대둔근 하부 섬유 운동","dur":"7분"}]'></div>
+  </div>
+
+  <p class="sec">Step 4 — 장요근 훈련</p>
+  <div class="ex-card">
+    <span class="ex-badge lv2">④ 중급</span>
+    <h3>장요근(Iliopsoas) 국소 코어 훈련</h3>
+    <p>통증 없이 장요근을 자극하는 저부하 접근법.</p>
+    <div class="vg" data-vids='[{"id":"tKKn4Vbtqaw","label":"장요근 훈련 통증 없이 하는 법","dur":"8분"}]'></div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══ TAB 3 ══ -->
+<div id="tab3" class="tab-content">
+<div class="wrap">
+
+  <p class="sec">CareFlow 핵심 원칙</p>
+  <div class="card">
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><div class="step-lbl">통증 부위 ≠ 원인 부위</div><p class="step-txt">목이 아파도 원인은 골반·코어일 수 있다. MRI에 보이는 디스크가 통증 원인이 아닐 수 있다.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><div class="step-lbl">낮은 부하로 Type 1 먼저</div><p class="step-txt">Henneman 원리: 낮은 부하에서 Type 1(안정화) 먼저 동원. 세게 하면 Type 2만 쓴다.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><div class="step-lbl">주사 + 운동 = 세트</div><p class="step-txt">주사로 통증을 줄인 기회에 기능 회복 운동을 해야 재발 방지. 주사만으로는 100% 재발.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><div class="step-lbl">수술 전 비수술 먼저 상담</div><p class="step-txt">수술이 필요한 경우도 있지만, 수술 전 기능적 접근 여부를 확인해야 한다.</p></div></div>
+    </div>
+  </div>
+
+  <p class="sec">전신 연결 이해</p>
+  <div class="card">
+    <div style="font-size:12px;color:var(--kk-gray-500);margin-bottom:var(--sp-8);">목·어깨 통증의 전신 연결 고리</div>
+    <div class="chain">
+      <span class="chain-node">발·종아리 경직</span><span class="chain-arrow">→</span>
+      <span class="chain-node">골반 불안정</span><span class="chain-arrow">→</span>
+      <span class="chain-node">코어 약화</span><span class="chain-arrow">→</span>
+      <span class="chain-node">횡격막 기능 저하</span><span class="chain-arrow">→</span>
+      <span class="chain-node">보조호흡근 과사용</span><span class="chain-arrow">→</span>
+      <span class="chain-node">목·어깨 통증</span>
+    </div>
+  </div>
+
+  <p class="sec">오해 vs 올바른 접근</p>
+  <div class="compare">
+    <div class="cmp cmp-bad">
+      <div class="cmp-lbl">❌ 오해</div>
+      <ul>
+        <li>거북목 → 턱 당기기로 교정</li>
+        <li>코어 → 세게 조여야 효과</li>
+        <li>디스크 보이면 → 디스크 수술</li>
+        <li>주사 맞으면 → 다 나음</li>
+        <li>통증 부위 = 원인 부위</li>
+      </ul>
+    </div>
+    <div class="cmp cmp-good">
+      <div class="cmp-lbl">✅ 올바른 접근</div>
+      <ul>
+        <li>전신 기능 회복이 먼저</li>
+        <li>낮은 부하로 Type 1 활성화</li>
+        <li>기능 저하가 진짜 원인인지 확인</li>
+        <li>주사 기회에 운동 병행</li>
+        <li>전신 연결 고리로 원인 추적</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="sec">증상별 영상 추천</p>
+  <div class="card">
+    <h4>거북목·목통증</h4>
+    <div class="vg" data-vids='[{"id":"n5yZwJa-IEA","label":"거북목 턱 당기기 금지","dur":"6분"},{"id":"C9nw67Om_No","label":"목어깨 허리골반 연결 치료","dur":"14분"}]'></div>
+    <hr>
+    <h4>허리통증·재발 방지</h4>
+    <div class="vg" data-vids='[{"id":"mB-nxa5XYyY","label":"주사만 맞으면 100% 재발","dur":"10분"},{"id":"IdhJJV98GkI","label":"쉬라는데 더 아픈 이유","dur":"9분"}]'></div>
+    <hr>
+    <h4>운동 이론 이해</h4>
+    <div class="vg" data-vids='[{"id":"vnLfzT6HcLc","label":"왜 세게 하면 안 되나","dur":"23분"},{"id":"xvtYH7Eb-24","label":"반사적 안정화","dur":"28분"}]'></div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══ TAB 4 ══ -->
+<div id="tab4" class="tab-content">
+<div class="wrap">
+
+  <p class="sec">핵심 용어 사전</p>
+
+  <div class="term">
+    <div class="term-name">Henneman의 크기 원리 (Size Principle)</div>
+    <p class="term-body">근육이 수축할 때 <strong>작은(Type 1) 운동단위부터 동원</strong>되고, 부하가 커질수록 큰(Type 2) 운동단위가 추가됨. 낮은 부하에서만 Type 1(안정화 근육)이 주로 일한다는 원리. 재활 운동에서 낮은 부하가 필요한 과학적 근거.</p>
+    <div class="term-analogy">전구처럼 약한 전류(낮은 부하)에서는 소형 전구(Type 1)만 켜지고, 강한 전류(높은 부하)에서는 대형 전구(Type 2)가 추가로 켜진다.</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">Type 1 근섬유 (안정화 / 지근)</div>
+    <p class="term-body">자세 유지, 지구력 담당. 낮은 강도(최대근력 25% 미만)에서 활성화. 근비대 없이 <strong>활성화 능력</strong>이 목표. 재활 초기 훈련의 주 대상. 천천히, 낮게, 오래.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">Type 2 근섬유 (이동성 / 속근)</div>
+    <p class="term-body">순발력, 폭발력 담당. 높은 강도에서 동원. 근비대 O. <strong>재활 초기에는 Type 2가 일하면 실패</strong>. 헬스장에서 키우는 근육.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">반사적 안정화 (Reflexive Stabilization)</div>
+    <p class="term-body">의식적으로 "이 근육 조여야지"가 아니라 <strong>움직임 중에 자동으로 안정화 패턴이 발동</strong>되는 상태. 재활이 성공하면 일상 동작에서 자동으로 적용됨.</p>
+    <div class="term-analogy">처음 자전거를 탈 때는 의식적으로 균형을 잡지만, 익숙해지면 자동으로 잡히는 것처럼.</div>
+  </div>
+
+  <div class="term">
+    <div class="term-name">전거근 (Serratus Anterior)</div>
+    <p class="term-body">겨드랑이 옆구리 근육. 날개뼈를 흉곽에 고정. <strong>이 근육이 약하면 날개뼈가 떠서 팔·목으로 과부하 전달</strong>. 전거근 운동 성공 시 겨드랑이 아래가 당기는 느낌이 남.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">복강내압 (IAP)</div>
+    <p class="term-body">배 안의 압력. 코어 근육들이 만드는 내부 지지력. 허리·척추의 쿠션 역할. <strong>억지로 조이는 것이 아니라 자연스럽게 팽팽한 통 느낌</strong>이 올바른 방법.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-name">신경차단술 (주사치료)</div>
+    <p class="term-body">통증 신호를 차단하는 주사. 통증은 줄지만 기능 저하는 해결 안 됨. <strong>주사 후 기능회복 운동을 반드시 해야</strong> 재발 방지. 주사만 반복하면 결국 재발.</p>
+  </div>
+
+  <p class="sec">이해 확인 퀴즈</p>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">1</div>거북목에 턱 당기기(Chin Tuck)가 효과가 없는 이유는?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q1')">정답 보기</button></div>
+    <div class="quiz-ans" id="q1"><strong>전신 기능 문제가 근본 원인이기 때문.</strong> 목 근육의 과사용은 횡격막 약화로 인한 보조호흡근 과사용에서 비롯됨. 턱만 당기면 이 연결 고리를 해결하지 못하고 오히려 이미 피로한 목 근육을 더 혹사시킴.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">2</div>코어 운동을 열심히 했는데 왜 더 아플까?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q2')">정답 보기</button></div>
+    <div class="quiz-ans" id="q2"><strong>Type 2 섬유만 자극했기 때문.</strong> 세게 또는 빠르게 운동하면 Type 1(안정화)이 아닌 Type 2(이동성)가 동원됨. 이 상태에서는 근육 긴장도만 높아지고 안정화 기능은 향상되지 않아 오히려 통증이 증가할 수 있음.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">3</div>전거근 운동 시 어깨를 강제로 내리면 안 되는 이유는?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q3')">정답 보기</button></div>
+    <div class="quiz-ans" id="q3"><strong>다른 근육이 대신 일하기 때문.</strong> 어깨를 억지로 내리면 승모근 하부나 다른 근육이 대신 과활성화됨. 전거근은 자연스러운 자세에서 날개뼈가 앞으로 살짝 이동하는 느낌으로 찾아야 한다.</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-q"><div class="quiz-n">4</div>주사치료를 받은 후 꼭 운동을 해야 하는 이유는?</div>
+    <div class="quiz-act"><button class="quiz-btn" onclick="toggleQ('q4')">정답 보기</button></div>
+    <div class="quiz-ans" id="q4"><strong>주사는 통증만 줄이고 기능 저하는 해결 못하기 때문.</strong> 기능 저하가 남아있으면 시간이 지나 재발함. 주사로 통증이 줄어든 "기회의 창"을 이용해 기능회복 운동을 해야 비로소 재발 방지가 됨.</div>
+  </div>
+
+</div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.vg[data-vids]').forEach(g => {
+    JSON.parse(g.dataset.vids).forEach(v => {
+      const a = document.createElement('a');
+      a.className = 'thumb';
+      a.href = `https://www.youtube.com/watch?v=${v.id}`;
+      a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = `
+        <div class="thumb-img">
+          <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy">
+          <div class="thumb-overlay"><div class="play-btn"></div></div>
+        </div>
+        <div class="thumb-info">
+          <div class="thumb-lbl">${v.label}</div>
+          <div class="thumb-dur">${v.dur||''}</div>
+        </div>`;
+      g.appendChild(a);
+    });
+  });
+});
+function toggleQ(id) {
+  const el = document.getElementById(id);
+  const btn = el.previousElementSibling.querySelector('.quiz-btn');
+  const open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '정답 보기' : '접기';
+}
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
