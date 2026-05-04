@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="취미는 과학">
+
+<!-- 카카오톡 공유 OG 태그 -->
+<meta property="og:title" content="과학이 바꾸는 일상 — EBS 취미는 과학 큐레이션">
+<meta property="og:description" content="30대 엄마를 위한 EBS 과학 큐레이션. 아이 뇌부터 제로슈가, 미세플라스틱, 노화까지 — 일상이 달라 보이는 12가지 과학 인사이트">
+<meta property="og:image" content="https://img.youtube.com/vi/YH7WlrV8Rbg/maxresdefault.jpg">
+<meta property="og:type" content="website">
+
+<title>과학이 바꾸는 일상 — EBS 취미는 과학</title>
+
+<style>
+/* ── Apple Design System Tokens ─────────────────── */
+:root {
+  --bg: #F2F2F7;
+  --surface: #FFFFFF;
+  --surface2: #F2F2F7;
+  --label: #1C1C1E;
+  --label2: #3C3C43;
+  --label3: #6C6C70;
+  --separator: rgba(60,60,67,.18);
+  --fill: rgba(120,120,128,.12);
+  --fill2: rgba(120,120,128,.08);
+
+  /* System Colors */
+  --blue: #007AFF;
+  --purple: #AF52DE;
+  --pink: #FF2D55;
+  --orange: #FF9500;
+  --green: #34C759;
+  --teal: #5AC8FA;
+  --indigo: #5856D6;
+
+  /* Category colors */
+  --cat-brain: #AF52DE;
+  --cat-body: #FF2D55;
+  --cat-food: #FF9500;
+  --cat-env: #34C759;
+  --cat-wow: #007AFF;
+
+  /* Typography */
+  --font: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Spacing */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #1C1C1E;
+    --surface2: #2C2C2E;
+    --label: #FFFFFF;
+    --label2: rgba(255,255,255,.6);
+    --label3: rgba(255,255,255,.3);
+    --separator: rgba(255,255,255,.12);
+    --fill: rgba(120,120,128,.2);
+    --fill2: rgba(120,120,128,.15);
+  }
+}
+
+/* ── Reset ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--label);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+  padding-top: var(--safe-top);
+  padding-bottom: calc(var(--safe-bottom) + 80px);
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; }
+button { cursor: pointer; border: none; background: none; font-family: var(--font); }
+* { -webkit-tap-highlight-color: transparent; }
+
+/* ── Status bar spacer ──────────────────────────── */
+.status-bar { height: var(--safe-top); background: var(--surface); }
+
+/* ── Hero ────────────────────────────────────────── */
+.hero {
+  background: var(--surface);
+  padding: 28px 20px 24px;
+  border-bottom: 0.5px solid var(--separator);
+}
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.hero-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1.15;
+  color: var(--label);
+  margin-bottom: 10px;
+}
+.hero-title span { color: var(--blue); }
+.hero-sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--label2);
+  margin-bottom: 16px;
+}
+.hero-badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: var(--fill);
+  color: var(--label2);
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+}
+
+/* ── Filter tabs ─────────────────────────────────── */
+.filter-wrap {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--separator);
+  position: sticky;
+  top: var(--safe-top);
+  z-index: 100;
+}
+.filter-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 6px;
+  padding: 10px 16px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.filter-scroll::-webkit-scrollbar { display: none; }
+.filter-btn {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: var(--fill2);
+  color: var(--label3);
+  transition: all .18s;
+  white-space: nowrap;
+}
+.filter-btn.active {
+  background: var(--label);
+  color: var(--surface);
+}
+
+/* ── Section ─────────────────────────────────────── */
+.section {
+  padding: 0 0 8px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 20px 10px;
+}
+.section-color-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--label);
+}
+.section-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label3);
+  margin-left: auto;
+}
+
+/* ── Card ────────────────────────────────────────── */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  transition: transform .15s, box-shadow .15s;
+}
+.card:active {
+  transform: scale(.98);
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+
+/* Thumbnail */
+.card-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+}
+.card-thumb-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-play-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,.72);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 10px 6px 8px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.card-play-btn::before {
+  content: '▶';
+  font-size: 10px;
+}
+
+.card-cat-stripe {
+  height: 3px;
+}
+
+/* Card body */
+.card-body { padding: 16px; }
+
+.card-tag-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.card-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: .02em;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.35;
+  color: var(--label);
+  margin-bottom: 8px;
+}
+
+.card-insight-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--label3);
+  margin-bottom: 5px;
+}
+
+.card-insight {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--label2);
+}
+.card-insight strong { color: var(--label); font-weight: 600; }
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 0.5px solid var(--separator);
+}
+.card-source {
+  font-size: 12px;
+  color: var(--label3);
+}
+.card-watch-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  padding: 8px 14px;
+  background: rgba(0,122,255,.1);
+  border-radius: 20px;
+}
+.card-watch-btn::after { content: ' →'; }
+
+/* ── Filter visibility ──────────────────────────── */
+[data-cat] { display: block; }
+body.filter-brain [data-cat]:not([data-cat="brain"]) { display: none; }
+body.filter-body [data-cat]:not([data-cat="body"]) { display: none; }
+body.filter-food [data-cat]:not([data-cat="food"]) { display: none; }
+body.filter-env [data-cat]:not([data-cat="env"]) { display: none; }
+body.filter-wow [data-cat]:not([data-cat="wow"]) { display: none; }
+body.filter-brain .section:not(:has([data-cat="brain"])) { display: none; }
+body.filter-body .section:not(:has([data-cat="body"])) { display: none; }
+body.filter-food .section:not(:has([data-cat="food"])) { display: none; }
+body.filter-env .section:not(:has([data-cat="env"])) { display: none; }
+body.filter-wow .section:not(:has([data-cat="wow"])) { display: none; }
+
+/* ── Bottom note ─────────────────────────────────── */
+.bottom-note {
+  padding: 20px 20px calc(var(--safe-bottom) + 20px);
+  text-align: center;
+  font-size: 12px;
+  color: var(--label3);
+  line-height: 1.7;
+}
+.bottom-note strong { color: var(--label2); }
+</style>
+</head>
+<body>
+
+<div class="status-bar"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">EBS 취미는 과학 · 큐레이션</div>
+  <h1 class="hero-title">과학이 바꾸는<br><span>일상의 시선</span></h1>
+  <p class="hero-sub">아이 뇌, 내 몸, 먹거리, 지구까지 —<br>30대 엄마를 위해 고른 12가지 과학 인사이트</p>
+  <div class="hero-badge-row">
+    <span class="hero-badge"><span class="dot" style="background:var(--cat-brain)"></span>뇌·마음</span>
+    <span class="hero-badge"><span class="dot" style="background:var(--cat-body)"></span>몸·건강</span>
+    <span class="hero-badge"><span class="dot" style="background:var(--cat-food)"></span>먹거리</span>
+    <span class="hero-badge"><span class="dot" style="background:var(--cat-env)"></span>환경·지구</span>
+    <span class="hero-badge"><span class="dot" style="background:var(--cat-wow)"></span>우와 발견</span>
+  </div>
+</header>
+
+<!-- FILTER -->
+<nav class="filter-wrap">
+  <div class="filter-scroll">
+    <button class="filter-btn active" onclick="setFilter(this,'all')">전체 12</button>
+    <button class="filter-btn" onclick="setFilter(this,'brain')">🧠 뇌·마음 3</button>
+    <button class="filter-btn" onclick="setFilter(this,'body')">💊 몸·건강 4</button>
+    <button class="filter-btn" onclick="setFilter(this,'food')">🥗 먹거리 1</button>
+    <button class="filter-btn" onclick="setFilter(this,'env')">🌿 환경·지구 2</button>
+    <button class="filter-btn" onclick="setFilter(this,'wow')">✨ 우와 발견 2</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- SECTION 1: 뇌·마음 -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-color-dot" style="background:var(--cat-brain)"></span>
+    <span class="section-title">뇌 · 마음</span>
+    <span class="section-count">3편</span>
+  </div>
+  <div class="cards">
+
+    <!-- 유전 vs 환경 -->
+    <article class="card" data-cat="brain">
+      <a href="https://www.youtube.com/watch?v=YH7WlrV8Rbg" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/YH7WlrV8Rbg/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/YH7WlrV8Rbg/hqdefault.jpg'"
+               alt="유전 vs 환경">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-brain)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#아이교육</span>
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#유전자</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#66화 확장판</span>
+          </div>
+          <h2 class="card-title">유전 vs 환경, 공부 머리는 어디서 오는 걸까?</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">IQ의 약 50%는 유전이지만, <strong>나머지 50%는 환경이 결정</strong>합니다. 그런데 '어떤 환경'인지가 핵심. 공부를 잘하는 환경은 재능보다 <strong>스트레스 없는 심리적 안전감</strong>에서 시작됩니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 도파민 -->
+    <article class="card" data-cat="brain">
+      <a href="https://www.youtube.com/watch?v=DPBJ1PWo9WM" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/DPBJ1PWo9WM/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/DPBJ1PWo9WM/hqdefault.jpg'"
+               alt="도파민">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-brain)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#도파민</span>
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#스마트폰</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#30화 확장판</span>
+          </div>
+          <h2 class="card-title">우리는 도파민에 대해 완전히 잘못 알고 있다</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">도파민은 쾌락 호르몬이 아니라 <strong>'기대와 동기'의 호르몬</strong>입니다. 스마트폰·SNS가 도파민을 과자극하는 원리를 알면, <strong>아이의 유튜브 중독이 왜 일어나는지</strong> 정확히 이해됩니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 불안 -->
+    <article class="card" data-cat="brain">
+      <a href="https://www.youtube.com/watch?v=1ycd5kK2K_Q" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/1ycd5kK2K_Q/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/1ycd5kK2K_Q/hqdefault.jpg'"
+               alt="불안">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-brain)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#불안</span>
+            <span class="card-tag" style="background:rgba(175,82,222,.12);color:var(--cat-brain)">#정신건강</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#6화</span>
+          </div>
+          <h2 class="card-title">인간은 왜 불안해 할까?</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">불안은 뇌의 오작동이 아닙니다. <strong>진화적으로 설계된 생존 시스템</strong>인데, 현대인에게 과활성화됩니다. 불안이 높은 사람이 오히려 위험을 잘 피하는 이유, 그리고 <strong>술로 불안을 달래면 안 되는 과학적 이유</strong>.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- SECTION 2: 몸·건강 -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-color-dot" style="background:var(--cat-body)"></span>
+    <span class="section-title">몸 · 건강</span>
+    <span class="section-count">4편</span>
+  </div>
+  <div class="cards">
+
+    <!-- 노화 -->
+    <article class="card" data-cat="body">
+      <a href="https://www.youtube.com/watch?v=J4Ct4G89M3A" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/J4Ct4G89M3A/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/J4Ct4G89M3A/hqdefault.jpg'"
+               alt="노화">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-body)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#노화</span>
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#텔로미어</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#4화</span>
+          </div>
+          <h2 class="card-title">노화, 우리는 왜 늙는가?</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">세포 분열 횟수는 한정되어 있습니다. <strong>텔로미어(염색체 끝 보호 캡)</strong>가 짧아질수록 노화가 빨라집니다. 30대부터 텔로미어를 지키는 생활 습관이 왜 중요한지 과학자가 직접 설명합니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 암 -->
+    <article class="card" data-cat="body">
+      <a href="https://www.youtube.com/watch?v=jGTt59qUbRY" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/jGTt59qUbRY/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/jGTt59qUbRY/hqdefault.jpg'"
+               alt="암 사망">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-body)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#암</span>
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#암전이</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#신의철 교수</span>
+          </div>
+          <h2 class="card-title">암 사망의 90%를 차지하는 진짜 이유</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">암 환자가 사망하는 90%는 <strong>전이(metastasis)</strong> 때문입니다. 암세포 단 한 개가 혈관을 타고 간·폐·뼈로 퍼지는 과정, 그리고 왜 조기 발견이 결정적인지 분자생물학으로 설명합니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- GLP-1 -->
+    <article class="card" data-cat="body">
+      <a href="https://www.youtube.com/watch?v=kKp3Z-OmEU8" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/kKp3Z-OmEU8/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/kKp3Z-OmEU8/hqdefault.jpg'"
+               alt="GLP-1">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-body)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#GLP-1</span>
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#비만치료제</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#20화 확장판</span>
+          </div>
+          <h2 class="card-title">GLP-1, 어떻게 비만 치료제가 되었나?</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">위고비·오젬픽이 왜 이렇게 화제인지. <strong>GLP-1은 식욕을 억제하는 장 호르몬</strong>인데, 이것을 흉내 내는 주사제가 체중의 15~20%를 줄입니다. 단순한 다이어트약이 아닌 이유가 있습니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 노화 방지 -->
+    <article class="card" data-cat="body">
+      <a href="https://www.youtube.com/watch?v=HPKgssjSQvw" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/HPKgssjSQvw/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/HPKgssjSQvw/hqdefault.jpg'"
+               alt="노화 방지">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-body)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#항노화</span>
+            <span class="card-tag" style="background:rgba(255,45,85,.1);color:var(--cat-body)">#젊은피</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#실리콘밸리</span>
+          </div>
+          <h2 class="card-title">젊은 피를 수혈하면 젊어질까? 노화 방지 프로젝트</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">늙은 쥐에게 젊은 쥐의 피를 연결했더니 <strong>근육, 뇌, 심장이 실제로 회복</strong>됐습니다. 실리콘밸리 억만장자들이 이 연구에 수천억을 투자하는 이유. 항노화 과학의 최전선을 30분에 이해합니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- SECTION 3: 먹거리 -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-color-dot" style="background:var(--cat-food)"></span>
+    <span class="section-title">먹거리 과학</span>
+    <span class="section-count">1편</span>
+  </div>
+  <div class="cards">
+
+    <!-- 제로슈가 -->
+    <article class="card" data-cat="food">
+      <a href="https://www.youtube.com/watch?v=0LiCt0QciGc" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/0LiCt0QciGc/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/0LiCt0QciGc/hqdefault.jpg'"
+               alt="제로슈가">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-food)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(255,149,0,.12);color:var(--cat-food)">#제로슈가</span>
+            <span class="card-tag" style="background:rgba(255,149,0,.12);color:var(--cat-food)">#대체감미료</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#장내미생물</span>
+          </div>
+          <h2 class="card-title">제로슈가, 정말 먹어도 될까?</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">혈당은 안 올리지만, <strong>장내 미생물 생태계를 교란</strong>하고 뇌의 단맛 기대치를 높여 나중에 더 많이 먹게 합니다. 아이에게 제로콜라를 줘도 괜찮은지 <strong>과학자가 직접 답합니다</strong>.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- SECTION 4: 환경·지구 -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-color-dot" style="background:var(--cat-env)"></span>
+    <span class="section-title">환경 · 지구</span>
+    <span class="section-count">2편</span>
+  </div>
+  <div class="cards">
+
+    <!-- 미세플라스틱 -->
+    <article class="card" data-cat="env">
+      <a href="https://www.youtube.com/watch?v=9Tcry58_vqY" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/9Tcry58_vqY/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/9Tcry58_vqY/hqdefault.jpg'"
+               alt="미세플라스틱">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-env)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(52,199,89,.12);color:var(--cat-env)">#미세플라스틱</span>
+            <span class="card-tag" style="background:rgba(52,199,89,.12);color:var(--cat-env)">#뇌건강</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#35화 확장판</span>
+          </div>
+          <h2 class="card-title">치매에 파킨슨까지?! 미세플라스틱의 정체</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">티백 한 개에서 116억 개 미세플라스틱이 나옵니다. 문제는 이 입자가 <strong>뇌-혈관 장벽을 통과해 뇌에 쌓인다</strong>는 것. 치매·파킨슨과의 연관성이 발견되고 있습니다. 무엇을 바꿔야 하는지 정리됩니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 기후 -->
+    <article class="card" data-cat="env">
+      <a href="https://www.youtube.com/watch?v=1oc7hLeqBBI" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/1oc7hLeqBBI/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/1oc7hLeqBBI/hqdefault.jpg'"
+               alt="기후변화">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-env)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(52,199,89,.12);color:var(--cat-env)">#기후변화</span>
+            <span class="card-tag" style="background:rgba(52,199,89,.12);color:var(--cat-env)">#이상기후</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#46화 확장판</span>
+          </div>
+          <h2 class="card-title">요즘 날씨, 왜 이렇냐면요...</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">한국은 이미 아열대 기후 진입 직전입니다. <strong>겨울이 짧아지고 여름이 길어지는 통계적 증거</strong>를 빙하학자가 직접 보여줍니다. 아이가 자라는 30년 뒤 한국의 기후가 어떻게 바뀌는지 과학적으로 예측합니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<!-- SECTION 5: 우와 발견 -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-color-dot" style="background:var(--cat-wow)"></span>
+    <span class="section-title">우와 발견</span>
+    <span class="section-count">2편</span>
+  </div>
+  <div class="cards">
+
+    <!-- 사랑 -->
+    <article class="card" data-cat="wow">
+      <a href="https://www.youtube.com/watch?v=LN1hr80NyX4" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/LN1hr80NyX4/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/LN1hr80NyX4/hqdefault.jpg'"
+               alt="사랑의 과학">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-wow)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(0,122,255,.1);color:var(--cat-wow)">#사랑과학</span>
+            <span class="card-tag" style="background:rgba(0,122,255,.1);color:var(--cat-wow)">#옥시토신</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#34화 확장판</span>
+          </div>
+          <h2 class="card-title">사랑은 선택이다 — 짝짓기의 과학</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">사랑의 감정 뒤에는 <strong>옥시토신·도파민·세로토닌의 칵테일</strong>이 숨어 있습니다. 최재천 교수가 말하는 진화적 짝짓기 전략. 연애가 왜 3년 후 식는지, 그리고 <strong>오래 사랑하는 커플의 뇌는 뭐가 다른지</strong>까지.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- 식물 -->
+    <article class="card" data-cat="wow">
+      <a href="https://www.youtube.com/watch?v=eZKCzIw4Zdg" target="_blank">
+        <div class="card-thumb-wrap">
+          <img src="https://img.youtube.com/vi/eZKCzIw4Zdg/maxresdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/eZKCzIw4Zdg/hqdefault.jpg'"
+               alt="식물의 복수">
+          <div class="card-play-btn">영상 보기</div>
+        </div>
+        <div class="card-cat-stripe" style="background:var(--cat-wow)"></div>
+        <div class="card-body">
+          <div class="card-tag-row">
+            <span class="card-tag" style="background:rgba(0,122,255,.1);color:var(--cat-wow)">#식물생태</span>
+            <span class="card-tag" style="background:rgba(0,122,255,.1);color:var(--cat-wow)">#자연의신비</span>
+            <span class="card-tag" style="background:var(--fill2);color:var(--label3)">#71화 확장판</span>
+          </div>
+          <h2 class="card-title">식물은 생각보다 무섭습니다</h2>
+          <div class="card-insight-label">핵심 인사이트</div>
+          <p class="card-insight">식물은 씹히는 소리를 '듣고' <strong>방어 물질을 즉시 분비</strong>합니다. 이웃 식물에게 신호를 보내 함께 방어하기도 합니다. 말 못 하는 식물이 사실 가장 치밀한 생존 전략가임을 알게 되면 자연이 달리 보입니다.</p>
+          <div class="card-footer">
+            <span class="card-source">EBS 취미는 과학</span>
+            <span class="card-watch-btn">시청하기</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="bottom-note">
+  <p><strong>EBS 취미는 과학</strong></p>
+  <p>youtube.com/@ebs.science</p>
+  <p style="margin-top:8px;font-size:11px">큐레이션: 2026-05-04</p>
+</footer>
+
+<script>
+function setFilter(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const body = document.body;
+  body.className = body.className.replace(/filter-\w+/g, '').trim();
+  if (cat !== 'all') body.classList.add('filter-' + cat);
+}
+</script>
+</body>
+</html>
