@@ -3,594 +3,720 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>지예를 위한 발표 & 면접 가이드 🌸</title>
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+<title>지예야, 이거 봐 💙</title>
 <style>
-/* ── Cute / Figma-inspired Design ── */
-:root {
-  --pink:     #FF6B9D;
-  --pink-l:   #FFE4EF;
-  --pink-m:   #FFB3CF;
-  --mint:     #3EC9B4;
-  --mint-l:   #D6F5F0;
-  --lavender: #9B7FE8;
-  --lav-l:    #EDE7FF;
-  --yellow:   #FFCA28;
-  --yel-l:    #FFF8DC;
-  --peach:    #FF8C69;
-  --peach-l:  #FFE8E0;
-  --sky:      #5BB8FF;
-  --sky-l:    #E0F2FF;
-  --bg:       #FFF5F8;
-  --white:    #FFFFFF;
-  --text:     #2D2D2D;
-  --gray-600: #5A5A7A;
-  --gray-400: #9999BB;
-  --gray-200: #E8E8F0;
-  --gray-100: #F5F5FC;
-  --border:   #F0E0EA;
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;700&display=swap');
 
-  --font: 'Pretendard Variable', 'Apple SD Gothic Neo', sans-serif;
-  --r-sm: 12px; --r-md: 18px; --r-lg: 24px; --r-xl: 32px;
-  --shadow-sm: 0 2px 8px rgba(255,107,157,.12);
-  --shadow-md: 0 6px 24px rgba(255,107,157,.16);
-  --t: 200ms ease;
+:root{
+  --navy:#1e3a5f; --blue:#3b82f6; --sky:#bfdbfe;
+  --pink:#fce7f3; --rose:#f9a8d4; --white:#ffffff;
+  --cream:#fafaf7; --muted:#64748b; --dark:#1e293b;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+body{background:var(--cream);color:var(--dark);
+  font-family:'Noto Sans KR',-apple-system,sans-serif;line-height:1.8;overflow-x:hidden;}
 
-/* ── Decorative blobs ── */
-body::before{content:'';position:fixed;top:-120px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,107,157,.15),transparent 70%);pointer-events:none;z-index:0;}
-body::after{content:'';position:fixed;bottom:-100px;left:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(62,201,180,.12),transparent 70%);pointer-events:none;z-index:0;}
+/* ── PARTICLES ── */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.p{position:absolute;font-size:1.1rem;animation:rise linear infinite;opacity:0;}
+@keyframes rise{
+  0%{transform:translateY(100vh) scale(0);opacity:0;}
+  10%{opacity:.5;}85%{opacity:.4;}
+  100%{transform:translateY(-10vh) scale(1);opacity:0;}
+}
 
-/* ── Header ── */
-.header{background:linear-gradient(135deg,#FFE4EF 0%,#EDE7FF 50%,#D6F5F0 100%);padding:28px var(--r-xl) 24px;position:relative;overflow:hidden;}
-.header::after{content:'✨';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:48px;opacity:.4;}
-.header-inner{max-width:820px;margin:0 auto;}
-.header-tag{display:inline-flex;align-items:center;gap:6px;background:var(--pink);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:10px;}
-.header-title{font-size:22px;font-weight:900;color:var(--text);letter-spacing:-0.5px;line-height:1.3;}
-.header-title span{color:var(--pink);}
-.header-sub{font-size:13px;color:var(--gray-600);margin-top:6px;}
-@media(max-width:600px){.header{padding:24px 18px 20px;}.header-title{font-size:18px;}}
+/* ── HEADER / HERO ── */
+.hero{
+  position:relative;z-index:1;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:3rem 1.5rem;
+  background:linear-gradient(160deg,#0f172a 0%,#1e3a5f 45%,#1e4080 100%);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.date-tag{
+  display:inline-block;padding:.4rem 1.4rem;border-radius:100px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);
+  font-size:.8rem;color:rgba(255,255,255,.7);letter-spacing:.1em;
+  margin-bottom:1.5rem;position:relative;z-index:1;
+}
+.hero h1{
+  font-family:'Nanum Pen Script',cursive;
+  font-size:clamp(3.5rem,12vw,8rem);color:var(--white);
+  line-height:1;margin-bottom:.5rem;position:relative;z-index:1;
+  text-shadow:0 0 40px rgba(147,197,253,.4);
+}
+.hero-sub{
+  font-size:clamp(.95rem,3vw,1.4rem);
+  color:rgba(255,255,255,.65);margin-bottom:2.5rem;
+  position:relative;z-index:1;line-height:1.9;
+}
+.scroll-hint{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:rgba(255,255,255,.35);font-size:.78rem;
+  animation:bob 2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+.scroll-hint::after{content:'↓';font-size:1.2rem;}
 
-/* ── Tab nav ── */
-.tab-nav{background:var(--white);border-bottom:2px solid var(--pink-l);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(255,107,157,.08);}
-.tab-nav-inner{max-width:820px;margin:0 auto;padding:0 20px;display:flex;overflow-x:auto;scrollbar-width:none;gap:4px;}
-.tab-nav-inner::-webkit-scrollbar{display:none;}
-.tab-btn{padding:14px 16px;font-size:13px;font-weight:700;color:var(--gray-400);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;font-family:var(--font);transition:all var(--t);border-radius:var(--r-sm) var(--r-sm) 0 0;}
-.tab-btn:hover{color:var(--pink);background:var(--pink-l);}
-.tab-btn.active{color:var(--pink);border-bottom-color:var(--pink);}
+/* ── SECTION COMMON ── */
+.sec{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:4rem 1.5rem;}
+.sec-chip{
+  display:inline-block;padding:.3rem 1rem;border-radius:100px;
+  font-size:.73rem;font-weight:700;letter-spacing:.06em;margin-bottom:.75rem;
+}
+.chip-blue{background:var(--sky);color:var(--navy);}
+.chip-pink{background:var(--pink);color:#9d174d;}
+.chip-green{background:#d1fae5;color:#065f46;}
+.chip-purple{background:#ede9fe;color:#5b21b6;}
+h2.sec-title{
+  font-family:'Nanum Pen Script',cursive;
+  font-size:clamp(1.8rem,6vw,3rem);color:var(--navy);
+  margin-bottom:1.5rem;line-height:1.2;
+}
 
-/* ── Content ── */
-.tab-content{display:none;padding:24px 0 80px;position:relative;z-index:1;}
-.tab-content.active{display:block;}
-.wrap{max-width:820px;margin:0 auto;padding:0 20px;}
+/* ── DIVIDER ── */
+.div{
+  width:80%;max-width:400px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(59,130,246,.3),transparent);
+  margin:3rem auto;
+}
 
-/* ── Section label ── */
-.sec{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--pink);letter-spacing:.5px;text-transform:uppercase;margin:32px 0 14px;}
-.sec:first-child{margin-top:0;}
-.sec::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--pink-l),transparent);border-radius:2px;}
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--blue),var(--rose));
+}
+.tl-item{position:relative;padding:0 0 2.5rem 2rem;}
+.tl-dot{
+  position:absolute;left:-2rem;top:4px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--blue);border:3px solid var(--cream);
+  transform:translateX(-50%);box-shadow:0 0 0 3px rgba(59,130,246,.2);
+}
+.tl-date{font-size:.75rem;color:var(--blue);font-weight:700;margin-bottom:.3rem;letter-spacing:.05em;}
+.tl-text{font-size:.93rem;color:var(--dark);line-height:1.8;}
+.tl-text em{font-style:normal;color:var(--blue);font-weight:700;}
 
-/* ── Card ── */
-.card{background:var(--white);border:2px solid var(--pink-l);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow-sm);transition:box-shadow var(--t),transform var(--t);}
-.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
-.card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
-.card-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.icon-pink{background:var(--pink-l);}
-.icon-mint{background:var(--mint-l);}
-.icon-lav{background:var(--lav-l);}
-.icon-yel{background:var(--yel-l);}
-.icon-sky{background:var(--sky-l);}
-.icon-peach{background:var(--peach-l);}
-.card-ttl{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-.3px;}
-.card-meta{font-size:12px;color:var(--gray-400);margin-top:3px;}
+/* ── PHOTO FILM STRIP ── */
+.film-container{
+  display:flex;gap:1rem;overflow-x:auto;padding:1rem .5rem;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.film-container::-webkit-scrollbar{height:4px;}
+.film-container::-webkit-scrollbar-track{background:rgba(0,0,0,.05);}
+.film-container::-webkit-scrollbar-thumb{background:var(--blue);border-radius:100px;}
+.film-card{
+  flex-shrink:0;width:240px;scroll-snap-align:start;
+  background:var(--white);border-radius:16px;overflow:hidden;
+  box-shadow:0 8px 30px rgba(30,58,95,.12);
+  border:1px solid rgba(59,130,246,.1);
+  transition:transform .3s,box-shadow .3s;
+}
+.film-card:hover{transform:translateY(-6px) rotate(.5deg);box-shadow:0 16px 40px rgba(30,58,95,.18);}
+.film-img{
+  aspect-ratio:.85;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#dbeafe,#ede9fe);
+}
+.film-img img{width:100%;height:100%;object-fit:cover;}
+.film-emoji{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.5rem;
+  font-size:3.5rem;
+}
+.film-caption{
+  padding:1rem 1.1rem;
+}
+.film-caption strong{display:block;font-size:.88rem;color:var(--navy);margin-bottom:.3rem;}
+.film-caption p{font-size:.78rem;color:var(--muted);line-height:1.6;}
 
-h3{font-size:14px;font-weight:700;color:var(--text);margin:14px 0 8px;}
-h4{font-size:13px;font-weight:700;color:var(--gray-600);margin:12px 0 6px;}
-p{font-size:14px;color:var(--gray-600);margin-bottom:8px;line-height:1.65;}
-ul,ol{padding-left:18px;margin-bottom:12px;}
-li{font-size:14px;color:var(--gray-600);margin-bottom:4px;line-height:1.65;}
-strong{color:var(--text);font-weight:700;}
-em{color:var(--pink);font-style:normal;font-weight:700;}
-hr{border:none;border-top:2px dashed var(--pink-l);margin:20px 0;}
+/* ── SWEET MOMENTS ── */
+.moment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.moment-card{
+  background:var(--white);border-radius:16px;padding:1.4rem;
+  box-shadow:0 4px 20px rgba(30,58,95,.07);
+  border:1px solid rgba(59,130,246,.1);
+  transition:transform .2s;
+}
+.moment-card:hover{transform:translateY(-3px);}
+.moment-icon{font-size:1.6rem;margin-bottom:.65rem;}
+.moment-card h4{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.4rem;}
+.moment-card p{font-size:.83rem;color:var(--muted);line-height:1.7;}
 
-/* ── Cute tags ── */
-.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin:0 4px 8px 0;border:1.5px solid;}
-.tag-p{background:var(--pink-l);color:var(--pink);border-color:var(--pink-m);}
-.tag-m{background:var(--mint-l);color:var(--mint);border-color:#8FE0D8;}
-.tag-l{background:var(--lav-l);color:var(--lavender);border-color:#C5B0F5;}
-.tag-y{background:var(--yel-l);color:#B38600;border-color:#FFE082;}
-.tag-s{background:var(--sky-l);color:var(--sky);border-color:#A8D9FF;}
+/* ── LOVE LETTER ── */
+.letter-box{
+  background:var(--white);border-radius:20px;padding:2.5rem;
+  box-shadow:0 8px 40px rgba(30,58,95,.1);
+  border:1px solid rgba(59,130,246,.12);
+  position:relative;
+}
+.letter-box::before{
+  content:'"';position:absolute;top:1rem;left:1.5rem;
+  font-size:6rem;color:rgba(59,130,246,.08);
+  font-family:Georgia,serif;line-height:1;
+}
+.letter-text{
+  font-size:1rem;color:#374151;line-height:2.2;
+  position:relative;z-index:1;
+}
+.letter-text em{color:var(--blue);font-style:normal;font-weight:700;}
+.letter-sign{
+  margin-top:1.5rem;text-align:right;
+  font-family:'Nanum Pen Script',cursive;font-size:1.4rem;color:var(--navy);
+}
 
-/* ── Callout ── */
-.callout{display:flex;gap:12px;padding:16px 18px;border-radius:var(--r-md);margin:12px 0;border:2px solid;}
-.callout-icon{font-size:20px;flex-shrink:0;margin-top:1px;}
-.callout-ttl{font-size:13px;font-weight:800;margin-bottom:4px;}
-.callout-txt{font-size:13px;color:var(--gray-600);line-height:1.6;margin:0;}
-.cb-pink{background:var(--pink-l);border-color:var(--pink-m);}
-.cb-pink .callout-ttl{color:var(--pink);}
-.cb-mint{background:var(--mint-l);border-color:#8FE0D8;}
-.cb-mint .callout-ttl{color:var(--mint);}
-.cb-lav{background:var(--lav-l);border-color:#C5B0F5;}
-.cb-lav .callout-ttl{color:var(--lavender);}
-.cb-yel{background:var(--yel-l);border-color:#FFE082;}
-.cb-yel .callout-ttl{color:#9A7000;}
+/* ── EXAM ENCOURAGE ── */
+.exam-box{
+  background:linear-gradient(135deg,#0f172a,#1e3a5f);
+  border-radius:20px;padding:2.5rem;color:var(--white);
+  position:relative;overflow:hidden;
+}
+.exam-box::before{
+  content:'📡';position:absolute;right:1.5rem;bottom:1rem;
+  font-size:5rem;opacity:.07;
+}
+.exam-title{font-family:'Nanum Pen Script',cursive;font-size:2rem;margin-bottom:1rem;}
+.exam-text{font-size:.93rem;color:rgba(255,255,255,.75);line-height:2;}
+.exam-steps{display:flex;flex-direction:column;gap:.65rem;margin-top:1.5rem;}
+.exam-step{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:rgba(255,255,255,.06);border-radius:10px;
+  padding:.85rem 1.1rem;border:1px solid rgba(255,255,255,.08);
+}
+.exam-step-n{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:rgba(147,197,253,.2);color:#93c5fd;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:800;
+}
+.exam-step-t h5{font-size:.88rem;font-weight:700;color:#bfdbfe;margin-bottom:.15rem;}
+.exam-step-t p{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.5;}
+.exam-cheer{
+  margin-top:1.5rem;text-align:center;
+  font-family:'Nanum Pen Script',cursive;font-size:1.8rem;color:#93c5fd;
+}
 
-/* ── Steps ── */
-.steps{display:flex;flex-direction:column;gap:12px;margin:12px 0;}
-.step{display:flex;gap:12px;align-items:flex-start;}
-.step-n{width:28px;height:28px;background:linear-gradient(135deg,var(--pink),#FF8CC4);color:white;font-size:13px;font-weight:900;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;box-shadow:0 3px 8px rgba(255,107,157,.3);}
-.step-lbl{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
-.step-txt{font-size:13px;color:var(--gray-600);line-height:1.6;margin:0;}
+/* ── YOUTUBE ── */
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.yt-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(30,58,95,.08);
+  border:1px solid rgba(59,130,246,.08);
+  transition:transform .25s,box-shadow .25s;
+}
+.yt-card:hover{transform:translateY(-5px);box-shadow:0 12px 35px rgba(30,58,95,.15);}
+.yt-thumb{aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,#dbeafe,#ede9fe);position:relative;}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;}
+.yt-tag{
+  position:absolute;top:.5rem;left:.5rem;
+  padding:.2rem .75rem;border-radius:100px;font-size:.68rem;font-weight:700;
+  background:rgba(255,255,255,.93);
+}
+.yt-body{padding:1rem;}
+.yt-title{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.4;}
+.yt-desc{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem;}
+.yt-why{font-size:.75rem;color:var(--blue);padding:.3rem .75rem;background:var(--sky);border-radius:6px;display:inline-block;}
+.yt-btn{
+  display:block;margin:.75rem;padding:.6rem;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:var(--white);text-align:center;font-size:.83rem;font-weight:700;
+  border-radius:10px;text-decoration:none;transition:opacity .2s;
+}
+.yt-btn:hover{opacity:.85;}
 
-/* ── Highlight box (for Jiyae tips) ── */
-.tip-box{background:linear-gradient(135deg,var(--pink-l),var(--lav-l));border:2px solid var(--pink-m);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:14px;position:relative;overflow:hidden;}
-.tip-box::before{content:'💝';position:absolute;right:16px;top:12px;font-size:32px;opacity:.3;}
-.tip-label{font-size:11px;font-weight:900;color:var(--pink);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;}
-.tip-title{font-size:15px;font-weight:900;color:var(--text);margin-bottom:10px;}
-.tip-content{font-size:14px;color:var(--gray-600);line-height:1.65;}
+/* ── FINAL MSG ── */
+.final{
+  background:linear-gradient(160deg,#1e3a5f,#3b0f6e);
+  padding:5rem 1.5rem;text-align:center;position:relative;z-index:1;
+  overflow:hidden;
+}
+.final::before{
+  content:'💙';position:absolute;font-size:18rem;
+  opacity:.04;top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.final h2{
+  font-family:'Nanum Pen Script',cursive;
+  font-size:clamp(2.5rem,8vw,5rem);color:var(--white);
+  margin-bottom:1rem;position:relative;z-index:1;
+}
+.final-text{
+  font-size:1.05rem;color:rgba(255,255,255,.7);
+  line-height:2.2;max-width:480px;margin:0 auto;
+  position:relative;z-index:1;
+}
+.final-oxytocin{
+  margin-top:2rem;padding:1.5rem 2rem;
+  background:rgba(255,255,255,.06);border-radius:16px;
+  border:1px solid rgba(255,255,255,.1);
+  max-width:480px;margin:2rem auto 0;
+  font-size:.93rem;color:rgba(255,255,255,.8);
+  line-height:2.2;position:relative;z-index:1;
+  font-style:italic;
+}
+.final-sign{
+  margin-top:2rem;font-family:'Nanum Pen Script',cursive;
+  font-size:1.6rem;color:#93c5fd;position:relative;z-index:1;
+}
 
-/* ── Practice box ── */
-.practice{background:var(--yel-l);border:2px solid #FFE082;border-radius:var(--r-md);padding:16px 20px;margin:12px 0;}
-.practice-ttl{font-size:13px;font-weight:800;color:#7A5C00;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.practice-txt{font-size:13px;color:#5A4400;line-height:1.65;}
+/* ── FADE IN ── */
+.fi{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.fi.on{opacity:1;transform:none;}
 
-/* ── Video thumbnails ── */
-.vg{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
-.thumb{width:175px;border-radius:var(--r-md);overflow:hidden;border:2px solid var(--pink-l);background:var(--white);box-shadow:var(--shadow-sm);text-decoration:none;display:block;transition:all var(--t);}
-.thumb:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--pink);}
-.thumb-img{position:relative;aspect-ratio:16/9;background:var(--pink-l);overflow:hidden;}
-.thumb-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.thumb-ov{position:absolute;inset:0;background:rgba(255,107,157,.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--t);}
-.thumb:hover .thumb-ov{opacity:1;}
-.play{width:36px;height:36px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(255,107,157,.4);}
-.play::after{content:'';border-left:13px solid white;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px;}
-.thumb-info{padding:8px 12px 12px;}
-.thumb-lbl{font-size:12px;font-weight:700;color:var(--text);line-height:1.4;}
-.thumb-dur{font-size:11px;color:var(--gray-400);margin-top:2px;}
+/* ── FOOTER ── */
+footer{background:#0f172a;padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.25);position:relative;z-index:1;}
 
-/* ── Problem-Solution card ── */
-.prob-sol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
-@media(max-width:500px){.prob-sol{grid-template-columns:1fr;}}
-.prob{background:#FFF0F5;border:2px solid var(--pink-m);border-radius:var(--r-md);padding:14px 16px;}
-.sol{background:var(--mint-l);border:2px solid #8FE0D8;border-radius:var(--r-md);padding:14px 16px;}
-.ps-lbl{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
-.prob .ps-lbl{color:var(--pink);}
-.sol .ps-lbl{color:var(--mint);}
-
-/* ── Big tip cards (for Jiyae section) ── */
-.jiyae-card{background:var(--white);border:2px solid var(--pink-l);border-radius:var(--r-xl);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:all var(--t);}
-.jiyae-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
-.jiyae-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:linear-gradient(135deg,var(--pink),#C060A8);color:white;font-size:15px;font-weight:900;border-radius:50%;margin-bottom:12px;box-shadow:0 3px 10px rgba(255,107,157,.3);}
-.jiyae-issue{font-size:12px;font-weight:700;color:var(--pink);background:var(--pink-l);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:8px;}
-.jiyae-ttl{font-size:16px;font-weight:900;color:var(--text);margin-bottom:10px;letter-spacing:-.3px;}
-.jiyae-desc{font-size:14px;color:var(--gray-600);margin-bottom:14px;line-height:1.65;}
-.jiyae-method{background:linear-gradient(135deg,#F0FFF9,#E8F0FF);border:2px solid #C5E8FF;border-radius:var(--r-md);padding:14px 18px;}
-.jiyae-method-ttl{font-size:12px;font-weight:800;color:var(--lavender);margin-bottom:8px;}
-
-/* ── Formula box ── */
-.formula{background:linear-gradient(135deg,var(--lav-l),var(--sky-l));border:2px solid #C5B0F5;border-radius:var(--r-md);padding:18px;margin:12px 0;text-align:center;}
-.formula-txt{font-size:18px;font-weight:900;color:var(--lavender);letter-spacing:-0.5px;}
-.formula-sub{font-size:12px;color:var(--gray-600);margin-top:6px;}
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .sec{padding:3rem 1rem;}
+  .letter-box{padding:1.5rem;}
+  .exam-box{padding:1.5rem;}
+}
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <div class="header-tag">🌸 지예를 위한 특별 가이드</div>
-    <h1 class="header-title"><span>지예</span>의 발표 & 면접 완전정복 ✨</h1>
-    <p class="header-sub">happyspeech 임행복 강사 강의 정리 · 발표 / 면접 / 지예만을 위한 팁</p>
+<div class="particles" id="particles"></div>
+
+<!-- ────────── HERO ────────── -->
+<div class="hero">
+  <div class="date-tag">💙 2025.05.24 → 영원히</div>
+  <h1>지예야,<br>이거 봐</h1>
+  <div class="hero-sub">
+    오빠가 기억하는 우리 이야기 전부.<br>
+    지예가 기억 못 할 것 같아서 만들었어.
   </div>
-</header>
+  <div class="scroll-hint">아래로 내려봐</div>
+</div>
 
-<nav class="tab-nav">
-  <div class="tab-nav-inner">
-    <button class="tab-btn active" onclick="showTab('t1',this)">🎤 발표 강의</button>
-    <button class="tab-btn" onclick="showTab('t2',this)">💼 면접 강의</button>
-    <button class="tab-btn" onclick="showTab('t3',this)">💝 지예를 위한 팁</button>
-  </div>
-</nav>
+<!-- ────────── 우리 이야기 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-blue">💙 처음부터</span>
+  <h2 class="sec-title">우리의 시작</h2>
+  <div class="timeline fi">
 
-
-<!-- ══ TAB 1 — 발표 강의 ══ -->
-<div id="t1" class="tab-content active"><div class="wrap">
-
-  <div class="callout cb-pink">
-    <span class="callout-icon">🌸</span>
-    <div><div class="callout-ttl">발표의 핵심 원칙</div>
-    <p class="callout-txt">대본을 외우지 말고 <strong>키워드로 말하세요</strong>. 자연스럽게 흘러가는 말이 가장 잘 들립니다. 완벽한 발표보다 <em>살아있는 발표</em>가 더 설득력 있어요 🎯</p></div>
-  </div>
-
-  <p class="sec">✨ 발표 잘하는 핵심 기술</p>
-
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-lav">🗂️</div>
-      <div>
-        <div class="card-ttl">대본 외우지 말고 키워드로 말하기</div>
-        <div class="card-meta">happyspeech · 9분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025년 5월 24일 밤</div>
+      <div class="tl-text">
+        오빠가 지인 만나서 삼겹 김치볶음 먹는 사진 보냈고,<br>
+        지예는 친구랑 날씨 좋다고 돌아다니는 중이었어.<br>
+        <em>"너무 귀엽게 생기셨어요."</em><br>
+        그게 첫 말이었어.
       </div>
     </div>
-    <span class="tag tag-p">핵심 기술</span>
-    <ul>
-      <li><strong>키워드 중심 구조</strong>: 전달할 내용을 키워드 3~5개로 압축</li>
-      <li>외운 대본은 잊어버리면 끝. 키워드는 잊어도 <em>맥락으로 이어갈 수 있음</em></li>
-      <li>키워드 → 이유(맥락) → 예시 순서로 자연스럽게 이어가기</li>
-    </ul>
-    <div class="practice">
-      <div class="practice-ttl">🏋️ 연습법</div>
-      <p class="practice-txt">발표 내용을 포스트잇 5장에 키워드만 적어보세요. 그 키워드만 보고 말하는 연습 3번 → 키워드도 없이 말하는 연습 3번</p>
-    </div>
-    <div class="vg" data-vids='[{"id":"BRQpeHrrUJA","label":"키워드로 말이 술술 나오는 훈련법","dur":"9분"},{"id":"AJVmJu3KrkQ","label":"10초 만에 조리있게 말하는 법","dur":"8분"},{"id":"Pp9ld0nIwfg","label":"횡설수설하지 않고 조리있게 말하기","dur":"6분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-mint">🎯</div>
-      <div>
-        <div class="card-ttl">설득하는 발표의 공식 — PRP</div>
-        <div class="card-meta">happyspeech · 8분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025년 5월 25일</div>
+      <div class="tl-text">
+        <em>"오빠라 불러도 돼여?"</em><br>
+        오빠가 "좋죠 ㅋㅋㅋㅋ" 했고<br>
+        그냥 자연스럽게 오빠가 됐어.<br>
+        이상형 얘기도 그날 나왔어. 지예가 먼저 물어봤고.
       </div>
     </div>
-    <span class="tag tag-m">설득 구조</span>
-    <div class="formula">
-      <div class="formula-txt">Point → Reason → Point (재강조)</div>
-      <div class="formula-sub">핵심 주장 → 이유/근거 → 다시 핵심으로 마무리</div>
-    </div>
-    <ul>
-      <li><strong>Point</strong>: 먼저 결론부터. "저는 ~라고 생각합니다"</li>
-      <li><strong>Reason</strong>: 이유와 근거. "왜냐하면 ~이기 때문입니다"</li>
-      <li><strong>Point 재강조</strong>: "따라서 ~입니다" 로 마무리</li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"FEagflVfOaM","label":"한 방에 상대를 설득시키는 방법","dur":"8분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-pink">😰</div>
-      <div>
-        <div class="card-ttl">발표 떨림·공포증 완전 해결</div>
-        <div class="card-meta">happyspeech · 7분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025년 5월 30~31일 — 첫 만남</div>
+      <div class="tl-text">
+        오빠가 빨래 돌려놓고 버스 타고 갔어.<br>
+        새벽 4시 넘어서 지예 집에 가면서<br>
+        <em>"오빠랑 같이 있으니까 재밌었어요"</em>라고 했잖아.<br>
+        오빠 그 말 기억해. 아직도.
       </div>
     </div>
-    <span class="tag tag-p">긴장 관리</span>
-    <ul>
-      <li>떨림의 진짜 원인: <strong>"실수하면 어쩌지"가 아니라 "나를 평가받는다"는 느낌</strong></li>
-      <li>해결법 1: 청중을 평가자가 아닌 <em>동료</em>로 인식 바꾸기</li>
-      <li>해결법 2: 발표 전 3분 루틴으로 신체 긴장 먼저 풀기</li>
-      <li>해결법 3: 완벽하게 하려 말고 <em>"전달"에만 집중</em>하기</li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"oN5GAt2ZK_c","label":"발표공포증 원인 & 해결법","dur":"7분"},{"id":"hI26FOeTYXQ","label":"면접/발표 3분 전 루틴","dur":"12분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-yel">⭐</div>
-      <div>
-        <div class="card-ttl">미미미누 발표 기술 분석</div>
-        <div class="card-meta">happyspeech · 7분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025년 6월 3일 — 두 번째</div>
+      <div class="tl-text">
+        지예가 먼저 <em>"오늘 만날 수 있어요?"</em> 물어봤잖아.<br>
+        오빠 서점에서 기다렸어. 지예 기다리는 동안 똑똑해지고 있었어 ㅋㅋ<br>
+        그날 지예가 또 말했잖아 — "강아지상이에요"라고.
       </div>
     </div>
-    <span class="tag tag-y">실전 사례</span>
-    <ul>
-      <li>발표 첫 문장에 <strong>인용구 or 질문</strong>으로 주목 집중</li>
-      <li>중간에 <strong>수사적 질문</strong>으로 청중 참여 유도 ("여러분도 이런 경험 있으시죠?")</li>
-      <li>속도 변화: 중요한 부분에서 <em>의도적으로 느리게</em></li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"HRoQVpEhPMQ","label":"발표 잘하는법 미미미누 분석","dur":"7분"}]'></div>
-  </div>
 
-  <p class="sec">💬 발표 전 준비 루틴</p>
-
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-sky">⏰</div>
-      <div>
-        <div class="card-ttl">발표/면접 3분 전 이 5가지만</div>
-        <div class="card-meta">happyspeech · 12분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2025년 6월 5일 — 대전</div>
+      <div class="tl-text">
+        오빠 퇴근하고 차 끌고 대전 내려갔어.<br>
+        지예가 취소표 찾아서 기차 끊어줬잖아 — 무궁화호.<br>
+        <em>"저도 기대돼요"</em>라고 했던 거 기억해.
       </div>
     </div>
-    <div class="steps">
-      <div class="step"><div class="step-n">1</div><div>
-        <div class="step-lbl">발성 깨우기</div>
-        <p class="step-txt">"아에이오우" 크게 3번. 입과 목소리 워밍업.</p>
-      </div></div>
-      <div class="step"><div class="step-n">2</div><div>
-        <div class="step-lbl">발음 풀기</div>
-        <p class="step-txt">혀를 입천장·뺨에 돌려가며 30초. 발음이 선명해짐.</p>
-      </div></div>
-      <div class="step"><div class="step-n">3</div><div>
-        <div class="step-lbl">표정 만들기</div>
-        <p class="step-txt">과한 웃음 표정 5초 유지 후 이완. 표정 근육 활성화.</p>
-      </div></div>
-      <div class="step"><div class="step-n">4</div><div>
-        <div class="step-lbl">긴장 방출</div>
-        <p class="step-txt">손을 세게 쥐었다 펴기 5회. 긴장 에너지 신체로 분출.</p>
-      </div></div>
-      <div class="step"><div class="step-n">5</div><div>
-        <div class="step-lbl">복식호흡으로 마음 안정</div>
-        <p class="step-txt">4초 코로 들이쉬기 → 4초 멈춤 → 8초 천천히 내쉬기. 3회 반복.</p>
-      </div></div>
-    </div>
-    <div class="vg" data-vids='[{"id":"hI26FOeTYXQ","label":"면접/발표 3분 전 루틴","dur":"12분"}]'></div>
-  </div>
 
-</div></div>
-
-
-<!-- ══ TAB 2 — 면접 강의 ══ -->
-<div id="t2" class="tab-content"><div class="wrap">
-
-  <div class="callout cb-mint">
-    <span class="callout-icon">💼</span>
-    <div><div class="callout-ttl">면접의 핵심 원칙</div>
-    <p class="callout-txt">면접관은 <strong>정답을 듣고 싶은 게 아니에요.</strong> "이 사람이 우리 팀에서 일할 수 있을까?"를 봅니다. 당신만의 언어로, 진솔하게 말하는 것이 가장 좋은 면접입니다 🌿</p></div>
-  </div>
-
-  <p class="sec">💡 면접 핵심 기술</p>
-
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-mint">🔑</div>
-      <div>
-        <div class="card-ttl">면접 대본 외우지 말고 키워드로</div>
-        <div class="card-meta">happyspeech · 9분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">겨울 — 오빠 아팠을 때</div>
+      <div class="tl-text">
+        오빠 한의원 가는 날, 지예가 피부관리기 충전해서 왔잖아.<br>
+        근데 오는 중에 지예가 힘들었을 때,<br>
+        오빠가 바지랑 약이랑 들고 먼저 나갔어.<br>
+        <em>그때 오빠 마음이 얼마나 바빴는지 알아?</em>
       </div>
     </div>
-    <span class="tag tag-m">핵심 전략</span>
-    <ul>
-      <li>외운 대본 → 긴장하면 <strong>뇌가 blank</strong>. 키워드는 긴장해도 살아남음</li>
-      <li>자기소개: "저는 [키워드1], [키워드2], [키워드3]을 가진 사람입니다" 구조로</li>
-      <li>각 키워드마다 <em>경험 한 가지씩</em> 연결해서 자연스럽게 말하기</li>
-    </ul>
-    <div class="formula">
-      <div class="formula-txt">키워드 → 경험 → 결과 → 지원 동기 연결</div>
-      <div class="formula-sub">STAR 방식 변형 (Situation → Task → Action → Result)</div>
-    </div>
-    <div class="vg" data-vids='[{"id":"BRQpeHrrUJA","label":"키워드로 말이 술술 나오는 훈련법","dur":"9분"},{"id":"Pp9ld0nIwfg","label":"면접·회사 횡설수설 없애는 법","dur":"6분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-lav">💬</div>
-      <div>
-        <div class="card-ttl">자신감 있어 보이는 이미지 4가지</div>
-        <div class="card-meta">happyspeech · 7분</div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2026년 4월 11~12일 — 연휴</div>
+      <div class="tl-text">
+        대전에서 같이 있었잖아. 밥도 먹고.<br>
+        오빠 혼자 돌아오는 기차에서 문자했잖아.<br>
+        <em>"벚꽃 다 떨어졌어 ㅠ 지예 무해"</em><br>
+        연휴 같이 보내서 진짜 행복했어.
       </div>
     </div>
-    <span class="tag tag-l">이미지 메이킹</span>
-    <div class="steps">
-      <div class="step"><div class="step-n">1</div><div>
-        <div class="step-lbl">표정 — 입꼬리를 2mm만 올려라</div>
-        <p class="step-txt">크게 웃지 않아도 돼요. 살짝 올린 입꼬리가 더 자연스럽고 따뜻해 보임.</p>
-      </div></div>
-      <div class="step"><div class="step-n">2</div><div>
-        <div class="step-lbl">눈맞춤 — 도망가지 말기</div>
-        <p class="step-txt">시선을 내리깔면 자신없어 보임. 면접관의 눈에서 코 사이를 보는 것만으로도 충분.</p>
-      </div></div>
-      <div class="step"><div class="step-n">3</div><div>
-        <div class="step-lbl">자세 — 어깨를 뒤로</div>
-        <p class="step-txt">앞으로 굽은 어깨 = 긴장 신호. 등받이 없이 앉을 때 등이 자연히 펴지도록 연습.</p>
-      </div></div>
-      <div class="step"><div class="step-n">4</div><div>
-        <div class="step-lbl">목소리 톤 — 한 음 낮춰라</div>
-        <p class="step-txt">긴장하면 목소리가 올라감. 의도적으로 한 음 낮게 시작하면 차분하고 신뢰감 있어 보임.</p>
-      </div></div>
-    </div>
-    <div class="vg" data-vids='[{"id":"s6Ufwl8k6ZA","label":"자신감 이미지 만드는 4가지 비밀","dur":"7분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-yel">🔢</div>
-      <div>
-        <div class="card-ttl">숫자로 말하면 설득력이 올라간다</div>
-        <div class="card-meta">happyspeech · 5분</div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ────────── 사진 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-pink">📸 우리 사진들</span>
+  <h2 class="sec-title">오빠가 제일 좋아하는<br>우리 모습들</h2>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.88rem">← 옆으로 밀어봐</p>
+  <div class="film-container fi">
+
+    <div class="film-card">
+      <div class="film-img">
+        <div class="film-emoji">🪞<span style="font-size:.9rem;color:#1e3a5f">미러셀카</span></div>
+      </div>
+      <div class="film-caption">
+        <strong>첫 거울 셀카 📱</strong>
+        <p>지예 빨간 가디건, 오빠 뒤에서 브이. 두 개 폰이 동시에 찍히는 그 순간. 제일 좋아하는 사진 중 하나야.</p>
       </div>
     </div>
-    <ul>
-      <li>"열심히 했습니다" → ❌ "3개월 동안 매일 2시간씩" → ✅</li>
-      <li>"많이 개선됐습니다" → ❌ "20% 향상됐습니다" → ✅</li>
-      <li>면접 답변에 숫자 1개만 넣어도 <em>기억에 남는 답변</em>이 됨</li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"FAbASHgcAM8","label":"똑똑한 사람은 숫자로 이야기한다","dur":"5분"}]'></div>
-  </div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-peach">🚫</div>
-      <div>
-        <div class="card-ttl">손해 보는 말투 3가지 — 면접에서 절대 하지 말 것</div>
-        <div class="card-meta">happyspeech · 7분</div>
+    <div class="film-card">
+      <div class="film-img">
+        <div class="film-emoji">🦦<span style="font-size:.9rem;color:#1e3a5f">카피바라</span></div>
+      </div>
+      <div class="film-caption">
+        <strong>카피바라 앞에서 🥰</strong>
+        <p>둘이 카피바라 옆에서 찍은 사진. 지예 웃는 얼굴이 제일 예쁜 날이었어. 오빠도 기분 좋아서 브이 했잖아.</p>
       </div>
     </div>
-    <ul>
-      <li><strong>끝 올림 억양</strong>: "했는데요~?" 처럼 마무리를 올리면 자신없어 보임 → 문장 끝은 내려야</li>
-      <li><strong>"어..." "음..." 필러 단어</strong>: 침묵이 낫다. 말하기 전 2초 생각하는 여유가 더 지적으로 보임</li>
-      <li><strong>자기 비하 표현</strong>: "제가 잘 못하지만..." → 삭제. 강점만 말해도 됨</li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"iRrGrgWkpJo","label":"손해 보는 말투 3가지","dur":"7분"},{"id":"5O1jzmZBSOc","label":"어... 음... 말습관 없애는 법","dur":"4분"}]'></div>
-  </div>
 
-  <p class="sec">🧠 횡설수설 끝내기</p>
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-sky">💡</div>
-      <div>
-        <div class="card-ttl">횡설수설 끝내는 6가지 습관</div>
-        <div class="card-meta">happyspeech · 9분</div>
+    <div class="film-card">
+      <div class="film-img">
+        <div class="film-emoji">📷<span style="font-size:.9rem;color:#1e3a5f">PHOTOGRAY</span></div>
+      </div>
+      <div class="film-caption">
+        <strong>포토그레이 네컷 💗</strong>
+        <p>벚꽃 필터, 네잎클로버, 하트, 고양이 귀. 줄무늬 티 맞춰 입고. 4컷이 다 좋은데 심장 모양이 제일.</p>
       </div>
     </div>
-    <ul>
-      <li>말하기 전 <strong>먼저 결론</strong> 한 문장 정하기</li>
-      <li>이유는 <strong>최대 3가지</strong>만 (그 이상은 흐트러짐)</li>
-      <li>말하다 길어지면 <em>"정리하면..."으로 회수</em>하기</li>
-    </ul>
-    <div class="vg" data-vids='[{"id":"MeCK3jEK8N4","label":"횡설수설 끝내는 6가지 습관","dur":"9분"}]'></div>
-  </div>
 
-</div></div>
-
-
-<!-- ══ TAB 3 — 지예를 위한 팁 ══ -->
-<div id="t3" class="tab-content"><div class="wrap">
-
-  <div class="tip-box">
-    <div class="tip-label">💝 지예에게</div>
-    <div class="tip-title">지예야, 이 가이드는 너만을 위해 만들었어 🌸</div>
-    <p class="tip-content">급하게 말하는 거, 톤이 높아지는 거, 불안한 느낌 — 다 고칠 수 있어. 사실 이런 습관들은 "열심히 하려는 마음"에서 오거든. 그 마음은 그대로 두고 방법만 바꿔보자 💕</p>
-  </div>
-
-  <p class="sec">🎯 지예의 문제점별 처방</p>
-
-  <div class="jiyae-card">
-    <div class="jiyae-num">1</div>
-    <div class="jiyae-issue">🏃 너무 서둘러서 말함</div>
-    <div class="jiyae-ttl">쫓기는 것처럼 말하는 이유와 해결법</div>
-    <p class="jiyae-desc">빠르게 말하는 건 대부분 "빨리 말해야 해", "잊어버리면 어쩌지" 불안에서 나와. 청중은 지예가 생각하는 것보다 훨씬 여유 있게 들을 준비가 되어있어.</p>
-    <div class="jiyae-method">
-      <div class="jiyae-method-ttl">💜 처방</div>
-      <div class="steps" style="margin:0;">
-        <div class="step"><div class="step-n">①</div><div>
-          <div class="step-lbl">문장 끝에 1초 쉬기</div>
-          <p class="step-txt">말 끝에 의도적으로 1초 멈춤. 처음엔 어색하지만 청중에겐 여유롭게 들려.</p>
-        </div></div>
-        <div class="step"><div class="step-n">②</div><div>
-          <div class="step-lbl">녹음해서 들어보기</div>
-          <p class="step-txt">스스로 들어봐야 얼마나 빠른지 체감할 수 있어. 주 3번만 해도 달라짐.</p>
-        </div></div>
-        <div class="step"><div class="step-n">③</div><div>
-          <div class="step-lbl">발표 전 "천천히" 한 번 마음속으로</div>
-          <p class="step-txt">발표 시작 전 심호흡 + "천천히" 한 마디. 몸에 신호를 주는 것.</p>
-        </div></div>
+    <div class="film-card">
+      <div class="film-img">
+        <div class="film-emoji">🥐<span style="font-size:.9rem;color:#1e3a5f">베이커리</span></div>
+      </div>
+      <div class="film-caption">
+        <strong>빵집 거울 셀카 🪞</strong>
+        <p>지예 흰 니트, 브이 하면서 씨익 웃는 그 표정. 오빠 옆에서 그 사진 찍을 때 진짜 행복했어.</p>
       </div>
     </div>
-  </div>
 
-  <div class="jiyae-card">
-    <div class="jiyae-num">2</div>
-    <div class="jiyae-issue">🎵 목소리 톤이 차분하지 않음</div>
-    <div class="jiyae-ttl">긴장하면 목소리가 높아지는 이유</div>
-    <p class="jiyae-desc">긴장 → 어깨·목 근육 경직 → 성대가 조여서 목소리가 올라가. 자연스러운 반응이야. 이건 몸을 먼저 풀어야 해결돼.</p>
-    <div class="jiyae-method">
-      <div class="jiyae-method-ttl">💜 처방</div>
-      <div class="steps" style="margin:0;">
-        <div class="step"><div class="step-n">①</div><div>
-          <div class="step-lbl">발표 전 허밍으로 목소리 낮추기</div>
-          <p class="step-txt">"음~" 소리를 낮은 음으로 10초. 성대가 자연스럽게 이완됨.</p>
-        </div></div>
-        <div class="step"><div class="step-n">②</div><div>
-          <div class="step-lbl">첫 문장을 한 음 낮게 시작</div>
-          <p class="step-txt">첫 문장이 톤을 결정해. 의도적으로 낮게 시작하면 전체가 차분해져.</p>
-        </div></div>
-        <div class="step"><div class="step-n">③</div><div>
-          <div class="step-lbl">복식호흡 연습 (매일 5분)</div>
-          <p class="step-txt">배에 손 얹고 배가 나왔다 들어가는 호흡. 목소리가 깊어지고 톤이 낮아져.</p>
-        </div></div>
+    <div class="film-card">
+      <div class="film-img">
+        <div class="film-emoji">🧱<span style="font-size:.9rem;color:#1e3a5f">벽돌벽</span></div>
+      </div>
+      <div class="film-caption">
+        <strong>겨울 셀카 ❄️</strong>
+        <p>벽돌벽 앞에서 지예 뽀뽀 표정. 오빠 그냥 웃는 중. 이 사진 볼 때마다 기분이 좋아져.</p>
       </div>
     </div>
-  </div>
 
-  <div class="jiyae-card">
-    <div class="jiyae-num">3</div>
-    <div class="jiyae-issue">😟 불안도가 높음</div>
-    <div class="jiyae-ttl">발표/면접 불안을 다루는 방법</div>
-    <p class="jiyae-desc">불안은 "잘하고 싶다"는 마음에서 와. 나쁜 게 아니야. 다만 그 에너지를 "경계"로 쓰지 말고 "활력"으로 쓰는 게 핵심이야.</p>
-    <div class="jiyae-method">
-      <div class="jiyae-method-ttl">💜 처방</div>
-      <div class="steps" style="margin:0;">
-        <div class="step"><div class="step-n">①</div><div>
-          <div class="step-lbl">떨림을 흥분으로 재해석하기</div>
-          <p class="step-txt">"나 지금 떨려" → "나 지금 흥분됐어"로 바꿔 말하기. 뇌는 같은 각성 상태를 다르게 해석할 수 있어.</p>
-        </div></div>
-        <div class="step"><div class="step-n">②</div><div>
-          <div class="step-lbl">청중을 적으로 보지 말기</div>
-          <p class="step-txt">면접관·청중은 지예가 잘하길 바라고 있어. 평가자가 아니라 <em>응원단</em>이라고 생각해.</p>
-        </div></div>
-        <div class="step"><div class="step-n">③</div><div>
-          <div class="step-lbl">3분 전 루틴 반드시 지키기</div>
-          <p class="step-txt">발성 → 발음 → 표정 → 긴장 방출 → 복식호흡. 이 루틴만으로도 불안이 30% 줄어.</p>
-        </div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ────────── 오빠가 기억하는 것들 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-purple">💜 기억하는 것들</span>
+  <h2 class="sec-title">오빠가 놓치지 않은<br>지예의 순간들</h2>
+  <div class="moment-grid fi">
+
+    <div class="moment-card">
+      <div class="moment-icon">📸</div>
+      <h4>도촬 12장</h4>
+      <p>지예가 오빠 몰래 찍어뒀다가 한꺼번에 보내줬잖아. "기엽게 나온 것 같아요"라고 하면서. 오빠 그거 다 저장해뒀어.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🐾</div>
+      <h4>초롱이</h4>
+      <p>"초롱이가 오빠 안 아프래요." 아플 때 초롱이 사진 연속으로 보내줬잖아. 그때 진짜 마음 따뜻했어.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">💤</div>
+      <h4>꿈속에서도</h4>
+      <p>가위눌렸는데 꿈에서 오빠한테 말했더니 위로해줬다고 했잖아. "진짜 꿈인지 몰랐어요"라고. 꿈속 오빠 잘했네.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🎫</div>
+      <h4>표 쪼개기</h4>
+      <p>평택→천안→조치원→서대전. 오빠 지예 보러 가는 거라 전혀 안 힘들었어. 여행이었어.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🤖</div>
+      <h4>AI 커플사진</h4>
+      <p>오빠 사진으로 AI 커플사진 만들어줬잖아. "연예인 같당"이라고. 지예가 그런 거 할 때 너무 귀여워.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🩸</div>
+      <h4>오빠가 먼저 나간 날</h4>
+      <p>지예가 힘들었을 때 오빠가 바지랑 약 들고 먼저 뛰어나갔어. 당연한 거야. 지예 걱정되면 그냥 뛰어.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🌸</div>
+      <h4>벚꽃 다 떨어졌어 ㅠ</h4>
+      <p>기차에서 혼자 보면서 "지예 무해"라고 했잖아. 지예랑 같이 봤으면 더 좋았을 텐데.</p>
+    </div>
+
+    <div class="moment-card">
+      <div class="moment-icon">🌙</div>
+      <h4>헤롱헤롱</h4>
+      <p>졸릴 때 "헤롱헤롱"이라고 하는 거. 오빠 그 표현 진짜 좋아해. 지예 자기 전 연락할 때가 제일 귀여워.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ────────── 오빠 편지 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-blue">💌 오빠 말</span>
+  <h2 class="sec-title">지예한테 하고 싶은 말</h2>
+  <div class="letter-box fi">
+    <div class="letter-text">
+      지예야,<br><br>
+      처음에 <em>"너무 귀엽게 생기셨어요"</em>라고 했을 때부터<br>
+      오빠는 이미 좋아하고 있었어.<br><br>
+      멀리 있어도, 바빠도, 싸웠다가 풀고,<br>
+      그래도 계속 보고 싶고 보러 갔잖아.<br>
+      그게 오빠한테는 자연스러운 거야.<br><br>
+      지예랑 있으면 사소한 것도 재밌어.<br>
+      <em>카피바라 보는 것도, 빵집 가는 것도,</em><br>
+      <em>네컷 찍는 것도, 아무것도 안 하는 것도.</em><br><br>
+      지예가 국시 열심히 준비하는 거<br>
+      오빠 옆에서 다 보고 있어.<br>
+      방사선사 돼서 멋지게 일하는 지예,<br>
+      오빠 진짜 보고 싶어.<br><br>
+      연휴에 같이 보내서 행복했어.<br>
+      앞으로도 많이 그러자.
+    </div>
+    <div class="letter-sign">— 오빠가 💙</div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ────────── 국시 응원 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-green">📡 파이팅!</span>
+  <h2 class="sec-title">지예 방사선과 국시<br>오빠가 응원해</h2>
+  <div class="exam-box fi">
+    <div class="exam-title">방사선사 되는 그날까지 💙</div>
+    <div class="exam-text">
+      매일 공부하느라 힘들지? 오빠 알아.<br>
+      근데 지예는 분명히 해낼 수 있어. 오빠가 확신해.
+    </div>
+    <div class="exam-steps">
+      <div class="exam-step">
+        <div class="exam-step-n">1</div>
+        <div class="exam-step-t">
+          <h5>지금 이 순간이 제일 힘들어</h5>
+          <p>시험 직전이 제일 힘들어 보이는 법이야. 그게 정상이고, 지예가 열심히 하고 있다는 증거야.</p>
+        </div>
+      </div>
+      <div class="exam-step">
+        <div class="exam-step-n">2</div>
+        <div class="exam-step-t">
+          <h5>밥은 꼭 챙겨먹어</h5>
+          <p>공부하다 밥 못 먹는 거 오빠 제일 걱정돼. 먹어야 머리도 돌아가. 꼭 챙겨먹기.</p>
+        </div>
+      </div>
+      <div class="exam-step">
+        <div class="exam-step-n">3</div>
+        <div class="exam-step-t">
+          <h5>초롱이랑 잠깐 쉬어도 돼</h5>
+          <p>너무 오래 앉아있지 말고, 초롱이랑 잠깐 쉬고 다시 해. 집중력이 더 올라가.</p>
+        </div>
+      </div>
+      <div class="exam-step">
+        <div class="exam-step-n">4</div>
+        <div class="exam-step-t">
+          <h5>국시 끝나면 오빠가 뭐든 해줄게</h5>
+          <p>어디든 가고 싶은 데 가고, 먹고 싶은 거 먹고. 오빠가 다 들어줄게. 기대해도 돼.</p>
+        </div>
       </div>
     </div>
+    <div class="exam-cheer">지예 파이팅!! 방사선사 될 수 있어 📡✨</div>
   </div>
+</section>
 
-  <p class="sec">📅 지예의 2주 연습 플랜</p>
+<div class="div"></div>
 
-  <div class="card">
-    <div class="card-top">
-      <div class="card-icon icon-yel">📆</div>
-      <div>
-        <div class="card-ttl">매일 10분 루틴</div>
+<!-- ────────── 지예가 좋아할 영상 ────────── -->
+<section class="sec">
+  <span class="sec-chip chip-pink">🎬 지예를 위한 영상</span>
+  <h2 class="sec-title">공부 쉬는 시간에<br>이거 봐!</h2>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.88rem">아이돌, 뷰티, 힐링 영상 골라봤어 💙</p>
+
+  <div class="yt-grid fi">
+
+    <!-- IVE -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/Y8HOlxDj1EM/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+        <span class="yt-tag" style="color:#9333ea">💜 IVE</span>
       </div>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-n">월</div><div>
-        <div class="step-lbl">복식호흡 5분 + 오늘 있었던 일 키워드 3개로 말하기</div>
-        <p class="step-txt">스피치 훈련 시작. 천천히, 내용은 쉬운 것부터.</p>
-      </div></div>
-      <div class="step"><div class="step-n">화</div><div>
-        <div class="step-lbl">1분 자기소개 녹음 → 들어보기</div>
-        <p class="step-txt">속도·톤 체크. 빠르면 다시. 목표: 1분을 55~65초에 맞추기.</p>
-      </div></div>
-      <div class="step"><div class="step-n">수</div><div>
-        <div class="step-lbl">PRP 구조로 의견 말하기 연습</div>
-        <p class="step-txt">주제 하나 정해서 "저는 ~입니다. 왜냐하면 ~. 따라서 ~입니다." 3번 반복.</p>
-      </div></div>
-      <div class="step"><div class="step-n">목</div><div>
-        <div class="step-lbl">3분 전 루틴 연습</div>
-        <p class="step-txt">발성 → 발음 → 표정 → 손 쥐기 → 호흡. 5가지를 근육 기억에 새기기.</p>
-      </div></div>
-      <div class="step"><div class="step-n">금</div><div>
-        <div class="step-lbl">거울 보며 눈맞춤 + 표정 연습</div>
-        <p class="step-txt">말하면서 자신의 눈을 1초 이상 보기. 처음엔 어색하지만 익숙해지면 자신감 생겨.</p>
-      </div></div>
+      <div class="yt-body">
+        <div class="yt-title">IVE "Accendio" Official MV</div>
+        <div class="yt-desc">아이브 신곡! 완전 이쁘고 강한 여자 느낌. 보고 나면 기분 올라와</div>
+        <span class="yt-why">💙 이쁜 아이돌 픽</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=Y8HOlxDj1EM" target="_blank">▶ 보러 가기</a>
     </div>
 
-    <div class="callout cb-pink" style="margin-top:16px;">
-      <span class="callout-icon">💌</span>
-      <div><div class="callout-ttl">지예에게 한 마디</div>
-      <p class="callout-txt">완벽하게 할 필요 없어. 오늘보다 내일 조금만 더 나아지면 돼. 이 가이드 열심히 봐주는 것 자체가 이미 잘하고 있다는 증거야 💕</p></div>
+    <!-- aespa -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/WR8bFNFIElo/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#dbeafe,#ede9fe)'">
+        <span class="yt-tag" style="color:#2563eb">✨ aespa</span>
+      </div>
+      <div class="yt-body">
+        <div class="yt-title">aespa 'Supernova' MV</div>
+        <div class="yt-desc">에스파 슈퍼노바! 비주얼 터지는 뮤비. 쉬는 시간에 한 번씩 보면 힐링</div>
+        <span class="yt-why">💙 카리나 비주얼 폭발</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=WR8bFNFIElo" target="_blank">▶ 보러 가기</a>
     </div>
+
+    <!-- NewJeans -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/ArmDp-zijuc/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#d1fae5,#dbeafe)'">
+        <span class="yt-tag" style="color:#0891b2">🩵 NewJeans</span>
+      </div>
+      <div class="yt-body">
+        <div class="yt-title">NewJeans 'Supernatural'</div>
+        <div class="yt-desc">뉴진스 신비롭고 이쁜 뮤비. 공부하다 지칠 때 보면 좋아</div>
+        <span class="yt-why">💙 상큼하고 이쁜 분위기</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=ArmDp-zijuc" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <!-- 코스메틱 -->
+    <div class="yt-card">
+      <div class="yt-thumb"
+           style="background:linear-gradient(135deg,#fce7f3,#ede9fe);display:flex;align-items:center;justify-content:center;font-size:4rem;">
+        💄
+      </div>
+      <div class="yt-body">
+        <div class="yt-title">한국 뷰티 채널 LAMUQE 등</div>
+        <div class="yt-desc">피부관리, 메이크업 노하우. 국시 끝나고 지예 더 예뻐지기 위한 준비!</div>
+        <span class="yt-why">💙 코스메틱 좋아하는 지예를 위해</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/results?search_query=한국+뷰티+피부관리+꿀팁" target="_blank">▶ 뷰티 영상 보기</a>
+    </div>
+
+    <!-- 힐링 -->
+    <div class="yt-card">
+      <div class="yt-thumb"
+           style="background:linear-gradient(135deg,#d1fae5,#dbeafe);display:flex;align-items:center;justify-content:center;font-size:4rem;">
+        🌿
+      </div>
+      <div class="yt-body">
+        <div class="yt-title">Lo-fi 공부 음악 플레이리스트</div>
+        <div class="yt-desc">집중할 때 틀어놓으면 딱 좋은 감성 스터디 음악. 국시 준비할 때 틀어봐</div>
+        <span class="yt-why">💙 공부할 때 집중력 UP</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/results?search_query=lofi+공부+음악+한국" target="_blank">▶ 공부 음악 보기</a>
+    </div>
+
+    <!-- 재밌는 영상 -->
+    <div class="yt-card">
+      <div class="yt-thumb"
+           style="background:linear-gradient(135deg,#fef3c7,#fce7f3);display:flex;align-items:center;justify-content:center;font-size:4rem;">
+        😂
+      </div>
+      <div class="yt-body">
+        <div class="yt-title">재미있는 쇼츠 모음</div>
+        <div class="yt-desc">공부하다가 뇌 쉬게 해주는 유쾌한 영상들. 잠깐 웃고 다시 집중!</div>
+        <span class="yt-why">💙 스트레스 해소용</span>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/shorts/" target="_blank">▶ 유튜브 쇼츠 보기</a>
+    </div>
+
   </div>
+</section>
 
-  <p class="sec">🎬 추천 영상 순서</p>
-  <div class="card">
-    <h4>1단계 — 먼저 이거 봐 (이론 이해)</h4>
-    <div class="vg" data-vids='[{"id":"oN5GAt2ZK_c","label":"발표공포증 원인 & 해결법","dur":"7분"},{"id":"s6Ufwl8k6ZA","label":"자신감 이미지 4가지","dur":"7분"}]'></div>
-    <hr>
-    <h4>2단계 — 말하기 구조 잡기</h4>
-    <div class="vg" data-vids='[{"id":"AJVmJu3KrkQ","label":"10초 만에 조리있게 말하기","dur":"8분"},{"id":"FEagflVfOaM","label":"PRP 설득 공식","dur":"8분"}]'></div>
-    <hr>
-    <h4>3단계 — 실전 훈련</h4>
-    <div class="vg" data-vids='[{"id":"hI26FOeTYXQ","label":"발표/면접 3분 전 루틴","dur":"12분"},{"id":"BRQpeHrrUJA","label":"키워드 말하기 훈련","dur":"9분"}]'></div>
+<div class="div"></div>
+
+<!-- ────────── 마지막 ────────── -->
+<div class="final">
+  <h2>지예야 💙</h2>
+  <div class="final-text">
+    오빠가 지예랑 있어서 행복해.<br>
+    멀어도 보러 가고 싶고,<br>
+    싸워도 풀고 싶고,<br>
+    지예가 힘들면 옆에 있고 싶어.<br><br>
+    국시도 다 잘 될 거야.<br>
+    오빠가 확신해.
   </div>
+  <div class="final-oxytocin">
+    "지예랑 있으면 마음이 편해지고<br>
+    지예랑 사이좋으면 옥시토신이 나오고<br>
+    같이 있을 때 행복하고<br>
+    사소한 것도 더 재밌어져서 좋아."
+  </div>
+  <div class="final-sign">— 오빠가 직접 한 말이야 💙</div>
+</div>
 
-</div></div>
-
+<footer>
+  💙 오빠가 만든 지예를 위한 페이지 · 2025.05.24부터 지금까지 그리고 앞으로도
+</footer>
 
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('.vg[data-vids]').forEach(g=>{
-    JSON.parse(g.dataset.vids).forEach(v=>{
-      const a=document.createElement('a');
-      a.className='thumb';
-      a.href=`https://www.youtube.com/watch?v=${v.id}`;
-      a.target='_blank';a.rel='noopener';
-      a.innerHTML=`<div class="thumb-img"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.label}" loading="lazy"><div class="thumb-ov"><div class="play"></div></div></div><div class="thumb-info"><div class="thumb-lbl">${v.label}</div><div class="thumb-dur">${v.dur||''}</div></div>`;
-      g.appendChild(a);
-    });
-  });
-});
-function showTab(id,btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+// Particles
+const emojis = ['💙','✨','🌟','💫','⭐','🩵','💎','🫧'];
+const c = document.getElementById('particles');
+for(let i=0;i<20;i++){
+  const el=document.createElement('div');
+  el.className='p';
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.cssText=`left:${Math.random()*100}%;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*10}s;font-size:${.8+Math.random()*.8}rem;`;
+  c.appendChild(el);
 }
+
+// Fade in
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});
+},{threshold:.1});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
