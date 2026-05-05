@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시온아, 어린이날 축하해! 🎉</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Jua&display=swap');
+
+:root{
+  --pink:#ff6eb4; --purple:#c084fc; --yellow:#ffd166;
+  --mint:#6ee7b7; --blue:#93c5fd; --red:#ff8fa3;
+  --bg:#fff5fb; --white:#ffffff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  font-family:'Jua','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  overflow-x:hidden; line-height:1.6;
+}
+
+/* ── FLOATING STARS ── */
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;font-size:1.4rem;animation:float linear infinite;opacity:.55;}
+@keyframes float{
+  0%{transform:translateY(110vh) rotate(0deg);opacity:0;}
+  10%{opacity:.6;}
+  90%{opacity:.6;}
+  100%{transform:translateY(-10vh) rotate(720deg);opacity:0;}
+}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem 1.5rem;
+  background:linear-gradient(160deg,#ffeef8 0%,#f0e0ff 40%,#dff6ff 100%);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-30%;left:-20%;width:60%;height:60%;
+  background:radial-gradient(circle,rgba(255,110,180,.18),transparent 70%);
+  border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-20%;right:-10%;width:50%;height:50%;
+  background:radial-gradient(circle,rgba(192,132,252,.15),transparent 70%);
+  border-radius:50%;
+}
+.hero-date{
+  display:inline-block;padding:.4rem 1.4rem;border-radius:100px;
+  background:rgba(255,110,180,.15);border:2px solid rgba(255,110,180,.3);
+  font-size:.85rem;color:var(--pink);margin-bottom:1rem;letter-spacing:.05em;
+}
+.hero h1{
+  font-family:'Nanum Pen Script',cursive;
+  font-size:clamp(3rem,12vw,7rem);line-height:1;
+  background:linear-gradient(135deg,var(--pink),var(--purple),#6db8ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;position:relative;z-index:1;
+}
+.hero-sub{
+  font-size:clamp(1.1rem,4vw,1.8rem);color:#a855f7;margin-bottom:2rem;position:relative;z-index:1;
+}
+.heart-row{font-size:2rem;letter-spacing:.5rem;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* ── SECTION COMMON ── */
+section{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 1.5rem;}
+.sec-tag{
+  display:inline-block;padding:.35rem 1.2rem;border-radius:100px;
+  font-size:.8rem;margin-bottom:.75rem;
+}
+.sec-tag.pink{background:rgba(255,110,180,.15);color:var(--pink);}
+.sec-tag.purple{background:rgba(192,132,252,.15);color:var(--purple);}
+.sec-tag.yellow{background:rgba(255,209,102,.2);color:#d97706;}
+.sec-tag.mint{background:rgba(110,231,183,.2);color:#059669;}
+.sec-tag.blue{background:rgba(147,197,253,.2);color:#2563eb;}
+h2{font-size:clamp(1.6rem,5vw,2.5rem);margin-bottom:1.5rem;color:#4a1d6e;}
+
+/* ── PHOTO GALLERY ── */
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+@media(max-width:500px){.photo-grid{grid-template-columns:1fr;}}
+.photo-card{
+  border-radius:20px;overflow:hidden;position:relative;
+  box-shadow:0 8px 30px rgba(168,85,247,.18);
+  border:4px solid white;
+  aspect-ratio:.85;
+  background:linear-gradient(135deg,#fce7f3,#ede9fe);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+}
+.photo-card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  border-radius:14px;
+}
+.photo-caption{
+  position:relative;z-index:2;width:100%;
+  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 100%);
+  padding:.75rem 1rem .85rem;color:white;font-size:.88rem;text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.photo-caption strong{display:block;font-size:1rem;margin-bottom:2px;}
+
+/* placeholder photo (when no real img) */
+.photo-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.5rem;
+  font-size:4rem;
+  background:linear-gradient(135deg,#fce7f3,#ddd6fe);
+}
+
+/* ── MESSAGE CARDS ── */
+.msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.msg-card{
+  background:white;border-radius:20px;padding:1.5rem;
+  box-shadow:0 4px 20px rgba(168,85,247,.1);
+  border:2px solid rgba(255,110,180,.15);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.msg-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--grad);
+}
+.msg-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(168,85,247,.18);}
+.msg-from{font-size:.75rem;color:#a78bfa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+.msg-name{font-size:1.1rem;color:#4a1d6e;margin-bottom:.75rem;}
+.msg-text{font-size:.93rem;color:#6b7280;line-height:1.8;}
+.msg-heart{font-size:1.8rem;margin-top:.75rem;}
+
+/* ── YOUTUBE SECTION ── */
+.yt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;}
+.yt-card{
+  background:white;border-radius:20px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(168,85,247,.1);
+  border:2px solid rgba(255,110,180,.1);
+  transition:transform .2s,box-shadow .2s;
+}
+.yt-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(168,85,247,.2);}
+.yt-thumb{
+  aspect-ratio:16/9;overflow:hidden;
+  background:linear-gradient(135deg,#fce7f3,#ede9fe);
+  position:relative;
+}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;}
+.yt-badge{
+  position:absolute;top:.5rem;left:.5rem;
+  padding:.2rem .7rem;border-radius:100px;font-size:.7rem;font-weight:700;
+  background:rgba(255,255,255,.9);
+}
+.yt-info{padding:1rem;}
+.yt-title{font-size:.93rem;font-weight:700;color:#4a1d6e;margin-bottom:.35rem;line-height:1.4;}
+.yt-desc{font-size:.8rem;color:#6b7280;line-height:1.5;}
+.yt-why{
+  margin-top:.6rem;padding:.4rem .75rem;border-radius:8px;
+  background:#fdf4ff;font-size:.78rem;color:#a855f7;
+}
+.yt-btn{
+  display:block;margin:.75rem;padding:.65rem;border-radius:12px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:white;text-align:center;font-size:.85rem;font-weight:700;
+  text-decoration:none;transition:opacity .2s;
+}
+.yt-btn:hover{opacity:.85;}
+
+/* ── GROWTH TIPS ── */
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.tip-card{
+  background:white;border-radius:18px;padding:1.3rem;
+  box-shadow:0 4px 16px rgba(168,85,247,.08);
+  border:2px solid var(--border-c);
+  text-align:center;
+}
+.tip-icon{font-size:2.2rem;margin-bottom:.65rem;}
+.tip-card h4{font-size:.95rem;color:#4a1d6e;margin-bottom:.4rem;}
+.tip-card p{font-size:.82rem;color:#6b7280;line-height:1.6;}
+
+/* ── LOVE SECTION ── */
+.love-section{
+  background:linear-gradient(135deg,#fce7f3 0%,#ede9fe 50%,#dbeafe 100%);
+  border-radius:28px;padding:3rem 2rem;text-align:center;margin:0 1.5rem 3rem;
+  position:relative;z-index:1;overflow:hidden;
+}
+.love-section h2{color:#7c3aed;margin-bottom:1rem;}
+.love-text{font-size:1.1rem;color:#6b21a8;line-height:2;margin-bottom:1.5rem;}
+.love-big{font-family:'Nanum Pen Script',cursive;font-size:clamp(2rem,8vw,4.5rem);
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.confetti-row{font-size:1.8rem;letter-spacing:.3rem;animation:pulse 2s ease-in-out infinite;}
+
+/* ── FUN FACTS ── */
+.fact-list{display:flex;flex-direction:column;gap:.65rem;}
+.fact{
+  display:flex;align-items:center;gap:1rem;
+  background:white;border-radius:14px;padding:1rem 1.25rem;
+  box-shadow:0 2px 10px rgba(168,85,247,.08);
+  border-left:4px solid var(--pink);
+}
+.fact-ic{font-size:1.5rem;flex-shrink:0;}
+.fact-text{font-size:.9rem;color:#374151;}
+.fact-text strong{color:#7c3aed;}
+
+/* ── DIVIDER ── */
+.div-cute{
+  text-align:center;padding:1rem 0;font-size:1.4rem;
+  letter-spacing:.5rem;color:rgba(168,85,247,.4);
+  margin:0 auto;
+}
+
+/* ── SCROLL ANIMATION ── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;padding:2rem;font-size:.85rem;
+  color:#c084fc;position:relative;z-index:1;
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING STARS -->
+<div class="stars" id="stars"></div>
+
+<!-- ─────────── HERO ─────────── -->
+<div class="hero">
+  <div class="hero-date">🎈 2025년 어린이날 · 5월 5일</div>
+  <h1>시온아!</h1>
+  <div class="hero-sub">어린이날 축하해 🎉</div>
+  <div class="heart-row">💗 💜 💛 💙 💚</div>
+  <div style="margin-top:2rem;font-size:1.05rem;color:#7c3aed;max-width:420px;line-height:1.9">
+    세상에서 제일 사랑스럽고<br>
+    눈이 너무너무 예쁜 우리 시온이에게<br>
+    가족 모두가 만든 특별한 선물이야 ✨
+  </div>
+</div>
+
+<!-- ─────────── 시온이는 이런 아이 ─────────── -->
+<section>
+  <span class="sec-tag purple">⭐ 시온이 소개</span>
+  <h2>우리 시온이는요!</h2>
+  <div class="fact-list fade-in">
+    <div class="fact"><span class="fact-ic">👀</span><span class="fact-text"><strong>눈이 너무너무 큰</strong> 세상에서 제일 예쁜 아이예요</span></div>
+    <div class="fact"><span class="fact-ic">🏃</span><span class="fact-text"><strong>미친 듯이 달리는</strong> 에너지 폭발 활동가! 팔근육도 있어요</span></div>
+    <div class="fact"><span class="fact-ic">🥋</span><span class="fact-text"><strong>한빛 태권도</strong> 다니는 씩씩한 꼬마 무사</span></div>
+    <div class="fact"><span class="fact-ic">👻</span><span class="fact-text">삼촌이랑 <strong>괴물놀이</strong> 할 때가 제일 신나!</span></div>
+    <div class="fact"><span class="fact-ic">🤳</span><span class="fact-text">셀카 찍기를 <strong>스스로</strong> 할 줄 아는 디지털 네이티브</span></div>
+    <div class="fact"><span class="fact-ic">👸</span><span class="fact-text"><strong>신데렐라</strong>를 사랑하는 작은 공주님</span></div>
+    <div class="fact"><span class="fact-ic">💕</span><span class="fact-text"><strong>티니핑</strong>도 너무너무 좋아해요!</span></div>
+    <div class="fact"><span class="fact-ic">💧</span><span class="fact-text">물놀이하면 옷 다 젖어도 <strong>집에 안 가는</strong> 놀이 천재</span></div>
+  </div>
+</section>
+
+<div class="div-cute">✦ ✦ ✦</div>
+
+<!-- ─────────── 사진 갤러리 ─────────── -->
+<section>
+  <span class="sec-tag pink">📸 시온이 사진</span>
+  <h2>우리가 좋아하는 시온이 모습</h2>
+  <div class="photo-grid fade-in">
+
+    <div class="photo-card">
+      <div class="photo-placeholder">🐰<span style="font-size:1rem;color:#9d4edd">토끼옷 입은 날</span></div>
+      <div class="photo-caption">
+        <strong>진지한 시온이 👀</strong>
+        토끼 패턴 옷 입고 식당에서 — 저 눈빛 보면 다 녹아버려
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-placeholder">😄<span style="font-size:1rem;color:#9d4edd">분홍 후드</span></div>
+      <div class="photo-caption">
+        <strong>장난꾸러기 시온이 😜</strong>
+        분홍 집업 입고 뭔가 물고 장난치는 중 — 이 표정이 짱이야
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-placeholder">✌️<span style="font-size:1rem;color:#9d4edd">삼촌이랑 셀카</span></div>
+      <div class="photo-caption">
+        <strong>삼촌이랑 브이! 📸</strong>
+        삼촌 유성이랑 찍은 셀카 — 시온이 브이 포즈 귀여워 죽겠다
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <div class="photo-placeholder">🎂<span style="font-size:1rem;color:#9d4edd">생일 파티</span></div>
+      <div class="photo-caption">
+        <strong>신데렐라 생일파티 🎉</strong>
+        신데렐라 케이크 앞에서 브이! 이 날 얼마나 좋았을까
+      </div>
+    </div>
+
+  </div>
+  <p style="text-align:center;margin-top:1rem;font-size:.82rem;color:#c084fc">
+    💜 사진은 매년 업데이트 될 거야 — 시온이가 크는 걸 다 담을게!
+  </p>
+</section>
+
+<div class="div-cute">🌸 🌸 🌸</div>
+
+<!-- ─────────── 가족 메시지 ─────────── -->
+<section>
+  <span class="sec-tag yellow">💌 가족들의 말</span>
+  <h2>시온이에게 하고 싶은 말</h2>
+  <div class="msg-grid fade-in">
+
+    <div class="msg-card" style="--grad:linear-gradient(90deg,#ff6eb4,#f472b6)">
+      <div class="msg-from">FROM 삼촌 유성</div>
+      <div class="msg-name">삼촌 유성이가 💜</div>
+      <div class="msg-text">
+        시온아, 삼촌이 괴물 역할 해줄 때 네가 그렇게 신나하는 거 보면 삼촌도 세상 행복해.
+        그 큰 눈으로 세상 다 받아들이면서 씩씩하게 자라줘서 고마워.
+        태권도도 열심히 하고, 앞으로도 실컷 달리고 실컷 놀아!
+        삼촌이 항상 응원해 🥊
+      </div>
+      <div class="msg-heart">🦸‍♂️💜</div>
+    </div>
+
+    <div class="msg-card" style="--grad:linear-gradient(90deg,#f472b6,#e879f9)">
+      <div class="msg-from">FROM 엄마 구민희</div>
+      <div class="msg-name">엄마가 💗</div>
+      <div class="msg-text">
+        시온아, 우리 딸이 세상에서 제일 예쁘고 제일 사랑스러워.
+        그 눈으로 환하게 웃을 때 엄마 심장이 녹아버려.
+        얼마나 씩씩하게 달리고, 얼마나 열심히 노는지 — 다 보고 있어.
+        우리 시온이 어린이날 진심으로 축하해! 사랑해 ❤️
+      </div>
+      <div class="msg-heart">👩‍👧💗</div>
+    </div>
+
+    <div class="msg-card" style="--grad:linear-gradient(90deg,#c084fc,#a78bfa)">
+      <div class="msg-from">FROM 할머니</div>
+      <div class="msg-name">할머니가 💛</div>
+      <div class="msg-text">
+        시온이가 놀이터에서 집에 안 온다고 해도 사실 할머니가 제일 좋아.
+        그렇게 신나서 뛰어노는 거 보면 할머니도 덩달아 기분 좋아지거든.
+        우리 시온이 건강하게 무럭무럭 자라! 할머니가 맛있는 거 많이 해줄게.
+        사랑한다 우리 강아지 💛
+      </div>
+      <div class="msg-heart">👵💛</div>
+    </div>
+
+    <div class="msg-card" style="--grad:linear-gradient(90deg,#6ee7b7,#34d399)">
+      <div class="msg-from">FROM 아빠 유재민</div>
+      <div class="msg-name">아빠가 💚</div>
+      <div class="msg-text">
+        시온아, 아빠 딸이라서 너무 행복해.
+        신데렐라처럼 예쁘고, 태권도 배우는 것처럼 용감하게 자라주렴.
+        어떤 일이든 다 잘 해낼 수 있어 — 아빠가 옆에 있을게.
+        어린이날 진심으로 축하해! 💚
+      </div>
+      <div class="msg-heart">👨‍👧💚</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-cute">⭐ ⭐ ⭐</div>
+
+<!-- ─────────── 유튜브 추천 ─────────── -->
+<section>
+  <span class="sec-tag mint">📺 시온이를 위한 영상</span>
+  <h2>시온이가 좋아할 영상 모음!</h2>
+  <p style="color:#6b7280;margin-bottom:1.5rem;font-size:.93rem">
+    티니핑, 신데렐라, 핑크퐁, 뽀로로 — 시온이 취향 저격 영상들이야 🎬
+  </p>
+
+  <div class="yt-grid fade-in">
+
+    <!-- 티니핑 -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/K2cFkAbwYis/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/K2cFkAbwYis/mqdefault.jpg'">
+        <span class="yt-badge" style="color:#9333ea">💜 티니핑</span>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">캐치! 티니핑 ✨ 인기 에피소드</div>
+        <div class="yt-desc">시온이가 제일 좋아하는 티니핑! 깜찍한 티니핑 친구들이랑 신나게 놀아봐</div>
+        <div class="yt-why">💡 시온이가 좋아하는 티니핑 공식 채널</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/@TeeniepingTV" target="_blank">
+        🎵 티니핑 보러 가기
+      </a>
+    </div>
+
+    <!-- 신데렐라 -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/oyRxxpJg3gU/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/oyRxxpJg3gU/mqdefault.jpg'">
+        <span class="yt-badge" style="color:#2563eb">👸 신데렐라</span>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">신데렐라 이야기 🥿</div>
+        <div class="yt-desc">시온이가 제일 좋아하는 신데렐라! 유리구두 신고 왕자님 만나는 그 이야기</div>
+        <div class="yt-why">💡 생일 케이크도 신데렐라! 시온이의 최애</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=oyRxxpJg3gU" target="_blank">
+        👑 신데렐라 보러 가기
+      </a>
+    </div>
+
+    <!-- 핑크퐁 -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/XqZsoesa55w/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/XqZsoesa55w/mqdefault.jpg'">
+        <span class="yt-badge" style="color:#db2777">🦈 핑크퐁</span>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">아기상어 뚜루루뚜루 🦈</div>
+        <div class="yt-desc">전 세계 어린이들이 사랑하는 아기상어! 같이 따라 춰봐요 — 뚜루루뚜루!</div>
+        <div class="yt-why">💡 유튜브 역대 조회수 1위 — 전 세계 어린이 픽</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=XqZsoesa55w" target="_blank">
+        🦈 아기상어 보러 가기
+      </a>
+    </div>
+
+    <!-- 뽀로로 -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/fDjsD8atx1U/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/fDjsD8atx1U/mqdefault.jpg'">
+        <span class="yt-badge" style="color:#0891b2">🐧 뽀로로</span>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">뽀로로 노래 모음 🎵</div>
+        <div class="yt-desc">뽀로로랑 친구들이 부르는 신나는 노래들! 같이 따라 불러요</div>
+        <div class="yt-why">💡 한국 어린이 국민 캐릭터! 신나는 노래 모음</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=fDjsD8atx1U" target="_blank">
+        🐧 뽀로로 보러 가기
+      </a>
+    </div>
+
+    <!-- 지니키즈 동화 -->
+    <div class="yt-card">
+      <div class="yt-thumb">
+        <img src="https://img.youtube.com/vi/iKsf86HS6zU/maxresdefault.jpg"
+             onerror="this.src='https://img.youtube.com/vi/iKsf86HS6zU/mqdefault.jpg'">
+        <span class="yt-badge" style="color:#d97706">📖 동화</span>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">베스트 인기 동화 30분 모음 📚</div>
+        <div class="yt-desc">잠들기 전에 같이 봐요! 30분 연속 인기 동화 모음 — 상상력이 쑥쑥 자라요</div>
+        <div class="yt-why">💡 취침 전 루틴으로 딱! 상상력과 언어 발달에 좋아요</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/watch?v=iKsf86HS6zU" target="_blank">
+        📖 동화 보러 가기
+      </a>
+    </div>
+
+    <!-- 키즈 태권도 -->
+    <div class="yt-card">
+      <div class="yt-thumb" style="background:linear-gradient(135deg,#fde68a,#fca5a5);display:flex;align-items:center;justify-content:center;font-size:5rem;">
+        🥋
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">어린이 태권도 신나는 영상 🥋</div>
+        <div class="yt-desc">한빛 태권도 다니는 시온이를 위한 특별 추천! 어린이 태권도 동작 따라하기</div>
+        <div class="yt-why">💡 시온이가 다니는 태권도! 동작 예습하면 더 잘할 수 있어</div>
+      </div>
+      <a class="yt-btn" href="https://www.youtube.com/results?search_query=어린이+태권도+동작" target="_blank">
+        🥋 태권도 영상 보러 가기
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-cute">🎀 🎀 🎀</div>
+
+<!-- ─────────── 시온이에게 도움될 것들 ─────────── -->
+<section>
+  <span class="sec-tag blue">🌱 시온이에게 도움이 되는 것들</span>
+  <h2>시온이가 더 멋지게 자라려면!</h2>
+  <div class="tip-grid fade-in">
+
+    <div class="tip-card" style="--border-c:rgba(255,110,180,.25)">
+      <div class="tip-icon">📚</div>
+      <h4>매일 책 읽기</h4>
+      <p>자기 전 엄마·삼촌이랑 책 한 권 같이 읽으면 상상력과 어휘력이 쑥쑥 자라요!</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(192,132,252,.25)">
+      <div class="tip-icon">🎨</div>
+      <h4>그림 그리기</h4>
+      <p>티니핑·신데렐라 그려보기! 손 근육도 발달하고 창의력도 UP. 색연필 선물 받으면 딱!</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(110,231,183,.25)">
+      <div class="tip-icon">🥋</div>
+      <h4>태권도 계속하기</h4>
+      <p>꾸준히 다니면 집중력·체력·자신감 세 마리 토끼를 한꺼번에 잡을 수 있어!</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(253,186,116,.25)">
+      <div class="tip-icon">🌳</div>
+      <h4>매일 밖에서 놀기</h4>
+      <p>시온이가 제일 잘하는 거! 놀이터에서 실컷 뛰면 뼈도 튼튼해지고 면역력도 강해져요</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(147,197,253,.25)">
+      <div class="tip-icon">💤</div>
+      <h4>일찍 자기</h4>
+      <p>밤 9시 이전에 자야 성장호르몬이 나와서 키도 크고 머리도 좋아진대! 자야 한다 시온아</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(249,168,212,.25)">
+      <div class="tip-icon">🥦</div>
+      <h4>채소 조금씩 먹기</h4>
+      <p>싫어도 한 입만! 채소 먹으면 피부가 더 예뻐지고 힘도 세진대 — 태권도 더 잘하게 돼</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(167,243,208,.25)">
+      <div class="tip-icon">🎵</div>
+      <h4>노래 따라 부르기</h4>
+      <p>티니핑·신데렐라 노래 크게 따라 부르기! 폐활량도 좋아지고 표현력도 자라요</p>
+    </div>
+
+    <div class="tip-card" style="--border-c:rgba(221,214,254,.25)">
+      <div class="tip-icon">🤗</div>
+      <h4>마음 표현하기</h4>
+      <p>"좋아", "싫어", "고마워" 말로 표현하기. 시온이의 감정이 다 소중해. 말해줘서 고마워!</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="div-cute">💗 💗 💗</div>
+
+<!-- ─────────── LOVE SECTION ─────────── -->
+<div class="love-section fade-in">
+  <div class="confetti-row">🎉🎈🎁🎊🎀</div>
+  <h2 style="margin-top:1.2rem">가족 모두가 시온이를 사랑해!</h2>
+  <div class="love-text">
+    엄마도 아빠도 삼촌도 할머니도<br>
+    우리 시온이가 건강하고 행복하게<br>
+    마음껏 뛰어놀고 크는 거 보는 게<br>
+    세상에서 제일 행복한 일이야 💜
+  </div>
+  <div class="love-big">
+    시온이 사랑해 💗
+  </div>
+  <div style="margin-top:1.5rem;font-size:1rem;color:#7c3aed">
+    앞으로도 실컷 달리고, 실컷 웃고,<br>
+    실컷 놀고, 씩씩하게 자라줘 🌟
+  </div>
+  <div class="confetti-row" style="margin-top:1.5rem">🌸⭐🌈✨🎶</div>
+</div>
+
+<footer>
+  💜 유시온 어린이날 선물 · 2025년 5월 5일 · 가족 모두가 함께 만들었어요 💜
+</footer>
+
+<script>
+// Floating stars/emojis
+const emojis = ['⭐','💜','💗','🌸','✨','💛','🎀','💙','🌟','💕','🎶','🌈'];
+const container = document.getElementById('stars');
+for(let i = 0; i < 22; i++){
+  const el = document.createElement('div');
+  el.className = 'star';
+  el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  el.style.cssText = `
+    left:${Math.random()*100}%;
+    animation-duration:${5 + Math.random()*8}s;
+    animation-delay:${Math.random()*8}s;
+    font-size:${1 + Math.random()*1.2}rem;
+    opacity:${0.3 + Math.random()*0.4};
+  `;
+  container.appendChild(el);
+}
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
