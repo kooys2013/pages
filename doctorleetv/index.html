@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>교육하는 의사 이동환 — 나를 위한 건강 강의</title>
+<style>
+:root{
+  --bg:#080b12;--bg2:#0e1520;--bg3:#141e2c;--card:#182231;--border:#233042;
+  --teal:#2dd4bf;--teal-d:rgba(45,212,191,.13);
+  --blue:#60a5fa;--blue-d:rgba(96,165,250,.12);
+  --green:#4ade80;--green-d:rgba(74,222,128,.1);
+  --orange:#fb923c;--orange-d:rgba(251,146,60,.1);
+  --red:#f87171;--red-d:rgba(248,113,113,.09);
+  --white:#f0f6ff;--text:#b8c8dd;--muted:#5a7090;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','Noto Sans KR',-apple-system,sans-serif;line-height:1.8;}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--teal);z-index:999;width:0;transition:width .1s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;}
+.nav-logo{font-weight:900;color:var(--teal);font-size:.98rem;}
+.nav-sub{font-size:.72rem;color:var(--muted);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 1.5rem 60px;
+  background:radial-gradient(ellipse at 15% 55%,rgba(45,212,191,.07) 0%,transparent 55%),
+  radial-gradient(ellipse at 85% 25%,rgba(96,165,250,.05) 0%,transparent 50%);
+  position:relative;overflow:hidden;}
+.hero::after{content:'건강';position:absolute;right:-1rem;bottom:1rem;font-size:clamp(7rem,24vw,22rem);font-weight:900;color:rgba(45,212,191,.03);pointer-events:none;line-height:1;}
+.hero-in{max-width:800px;}
+.hbadge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:100px;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.28);font-size:.77rem;color:var(--teal);margin-bottom:1.5rem;}
+h1{font-size:clamp(2.3rem,7vw,5rem);font-weight:900;line-height:1.08;letter-spacing:-.04em;color:var(--white);margin-bottom:1.2rem;}
+h1 em{color:var(--teal);font-style:normal;}
+.hdesc{font-size:1.02rem;color:var(--muted);max-width:560px;margin-bottom:2rem;line-height:1.7;}
+.stats{display:flex;gap:2rem;flex-wrap:wrap;padding:1.5rem 0;border-top:1px solid var(--border);}
+.stat{display:flex;flex-direction:column;gap:2px;}
+.stat-n{font-size:1.35rem;font-weight:900;color:var(--white);}
+.stat-l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+
+/* MAIN */
+.main{max-width:940px;margin:0 auto;padding:0 1.5rem 120px;}
+
+/* TABS */
+.tnav{display:flex;gap:3px;padding:4px;background:var(--bg2);border-radius:14px;border:1px solid var(--border);margin-bottom:2.5rem;position:sticky;top:64px;z-index:50;}
+.tb{flex:1;padding:.65rem .75rem;border-radius:10px;border:none;background:none;color:var(--muted);font-size:.82rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;text-align:center;line-height:1.3;}
+.tb:hover{color:var(--white);background:rgba(255,255,255,.05);}
+.tb.on{background:var(--card);color:var(--white);box-shadow:0 2px 8px rgba(0,0,0,.4);}
+.tp{display:none;}
+.tp.on{display:block;animation:fu .3s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* UTIL */
+.slabel{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--teal);font-weight:700;margin-bottom:.5rem;display:block;}
+h2{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:900;color:var(--white);letter-spacing:-.03em;margin-bottom:.7rem;}
+.sdesc{color:var(--muted);font-size:.92rem;margin-bottom:2rem;max-width:560px;line-height:1.7;}
+.div{width:100%;height:1px;background:var(--border);margin:2.5rem 0;}
+
+/* VIDEO ROW */
+.vrow{display:flex;gap:.75rem;align-items:center;padding:.85rem 1.1rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:.55rem;text-decoration:none;transition:border-color .2s;}
+.vrow:hover{border-color:var(--teal);}
+.vth{width:70px;height:44px;flex-shrink:0;border-radius:5px;overflow:hidden;background:var(--bg3);}
+.vth img{width:100%;height:100%;object-fit:cover;}
+.vi h4{font-size:.82rem;color:var(--white);font-weight:700;line-height:1.35;margin-bottom:2px;}
+.vi .vm{font-size:.72rem;color:var(--muted);}
+.vv{color:var(--teal);font-weight:700;}
+
+/* ACCORDION */
+.acc{margin-bottom:.7rem;}
+.acc-h{display:flex;align-items:center;justify-content:space-between;padding:1.15rem 1.5rem;cursor:pointer;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:background .2s;}
+.acc-h:hover{background:var(--bg3);}
+.acc.op .acc-h{border-radius:12px 12px 0 0;border-bottom-color:transparent;background:var(--bg3);}
+.acc-tw{display:flex;align-items:center;gap:10px;}
+.acc-ic{font-size:1.05rem;}
+.acc-ti{font-size:.95rem;font-weight:700;color:var(--white);}
+.acc-si{font-size:.73rem;color:var(--muted);margin-top:1px;}
+.acc-ar{width:25px;height:25px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s;}
+.acc.op .acc-ar{transform:rotate(180deg);}
+.acc-ar svg{width:12px;fill:var(--muted);}
+.acc-b{max-height:0;overflow:hidden;transition:max-height .4s ease;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;}
+.acc.op .acc-b{max-height:3000px;}
+.acc-c{padding:1.2rem 1.5rem;}
+.acc-c p{font-size:.91rem;color:var(--text);margin-bottom:.85rem;line-height:1.8;}
+.acc-c p:last-child{margin-bottom:0;}
+.acc-c ul{list-style:none;margin:.75rem 0;}
+.acc-c ul li{padding:.42rem 0 .42rem 1.3rem;position:relative;font-size:.88rem;color:var(--text);border-bottom:1px solid #182231;}
+.acc-c ul li:last-child{border-bottom:none;}
+.acc-c ul li::before{content:'▸';position:absolute;left:0;color:var(--teal);font-size:.77rem;}
+.callout{background:rgba(45,212,191,.07);border-left:3px solid var(--teal);padding:.85rem 1.15rem;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.87rem;color:var(--text);line-height:1.75;}
+.warn{background:rgba(248,113,113,.07);border-left:3px solid var(--red);padding:.85rem 1.15rem;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.87rem;color:var(--text);line-height:1.75;}
+.good{background:rgba(74,222,128,.07);border-left:3px solid var(--green);padding:.85rem 1.15rem;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.87rem;color:var(--text);line-height:1.75;}
+
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.2rem 0;}
+.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem;margin:1.2rem 0;}
+@media(max-width:560px){.g2{grid-template-columns:1fr;}}
+
+/* MINI CARD */
+.mc{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.15rem;transition:border-color .2s,transform .2s;}
+.mc:hover{border-color:rgba(45,212,191,.4);transform:translateY(-2px);}
+.mc-ic{font-size:1.35rem;margin-bottom:.65rem;}
+.mc h4{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.4rem;}
+.mc p{font-size:.81rem;color:var(--muted);line-height:1.6;}
+.mc-tag{display:inline-block;margin-top:.6rem;padding:2px 9px;border-radius:100px;font-size:.68rem;}
+.t-teal{background:var(--teal-d);color:var(--teal);}
+.t-blue{background:var(--blue-d);color:var(--blue);}
+.t-green{background:var(--green-d);color:var(--green);}
+.t-orange{background:var(--orange-d);color:var(--orange);}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:.7rem;}
+.step{display:flex;gap:1rem;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.15rem;}
+.step-n{width:30px;height:30px;border-radius:50%;flex-shrink:0;background:var(--teal-d);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem;margin-top:1px;}
+.step-b h4{font-size:.92rem;font-weight:700;color:var(--white);margin-bottom:.35rem;}
+.step-b p{font-size:.84rem;color:var(--muted);line-height:1.7;}
+.step-tag{display:inline-block;margin-top:.4rem;padding:2px 9px;background:var(--blue-d);border-radius:100px;font-size:.68rem;color:var(--blue);}
+
+/* ROUTINE BLOCK */
+.routine{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;}
+.rh{padding:.95rem 1.5rem;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:linear-gradient(90deg,var(--teal-d),transparent);}
+.rh h3{font-size:.97rem;font-weight:800;color:var(--white);}
+.rb{padding:1.15rem 1.5rem;}
+.ri{display:flex;gap:1rem;padding:.7rem 0;border-bottom:1px solid #182231;}
+.ri:last-child{border-bottom:none;}
+.ri-n{width:24px;height:24px;border-radius:50%;flex-shrink:0;background:var(--border);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;margin-top:2px;}
+.ri-t h5{font-size:.88rem;font-weight:700;color:var(--white);}
+.ri-t p{font-size:.8rem;color:var(--muted);margin-top:2px;line-height:1.6;}
+.ri-d{flex-shrink:0;font-size:.73rem;color:var(--teal);font-weight:700;padding-top:3px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;margin:1.2rem 0;}
+.tbl th{background:var(--bg3);color:var(--muted);font-size:.73rem;text-transform:uppercase;letter-spacing:.07em;padding:.75rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+.tbl td{padding:.7rem 1rem;font-size:.86rem;color:var(--text);border-bottom:1px solid #182231;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:rgba(45,212,191,.02);}
+.hi{color:var(--teal);font-weight:700;}
+.lo{color:var(--muted);}
+.bad{color:var(--red);}
+
+/* TIP CARD */
+.tip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin:1.2rem 0;}
+.tip{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem;transition:border-color .2s,transform .2s;}
+.tip:hover{border-color:rgba(45,212,191,.4);transform:translateY(-2px);}
+.tip-ic{font-size:1.4rem;margin-bottom:.65rem;}
+.tip h4{font-size:.88rem;font-weight:700;color:var(--white);margin-bottom:.4rem;}
+.tip p{font-size:.81rem;color:var(--muted);line-height:1.6;}
+.tip-tag{display:inline-block;margin-top:.6rem;padding:2px 9px;border-radius:100px;font-size:.68rem;}
+
+/* QUOTE */
+.qb{text-align:center;padding:2.5rem 1.5rem;margin:2.5rem 0;background:radial-gradient(ellipse at center,rgba(45,212,191,.07) 0%,transparent 65%);border-radius:20px;border:1px solid var(--border);}
+.qb-t{font-size:clamp(1.1rem,3.5vw,1.9rem);font-weight:800;color:var(--white);line-height:1.4;letter-spacing:-.02em;}
+.qb-t em{color:var(--teal);font-style:normal;}
+.qb-s{margin-top:.9rem;font-size:.78rem;color:var(--muted);}
+
+/* WARN BOX */
+.wbox{background:var(--red-d);border:1px solid rgba(248,113,113,.22);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem;}
+.wbox h3{color:var(--red);font-size:.97rem;font-weight:700;margin-bottom:.9rem;}
+.wlist{display:flex;flex-direction:column;gap:.45rem;}
+.wi{display:flex;gap:9px;padding:.6rem .95rem;border-radius:8px;background:rgba(248,113,113,.05);font-size:.85rem;color:var(--text);}
+.wi::before{content:'⚠';flex-shrink:0;color:var(--red);}
+
+/* CHECK LIST */
+.chk{display:flex;flex-direction:column;gap:.45rem;margin:1rem 0;}
+.chk-item{display:flex;align-items:center;gap:10px;padding:.65rem 1rem;border-radius:9px;font-size:.87rem;}
+.chk-item.ok{background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.2);color:var(--text);}
+.chk-item.no{background:var(--red-d);border:1px solid rgba(248,113,113,.2);color:var(--text);}
+.chk-item.ok::before{content:'✓';color:var(--green);font-weight:800;}
+.chk-item.no::before{content:'✕';color:var(--red);font-weight:800;}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:.72rem;margin-right:.4rem;margin-bottom:.3rem;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .main{padding:0 1rem 80px;}
+  .hero{padding:80px 1rem 50px;}
+  .tnav{gap:2px;}
+  .tb{font-size:.75rem;padding:.55rem .35rem;}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<nav>
+  <div>
+    <div class="nav-logo">교육하는 의사! 이동환</div>
+    <div class="nav-sub">@doctorLeeTV · 가정의학과 전문의</div>
+  </div>
+  <a href="https://www.youtube.com/@doctorLeeTV" target="_blank"
+     style="font-size:.77rem;color:var(--teal);text-decoration:none;">▶ 채널</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-in">
+    <div class="hbadge">🩺 @doctorLeeTV — 교육하는 의사</div>
+    <h1>이동환 의사의<br><em>건강 강의</em><br>집대성</h1>
+    <p class="hdesc">가정의학과 전문의·기능의학 전문가 이동환 원장이 1,545개 영상에서 반복하는 핵심. 면역·장건강·실천법을 나를 위한 강의로 정리했습니다.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-n">1,545</span><span class="stat-l">영상 수</span></div>
+      <div class="stat"><span class="stat-n">457만+</span><span class="stat-l">최다 조회</span></div>
+      <div class="stat"><span class="stat-n">4</span><span class="stat-l">핵심 탭</span></div>
+      <div class="stat"><span class="stat-n">5가지</span><span class="stat-l">필수 영양소</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="main">
+
+  <div class="tnav" id="tnav">
+    <button class="tb on"  onclick="tab(this,'t1')">📖 강의</button>
+    <button class="tb"     onclick="tab(this,'t2')">🛡️ 면역·장건강</button>
+    <button class="tb"     onclick="tab(this,'t3')">🏃 실천법</button>
+    <button class="tb"     onclick="tab(this,'t4')">💡 나에게 팁</button>
+  </div>
+
+  <!-- ═══════ TAB 1: 강의 ═══════ -->
+  <div id="t1" class="tp on">
+
+    <span class="slabel">📺 인기 영상</span>
+    <h2>조회수 TOP 영상들</h2>
+    <p class="sdesc">1,500개 이상의 영상 중 조회수·내용 기준으로 선별한 핵심 영상. 아래 강의의 출처입니다.</p>
+
+    <a class="vrow" href="https://youtu.be/RsJLNCVX4M4" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/RsJLNCVX4M4/mqdefault.jpg"></div>
+      <div class="vi"><h4>술 마시면 얼굴 빨개지는 사람 — 반드시 알아야 할 것</h4><div class="vm"><span class="vv">👁 4,577,044</span> · 음주·건강</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/_jFBzWRwQuk" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/_jFBzWRwQuk/mqdefault.jpg"></div>
+      <div class="vi"><h4>잘 때 똑바로 눕지 마라 — 수면 자세의 충격적 진실</h4><div class="vm"><span class="vv">👁 3,439,316</span> · 수면·자세</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/vyVYa0GDacg" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/vyVYa0GDacg/mqdefault.jpg"></div>
+      <div class="vi"><h4>해파리 수면법 — 2분 안에 잠드는 방법</h4><div class="vm"><span class="vv">👁 2,934,358</span> · 수면법</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/vUx48w-SEjk" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/vUx48w-SEjk/mqdefault.jpg"></div>
+      <div class="vi"><h4>이것만 해도 소화력 10배 달라진다</h4><div class="vm"><span class="vv">👁 2,793,399</span> · 소화·장건강</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/DZ8z33cBEr4" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/DZ8z33cBEr4/mqdefault.jpg"></div>
+      <div class="vi"><h4>마그네슘 보충제 먹으면 안 되는 사람</h4><div class="vm"><span class="vv">👁 2,413,905</span> · 영양제·주의</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/sF94nGoWGMg" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/sF94nGoWGMg/mqdefault.jpg"></div>
+      <div class="vi"><h4>많은 영양제 중 제일 먼저 먹어야 하는 것</h4><div class="vm"><span class="vv">👁 2,107,151</span> · 영양제 우선순위</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/WEfsWSJAp7M" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/WEfsWSJAp7M/mqdefault.jpg"></div>
+      <div class="vi"><h4>의사가 절대 안 먹는 9가지 음식</h4><div class="vm"><span class="vv">👁 1,870,206</span> · 식단·음식</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/jTKOjvWEtLQ" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/jTKOjvWEtLQ/mqdefault.jpg"></div>
+      <div class="vi"><h4>과학적으로 검증된 면역력 올리는 확실한 3가지</h4><div class="vm"><span class="vv">👁 1,599,840</span> · 면역력</div></div>
+    </a>
+    <a class="vrow" href="https://youtu.be/kjiZR44X-zY" target="_blank">
+      <div class="vth"><img src="https://img.youtube.com/vi/kjiZR44X-zY/mqdefault.jpg"></div>
+      <div class="vi"><h4>꾸준한 운동이 기억력·뇌 기능을 개선한다</h4><div class="vm"><span class="vv">👁 1,874,004</span> · 운동·뇌</div></div>
+    </a>
+
+    <div class="div"></div>
+
+    <!-- 이동환 원장 소개 -->
+    <span class="slabel">👨‍⚕️ 이동환 원장</span>
+    <h2>누구인가</h2>
+    <div class="g2" style="margin-top:1.2rem">
+      <div class="mc"><div class="mc-ic">🏥</div><h4>가정의학과 전문의</h4><p>교육학 석사·경영학 박사. 직업 스트레스 연구소장. 대한만성피로학회 명예이사장.</p><span class="mc-tag t-teal">전문의</span></div>
+      <div class="mc"><div class="mc-ic">🎓</div><h4>기능의학·심신의학 전문가</h4><p>국제 NLP 마스터 프랙티셔너. 한국코치협회 인증코치. 수십 개 기업·기관 건강 강의.</p><span class="mc-tag t-blue">기능의학</span></div>
+      <div class="mc"><div class="mc-ic">📱</div><h4>1,545개 영상 · 교육하는 의사</h4><p>과학적으로 검증된 건강 정보를 쉽고 실용적으로 전달. "의사도 모르던 것"을 찾아 알리는 채널.</p><span class="mc-tag t-green">유튜브</span></div>
+      <div class="mc"><div class="mc-ic">💊</div><h4>15년 영양제 복용 경험</h4><p>본인이 15년째 직접 복용·검증. "상품 추천 아닌 성분 기준"으로 설명하는 원칙을 고수.</p><span class="mc-tag t-orange">실증</span></div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- 핵심 이론 강의 -->
+    <span class="slabel">🧬 핵심 개념</span>
+    <h2>이동환 원장이 반복하는<br>5가지 핵심 이론</h2>
+
+    <div class="acc op" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🔥</span>
+          <div><div class="acc-ti">미세 염증(Micro-Inflammation) — 모든 병의 출발점</div>
+          <div class="acc-si">채널 전체를 관통하는 핵심 키워드</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>이동환 원장이 가장 자주 언급하는 개념. <strong>미세 염증(Micro-Inflammation)</strong>은 눈에 보이지 않는 낮은 수준의 만성 염증으로, 노화·암·당뇨·심혈관 질환·치매의 근본 원인입니다.</p>
+        <div class="callout">
+          "미세 염증을 낮추는 것이 우리가 건강하게 사는 데 무지하게 중요한 역할을 합니다. 미세 염증이 많은 사람들은 결국 노화가 빨리 오고 모든 병에 잘 걸립니다."
+          <br><small style="color:var(--muted)">— 이동환 원장 (영양제 영상 중)</small>
+        </div>
+        <p><strong>미세 염증을 높이는 것:</strong></p>
+        <ul>
+          <li>초가공식품, 트랜스지방, 흰 밀가루, 설탕</li>
+          <li>수면 부족 (7시간 미만)</li>
+          <li>만성 스트레스</li>
+          <li>운동 부족</li>
+          <li>장내 세균 불균형 (나쁜 균 증가)</li>
+        </ul>
+        <p><strong>미세 염증을 낮추는 것:</strong></p>
+        <ul>
+          <li>오메가3 섭취 (세포막 유연화 + 항염)</li>
+          <li>규칙적 유산소 운동 (특히 산책)</li>
+          <li>수면 7~9시간 확보</li>
+          <li>유산균으로 장 건강 유지</li>
+          <li>비타민D 충분한 수치 유지</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🦠</span>
+          <div><div class="acc-ti">마이크로바이옴 — 내 안의 또 다른 나</div>
+          <div class="acc-si">수 백조 미생물이 내 건강을 결정한다</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>이동환 원장이 최근 강조하는 혁명적 개념. 우리 몸속에는 수 백조 개의 미생물이 함께 살고 있으며, 이 미생물들의 유전자 정보가 내 건강·면역·심지어 정신건강까지 결정합니다.</p>
+        <div class="callout">
+          "이제는 내 유전자만 좋으면 되는 것이 아니라, 내가 가지고 있는 내 몸속에 함께 살고 있는 미생물이 갖고 있는 유전자 정보도 나와 함께 움직이고 있습니다. 미생물이 건강해야 나도 건강하다."
+          <br><small style="color:var(--muted)">— 이동환 원장 (영양제 1순위 영상 중)</small>
+        </div>
+        <ul>
+          <li>장내 유익균이 면역세포 70% 이상을 훈련시킴</li>
+          <li>세로토닌(행복 호르몬)의 95%가 장에서 만들어짐</li>
+          <li>장 건강 = 정신 건강 = 면역력</li>
+          <li>항생제 남용이 마이크로바이옴 파괴의 주요 원인</li>
+          <li>유산균 보충이 마이크로바이옴 회복의 핵심</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">💊</span>
+          <div><div class="acc-ti">영양제 필수 과목 vs 선택 과목</div>
+          <div class="acc-si">15년 직접 복용·검증한 이동환 원장의 결론</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>"영양제도 학교 과목처럼 필수와 선택이 있습니다." 이동환 원장이 조회수 210만 영상에서 제시한 영양제 계층 구조:</p>
+        <table class="tbl">
+          <tr><th>순위</th><th>영양소</th><th>이유</th><th>복용 기준</th></tr>
+          <tr><td class="hi">①</td><td><strong>종합비타민·미네랄</strong></td><td>없으면 세포 대사 불가. 현대 음식은 비타민·미네랄 부족</td><td>매일 1회</td></tr>
+          <tr><td class="hi">②</td><td><strong>오메가3</strong></td><td>세포막 유연화, 미세 염증 감소. 생선 매일 안 먹으면 필수</td><td>매일 1~2g</td></tr>
+          <tr><td class="hi">③</td><td><strong>비타민D</strong></td><td>한국인 80%+ 부족. 종합비타민 속 양으로 부족</td><td>1,000~2,000IU/일</td></tr>
+          <tr><td class="hi">④</td><td><strong>비타민C 고용량</strong></td><td>종합비타민 속 양 부족. 면역·항산화 추가 보충 필요</td><td>1,000mg+ 추가</td></tr>
+          <tr><td class="hi">⑤</td><td><strong>유산균(프로바이오틱스)</strong></td><td>마이크로바이옴 연구로 이제 필수 지위. 장·면역·정신건강 연결</td><td>매일, 식후</td></tr>
+          <tr><td>선택</td><td>코엔자임Q10</td><td>에너지 대사·항산화. 40대 이후 분비 급감</td><td>선택적 추가</td></tr>
+          <tr><td>선택</td><td>마그네슘</td><td>스트레스 해소·수면. 단, <span class="bad">신장 질환자 금기</span></td><td>조건부 복용</td></tr>
+        </table>
+      </div></div>
+    </div>
+
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🧠</span>
+          <div><div class="acc-ti">운동과 뇌 — 운동이 기억력을 만드는 3가지 메커니즘</div>
+          <div class="acc-si">조회수 187만 영상 핵심</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>운동이 근육만 만드는 것이 아닙니다. 이동환 원장은 운동이 뇌에 미치는 3가지 과학적 메커니즘을 설명합니다:</p>
+        <ul>
+          <li><strong>① 신경전달물질 분비</strong>: 운동 후 도파민·세로토닌·엔돌핀 분비 → 기분 좋아지고 머리 맑아지고 집중력 증가</li>
+          <li><strong>② 신경 연결 촉진</strong>: 기억을 담당하는 신경세포 결합(시냅스 형성)을 촉진. 기억력 향상의 직접 원인</li>
+          <li><strong>③ 해마 신경세포 신생</strong>: 기억 저장 담당 해마에서 새로운 신경세포가 빠르게 성장하도록 운동이 직접 유도</li>
+        </ul>
+        <div class="callout">
+          "결론적으로 뇌 기능을 향상시키는 운동은 유산소 운동입니다. 그 중에서도 제가 한 가지 꼽는다면 산책입니다. 작업 기억을 편안하게 만들어줌으로써 창의력도 증가시켜 줍니다."
+          <br><small style="color:var(--muted)">— 이동환 원장 (운동·뇌 영상 중)</small>
+        </div>
+        <p>추천: 하루 30분 산책. 주 3~4회 이상. 심리적 안정 + 뇌기능 향상 + 세로토닌 분비 동시 효과.</p>
+      </div></div>
+    </div>
+
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">😴</span>
+          <div><div class="acc-ti">수면의 과학 — 잠이 모든 것을 고친다</div>
+          <div class="acc-si">해파리 수면법·수면 자세·수면 질 개선</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>이동환 원장의 수면 관련 영상은 수백만 조회를 기록할 만큼 핵심 주제입니다. 수면 중에는 뇌의 노폐물 제거(글림프 시스템), 성장호르몬 분비, 면역 재충전, 기억 정리가 모두 일어납니다.</p>
+        <div class="warn">
+          <strong>⚠ 똑바로 눕는 자세는 최악입니다:</strong> 혀와 조직이 기도를 막아 수면 무호흡 위험. 심장에도 부담. 이동환 원장 권장: 옆으로 눕기(특히 왼쪽).
+        </div>
+        <p><strong>해파리 수면법 핵심 원리 (조회수 293만):</strong></p>
+        <ul>
+          <li>온몸의 힘을 완전히 빼는 것이 목표 — 해파리처럼</li>
+          <li>발끝→종아리→허벅지→복부→가슴→팔→어깨→목→얼굴 순서로 힘 빼기</li>
+          <li>마음속으로 "무거워진다, 따뜻해진다" 반복</li>
+          <li>숨을 들이마실 때 배가 나오도록 복식호흡</li>
+          <li>2분 안에 잠드는 군인 수면법의 변형</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="qb">
+      <div class="qb-t">"영양제에도 필수 과목과<br><em>선택 과목이 있습니다.</em><br>먼저 필수부터 챙기세요."</div>
+      <p class="qb-s">— 이동환 원장, 조회수 210만 영양제 영상</p>
+    </div>
+
+  </div>
+
+  <!-- ═══════ TAB 2: 면역·장건강 ═══════ -->
+  <div id="t2" class="tp">
+
+    <span class="slabel">🛡️ 면역력·장건강</span>
+    <h2>면역과 장건강의<br>모든 것</h2>
+    <p class="sdesc">이동환 원장이 수십 개 영상에서 반복한 면역·장건강 이론을 하나로 집대성했습니다.</p>
+
+    <!-- 면역계 기초 -->
+    <div class="acc op" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🏰</span>
+          <div><div class="acc-ti">면역계 기초 — 림프계와 면역세포</div>
+          <div class="acc-si">면역력을 올리는 첫 번째 이론적 기반</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>면역력은 단순히 "저항력"이 아닙니다. 림프계, 면역세포, 장내 미생물이 복합적으로 작동하는 정교한 시스템입니다.</p>
+        <p><strong>림프계의 역할:</strong></p>
+        <ul>
+          <li><strong>림프절</strong>: 임파선. 림프구(면역세포)가 성장·훈련되는 곳. 목·겨드랑이·서혜부(사타구니)에 집중</li>
+          <li><strong>림프관</strong>: 림프절들을 연결하는 관. 순환이 좋아야 면역세포가 전신에 공급됨</li>
+          <li><strong>림프 흐름이 나빠지는 원인</strong>: 흡연, 만성 스트레스, 운동 부족, 수분 부족</li>
+        </ul>
+        <div class="callout">
+          "림프계는 우리 면역력을 유지하는 데 굉장히 중요한 기관입니다. 림프구라는 면역세포들이 성장·단련되는 곳이 바로 림프절입니다. 림프 흐름이 안 좋아지면 당연히 면역력이 나빠집니다."
+          <br><small style="color:var(--muted)">— 이동환 원장 (면역력 3가지 영상)</small>
+        </div>
+        <p><strong>주요 면역세포 종류:</strong></p>
+        <ul>
+          <li>NK세포(자연살해세포): 암세포·바이러스 감염 세포 직접 제거</li>
+          <li>T세포: 바이러스 기억·특이적 공격</li>
+          <li>B세포: 항체 생산</li>
+          <li>대식세포: 이물질 포식·소화</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- 과학적 면역력 3가지 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🔬</span>
+          <div><div class="acc-ti">과학적으로 검증된 면역력 올리는 3가지</div>
+          <div class="acc-si">조회수 160만 영상 — 근거 있는 방법만</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">1</div>
+            <div class="step-b">
+              <h4>림프 마사지 — 하루 10분</h4>
+              <p>목(흉쇄유돌근 부위)·겨드랑이·서혜부(사타구니)를 부드럽게 위에서 아래로 쓸어내리기. 너무 세게 누르면 림프관 손상 — 부드럽게 아프지 않을 정도로. 림프 순환 개선 → 면역세포 활성화.</p>
+              <span class="step-tag">매일 10분</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">2</div>
+            <div class="step-b">
+              <h4>충분한 수면 — 7~8시간</h4>
+              <p>수면 중 성장호르몬 분비. T세포·NK세포 재충전. 수면 부족 시 NK세포 활성 70% 감소(연구). 수면의 질도 중요 — 수면 자세, 취침 시간 일정화.</p>
+              <span class="step-tag">7~9시간</span>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">3</div>
+            <div class="step-b">
+              <h4>유산소 운동 — 주 3~5회</h4>
+              <p>중간 강도 유산소(산책, 자전거, 수영). 운동 중 NK세포·T세포 활성화. 단, 과격한 운동은 오히려 면역 억제 — 강도 조절 필수. 30분 이상 걷기가 가장 추천.</p>
+              <span class="step-tag">주 3~5회 · 30분+</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 장건강 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🦠</span>
+          <div><div class="acc-ti">장건강 = 면역력 = 정신건강 — 삼위일체</div>
+          <div class="acc-si">마이크로바이옴이 모든 것을 연결한다</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>이동환 원장이 유산균을 필수 영양제에 포함시킨 이유는 단순한 소화 개선이 아닙니다. 장-뇌-면역 축(Gut-Brain-Immune Axis)이라는 혁명적 개념 때문입니다.</p>
+        <div class="callout">
+          "인간은 혼자 사는 것이 아닌 미생물과 함께 살아가고 있습니다. 수 백조의 미생물이 갖고 있는 유전자 정보가 나의 유전자 정보와 합쳐지면서 하나의 군을 이룹니다. 그래서 이제는 유산균도 필수 영양소에 포함시키고 싶습니다."
+          <br><small style="color:var(--muted)">— 이동환 원장</small>
+        </div>
+        <p><strong>장건강이 망가지면 일어나는 일:</strong></p>
+        <ul>
+          <li>장 누수(Leaky Gut) → 독소 혈액 유입 → 전신 미세 염증</li>
+          <li>유익균 감소 → 세로토닌 생산 감소 → 우울감·불안감</li>
+          <li>면역세포 훈련 저하 → 감기·바이러스에 취약</li>
+          <li>소화 효소 부족 → 영양소 흡수율 저하</li>
+          <li>가스·팽만·변비·설사의 반복</li>
+        </ul>
+        <p><strong>장건강 회복 핵심 3가지:</strong></p>
+        <ul>
+          <li><strong>유산균(프로바이오틱스)</strong>: 비피도박테리움·락토바실러스 균종 포함 제품. 식후 복용</li>
+          <li><strong>프리바이오틱스(먹이)</strong>: 식이섬유 충분 섭취. 양파·마늘·바나나·귀리</li>
+          <li><strong>장 독소 줄이기</strong>: 초가공식품·트랜스지방·설탕 줄이기</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- 소화력 개선 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🍽️</span>
+          <div><div class="acc-ti">소화력 10배 올리는 법 — 숨는 방법이 소화를 바꾼다</div>
+          <div class="acc-si">조회수 279만 영상 핵심</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>소화력이 나쁜 이유의 숨겨진 원인: <strong>교감신경 과활성화</strong>. 스트레스·긴장 상태에서는 교감신경이 위장 운동을 억제합니다. 반대로 부교감신경이 활성화되면 소화가 촉진됩니다.</p>
+        <div class="good">
+          <strong>✅ 식사 전 2분 복식호흡</strong>: 코로 4초 들이마시며 배가 나오도록 → 6~8초 천천히 내쉬기. 부교감신경 활성화 → 위산·소화효소 분비 촉진 → 소화력 향상.
+        </div>
+        <p><strong>소화력을 망치는 습관들:</strong></p>
+        <ul>
+          <li>빠르게 먹기 — 씹는 횟수 부족 → 위장 과부하</li>
+          <li>스트레스 받으면서 먹기 — 교감신경 활성 → 소화 억제</li>
+          <li>식사 중 스마트폰·TV — 집중력 분산 → 씹는 횟수 감소</li>
+          <li>식사 직후 바로 눕기 — 역류성 식도염 위험</li>
+          <li>찬 음식 과다 — 위장 혈류 감소 → 소화 효소 활성 저하</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- 면역 관련 영양소 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🌟</span>
+          <div><div class="acc-ti">면역을 높이는 핵심 영양소 5가지</div>
+          <div class="acc-si">음식 + 영양제로 채우는 법</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <div class="g3">
+          <div class="mc"><div class="mc-ic">🌞</div><h4>비타민D</h4><p>면역 조절의 핵심 호르몬. NK세포·T세포 활성화. 한국인 80%+ 부족. 햇빛 1일 30분 or 보충제 1,000~4,000IU.</p><span class="mc-tag t-teal">면역 조절</span></div>
+          <div class="mc"><div class="mc-ic">🐟</div><h4>오메가3</h4><p>세포막을 유연하게 → 면역세포의 기동성 향상. 염증 억제 물질(리졸빈) 합성. 생선 1토막/일 or 영양제 1~2g.</p><span class="mc-tag t-blue">항염</span></div>
+          <div class="mc"><div class="mc-ic">🍊</div><h4>비타민C</h4><p>면역세포(백혈구) 기능 강화. 항산화로 면역세포 자체 보호. 1,000mg+ 추가 복용 권장.</p><span class="mc-tag t-orange">항산화</span></div>
+          <div class="mc"><div class="mc-ic">🥦</div><h4>아연(Zinc)</h4><p>면역세포 분화·성장에 필수. 부족 시 T세포 기능 저하. 굴·소고기·호박씨로 섭취 or 종합비타민 내 포함.</p><span class="mc-tag t-green">면역세포</span></div>
+          <div class="mc"><div class="mc-ic">🦠</div><h4>프로바이오틱스</h4><p>장내 유익균 강화 → 장면역 활성화. 락토바실러스+비피도박테리움 복합균. 매일 식후 복용.</p><span class="mc-tag t-teal">장면역</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="qb">
+      <div class="qb-t">"장이 건강해야<br><em>면역도 정신도 건강합니다.</em><br>장은 제2의 뇌입니다."</div>
+      <p class="qb-s">— 이동환 원장, 마이크로바이옴 강의 중</p>
+    </div>
+
+  </div>
+
+  <!-- ═══════ TAB 3: 실천법 ═══════ -->
+  <div id="t3" class="tp">
+
+    <span class="slabel">🏃 오늘 바로 시작</span>
+    <h2>이동환 원장이 알려준<br>실천 루틴</h2>
+    <p class="sdesc">영상에서 직접 시연하고 본인도 실천하는 구체적 방법들. 오늘부터 하나씩 시작하세요.</p>
+
+    <!-- 수면 루틴 -->
+    <div class="routine">
+      <div class="rh">
+        <span style="font-size:1.3rem">😴</span>
+        <h3>해파리 수면법 — 2분 안에 잠드는 루틴</h3>
+        <span class="badge t-teal">조회수 293만</span>
+        <span class="badge t-blue">눕자마자 가능</span>
+      </div>
+      <div class="rb">
+        <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">💡 <strong>핵심 원리:</strong> 몸의 힘을 발끝부터 얼굴까지 순서대로 완전히 빼는 것. 해파리처럼 물에 떠 있는 느낌이 목표.</p>
+        <div class="ri"><div class="ri-n">1</div><div class="ri-t"><h5>발끝·발바닥 힘 빼기</h5><p>발가락을 쭉 펴다가 힘 완전히 빼기. "발이 무거워진다" 마음속으로 반복. 발바닥이 따뜻해지는 느낌 확인.</p></div><div class="ri-d">30초</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-t"><h5>종아리→허벅지 이완</h5><p>종아리 근육 수축했다가 한번에 힘 빼기. 허벅지도 동일. "다리 전체가 무겁고 따뜻하다" 반복.</p></div><div class="ri-d">30초</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-t"><h5>복부·등 이완</h5><p>배를 살짝 당겼다가 완전히 힘 빼기. 등이 침대에 완전히 가라앉는 느낌. 등 근육의 긴장을 의식적으로 풀기.</p></div><div class="ri-d">20초</div></div>
+        <div class="ri"><div class="ri-n">4</div><div class="ri-t"><h5>어깨·팔·손 이완</h5><p>어깨를 귀 쪽으로 올렸다가 툭 떨어뜨리기. 팔 힘 완전히 빼고 손가락도 자연스럽게 펴기. "팔이 납처럼 무겁다".</p></div><div class="ri-d">20초</div></div>
+        <div class="ri"><div class="ri-n">5</div><div class="ri-t"><h5>목·얼굴 이완</h5><p>턱을 살짝 힘 줬다가 빼기. 눈썹·이마 근육 이완. 혀를 입천장에서 내리기. 얼굴이 무표정해지는 느낌.</p></div><div class="ri-d">20초</div></div>
+        <div class="ri"><div class="ri-n">✦</div><div class="ri-t"><h5>복식호흡 + 이미지 유지</h5><p>코로 4초 들이마시며 배가 올라오도록 → 6초 천천히 내쉬기. "아무 생각도 하지 않는다" 또는 평온한 장소 이미지 유지. 잡념이 오면 "됐어" 하고 다시 호흡으로.</p></div><div class="ri-d">반복</div></div>
+      </div>
+    </div>
+
+    <!-- 림프 마사지 -->
+    <div class="routine">
+      <div class="rh">
+        <span style="font-size:1.3rem">💆</span>
+        <h3>림프 마사지 루틴 — 면역력 개선</h3>
+        <span class="badge t-teal">하루 10분</span>
+        <span class="badge t-green">면역·순환</span>
+      </div>
+      <div class="rb">
+        <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">💡 <strong>원칙:</strong> 절대 세게 누르지 말 것. 부드럽게 아프지 않을 정도. 림프관은 혈관보다 얇아 세게 누르면 손상.</p>
+        <div class="ri"><div class="ri-n">1</div><div class="ri-t"><h5>목 림프 마사지</h5><p>귀 뒤에서 시작해 목을 따라 쭉 아래로 쓸어내리기. 반대 손 손가락 3~4개로 부드럽게. 왼쪽·오른쪽 각 1분씩. 흉쇄유돌근(목 측면 긴 근육) 따라 진행.</p></div><div class="ri-d">2분</div></div>
+        <div class="ri"><div class="ri-n">2</div><div class="ri-t"><h5>겨드랑이 림프</h5><p>팔을 위로 올린 상태에서 겨드랑이 안쪽을 손가락으로 부드럽게 원 그리기. 림프절이 집중되어 있는 곳. 각 30초~1분.</p></div><div class="ri-d">2분</div></div>
+        <div class="ri"><div class="ri-n">3</div><div class="ri-t"><h5>서혜부(사타구니) 림프</h5><p>허벅지 안쪽 위 서혜부를 손바닥으로 부드럽게 쓸어올리기. 하체 림프가 모이는 곳. 앉은 자세에서 양쪽 각 1분.</p></div><div class="ri-d">2분</div></div>
+        <div class="ri"><div class="ri-n">4</div><div class="ri-t"><h5>쇄골 아래 + 복부</h5><p>쇄골 바로 아래를 손가락으로 부드럽게 원 그리기. 복부는 배꼽 주변 시계 방향으로 부드럽게 쓸어주기.</p></div><div class="ri-d">2분</div></div>
+        <div class="ri"><div class="ri-n">💧</div><div class="ri-t"><h5>충분한 수분 섭취</h5><p>림프 마사지 전후 물 한 잔씩. 림프계는 수분이 있어야 흐름. 하루 물 1.5~2L는 림프 건강의 기본.</p></div><div class="ri-d">필수</div></div>
+      </div>
+    </div>
+
+    <!-- 혈당 스파이크 방지 -->
+    <div class="routine">
+      <div class="rh">
+        <span style="font-size:1.3rem">🍽️</span>
+        <h3>혈당 스파이크 방지 식사법</h3>
+        <span class="badge t-orange">코넬대 연구</span>
+        <span class="badge t-blue">매 식사 적용</span>
+      </div>
+      <div class="rb">
+        <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">💡 코넬대 의대 연구: 식사 순서만 바꿔도 혈당 스파이크 50% 이상 감소.</p>
+        <div class="ri"><div class="ri-n">1st</div><div class="ri-t"><h5>채소 먼저 (식이섬유)</h5><p>샐러드, 나물, 잎채소. 식이섬유가 장 벽에 막을 형성 → 당분 흡수 속도 늦춤. 채소 없으면 물 한 잔.</p></div><div class="ri-d">3~5분</div></div>
+        <div class="ri"><div class="ri-n">2nd</div><div class="ri-t"><h5>단백질·지방 (고기·생선·두부)</h5><p>단백질·지방이 위 배출 속도 늦춤 → 탄수화물 분해·흡수 속도 감소. 포만감 호르몬(GLP-1) 분비.</p></div><div class="ri-d">천천히</div></div>
+        <div class="ri"><div class="ri-n">3rd</div><div class="ri-t"><h5>탄수화물 마지막 (밥·빵·면)</h5><p>앞에서 먹은 채소·단백질·지방의 완충 작용으로 혈당 급등 방지. 같은 양의 밥이라도 혈당 차이 크게 남.</p></div><div class="ri-d">마지막</div></div>
+        <div class="ri"><div class="ri-n">+</div><div class="ri-t"><h5>식후 10분 걷기</h5><p>식후 10분 가벼운 산책으로 근육이 포도당 흡수 → 혈당 추가 조절. 이동환 원장이 강조하는 습관.</p></div><div class="ri-d">매 식후</div></div>
+      </div>
+    </div>
+
+    <!-- 일일 건강 루틴 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">📅</span>
+          <div><div class="acc-ti">이동환 원장 추천 — 하루 건강 루틴</div>
+          <div class="acc-si">여러 영상에서 언급한 일상 습관들</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <table class="tbl">
+          <tr><th>시간</th><th>루틴</th><th>이유</th></tr>
+          <tr><td class="hi">기상 직후</td><td>햇빛 보기 10분 + 물 한 잔</td><td>세로토닌·비타민D 합성 시작. 수면 리듬 리셋.</td></tr>
+          <tr><td class="hi">아침 식사 중</td><td>종합비타민 + 오메가3 + 유산균</td><td>음식과 함께 흡수율 최대화</td></tr>
+          <tr><td>점심 식사 전</td><td>복식호흡 2분 (소화 준비)</td><td>부교감신경 활성화 → 소화효소 분비 촉진</td></tr>
+          <tr><td>오후</td><td>산책 30분 (밖에서)</td><td>유산소 + 비타민D + 뇌기능 + 스트레스 해소</td></tr>
+          <tr><td class="hi">저녁 식사 후</td><td>비타민D + 비타민C 추가</td><td>지용성(D)은 식사 후, C는 저녁에 항산화 역할</td></tr>
+          <tr><td>취침 1시간 전</td><td>스마트폰·TV 차단</td><td>청색광 → 멜라토닌 억제 → 수면 질 저하</td></tr>
+          <tr><td class="hi">취침 시</td><td>해파리 수면법 + 옆으로 눕기</td><td>2분 이완 + 올바른 수면 자세</td></tr>
+        </table>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- ═══════ TAB 4: 팁 ═══════ -->
+  <div id="t4" class="tp">
+
+    <span class="slabel">💡 나에게 도움되는 팁</span>
+    <h2>바로 써먹는<br>이동환 원장의 팁들</h2>
+    <p class="sdesc">1,500개 영상에서 고른 즉시 적용 가능한 핵심 팁. 알고 나면 행동이 바뀝니다.</p>
+
+    <!-- 의사가 안 먹는 것 -->
+    <div class="acc op" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🚫</span>
+          <div><div class="acc-ti">이동환 원장이 거의 안 먹는 9가지 음식</div>
+          <div class="acc-si">조회수 187만 영상 — 의사의 실제 식단</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <table class="tbl">
+          <tr><th>음식</th><th>이유</th><th>원장 빈도</th></tr>
+          <tr><td><strong>통조림·절임</strong></td><td>나트륨 과다, 보존제, 미세 영양소 파괴</td><td class="lo">가끔</td></tr>
+          <tr><td><strong>아이스크림</strong></td><td>설탕 덩어리. 차가운 음식 + 설탕 = 장 자극</td><td class="bad">연 5회↓</td></tr>
+          <tr><td><strong>화이트 초콜릿</strong></td><td>카카오 없음 = 설탕·지방 덩어리. 항산화 성분 0</td><td class="bad">연 1회↓</td></tr>
+          <tr><td><strong>팝콘(전자레인지용)</strong></td><td>트랜스지방, 향미료, 포장재 화학물질</td><td class="bad">연 1회↓</td></tr>
+          <tr><td><strong>핫케이크·패케이크</strong></td><td>흰 밀가루 + 설탕 + 포화지방의 조합</td><td class="bad">연 5회↓</td></tr>
+          <tr><td><strong>밀가루 음식(과다)</strong></td><td>글루텐 민감, 혈당 스파이크, 장 염증 가능</td><td class="lo">조금씩만</td></tr>
+          <tr><td><strong>무지방 우유</strong></td><td>지방 제거 = 지용성 비타민 흡수 방해. 단맛 더 강</td><td class="bad">거의 안 마심</td></tr>
+          <tr><td><strong>마가린</strong></td><td>인공 경화유 = 트랜스지방 우려. 버터 선호</td><td class="bad">거의 0</td></tr>
+          <tr><td><strong>탄산음료·과당음료</strong></td><td>액상과당 = 지방간·인슐린 저항성 직결</td><td class="bad">거의 0</td></tr>
+        </table>
+        <div class="callout">
+          "이 9가지를 완전히 끊고 살 수는 없습니다. 하지만 한번쯤 생각을 해 보시고, 가능한 한 이런 음식들을 멀리 하셨으면 합니다."
+          <br><small style="color:var(--muted)">— 이동환 원장</small>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- 마그네슘 주의 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">⚠️</span>
+          <div><div class="acc-ti">마그네슘 먹으면 안 되는 사람 — 조회수 241만</div>
+          <div class="acc-si">"좋다고 다 먹으면 안 됩니다"</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <div class="wbox">
+          <h3>🚨 마그네슘 복용 전 반드시 확인</h3>
+          <div class="wlist">
+            <div class="wi"><strong>신장(콩팥) 기능 저하자</strong> — 마그네슘 배출 능력 저하 → 고마그네슘혈증 → 심장 리듬 이상</div>
+            <div class="wi"><strong>특정 심장 약물 복용자</strong> — 칼슘 채널 차단제 등과 상호작용 가능. 반드시 의사 상담</div>
+            <div class="wi"><strong>저혈압 경향자</strong> — 마그네슘이 혈관 이완 → 혈압 추가 하강 가능</div>
+            <div class="wi"><strong>설사·과민성대장 환자</strong> — 마그네슘(특히 산화마그네슘) → 삼투성 설사 악화</div>
+          </div>
+        </div>
+        <p><strong>마그네슘 종류별 특성:</strong></p>
+        <ul>
+          <li><strong>산화 마그네슘</strong>: 가장 흔함. 흡수율 낮음. 설사 유발 가능. 변비엔 도움</li>
+          <li><strong>구연산 마그네슘</strong>: 흡수율 좋음. 위장 부담 적음. 이동환 원장 추천</li>
+          <li><strong>글리시네이트 마그네슘</strong>: 수면·신경계에 특화. 흡수율 최고. 가격 비쌈</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- 치매 전조증상 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">🧠</span>
+          <div><div class="acc-ti">치매 전조증상 체크 — MCI(경도인지장애) 셀프진단</div>
+          <div class="acc-si">조회수 211만 — 이 증상 있으면 지금 시작하세요</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>MCI(경도인지장애)는 치매 직전 단계. 이 단계에서 관리하면 치매로의 진행을 막을 수 있습니다. 이동환 원장이 알려준 체크 항목:</p>
+        <div class="chk">
+          <div class="chk-item no">얼마 전 있었던 일이 기억나지 않는다 (오래된 기억은 괜찮음)</div>
+          <div class="chk-item no">같은 말을 반복한다 (본인은 모름)</div>
+          <div class="chk-item no">익숙한 길을 헤맨다</div>
+          <div class="chk-item no">냄새를 잘 못 맡게 됐다 (후각 저하)</div>
+          <div class="chk-item no">잠을 못 자거나 낮잠이 많이 늘었다</div>
+          <div class="chk-item no">우울감·무기력이 갑자기 심해졌다</div>
+          <div class="chk-item ok">3개 이상 해당 → 신경과 방문 권장</div>
+        </div>
+        <p><strong>치매 예방 핵심:</strong></p>
+        <ul>
+          <li>규칙적 유산소 운동 (산책 30분/일) — 해마 신경세포 성장 촉진</li>
+          <li>사회적 활동 유지 — 고립이 치매 최대 위험인자 중 하나</li>
+          <li>수면 7시간 이상 — 수면 중 뇌 노폐물(아밀로이드) 제거</li>
+          <li>혈당·혈압 관리 — 뇌혈관 건강이 인지기능과 직결</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- 비타민D 관련 팁 -->
+    <div class="acc" onclick="ac(this)">
+      <div class="acc-h">
+        <div class="acc-tw"><span class="acc-ic">☀️</span>
+          <div><div class="acc-ti">한국인 80%가 부족한 비타민D — 충격적 사실들</div>
+          <div class="acc-si">비타민D는 비타민이 아니라 호르몬</div></div>
+        </div>
+        <div class="acc-ar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+      </div>
+      <div class="acc-b"><div class="acc-c">
+        <p>이동환 원장이 "종합비타민을 먹어도 비타민D는 따로 추가해야 한다"고 강조하는 이유:</p>
+        <ul>
+          <li>비타민D는 사실 호르몬. 면역·뼈·근육·뇌 기능 조절</li>
+          <li>한국인 일상 햇빛 노출이 극도로 부족 (실내 근무 + SPF 차단제)</li>
+          <li>결핍 증상: 만성피로·근육통·면역저하·우울감·탈모</li>
+          <li>혈중 수치 기준: 30ng/mL 이상 정상. 한국 성인 평균 약 18ng/mL</li>
+        </ul>
+        <div class="good">
+          <strong>✅ 비타민D 올리는 법:</strong> ① 매일 오전 11시~오후 2시 사이 야외 30분 (팔·다리 노출) ② 비타민D3 보충제 1,000~4,000IU/일 ③ 마그네슘·K2와 함께 복용 시 효과 극대화
+        </div>
+      </div></div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- 즉시 팁 그리드 -->
+    <span class="slabel">⚡ 즉시 적용</span>
+    <h2>증상별 빠른 솔루션</h2>
+    <div class="tip-grid" style="margin-top:1.5rem">
+      <div class="tip"><div class="tip-ic">😴</div><h4>잠이 안 온다</h4><p>해파리 수면법 2분. 취침 1시간 전 스마트폰 차단. 마그네슘 글리시네이트 복용. 침실 18~20°C 유지.</p><span class="tip-tag t-teal">해파리 수면법</span></div>
+      <div class="tip"><div class="tip-ic">🤒</div><h4>면역이 약하다</h4><p>림프 마사지 10분/일. 비타민D 수치 확인. 유산균 매일. 수면 7시간 확보. 산책 30분.</p><span class="tip-tag t-green">3대 면역 루틴</span></div>
+      <div class="tip"><div class="tip-ic">💩</div><h4>소화가 안 된다</h4><p>식사 전 복식호흡 2분. 채소→단백질→탄수화물 순서. 30번 씹기. 스트레스 관리 (교감신경↓).</p><span class="tip-tag t-orange">소화 루틴</span></div>
+      <div class="tip"><div class="tip-ic">😔</div><h4>무기력·피로하다</h4><p>비타민D 결핍 의심. 오메가3 부족 여부 확인. 산책 30분 당일 시작. 유산균으로 세로토닌 전구체 공급.</p><span class="tip-tag t-blue">에너지 회복</span></div>
+      <div class="tip"><div class="tip-ic">🍬</div><h4>단것이 자꾸 당긴다</h4><p>혈당 스파이크 후 저혈당이 원인. 식사 순서 바꾸기. 식후 산책 10분. 크롬·마그네슘 부족 확인.</p><span class="tip-tag t-orange">혈당 관리</span></div>
+      <div class="tip"><div class="tip-ic">🧠</div><h4>기억력이 걱정된다</h4><p>매일 산책 30분. 오메가3 충분 섭취. 수면 질 개선. 치매 전조증상 체크리스트 확인.</p><span class="tip-tag t-teal">뇌 건강</span></div>
+      <div class="tip"><div class="tip-ic">🦴</div><h4>관절이 아프다</h4><p>오메가3로 관절 염증 감소. 비타민D로 뼈 밀도 유지. 과체중이면 체중 감량 우선. 자전거·수영이 관절 부담 최소.</p><span class="tip-tag t-green">관절 보호</span></div>
+      <div class="tip"><div class="tip-ic">🌡️</div><h4>감기에 자주 걸린다</h4><p>림프 마사지 매일. 비타민C 1,000mg+ 추가. 비타민D 결핍 수정. 수면 부족이 가장 큰 원인 — 잠 먼저.</p><span class="tip-tag t-blue">면역 강화</span></div>
+      <div class="tip"><div class="tip-ic">🫀</div><h4>혈당·혈압이 걱정된다</h4><p>식사 순서 채소 먼저. 식후 10분 산책. 통조림·절임 줄이기. 오메가3 + 마그네슘(구연산) 복용.</p><span class="tip-tag t-orange">만성질환 예방</span></div>
+    </div>
+
+    <div class="qb">
+      <div class="qb-t">"건강은 아는 것이 아니라<br><em>실천하는 것입니다.</em><br>오늘 하나만 시작하세요."</div>
+      <p class="qb-s">— 이동환 원장, 교육하는 의사로서의 마지막 말</p>
+    </div>
+
+  </div>
+
+</div><!-- /main -->
+
+<script>
+window.addEventListener('scroll',()=>{
+  const p=document.getElementById('prog');
+  const t=document.documentElement.scrollHeight-window.innerHeight;
+  p.style.width=(window.scrollY/t*100)+'%';
+});
+function ac(el){el.classList.toggle('op');}
+function tab(btn,id){
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(id).classList.add('on');
+  document.getElementById('tnav').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+document.querySelector('.acc').classList.add('op');
+</script>
+</body>
+</html>
