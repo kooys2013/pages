@@ -226,7 +226,7 @@ footer{
 
 <!-- ─────────── HERO ─────────── -->
 <div class="hero">
-  <div class="hero-date">🎈 2025년 어린이날 · 5월 5일</div>
+  <div class="hero-date">🎈 2026년 어린이날 · 5월 5일</div>
   <h1>시온아!</h1>
   <div class="hero-sub">어린이날 축하해 🎉</div>
   <div class="heart-row">💗 💜 💛 💙 💚</div>
@@ -361,116 +361,380 @@ footer{
 <div class="div-cute">⭐ ⭐ ⭐</div>
 
 <!-- ─────────── 유튜브 추천 ─────────── -->
+<style>
+.yt-full{display:flex;flex-direction:column;gap:1.5rem;}
+.ytf-card{
+  background:white;border-radius:20px;overflow:hidden;
+  box-shadow:0 4px 20px rgba(168,85,247,.1);
+  border:2px solid rgba(192,132,252,.15);
+  transition:transform .2s,box-shadow .2s;
+}
+.ytf-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(168,85,247,.2);}
+.ytf-top{display:flex;gap:0;flex-direction:column;}
+@media(min-width:600px){.ytf-top{flex-direction:row;}}
+.ytf-thumb{
+  flex-shrink:0;width:100%;aspect-ratio:16/9;overflow:hidden;
+  background:linear-gradient(135deg,#fce7f3,#ede9fe);position:relative;
+}
+@media(min-width:600px){.ytf-thumb{width:220px;aspect-ratio:auto;}}
+.ytf-thumb img{width:100%;height:100%;object-fit:cover;}
+.ytf-badge{
+  position:absolute;top:.5rem;left:.5rem;
+  padding:.25rem .8rem;border-radius:100px;font-size:.7rem;font-weight:800;
+  background:rgba(255,255,255,.93);
+}
+.ytf-views{
+  position:absolute;bottom:.5rem;right:.5rem;
+  padding:.2rem .6rem;border-radius:100px;font-size:.65rem;font-weight:700;
+  background:rgba(0,0,0,.65);color:white;
+}
+.ytf-body{padding:1.25rem 1.4rem;flex:1;}
+.ytf-title{font-size:1rem;font-weight:800;color:#4a1d6e;margin-bottom:.5rem;line-height:1.4;}
+.ytf-desc{font-size:.87rem;color:#374151;line-height:1.7;margin-bottom:1rem;}
+.ytf-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;}
+.ytf-tag{
+  padding:.25rem .8rem;border-radius:100px;font-size:.72rem;font-weight:700;
+}
+.tag-p{background:rgba(192,132,252,.15);color:#7c3aed;}
+.tag-l{background:rgba(110,231,183,.15);color:#065f46;}
+.tag-e{background:rgba(253,186,116,.15);color:#92400e;}
+.ytf-info{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1rem;}
+@media(max-width:500px){.ytf-info{grid-template-columns:1fr;}}
+.ytf-info-box{
+  background:#fdf4ff;border-radius:10px;padding:.6rem .8rem;
+  border-left:3px solid var(--border-c);
+}
+.ytf-info-box .label{font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem;}
+.ytf-info-box .val{font-size:.8rem;color:#374151;line-height:1.5;}
+.ytf-btn{
+  display:inline-block;padding:.6rem 1.5rem;border-radius:100px;
+  background:linear-gradient(135deg,#c084fc,#a855f7);
+  color:white;font-size:.83rem;font-weight:800;text-decoration:none;
+  transition:opacity .2s,transform .2s;
+}
+.ytf-btn:hover{opacity:.88;transform:scale(1.03);}
+
+/* 그리드형 (기타 영상) */
+.yt-mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1.5rem;}
+.yt-mini{
+  background:white;border-radius:16px;overflow:hidden;
+  box-shadow:0 3px 12px rgba(168,85,247,.08);
+  border:1px solid rgba(192,132,252,.15);
+  transition:transform .2s;
+}
+.yt-mini:hover{transform:translateY(-3px);}
+.yt-mini-thumb{aspect-ratio:16/9;overflow:hidden;background:linear-gradient(135deg,#fce7f3,#ede9fe);position:relative;}
+.yt-mini-thumb img{width:100%;height:100%;object-fit:cover;}
+.yt-mini-body{padding:.9rem 1rem;}
+.yt-mini-title{font-size:.88rem;font-weight:700;color:#4a1d6e;margin-bottom:.3rem;line-height:1.3;}
+.yt-mini-tip{font-size:.75rem;color:#7c3aed;background:#fdf4ff;padding:.25rem .65rem;border-radius:6px;display:inline-block;margin-top:.3rem;}
+.yt-mini-btn{
+  display:block;margin:.7rem;padding:.55rem;border-radius:10px;
+  background:linear-gradient(135deg,#c084fc,#a855f7);
+  color:white;text-align:center;font-size:.8rem;font-weight:700;
+  text-decoration:none;
+}
+</style>
+
 <section>
   <span class="sec-tag mint">📺 시온이를 위한 영상</span>
-  <h2>시온이가 좋아할 영상 모음!</h2>
-  <p style="color:#6b7280;margin-bottom:1.5rem;font-size:.93rem">
-    티니핑, 신데렐라, 핑크퐁, 뽀로로 — 시온이 취향 저격 영상들이야 🎬
+  <h2>티니핑 완전 정복 🌟</h2>
+  <p style="color:#6b7280;margin-bottom:.5rem;font-size:.93rem">
+    조회수 최고 티니핑 영상들 — 원리·교훈·정서 발달 효과까지 정리했어!
+  </p>
+  <p style="color:#c084fc;margin-bottom:2rem;font-size:.82rem;font-weight:700">
+    🎯 시온이가 영상을 보면서 자연스럽게 배우는 것들이 있어. 어른들이 알면 더 잘 활용할 수 있어!
   </p>
 
-  <div class="yt-grid fade-in">
+  <!-- ── 1위: 포실핑 95M ── -->
+  <div class="yt-full fade-in">
 
-    <!-- 티니핑 -->
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/K2cFkAbwYis/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/K2cFkAbwYis/mqdefault.jpg'">
-        <span class="yt-badge" style="color:#9333ea">💜 티니핑</span>
+    <div class="ytf-card">
+      <div class="ytf-top">
+        <div class="ytf-thumb">
+          <img src="https://img.youtube.com/vi/MsdU8bsOuUs/maxresdefault.jpg"
+               onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+          <span class="ytf-badge" style="color:#9333ea">💜 No.1 인기</span>
+          <span class="ytf-views">👁 9,500만</span>
+        </div>
+        <div class="ytf-body">
+          <div class="ytf-title">🍩 헤헤~ 맛있어! 사랑스러운 먹보 포실핑</div>
+          <div class="ytf-desc">
+            배고프면 아무것도 못하고 음식만 보면 눈이 동그래지는 포실핑의 귀여운 일상!
+            간식 앞에서 참지 못하는 포실핑의 솔직한 모습이 시온이를 웃게 만들어 줄 거야 🍰
+          </div>
+          <div class="ytf-info">
+            <div class="ytf-info-box" style="--border-c:#c084fc">
+              <div class="label" style="color:#7c3aed">🔬 원리</div>
+              <div class="val">배고픔·포만감 감정을 캐릭터로 표현 → 아이들이 자기 감정을 이름 붙이는 법을 배워</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#6ee7b7">
+              <div class="label" style="color:#065f46">📚 교훈</div>
+              <div class="val">"원하는 게 있어도 때와 장소가 있어" — 기다림과 절제를 자연스럽게 배워</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#fbbf24">
+              <div class="label" style="color:#92400e">💗 정서 발달</div>
+              <div class="val">귀여운 솔직함을 보며 자기 욕구를 표현하는 것이 괜찮다는 것을 배워</div>
+            </div>
+          </div>
+          <a class="ytf-btn" href="https://www.youtube.com/watch?v=MsdU8bsOuUs" target="_blank">💜 포실핑 보러 가기</a>
+        </div>
       </div>
-      <div class="yt-info">
-        <div class="yt-title">캐치! 티니핑 ✨ 인기 에피소드</div>
-        <div class="yt-desc">시온이가 제일 좋아하는 티니핑! 깜찍한 티니핑 친구들이랑 신나게 놀아봐</div>
-        <div class="yt-why">💡 시온이가 좋아하는 티니핑 공식 채널</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/@TeeniepingTV" target="_blank">
-        🎵 티니핑 보러 가기
-      </a>
     </div>
 
-    <!-- 신데렐라 -->
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/oyRxxpJg3gU/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/oyRxxpJg3gU/mqdefault.jpg'">
-        <span class="yt-badge" style="color:#2563eb">👸 신데렐라</span>
+    <!-- ── 2위: 따따따송 26M ── -->
+    <div class="ytf-card">
+      <div class="ytf-top">
+        <div class="ytf-thumb">
+          <img src="https://img.youtube.com/vi/Z1mz7zxlyyE/maxresdefault.jpg"
+               onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+          <span class="ytf-badge" style="color:#db2777">🎵 No.2 인기</span>
+          <span class="ytf-views">👁 2,600만</span>
+        </div>
+        <div class="ytf-body">
+          <div class="ytf-title">🍰 디저트티니핑들이 춤춘다! 헤이쥬 따따따송</div>
+          <div class="ytf-desc">
+            푸딩핑, 케이크핑, 마카롱핑… 디저트 모양 티니핑 친구들이 신나는 음악에 맞춰 춤을 춰!
+            리듬감 넘치는 노래에 저절로 몸이 움직여지는 중독성 최고 영상 🎶
+          </div>
+          <div class="ytf-info">
+            <div class="ytf-info-box" style="--border-c:#c084fc">
+              <div class="label" style="color:#7c3aed">🔬 원리</div>
+              <div class="val">반복 리듬 + 동작 = 뇌 발달! 음악을 들으며 몸을 움직이면 운동능력·리듬감·기억력이 함께 자라</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#6ee7b7">
+              <div class="label" style="color:#065f46">📚 교훈</div>
+              <div class="val">"함께 춤추면 더 신나!" — 친구들과 같이 하는 즐거움을 배워</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#fbbf24">
+              <div class="label" style="color:#92400e">💗 정서 발달</div>
+              <div class="val">몸을 마음껏 움직이는 경험 → 스트레스 해소, 자신감 상승, 표현력 발달</div>
+            </div>
+          </div>
+          <a class="ytf-btn" href="https://www.youtube.com/watch?v=Z1mz7zxlyyE" target="_blank">🎵 따따따송 보러 가기</a>
+        </div>
       </div>
-      <div class="yt-info">
-        <div class="yt-title">신데렐라 이야기 🥿</div>
-        <div class="yt-desc">시온이가 제일 좋아하는 신데렐라! 유리구두 신고 왕자님 만나는 그 이야기</div>
-        <div class="yt-why">💡 생일 케이크도 신데렐라! 시온이의 최애</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/watch?v=oyRxxpJg3gU" target="_blank">
-        👑 신데렐라 보러 가기
-      </a>
     </div>
 
-    <!-- 핑크퐁 -->
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/XqZsoesa55w/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/XqZsoesa55w/mqdefault.jpg'">
-        <span class="yt-badge" style="color:#db2777">🦈 핑크퐁</span>
+    <!-- ── 3위: 하츄핑 10M ── -->
+    <div class="ytf-card">
+      <div class="ytf-top">
+        <div class="ytf-thumb">
+          <img src="https://img.youtube.com/vi/NmO51L4-nEM/maxresdefault.jpg"
+               onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+          <span class="ytf-badge" style="color:#9333ea">💜 하츄핑</span>
+          <span class="ytf-views">👁 1,000만</span>
+        </div>
+        <div class="ytf-body">
+          <div class="ytf-title">💖 [캐치!티니핑] 주인공 하츄핑!</div>
+          <div class="ytf-desc">
+            티니핑 중에서도 제일 인기 많은 하츄핑! 사랑의 감정을 담당하는 티니핑이야.
+            하츄핑이 사랑을 전달하는 방식이 너무 귀여워서 보다 보면 마음이 따뜻해져 💗
+          </div>
+          <div class="ytf-info">
+            <div class="ytf-info-box" style="--border-c:#c084fc">
+              <div class="label" style="color:#7c3aed">🔬 원리</div>
+              <div class="val">각 티니핑이 하나의 감정을 담당 → 감정을 캐릭터로 시각화해서 아이가 감정 이름을 쉽게 배워</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#6ee7b7">
+              <div class="label" style="color:#065f46">📚 교훈</div>
+              <div class="val">"사랑하는 마음을 표현하는 건 용기 있는 일이야" — 감정 표현의 중요성</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#fbbf24">
+              <div class="label" style="color:#92400e">💗 정서 발달</div>
+              <div class="val">사랑·애정의 감정을 긍정적으로 인식 → "나도 사랑받고 있어"라는 안정감 형성</div>
+            </div>
+          </div>
+          <a class="ytf-btn" href="https://www.youtube.com/watch?v=NmO51L4-nEM" target="_blank">💖 하츄핑 보러 가기</a>
+        </div>
       </div>
-      <div class="yt-info">
-        <div class="yt-title">아기상어 뚜루루뚜루 🦈</div>
-        <div class="yt-desc">전 세계 어린이들이 사랑하는 아기상어! 같이 따라 춰봐요 — 뚜루루뚜루!</div>
-        <div class="yt-why">💡 유튜브 역대 조회수 1위 — 전 세계 어린이 픽</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/watch?v=XqZsoesa55w" target="_blank">
-        🦈 아기상어 보러 가기
-      </a>
     </div>
 
-    <!-- 뽀로로 -->
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/fDjsD8atx1U/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/fDjsD8atx1U/mqdefault.jpg'">
-        <span class="yt-badge" style="color:#0891b2">🐧 뽀로로</span>
+    <!-- ── 4위: 매직슈가볼 10M ── -->
+    <div class="ytf-card">
+      <div class="ytf-top">
+        <div class="ytf-thumb">
+          <img src="https://img.youtube.com/vi/trIjmDso82A/maxresdefault.jpg"
+               onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+          <span class="ytf-badge" style="color:#d97706">🪄 매직슈가볼</span>
+          <span class="ytf-views">👁 1,000만</span>
+        </div>
+        <div class="ytf-body">
+          <div class="ytf-title">🍬 매직슈가볼은 내 거야! 내 친구 뺏지 마!</div>
+          <div class="ytf-desc">
+            소중한 것을 빼앗기지 않으려는 티니핑의 마음 — 내 것, 네 것, 우리 것을 구분하면서
+            소유와 나눔에 대해 자연스럽게 배우는 에피소드야 🍭
+          </div>
+          <div class="ytf-info">
+            <div class="ytf-info-box" style="--border-c:#c084fc">
+              <div class="label" style="color:#7c3aed">🔬 원리</div>
+              <div class="val">소유 개념 + 갈등 해결 과정을 보여줌 → 나의 것과 친구의 것, 나눔의 의미를 배워</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#6ee7b7">
+              <div class="label" style="color:#065f46">📚 교훈</div>
+              <div class="val">"소중한 건 잘 지켜야 해, 하지만 나눠서 더 기쁠 때도 있어"</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#fbbf24">
+              <div class="label" style="color:#92400e">💗 정서 발달</div>
+              <div class="val">갈등 상황에서 감정 다루기 연습 → 공감 능력과 문제 해결 능력이 자라</div>
+            </div>
+          </div>
+          <a class="ytf-btn" href="https://www.youtube.com/watch?v=trIjmDso82A" target="_blank">🍬 매직슈가볼 보러 가기</a>
+        </div>
       </div>
-      <div class="yt-info">
-        <div class="yt-title">뽀로로 노래 모음 🎵</div>
-        <div class="yt-desc">뽀로로랑 친구들이 부르는 신나는 노래들! 같이 따라 불러요</div>
-        <div class="yt-why">💡 한국 어린이 국민 캐릭터! 신나는 노래 모음</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/watch?v=fDjsD8atx1U" target="_blank">
-        🐧 뽀로로 보러 가기
-      </a>
     </div>
 
-    <!-- 지니키즈 동화 -->
-    <div class="yt-card">
-      <div class="yt-thumb">
-        <img src="https://img.youtube.com/vi/iKsf86HS6zU/maxresdefault.jpg"
-             onerror="this.src='https://img.youtube.com/vi/iKsf86HS6zU/mqdefault.jpg'">
-        <span class="yt-badge" style="color:#d97706">📖 동화</span>
+    <!-- ── 5위: 아기 티니핑 커핑&머핑 8M ── -->
+    <div class="ytf-card">
+      <div class="ytf-top">
+        <div class="ytf-thumb">
+          <img src="https://img.youtube.com/vi/kMFiCC1r0Zk/maxresdefault.jpg"
+               onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+          <span class="ytf-badge" style="color:#be185d">🍼 아기 티니핑</span>
+          <span class="ytf-views">👁 800만</span>
+        </div>
+        <div class="ytf-body">
+          <div class="ytf-title">👶 아기 티니핑 등장! 유모차 타는 커핑&머핑</div>
+          <div class="ytf-desc">
+            작고 귀여운 아기 티니핑 커핑이랑 머핑이 유모차 타고 나타났어!
+            아기 티니핑을 돌봐주고 싶은 마음이 저절로 드는 영상 — 너무 사랑스러워 💕
+          </div>
+          <div class="ytf-info">
+            <div class="ytf-info-box" style="--border-c:#c084fc">
+              <div class="label" style="color:#7c3aed">🔬 원리</div>
+              <div class="val">더 어린 존재를 보며 돌봄 본능 자극 → 보살피고 싶은 마음이 자연스럽게 생겨</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#6ee7b7">
+              <div class="label" style="color:#065f46">📚 교훈</div>
+              <div class="val">"작고 약한 친구를 도와주는 건 멋진 일이야" — 배려심과 책임감이 싹터</div>
+            </div>
+            <div class="ytf-info-box" style="--border-c:#fbbf24">
+              <div class="label" style="color:#92400e">💗 정서 발달</div>
+              <div class="val">공감 능력·돌봄 감정 발달 → 형제자매, 친구를 이해하는 마음이 커져</div>
+            </div>
+          </div>
+          <a class="ytf-btn" href="https://www.youtube.com/watch?v=kMFiCC1r0Zk" target="_blank">👶 아기 티니핑 보러 가기</a>
+        </div>
       </div>
-      <div class="yt-info">
-        <div class="yt-title">베스트 인기 동화 30분 모음 📚</div>
-        <div class="yt-desc">잠들기 전에 같이 봐요! 30분 연속 인기 동화 모음 — 상상력이 쑥쑥 자라요</div>
-        <div class="yt-why">💡 취침 전 루틴으로 딱! 상상력과 언어 발달에 좋아요</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/watch?v=iKsf86HS6zU" target="_blank">
-        📖 동화 보러 가기
-      </a>
-    </div>
-
-    <!-- 키즈 태권도 -->
-    <div class="yt-card">
-      <div class="yt-thumb" style="background:linear-gradient(135deg,#fde68a,#fca5a5);display:flex;align-items:center;justify-content:center;font-size:5rem;">
-        🥋
-      </div>
-      <div class="yt-info">
-        <div class="yt-title">어린이 태권도 신나는 영상 🥋</div>
-        <div class="yt-desc">한빛 태권도 다니는 시온이를 위한 특별 추천! 어린이 태권도 동작 따라하기</div>
-        <div class="yt-why">💡 시온이가 다니는 태권도! 동작 예습하면 더 잘할 수 있어</div>
-      </div>
-      <a class="yt-btn" href="https://www.youtube.com/results?search_query=어린이+태권도+동작" target="_blank">
-        🥋 태권도 영상 보러 가기
-      </a>
     </div>
 
   </div>
+
+  <!-- ── 그 외 인기 티니핑 영상들 ── -->
+  <div class="div-cute" style="padding:.5rem 0;font-size:1rem;margin:.75rem 0">✦ 더 보기 ✦</div>
+  <h3 style="color:#7c3aed;font-size:1.1rem;margin-bottom:1rem;font-weight:800">🎬 이것도 다 좋아할 거야!</h3>
+  <div class="yt-mini-grid fade-in">
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/WlovPW26nog/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">🎵 APT. CHU — 하츄핑&포실핑 핑파트 (780만)</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">요즘 제일 유행하는 노래를 티니핑이 부르는 버전! 따라 부르다 보면 노래 실력도 쑥쑥</p>
+        <span class="yt-mini-tip">🎤 정서: 트렌드 참여 → 자신감·소속감</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=WlovPW26nog" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/-gPDJCasHqA/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">💃 춤왕 말랑핑! 따따따송 (680만)</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">말랑말랑 부드러운 말랑핑이 신나게 춤추는 영상. 따라 추다 보면 몸도 마음도 말랑말랑해져</p>
+        <span class="yt-mini-tip">💃 정서: 신체 표현 → 해방감·즐거움</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=-gPDJCasHqA" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/SIEeCj9x4Co/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">🥪 다 채워줄게 샌드핑! 히힛 (790만)</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">배고픈 친구의 빈속을 채워주는 친절한 샌드핑! 나눔과 배려의 마음을 알려줘</p>
+        <span class="yt-mini-tip">💗 정서: 나눔 → 배려심·친사회성 발달</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=SIEeCj9x4Co" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/NHVJtRamUaI/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">🏅 파리올림픽 응원하는 하츄핑! (540만)</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">2024 파리 올림픽을 열심히 응원하는 하츄핑! 함께 응원하는 즐거움, 도전 정신을 배워</p>
+        <span class="yt-mini-tip">🏅 정서: 응원·연대감 → 공동체 의식</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=NHVJtRamUaI" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/XqZsoesa55w/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">🦈 아기상어 뚜루루뚜루 핑크퐁 (조회수 1위)</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">유튜브 역대 조회수 1위 영상! 따라 부르고 따라 추다 보면 영어 단어도 자연스럽게 익혀</p>
+        <span class="yt-mini-tip">🌏 정서: 리듬감·언어감각 동시 발달</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=XqZsoesa55w" target="_blank">▶ 보러 가기</a>
+    </div>
+
+    <div class="yt-mini">
+      <div class="yt-mini-thumb">
+        <img src="https://img.youtube.com/vi/fDjsD8atx1U/maxresdefault.jpg"
+             onerror="this.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)'">
+      </div>
+      <div class="yt-mini-body">
+        <div class="yt-mini-title">🐧 뽀로로 노래 모음 — 한국 어린이 국민</div>
+        <p style="font-size:.78rem;color:#6b7280;margin:.3rem 0">친구들과 사이좋게 지내는 법, 실수해도 괜찮다는 것을 뽀로로가 자연스럽게 알려줘</p>
+        <span class="yt-mini-tip">💛 정서: 우정·실수 수용 → 회복탄력성</span>
+      </div>
+      <a class="yt-mini-btn" href="https://www.youtube.com/watch?v=fDjsD8atx1U" target="_blank">▶ 보러 가기</a>
+    </div>
+
+  </div>
+
+  <!-- 티니핑 캐릭터 감정 안내 -->
+  <div style="background:linear-gradient(135deg,#fdf4ff,#fce7f3);border-radius:20px;padding:1.75rem;margin-top:2rem;border:2px solid rgba(192,132,252,.2);" class="fade-in">
+    <h3 style="color:#7c3aed;font-size:1rem;font-weight:800;margin-bottom:1rem">💜 시온이가 티니핑 보면서 자연스럽게 배우는 것들</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem;">
+      <div style="background:white;border-radius:12px;padding:.85rem;text-align:center;">
+        <div style="font-size:1.5rem">💖 하츄핑</div>
+        <div style="font-size:.78rem;color:#7c3aed;font-weight:700;margin:.3rem 0">사랑의 감정</div>
+        <div style="font-size:.75rem;color:#6b7280">"사랑해"라고 표현하는 용기 → 애착 안정성</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:.85rem;text-align:center;">
+        <div style="font-size:1.5rem">🍩 포실핑</div>
+        <div style="font-size:.78rem;color:#7c3aed;font-weight:700;margin:.3rem 0">욕구의 감정</div>
+        <div style="font-size:.75rem;color:#6b7280">"먹고 싶어!" 솔직한 욕구 표현 → 자기 이해</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:.85rem;text-align:center;">
+        <div style="font-size:1.5rem">💃 말랑핑</div>
+        <div style="font-size:.78rem;color:#7c3aed;font-weight:700;margin:.3rem 0">즐거움·춤</div>
+        <div style="font-size:.75rem;color:#6b7280">몸으로 기쁨 표현 → 신체 자기표현 발달</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:.85rem;text-align:center;">
+        <div style="font-size:1.5rem">🥪 샌드핑</div>
+        <div style="font-size:.78rem;color:#7c3aed;font-weight:700;margin:.3rem 0">배려·나눔</div>
+        <div style="font-size:.75rem;color:#6b7280">친구를 먼저 생각하는 마음 → 공감 능력</div>
+      </div>
+    </div>
+    <p style="margin-top:1rem;font-size:.8rem;color:#a855f7;font-weight:600">
+      ✨ 영상 보고 나서 "하츄핑처럼 사랑해 말할 수 있어?" 같은 질문을 던져줘봐 — 감정 대화 능력이 쑥쑥 자라!
+    </p>
+  </div>
+
 </section>
 
 <div class="div-cute">🎀 🎀 🎀</div>
