@@ -81,34 +81,47 @@ section{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 1
 h2{font-size:clamp(1.6rem,5vw,2.5rem);margin-bottom:1.5rem;color:#4a1d6e;}
 
 /* ── PHOTO GALLERY ── */
-.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;}
 @media(max-width:500px){.photo-grid{grid-template-columns:1fr;}}
-.photo-card{
-  border-radius:20px;overflow:hidden;position:relative;
-  box-shadow:0 8px 30px rgba(168,85,247,.18);
-  border:4px solid white;
-  aspect-ratio:.85;
-  background:linear-gradient(135deg,#fce7f3,#ede9fe);
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-}
-.photo-card img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  border-radius:14px;
-}
-.photo-caption{
-  position:relative;z-index:2;width:100%;
-  background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 100%);
-  padding:.75rem 1rem .85rem;color:white;font-size:.88rem;text-shadow:0 1px 3px rgba(0,0,0,.5);
-}
-.photo-caption strong{display:block;font-size:1rem;margin-bottom:2px;}
 
-/* placeholder photo (when no real img) */
-.photo-placeholder{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:.5rem;
-  font-size:4rem;
-  background:linear-gradient(135deg,#fce7f3,#ddd6fe);
+/* 메모리 카드 스타일 */
+.mem-card{
+  border-radius:20px;overflow:hidden;position:relative;
+  box-shadow:0 8px 32px rgba(168,85,247,.2);
+  border:3px solid white;
+  background:var(--card-bg);
+  transition:transform .3s,box-shadow .3s;
+  cursor:default;
 }
+.mem-card:hover{transform:translateY(-5px) rotate(.5deg);box-shadow:0 16px 40px rgba(168,85,247,.3);}
+.mem-inner{
+  padding:1.4rem 1.2rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.75rem;
+}
+.mem-emoji-wrap{
+  width:100%;aspect-ratio:1;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;
+  background:var(--emoji-bg);position:relative;overflow:hidden;
+}
+.mem-emoji-wrap::before{
+  content:var(--deco);position:absolute;
+  font-size:8rem;opacity:.07;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+}
+.mem-big-emoji{font-size:4.5rem;position:relative;z-index:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.1));}
+.mem-scene{font-size:.75rem;color:rgba(255,255,255,.7);position:relative;z-index:1;font-weight:700;letter-spacing:.05em;}
+.mem-tape{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  width:60px;height:18px;background:rgba(255,255,255,.5);
+  border-radius:3px;
+}
+.mem-bottom{width:100%;padding:.2rem 0 .3rem;}
+.mem-title{font-size:.93rem;font-weight:800;color:#4a1d6e;margin-bottom:.3rem;}
+.mem-desc{font-size:.78rem;color:#6b7280;line-height:1.6;}
+.mem-sticker{
+  position:absolute;top:.7rem;right:.8rem;
+  font-size:1.3rem;animation:wobble 2s ease-in-out infinite;
+}
+@keyframes wobble{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
 
 /* ── MESSAGE CARDS ── */
 .msg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
@@ -261,41 +274,89 @@ footer{
   <h2>우리가 좋아하는 시온이 모습</h2>
   <div class="photo-grid fade-in">
 
-    <div class="photo-card">
-      <div class="photo-placeholder">🐰<span style="font-size:1rem;color:#9d4edd">토끼옷 입은 날</span></div>
-      <div class="photo-caption">
-        <strong>진지한 시온이 👀</strong>
-        토끼 패턴 옷 입고 식당에서 — 저 눈빛 보면 다 녹아버려
+    <!-- 1. 분홍 패딩 + 흰 인형 -->
+    <div class="mem-card" style="--card-bg:linear-gradient(160deg,#fff0f8,#fce7f3)">
+      <div class="mem-tape"></div>
+      <div class="mem-sticker">🧸</div>
+      <div class="mem-inner">
+        <div class="mem-emoji-wrap" style="--emoji-bg:linear-gradient(135deg,#ffb3d1,#ffd6e8);--deco:'🩷'">
+          <div class="mem-big-emoji">🧸</div>
+          <div class="mem-scene">분홍 패딩 · 흰 인형이랑</div>
+        </div>
+        <div class="mem-bottom">
+          <div class="mem-title">인형이 제일 좋아! 🩷</div>
+          <div class="mem-desc">분홍 패딩 입고 흰 강아지 인형 꼭 안고서 환하게 웃는 시온이. 이 웃음 보면 세상 다 가진 것 같아.</div>
+        </div>
       </div>
     </div>
 
-    <div class="photo-card">
-      <div class="photo-placeholder">😄<span style="font-size:1rem;color:#9d4edd">분홍 후드</span></div>
-      <div class="photo-caption">
-        <strong>장난꾸러기 시온이 😜</strong>
-        분홍 집업 입고 뭔가 물고 장난치는 중 — 이 표정이 짱이야
+    <!-- 2. 삼촌이랑 셀카 -->
+    <div class="mem-card" style="--card-bg:linear-gradient(160deg,#f0f4ff,#e8edff)">
+      <div class="mem-tape"></div>
+      <div class="mem-sticker">💜</div>
+      <div class="mem-inner">
+        <div class="mem-emoji-wrap" style="--emoji-bg:linear-gradient(135deg,#a78bfa,#c4b5fd);--deco:'✌'">
+          <div class="mem-big-emoji">🤙</div>
+          <div class="mem-scene">삼촌이랑 · 손가락 하트</div>
+        </div>
+        <div class="mem-bottom">
+          <div class="mem-title">삼촌이랑 💜</div>
+          <div class="mem-desc">삼촌 유성이랑 셀카. 시온이 작은 손가락 하트 포즈가 너무 귀여웠어. 이런 순간이 제일 좋아.</div>
+        </div>
       </div>
     </div>
 
-    <div class="photo-card">
-      <div class="photo-placeholder">✌️<span style="font-size:1rem;color:#9d4edd">삼촌이랑 셀카</span></div>
-      <div class="photo-caption">
-        <strong>삼촌이랑 브이! 📸</strong>
-        삼촌 유성이랑 찍은 셀카 — 시온이 브이 포즈 귀여워 죽겠다
+    <!-- 3. 아디다스 더블 브이 -->
+    <div class="mem-card" style="--card-bg:linear-gradient(160deg,#fffbeb,#fef3c7)">
+      <div class="mem-tape"></div>
+      <div class="mem-sticker">✌️</div>
+      <div class="mem-inner">
+        <div class="mem-emoji-wrap" style="--emoji-bg:linear-gradient(135deg,#fbbf24,#f59e0b);--deco:'⭐'">
+          <div class="mem-big-emoji">✌️✌️</div>
+          <div class="mem-scene">카페에서 · 더블 브이!</div>
+        </div>
+        <div class="mem-bottom">
+          <div class="mem-title">더블 브이! ⭐</div>
+          <div class="mem-desc">아디다스 점퍼 입고 카페에서 양손 브이. 꼬마가 이렇게 쿨할 수가 없어. 자신감 넘치는 시온이.</div>
+        </div>
       </div>
     </div>
 
-    <div class="photo-card">
-      <div class="photo-placeholder">🎂<span style="font-size:1rem;color:#9d4edd">생일 파티</span></div>
-      <div class="photo-caption">
-        <strong>신데렐라 생일파티 🎉</strong>
-        신데렐라 케이크 앞에서 브이! 이 날 얼마나 좋았을까
+    <!-- 4. 분홍 잠옷 토끼귀 -->
+    <div class="mem-card" style="--card-bg:linear-gradient(160deg,#fdf4ff,#f3e8ff)">
+      <div class="mem-tape"></div>
+      <div class="mem-sticker">🐰</div>
+      <div class="mem-inner">
+        <div class="mem-emoji-wrap" style="--emoji-bg:linear-gradient(135deg,#e879f9,#d946ef);--deco:'🐰'">
+          <div class="mem-big-emoji">🐰</div>
+          <div class="mem-scene">분홍 잠옷 · 토끼귀 포즈</div>
+        </div>
+        <div class="mem-bottom">
+          <div class="mem-title">나는 토끼야! 🐰</div>
+          <div class="mem-desc">분홍 잠옷 입고 바닥에 앉아 양손으로 토끼귀 포즈. 이 장난기 넘치는 표정 — 시온이 그 자체야.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 신데렐라 생일파티 -->
+    <div class="mem-card" style="--card-bg:linear-gradient(160deg,#eff6ff,#dbeafe);grid-column:1/-1">
+      <div class="mem-tape"></div>
+      <div class="mem-sticker">👑</div>
+      <div class="mem-inner" style="flex-direction:row;align-items:center;gap:1.5rem;flex-wrap:wrap">
+        <div class="mem-emoji-wrap" style="--emoji-bg:linear-gradient(135deg,#60a5fa,#3b82f6);--deco:'👸';width:140px;height:140px;flex-shrink:0;aspect-ratio:auto">
+          <div class="mem-big-emoji">🎂</div>
+          <div class="mem-scene">신데렐라 케이크!</div>
+        </div>
+        <div class="mem-bottom" style="flex:1;min-width:180px">
+          <div class="mem-title" style="font-size:1.1rem">신데렐라 생일파티 👑🎉</div>
+          <div class="mem-desc" style="font-size:.85rem">하트 핀으로 쌍갈래 묶고 신데렐라 케이크 앞에서 브이! 이 날 얼마나 좋았을지 눈빛만 봐도 알아. 시온이의 제일 특별한 날.</div>
+        </div>
       </div>
     </div>
 
   </div>
-  <p style="text-align:center;margin-top:1rem;font-size:.82rem;color:#c084fc">
-    💜 사진은 매년 업데이트 될 거야 — 시온이가 크는 걸 다 담을게!
+  <p style="text-align:center;margin-top:1.2rem;font-size:.82rem;color:#c084fc">
+    💜 시온이가 크는 모습, 매년 여기 담을게!
   </p>
 </section>
 
