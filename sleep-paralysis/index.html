@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지예야 가위 눌리지 마 🛌 — 완벽 가이드</title>
+<style>
+  :root {
+    --bg: #0f0f1a;
+    --card: #1a1a2e;
+    --card2: #16213e;
+    --accent: #7c3aed;
+    --accent2: #a78bfa;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #2d2d4e;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 50%, #0a1628 100%);
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-emoji { font-size: 64px; display: block; margin-bottom: 16px; }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 24px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(124,58,237,0.2);
+    border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 99px;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: var(--accent2);
+  }
+  .friend-msg {
+    margin-top: 32px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(59,130,246,0.1));
+    border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 16px;
+    max-width: 480px;
+    margin: 32px auto 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #6ee7b7;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* Section */
+  .section { margin-top: 60px; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--accent2);
+  }
+  .section h2 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    border-color: rgba(124,58,237,0.4);
+    transform: translateY(-2px);
+  }
+  .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  /* Cause items */
+  .cause-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .cause-item {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .cause-item:hover { border-color: rgba(124,58,237,0.4); }
+  .cause-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .cause-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .cause-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* Solution steps */
+  .step-list { display: flex; flex-direction: column; gap: 12px; }
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    transition: border-color 0.2s;
+  }
+  .step:hover { border-color: rgba(16,185,129,0.3); }
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-num.green { background: rgba(16,185,129,0.2); color: var(--green); }
+  .step-num.blue { background: rgba(59,130,246,0.2); color: var(--blue); }
+  .step-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .step-desc { font-size: 13px; color: var(--muted); }
+
+  /* Science box */
+  .science-box {
+    background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(59,130,246,0.05));
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 20px;
+    padding: 32px;
+  }
+  .science-box h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--accent2);
+  }
+  .science-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .science-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .science-list li::before {
+    content: '▸';
+    color: var(--accent2);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Stat badges */
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .stat {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    flex: 1;
+    min-width: 130px;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* Warning box */
+  .warning {
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+  .warning-icon { font-size: 22px; flex-shrink: 0; }
+  .warning p { font-size: 14px; color: #fca5a5; }
+
+  /* Tip box */
+  .tip {
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.25);
+    border-radius: 16px;
+    padding: 18px 22px;
+    font-size: 14px;
+    color: #6ee7b7;
+    margin-top: 12px;
+  }
+  .tip strong { color: #a7f3d0; }
+
+  /* YouTube cards */
+  .yt-card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .yt-card:hover {
+    border-color: rgba(239,68,68,0.4);
+    transform: translateY(-2px);
+  }
+  .yt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(239,68,68,0.15);
+    color: #fca5a5;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .yt-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .yt-card p { font-size: 13px; color: var(--muted); }
+  .yt-card .yt-link { font-size: 12px; color: var(--accent2); margin-top: 8px; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a { color: var(--accent2); text-decoration: none; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .hero { padding: 60px 16px 40px; }
+    .container { padding: 0 16px 60px; }
+    .card, .science-box { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-emoji">🌙</span>
+  <h1>가위눌림 완전 정복 가이드</h1>
+  <p class="hero-sub">수면 마비의 원인부터 당장 오늘 밤 쓸 수 있는 해결법까지 — 의학적 근거 기반</p>
+  <div class="hero-badge">
+    <span>📺</span> 서울대병원 · 닥터딩요 · 수면 전문가 영상 요약
+  </div>
+  <div class="friend-msg">
+    💜 지예야, 가위 눌리지 마!
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- 가위눌림이란? -->
+  <section class="section">
+    <div class="section-label">What is it?</div>
+    <h2>😱 가위눌림, 대체 뭔가요?</h2>
+
+    <div class="science-box">
+      <h3>🔬 의학적 설명</h3>
+      <ul class="science-list">
+        <li>정식 명칭은 <strong>수면 마비(Sleep Paralysis)</strong> — 초자연 현상이 아닌 의학적 상태입니다.</li>
+        <li>렘(REM) 수면 중에는 뇌가 꿈을 꾸는 동안 몸이 움직이지 못하도록 근육을 마비시키는 것이 <strong>정상</strong>입니다.</li>
+        <li>문제는 의식이 먼저 깨어났는데 근육 마비가 아직 풀리지 않은 상태 — 이것이 수면 마비입니다.</li>
+        <li>귀신, 외계인 등의 환각은 꿈과 각성 사이의 뇌가 <strong>문화적 공포 기억을 재구성</strong>하는 것 (한국 → 귀신, 미국 → 외계인납치).</li>
+        <li>보통 <strong>수 분 내에 자연스럽게 사라지며</strong> 후유증은 없습니다. 의학적으로 위험하지 않습니다.</li>
+      </ul>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-num">50%</div>
+        <div class="stat-label">평생 1번 이상 경험</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">30%</div>
+        <div class="stat-label">전 세계 유병률 (2024 메타분석)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15~45%</div>
+        <div class="stat-label">재발성 비율</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">28%</div>
+        <div class="stat-label">수면부족 학생 발생률</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 원인 -->
+  <section class="section">
+    <div class="section-label">Causes</div>
+    <h2>🔎 왜 가위에 눌릴까? — 8가지 원인</h2>
+
+    <div class="cause-grid">
+      <div class="cause-item">
+        <div class="cause-icon">😴</div>
+        <div>
+          <h4>수면 부족 / 불규칙한 수면</h4>
+          <p>렘수면이 박탈됐다가 한꺼번에 리바운드되면서 비정상 렘수면이 나타납니다. 학생·교대근무자에게 특히 많습니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">😰</div>
+        <div>
+          <h4>스트레스 · 불안</h4>
+          <p>교감신경이 과도하게 활성화된 상태에서 수면에 들면 수면의 질이 떨어지고 얕은 잠에서 수면 마비가 잘 생깁니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">🤸</div>
+        <div>
+          <h4>바로 누운 자세 (앙와위)</h4>
+          <p>천장을 보고 누우면 몸이 빠르게 이완되는데 뇌는 아직 각성 상태 → 수면-각성 간 불일치가 커집니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">💤</div>
+        <div>
+          <h4>수면 무호흡증</h4>
+          <p>바로 누운 자세에서 기도가 눌려 수면 무호흡이 생기고, 이것이 수면 마비 발생률을 높입니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">🍺</div>
+        <div>
+          <h4>음주 · 과로 · 교대근무</h4>
+          <p>수면의 질을 전반적으로 낮추는 요인들. 한의학적으로 "기가 허한 상태"와 일치합니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">🧬</div>
+        <div>
+          <h4>유전적 요인</h4>
+          <p>가족 중 수면 마비가 많다면 유전적 소인이 있을 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">😴</div>
+        <div>
+          <h4>기면병(Narcolepsy)</h4>
+          <p>낮에 심하게 졸리고 수면 마비가 자주 반복된다면 기면병 동반 가능. 전문의 상담 필요.</p>
+        </div>
+      </div>
+      <div class="cause-item">
+        <div class="cause-icon">🧠</div>
+        <div>
+          <h4>심리적 트라우마 · 강박</h4>
+          <p>내면의 해결되지 않은 스트레스가 자율신경 불균형을 일으키고 수면 중 재활성화됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 단기 해결 -->
+  <section class="section">
+    <div class="section-label">Short-term</div>
+    <h2>⚡ 지금 당장! 단기 해결법</h2>
+    <p style="color:var(--muted); margin-bottom:24px; font-size:14px;">가위에 눌렸을 때 & 오늘 밤 잠들기 전 쓸 수 있는 방법들</p>
+
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num green">1</div>
+        <div>
+          <div class="step-title">🖐️ 작은 부위부터 움직여라 — 초기에 바로 시도!</div>
+          <div class="step-desc">가위 눌린 것 같다는 느낌이 오는 순간 바로 손가락, 이, 혀 등 작은 부위부터 살짝살짝 움직여 보세요. <strong>마비가 심해질수록 효과가 떨어지므로 초기 대응이 핵심</strong>입니다. [닥터딩요 영상 기반]</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num green">2</div>
+        <div>
+          <div class="step-title">😌 "이거 가위야" 인정하고 차분하게 있기</div>
+          <div class="step-desc">논문에서 성공률이 가장 높은 방법은 <strong>가만히 있기</strong>입니다. "이건 가위 눌린 거다, 귀신이 아니다, 곧 풀린다" — 강하게 인정할수록 공포가 줄고 더 빨리 풀립니다. [닥터딩요 영상 기반]</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num green">3</div>
+        <div>
+          <div class="step-title">🫂 옆에 사람 있으면 깨워달라고 미리 말해두기</div>
+          <div class="step-desc">가장 확실한 방법입니다. 평소 자주 눌린다면 파트너나 가족에게 코 골거나 이상해 보이면 흔들어 달라고 미리 부탁하세요.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num green">4</div>
+        <div>
+          <div class="step-title">🔄 깨고 나서 바로 다시 자지 않기</div>
+          <div class="step-desc">수면 마비에서 깬 직후 바로 자면 재발 가능성이 높습니다. 잠깐 일어나 물 마시기, 가벼운 스트레칭 후 다시 누우세요.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num green">5</div>
+        <div>
+          <div class="step-title">🌬️ 오늘 밤 자기 전: 내쉬는 호흡 길게</div>
+          <div class="step-desc">코로 4초 들이쉬고 입으로 6~8초 내쉬기. 내쉬는 호흡이 길수록 부교감신경이 활성화되어 뇌 각성이 낮아집니다. 잠들기 전 10회 반복하세요. [수면 전문가 영상 기반]</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num green">6</div>
+        <div>
+          <div class="step-title">🛌 옆으로 자는 자세로 바꾸기</div>
+          <div class="step-desc">바로 누운 자세(앙와위)는 수면 마비와 가장 강하게 연관됩니다. 오늘 밤부터 옆으로 누워 자세요. 고개만 돌리는 건 의미 없고 <strong>몸 전체를 옆으로</strong> 틀어야 합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>이것은 하지 마세요:</strong> 귀신에게 말 걸기, 소리 지르려 하기, 무리하게 몸 전체를 움직이려 하기 — 마비가 심해진 후에는 오히려 공포만 키웁니다.</p>
+    </div>
+  </section>
+
+  <!-- 장기 해결 -->
+  <section class="section">
+    <div class="section-label">Long-term</div>
+    <h2>🌱 근본적으로 고치는 장기 해결법</h2>
+    <p style="color:var(--muted); margin-bottom:24px; font-size:14px;">자꾸 재발한다면 생활 패턴부터 바꿔야 합니다</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>🕐 수면 위생 개선</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted);">
+          <li>✅ 매일 같은 시간에 자고 일어나기</li>
+          <li>✅ 취침 1시간 전 스마트폰·강한 빛 차단</li>
+          <li>✅ 침대는 오직 수면에만 사용 (TV·공부 금지)</li>
+          <li>✅ 졸릴 때만 침대에 눕기</li>
+          <li>✅ 낮잠은 20분 이하로</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🧘 스트레스 · 심리 관리</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted);">
+          <li>✅ 자기 전 걱정 목록 노트에 적고 닫기</li>
+          <li>✅ 심리적 트라우마 원인 찾기 (필요시 상담)</li>
+          <li>✅ 명상은 잠들기 전보다 <strong>낮에</strong> 하기</li>
+          <li>✅ 잠들기 전 계획·걱정 생각 차단</li>
+          <li>✅ 격한 운동은 취침 3시간 전에 마무리</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🌡️ 수면 환경 최적화</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted);">
+          <li>✅ 실내 온도 18~22℃ 서늘하게 유지</li>
+          <li>✅ 무거운 이불 대신 가벼운 이불 사용</li>
+          <li>✅ 옆으로 자는 습관 만들기</li>
+          <li>✅ 암막 커튼으로 빛 차단</li>
+          <li>✅ 음주 후 수면 피하기</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🏥 전문적 치료 (재발 심할 때)</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted);">
+          <li>✅ <strong>CBT-ISP</strong>: 수면 마비 특화 인지행동치료</li>
+          <li>✅ 불면증 인지행동치료 (CBT-I)</li>
+          <li>✅ 문화 관련 CBT (명상, 최면 등)</li>
+          <li>✅ 약물치료 (항우울제) — 의사 상담 필수</li>
+          <li>✅ 낮졸림 심하면 기면병 검사</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 핵심 마인드셋:</strong> 가위눌림은 귀신이나 질병이 아닙니다. 수면의 질이 나빠진 신호입니다. "이건 가위야, 곧 나아"라는 인식 자체가 치료의 시작이고, <strong>나이가 들면서 자연히 줄어드는 경향</strong>이 있습니다. [서울대병원 이유진 교수 영상 기반]
+    </div>
+  </section>
+
+  <!-- 추천 영상 -->
+  <section class="section">
+    <div class="section-label">YouTube</div>
+    <h2>📺 추천 YouTube 영상</h2>
+    <p style="color:var(--muted); margin-bottom:24px; font-size:14px;">의학적 근거 기반 신뢰할 수 있는 영상들</p>
+
+    <a class="yt-card" href="https://www.youtube.com/watch?v=FAEd5Yl5BwA" target="_blank" rel="noopener">
+      <div class="yt-badge">▶ YouTube</div>
+      <h4>가위눌림 — 푸는 법, 안 눌리는 법 | 격리형 수면 마비 | 닥터딩요</h4>
+      <p>불면증 전문의가 직접 가위눌림을 경험한 입장에서 설명. 논문 기반으로 초기 대응법과 예방법을 상세히 설명합니다.</p>
+      <div class="yt-link">youtube.com/watch?v=FAEd5Yl5BwA</div>
+    </a>
+
+    <a class="yt-card" href="https://www.youtube.com/watch?v=EjXDLdyM27U" target="_blank" rel="noopener">
+      <div class="yt-badge">▶ YouTube</div>
+      <h4>수면 중 무슨 일이? 가위 눌림 원인과 대처법 | 서울대병원 이유진 교수</h4>
+      <p>서울대학교병원 정신건강의학과 수면 전문의가 수면 마비의 원리를 렘수면 메커니즘부터 친절하게 설명합니다.</p>
+      <div class="yt-link">youtube.com/watch?v=EjXDLdyM27U</div>
+    </a>
+
+    <a class="yt-card" href="https://www.youtube.com/watch?v=IRmkBBEYHLw" target="_blank" rel="noopener">
+      <div class="yt-badge">▶ YouTube</div>
+      <h4>수면마비(가위눌림) 없애는 가장 확실한 방법 3가지 | 베인</h4>
+      <p>호흡 · 자세 · 체온 밸런스 3가지 관점에서 실용적인 해결 방법을 제시합니다. 오늘 밤 당장 적용 가능.</p>
+      <div class="yt-link">youtube.com/watch?v=IRmkBBEYHLw</div>
+    </a>
+
+    <a class="yt-card" href="https://www.youtube.com/watch?v=dEBHoaUHD-k" target="_blank" rel="noopener">
+      <div class="yt-badge">▶ YouTube</div>
+      <h4>가위눌림 — 의사가 직접 귀신 본 썰 + 원인과 해결 방법</h4>
+      <p>의사도 가위 눌린 경험을 직접 공유하며 의학적 설명을 유머와 함께 풀어냅니다. 공포를 줄이는 데 도움이 됩니다.</p>
+      <div class="yt-link">youtube.com/watch?v=dEBHoaUHD-k</div>
+    </a>
+  </section>
+
+  <!-- 요약 -->
+  <section class="section">
+    <div class="section-label">Summary</div>
+    <h2>📋 한눈에 정리</h2>
+
+    <div class="card">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:24px;">
+        <div>
+          <div style="color:var(--accent2); font-weight:800; margin-bottom:12px; font-size:14px;">🔎 원인</div>
+          <ul style="list-style:none; font-size:13px; color:var(--muted); display:flex;flex-direction:column;gap:6px;">
+            <li>• 수면 부족 / 불규칙</li>
+            <li>• 스트레스 · 불안</li>
+            <li>• 바로 누운 자세</li>
+            <li>• 수면 무호흡증</li>
+            <li>• 음주 · 과로</li>
+            <li>• 유전 · 기면병</li>
+          </ul>
+        </div>
+        <div>
+          <div style="color:#6ee7b7; font-weight:800; margin-bottom:12px; font-size:14px;">⚡ 단기 해결</div>
+          <ul style="list-style:none; font-size:13px; color:var(--muted); display:flex;flex-direction:column;gap:6px;">
+            <li>• 손가락부터 살짝 움직이기</li>
+            <li>• "가위야" 인정하고 진정</li>
+            <li>• 옆에서 깨워달라 부탁</li>
+            <li>• 깨면 바로 다시 눕지 말기</li>
+            <li>• 자기 전 길게 내쉬는 호흡</li>
+            <li>• 옆으로 자는 자세 유지</li>
+          </ul>
+        </div>
+        <div>
+          <div style="color:#60a5fa; font-weight:800; margin-bottom:12px; font-size:14px;">🌱 장기 해결</div>
+          <ul style="list-style:none; font-size:13px; color:var(--muted); display:flex;flex-direction:column;gap:6px;">
+            <li>• 규칙적인 수면 시간</li>
+            <li>• 스트레스 원인 해소</li>
+            <li>• 수면 환경 최적화</li>
+            <li>• 인지행동치료 (CBT-I)</li>
+            <li>• 심하면 전문의 상담</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>이 페이지는 <strong>서울대병원 이유진 교수 영상</strong>, <strong>닥터딩요 영상</strong>, 수면 전문가 영상 및 PubMed 논문을 기반으로 작성되었습니다.</p>
+  <p style="margin-top:8px;">참고: <a href="https://www.youtube.com/watch?v=FAEd5Yl5BwA" target="_blank">닥터딩요</a> · <a href="https://www.youtube.com/watch?v=EjXDLdyM27U" target="_blank">서울대병원</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11344621/" target="_blank">PubMed 2024</a></p>
+  <p style="margin-top:16px; color:#4a4a6a;">💜 지예야, 이제 가위 눌리지 마!</p>
+</footer>
+
+</body>
+</html>
