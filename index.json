@@ -56,11 +56,6 @@
       "deployed": "2026-05-17 17:56"
     },
     {
-      "slug": "candlefall-ch10",
-      "url": "https://kooys2013.github.io/pages/candlefall-ch10/",
-      "deployed": "2026-05-17 23:48"
-    },
-    {
       "slug": "candlefall",
       "url": "https://kooys2013.github.io/pages/candlefall/",
       "deployed": "2026-05-17 23:58"
@@ -108,6 +103,11 @@
     {
       "slug": "candlefall-ch9",
       "url": "https://kooys2013.github.io/pages/candlefall-ch9/",
+      "deployed": "2026-05-18 00:46"
+    },
+    {
+      "slug": "candlefall-ch10",
+      "url": "https://kooys2013.github.io/pages/candlefall-ch10/",
       "deployed": "2026-05-18 00:46"
     }
   ]
