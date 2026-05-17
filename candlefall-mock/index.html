@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANDLEFALL — Demo Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<style>
+  :root {
+    --cf-bg-deep: #0A0E14;
+    --cf-bg-panel: #0F1520;
+    --cf-bg-card: #141B28;
+    --cf-border: #1E2A3A;
+    --cf-amber: #FFC832;
+    --cf-bull: #39D0D8;
+    --cf-bear: #EF5350;
+    --cf-morph-violet: #B83FFF;
+    --cf-text: #E2E8F0;
+    --cf-text-muted: #64748B;
+    --cf-text-dim: #94A3B8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cf-bg-deep);
+    color: var(--cf-text);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--cf-border);
+    background: var(--cf-bg-panel);
+    flex-shrink: 0;
+    height: 52px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    color: var(--cf-amber);
+  }
+
+  .logo span { font-size: 18px; }
+
+  .mode-toggle {
+    display: flex;
+    gap: 6px;
+  }
+
+  .mode-btn {
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--cf-border);
+    background: transparent;
+    color: var(--cf-text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+
+  .mode-btn.active {
+    background: var(--cf-amber);
+    border-color: var(--cf-amber);
+    color: #0A0E14;
+  }
+
+  .mode-btn:not(.active):hover {
+    border-color: var(--cf-amber);
+    color: var(--cf-amber);
+  }
+
+  /* ── MAIN AREA ── */
+  .main-area {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* ── CHART PANEL ── */
+  .chart-panel {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--cf-border);
+    position: relative;
+    transition: flex 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    min-width: 0;
+  }
+
+  .main-area.combat-mode .chart-panel { flex: 4; }
+
+  .chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--cf-border);
+    flex-shrink: 0;
+  }
+
+  .ticker-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ticker-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .ticker-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cf-bull);
+  }
+
+  .sacred-badge {
+    font-size: 10px;
+    background: rgba(184, 63, 255, 0.15);
+    border: 1px solid rgba(184, 63, 255, 0.3);
+    color: var(--cf-morph-violet);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+
+  #chart-container {
+    flex: 1;
+    position: relative;
+    cursor: crosshair;
+  }
+
+  #lwc-chart {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── CANDLE MORPH OVERLAY ── */
+  #morph-overlay {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 2px;
+    opacity: 0;
+    z-index: 10;
+    transition: background 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* ── BUY ORDER FLASH ── */
+  #order-flash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 20;
+    text-shadow: 0 0 20px currentColor;
+  }
+
+  /* ── MIRA PANEL ── */
+  .mira-panel {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    background: var(--cf-bg-panel);
+    transition: flex 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    min-width: 200px;
+  }
+
+  .main-area.combat-mode .mira-panel { flex: 6; }
+
+  .mira-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--cf-border);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--cf-amber);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mira-state-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--cf-bull);
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .mira-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  #mira {
+    width: 120px;
+    height: 180px;
+    filter: drop-shadow(0 0 12px rgba(57, 208, 216, 0.25));
+    transition: filter 0.3s;
+  }
+
+  #mira.attacking {
+    filter: drop-shadow(0 0 20px rgba(57, 208, 216, 0.6));
+  }
+
+  /* ── HP BAR ── */
+  .hp-section {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .hp-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cf-text-muted);
+    margin-bottom: 5px;
+  }
+
+  .hp-value {
+    color: var(--cf-bull);
+    font-weight: 700;
+  }
+
+  .hp-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: var(--cf-bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--cf-border);
+  }
+
+  .hp-bar-fill {
+    height: 100%;
+    width: 100%;
+    background: var(--cf-bull);
+    border-radius: 4px;
+    transition: width 0.4s ease, background 0.4s ease;
+  }
+
+  .hp-bar-fill.low {
+    background: var(--cf-bear);
+    animation: hp-pulse 1s infinite;
+  }
+
+  @keyframes hp-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ── COMBO COUNTER ── */
+  .combo-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--cf-amber);
+    text-align: center;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .combo-display.flash {
+    text-shadow: 0 0 20px var(--cf-amber), 0 0 40px var(--cf-amber);
+    transform: scale(1.15);
+  }
+
+  .combo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cf-text-muted);
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+
+  .mira-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--cf-text-muted);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── BOTTOM ACTION BAR ── */
+  .action-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-top: 1px solid var(--cf-border);
+    background: var(--cf-bg-panel);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    height: 60px;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--cf-border);
+    background: var(--cf-bg-card);
+    color: var(--cf-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .action-btn.buy {
+    border-color: rgba(57, 208, 216, 0.4);
+    color: var(--cf-bull);
+  }
+
+  .action-btn.buy:hover, .action-btn.buy:active {
+    background: rgba(57, 208, 216, 0.12);
+    border-color: var(--cf-bull);
+    box-shadow: 0 0 12px rgba(57, 208, 216, 0.2);
+  }
+
+  .action-btn.sell {
+    border-color: rgba(239, 83, 80, 0.4);
+    color: var(--cf-bear);
+  }
+
+  .action-btn.sell:hover, .action-btn.sell:active {
+    background: rgba(239, 83, 80, 0.12);
+    border-color: var(--cf-bear);
+    box-shadow: 0 0 12px rgba(239, 83, 80, 0.2);
+  }
+
+  .action-btn.hodl {
+    border-color: rgba(255, 200, 50, 0.4);
+    color: var(--cf-amber);
+  }
+
+  .action-btn.hodl:hover, .action-btn.hodl:active {
+    background: rgba(255, 200, 50, 0.1);
+    border-color: var(--cf-amber);
+    box-shadow: 0 0 12px rgba(255, 200, 50, 0.15);
+  }
+
+  .morphing-info {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cf-text-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .morphing-info span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .morph-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .morph-dot.chart { background: var(--cf-bull); }
+  .morph-dot.mira { background: var(--cf-morph-violet); }
+  .morph-dot.bell { background: var(--cf-amber); }
+
+  /* ── BELL DROP ANIMATION ── */
+  #bell-drop {
+    position: fixed;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 44px;
+    z-index: 100;
+    pointer-events: none;
+    filter: drop-shadow(0 0 16px var(--cf-amber));
+  }
+
+  #bell-text {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 200, 50, 0.15);
+    border: 1px solid rgba(255, 200, 50, 0.4);
+    color: var(--cf-amber);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 8px;
+    white-space: nowrap;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    body { overflow: auto; }
+
+    .main-area {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .chart-panel {
+      flex: none;
+      height: 55vw;
+      min-height: 240px;
+      border-right: none;
+      border-bottom: 1px solid var(--cf-border);
+    }
+
+    .main-area.combat-mode .chart-panel { height: 40vw; }
+
+    .mira-panel {
+      flex: none;
+      height: 180px;
+      min-width: 0;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .mira-header { display: none; }
+    .mira-body { flex-direction: row; gap: 12px; padding: 10px; }
+
+    #mira { width: 80px; height: 120px; }
+
+    .action-bar {
+      height: auto;
+      padding: 8px 12px;
+    }
+
+    .morphing-info { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span>🕯️</span> CANDLEFALL
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btn-trade" onclick="setMode('trade')">Trade Mode</button>
+    <button class="mode-btn" id="btn-combat" onclick="setMode('combat')">Combat Mode</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<div class="main-area" id="main-area">
+
+  <!-- CHART PANEL -->
+  <div class="chart-panel">
+    <div class="chart-header">
+      <div class="ticker-info">
+        <span class="ticker-name">005930.KS</span>
+        <span class="ticker-price" id="price-display">₩72,000</span>
+      </div>
+      <span class="sacred-badge">🛡️ Sacred Zone S0 — Original chart data immutable</span>
+    </div>
+    <div id="chart-container">
+      <div id="lwc-chart"></div>
+      <div id="morph-overlay"></div>
+      <div id="order-flash"></div>
+    </div>
+  </div>
+
+  <!-- MIRA PANEL -->
+  <div class="mira-panel">
+    <div class="mira-header">
+      <div class="mira-state-dot"></div>
+      MIRA
+    </div>
+    <div class="mira-body">
+      <svg id="mira" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head -->
+        <circle cx="60" cy="32" r="18" fill="#1A2535" stroke="#39D0D8" stroke-width="1.5"/>
+        <!-- Eyes -->
+        <circle cx="53" cy="30" r="3" fill="#39D0D8"/>
+        <circle cx="67" cy="30" r="3" fill="#39D0D8"/>
+        <circle cx="54" cy="29" r="1.2" fill="#0A0E14"/>
+        <circle cx="68" cy="29" r="1.2" fill="#0A0E14"/>
+        <!-- Mouth / expression -->
+        <path d="M54 38 Q60 42 66 38" stroke="#39D0D8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <!-- Neck -->
+        <line x1="60" y1="50" x2="60" y2="58" stroke="#39D0D8" stroke-width="2"/>
+        <!-- Torso -->
+        <rect x="42" y="58" width="36" height="44" rx="6" fill="#141B28" stroke="#39D0D8" stroke-width="1.5"/>
+        <!-- Collar detail -->
+        <path d="M52 58 L60 68 L68 58" stroke="#39D0D8" stroke-width="1.2" fill="none"/>
+        <!-- Belt line -->
+        <line x1="42" y1="88" x2="78" y2="88" stroke="#39D0D8" stroke-width="1"/>
+        <!-- Left arm -->
+        <line x1="42" y1="65" x2="26" y2="85" stroke="#39D0D8" stroke-width="3" stroke-linecap="round"/>
+        <!-- Right arm — holds umbrella (Krieg-Candle) -->
+        <line x1="78" y1="65" x2="96" y2="82" stroke="#39D0D8" stroke-width="3" stroke-linecap="round"/>
+        <!-- Umbrella handle -->
+        <line x1="96" y1="82" x2="100" y2="120" stroke="#FFC832" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Umbrella canopy -->
+        <path d="M80 82 Q100 68 120 82" stroke="#FFC832" stroke-width="2" fill="rgba(255,200,50,0.08)" stroke-linecap="round"/>
+        <!-- Canopy ribs -->
+        <line x1="90" y1="82" x2="88" y2="72" stroke="#FFC832" stroke-width="1" opacity="0.6"/>
+        <line x1="100" y1="75" x2="100" y2="66" stroke="#FFC832" stroke-width="1" opacity="0.6"/>
+        <line x1="110" y1="80" x2="112" y2="70" stroke="#FFC832" stroke-width="1" opacity="0.6"/>
+        <!-- Legs -->
+        <line x1="52" y1="102" x2="46" y2="140" stroke="#39D0D8" stroke-width="3" stroke-linecap="round"/>
+        <line x1="68" y1="102" x2="74" y2="140" stroke="#39D0D8" stroke-width="3" stroke-linecap="round"/>
+        <!-- Feet -->
+        <line x1="46" y1="140" x2="36" y2="146" stroke="#39D0D8" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="74" y1="140" x2="84" y2="146" stroke="#39D0D8" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Chest emblem -->
+        <text x="60" y="82" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#FFC832" font-weight="700">CF</text>
+      </svg>
+
+      <div>
+        <div class="combo-label">COMBO</div>
+        <div class="combo-display" id="combo-display">×0</div>
+        <div class="mira-status" id="mira-status">Watching markets...</div>
+      </div>
+
+      <div class="hp-section">
+        <div class="hp-label">
+          <span>HP</span>
+          <span class="hp-value" id="hp-value">100%</span>
+        </div>
+        <div class="hp-bar-bg">
+          <div class="hp-bar-fill" id="hp-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <button class="action-btn buy" onclick="triggerBuyOrder()">⬆ BUY ORDER</button>
+  <button class="action-btn sell" onclick="triggerSellOrder()">⬇ SELL ORDER</button>
+  <button class="action-btn hodl" onclick="triggerHodlGuard()">🛡 HODL GUARD</button>
+  <button class="action-btn" style="color:var(--cf-amber);border-color:rgba(255,200,50,0.3)" onclick="triggerBellDrop()">🔔 Bell Drop</button>
+
+  <div class="morphing-info">
+    <span><span class="morph-dot chart"></span>Chart 0.6s</span>
+    <span><span class="morph-dot mira"></span>MIRA 3s</span>
+    <span><span class="morph-dot bell"></span>Bell Drop: 15:30</span>
+  </div>
+</div>
+
+<!-- BELL DROP ELEMENTS -->
+<div id="bell-drop">🔔</div>
+<div id="bell-text">15:30 Bell Drops — Persona Morphs</div>
+
+<script>
+// ── STATE ──
+let combo = 0;
+let hp = 100;
+let currentMode = 'trade';
+let chart = null;
+let candleSeries = null;
+let chartData = [];
+let lastClickedBar = null;
+
+// ── GENERATE DATA ──
+function generateData() {
+  const basePrice = 72000;
+  const data = [];
+  for (let i = 0; i < 60; i++) {
+    const time = Math.floor(new Date('2025-01-02').getTime() / 1000) + i * 86400;
+    const open = basePrice + (Math.sin(i * 0.3) * 4000) + (Math.random() - 0.5) * 2000;
+    const close = open + (Math.random() - 0.48) * 3000;
+    const high = Math.max(open, close) + Math.random() * 1000;
+    const low = Math.min(open, close) - Math.random() * 1000;
+    data.push({
+      time,
+      open: Math.round(open),
+      high: Math.round(high),
+      low: Math.round(low),
+      close: Math.round(close)
+    });
+  }
+  return data;
+}
+
+// ── INIT CHART ──
+function initChart() {
+  const container = document.getElementById('lwc-chart');
+
+  chart = LightweightCharts.createChart(container, {
+    layout: {
+      background: { type: 'solid', color: '#0A0E14' },
+      textColor: '#64748B',
+      fontFamily: "'JetBrains Mono', monospace",
+    },
+    grid: {
+      vertLines: { color: '#0F1520' },
+      horzLines: { color: '#0F1520' },
+    },
+    crosshair: {
+      mode: LightweightCharts.CrosshairMode.Normal,
+      vertLine: { color: '#1E2A3A', width: 1, style: 3 },
+      horzLine: { color: '#1E2A3A', width: 1, style: 3 },
+    },
+    rightPriceScale: {
+      borderColor: '#1E2A3A',
+      textColor: '#64748B',
+    },
+    timeScale: {
+      borderColor: '#1E2A3A',
+      textColor: '#64748B',
+    },
+    width: container.parentElement.offsetWidth,
+    height: container.parentElement.offsetHeight,
+  });
+
+  candleSeries = chart.addCandlestickSeries({
+    upColor: '#39D0D8',
+    downColor: '#EF5350',
+    borderUpColor: '#39D0D8',
+    borderDownColor: '#EF5350',
+    wickUpColor: '#39D0D8',
+    wickDownColor: '#EF5350',
+  });
+
+  chartData = generateData();
+  candleSeries.setData(chartData);
+
+  // Price display
+  const last = chartData[chartData.length - 1];
+  updatePriceDisplay(last.close, last.close >= last.open);
+
+  // Crosshair move — track hovered bar
+  chart.subscribeCrosshairMove(function(param) {
+    if (!param.time || !param.seriesData) return;
+    const bar = param.seriesData.get(candleSeries);
+    if (bar) {
+      lastClickedBar = { ...bar, time: param.time, point: param.point };
+      updatePriceDisplay(bar.close, bar.close >= bar.open);
+    }
+  });
+
+  // Click handler on chart container
+  container.addEventListener('click', function(e) {
+    if (lastClickedBar) {
+      const isBear = lastClickedBar.close < lastClickedBar.open;
+      if (isBear) {
+        triggerBuyOrderOnBar(lastClickedBar, e);
+      } else {
+        flashOrder('BULL ZONE', '#39D0D8');
+      }
+    }
+  });
+
+  // Resize
+  const ro = new ResizeObserver(() => {
+    chart.applyOptions({
+      width: container.parentElement.offsetWidth,
+      height: container.parentElement.offsetHeight,
+    });
+  });
+  ro.observe(container.parentElement);
+}
+
+function updatePriceDisplay(price, isBull) {
+  const el = document.getElementById('price-display');
+  el.textContent = '₩' + price.toLocaleString('ko-KR');
+  el.style.color = isBull ? 'var(--cf-bull)' : 'var(--cf-bear)';
+}
+
+// ── BUY ORDER FROM BAR CLICK ──
+function triggerBuyOrderOnBar(bar, mouseEvent) {
+  // Calculate overlay position
+  const container = document.getElementById('chart-container');
+  const rect = container.getBoundingClientRect();
+
+  const timeCoord = chart.timeScale().timeToCoordinate(bar.time);
+  const highCoord = candleSeries.priceToCoordinate(bar.high);
+  const lowCoord = candleSeries.priceToCoordinate(bar.low);
+  const openCoord = candleSeries.priceToCoordinate(bar.open);
+  const closeCoord = candleSeries.priceToCoordinate(bar.close);
+
+  if (timeCoord === null || highCoord === null) return;
+
+  const bodyTop = Math.min(openCoord, closeCoord);
+  const bodyBottom = Math.max(openCoord, closeCoord);
+  const bodyHeight = Math.max(bodyBottom - bodyTop, 4);
+
+  const overlay = document.getElementById('morph-overlay');
+  const barWidth = 9;
+
+  overlay.style.left = (timeCoord - barWidth / 2) + 'px';
+  overlay.style.top = bodyTop + 'px';
+  overlay.style.width = barWidth + 'px';
+  overlay.style.height = bodyHeight + 'px';
+  overlay.style.background = '#EF5350';
+  overlay.style.opacity = '1';
+  overlay.style.boxShadow = '0 0 12px #EF5350';
+
+  // Morph animation: bear → bull
+  anime({
+    targets: overlay,
+    background: ['#EF5350', '#B83FFF', '#39D0D8'],
+    height: [bodyHeight, bodyHeight * 0.7, bodyHeight * 1.3],
+    top: [bodyTop, bodyTop + bodyHeight * 0.15, bodyTop - bodyHeight * 0.15],
+    opacity: [1, 1, 0],
+    duration: 600,
+    easing: 'cubicBezier(0.65,0,0.35,1)',
+    complete: () => {
+      overlay.style.opacity = '0';
+    }
+  });
+
+  animateMiraAttack('BUY ORDER!', '#39D0D8');
+}
+
+// ── BUY ORDER (BUTTON) ──
+function triggerBuyOrder() {
+  // Pick last bear candle from data
+  const bearBars = chartData.filter(b => b.close < b.open);
+  if (bearBars.length === 0) return;
+  const bar = bearBars[bearBars.length - 3] || bearBars[bearBars.length - 1];
+  lastClickedBar = bar;
+  triggerBuyOrderOnBar(bar, null);
+}
+
+// ── SELL ORDER ──
+function triggerSellOrder() {
+  hp = Math.max(0, hp - 10);
+  updateHP();
+
+  // Mirror MIRA and do sell animation
+  const miraEl = document.getElementById('mira');
+  miraEl.style.transform = 'scaleX(-1)';
+
+  anime({
+    targets: '#mira',
+    scaleX: [-1, -1.1, -1],
+    rotate: [0, 5, 0],
+    duration: 600,
+    easing: 'easeInOutQuad',
+    complete: () => {
+      miraEl.style.transform = 'scaleX(1)';
+    }
+  });
+
+  flashOrder('SELL ORDER!', '#EF5350');
+  document.getElementById('mira-status').textContent = 'Taking damage...';
+  setTimeout(() => {
+    document.getElementById('mira-status').textContent = 'Watching markets...';
+  }, 2000);
+}
+
+// ── HODL GUARD ──
+function triggerHodlGuard() {
+  combo = 0;
+  updateCombo();
+
+  anime({
+    targets: '#mira',
+    scaleY: [1, 1.05, 1],
+    duration: 400,
+    easing: 'easeInOutQuad',
+  });
+
+  flashOrder('HODL GUARD!', '#FFC832');
+  document.getElementById('mira-status').textContent = 'Shielding position...';
+  setTimeout(() => {
+    document.getElementById('mira-status').textContent = 'Watching markets...';
+  }, 1800);
+}
+
+// ── MIRA ATTACK ANIMATION ──
+function animateMiraAttack(orderText, color) {
+  const miraEl = document.getElementById('mira');
+  miraEl.classList.add('attacking');
+
+  anime({
+    targets: '#mira',
+    scaleX: [1, 1.1, 1],
+    rotate: [0, -5, 0],
+    duration: 600,
+    easing: 'easeInOutQuad',
+    complete: () => {
+      miraEl.classList.remove('attacking');
+    }
+  });
+
+  flashOrder(orderText, color);
+
+  combo++;
+  updateCombo();
+
+  document.getElementById('mira-status').textContent = 'Executing attack!';
+  setTimeout(() => {
+    document.getElementById('mira-status').textContent = 'Watching markets...';
+  }, 2500);
+}
+
+// ── FLASH ORDER TEXT ──
+function flashOrder(text, color) {
+  const el = document.getElementById('order-flash');
+  el.textContent = text;
+  el.style.color = color;
+
+  anime({
+    targets: '#order-flash',
+    opacity: [0, 1, 1, 0],
+    scale: [0.8, 1.05, 1, 0.95],
+    translateY: [20, 0, 0, -10],
+    duration: 1000,
+    easing: 'easeOutCubic',
+  });
+}
+
+// ── UPDATE COMBO ──
+function updateCombo() {
+  const el = document.getElementById('combo-display');
+  el.textContent = '×' + combo;
+  el.classList.add('flash');
+  setTimeout(() => el.classList.remove('flash'), 300);
+}
+
+// ── UPDATE HP ──
+function updateHP() {
+  const bar = document.getElementById('hp-bar');
+  const val = document.getElementById('hp-value');
+  bar.style.width = hp + '%';
+  val.textContent = hp + '%';
+  if (hp <= 30) {
+    bar.classList.add('low');
+  } else {
+    bar.classList.remove('low');
+  }
+}
+
+// ── BELL DROP ──
+function triggerBellDrop() {
+  const bell = document.getElementById('bell-drop');
+  const text = document.getElementById('bell-text');
+
+  bell.style.top = '-80px';
+  bell.style.opacity = '1';
+
+  anime({
+    targets: '#bell-drop',
+    top: ['−80px', '50px', '30px'],
+    translateY: [-80, 50, 30],
+    duration: 1200,
+    easing: 'easeOutBounce',
+  });
+
+  anime({
+    targets: '#bell-text',
+    opacity: [0, 1, 1, 0],
+    duration: 2200,
+    delay: 400,
+    easing: 'easeInOutQuad',
+  });
+
+  anime({
+    targets: '#bell-drop',
+    rotate: [0, -15, 15, -10, 10, 0],
+    duration: 800,
+    delay: 600,
+    easing: 'easeInOutSine',
+  });
+
+  setTimeout(() => {
+    bell.style.top = '-80px';
+  }, 3000);
+}
+
+// ── MODE TOGGLE ──
+function setMode(mode) {
+  currentMode = mode;
+  const mainArea = document.getElementById('main-area');
+  const btnTrade = document.getElementById('btn-trade');
+  const btnCombat = document.getElementById('btn-combat');
+
+  if (mode === 'combat') {
+    mainArea.classList.add('combat-mode');
+    btnCombat.classList.add('active');
+    btnTrade.classList.remove('active');
+    document.getElementById('mira-status').textContent = 'Combat stance activated!';
+  } else {
+    mainArea.classList.remove('combat-mode');
+    btnTrade.classList.add('active');
+    btnCombat.classList.remove('active');
+    document.getElementById('mira-status').textContent = 'Trade mode engaged.';
+  }
+
+  // Resize chart after transition
+  setTimeout(() => {
+    if (chart) {
+      const container = document.getElementById('lwc-chart');
+      chart.applyOptions({
+        width: container.parentElement.offsetWidth,
+        height: container.parentElement.offsetHeight,
+      });
+    }
+  }, 450);
+}
+
+// ── TOUCH: BUY/SELL MOBILE ──
+document.addEventListener('touchstart', function(e) {
+  // Handled via button clicks already
+}, { passive: true });
+
+// ── INIT ──
+window.addEventListener('load', function() {
+  // Wait a tick to ensure layout is settled
+  requestAnimationFrame(() => {
+    initChart();
+  });
+});
+</script>
+</body>
+</html>
