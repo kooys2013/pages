@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANDLEFALL · The Bell That Falls — Design Concept Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ==============================
+   DESIGN TOKENS
+============================== */
+:root {
+  --cf-bg-deepest: #050810;
+  --cf-bg-deep: #0A0E14;
+  --cf-bg-elevated: #14191F;
+  --cf-bg-card: #181E27;
+  --cf-amber-primary: #FFC832;
+  --cf-amber-glow: #FFB000;
+  --cf-bull-green: #39D0D8;
+  --cf-bull-glow: #5EFAFF;
+  --cf-bear-red: #EF5350;
+  --cf-bear-glow: #FF6B6B;
+  --cf-morph-violet: #B83FFF;
+  --cf-morph-cyan: #00F0FF;
+  --cf-text-primary: #FFFFFF;
+  --cf-text-secondary: rgba(255,255,255,0.65);
+  --cf-text-muted: rgba(255,255,255,0.35);
+  --cf-motion-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --cf-motion-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --cf-motion-morph-chart: 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  --cf-motion-morph-char: 3s cubic-bezier(0.83, 0, 0.17, 1);
+  --cf-motion-bell-drop: 1.2s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* ==============================
+   RESET & BASE
+============================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--cf-bg-deep);
+  color: var(--cf-text-primary);
+  font-family: 'Inter', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--cf-amber-primary); text-decoration: none; transition: color var(--cf-motion-fast); }
+a:hover { color: var(--cf-bull-glow); }
+
+/* ==============================
+   UTILITIES
+============================== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 64px 24px; max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-amber-primary);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+.section-title {
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--cf-text-primary);
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255,200,50,0.15);
+  padding-bottom: 12px;
+}
+.card {
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform var(--cf-motion-base), box-shadow var(--cf-motion-base);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(255,200,50,0.15);
+}
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.tag-amber { background: rgba(255,200,50,0.15); color: var(--cf-amber-primary); border: 1px solid rgba(255,200,50,0.3); }
+.tag-cyan { background: rgba(57,208,216,0.15); color: var(--cf-bull-green); border: 1px solid rgba(57,208,216,0.3); }
+.tag-red { background: rgba(239,83,80,0.15); color: var(--cf-bear-red); border: 1px solid rgba(239,83,80,0.3); }
+.tag-violet { background: rgba(184,63,255,0.15); color: var(--cf-morph-violet); border: 1px solid rgba(184,63,255,0.3); }
+.glow-amber { text-shadow: 0 0 12px var(--cf-amber-primary); }
+.glow-box { box-shadow: 0 0 24px rgba(255,200,50,0.4); }
+
+/* ==============================
+   §1 HERO
+============================== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background:
+    radial-gradient(ellipse at center, rgba(255,200,50,0.04) 0%, transparent 60%),
+    var(--cf-bg-deepest);
+  overflow: hidden;
+}
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; padding: 40px 24px; }
+.hero-title {
+  font-size: clamp(28px, 7vw, 72px);
+  font-weight: 900;
+  color: var(--cf-amber-primary);
+  text-shadow:
+    2px 0 0 rgba(239,83,80,0.6),
+    -2px 0 0 rgba(57,208,216,0.6),
+    0 0 40px rgba(255,200,50,0.5);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero-sub {
+  font-size: clamp(12px, 2.5vw, 18px);
+  color: var(--cf-text-secondary);
+  margin-top: 12px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.hero-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  letter-spacing: 0.15em;
+  margin-top: 16px;
+}
+.bell-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.bell-svg {
+  animation: bellDrop var(--cf-motion-bell-drop) infinite;
+  filter: drop-shadow(0 0 12px rgba(255,200,50,0.7));
+}
+@keyframes bellDrop {
+  0% { transform: translateY(-100px); opacity: 0; }
+  30% { opacity: 1; }
+  70% { transform: translateY(0); opacity: 1; }
+  85% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+
+/* ==============================
+   §2 MIRA 3 POSE
+============================== */
+#mira-poses { background: var(--cf-bg-deepest); }
+.pose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pose-card {
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: transform var(--cf-motion-base), box-shadow var(--cf-motion-base);
+}
+.pose-card:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,200,50,0.15); }
+.pose-svg-wrap {
+  width: 100px;
+  height: 140px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pose-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cf-amber-primary);
+  margin-bottom: 4px;
+}
+.pose-homage {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-morph-violet);
+  margin-bottom: 8px;
+}
+.pose-moves {
+  font-size: 12px;
+  color: var(--cf-text-secondary);
+  line-height: 1.5;
+}
+/* Morphing card animation */
+.pose-card.morphing-card { border-color: rgba(184,63,255,0.3); }
+.pose-card.morphing-card:hover { box-shadow: 0 0 24px rgba(184,63,255,0.3); }
+.morph-gradient-anim {
+  animation: morphGradientSweep 3s ease-in-out infinite;
+}
+@keyframes morphGradientSweep {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ==============================
+   §3 MORPH DEMO
+============================== */
+#morph-demo { background: var(--cf-bg-elevated); }
+.morph-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.morph-box {
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.morph-box-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-amber-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.morph-box-desc { font-size: 12px; color: var(--cf-text-muted); text-align: center; margin-top: 8px; }
+.candle-morph-svg { cursor: pointer; user-select: none; }
+/* Chart morph rect transitions */
+#bearRect, #bullRect {
+  transition: fill 0.6s cubic-bezier(0.65,0,0.35,1),
+              y 0.6s cubic-bezier(0.65,0,0.35,1),
+              height 0.6s cubic-bezier(0.65,0,0.35,1),
+              opacity 0.6s cubic-bezier(0.65,0,0.35,1);
+}
+.click-hint {
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+/* Character morph */
+.char-morph-wrap { position: relative; width: 120px; height: 160px; }
+#traderFigure, #fighterFigure {
+  position: absolute;
+  inset: 0;
+  transition: opacity 3s ease;
+}
+#fighterFigure { opacity: 0; }
+.char-morph-wrap:hover #traderFigure { opacity: 0; }
+.char-morph-wrap:hover #fighterFigure { opacity: 1; }
+.morph-bottom-label {
+  font-size: 12px;
+  color: var(--cf-text-secondary);
+  text-align: center;
+  border-top: 1px solid rgba(255,200,50,0.1);
+  padding-top: 12px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ==============================
+   §4 MOODBOARD GRID
+============================== */
+#moodboard { background: var(--cf-bg-deepest); }
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.mood-card {
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.12);
+  border-radius: 8px;
+  padding: 16px;
+  transition: transform var(--cf-motion-base), box-shadow var(--cf-motion-base);
+}
+.mood-card:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(255,200,50,0.15); }
+.mood-num {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.mood-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cf-amber-primary);
+  margin-bottom: 4px;
+}
+.mood-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--cf-morph-violet);
+  margin-bottom: 6px;
+}
+.mood-apply {
+  font-size: 11px;
+  color: var(--cf-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.mood-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.mood-link {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cf-bull-green);
+  border: 1px solid rgba(57,208,216,0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  transition: all var(--cf-motion-fast);
+  white-space: nowrap;
+}
+.mood-link:hover {
+  background: rgba(57,208,216,0.1);
+  color: var(--cf-bull-glow);
+}
+
+/* ==============================
+   §5 15 MOVE STORYBOARD
+============================== */
+#storyboard { background: var(--cf-bg-elevated); }
+.move-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.move-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.move-table th {
+  background: rgba(255,200,50,0.1);
+  color: var(--cf-amber-primary);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,200,50,0.2);
+  text-align: left;
+}
+.move-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--cf-text-secondary);
+  font-size: 11px;
+}
+.move-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.move-table tr:hover td { background: rgba(255,200,50,0.04); }
+.move-num { color: var(--cf-amber-primary); font-weight: 700; }
+.move-name { color: var(--cf-text-primary); font-weight: 600; }
+.morph-yes { color: var(--cf-morph-cyan); }
+.morph-no { color: var(--cf-text-muted); }
+.sacred { color: var(--cf-bull-green); font-size: 10px; }
+
+/* ==============================
+   §6 TOKENS
+============================== */
+#tokens { background: var(--cf-bg-deepest); }
+.tokens-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.token-pre {
+  background: #0D1117;
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-text-secondary);
+  line-height: 1.8;
+  overflow-x: auto;
+  white-space: pre;
+}
+.t-comment { color: var(--cf-text-muted); }
+.t-var { color: var(--cf-bull-green); }
+.t-val-amber { color: var(--cf-amber-primary); }
+.t-val-cyan { color: var(--cf-bull-green); }
+.t-val-red { color: var(--cf-bear-red); }
+.t-val-violet { color: var(--cf-morph-violet); }
+.t-val-white { color: #FFFFFF; }
+.swatches-panel { display: flex; flex-direction: column; gap: 16px; }
+.swatch-row { display: flex; align-items: center; gap: 12px; }
+.swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.swatch-info { flex: 1; }
+.swatch-name { font-size: 12px; color: var(--cf-text-primary); font-weight: 500; }
+.swatch-hex { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--cf-text-muted); }
+.font-samples {
+  margin-top: 24px;
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.12);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.font-sample-inter { font-family: 'Inter', sans-serif; font-size: 16px; color: var(--cf-amber-primary); }
+.font-sample-ko { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-size: 15px; color: var(--cf-text-secondary); }
+.font-sample-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--cf-bull-green);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* ==============================
+   §7 UX WIREFRAME
+============================== */
+#ux-wireframe { background: var(--cf-bg-elevated); }
+.wireframe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.wireframe-card {
+  background: #0D1117;
+  border: 1px solid rgba(57,208,216,0.2);
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-text-muted);
+}
+.wireframe-card-title {
+  font-size: 13px;
+  color: var(--cf-bull-green);
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wf-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.wf-block {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 8px;
+  flex: 1;
+  font-size: 10px;
+  color: var(--cf-text-muted);
+  text-align: center;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wf-block-chart { flex: 3; min-height: 120px; border-color: rgba(57,208,216,0.3); color: var(--cf-bull-green); }
+.wf-block-analysis { flex: 1.2; border-color: rgba(255,200,50,0.2); }
+.wf-block-mira { flex: 1; min-height: 100px; border-color: rgba(184,63,255,0.3); color: var(--cf-morph-violet); }
+.wf-btn-buy { background: rgba(57,208,216,0.15); border-color: var(--cf-bull-green); color: var(--cf-bull-green); flex: 1; }
+.wf-btn-sell { background: rgba(239,83,80,0.15); border-color: var(--cf-bear-red); color: var(--cf-bear-red); flex: 1; }
+.wf-hp { background: linear-gradient(90deg, var(--cf-bear-red) 70%, rgba(239,83,80,0.1) 70%); height: 8px; border-radius: 4px; margin-bottom: 8px; }
+.wf-combo { color: var(--cf-amber-primary); text-align: right; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.wf-gauge-label { font-size: 10px; color: var(--cf-text-muted); margin-bottom: 4px; }
+.wf-gauge { background: linear-gradient(90deg, var(--cf-morph-violet) 85%, rgba(184,63,255,0.1) 85%); height: 4px; border-radius: 2px; }
+.bell-transform-btn {
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(184,63,255,0.2), rgba(0,240,255,0.2));
+  border: 1px solid rgba(184,63,255,0.5);
+  border-radius: 8px;
+  padding: 14px 40px;
+  color: var(--cf-morph-cyan);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.05em;
+  transition: all var(--cf-motion-base);
+}
+.bell-transform-btn:hover {
+  background: linear-gradient(135deg, rgba(184,63,255,0.35), rgba(0,240,255,0.35));
+  box-shadow: 0 0 32px rgba(184,63,255,0.4), 0 0 32px rgba(0,240,255,0.3);
+  transform: scale(1.03);
+}
+.bell-transform-btn.active {
+  animation: bellTransformActive 3s ease-in-out;
+}
+@keyframes bellTransformActive {
+  0% { box-shadow: none; }
+  20% { box-shadow: 0 0 60px rgba(184,63,255,0.8), 0 0 60px rgba(0,240,255,0.6); }
+  50% { box-shadow: 0 0 80px rgba(255,200,50,0.7); }
+  80% { box-shadow: 0 0 40px rgba(57,208,216,0.6); }
+  100% { box-shadow: none; }
+}
+
+/* ==============================
+   §8 MOTION SIGS
+============================== */
+#motion-sigs { background: var(--cf-bg-deepest); }
+.motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.motion-box {
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.motion-box-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-amber-primary);
+  letter-spacing: 0.1em;
+}
+.bell-mini {
+  animation: bellDrop var(--cf-motion-bell-drop) infinite;
+  filter: drop-shadow(0 0 8px rgba(255,200,50,0.7));
+}
+.morph-char-box {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.morph-char-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  animation: morphCharSweep var(--cf-motion-morph-char) ease-in-out infinite;
+}
+@keyframes morphCharSweep {
+  0% { background: linear-gradient(135deg, #14191F 0%, var(--cf-amber-primary) 0%); }
+  50% { background: linear-gradient(135deg, #14191F 0%, var(--cf-morph-violet) 50%, var(--cf-morph-cyan) 100%); }
+  100% { background: linear-gradient(135deg, var(--cf-morph-cyan) 0%, var(--cf-morph-violet) 100%); }
+}
+.morph-chart-mini { cursor: pointer; }
+#miniRect {
+  transition: fill var(--cf-motion-morph-chart), y var(--cf-motion-morph-chart), height var(--cf-motion-morph-chart);
+}
+/* Effect showcases */
+.effect-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.effect-box {
+  flex: 1;
+  min-width: 140px;
+  background: var(--cf-bg-card);
+  border: 1px solid rgba(255,200,50,0.15);
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.effect-glow-demo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cf-amber-primary);
+  text-shadow: 0 0 12px var(--cf-amber-primary), 0 0 24px rgba(255,200,50,0.5);
+  margin-bottom: 8px;
+}
+.effect-chroma-demo {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-shadow:
+    2px 0 0 rgba(239,83,80,0.8),
+    -2px 0 0 rgba(57,208,216,0.8),
+    0 0 8px rgba(255,255,255,0.4);
+  margin-bottom: 8px;
+}
+.effect-vignette-demo {
+  width: 100%;
+  height: 60px;
+  border-radius: 6px;
+  background: radial-gradient(ellipse at center, rgba(255,200,50,0.15) 0%, rgba(0,0,0,0.8) 100%);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--cf-amber-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+.effect-label { font-size: 11px; color: var(--cf-text-muted); font-family: 'JetBrains Mono', monospace; }
+
+/* ==============================
+   FOOTER
+============================== */
+footer {
+  background: var(--cf-bg-deepest);
+  border-top: 1px solid rgba(255,200,50,0.1);
+  padding: 24px;
+  text-align: center;
+}
+.footer-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  letter-spacing: 0.1em;
+}
+.footer-text a { color: rgba(255,200,50,0.6); }
+
+/* ==============================
+   NAV
+============================== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,20,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,200,50,0.1);
+  padding: 10px 24px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  transition: color var(--cf-motion-fast);
+}
+nav a:hover { color: var(--cf-amber-primary); }
+
+/* ==============================
+   RESPONSIVE
+============================== */
+@media (max-width: 900px) {
+  .pose-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .mood-grid { grid-template-columns: repeat(2, 1fr); }
+  .tokens-grid { grid-template-columns: 1fr; }
+  .wireframe-grid { grid-template-columns: 1fr; }
+  .motion-grid { grid-template-columns: repeat(2, 1fr); }
+  .morph-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .pose-grid { grid-template-columns: 1fr; }
+  .mood-grid { grid-template-columns: 1fr; }
+  .motion-grid { grid-template-columns: 1fr; }
+  .section { padding: 48px 16px; }
+  .hero-title { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ==============================
+   DIVIDER
+============================== */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,200,50,0.2), transparent);
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero">§1 Hero</a>
+  <a href="#mira-poses">§2 MIRA 3 Pose</a>
+  <a href="#morph-demo">§3 Morph Demo</a>
+  <a href="#moodboard">§4 Moodboard</a>
+  <a href="#storyboard">§5 Storyboard</a>
+  <a href="#tokens">§6 Tokens</a>
+  <a href="#ux-wireframe">§7 UX Wireframe</a>
+  <a href="#motion-sigs">§8 Motion Sigs</a>
+</nav>
+
+<!-- §1 HERO -->
+<section id="hero">
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="bell-container">
+      <svg class="bell-svg" width="64" height="72" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bell body -->
+        <path d="M32 8 C18 8, 10 20, 10 34 L10 52 L54 52 L54 34 C54 20, 46 8, 32 8Z" fill="#FFC832" opacity="0.9"/>
+        <!-- Bell dome detail -->
+        <path d="M32 8 C26 8, 20 12, 17 18" stroke="#FFB000" stroke-width="2" fill="none" opacity="0.5"/>
+        <!-- Clapper mount -->
+        <rect x="28" y="4" width="8" height="6" rx="3" fill="#FFB000"/>
+        <!-- Bell bottom flare -->
+        <path d="M10 52 Q8 56 12 58 L52 58 Q56 56 54 52Z" fill="#FFB000" opacity="0.7"/>
+        <!-- Clapper -->
+        <circle cx="32" cy="62" r="5" fill="#FFC832"/>
+        <line x1="32" y1="56" x2="32" y2="64" stroke="#FFB000" stroke-width="2"/>
+        <!-- Glow ring -->
+        <ellipse cx="32" cy="52" rx="22" ry="4" fill="rgba(255,200,50,0.2)"/>
+      </svg>
+    </div>
+
+    <div class="hero-title">🕯️ CANDLEFALL · The Bell That Falls</div>
+    <div class="hero-sub">일봉이 음에서 양으로 모핑되는 순간, MIRA는 종을 친다.</div>
+
+    <div class="hero-badges">
+      <span class="tag tag-amber">Bloomberg Amber</span>
+      <span class="tag tag-cyan">Bull Cyan #39D0D8</span>
+      <span class="tag tag-red">Bear Red #EF5350</span>
+      <span class="tag tag-violet">Morph Violet #B83FFF</span>
+    </div>
+
+    <div class="hero-meta">TRADING × FIGHTING · MIRA — Market Inversion Reactive Avatar · Phase 3 Design Concept</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §2 MIRA 3 POSE -->
+<section id="mira-poses" class="section">
+  <div class="section-label">§2</div>
+  <div class="section-title">MIRA — 3 Pose States</div>
+
+  <div class="pose-grid">
+    <!-- Pose 1: Trader -->
+    <div class="pose-card">
+      <div class="pose-svg-wrap">
+        <svg width="90" height="130" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head -->
+          <circle cx="45" cy="18" r="14" fill="#FFC832" opacity="0.85"/>
+          <!-- Hair highlight -->
+          <path d="M33 12 Q45 6 57 12" stroke="#FFB000" stroke-width="2" fill="none"/>
+          <!-- Glasses -->
+          <rect x="36" y="16" width="9" height="6" rx="2" fill="none" stroke="#14191F" stroke-width="1.5"/>
+          <rect x="47" y="16" width="9" height="6" rx="2" fill="none" stroke="#14191F" stroke-width="1.5"/>
+          <line x1="45" y1="19" x2="47" y2="19" stroke="#14191F" stroke-width="1"/>
+          <!-- Body suit jacket -->
+          <path d="M32 32 L28 72 L62 72 L58 32 Q45 28 32 32Z" fill="#1a1a2e"/>
+          <!-- Tie / shirt detail -->
+          <path d="M43 35 L45 55 L47 35 Q45 33 43 35Z" fill="#FFC832" opacity="0.6"/>
+          <!-- Lapels -->
+          <path d="M32 32 L38 46 L45 38 L52 46 L58 32" stroke="#2a2a4e" stroke-width="1.5" fill="none"/>
+          <!-- Arms -->
+          <path d="M28 40 L18 56 L22 58 L31 44" fill="#1a1a2e"/>
+          <path d="M62 40 L72 56 L68 58 L59 44" fill="#1a1a2e"/>
+          <!-- Laptop -->
+          <rect x="16" y="54" width="22" height="14" rx="2" fill="#14191F" stroke="#FFC832" stroke-width="1"/>
+          <rect x="17" y="55" width="20" height="11" rx="1" fill="#0D1117"/>
+          <!-- Screen glow -->
+          <rect x="18" y="56" width="18" height="9" rx="1" fill="none" stroke="#39D0D8" stroke-width="0.5" opacity="0.6"/>
+          <line x1="19" y1="59" x2="34" y2="59" stroke="#39D0D8" stroke-width="0.5" opacity="0.5"/>
+          <line x1="19" y1="61" x2="31" y2="61" stroke="#FFC832" stroke-width="0.5" opacity="0.5"/>
+          <!-- Legs -->
+          <path d="M36 72 L33 105 L40 105 L45 85 L50 105 L57 105 L54 72Z" fill="#1a1a2e"/>
+          <!-- Shoes -->
+          <ellipse cx="36" cy="108" rx="7" ry="4" fill="#0D1117"/>
+          <ellipse cx="54" cy="108" rx="7" ry="4" fill="#0D1117"/>
+        </svg>
+      </div>
+      <div class="pose-label">Trader</div>
+      <div class="pose-homage">Joker (P5) + NieR 2B</div>
+      <div class="pose-moves">DCA Splash · HODL Guard<br>Buy Order · Sell Order · Profit Take</div>
+    </div>
+
+    <!-- Pose 2: Morphing -->
+    <div class="pose-card morphing-card">
+      <div class="pose-svg-wrap">
+        <svg class="morph-gradient-anim" width="90" height="130" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="morphBodyGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FFC832"/>
+              <stop offset="50%" stop-color="#B83FFF"/>
+              <stop offset="100%" stop-color="#00F0FF"/>
+            </linearGradient>
+            <linearGradient id="morphCoatGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1a1a2e"/>
+              <stop offset="100%" stop-color="#2d0050"/>
+            </linearGradient>
+          </defs>
+          <!-- Head transitioning -->
+          <circle cx="45" cy="18" r="14" fill="url(#morphBodyGrad)" opacity="0.9"/>
+          <!-- Half blindfold appearing -->
+          <rect x="33" y="15" width="24" height="6" rx="3" fill="#0D1117" opacity="0.7"/>
+          <!-- Chart line on face (mask appearing) -->
+          <path d="M36 18 L40 15 L44 19 L48 16 L52 18" stroke="#00F0FF" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <!-- Body mid-morph -->
+          <path d="M30 32 L26 72 L64 72 L60 32 Q45 28 30 32Z" fill="url(#morphCoatGrad)"/>
+          <!-- Morph particle trails -->
+          <circle cx="25" cy="45" r="2" fill="#B83FFF" opacity="0.7"/>
+          <circle cx="22" cy="52" r="1.5" fill="#00F0FF" opacity="0.5"/>
+          <circle cx="65" cy="40" r="2" fill="#B83FFF" opacity="0.7"/>
+          <circle cx="68" cy="55" r="1.5" fill="#00F0FF" opacity="0.5"/>
+          <!-- Transitioning hair -->
+          <path d="M33 10 Q45 4 57 10 L60 18 Q45 8 30 18Z" fill="#B83FFF" opacity="0.4"/>
+          <!-- Arms mid-change -->
+          <path d="M26 40 L16 58 L20 60 L29 44" fill="url(#morphCoatGrad)"/>
+          <path d="M64 40 L74 58 L70 60 L61 44" fill="url(#morphCoatGrad)"/>
+          <!-- Weapon transitioning: laptop→umbrella -->
+          <ellipse cx="20" cy="62" rx="5" ry="2" fill="#B83FFF" opacity="0.6"/>
+          <line x1="20" y1="56" x2="20" y2="68" stroke="#00F0FF" stroke-width="1.5"/>
+          <!-- Legs -->
+          <path d="M35 72 L32 105 L39 105 L45 85 L51 105 L58 105 L55 72Z" fill="url(#morphCoatGrad)"/>
+          <ellipse cx="35" cy="108" rx="7" ry="4" fill="#0D1117"/>
+          <ellipse cx="55" cy="108" rx="7" ry="4" fill="#0D1117"/>
+          <!-- Morph glow ring -->
+          <ellipse cx="45" cy="70" rx="25" ry="6" fill="none" stroke="url(#morphBodyGrad)" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="pose-label" style="color:var(--cf-morph-violet)">Morphing</div>
+      <div class="pose-homage">Bell Drop 3.0s Sequence</div>
+      <div class="pose-moves">0.0s Laptop→Umbrella<br>1.5s Suit→Trenchcoat<br>2.5s Blindfold ON</div>
+    </div>
+
+    <!-- Pose 3: Fighter -->
+    <div class="pose-card">
+      <div class="pose-svg-wrap">
+        <svg width="90" height="130" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Head -->
+          <circle cx="45" cy="18" r="14" fill="#FFC832" opacity="0.85"/>
+          <!-- Blindfold -->
+          <rect x="32" y="14" width="26" height="8" rx="4" fill="#0D1117"/>
+          <!-- Chart line mask graphic -->
+          <path d="M34 18 L38 15 L42 20 L46 16 L50 18 L54 15" stroke="#00F0FF" stroke-width="1.5" fill="none"/>
+          <!-- Hair flowing -->
+          <path d="M32 10 Q25 15 22 28" stroke="#FFC832" stroke-width="2.5" fill="none" opacity="0.7"/>
+          <path d="M58 10 Q62 18 64 26" stroke="#FFC832" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <!-- Trenchcoat body -->
+          <path d="M30 32 L22 75 L68 75 L60 32 Q45 28 30 32Z" fill="#1a0a2e"/>
+          <!-- Coat collar / epaulettes -->
+          <path d="M30 32 L35 38 L45 34 L55 38 L60 32" stroke="#B83FFF" stroke-width="1.5" fill="none" opacity="0.6"/>
+          <rect x="22" y="32" width="8" height="4" rx="1" fill="#B83FFF" opacity="0.5"/>
+          <rect x="60" y="32" width="8" height="4" rx="1" fill="#B83FFF" opacity="0.5"/>
+          <!-- Arms combat stance: right arm raised -->
+          <path d="M30 38 L16 28 L14 32 L27 44" fill="#1a0a2e"/>
+          <path d="M60 40 L72 55 L68 58 L58 44" fill="#1a0a2e"/>
+          <!-- Umbrella / Krieg-Candle weapon -->
+          <line x1="14" y1="14" x2="14" y2="46" stroke="#FFC832" stroke-width="2.5"/>
+          <!-- Umbrella open, bull beam -->
+          <path d="M14 14 Q0 20 4 28 Q8 22 14 20 Q20 22 24 28 Q28 20 14 14Z" fill="#39D0D8" opacity="0.7"/>
+          <!-- Bull beam glow -->
+          <line x1="14" y1="8" x2="14" y2="14" stroke="#5EFAFF" stroke-width="3" opacity="0.8"/>
+          <!-- Coat bottom flare: combat stance -->
+          <path d="M22 75 L18 95 L28 95 L37 80 L45 75 L53 80 L62 95 L72 95 L68 75Z" fill="#1a0a2e"/>
+          <!-- Boots -->
+          <rect x="18" y="93" width="14" height="10" rx="3" fill="#0D1117"/>
+          <rect x="58" y="93" width="14" height="10" rx="3" fill="#0D1117"/>
+        </svg>
+      </div>
+      <div class="pose-label" style="color:var(--cf-bear-red)">Fighter</div>
+      <div class="pose-homage">Parasoul + NieR 2B + Cammy</div>
+      <div class="pose-moves">Bell Reversal · Volatility Spike<br>Stop Loss Dash · Jab/Kick/Heavy</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §3 MORPH DEMO -->
+<section id="morph-demo" class="section">
+  <div class="section-label">§3</div>
+  <div class="section-title">Morph Demo — Live Working</div>
+
+  <div class="morph-grid">
+    <!-- Chart Morph -->
+    <div class="morph-box">
+      <div class="morph-box-label">Chart Morph — 0.6s</div>
+      <svg class="candle-morph-svg" id="chartMorphSvg" width="180" height="140" viewBox="0 0 180 140"
+           onclick="toggleChartMorph()" title="Click to toggle Bear→Bull morph">
+        <!-- Axis -->
+        <line x1="20" y1="10" x2="20" y2="130" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <line x1="20" y1="130" x2="160" y2="130" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+        <!-- Price labels -->
+        <text x="5" y="40" fill="rgba(255,255,255,0.3)" font-size="9" font-family="JetBrains Mono">H</text>
+        <text x="5" y="70" fill="rgba(255,255,255,0.3)" font-size="9" font-family="JetBrains Mono">O</text>
+        <text x="5" y="100" fill="rgba(255,255,255,0.3)" font-size="9" font-family="JetBrains Mono">C</text>
+        <!-- Background candles (context) -->
+        <rect x="35" y="30" width="14" height="55" rx="1" fill="#39D0D8" opacity="0.3"/>
+        <line x1="42" y1="20" x2="42" y2="30" stroke="#39D0D8" stroke-width="1.5" opacity="0.3"/>
+        <line x1="42" y1="85" x2="42" y2="95" stroke="#39D0D8" stroke-width="1.5" opacity="0.3"/>
+        <rect x="60" y="50" width="14" height="40" rx="1" fill="#EF5350" opacity="0.3"/>
+        <line x1="67" y1="38" x2="67" y2="50" stroke="#EF5350" stroke-width="1.5" opacity="0.3"/>
+        <line x1="67" y1="90" x2="67" y2="105" stroke="#EF5350" stroke-width="1.5" opacity="0.3"/>
+        <!-- Wicks for main candle -->
+        <line id="wick-top" x1="100" y1="18" x2="100" y2="38" stroke="#EF5350" stroke-width="2" opacity="0.8"/>
+        <line id="wick-bot" x1="100" y1="108" x2="100" y2="120" stroke="#EF5350" stroke-width="2" opacity="0.8"/>
+        <!-- Main candle: morphable -->
+        <rect id="bearRect" x="86" y="38" width="28" height="70" rx="2" fill="#EF5350"/>
+        <!-- Glow overlay -->
+        <rect id="glowRect" x="86" y="38" width="28" height="70" rx="2" fill="none" stroke="#EF5350" stroke-width="1" opacity="0.4" id="candleGlow"/>
+      </svg>
+      <div class="click-hint">← Click candle to morph Bear→Bull</div>
+    </div>
+
+    <!-- Character Morph -->
+    <div class="morph-box">
+      <div class="morph-box-label">Character Morph — 3.0s</div>
+      <div class="char-morph-wrap" title="Hover to morph Trader→Fighter">
+        <!-- Trader figure -->
+        <svg id="traderFigure" width="120" height="160" viewBox="0 0 90 130">
+          <circle cx="45" cy="18" r="14" fill="#FFC832" opacity="0.85"/>
+          <rect x="36" y="16" width="9" height="6" rx="2" fill="none" stroke="#14191F" stroke-width="1.5"/>
+          <rect x="47" y="16" width="9" height="6" rx="2" fill="none" stroke="#14191F" stroke-width="1.5"/>
+          <path d="M32 32 L28 72 L62 72 L58 32 Q45 28 32 32Z" fill="#1a1a2e"/>
+          <path d="M43 35 L45 55 L47 35 Q45 33 43 35Z" fill="#FFC832" opacity="0.6"/>
+          <path d="M28 40 L18 56 L22 58 L31 44" fill="#1a1a2e"/>
+          <path d="M62 40 L72 56 L68 58 L59 44" fill="#1a1a2e"/>
+          <rect x="16" y="54" width="22" height="14" rx="2" fill="#14191F" stroke="#FFC832" stroke-width="1"/>
+          <rect x="17" y="55" width="20" height="11" rx="1" fill="#0D1117"/>
+          <path d="M36 72 L33 105 L40 105 L45 85 L50 105 L57 105 L54 72Z" fill="#1a1a2e"/>
+          <ellipse cx="36" cy="108" rx="7" ry="4" fill="#0D1117"/>
+          <ellipse cx="54" cy="108" rx="7" ry="4" fill="#0D1117"/>
+        </svg>
+        <!-- Fighter figure -->
+        <svg id="fighterFigure" width="120" height="160" viewBox="0 0 90 130">
+          <circle cx="45" cy="18" r="14" fill="#FFC832" opacity="0.85"/>
+          <rect x="32" y="14" width="26" height="8" rx="4" fill="#0D1117"/>
+          <path d="M34 18 L38 15 L42 20 L46 16 L50 18 L54 15" stroke="#00F0FF" stroke-width="1.5" fill="none"/>
+          <path d="M30 32 L22 75 L68 75 L60 32 Q45 28 30 32Z" fill="#1a0a2e"/>
+          <path d="M30 38 L16 28 L14 32 L27 44" fill="#1a0a2e"/>
+          <path d="M60 40 L72 55 L68 58 L58 44" fill="#1a0a2e"/>
+          <line x1="14" y1="14" x2="14" y2="46" stroke="#FFC832" stroke-width="2.5"/>
+          <path d="M14 14 Q0 20 4 28 Q8 22 14 20 Q20 22 24 28 Q28 20 14 14Z" fill="#39D0D8" opacity="0.7"/>
+          <line x1="14" y1="8" x2="14" y2="14" stroke="#5EFAFF" stroke-width="3" opacity="0.8"/>
+          <path d="M22 75 L18 95 L28 95 L37 80 L45 75 L53 80 L62 95 L72 95 L68 75Z" fill="#1a0a2e"/>
+          <rect x="18" y="93" width="14" height="10" rx="3" fill="#0D1117"/>
+          <rect x="58" y="93" width="14" height="10" rx="3" fill="#0D1117"/>
+        </svg>
+      </div>
+      <div class="click-hint">← Hover figure to morph Trader→Fighter</div>
+    </div>
+  </div>
+  <div class="morph-bottom-label">Chart Morph 0.6s · Character Morph 3.0s — Game Signature</div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §4 MOODBOARD GRID -->
+<section id="moodboard" class="section">
+  <div class="section-label">§4</div>
+  <div class="section-title">오마쥬 무드보드 — 12 Elements</div>
+
+  <div class="mood-grid">
+    <div class="mood-card">
+      <div class="mood-num">1️⃣</div>
+      <div class="mood-name">이중 인격 + 가면</div>
+      <div class="mood-source">Persona 5 — Joker</div>
+      <div class="mood-apply">Trader↔Combat 모핑. 가면 ON/OFF = 인격 전환. 까마귀 모티프 + 차트 라인 그래픽.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/Joker_(Persona)" target="_blank">Wikipedia</a>
+        <a class="mood-link" href="https://megamitensei.fandom.com/wiki/Mask" target="_blank">Fandom</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">2️⃣</div>
+      <div class="mood-name">우산 무기 (Krieg-Candle)</div>
+      <div class="mood-source">Skullgirls — Parasoul</div>
+      <div class="mood-apply">접힌 노트북 → 봉 모양 빔 우산. Buy Order 시 펼침 + 호박색 빔 양봉 형태.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://skullgirls.fandom.com/wiki/Parasoul" target="_blank">Fandom</a>
+        <a class="mood-link" href="https://www.fightersgeneration.com/characters4/parasoul.html" target="_blank">FightersGen</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">3️⃣</div>
+      <div class="mood-name">블라인드폴드 + 흑백</div>
+      <div class="mood-source">NieR Automata — 2B</div>
+      <div class="mood-apply">콤뱃 모드 블라인드폴드. "종소리만 듣는다." 시각 차단 = 청각 동기 강조.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/2B_(Nier:_Automata)" target="_blank">Wikipedia</a>
+        <a class="mood-link" href="https://blog.playstation.com/2017/04/03/an-exclusive-look-at-the-creation-of-2b-by-nier-automatas-character-modeller/" target="_blank">PS Blog</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">4️⃣</div>
+      <div class="mood-name">군복 + 코트 실루엣</div>
+      <div class="mood-source">Parasoul Black Egrets</div>
+      <div class="mood-apply">트레이더 정장 → 콤뱃 트렌치코트 3초 모핑. Parasoul 견장 + 트레이더 라펠 결합.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://skullgirls.fandom.com/wiki/Parasoul" target="_blank">Fandom</a>
+        <a class="mood-link" href="https://www.giantbomb.com/parasoul/3005-20764/" target="_blank">GiantBomb</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">5️⃣</div>
+      <div class="mood-name">카운터 + 차지 (Stop Loss)</div>
+      <div class="mood-source">Street Fighter — Guile + Cammy</div>
+      <div class="mood-apply">Guile 차지 → "분석 차지 후 매수". Cammy 대시 → Stop Loss Dash (무적 프레임).</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://streetfighter.fandom.com/wiki/Cammy" target="_blank">SF Wiki</a>
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/Cammy" target="_blank">Wikipedia</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">6️⃣</div>
+      <div class="mood-name">날렵한 킥 (Volatility Spike)</div>
+      <div class="mood-source">Cammy + Juri Han</div>
+      <div class="mood-apply">Cammy 캐넌 스파이크 → Volatility Spike Kick. Juri 비대칭 → MIRA 한쪽 노출 어깨.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://streetfighter.fandom.com/wiki/Juri_Han" target="_blank">SF Wiki</a>
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/Juri_(Street_Fighter)" target="_blank">Wikipedia</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">7️⃣</div>
+      <div class="mood-name">다크 톤 + 네온 액센트</div>
+      <div class="mood-source">Hyper Light Drifter</div>
+      <div class="mood-apply">HLD 핑크/시안 → MIRA 호박/시안/레드. Chromatic aberration + 비넷 효과.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/Hyper_Light_Drifter" target="_blank">Wikipedia</a>
+        <a class="mood-link" href="https://www.gamedeveloper.com/business/the-ultra-modern-stylings-of-hyper-light-drifter" target="_blank">GameDev</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">8️⃣</div>
+      <div class="mood-name">음악-시각 동기</div>
+      <div class="mood-source">Tetris Effect (Mizuguchi)</div>
+      <div class="mood-apply">매 무브 = 음악 노트 트리거. BPM 88(trade)/132(combat). Bell 가사 = 차트 모핑 트리거.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://www.nintendolife.com/reviews/switch-eshop/tetris-effect-connected" target="_blank">NintendoLife</a>
+        <a class="mood-link" href="https://www.engadget.com/2018-11-21-tetris-effect-ps4-synesthesia-psvr.html" target="_blank">Engadget</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">9️⃣</div>
+      <div class="mood-name">그래플러 (Bell Reversal)</div>
+      <div class="mood-source">Skullgirls — Cerebella</div>
+      <div class="mood-apply">Bell Reversal 피니시 = 종이 MIRA 머리 위 거대화. Vice-Versa hands 오마쥬.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://skullgirls.fandom.com/wiki/Cerebella" target="_blank">Fandom</a>
+        <a class="mood-link" href="https://skullgirls.com/characters/cerebella/" target="_blank">Official</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">🔟</div>
+      <div class="mood-name">군복 + 베레모</div>
+      <div class="mood-source">Street Fighter — Cammy (Delta Red)</div>
+      <div class="mood-apply">콤뱃 모드 호박색 베레모 추가. Bloomberg Terminal 로고 오마쥬. 군복 컬러 매스.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://www.streetfighter.com/6/en-us/character/cammy/outfit" target="_blank">Official</a>
+        <a class="mood-link" href="https://vgcdatabase.fandom.com/wiki/Cammy" target="_blank">Fandom</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">1️⃣1️⃣</div>
+      <div class="mood-name">창/봉 무기 (Outseal)</div>
+      <div class="mood-source">BlazBlue — Mai Natsume</div>
+      <div class="mood-apply">우산 펼치면 봉 모양 빔. 양봉 = 시안 에너지, 음봉 = 적색. Gae Bolg 스타일 공격.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://blazblue.fandom.com/wiki/Mai_Natsume" target="_blank">Fandom</a>
+        <a class="mood-link" href="https://www.fightersgeneration.com/characters5/mai-natsume.html" target="_blank">FightersGen</a>
+      </div>
+    </div>
+    <div class="mood-card">
+      <div class="mood-num">1️⃣2️⃣</div>
+      <div class="mood-name">종 모티프 (Bell Drop)</div>
+      <div class="mood-source">Bloodborne + Persona 5 + Inception</div>
+      <div class="mood-apply">매일 15:30 종 슬로우모션 낙하 = 인격 전환. 1.2s bell-drop 모션 토큰.</div>
+      <div class="mood-links">
+        <a class="mood-link" href="https://skullgirls.fandom.com/wiki/Parasoul" target="_blank">Bell Ref</a>
+        <a class="mood-link" href="https://en.wikipedia.org/wiki/Bloodborne" target="_blank">Bloodborne</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §5 15 MOVE STORYBOARD -->
+<section id="storyboard" class="section">
+  <div class="section-label">§5</div>
+  <div class="section-title">15 Move Storyboard — MIRA Complete Moveset</div>
+
+  <div class="move-table-wrap">
+    <table class="move-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>무브</th>
+          <th>트레이딩 의미</th>
+          <th>격투 동작</th>
+          <th>Sacred Zone</th>
+          <th>모핑</th>
+          <th>오마쥬</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="move-num">01</td>
+          <td class="move-name">Buy Order</td>
+          <td>매수</td>
+          <td>어퍼컷</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Candle Morph</td>
+          <td>Joker + Parasoul</td>
+        </tr>
+        <tr>
+          <td class="move-num">02</td>
+          <td class="move-name">Sell Order</td>
+          <td>매도</td>
+          <td>카운터 공격</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Candle Morph</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="move-num">03</td>
+          <td class="move-name">DCA Splash</td>
+          <td>분할 매수</td>
+          <td>스플래시 콤보</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Multi-Candle</td>
+          <td>Cerebella 그래플</td>
+        </tr>
+        <tr>
+          <td class="move-num">04</td>
+          <td class="move-name">Stop Loss Dash</td>
+          <td>손절</td>
+          <td>회피 대시 (무적)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>Cammy Spin Knuckle</td>
+        </tr>
+        <tr>
+          <td class="move-num">05</td>
+          <td class="move-name">HODL Guard</td>
+          <td>보유</td>
+          <td>가드 (시간 가속)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>NieR 2B Defend</td>
+        </tr>
+        <tr>
+          <td class="move-num">06</td>
+          <td class="move-name">Profit Take</td>
+          <td>익절</td>
+          <td>피니시 (날아감)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Candle Finish</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="move-num">07</td>
+          <td class="move-name">Jab</td>
+          <td>—</td>
+          <td>속공 (빠른 펀치)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>Street Fighter 기본</td>
+        </tr>
+        <tr>
+          <td class="move-num">08</td>
+          <td class="move-name">Kick</td>
+          <td>—</td>
+          <td>회전 킥</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>Cammy / Juri</td>
+        </tr>
+        <tr>
+          <td class="move-num">09</td>
+          <td class="move-name">Heavy</td>
+          <td>—</td>
+          <td>강타 (넉백)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="move-num">10</td>
+          <td class="move-name">Crouch Sweep</td>
+          <td>—</td>
+          <td>하단 쓸기</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>SF 하단 공격</td>
+        </tr>
+        <tr>
+          <td class="move-num">11</td>
+          <td class="move-name">Lunch Hour Frenzy</td>
+          <td>12시 변동성</td>
+          <td>광폭 모드 (버프)</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>시간 메커닉</td>
+        </tr>
+        <tr>
+          <td class="move-num">12</td>
+          <td class="move-name">Bell Reversal</td>
+          <td>장 마감 (15:30)</td>
+          <td>차트 뒤집기 피니시</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Full Morph</td>
+          <td>Bloodborne Bell</td>
+        </tr>
+        <tr>
+          <td class="move-num">13</td>
+          <td class="move-name">Year-End Bonus</td>
+          <td>연결산 (365일)</td>
+          <td>시네마틱 피니시</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-yes">✅ Dual Morph</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="move-num">14</td>
+          <td class="move-name">Volatility Spike Kick</td>
+          <td>변동성 급등</td>
+          <td>캐넌 스파이크 변형</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>Juri Han</td>
+        </tr>
+        <tr>
+          <td class="move-num">15</td>
+          <td class="move-name">Cancel Combo</td>
+          <td>콤보 연결</td>
+          <td>Cancel Window 활용</td>
+          <td class="sacred">S0 불변</td>
+          <td class="morph-no">—</td>
+          <td>Tetris Effect BPM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §6 TOKENS -->
+<section id="tokens" class="section">
+  <div class="section-label">§6</div>
+  <div class="section-title">Design Tokens — Bloomberg Amber Play</div>
+
+  <div class="tokens-grid">
+    <!-- CSS Variables pre block -->
+    <div>
+      <pre class="token-pre"><span class="t-comment">/* Bloomberg Amber Play ベース */</span>
+<span class="t-var">--cf-bg-deepest</span>: <span class="t-val-amber">#050810</span>;      <span class="t-comment">/* 밤하늘 */</span>
+<span class="t-var">--cf-bg-deep</span>: <span class="t-val-amber">#0A0E14</span>;         <span class="t-comment">/* 메인 BG */</span>
+<span class="t-var">--cf-bg-elevated</span>: <span class="t-val-amber">#14191F</span>;     <span class="t-comment">/* 카드 BG */</span>
+<span class="t-var">--cf-amber-primary</span>: <span class="t-val-amber">#FFC832</span>;   <span class="t-comment">/* 호박 메인 */</span>
+<span class="t-var">--cf-amber-glow</span>: <span class="t-val-amber">#FFB000</span>;      <span class="t-comment">/* 호박 글로우 */</span>
+
+<span class="t-comment">/* 트레이딩 시그널 */</span>
+<span class="t-var">--cf-bull-green</span>: <span class="t-val-cyan">#39D0D8</span>;      <span class="t-comment">/* 양봉 시안 */</span>
+<span class="t-var">--cf-bull-glow</span>: <span class="t-val-cyan">#5EFAFF</span>;       <span class="t-comment">/* 양봉 글로우 */</span>
+<span class="t-var">--cf-bear-red</span>: <span class="t-val-red">#EF5350</span>;        <span class="t-comment">/* 음봉 적 */</span>
+<span class="t-var">--cf-bear-glow</span>: <span class="t-val-red">#FF6B6B</span>;       <span class="t-comment">/* 음봉 글로우 */</span>
+
+<span class="t-comment">/* 모핑 액센트 (Hyper Light 오마쥬) */</span>
+<span class="t-var">--cf-morph-violet</span>: <span class="t-val-violet">#B83FFF</span>;    <span class="t-comment">/* 모핑 트레일 */</span>
+<span class="t-var">--cf-morph-cyan</span>: <span class="t-val-cyan">#00F0FF</span>;      <span class="t-comment">/* 모핑 글로우 */</span>
+
+<span class="t-comment">/* 텍스트 */</span>
+<span class="t-var">--cf-text-primary</span>: <span class="t-val-white">#FFFFFF</span>;
+<span class="t-var">--cf-text-secondary</span>: rgba(255,255,255,0.65);
+<span class="t-var">--cf-text-muted</span>: rgba(255,255,255,0.35);
+
+<span class="t-comment">/* 모션 토큰 */</span>
+<span class="t-var">--cf-motion-fast</span>: 0.15s cubic-bezier(0.4,0,0.2,1);
+<span class="t-var">--cf-motion-base</span>: 0.3s cubic-bezier(0.4,0,0.2,1);
+<span class="t-var">--cf-motion-morph-chart</span>: 0.6s cubic-bezier(0.65,0,0.35,1);
+<span class="t-var">--cf-motion-morph-char</span>: 3s cubic-bezier(0.83,0,0.17,1);
+<span class="t-var">--cf-motion-bell-drop</span>: 1.2s cubic-bezier(0.55,0,0.1,1);</pre>
+
+      <div class="font-samples">
+        <div class="font-sample-inter">MIRA wakes up. The Bell tolls.</div>
+        <div class="font-sample-ko">일봉이 떨어진다. 종이 울린다.</div>
+        <div class="font-sample-mono">100,250.50  +2.34%  9.5ms</div>
+      </div>
+    </div>
+
+    <!-- Color swatches -->
+    <div class="swatches-panel">
+      <div class="swatch-row">
+        <div class="swatch" style="background:#0A0E14;"></div>
+        <div class="swatch-info"><div class="swatch-name">BG Deep</div><div class="swatch-hex">#0A0E14</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#14191F;"></div>
+        <div class="swatch-info"><div class="swatch-name">BG Elevated</div><div class="swatch-hex">#14191F</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#FFC832; box-shadow: 0 0 12px rgba(255,200,50,0.6);"></div>
+        <div class="swatch-info"><div class="swatch-name">Amber Primary</div><div class="swatch-hex">#FFC832</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#FFB000;"></div>
+        <div class="swatch-info"><div class="swatch-name">Amber Glow</div><div class="swatch-hex">#FFB000</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#39D0D8; box-shadow: 0 0 12px rgba(57,208,216,0.5);"></div>
+        <div class="swatch-info"><div class="swatch-name">Bull Cyan</div><div class="swatch-hex">#39D0D8</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#5EFAFF;"></div>
+        <div class="swatch-info"><div class="swatch-name">Bull Glow</div><div class="swatch-hex">#5EFAFF</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#EF5350; box-shadow: 0 0 12px rgba(239,83,80,0.5);"></div>
+        <div class="swatch-info"><div class="swatch-name">Bear Red</div><div class="swatch-hex">#EF5350</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#FF6B6B;"></div>
+        <div class="swatch-info"><div class="swatch-name">Bear Glow</div><div class="swatch-hex">#FF6B6B</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#B83FFF; box-shadow: 0 0 12px rgba(184,63,255,0.5);"></div>
+        <div class="swatch-info"><div class="swatch-name">Morph Violet</div><div class="swatch-hex">#B83FFF</div></div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#00F0FF;"></div>
+        <div class="swatch-info"><div class="swatch-name">Morph Cyan</div><div class="swatch-hex">#00F0FF</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §7 UX WIREFRAME -->
+<section id="ux-wireframe" class="section">
+  <div class="section-label">§7</div>
+  <div class="section-title">UX Wireframe — Trade Mode ↔ Combat Mode</div>
+
+  <div class="wireframe-grid">
+    <!-- Trade Mode -->
+    <div class="wireframe-card">
+      <div class="wireframe-card-title">📊 Trade Mode</div>
+      <!-- Chart + Analysis panel -->
+      <div class="wf-row">
+        <div class="wf-block wf-block-chart">CHART AREA<br><span style="font-size:9px;opacity:0.5">LWC Candlestick<br>PIXI Overlay</span></div>
+        <div class="wf-block wf-block-analysis" style="flex-direction:column;gap:6px;font-size:9px;min-height:120px;">
+          <div style="color:var(--cf-amber-primary);">ANALYSIS</div>
+          <div>BTC/USDT</div>
+          <div style="color:var(--cf-bull-green);">+2.34%</div>
+          <div>Vol: 1.2M</div>
+          <div style="color:var(--cf-text-muted);">RSI 54</div>
+        </div>
+      </div>
+      <!-- DCA Slider -->
+      <div class="wf-block" style="flex-direction:column;gap:4px;min-height:28px;align-items:flex-start;padding:8px;">
+        <span style="font-size:9px;color:var(--cf-text-muted);">DCA AMOUNT ───────────●──── 1.0×</span>
+      </div>
+      <!-- Buy/Sell buttons -->
+      <div class="wf-row" style="margin-top:8px;">
+        <div class="wf-block wf-btn-buy">▲ BUY<br>어퍼컷</div>
+        <div class="wf-block wf-btn-sell">▼ SELL<br>카운터</div>
+      </div>
+      <div style="font-size:9px;color:var(--cf-text-muted);margin-top:6px;font-family:'JetBrains Mono',monospace;">BPM: 88 · HODL Guard: hold → block</div>
+    </div>
+
+    <!-- Combat Mode -->
+    <div class="wireframe-card" style="border-color:rgba(184,63,255,0.2);">
+      <div class="wireframe-card-title" style="color:var(--cf-morph-violet);">⚔️ Combat Mode</div>
+      <!-- Mini chart + MIRA figure -->
+      <div class="wf-row">
+        <div class="wf-block wf-block-chart" style="min-height:60px;flex:2;border-color:rgba(239,83,80,0.3);color:var(--cf-bear-red);">CHART (mini)<br><span style="font-size:9px;">BEAR 음봉 진행중</span></div>
+      </div>
+      <!-- MIRA Center -->
+      <div class="wf-row" style="justify-content:center;">
+        <div class="wf-block wf-block-mira" style="min-height:80px;">MIRA<br>REVERSAL<br><span style="font-size:9px;">Blindfold ON</span></div>
+      </div>
+      <!-- HP Bar -->
+      <div style="font-size:9px;color:var(--cf-text-muted);margin-bottom:4px;font-family:'JetBrains Mono',monospace;">HP ████████░░ 82%</div>
+      <div class="wf-hp"></div>
+      <!-- Combo counter -->
+      <div class="wf-combo">COMBO ×7</div>
+      <!-- 16ms gauge -->
+      <div class="wf-gauge-label">16ms FRAME GATE</div>
+      <div class="wf-gauge"></div>
+      <div style="font-size:9px;color:var(--cf-text-muted);margin-top:4px;font-family:'JetBrains Mono',monospace;">BPM: 132 · Bell Drop: 15:30 KST</div>
+    </div>
+  </div>
+
+  <!-- Bell Transform CTA -->
+  <button class="bell-transform-btn" id="bellTransformBtn" onclick="triggerBellTransform()">
+    🔔 BELL DROP — Transform
+  </button>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- §8 MOTION SIGS -->
+<section id="motion-sigs" class="section">
+  <div class="section-label">§8</div>
+  <div class="section-title">Motion Signatures — Game Effects</div>
+
+  <div class="motion-grid">
+    <!-- Bell drop demo -->
+    <div class="motion-box">
+      <div class="motion-box-label">Bell Drop · 1.2s</div>
+      <svg class="bell-mini" width="48" height="56" viewBox="0 0 64 72">
+        <path d="M32 8 C18 8, 10 20, 10 34 L10 52 L54 52 L54 34 C54 20, 46 8, 32 8Z" fill="#FFC832" opacity="0.9"/>
+        <rect x="28" y="4" width="8" height="6" rx="3" fill="#FFB000"/>
+        <path d="M10 52 Q8 56 12 58 L52 58 Q56 56 54 52Z" fill="#FFB000" opacity="0.7"/>
+        <circle cx="32" cy="62" r="5" fill="#FFC832"/>
+        <line x1="32" y1="56" x2="32" y2="64" stroke="#FFB000" stroke-width="2"/>
+      </svg>
+      <div style="font-size:10px;color:var(--cf-text-muted);font-family:'JetBrains Mono',monospace;">
+        cubic-bezier(0.55,0,0.1,1)<br>translateY -100px → 0<br>infinite loop
+      </div>
+    </div>
+
+    <!-- Morph char demo -->
+    <div class="motion-box">
+      <div class="motion-box-label">Morph Character · 3.0s</div>
+      <div class="morph-char-box">
+        <div class="morph-char-inner"></div>
+      </div>
+      <div style="font-size:10px;color:var(--cf-text-muted);font-family:'JetBrains Mono',monospace;">
+        cubic-bezier(0.83,0,0.17,1)<br>Amber → Violet → Cyan<br>gradient sweep
+      </div>
+    </div>
+
+    <!-- Morph chart demo -->
+    <div class="motion-box">
+      <div class="motion-box-label">Morph Chart · 0.6s</div>
+      <svg class="morph-chart-mini" width="80" height="100" viewBox="0 0 80 100"
+           onclick="toggleMiniMorph()" title="Click">
+        <line x1="40" y1="5" x2="40" y2="20" stroke="#EF5350" stroke-width="2"/>
+        <rect id="miniRect" x="25" y="20" width="30" height="60" rx="2" fill="#EF5350"/>
+        <line x1="40" y1="80" x2="40" y2="90" stroke="#EF5350" stroke-width="2"/>
+      </svg>
+      <div style="font-size:10px;color:var(--cf-text-muted);font-family:'JetBrains Mono',monospace;">
+        cubic-bezier(0.65,0,0.35,1)<br>Bear → Bull · fill + y + h<br>click to toggle
+      </div>
+    </div>
+  </div>
+
+  <!-- Effect showcases -->
+  <div class="effect-row">
+    <div class="effect-box">
+      <div class="effect-glow-demo">MIRA</div>
+      <div class="effect-label">Amber Glow<br>text-shadow 0 0 12px</div>
+    </div>
+    <div class="effect-box">
+      <div class="effect-chroma-demo">CANDLEFALL</div>
+      <div class="effect-label">Chromatic Aberration<br>red +2px / cyan -2px offset</div>
+    </div>
+    <div class="effect-box">
+      <div class="effect-vignette-demo">VIGNETTE</div>
+      <div class="effect-label">Radial Vignette<br>transparent 50% → black 100%</div>
+    </div>
+    <div class="effect-box" style="border-color:rgba(184,63,255,0.3);">
+      <div style="width:60px;height:40px;border-radius:4px;background:var(--cf-bg-deepest);box-shadow:0 0 24px rgba(255,200,50,0.4),inset 0 0 12px rgba(184,63,255,0.2);margin:0 auto 8px;"></div>
+      <div class="effect-label">Box Glow<br>box-shadow rgba(255,200,50,0.4)</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-text">
+    Phase 3 · Design Concept Sheet · v1.0 · 26/05/17 KST · Opus+Sonnet
+    &nbsp;·&nbsp;
+    <a href="../_report/2605172200_CANDLEFALL_MOODBOARD_URLS.md">MOODBOARD_URLS.md</a>
+    &nbsp;·&nbsp;
+    <a href="../_report/2605172110_CANDLEFALL_SYNOPSIS_v1.md">SYNOPSIS_v1.md</a>
+  </div>
+</footer>
+
+<!-- JS -->
+<script>
+// ===== Chart Morph Toggle =====
+let chartIsBull = false;
+function toggleChartMorph() {
+  const rect = document.getElementById('bearRect');
+  const wickTop = document.getElementById('wick-top');
+  const wickBot = document.getElementById('wick-bot');
+  const glow = document.getElementById('candleGlow');
+  chartIsBull = !chartIsBull;
+  if (chartIsBull) {
+    rect.setAttribute('fill', '#39D0D8');
+    rect.setAttribute('y', '30');
+    rect.setAttribute('height', '75');
+    if (wickTop) { wickTop.setAttribute('stroke', '#39D0D8'); wickTop.setAttribute('y1','12'); wickTop.setAttribute('y2','30'); }
+    if (wickBot) { wickBot.setAttribute('stroke', '#39D0D8'); }
+    if (glow) glow.setAttribute('stroke', '#39D0D8');
+  } else {
+    rect.setAttribute('fill', '#EF5350');
+    rect.setAttribute('y', '38');
+    rect.setAttribute('height', '70');
+    if (wickTop) { wickTop.setAttribute('stroke', '#EF5350'); wickTop.setAttribute('y1','18'); wickTop.setAttribute('y2','38'); }
+    if (wickBot) { wickBot.setAttribute('stroke', '#EF5350'); }
+    if (glow) glow.setAttribute('stroke', '#EF5350');
+  }
+}
+
+// ===== Mini Chart Morph =====
+let miniIsBull = false;
+function toggleMiniMorph() {
+  const r = document.getElementById('miniRect');
+  miniIsBull = !miniIsBull;
+  r.setAttribute('fill', miniIsBull ? '#39D0D8' : '#EF5350');
+}
+
+// ===== Bell Transform Button =====
+function triggerBellTransform() {
+  const btn = document.getElementById('bellTransformBtn');
+  btn.classList.remove('active');
+  void btn.offsetWidth; // reflow to restart animation
+  btn.classList.add('active');
+  btn.textContent = '🔔 MORPHING... 3s';
+  setTimeout(() => {
+    btn.textContent = '🔔 BELL DROP — Transform';
+    btn.classList.remove('active');
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
