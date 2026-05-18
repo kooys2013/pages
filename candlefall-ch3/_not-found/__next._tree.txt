@@ -1,2 +1,2 @@
-:HL["/_next/static/chunks/0aeglkvhv~u20.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"CUswaUh22T5nHf_cZb676"}
+:HL["/pages/candlefall-ch3/_next/static/chunks/0aeglkvhv~u20.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"EY6ioKNm1pPq-4n1jT2xZ"}
