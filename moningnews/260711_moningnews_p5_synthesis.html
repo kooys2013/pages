@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기둥5 — 총집합: 화자 레지스트리·인사이트 3축·교차검증·사실 22건</title>
+<!--
+  Design System: moningnews-lecture v1 (계승: design_spec.md / 260711_moningnews_p1_ai_dev.html)
+  Sources: analysis/SYNTHESIS.md, analysis/crosscheck_report.md, analysis/crosscheck_matrix.json,
+           analysis/P1A~P4 원문(교차 검증용 타임스탬프 재확인)
+  본 문서는 SYNTHESIS.md을 원고로 하되 §5 정정을 정본으로 삼아 재구성한 강의체 총집합이며,
+  화자 귀속·타임스탬프는 P1A~P4 원문 재확인을 거쳤다. 축약·창작 금지.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0D0F; --bg2:#111820; --bg3:#161E2D; --bg4:#1C2535;
+  --border:#243047; --border-dim:#1C2535; --text:#EAECEF; --text2:#848E9C; --text3:#5A6478;
+  --bull:#0ECB81; --bear:#F6465D; --neutral:#F0B90B; --accent:#1E80FF; --purple:#9B72FF;
+  --bull-bg:rgba(14,203,129,.08); --bear-bg:rgba(246,70,93,.08); --neutral-bg:rgba(240,185,11,.08);
+  --accent-bg:rgba(30,128,255,.08); --purple-bg:rgba(155,114,255,.08);
+  --font-sans:'IBM Plex Sans KR','IBM Plex Sans',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono','JetBrains Mono',monospace;
+  --font-display:'Space Grotesk',var(--font-sans);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px;
+  --r1:4px; --r2:6px; --r3:8px; --r4:12px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.4); --shadow-md:0 4px 12px rgba(0,0,0,.5); --shadow-lg:0 8px 32px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(30,128,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(30,128,255,.015) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+a{color:inherit}
+.hero{position:relative;z-index:1;background:linear-gradient(180deg,#0B1220 0%,#0B0D0F 100%);border-bottom:1px solid var(--border);padding:64px 40px 48px;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(155,114,255,.10) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.ticker{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s5);font-family:var(--font-mono);font-size:11px;flex-wrap:wrap}
+.ticker-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);box-shadow:0 0 8px var(--purple);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.ticker-label{color:var(--purple);letter-spacing:.12em;text-transform:uppercase}
+.ticker-divider{color:var(--border);margin:0 4px}
+.ticker-val{color:var(--text2)}
+.hero-eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);margin-bottom:var(--s3)}
+.hero h1{font-family:var(--font-display);font-size:clamp(26px,4.5vw,46px);font-weight:700;line-height:1.18;letter-spacing:-.02em;color:#fff;margin-bottom:var(--s4)}
+.hero h1 em{font-style:normal;color:var(--purple);position:relative}
+.hero h1 em::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--purple);border-radius:2px}
+.hero-sub{font-size:14px;color:var(--text2);max-width:720px;margin-bottom:var(--s6);line-height:1.85}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r3);overflow:hidden;max-width:680px}
+.stat-cell{background:var(--bg2);padding:var(--s3) var(--s4)}
+.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.stat-val{font-family:var(--font-mono);font-size:17px;font-weight:600;color:var(--purple)}
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr)}.hero{padding:40px 18px 32px}}
+.wrap{max-width:1140px;margin:0 auto;padding:0 var(--s5);position:relative;z-index:1}
+.navbar{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:6px;padding:10px var(--s5);background:#080A0D;border-bottom:1px solid var(--border);max-width:1140px;margin:0 auto}
+.navbar a{padding:6px 12px;border-radius:20px;font-size:12px;font-family:var(--font-mono);color:var(--text2);text-decoration:none;border:1px solid var(--border-dim);transition:all .15s}
+.navbar a:hover{border-color:var(--purple);color:var(--purple)}
+.navbar a.current{background:var(--purple-bg);border-color:var(--purple);color:var(--purple);font-weight:600}
+.margin-note{font-size:.8em;color:var(--text3);max-width:1140px;margin:var(--s3) auto 0;padding:0 var(--s5)}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--s6);margin:var(--s6) auto;max-width:1140px;position:sticky;top:0;z-index:5}
+.toc-header{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)}
+.toc-header h2{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
+.toc-header::before{content:'≡';color:var(--purple);font-size:16px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--s2)}
+.toc-item{display:flex;align-items:center;gap:var(--s3);padding:10px var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r2);text-decoration:none;color:var(--text2);font-size:13px;transition:all .15s}
+.toc-item:hover{border-color:var(--purple);color:var(--text);background:var(--purple-bg);transform:translateX(3px)}
+.toc-num{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--purple);min-width:28px}
+.toc-core .toc-num{color:var(--purple)}
+.toc-core{border-color:rgba(155,114,255,.3)}
+.chapter{position:relative;z-index:1;margin:var(--s5) auto;max-width:1140px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;scroll-margin-top:16px}
+.chapter-header{display:flex;align-items:flex-start;gap:var(--s4);padding:var(--s5) var(--s6);border-bottom:1px solid var(--border);background:linear-gradient(90deg,rgba(155,114,255,.06) 0%,transparent 40%);position:relative}
+.chapter-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple)}
+.ch-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:52px;height:52px;background:var(--purple-bg);border:1px solid rgba(155,114,255,.3);border-radius:var(--r3);flex-shrink:0}
+.ch-num{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:2px}
+.ch-idx{font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--purple)}
+.chapter-meta h2{font-family:var(--font-display);font-size:19px;font-weight:700;color:#fff;margin-bottom:5px;letter-spacing:-.01em}
+.chapter-meta p{font-size:13px;color:var(--text2)}
+.chapter-body{padding:var(--s6)}
+.quote{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin:var(--s4) 0;background:var(--accent-bg);border-radius:0 var(--r2) var(--r2) 0;font-size:13.5px;color:var(--text2);line-height:1.75;font-style:italic}
+.quote strong{color:var(--accent);font-style:normal}
+.quote.bull{border-color:var(--bull);background:var(--bull-bg)}.quote.bull strong{color:var(--bull)}
+.quote.bear{border-color:var(--bear);background:var(--bear-bg)}.quote.bear strong{color:var(--bear)}
+.quote.neutral{border-color:var(--neutral);background:var(--neutral-bg)}.quote.neutral strong{color:var(--neutral)}
+.quote.purple{border-color:var(--purple);background:var(--purple-bg)}.quote.purple strong{color:var(--purple)}
+.lecture-text{font-size:13.5px;color:var(--text2);line-height:1.9;margin:var(--s3) 0}
+.lecture-text strong{color:var(--text)}
+.lecture-text em{color:var(--accent);font-style:normal}
+.subhead{font-family:var(--font-display);font-size:15.5px;font-weight:700;color:#fff;margin:var(--s6) 0 var(--s3);padding-top:var(--s5);border-top:1px solid var(--border-dim);display:flex;align-items:center;gap:8px}
+.subhead::before{content:'▸';color:var(--purple);font-size:13px}
+.subhead:first-child{margin-top:0;padding-top:0;border-top:none}
+.alert{display:flex;gap:var(--s3);padding:var(--s3) var(--s4);border-radius:var(--r3);margin:var(--s4) 0;font-size:13px}
+.alert-warn{background:var(--bear-bg);border:1px solid rgba(246,70,93,.25)}
+.alert-tip{background:var(--bull-bg);border:1px solid rgba(14,203,129,.25)}
+.alert-key{background:var(--neutral-bg);border:1px solid rgba(240,185,11,.25)}
+.alert-link{background:var(--accent-bg);border:1px solid rgba(30,128,255,.25)}
+.alert-sponsor{background:var(--purple-bg);border:1px solid rgba(155,114,255,.25)}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-text{color:var(--text2);line-height:1.65}
+.alert-text strong{display:block;margin-bottom:4px;color:var(--text);font-size:14px}
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:var(--s3);margin:var(--s4) 0}
+.concept-card{padding:var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);position:relative;overflow:hidden;transition:border-color .15s}
+.concept-card:hover{border-color:var(--purple)}
+.concept-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),transparent)}
+.concept-icon{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);margin-bottom:var(--s3);display:flex;align-items:center;gap:6px}
+.concept-icon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--purple);display:inline-block}
+.concept-card h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.concept-card p{font-size:12.5px;color:var(--text2);line-height:1.65}
+.chart-box{background:#080A0D;border:1px solid var(--border);border-radius:var(--r3);padding:var(--s5) var(--s5) var(--s4);margin:var(--s5) 0;box-shadow:var(--shadow-md);position:relative}
+.chart-box::before{content:'DIAGRAM';position:absolute;top:var(--s3);right:var(--s4);font-size:9px;letter-spacing:.12em;color:var(--text3);font-family:var(--font-mono)}
+.chart-box svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--purple);text-transform:uppercase;margin-bottom:var(--s4)}
+.chart-caption{margin-top:var(--s3);font-size:12.5px;color:var(--text2);line-height:1.7;padding-top:var(--s3);border-top:1px solid var(--border-dim)}
+.chart-caption strong{color:var(--text)}
+.table-wrap{overflow-x:auto;margin:var(--s4) 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:var(--bg3)}
+th{padding:9px var(--s3);text-align:left;font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}
+td{padding:9px var(--s3);border-bottom:1px solid var(--border-dim);color:var(--text2)}
+tr:hover td{background:rgba(255,255,255,.02)}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--purple)}
+th.sortable::after{content:'⇅';margin-left:5px;opacity:.4;font-size:9px}
+th.sortable.sort-asc::after{content:'↑';opacity:1;color:var(--purple)}
+th.sortable.sort-desc::after{content:'↓';opacity:1;color:var(--purple)}
+.badge{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.05em;white-space:nowrap}
+.badge-bull{background:var(--bull-bg);color:var(--bull);border:1px solid rgba(14,203,129,.3)}
+.badge-bear{background:var(--bear-bg);color:var(--bear);border:1px solid rgba(246,70,93,.3)}
+.badge-neutral{background:var(--neutral-bg);color:var(--neutral);border:1px solid rgba(240,185,11,.3)}
+.badge-accent{background:var(--accent-bg);color:var(--accent);border:1px solid rgba(30,128,255,.3)}
+.badge-purple{background:var(--purple-bg);color:var(--purple);border:1px solid rgba(155,114,255,.3)}
+.flag{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:12px;font-size:10.5px;font-weight:600;margin-left:6px;vertical-align:middle;white-space:nowrap}
+.flag-verify{background:var(--bear-bg);color:var(--bear);border:1px solid rgba(246,70,93,.35)}
+.flag-sponsor{background:var(--purple-bg);color:var(--purple);border:1px solid rgba(155,114,255,.35)}
+.flag-speaker{background:var(--neutral-bg);color:var(--neutral);border:1px solid rgba(240,185,11,.35)}
+.ts-link{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;background:var(--bg4);border:1px solid var(--border-dim);border-radius:3px;text-decoration:none;font-family:var(--font-mono);font-size:10.5px;color:var(--text2);transition:all .15s;white-space:nowrap}
+.ts-link:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-bg)}
+.ts-link::before{content:'▶';font-size:7px;color:var(--purple)}
+.ts-links{display:flex;flex-wrap:wrap;gap:6px;margin:var(--s3) 0}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--s3);margin:var(--s4) 0}
+.filter-bar{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s4) 0;align-items:center}
+.filter-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-right:4px}
+.filter-btn{padding:6px 12px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:20px;color:var(--text2);font-size:12px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.filter-btn:hover{border-color:var(--purple);color:var(--text)}
+.filter-btn.active{background:var(--purple-bg);border-color:var(--purple);color:var(--purple);font-weight:600}
+.tabs-nav{display:flex;flex-wrap:wrap;gap:6px;margin:var(--s4) 0;border-bottom:1px solid var(--border-dim);padding-bottom:var(--s3)}
+.tab-btn{padding:8px 16px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r2) var(--r2) 0 0;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{background:var(--purple-bg);border-color:var(--purple);color:var(--purple)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.acc-item{border:1px solid var(--border-dim);border-radius:var(--r3);margin-bottom:var(--s2);overflow:hidden;background:var(--bg3)}
+.acc-head{display:flex;align-items:center;justify-content:space-between;padding:var(--s4);cursor:pointer;gap:var(--s3)}
+.acc-head:hover{background:rgba(255,255,255,.02)}
+.acc-head h4{font-size:14px;color:#fff;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.acc-idx{font-family:var(--font-mono);color:var(--purple);font-size:11px}
+.acc-arrow{font-size:11px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.acc-item.open .acc-arrow{transform:rotate(90deg);color:var(--purple)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc-item.open .acc-body{max-height:2200px}
+.acc-body-inner{padding:0 var(--s4) var(--s4);font-size:12.5px;color:var(--text2);line-height:1.8}
+.acc-body-inner strong{color:var(--text)}
+.section-sep{display:flex;align-items:center;gap:var(--s3);margin:var(--s5) 0}
+.section-sep::before,.section-sep::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-sep span{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.checklist{list-style:none;padding:0;margin:var(--s4) 0}
+.checklist li{display:flex;align-items:baseline;gap:var(--s3);padding:7px 0;font-size:13px;color:var(--text2);border-bottom:1px solid var(--border-dim)}
+.checklist li::before{content:'□';font-family:var(--font-mono);font-size:14px;color:var(--purple);flex-shrink:0}
+.checklist li strong{color:var(--text)}
+.legend-row{display:flex;flex-wrap:wrap;gap:var(--s4);margin:var(--s3) 0;font-size:12px;color:var(--text2)}
+.legend-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.footer{position:relative;z-index:1;text-align:center;padding:var(--s6) var(--s5);background:var(--bg2);border-top:1px solid var(--border);margin-top:var(--s8)}
+.footer p{font-size:12px;color:var(--text3);line-height:2}
+.footer strong{color:var(--text2)}
+.speaker-card{padding:var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+.speaker-card:hover{border-color:var(--purple)}
+.speaker-card h4{font-size:14.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.speaker-card .sc-world{font-size:12.5px;color:var(--accent);line-height:1.6}
+.speaker-card .sc-reli{font-size:12px;color:var(--text2);line-height:1.65;padding-top:6px;border-top:1px solid var(--border-dim)}
+.sc-videos{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.priority-card{background:var(--bg3);border:1px solid rgba(246,70,93,.3);border-radius:var(--r3);padding:var(--s5);margin:var(--s4) 0}
+.priority-card h4{font-size:15px;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.fallacy-card{background:var(--bg3);border:1px solid var(--border-dim);border-left:3px solid var(--bear);border-radius:0 var(--r3) var(--r3) 0;padding:var(--s4);margin-bottom:var(--s3)}
+.fallacy-card h4{font-size:13.5px;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.fallacy-num{font-family:var(--font-mono);color:var(--bear);font-size:16px;font-weight:700;min-width:26px}
+@media(max-width:680px){.term-grid{grid-template-columns:1fr}.chapter-body{padding:var(--s4)}.chapter-header{padding:var(--s4)}}
+table a,table a:visited{color:var(--purple);text-decoration:none}table a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="260711_moningnews_hub.html">🏠 허브</a>
+  <a href="260711_moningnews_p1_ai_dev.html">① AI 개발 실무</a>
+  <a href="260711_moningnews_p2_saylor.html">② Saylor 시리즈</a>
+  <a href="260711_moningnews_p3_btc_macro.html">③ BTC·매크로</a>
+  <a href="260711_moningnews_p4_life_thinking.html">④ 삶·사고법</a>
+  <a href="260711_moningnews_p5_synthesis.html" class="current">⑤ 총집합</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="ticker">
+      <span class="ticker-dot"></span>
+      <span class="ticker-label">기둥 5</span>
+      <span class="ticker-divider">|</span>
+      <span class="ticker-val">총집합 · 화자 17그룹 · 3축 인사이트 · 교차검증 사실 23건</span>
+      <span class="ticker-divider">|</span>
+      <span class="ticker-val">Opus 독립 심사관 패스 반영</span>
+    </div>
+    <div class="hero-eyebrow">Pillar 5 · Synthesis &amp; Cross-Verification</div>
+    <h1>44편을 뚫고 나온 <em>15가지 세계관</em>과<br>그것을 되돌아본 <em>독립 심사관의 판정</em></h1>
+    <p class="hero-sub">
+      기둥 1~4가 각 영상을 원문 그대로 해부했다면, 이 기둥은 그 위에서 세 가지 일을 한다 —
+      ① 17개 화자/그룹을 하나의 레지스트리로 묶고, ② "어떻게 살고·공부하고·적용할 것인가" 3축으로 화자를 넘나드는
+      통찰을 교차 인용하며, ③ SYNTHESIS.md가 제안한 충돌 7건·수렴 4건·사실 22건을
+      <strong style="color:var(--text)">별도의 Opus 패스가 원문·외부 사실과 대조해 재판정</strong>한 결과를 그대로 옮긴다.
+      결론부터 말하면 — "충돌"이라 불렸던 것 대부분은 허상이었고, "독립 수렴"이라 불렸던 것 대부분은 같은 원전을
+      반복 인용한 착시였다.
+    </p>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-label">화자/그룹</div><div class="stat-val">17</div></div>
+      <div class="stat-cell"><div class="stat-label">진짜 충돌</div><div class="stat-val" style="color:var(--bear)">1 / 7</div></div>
+      <div class="stat-cell"><div class="stat-label">진짜 독립수렴</div><div class="stat-val" style="color:var(--bull)">1 / 4</div></div>
+      <div class="stat-cell"><div class="stat-label">사실 검증</div><div class="stat-val" style="color:var(--neutral)">23건</div></div>
+    </div>
+  </div>
+</header>
+<p class="margin-note">※ 본문 [MM:SS] 타임스탬프는 자동 자막 블록 기준으로 최대 ±30초 오차가 있을 수 있다. 클릭하면 해당 지점(youtu.be/ID?t=초)으로 바로 이동한다.
+경고 배지 범례 — <span class="flag flag-verify">🔬 검증필요</span> 사실 플래그(화자 자체 추정·출처 불명) · <span class="flag flag-sponsor">📢 스폰서/광고</span> 삽입 광고·자기 채널 홍보 구간 · <span class="flag flag-speaker">⚠️ 화자 미확정</span> 트리아지 오기 정정 또는 신원 추정.</p>
+
+<div class="wrap">
+<div class="alert alert-warn" style="margin-top:var(--s5)">
+  <span class="alert-icon">⚠️</span>
+  <div class="alert-text"><strong>투자 조언 아님</strong>
+  이 문서(특히 CH2 "재무" 축, CH3, CH4)에 등장하는 모든 수치·전략·가격 전망은 원본 영상 화자 개인의 발언을
+  원문 그대로 정리한 것이며, 투자 자문이 아니다. 특히 DCA·LTV·담보대출 관련 서술은 Breedlove의 스폰서 광고 구간(Swan/NYDIG)에서
+  나온 것으로, 투자자문업 등록 없이 이루어진 개인 의견이다. 사실 검증 결과(CH4)에서 다수 수치가 UNVERIFIABLE·REFUTED로 판정된 점을
+  반드시 함께 읽을 것.</div>
+</div>
+<div class="alert alert-link">
+  <span class="alert-icon">📚</span>
+  <div class="alert-text"><strong>이 문서는 어떻게 만들어졌나</strong>
+  1단계로 analysis/SYNTHESIS.md가 P1A~P4 9개 심층 분석(총 4,302줄)을 종합해 화자 레지스트리·3축 인사이트·충돌/수렴 후보·
+  사실검증 대상 22건을 초안했다. 2단계로 별도의 독립 심사관(Opus)이 원문 자막(text/&lt;ID&gt;.txt)과 외부 WebSearch로
+  이 초안을 전량 재검증해 <code>crosscheck_report.md</code> / <code>crosscheck_matrix.json</code>을 산출했다.
+  이 HTML은 SYNTHESIS.md §5(교차검증 후 정정)를 정본으로 삼아, 초안과 재판정이 다른 지점을 명시적으로 구분해 보여준다.</div>
+</div>
+</div>
+
+<div class="toc wrap" id="toc">
+  <div class="toc-header"><h2>Table of Contents — 6챕터</h2></div>
+  <div class="toc-grid">
+    <a href="#ch1" class="toc-item"><span class="toc-num">01</span><span>화자 레지스트리 총집합 (17그룹)</span></a>
+    <a href="#ch2" class="toc-item toc-core"><span class="toc-num">02</span><span>★ 인사이트 3축 — 삶·공부·적용</span></a>
+    <a href="#ch3" class="toc-item toc-core"><span class="toc-num">03</span><span>★ 충돌·수렴 매트릭스 — 역할 분업 재판정</span></a>
+    <a href="#ch4" class="toc-item toc-core"><span class="toc-num">04</span><span>★ 사실검증 결과표 — 23건</span></a>
+    <a href="#ch5" class="toc-item"><span class="toc-num">05</span><span>논리 비약 Top 10</span></a>
+    <a href="#ch6" class="toc-item"><span class="toc-num">06</span><span>방법론 한계 고지</span></a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ CH1 화자 레지스트리 ══════════════════════════════════════════════ -->
+<section class="chapter" id="ch1">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">01</span></div>
+    <div class="chapter-meta">
+      <h2>화자별 총집합 — 17그룹 레지스트리</h2>
+      <p>SYNTHESIS.md §2 정정판 — 세계관 한 줄 + 신뢰도 특성 + 트리아지 정정 배지</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">
+      44편에 등장하는 화자·발화자를 17개 그룹으로 묶었다. 이 시리즈 전체의 자막은 <strong>화자 다이어라이제이션(diarization)이
+      없는 자동 생성 자막</strong>이기 때문에, "이 발화가 누구의 것인가"는 문맥으로만 재구성 가능하다. 아래 카드는 트리아지(1차 자동분류)
+      단계의 오류를 원문 재독으로 정정한 결과이며, 원문에 근거 없는 이름은 창작하지 않고 "추정" 또는 "미확정"으로 남겨두었다.
+    </p>
+
+    <div class="filter-bar">
+      <span class="filter-label">신뢰도 필터</span>
+      <button class="filter-btn active" data-filter="all">전체 17그룹</button>
+      <button class="filter-btn" data-filter="confirmed">1차 발화 확정</button>
+      <button class="filter-btn" data-filter="correction">트리아지 정정 있음</button>
+    </div>
+
+    <div class="concept-grid" id="speaker-grid">
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Michael Saylor <span class="badge badge-bull">확정</span></h4>
+        <div class="sc-world">화폐=에너지, 공학·열역학 프레임. MIT 시스템역학 배경. Saylor Series 17편 대아크의 핵심 발화자.</div>
+        <div class="sc-reli">논증은 정교하나 수치 과장·비유↔실증 경계가 흐린 사례가 다수(250조/2.3조 달러류 — CH4 참고).</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="tveitmNRGc8" data-t="0:00" data-label="Ep1~17 (Saylor Series)">Ep1~17 전편</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Robert Breedlove</h4>
+        <div class="sc-world">오스트리아학파 시간선호 프레임 — Saylor 에너지론과 명시적으로 대비되는 진행자 겸 "통역자".</div>
+        <div class="sc-reli">리캡 구간에서 자기 견해(ETH 비판 등)를 삽입 — 화자 오귀속 주의 필요.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="D7CRlii0KJQ" data-t="97:54" data-label="Ep5 [97:54]">Ep5 [97:54]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Arthur Hayes</h4>
+        <div class="sc-world">달러 유동성 기계론 — eSLR 완화→은행 신용창조 $4조→BTC $125k 연말 목표.</div>
+        <div class="sc-reli">인과 사슬이 명확하고 검증 가능한 시한부 예측(연말 $125k)을 제시.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="Z9HFJsja3m4" data-t="14:19">Z9HFJsja3m4 [14:19]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Raoul Pal</h4>
+        <div class="sc-world">인구구조→부채→유동성 8단계 숙명론적 실용주의 매크로 프레임워크.</div>
+        <div class="sc-reli">프레임워크형 서사 — 반증이 어려운 거대 서사 구조.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="1inMUNY-5v4" data-t="18:08">1inMUNY-5v4 [18:08]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Adam Back <span class="flag flag-speaker">⚠️</span></h4>
+        <div class="sc-world">기관 채택 = 정신 희석이 아닌 확산. 해시캐시(Hashcash) 창시자의 1차 발화.</div>
+        <div class="sc-reli">트리아지가 연도를 "2026"으로 오기 — 원문은 "Bitcoin 2025" 컨퍼런스.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="1xHR3zU3ikQ" data-t="9:53">1xHR3zU3ikQ [09:53]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="correction">
+        <h4>Ian Carroll <span class="flag flag-speaker">⚠️ 오기정정</span></h4>
+        <div class="sc-world">인센티브 불일치를 만능열쇠로 쓰는 서사 추론가. 기업 소유구조(검증가능)에서 정보기관 서사(검증취약)로 확장.</div>
+        <div class="sc-reli">트리아지가 화자명을 "Brewster"로 오기했다. 후반 음모론 구간은 <strong>검증 불가·화자 자신도 추측임을 명시</strong> — 본 문서는 존재 고지 수준으로만 다룬다(CH5 F10).</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="ZhCGz_-8mi8" data-t="0:00">ZhCGz_-8mi8</span></div>
+      </div>
+      <div class="speaker-card" data-tier="correction">
+        <h4>Richard Werner <span class="flag flag-speaker">⚠️ 트리아지 누락</span></h4>
+        <div class="sc-world">은행 신용창출 실증주의 — QE(양적완화) 용어의 원조.</div>
+        <div class="sc-reli">실증 실험·1차 인터뷰 근거. 단 "의도적 설계"로 해석하는 구간(CH5 F9)은 경계가 흐려진다.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="riffmvEOWlg" data-t="33:32">riffmvEOWlg [33:32]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>SOFTWAR 논평자 2인</h4>
+        <div class="sc-world">물리력 기반 안보론(Jason Lowery SOFTWAR 논지)을 소개하는 3인칭 대담.</div>
+        <div class="sc-reli">로워리 본인이 아닌 논평자 2인의 대담 — 원저자 발화가 아님에 주의.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="9gy_CbliS68" data-t="0:00">9gy_CbliS68</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Richard Hamming</h4>
+        <div class="sc-world">위대한 연구 = 용기+문 열기+중요한 문제(37원칙). 벨연구소 1957년 강연.</div>
+        <div class="sc-reli">벨연구소 1차 강연 — P4의 심장. (다트머스 연도 오류는 윈스턴 강의 소속으로 정정 — CH4 표 참조.)</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="M8NLDe7yXCA" data-t="18:34">M8NLDe7yXCA [18:34]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Patrick Winston</h4>
+        <div class="sc-world">아이디어 가치 = K×P×T(지식×전달×시간) 전달 공식(39기법).</div>
+        <div class="sc-reli">MIT "How to Speak" 1차 강연 — 30년 넘게 매년 갱신된 정형화된 강연.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="fyziIpGJfMw" data-t="4:52">fyziIpGJfMw [04:52]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="correction">
+        <h4>Chase Hughes <span class="flag flag-speaker">⚠️ 중간 확신 추정</span></h4>
+        <div class="sc-world">행동분석·조종 방어(11패턴 방어표) — 전직 미 해군 심문관 배경 추정.</div>
+        <div class="sc-reli">화자 자기모순 1건 기록됨(사이코패스 비율 4%→1% 자기정정, CH4에서 CONFIRMED 판정).</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="qYnhUKraCLw" data-t="74:21">qYnhUKraCLw [74:21]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Boris Cherny</h4>
+        <div class="sc-world">잠재수요(latent demand)·6개월후모델·씁쓸한 교훈(Bitter Lesson). Claude Code 창시자.</div>
+        <div class="sc-reli">1차 발화 확정 2편(철학·실전). 3번째 편(기능)은 화자 동일성 미확정.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="jOjDRuPl9UU" data-t="7:49">jOjDRuPl9UU [07:49]</span> <span class="ts-link" data-vid="8VFplLyMyf8" data-t="8:57">8VFplLyMyf8 [08:57]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="correction">
+        <h4>MCP 공동창시자 <span class="flag flag-speaker">⚠️ 추정</span></h4>
+        <div class="sc-world">2026 = "연결성의 해", 점진적 발견(progressive disclosure) 원칙. 추정 화자: David Soria Parra.</div>
+        <div class="sc-reli">트리아지가 "Alexis"라는 근거불명 이름을 오기 — 원문에는 해당 이름이 등장하지 않는다.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="syOHvhWzHEI" data-t="0:00">syOHvhWzHEI</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Sherwin Woo (OpenAI)</h4>
+        <div class="sc-world">에이전트 실패=컨텍스트 부족, Bitter Lesson의 실무판 적용. OpenAI API·개발자플랫폼 엔지니어링 책임자.</div>
+        <div class="sc-reli">자체 통계를 다수 인용(95% Codex 사용 등)하나 외부 검증 자료는 미제시.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="tzWm1iur8XU" data-t="13:39">tzWm1iur8XU [13:39]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>Bitcoin 컨퍼런스 4인</h4>
+        <div class="sc-world">루미스·맥코맥·재니스 맥아피·앳킨스 — 자유-규제 스펙트럼(관료적 제도주의 ↔ 국가불신주의).</div>
+        <div class="sc-reli">맥아피의 "프랑스 당국 지갑정보 판매→납치" 주장이 최우선 검증 대상(CH4 — 현상은 CONFIRMED, 기제는 부정확).</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="6zwG7-t3LCE" data-t="4:44">6zwG7-t3LCE [04:44]</span></div>
+      </div>
+      <div class="speaker-card" data-tier="confirmed">
+        <h4>단편 — 머스크·Dick·3B1B·Ayn Rand 낭독</h4>
+        <div class="sc-world">머스크(4단계 최적화 알고리즘)·Philip K. Dick(직교시간)·3Blue1Brown(고차원 기하)·아인 랜드 연설 낭독.</div>
+        <div class="sc-reli">머스크가 본인 입으로 "5단계"라 언급하지만 실제 나열은 4단계뿐 — 클립 절단으로 추정.</div>
+        <div class="sc-videos"><span class="ts-link" data-vid="ekIBxxt0Zag" data-t="0:00">ekIBxxt0Zag</span></div>
+      </div>
+    </div>
+
+    <div class="alert alert-key">
+      <span class="alert-icon">🗒️</span>
+      <div class="alert-text"><strong>정직 고지 — 자막 데이터의 구조적 한계 (CH6에서 상세)</strong>
+      전 편에 화자 다이어라이제이션이 없다. 위 카드의 화자 귀속은 문맥 재구성 결과이며, "확정"이라 표기된 항목도 자기소개
+      멘트·제3자 소개(사회자·인터뷰어)를 근거로 한 정황 판단이다. Saylor Series Ep11은 자막 자체를 확보하지 못했다(429 차단, 4회 재시도 실패) —
+      결번으로 공시한다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CH2 인사이트 3축 ══════════════════════════════════════════════ -->
+<section class="chapter core" id="ch2">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">02</span></div>
+    <div class="chapter-meta">
+      <h2>★ 인사이트 3축 — 어떻게 살고, 공부하고, 적용할 것인가</h2>
+      <p>SYNTHESIS.md §3 구조 그대로 — 15명 화자를 넘나드는 교차 인용, youtu.be 타임스탬프 링크 포함</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">
+      44편은 소재가 AI 개발·Bitcoin 매크로·역사·조종 심리학까지 제각각이지만, 반복해서 같은 3가지 질문으로 수렴한다 —
+      <strong>어떻게 살 것인가, 어떻게 공부할 것인가, 어떻게 적용할 것인가.</strong> 아래 3개 대형 탭은 이 3축을 화자 간 교차 인용으로
+      재구성한 것이다. 각 인용은 원문 [MM:SS]와 함께 표기했다.
+    </p>
+
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" data-tab="axis-life">① 삶(Life) — 책임·고통·자기객관화·창조성</button>
+      <button class="tab-btn" data-tab="axis-study">② 공부(Study) — 메타 전략·프레임 이식·검증 습관</button>
+      <button class="tab-btn" data-tab="axis-apply">③ 적용(Apply) — AI 실무·재무·조직·전달</button>
+    </div>
+
+    <!-- ── AXIS LIFE ── -->
+    <div class="tab-panel active" id="axis-life">
+      <div class="subhead">책임·주권 축 — 잃을 것이 있어야 예의도, 절제도 생긴다</div>
+      <p class="lecture-text">
+        Saylor는 레버리지(부채)를 재무 지표가 아니라 <strong>삶의 자율성 상실</strong>로 정의한다.
+      </p>
+      <div class="quote bear">
+        <strong>[33:22~33:52] Michael Saylor · Ep5</strong> "자산이 플러스에서 마이너스로 바뀌는 순간, 저는 제 존재의 생명력을 모두 소진하고,
+        어디에 있든 누구든 제 채권자나 거래 상대방의 뜻대로 살아가게 됩니다. 나는 주권을 잃었다. 전적으로."
+        <span class="ts-links"><span class="ts" data-vid="D7CRlii0KJQ" data-t="33:22">33:22</span></span>
+      </div>
+      <p class="lecture-text">
+        같은 논리가 Ep14의 결혼 비유, Ep15의 하워드 휴즈 일화, Ep17의 나폴레옹 선두지휘 비유로 세 번 반복된다 — "책임(잃을 것)이 있을 때는
+        극단으로 갈 수 없다"는 것이다.
+      </p>
+      <div class="quote">
+        <strong>[44:31~45:05] Michael Saylor · Ep14</strong> 결혼 비유 — "책임이 있을 때는 그렇게 할 수 없잖아요"
+        <span class="ts-links"><span class="ts" data-vid="YfShS7SEIAg" data-t="44:31">44:31</span></span>
+      </div>
+      <div class="quote">
+        <strong>[14:20] Michael Saylor · Ep15</strong> "세상에서 제일 부자인 사람은 다른 사람의 도움이 필요 없으니까 그렇게 할 수 있는 거죠…
+        책임감이 있을 때는 그렇게 할 수 없잖아요" — 하워드 휴즈가 세계 최고 부자였을 때 호텔 최상층에서 은둔한 일화(CH4에서 CONFIRMED 판정).
+        <span class="ts-links"><span class="ts" data-vid="6oBhph1IRm0" data-t="14:20">14:20</span></span>
+      </div>
+      <div class="quote">
+        <strong>[40:29] Michael Saylor · Ep17</strong> "현실 세계에서 이해관계가 얽혀 있기 때문에 예의를 지키며 행동하게 되는데
+        사이버 공간에는 이것이 없다" — 잃을 것이 예의의 근원이라는 인간관계 통찰.
+        <span class="ts-links"><span class="ts" data-vid="EVIcJL8asYM" data-t="40:29">40:29</span></span>
+      </div>
+      <div class="quote">
+        <strong>[86:21] Michael Saylor · Ep17</strong> 나폴레옹의 선두 지휘 비유 — "그는 이해관계가 얽혀 있었다… 앞면이 나오면 내가 이기고,
+        뒷면이 나오면 네가 지는" 오늘날 리더십과의 대비 — 책임을 회피하는 의사결정 구조에 대한 경고.
+        <span class="ts-links"><span class="ts" data-vid="EVIcJL8asYM" data-t="86:21">86:21</span></span>
+      </div>
+
+      <div class="subhead">고통·불확실성 축 — 고통은 타고난 스승이다</div>
+      <div class="quote">
+        <strong>[102:17] Robert Breedlove (Taleb 인용) · Ep1</strong> 고통은 타고난 스승이며 정보/피드백이라는 명제.
+        <span class="ts-links"><span class="ts" data-vid="tveitmNRGc8" data-t="102:17">102:17</span></span>
+      </div>
+      <div class="quote">
+        <strong>[25:46] Michael Saylor · Ep6</strong> "고통을 더 많이 느낄수록 반사 신경은 더 빨라집니다" — 고통을 회피가 아닌
+        정보로 받아들이는 태도.
+        <span class="ts-links"><span class="ts" data-vid="QQhzEFnZ3kc" data-t="25:46">25:46</span></span>
+      </div>
+      <div class="quote">
+        <strong>[37:25] 화자 미상 · Ep3</strong> "전쟁은 사람의 마음을 열어주는 힘이 있습니다. 누군가 머리 위에 폭탄을 떨어뜨리고
+        불길에 휩싸이거나 비명을 지르는 순간, 그 고통 때문에 오히려 더 열린 마음을 갖게 된다" — 극한의 불확실성/위기가 개인의
+        변화 수용성을 높인다는 관찰.
+        <span class="ts-links"><span class="ts" data-vid="snvVpJeqz4Y" data-t="37:25">37:25</span></span>
+      </div>
+      <div class="quote purple">
+        <strong>[41:56] Richard Hamming</strong> "성찰하지 않는 삶은 살 가치가 없다"(소크라테스 인용) — 강연 전체를
+        "부흥 설교"[43:31]로 자기 규정하며 마무리하는 최종 명제.
+        <span class="ts-links"><span class="ts" data-vid="M8NLDe7yXCA" data-t="41:56">41:56</span></span>
+      </div>
+
+      <div class="subhead">자기객관화 축 — "내가 틀렸을 때의 예를 스스로 묻는다"</div>
+      <div class="quote bull">
+        <strong>[15:31] Boris Cherny</strong> "제 뇌가 아직도 6개월 전 생각에 갇혀 있는" 것을 인정하는 자기객관화 —
+        후배가 자신보다 도구를 잘 쓰는 현실을 방어 없이 수용.
+        <span class="ts-links"><span class="ts" data-vid="jOjDRuPl9UU" data-t="15:31">15:31</span></span>
+      </div>
+      <div class="quote bull">
+        <strong>[16:35~17:06] Boris Cherny</strong> "저는 가끔 당신이 틀렸을 때의 예가 무엇인지 묻곤 합니다" — 실수 인정·책임·학습
+        능력을 채용·자기평가의 핵심 척도로 삼는다.
+        <span class="ts-links"><span class="ts" data-vid="jOjDRuPl9UU" data-t="16:35">16:35</span></span>
+      </div>
+      <div class="quote">
+        <strong>[40:17~41:19] Michael Saylor · Ep9</strong> "실패율 99%" 고백을 통한 겸손의 중요성.
+        <span class="ts-links"><span class="ts" data-vid="y7OmAIb3tuU" data-t="40:17">40:17</span></span>
+      </div>
+      <div class="quote">
+        <strong>[76:03] Sherwin Woo (OpenAI)</strong> 화자의 인생 좌우명 — "절대 자신을 불쌍하게 여기지 말라,
+        스스로를 일으켜 세울 힘이 항상 있다는 것을 기억하라."
+        <span class="ts-links"><span class="ts" data-vid="tzWm1iur8XU" data-t="76:03">76:03</span></span>
+      </div>
+
+      <div class="subhead">창조성 축 — 정원에게 빨리 자라라고 소리칠 수 없다</div>
+      <div class="quote">
+        <strong>[70:59~71:30] 화자 미상 · Ep3</strong> "물을 밀어낼 수는 없다는 겁니다. 혁신이란 우리 내면의 창조적 충동에서
+        자연스럽게 나타나는 것입니다. 억지로 할 순 없어… 정원에게 빨리 자라라고 소리칠 수는 없잖아요."
+        <span class="ts-links"><span class="ts" data-vid="snvVpJeqz4Y" data-t="70:59">70:59</span></span>
+      </div>
+      <div class="quote">
+        <strong>[10:02] Michael Saylor · Ep8</strong> 혼돈 속 질서 찾기가 인간 최고의 소명이라는 명제 —
+        "생명 = 반엔트로피 원리 → 채굴 = 혼돈 속 질서 창조"의 연장선.
+        <span class="ts-links"><span class="ts" data-vid="a0nImndH0Zw" data-t="10:02">10:02</span></span>
+      </div>
+    </div>
+
+    <!-- ── AXIS STUDY ── -->
+    <div class="tab-panel" id="axis-study">
+      <div class="subhead">메타 전략 — 씁쓸한 교훈(Bitter Lesson) 읽기</div>
+      <p class="lecture-text">
+        "원리 기반 판단이 임시방편을 이긴다"는 명제가 Cherny·Sherwin Woo·스탠퍼드 강의 3곳에서 반복 등장한다 — 단,
+        CH3에서 다루듯 이는 세 곳이 <strong>독립적으로 도달한 결론이 아니라 Rich Sutton의 2019년 동일 에세이를 각자 인용한 것</strong>이다.
+        (독립 수렴이 아니라는 재판정은 CH3 V2 참조.)
+      </p>
+      <div class="quote bull">
+        <strong>[36:41] Boris Cherny</strong> 20개 프로토타입을 만들고 마음에 드는 것을 고르는 탐색적 설계 원칙 —
+        머스크의 "삭제 우선" 원칙과는 라이프사이클의 다른 국면에 적용된다(CH3 C6 참조).
+        <span class="ts-links"><span class="ts" data-vid="jOjDRuPl9UU" data-t="36:41">36:41</span></span>
+      </div>
+      <div class="quote">
+        <strong>[44:40] Sherwin Woo</strong> "모델은 당신의 비계(scaffolding)를 아침 식사로 먹어치울 것이다" — 2022~2023년
+        벡터스토어·에이전트 프레임워크가 "모델이 아직 부족했을 때의 임시 발판"이었으나 모델이 좋아지며 대부분 불필요해졌다는 실무 사례.
+        <span class="ts-links"><span class="ts" data-vid="tzWm1iur8XU" data-t="44:40">44:40</span></span>
+      </div>
+      <div class="quote">
+        <strong>[01:00~02:01] 스탠퍼드 LLM 마스터클래스</strong> "곧 무효화될 지식 가려내기" — GPQA·SWE-bench류 벤치마크가
+        수 년 새 급격히 상향되는 현상을 근거로, 지금 배우는 세부 기법의 유통기한을 스스로 의심하라는 태도.
+        <span class="ts-links"><span class="ts" data-vid="5tO6q9ZOr_U" data-t="1:00">01:00</span></span>
+      </div>
+
+      <div class="subhead">해밍 원칙군 — 문 열고 일하기</div>
+      <div class="quote purple">
+        <strong>[18:34] Richard Hamming</strong> "문 열고 일하기" — 아이디어·동료와의 지적 개방성이 세렌디피티와 중요한 문제
+        발견으로 이어진다는 원칙. 해밍 스스로 인과관계가 확정되지 않았음을 명시한다.
+        <span class="ts-links"><span class="ts" data-vid="M8NLDe7yXCA" data-t="18:34">18:34</span></span>
+      </div>
+      <p class="lecture-text">
+        중요한 문제 목록을 유지하고, 용기를 갖고, 마태오 효과("있는 자는 더 받고")를 자각하며 활용하라는 것이 37원칙의 핵심 축이다.
+        단, 같은 "개방성"을 다른 대상(악의적 조종자)에 적용하면 위험해진다 — CH3 C7에서 Chase Hughes의 조종 방어론과 대조한다.
+      </p>
+
+      <div class="subhead">프레임 이식 훈련 — 물리학→경제, 생물학→네트워크</div>
+      <p class="lecture-text">
+        Saylor 시리즈는 열역학(에너지)·물리학 개념을 경제 현상에 이식하는 것이 방법론의 핵심이다. Werner는 반대로 실증 경제학의
+        틀을 유지하되 "은행이 대출을 실행하는 순간 화폐가 창조된다"는 반직관적 명제를 회계 항등식으로 증명한다.
+      </p>
+      <div class="quote">
+        <strong>[33:32] Richard Werner</strong> 전 세계 통화의 97%가 은행 대출을 통해 창조된다는 실증 논증.
+        <span class="ts-links"><span class="ts" data-vid="riffmvEOWlg" data-t="33:32">33:32</span></span>
+      </div>
+      <div class="quote">
+        <strong>[55:34] Richard Werner</strong> 금세공사 사기 2단계 증명 — Werner 본인도 이를 "명백한 사기"라 표현한다
+        (Saylor의 도덕적 수사와 결론이 오히려 수렴하는 지점, CH3 C4 참조).
+        <span class="ts-links"><span class="ts" data-vid="riffmvEOWlg" data-t="55:34">55:34</span></span>
+      </div>
+
+      <div class="subhead">검증 습관 — Via Negativa, 표면 규칙 vs 실질 규칙</div>
+      <p class="lecture-text">
+        Ep7의 반증 우위 논증(Via Negativa)과 Ep16의 "난이도 조정"에서 드러나는 표면 규칙/실질 규칙 구분은 모두 "그럴듯한
+        설명"을 의심하는 습관을 요구한다. 이 습관이 가장 실패한 사례가 CH5 F1 — Steve Yegge의 "1000배 생산성" 인용을 검증 없이
+        받아들인 경우다.
+      </p>
+      <div class="alert alert-key">
+        <span class="alert-icon">🔍</span>
+        <div class="alert-text"><strong>P1B GPT-5.5 소문 영상이 반면교사인 이유</strong>
+        신뢰도 최하로 플래그된 <code>-HhMGqCO3Mk</code>는 정보원 신뢰도 계층을 구분하지 않은 콘텐츠의 표본이다.
+        1인 뉴스 채널이 출처 미상 소문을 확정 사실처럼 전달하는 형식 자체가 CH5의 논리 비약 패턴과 동형이다.</div>
+      </div>
+    </div>
+
+    <!-- ── AXIS APPLY ── -->
+    <div class="tab-panel" id="axis-apply">
+      <div class="subhead">AI 실무 (P1)</div>
+      <div class="quote bull">
+        <strong>[12:35] Boris Cherny</strong> CLAUDE.md 최소주의 — "최대한 짧게" 작성하고, 필요한 것만 계층적으로 로드하는 원칙.
+        jOjDRuPl9UU의 "삭제 후 재설치" 원칙[09:56]과 완전히 정합한다.
+        <span class="ts-links"><span class="ts" data-vid="8VFplLyMyf8" data-t="12:35">12:35</span></span>
+      </div>
+      <div class="quote">
+        <strong>[08:57] Boris Cherny</strong> "코드를 작성하기 전에 계획을 세우라는 말입니다. 그게 다예요" — 계획 모드는
+        프롬프트에 "제발 코딩하지 마세요"라는 문장 하나를 추가하는 것뿐이라는 실무 팁.
+        <span class="ts-links"><span class="ts" data-vid="8VFplLyMyf8" data-t="8:57">08:57</span></span>
+      </div>
+      <div class="quote">
+        <strong>[24:21] Boris Cherny</strong> 연구 작업 난이도에 따라 하위 에이전트 수를 3/5/10개로 스케일하는 병렬화 원칙.
+        <span class="ts-links"><span class="ts" data-vid="jOjDRuPl9UU" data-t="24:21">24:21</span></span>
+      </div>
+      <div class="quote">
+        <strong>[11:19] MCP vs 스킬 비교 영상</strong> 분기 기준 — 실시간 외부 시스템 연동이 필요하면 MCP, 지침·코드
+        제공만으로 충분하면 스킬로 설계할 것.
+        <span class="ts-links"><span class="ts" data-vid="rm2A-K1HSRY" data-t="11:19">11:19</span></span>
+      </div>
+      <div class="quote">
+        <strong>[13:39] Sherwin Woo</strong> "코딩 에이전트가 원하는 대로 작동하지 않을 때, 대개 컨텍스트나 제공하신 정보에
+        문제가 있는 경우가 많다" — 검증 루프 설계의 핵심: 결과 확인 방법만 제공하면 에이전트가 스스로 개선한다.
+        <span class="ts-links"><span class="ts" data-vid="tzWm1iur8XU" data-t="13:39">13:39</span></span>
+      </div>
+
+      <div class="subhead">재무 (P2·P3) <span class="flag flag-verify">🔬 투자 조언 아님 — 화자 주장 정리</span></div>
+      <div class="quote purple">
+        <strong>[01:36~02:08] Robert Breedlove · Ep5 (스폰서 광고 구간)</strong> "초기 포트폴리오 배분 비율과 목표 포트폴리오
+        배분 비율을 정하는 것이 좋습니다. 먼저 일회성 매수로 초기 포지션을 구축한 다음, 목표 포트폴리오 비율에 도달할 때까지
+        달러 코스트 애버리징(DCA) 방식으로 투자하세요." <span class="flag flag-sponsor">📢 스폰서</span>
+        <span class="ts-links"><span class="ts" data-vid="D7CRlii0KJQ" data-t="1:36">01:36</span></span>
+      </div>
+      <div class="quote purple">
+        <strong>[55:50~58:57] Michael Saylor · Ep5</strong> "담보 가치의 10% 이상은 절대 빌리지 않을 것", "주가가 80% 하락하더라도
+        보유할 수 있으려면 담보 대출비율(LTV)을 20% 이상으로 빌리면 안 됩니다" — 구체적 수치를 가진 리스크 관리 규칙.
+        <span class="ts-links"><span class="ts" data-vid="D7CRlii0KJQ" data-t="55:50">55:50</span></span>
+      </div>
+      <div class="quote">
+        <strong>[60:35] Raoul Pal</strong> 자산가격을 화폐공급/대차대조표로 디플레이트해서 봐야 진짜 실질가치가 보인다는
+        프레임 — "일이 벌어진 후 비로소 그 연관성을 깨닫게 되는 경우가 많으니 먼저 생각해야 한다"[01:43].
+        <span class="ts-links"><span class="ts" data-vid="1inMUNY-5v4" data-t="60:35">60:35</span></span>
+      </div>
+
+      <div class="subhead">조직·시스템</div>
+      <div class="quote">
+        <strong>[30:29] Michael Saylor · Ep15</strong> "화강암은 옮기면 안 돼요. 화강암 위에 건물을 지어야 해요" —
+        기초층(base layer)은 가벼움이 아니라 불변성이 목적이며, 속도 개선은 상위 레이어에서 해결해야 한다는 아키텍처 원칙.
+        <span class="ts-links"><span class="ts" data-vid="6oBhph1IRm0" data-t="30:29">30:29</span></span>
+      </div>
+      <div class="quote">
+        <strong>[50:42] Michael Saylor · Ep15</strong> "임원 지분 보유는 상방 인센티브만 있고 하방 책임이 없다" — 조직 설계에서
+        인센티브-책임 비대칭을 점검해야 한다는 실무 원칙.
+        <span class="ts-links"><span class="ts" data-vid="6oBhph1IRm0" data-t="50:42">50:42</span></span>
+      </div>
+      <div class="quote">
+        <strong>[32:18~32:49] Michael Saylor · Ep10</strong> "신뢰 네트워크는 10~20마일까지만 확장 가능하다" — 조직·커뮤니티
+        설계 시 신뢰 반경의 물리적 한계를 고려해야 한다는 통찰.
+        <span class="ts-links"><span class="ts" data-vid="tAY6KeBq2bU" data-t="32:18">32:18</span></span>
+      </div>
+      <div class="quote">
+        <strong>[32:20] Sherwin Woo</strong> 관리자는 시간의 50% 이상을 상위 10% 성과자에게 투입한다는 경영 원칙
+        (『신화 속의 맨먼스』 외과의사 팀 비유 인용).
+        <span class="ts-links"><span class="ts" data-vid="tzWm1iur8XU" data-t="32:20">32:20</span></span>
+      </div>
+      <div class="quote bear">
+        <strong>일론 머스크</strong> 삭제→단순화→가속→자동화 순서 — 순서를 뒤집어 "잘못된 것을 자동화"하는 것이 가장 흔한 실패
+        패턴이라는 경고(CH3 C6에서 Cherny의 탐색적 설계와 적용조건 대비).
+        <span class="ts-links"><span class="ts" data-vid="ekIBxxt0Zag" data-t="0:00">ekIBxxt0Zag</span></span>
+      </div>
+
+      <div class="subhead">전달 (윈스턴)</div>
+      <div class="quote">
+        <strong>[04:52] Patrick Winston</strong> 시작은 농담이 아니라 "힘을 실어주는 약속(empowerment promise)"으로 —
+        청중이 아직 화자의 톤에 익숙해지지 않아 농담을 받아들일 준비가 안 됐기 때문.
+        <span class="ts-links"><span class="ts" data-vid="fyziIpGJfMw" data-t="4:52">04:52</span></span>
+      </div>
+      <p class="lecture-text">
+        빈 칠판에서 시작해 판서 속도로 청중의 이해 속도를 맞추는 기법, 그리고 마무리는 "들어주셔서 감사합니다"(예의상 참았다는
+        뉘앙스)가 아니라 기여 슬라이드로 끝내는 것이 39기법의 핵심 축이다[53:32~57:35].
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CH3 충돌/수렴 매트릭스 ══════════════════════════════════════════════ -->
+<section class="chapter core" id="ch3">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">03</span></div>
+    <div class="chapter-meta">
+      <h2>★ 충돌·수렴 매트릭스 — 독립 심사관의 재판정</h2>
+      <p>crosscheck_report.md 1부 — SYNTHESIS.md §4 후보 11건 전량 재판정, "대립"이 아닌 "역할 분업" 프레임</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="alert alert-warn">
+      <span class="alert-icon">🚨</span>
+      <div class="alert-text"><strong>수렴 착시 경고 — 반드시 먼저 읽을 것</strong>
+      SYNTHESIS.md 초안은 "컨텍스트 모호성 제거" 원칙을 Anthropic·OpenAI·스탠퍼드 3진영이 "독립적으로" 확인했다고 서술했다.
+      Opus 재검증 결과 이 표현은 <strong>4건 중 1건(V1)에만</strong> 해당한다. 나머지 3건, 특히 가장 임팩트 있어 보였던
+      "규모&gt;아키텍처(Bitter Lesson) 3진영 독립 수렴"은 실제로는 세 화자 모두 <strong>Rich Sutton의 2019년 동일 에세이를
+      인용한 것</strong>일 뿐이다 — 공동출처를 독립 교차확인으로 착각한 사례(CH5 F2와 동일 오류 패턴). "여러 곳이 말했으니 참일
+      것"이라는 직관은 원전이 하나인 순간 무너진다.</div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">SVG 스펙 1 — 충돌 7건 · 수렴 4건 재판정 스펙트럼</div>
+      <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="28" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#fff">충돌 후보 7건 — "대립"에서 "역할 분업"으로</text>
+        <line x1="40" y1="60" x2="860" y2="60" stroke="#243047" stroke-width="2"/>
+        <text x="40" y="46" font-family="IBM Plex Mono" font-size="9" fill="#F6465D">◀ 진짜 충돌(1)</text>
+        <text x="860" y="46" text-anchor="end" font-family="IBM Plex Mono" font-size="9" fill="#0ECB81">상보/적용조건상이(6) ▶</text>
+        <!-- C2 real conflict near left -->
+        <g><circle cx="110" cy="60" r="16" fill="#F6465D22" stroke="#F6465D" stroke-width="2"/><text x="110" y="65" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#F6465D" font-weight="700">C2</text></g>
+        <text x="110" y="95" text-anchor="middle" font-size="9.5" fill="#EAECEF">Saylor 발견↔설계</text>
+        <text x="110" y="108" text-anchor="middle" font-size="8.5" fill="#848E9C">(화자 내부 긴장)</text>
+        <!-- C1,C3,C4,C5 complementary -->
+        <g><circle cx="320" cy="60" r="14" fill="#0ECB8122" stroke="#0ECB81" stroke-width="2"/><text x="320" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#0ECB81" font-weight="700">C1</text></g>
+        <text x="320" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">Saylor↔Breedlove</text>
+        <g><circle cx="430" cy="60" r="14" fill="#0ECB8122" stroke="#0ECB81" stroke-width="2"/><text x="430" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#0ECB81" font-weight="700">C3</text></g>
+        <text x="430" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">Hayes↔Pal</text>
+        <g><circle cx="540" cy="60" r="14" fill="#0ECB8122" stroke="#0ECB81" stroke-width="2"/><text x="540" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#0ECB81" font-weight="700">C4</text></g>
+        <text x="540" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">Werner↔Saylor</text>
+        <g><circle cx="650" cy="60" r="14" fill="#0ECB8122" stroke="#0ECB81" stroke-width="2"/><text x="650" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#0ECB81" font-weight="700">C5</text></g>
+        <text x="650" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">Back↔루미스·맥코맥</text>
+        <!-- C6,C7 differing application -->
+        <g><circle cx="760" cy="60" r="14" fill="#F0B90B22" stroke="#F0B90B" stroke-width="2"/><text x="760" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#F0B90B" font-weight="700">C6</text></g>
+        <text x="760" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">머스크↔Cherny</text>
+        <g><circle cx="820" cy="60" r="14" fill="#F0B90B22" stroke="#F0B90B" stroke-width="2"/><text x="820" y="64" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#F0B90B" font-weight="700">C7</text></g>
+        <text x="820" y="92" text-anchor="middle" font-size="9" fill="#EAECEF">해밍↔Hughes</text>
+
+        <text x="20" y="160" font-family="Space Grotesk" font-size="14" font-weight="700" fill="#fff">수렴 후보 4건 — "3진영 독립"에서 "대부분 단일 원전"으로</text>
+        <line x1="40" y1="192" x2="860" y2="192" stroke="#243047" stroke-width="2"/>
+        <text x="40" y="178" font-family="IBM Plex Mono" font-size="9" fill="#0ECB81">◀ 진짜 독립 수렴(1)</text>
+        <text x="860" y="178" text-anchor="end" font-family="IBM Plex Mono" font-size="9" fill="#F6465D">공동출처/단일원전 재인용(3) ▶</text>
+        <g><circle cx="120" cy="192" r="16" fill="#0ECB8122" stroke="#0ECB81" stroke-width="2"/><text x="120" y="197" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#0ECB81" font-weight="700">V1</text></g>
+        <text x="120" y="227" text-anchor="middle" font-size="9.5" fill="#EAECEF">컨텍스트 부족론</text>
+        <text x="120" y="240" text-anchor="middle" font-size="8.5" fill="#848E9C">(Anthropic·OpenAI·Stanford)</text>
+        <g><circle cx="620" cy="192" r="14" fill="#9B72FF22" stroke="#9B72FF" stroke-width="2"/><text x="620" y="196" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#9B72FF" font-weight="700">V4</text></g>
+        <text x="620" y="224" text-anchor="middle" font-size="9" fill="#EAECEF">레이어드 아키텍처</text>
+        <text x="620" y="236" text-anchor="middle" font-size="8.5" fill="#848E9C">(부분 수렴)</text>
+        <g><circle cx="730" cy="192" r="14" fill="#F6465D22" stroke="#F6465D" stroke-width="2"/><text x="730" y="196" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#F6465D" font-weight="700">V3</text></g>
+        <text x="730" y="224" text-anchor="middle" font-size="9" fill="#EAECEF">반취약성</text>
+        <text x="730" y="236" text-anchor="middle" font-size="8.5" fill="#848E9C">(Saylor 반복인용)</text>
+        <g><circle cx="820" cy="192" r="16" fill="#F6465D22" stroke="#F6465D" stroke-width="2.5"/><text x="820" y="197" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#F6465D" font-weight="700">V2</text></g>
+        <text x="820" y="227" text-anchor="middle" font-size="9.5" fill="#EAECEF">규모&gt;아키텍처</text>
+        <text x="820" y="240" text-anchor="middle" font-size="8.5" fill="#848E9C">(Bitter Lesson 공동출처)</text>
+
+        <rect x="40" y="290" width="820" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+        <text x="60" y="312" font-size="10.5" fill="#EAECEF" font-weight="600">역할 분업 프레임</text>
+        <text x="60" y="330" font-size="9.5" fill="#848E9C">7개 "충돌" 중 6개는 시간축(전술적 vs 구조적)·층위(물리 vs 가치평가·실증 vs 도덕)·적용조건(성숙기 vs 탐색기)이 다른 상보 관계다.</text>
+        <text x="60" y="346" font-size="9.5" fill="#848E9C">화자들을 "대립 진영"으로 배치하면 틀린다 — "서로 다른 조건에서 각자 옳은 진술"로 배치해야 정확하다.</text>
+      </svg>
+      <div class="chart-caption"><strong>근거</strong>: crosscheck_report.md 1부 전체 + crosscheck_matrix.json conflicts/convergences 배열. 원 크기는 판정 확실성이 아니라 시각적 구분을 위한 것이며 수치적 의미는 없다.</div>
+    </div>
+
+    <div class="section-sep"><span>충돌 후보 7건 — 상세 판정</span></div>
+    <div id="conflict-acc">
+      <div class="acc-item open">
+        <div class="acc-head"><h4><span class="acc-idx">C1</span> Saylor 에너지론 ↔ Breedlove 시간선호론 <span class="badge badge-bull">상보</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Saylor는 에너지-화폐 테제의 주 발언자(물리학·열역학 비유)이고, Breedlove는 "진행자 겸 통역자"로서 오스트리아학파
+          시간선호 렌즈로 되묻고 정리한다. 두 프레임은 동일 현상(화폐 가치)을 물리적 기질(에너지) vs 인간 가치평가(시간선호)
+          두 층위에서 서술한다 — 경쟁이 아니라 <strong>층위 분업</strong>이다. 진행자가 화자의 테제를 다른 렌즈로 되묻는 구조라
+          진짜 충돌이 아니다.
+          <div class="ts-links"><span class="ts" data-vid="D7CRlii0KJQ" data-t="97:54">Ep5 97:54</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item open">
+        <div class="acc-head"><h4><span class="acc-idx">C2</span> Saylor "화폐=발견된 자연법칙" ↔ "비트코인=발명·설계된 시스템" <span class="badge badge-bear">진짜 충돌</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          동일 화자 내부의 미해소 긴장이다. Ep7 사자-영양 우화[13:04]는 "인간 개입이 자연 복잡계를 망친다"고 논증하는데,
+          비트코인 자체는 인간이 발명·설계한 시스템이다. "자연법칙 발견" 프레임과 "공학적 설계물" 프레임을 편의적으로 오가며
+          어느 쪽도 해소되지 않는다. <strong>7건 중 유일한 진짜 충돌 — 단, 화자 간이 아니라 화자 내부의 미해소 논리 긴장이다.</strong>
+          <div class="ts-links"><span class="ts" data-vid="9y4-BdENW3M" data-t="13:04">Ep7 13:04</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">C3</span> Hayes 단기 유동성 기계론 ↔ Raoul Pal 장기 인구구조 숙명론 <span class="badge badge-bull">상보</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Hayes는 전술적/순환적(4/1 eSLR 완화[12:11] → 연말 BTC $125k[14:19]), Pal은 구조적/세대적(인구통계→부채→유동성
+          8단계[18:08])이다. 시간 지평만 다를 뿐 방향(유동성 확대→BTC 상승)은 동일하다. 정책 반응 예측이 상충하지 않는다.
+          <div class="ts-links"><span class="ts" data-vid="Z9HFJsja3m4" data-t="12:11">Hayes 12:11</span><span class="ts" data-vid="1inMUNY-5v4" data-t="18:08">Pal 18:08</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">C4</span> Werner 은행 신용창출 실증 ↔ Saylor "노동 없는 위조" 도덕 수사 <span class="badge badge-bull">상보</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          동일 현상(화폐의 무에서의 창출)을 Werner는 실증(통화 97% 은행대출 창출[33:32], 금세공사 사기 증명[55:34])으로,
+          Saylor는 도덕 판단으로 서술한다. <strong>Werner 본인도 "명백한 사기"[55:34]라 표현</strong>한다 — 실증/도덕 프레임이
+          오히려 같은 결론으로 수렴한다. 메커니즘 일치, 어조 차이만 존재한다.
+          <div class="ts-links"><span class="ts" data-vid="riffmvEOWlg" data-t="55:34">55:34</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">C5</span> Adam Back "기관 채택=정신 확산" ↔ 맥코맥·루미스 self-custody 자유주의 <span class="badge badge-bull">상보</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Back 자신이 self-custody를 핵심 가치로 옹호한다("자기 주권 원하면 직접 쟁취"[09:53], Blockstream Green 지갑
+          상세[13:28]). ETF/기관은 '관문', self-custody는 '목적지'라는 단계적 관점으로 두 입장을 스스로 통합한다.
+          P3B도 "루미스·맥아피는 순수 극단 아님"이라 명시 — 톤 스펙트럼 차이일 뿐 원칙 충돌이 아니다.
+          <div class="ts-links"><span class="ts" data-vid="1xHR3zU3ikQ" data-t="9:53">Back 09:53</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">C6</span> 머스크 "삭제 우선" ↔ Cherny "20개 프로토타입 후 선택" <span class="badge badge-neutral">적용조건 상이</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          머스크는 성숙한 생산 프로세스의 낭비 제거(삭제→단순화→가속→자동화, 잘못된 것 자동화 금지)이고, Cherny[36:41]는
+          초기 탐색의 발산적 시도(20개 만들고 선택)다. 라이프사이클의 다른 국면이다 — P1A도 둘을 "일단 시도 후 관찰·수정"
+          동일 인식론으로 본다.
+          <div class="ts-links"><span class="ts" data-vid="jOjDRuPl9UU" data-t="36:41">Cherny 36:41</span></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">C7</span> 해밍 "문 열고 일하라" ↔ Chase Hughes 조종 방어 <span class="badge badge-neutral">적용조건 상이</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          해밍의 개방성은 아이디어·동료와의 지적 개방성(인과는 미확정이라 스스로 명시[18:34]), Hughes의 경계는 악의적
+          조종자에 대한 개인 취약점 방어(개방성=6대 영향 레버 중 하나[74:21])다. 대상이 다르다(아이디어 vs 악용가능 취약점) —
+          둘 다 참일 수 있다.
+          <div class="ts-links"><span class="ts" data-vid="M8NLDe7yXCA" data-t="18:34">해밍 18:34</span><span class="ts" data-vid="qYnhUKraCLw" data-t="74:21">Hughes 74:21</span></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="section-sep"><span>수렴 후보 4건 — 상세 판정</span></div>
+    <div id="conv-acc">
+      <div class="acc-item open">
+        <div class="acc-head"><h4><span class="acc-idx">V1</span> 컨텍스트/모호성 제거 — Anthropic·OpenAI·스탠퍼드 3진영 <span class="badge badge-bull">진짜 독립 수렴</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          3개 별개 조직/화자(MCP 공동창시자, Sherwin Woo, 스탠퍼드)가 서로 인용 없이 동일 결론(에이전트 실패=컨텍스트 부족)에
+          도달한다. P1B 실측 독립성 확인. <strong>4건 중 유일하게 인정 가능한 독립 수렴</strong> — 단 세 소스 모두 동시대 LLM
+          실무 담론이라 시대적 공기(Zeitgeist) 공유 가능성은 잔존한다.
+        </div></div>
+      </div>
+      <div class="acc-item open">
+        <div class="acc-head"><h4><span class="acc-idx">V2</span> "규모&gt;아키텍처" Bitter Lesson <span class="badge badge-bear">공동출처(수렴 아님)</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Cherny·Sherwin·스탠퍼드가 모두 "씁쓸한 교훈"을 명시 인용한다 — 이는 Rich Sutton 2019년 동일 에세이다.
+          <strong>같은 원전을 읽고 인용하는 것이므로 독립 수렴이 아니다.</strong> "3진영 독립 확인" 강조는 과대 — 강의에서는
+          "공통 원전 인용"으로 정정한다.
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">V3</span> 반취약성 — Saylor 4회 + 해밍 "고통=정보" 공명 <span class="badge badge-purple">의미 공명</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Saylor의 4회(Ep6→7→9→16)는 동일 화자가 탈레브 단일 원전을 반복 인용한 것 — 독립 수렴이 아니다. 해밍 공명은
+          분석자가 사후 구성한 주제적 유사성이다. 실질은 "단일 출처 반복 + 분석자 은유"이므로 강한 독립 수렴으로 제시하면 과장이다.
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head"><h4><span class="acc-idx">V4</span> 레이어드 아키텍처 — Ep15 화강암 = Ep17 TCP/IP = P1 MCP <span class="badge badge-accent">부분 수렴</span></h4><span class="acc-arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-body-inner">
+          Ep15·Ep17은 둘 다 동일 화자(Saylor) 은유 — 상호 독립이 아니다. MCP 설계(P1)는 별도 도메인의 진짜 독립 병렬이나
+          "기초층 위에 쌓는다"는 일반 원리 수준의 은유적 유사다. Saylor 내부 쌍(1소스) + MCP(1소스)의 부분 수렴이다.
+          <div class="ts-links"><span class="ts" data-vid="6oBhph1IRm0" data-t="30:29">Ep15 30:29</span><span class="ts" data-vid="EVIcJL8asYM" data-t="30:28">Ep17 30:28</span></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="alert alert-tip">
+      <span class="alert-icon">🎯</span>
+      <div class="alert-text"><strong>심사관 종합 소견 1·2 (원문 인용)</strong>
+      "'충돌'은 대부분 허상이다 — 7건 중 진짜 충돌 1건(그마저 Saylor 내부 긴장). 강의는 화자들을 '대립 진영'이 아니라
+      '다른 시간축·층위·적용조건의 상보'로 배치해야 정확하다." / "'수렴'은 대부분 과장이다 — 4건 중 진짜 독립 수렴 1건(V1).
+      나머지는 단일 원전(Bitter Lesson) 인용·동일 화자(Saylor) 반복을 독립 증거로 오인했다. '3곳이 독립적으로 말했다'
+      프레임은 강의에서 가장 위험한 착시다."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CH4 사실검증 결과표 ══════════════════════════════════════════════ -->
+<section class="chapter core" id="ch4">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">04</span></div>
+    <div class="chapter-meta">
+      <h2>★ 사실검증 결과표 — 23건</h2>
+      <p>crosscheck_matrix.json facts 배열 전량 · 필터 + th 클릭 정렬 지원</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="alert alert-key">
+      <span class="alert-icon">🧮</span>
+      <div class="alert-text"><strong>집계 수치 불일치 — 정직 공시</strong>
+      crosscheck_report.md 본문은 "사실 22건(CONFIRMED 8·REFUTED 2·UNVERIFIABLE 8·TRANSCRIPTION-ERROR-LIKELY 4)"이라고
+      요약하지만, 구조화 데이터인 crosscheck_matrix.json의 <code>facts</code> 배열은 <strong>23건</strong>을 담고 있고
+      실제 REFUTED는 <strong>3건</strong>(왕젠 수치·도버해협·다트머스 연도)이다. 최우선 3건(왕젠·맥아피·Yegge)을 본문 요약에서
+      "22건" 밖으로 뺐는지 여부가 원본 문서에 명시되어 있지 않다 — 이 문서는 <strong>구조화 데이터(23건)를 그대로 신뢰</strong>해
+      전량 표기했다. 이 불일치는 임의로 해소하지 않고 있는 그대로 보고한다.</div>
+    </div>
+
+    <div class="filter-bar">
+      <span class="filter-label">판정 필터</span>
+      <button class="filter-btn active" data-filter="all">전체 23건</button>
+      <button class="filter-btn" data-filter="CONFIRMED">CONFIRMED 8</button>
+      <button class="filter-btn" data-filter="REFUTED">REFUTED 3</button>
+      <button class="filter-btn" data-filter="UNVERIFIABLE">UNVERIFIABLE 8</button>
+      <button class="filter-btn" data-filter="ERROR">오전사추정 4</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="fact-table">
+        <thead><tr>
+          <th class="sortable" data-key="idx">#</th>
+          <th>주장</th>
+          <th class="sortable" data-key="verdict">판정</th>
+          <th>출처</th>
+          <th>근거 요약</th>
+        </tr></thead>
+        <tbody>
+          <tr data-verdict="REFUTED"><td data-sort="1">1</td><td>중국 최고 부자 "2조 3천억 달러" 재산, 프랑스서 셀카 중 추락사 [100:06]</td><td><span class="badge badge-bear">REFUTED</span></td><td><span class="ts" data-vid="tveitmNRGc8" data-t="100:06">Ep1</span></td><td>일화(왕젠·HNA 공동회장, 2018 프로방스 추락사)는 실재하나 재산액이 10배+ 과장(HNA 총자산도 $230B).</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="2">2</td><td>로마가 카르타고 선박 역설계해 90일 만에 150척 함대 건조 [87:54]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="v3HZOeMVBss" data-t="87:54">Ep2</span></td><td>1차 포에니 전쟁(BCE 260) 실제 사건. '150척' 일치, '90일'은 고전 기록 '60일'보다 경미 과장.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="3">3</td><td>록펠러 재산 당시 3~4억 달러 ×100~200배 = 현재가치 2천억~2천5백억 달러 [55:14]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="v3HZOeMVBss" data-t="55:14">Ep2</span></td><td>최종 추정치는 통용 범위 내이나 base 저평가·배율 근거 불명확 — 결론 방어 가능, 산출 느슨.</td></tr>
+          <tr data-verdict="REFUTED"><td data-sort="4">4</td><td>도버해협 13마일은 1066년 정복왕 윌리엄 외 아무도 건너지 못함 [15:35]</td><td><span class="badge badge-bear">REFUTED</span></td><td><span class="ts" data-vid="snvVpJeqz4Y" data-t="15:35">Ep3</span></td><td>로마의 브리튼 침공(BCE 55·CE 43)이 성공적으로 해협을 건넜다 — 명백한 반례 무시.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="5">5</td><td>애플이 최고 가치 기업인 이유 = 5센트 소프트웨어 업데이트 [35:08]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="QQhzEFnZ3kc" data-t="35:08">Ep6</span></td><td>반증 불가능한 수사적·주관적 인과 주장. 사실 검증 대상이 아닌 은유.</td></tr>
+          <tr data-verdict="ERROR"><td data-sort="6">6</td><td>알트코인/암호화폐 총액 250조 달러 vs 실제 자산가치 250억 달러 [42:00]</td><td><span class="badge badge-purple">오전사추정</span></td><td>Ep6/Ep8 (복수 언급)</td><td>전체 암호화폐 시총은 $3~4조 — $250조는 물리적 불가. 조/억 자동전사 오기 추정.</td></tr>
+          <tr data-verdict="ERROR"><td data-sort="7">7</td><td>"니콜라스 TB" 인명 (100대 도시 은행 생존율 예측 주체) [38:51]</td><td><span class="badge badge-purple">오전사추정</span></td><td>P2A/P2B</td><td>'Nassim Taleb'(나심 탈레브)의 자동전사 오기로 추정. 원음 대조 없이 확정 불가.</td></tr>
+          <tr data-verdict="ERROR"><td data-sort="8">8</td><td>"로버트 하이랜드" (『라이프라인』 저자) [24:12]</td><td><span class="badge badge-purple">오전사추정</span></td><td>P2A</td><td>경제사학자 Robert Higgs의 오전사로 추정. UNVERIFIABLE에 가까운 추정.</td></tr>
+          <tr data-verdict="ERROR"><td data-sort="9">9</td><td>"세이프티" 저자 (화폐 관련서)</td><td><span class="badge badge-purple">오전사추정</span></td><td>P2B</td><td>'Saifedean'(Saifedean Ammous, 『The Bitcoin Standard』 저자)의 오전사로 추정.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="10">10</td><td>리디아 동전 이래 5,000종 이상의 화폐 제도가 실패 [13:31]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="tAY6KeBq2bU" data-t="13:31">Ep10</span></td><td>'5,000종 실패'의 권위 있는 집계 출처 없음 — Saylor 상용 수사, 정성적 서사.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="11">11</td><td>최근 12개월 BTC +240%, 금 -9.82% / 10년 CAGR 132% [47:20~48:30]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="tAY6KeBq2bU" data-t="47:20">Ep10</span></td><td>녹화 시점 미상 + 특정 상승장 구간 선택 — 생존편향·체리피킹 구조.</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="12">12</td><td>매일 900개의 비트코인이 채굴됨 [34:46]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="jloXSEZOx3Q" data-t="34:46">Ep12</span></td><td>6.25×144=900, 2024-04 반감기 이전 기준 정확(현재는 450 — 녹화 시점 단서).</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="13">13</td><td>Ep14 채굴장비 "5세대" vs Ep16 "7세대" 수치 불일치</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="YfShS7SEIAg" data-t="22:45">Ep14</span> / <span class="ts" data-vid="MNWyujhHAxY" data-t="2:45">Ep16</span></td><td>3~4년 경과로 세대 진행 설명 가능 — 모순 아닐 개연. 세대 정의 기준 자막 미제시.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="14">14</td><td>SEC 위원장 TV 발언 (ICO=증권 규정 관련)</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td>P2D</td><td>발언·일자·매체 미특정으로 외부 대조 불가.</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="15">15</td><td>하워드 휴즈가 세계 최고 부자였을 때 호텔 최상층에서 7년간 은둔 [14:20]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="6oBhph1IRm0" data-t="14:20">Ep15</span></td><td>말년 은둔은 실제(라스베가스 데저트인 등). '7년'은 근사치 — 은둔 자체는 확립된 사실.</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="16">16</td><td>재니스 맥아피: 프랑스 당국이 암호화폐 지갑정보 판매 → 납치 급증 [04:44]</td><td><span class="badge badge-bull">CONFIRMED (현상)</span></td><td><span class="ts" data-vid="6zwG7-t3LCE" data-t="4:44">P3B</span></td><td>2025~26 프랑스가 암호화폐 납치 진원지 — 데이터 유출과 직접 연계 실재. '당국 판매' 기제만 부정확(실제는 해킹).</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="17">17</td><td>Hayes: eSLR 완화 → 약 $4조 신용창조 [14:19]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="Z9HFJsja3m4" data-t="14:19">P3B</span></td><td>S&amp;P 추산 $1.3조는 출처 존재, ×3·$4조는 Hayes 개인 경험칙(출처 미상) — 예측값이라 검증 불가.</td></tr>
+          <tr data-verdict="REFUTED"><td data-sort="18">18</td><td>1957년 다트머스 인공지능 컨퍼런스 제안서 [32:32]</td><td><span class="badge badge-bear">REFUTED</span></td><td><span class="ts" data-vid="fyziIpGJfMw" data-t="32:32">P4</span></td><td>제안서 1955·컨퍼런스 1956 — '1957년' 불일치. 발언 위치는 윈스턴 강의(스팟체크로 해밍 오귀속 정정).</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="19">19</td><td>아인슈타인이 1905년 한 해 학술지 5편 발표 [05:13]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="M8NLDe7yXCA" data-t="5:13">P4</span></td><td>정전 4편 + 박사학위논문(1905 Annalen der Physik 게재) = 5편도 유효 — 해밍의 '5편'은 방어 가능.</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="20">20</td><td>사이코패스 인구 비율 4% → (구글 검색) 1% 자기정정 [132:27→133:33]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="qYnhUKraCLw" data-t="132:27">P4</span></td><td>자기정정 실제 발생. 수치 자체도 문헌 양립(1% 통설, 4% 기업맥락 상용).</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="21">21</td><td>Steve Yegge: Anthropic 엔지니어 생산성 구글 대비 평균 1,000배 [39:46]</td><td><span class="badge badge-bull">CONFIRMED (인용)</span></td><td><span class="ts" data-vid="jOjDRuPl9UU" data-t="39:46">P1</span></td><td>인용 자체는 정확(Yegge 'The Anthropic Hive Mind'). 단 40여명 인터뷰 기반 정성적 인상, 측정 방법론 없음 — 근거 수치는 UNVERIFIABLE.</td></tr>
+          <tr data-verdict="CONFIRMED"><td data-sort="22">22</td><td>NASA 화성 탐사선 퍼서비어런스 항로 계획에 Claude Code 사용 [47:40]</td><td><span class="badge badge-bull">CONFIRMED</span></td><td><span class="ts" data-vid="jOjDRuPl9UU" data-t="47:40">P1</span></td><td>2025-12 JPL이 실제로 Claude Code로 항로(약 400m) 계획 — Anthropic·JPL 공식 확인.</td></tr>
+          <tr data-verdict="UNVERIFIABLE"><td data-sort="23">23</td><td>GPQA 벤치마크 30% → 100% 등 수치 [01:00~01:30]</td><td><span class="badge badge-neutral">UNVERIFIABLE</span></td><td><span class="ts" data-vid="rm2A-K1HSRY" data-t="1:00">P1</span></td><td>GPQA 100% 달성은 문헌상 미확인(최상위 모델도 미달) — 과장 또는 벤치마크 혼동 가능.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-sep"><span>최우선 3건 — 외부 대조 완료 상세</span></div>
+
+    <div class="priority-card">
+      <h4>🔬 중국 부호 "2조 3천억 달러" — <span class="badge badge-bear">REFUTED (일화 실재, 수치 불가)</span></h4>
+      <p class="lecture-text">자막 원문: "중국 최고 부자가 프랑스 남부로 여름휴가를 갔었는데요. 2조 3천억 달러의 재산을 가진 그 남자는…
+      셀카를 찍으려고 암벽 위에 올라갔습니다… 15미터 아래로 추락해 사망했습니다." <span class="ts" data-vid="tveitmNRGc8" data-t="100:06">100:06</span></p>
+      <p class="lecture-text">외부 대조: 왕젠(Wang Jian, HNA 그룹 공동회장)이 2018-07-03 프로방스 보니외에서 사진 촬영 중 15m 추락사 —
+      <strong>일화는 사실</strong>. 그러나 <strong>HNA 그룹 총자산이 $230B(2천 3백억)</strong>이고 개인 재산은 그보다 훨씬 적다 —
+      "$2.3조(2조 3천억 달러)"는 물리적 불가(자릿수 10배+ 과장, trillion/billion 혼동 추정).</p>
+      <p class="lecture-text" style="font-size:11.5px;color:var(--text3)">출처: en.wikipedia.org/wiki/Wang_Jian_(businessman) · scmp.com/news/china/money-wealth/article/2153739</p>
+    </div>
+
+    <div class="priority-card">
+      <h4>🔬 재니스 맥아피 "프랑스 지갑정보 유출→납치 급증" — <span class="badge badge-bull">CONFIRMED (현상), 세부 부정확</span></h4>
+      <p class="lecture-text">자막 원문: "프랑스의 한 당국이 암호화폐 보유자들의 지갑 정보와 개인 정보를 판매한 사례가 있습니다.
+      이로 인해 납치 사건이 증가했고…" <span class="ts" data-vid="6zwG7-t3LCE" data-t="4:44">04:44</span></p>
+      <p class="lecture-text">외부 대조: 2025~26 프랑스가 암호화폐 납치("wrench attack")의 세계 진원지 — 데이터 유출(Waltio 5만명·Ledger 유출)과
+      직접 연계(해커가 최소 3건 납치·$17.1M와 연계 주장), 프랑스 당국 집계 납치 2024년 18건→2025년 67건.
+      <strong>핵심 현상은 CONFIRMED</strong>. 단 "당국이 판매"라는 기제는 부정확 — 실제는 정부 판매가 아닌 해킹·플랫폼 유출.</p>
+      <p class="lecture-text" style="font-size:11.5px;color:var(--text3)">출처: forbes.com/sites/digital-assets/2026/02/14 · cybernews.com/security (Waltio-French crypto kidnappings)</p>
+    </div>
+
+    <div class="priority-card">
+      <h4>🔬 Steve Yegge "1000배 생산성" — <span class="badge badge-bull">CONFIRMED (인용 정확)</span>, 실질 <span class="badge badge-neutral">UNVERIFIABLE</span></h4>
+      <p class="lecture-text">외부 대조: Yegge가 실제로 "Anthropic 엔지니어가 2005년 구글러 대비 ~1000배 생산성"이라 서술했다
+      ('The Anthropic Hive Mind', Medium). <strong>인용 정확성은 CONFIRMED</strong>다. 단 이는 40여명 인터뷰 기반 정성적
+      인상으로 측정 방법론이 없고(Yegge 본인도 정성 관찰로 규정), 구글 경영진이 공개 반박했다. <strong>인용은 정확하나 근거
+      수치의 실질은 검증 불가</strong> — 강의에서 "측정된 수치 아님" 배지가 필수인 이유다.</p>
+      <p class="lecture-text" style="font-size:11.5px;color:var(--text3)">출처: steve-yegge.medium.com/the-anthropic-hive-mind-d01f768f3d7b · venturebeat.com (Google leaders push back)</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CH5 논리 비약 Top10 ══════════════════════════════════════════════ -->
+<section class="chapter" id="ch5">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">05</span></div>
+    <div class="chapter-meta">
+      <h2>논리 비약 Top 10 — 수강자가 가장 속기 쉬운 순</h2>
+      <p>crosscheck_report.md 3부 fallacies 배열 — 왜 비약인지 1문장 근거 포함</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">
+      아래 10개는 44편 전체에서 "그럴듯하게 들리지만 검증하면 무너지는" 논증 패턴을 순위화한 것이다. 각 항목은
+      단순 사실 오류(CH4)가 아니라 <strong>추론 구조 자체의 결함</strong>에 초점을 맞춘다.
+    </p>
+    <div id="fallacy-list">
+      <div class="fallacy-card"><h4><span class="fallacy-num">F1</span> Yegge '1000배 생산성'을 사실처럼 제시 <span class="ts" data-vid="jOjDRuPl9UU" data-t="39:46">39:46</span></h4>
+        <p class="lecture-text">제3자 블로그의 정성적 인상(방법론 없음)을 정량 수치로 위장 — 권위 호소 + 거짓 정밀. 수강자가 '1000배'를 벤치마크 결과로 오인한다.</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F2</span> '규모&gt;아키텍처'가 3진영 독립 수렴이라는 서술</h4>
+        <p class="lecture-text">세 화자가 모두 Sutton의 Bitter Lesson 단일 원전을 인용 — 공동출처를 '독립적 교차 확인'으로 위장한다. '여러 곳이 독립적으로 말했으니 참'이라는 착시(CH3 V2 참조).</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F3</span> 도버해협 '1066년 외 아무도' <span class="ts" data-vid="snvVpJeqz4Y" data-t="15:35">15:35</span></h4>
+        <p class="lecture-text">로마의 브리튼 정복이라는 명백한 반례를 무시한 절대 단정 — 극적 확신이 검증을 마비시킨다.</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F4</span> 중국 부자 '2조 3천억 달러' 일화 <span class="ts" data-vid="tveitmNRGc8" data-t="100:06">100:06</span></h4>
+        <p class="lecture-text">물리적으로 불가능한 수치를 일화의 극적 장치로 사용 — 큰 숫자에 압도되어 자릿수를 검증하지 않게 된다(실제 대비 10배+ 과장).</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F5</span> 알트코인 '250조 달러 vs 실제 250억' 대비 <span class="ts" data-vid="QQhzEFnZ3kc" data-t="42:00">42:00</span></h4>
+        <p class="lecture-text">오기 가능성 큰 수치로 극단 대비를 만들어 '알트코인은 허상' 결론을 정량으로 착시시킨다 — 정확한 통계처럼 들리나 시가총액 규모와 불일치.</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F6</span> BTC +240%/CAGR 132% vs 금·주식 <span class="ts" data-vid="tAY6KeBq2bU" data-t="47:20">47:20</span></h4>
+        <p class="lecture-text">특정 상승장 구간·미상 시점을 선택한 체리피킹 — 수강자가 과거 수익률을 미래 기대수익으로 일반화한다(생존편향).</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F7</span> '매일 900 BTC 채굴' <span class="ts" data-vid="jloXSEZOx3Q" data-t="34:46">34:46</span></h4>
+        <p class="lecture-text">2024-04 반감기 이전 낡은 수치(현재 450)를 현재값처럼 제시 — 시점 명시 없이 stale data를 사실로 오인시킨다.</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F8</span> Saylor '화폐=발견된 자연법칙'이자 '비트코인=설계된 시스템' <span class="ts" data-vid="9y4-BdENW3M" data-t="13:04">Ep7 13:04</span></h4>
+        <p class="lecture-text">발견/발명 프레임을 편의적으로 전환하는 equivocation — 물리학 은유가 '비트코인 승리는 열역학적 필연'이라는 결정론으로 미끄러진다(CH3 C2 참조).</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F9</span> Werner '일본 20년 불황=의도된 설계' <span class="ts" data-vid="riffmvEOWlg" data-t="123:52">123:52</span></h4>
+        <p class="lecture-text">실증된 '버블 조장'에서 검증되지 않은 '의도성'으로 비약 — 앞선 실증 데이터(신용창출 논문)의 신뢰가 음모론적 목적론에 후광을 부여한다.</p></div>
+      <div class="fallacy-card"><h4><span class="fallacy-num">F10</span> Ian Carroll: 기업 소유구조(검증가능) → 정보기관 서사(검증취약) 확장 <span class="ts" data-vid="ZhCGz_-8mi8" data-t="0:00">ZhCGz_-8mi8</span></h4>
+        <p class="lecture-text">검증 가능한 사실로 신뢰를 쌓은 뒤 검증 불가한 음모로 매끄럽게 이동하는 motte-and-bailey — 앞부분의 사실성이 뒷부분 추측에 부당한 신뢰를 전가한다. <span class="flag flag-verify">🔬 이 구간은 강의 본문에서 존재 고지 수준으로만 다룬다 — 상세 서술 금지(SYNTHESIS §4 민감 콘텐츠 지침).</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ CH6 방법론 한계 고지 ══════════════════════════════════════════════ -->
+<section class="chapter" id="ch6">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">06</span></div>
+    <div class="chapter-meta">
+      <h2>방법론 한계 고지 — 자막·트리아지의 구조적 제약</h2>
+      <p>이 시리즈 전체(P1~P5)가 공유하는 데이터 한계 — 5개 문서를 읽기 전 반드시 숙지</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-icon">자동 자막 오전사</div>
+        <h4>Auto-transcription errors</h4>
+        <p>인명(Taleb→니콜라스TB, Higgs→로버트하이랜드, Saifedean→세이프티)과 수치(조/억, trillion/billion) 오기가 CH4에서만
+        4건 확인됐다. 원음 대조 없이 자막을 액면 그대로 인용하면 이 오류가 그대로 전파된다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">화자 다이어라이제이션 부재</div>
+        <h4>No speaker diarization</h4>
+        <p>44편 전체에 화자 구분 메타데이터가 없다. CH1의 "화자 확정" 표기도 자기소개·제3자 소개 문구를 근거로 한 문맥
+        재구성이며, 진짜 음성 지문 대조가 아니다. Saylor Series는 특히 Breedlove의 리캡 구간에서 화자 오귀속 위험이 크다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">±30초 타임스탬프 오차</div>
+        <h4>±30s timestamp drift</h4>
+        <p>본 문서 전체의 [MM:SS] 및 youtu.be 링크는 자동 자막 블록 경계 기준이며, 실제 발화 시작점과 최대 ±30초
+        어긋날 수 있다. 링크를 열었을 때 해당 발언이 몇 초 전후에 있는지 확인할 것.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">트리아지 1차 분류 오류</div>
+        <h4>Triage misattribution</h4>
+        <p>1차 자동 트리아지가 화자명(Ian Carroll→Brewster, MCP창시자→Alexis)·연도(Adam Back 2025→2026)·존재 여부(Werner
+        누락)를 오기했다. CH1 카드의 ⚠️ 배지가 이 정정 항목들이다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">Ep11 결번</div>
+        <h4>Episode 11 missing</h4>
+        <p>Saylor Series 11편은 자막 자체를 확보하지 못했다(429 차단, 4회 재시도 실패). 17편 대아크 서술에서 회색으로
+        처리하고 결번으로 공시한다 — 추측으로 메우지 않는다.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">독립 심사관 패스의 한계</div>
+        <h4>Cross-check pass limits</h4>
+        <p>CH3·CH4의 재판정도 완벽하지 않다 — WebSearch 외부 대조가 가능했던 항목(최우선 3건 등)만 고신뢰이며,
+        UNVERIFIABLE 판정 다수는 "반증 못 함"이지 "참으로 확인됨"이 아니다. UNVERIFIABLE을 CONFIRMED로 오독하지 말 것.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-tip">
+      <span class="alert-icon">✅</span>
+      <div class="alert-text"><strong>그럼에도 이 시리즈를 신뢰할 수 있는 이유</strong>
+      위 6가지 한계에도 불구하고, 이 문서군은 (1) 모든 인용에 원문 타임스탬프를 병기하고 (2) 화자 불확실성을 창작으로
+      메우지 않고 명시적으로 표기하며 (3) 독립 심사관 패스가 초안의 과잉 확신(특히 "충돌"·"수렴" 프레임)을 실제로
+      대폭 낮췄다는 점에서 — 원본 영상을 그냥 시청하는 것보다 더 검증된 정보 소비 경로를 제공한다.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>
+    <strong>moningnews 기둥5 — 총집합</strong> · analysis/SYNTHESIS.md + crosscheck_report.md + crosscheck_matrix.json 기반<br>
+    화자 레지스트리는 SYNTHESIS.md §2, 인사이트 3축은 §3, 충돌/수렴·사실검증은 Opus 독립 심사관 재판정(§5 정본)을 그대로 반영했다.<br>
+    타임스탬프 링크는 자동 자막 블록 기준 ±30초 오차가 있을 수 있으며, 사실 검증표의 집계 수치 불일치(22 vs 23)는 CH4에 정직 공시했다.
+  </p>
+</footer>
+
+<script>
+document.querySelectorAll('.ts[data-t]').forEach(function(el){
+  var parts = el.dataset.t.split(':').map(Number);
+  var sec = 0;
+  if(parts.length===3) sec = parts[0]*3600 + parts[1]*60 + parts[2];
+  else if(parts.length===2) sec = parts[0]*60 + parts[1];
+  else sec = parts[0] || 0;
+  var vid = el.dataset.vid;
+  var a = document.createElement('a');
+  a.href = 'https://youtu.be/' + vid + '?t=' + sec;
+  a.target = '_blank'; a.rel = 'noopener';
+  a.className = 'ts-link';
+  a.textContent = el.dataset.label || el.textContent;
+  el.replaceWith(a);
+});
+
+document.querySelectorAll('.tabs-nav').forEach(function(nav){
+  var panelWrap = nav.parentElement;
+  nav.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      nav.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var target = btn.dataset.tab;
+      panelWrap.querySelectorAll(':scope > .tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      var panel = panelWrap.querySelector('#'+target);
+      if(panel) panel.classList.add('active');
+    });
+  });
+});
+
+document.querySelectorAll('.acc-head').forEach(function(head){
+  head.addEventListener('click', function(){
+    head.parentElement.classList.toggle('open');
+  });
+});
+
+document.querySelectorAll('.filter-bar').forEach(function(bar){
+  bar.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      var scopeTable = bar.parentElement.querySelector('table');
+      if(scopeTable){
+        scopeTable.querySelectorAll('tbody tr').forEach(function(tr){
+          if(f==='all' || tr.dataset.verdict===f) tr.style.display='';
+          else tr.style.display='none';
+        });
+      }
+      var scopeGrid = bar.parentElement.querySelector('#speaker-grid');
+      if(scopeGrid){
+        scopeGrid.querySelectorAll('.speaker-card').forEach(function(c){
+          if(f==='all' || c.dataset.tier===f) c.style.display='';
+          else c.style.display='none';
+        });
+      }
+    });
+  });
+});
+
+document.querySelectorAll('th.sortable').forEach(function(th){
+  th.addEventListener('click', function(){
+    var table = th.closest('table');
+    var tbody = table.querySelector('tbody');
+    var idx = Array.prototype.indexOf.call(th.parentElement.children, th);
+    var asc = !th.classList.contains('sort-asc');
+    table.querySelectorAll('th.sortable').forEach(function(h){ h.classList.remove('sort-asc','sort-desc'); });
+    th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+    var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+    rows.sort(function(r1, r2){
+      var c1 = r1.children[idx], c2 = r2.children[idx];
+      var v1 = c1.dataset.sort !== undefined ? Number(c1.dataset.sort) : c1.textContent.trim();
+      var v2 = c2.dataset.sort !== undefined ? Number(c2.dataset.sort) : c2.textContent.trim();
+      if(typeof v1 === 'number' && typeof v2 === 'number') return asc ? v1-v2 : v2-v1;
+      return asc ? String(v1).localeCompare(String(v2), 'ko') : String(v2).localeCompare(String(v1), 'ko');
+    });
+    rows.forEach(function(r){ tbody.appendChild(r); });
+  });
+});
+</script>
+</body>
+</html>

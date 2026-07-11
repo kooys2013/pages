@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비트코인·매크로 — 유동성·안보·규제·돈의 역사 | moningnews 기둥3</title>
+<!--
+  Design System: 계승 (260711_the_rumers_channel_lecture.html / design_spec.md)
+  Sources: analysis/P3A_macro_long.md (라울 팔·이안 캐럴·리처드 워너·SOFTWAR 논평 4편)
+           analysis/P3B_btc_voices.md (아서 헤이즈·아담 백·아인 랜드·클래리티 법안·Bitcoin2026 4인 8편)
+  본 문서는 12편 유튜브 영상 원문(text/*.txt) 통독 기반 분석 정리이며 투자 조언이 아닙니다.
+  타임스탬프는 원문 자막 기준 ±30초 오차가 있을 수 있습니다.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #0B0D0F;
+  --bg2:        #111820;
+  --bg3:        #161E2D;
+  --bg4:        #1C2535;
+  --border:     #243047;
+  --border-dim: #1C2535;
+  --text:       #EAECEF;
+  --text2:      #848E9C;
+  --text3:      #5A6478;
+  --bull:       #0ECB81;
+  --bear:       #F6465D;
+  --neutral:    #F0B90B;
+  --accent:     #1E80FF;
+  --purple:     #9B72FF;
+  --bull-bg:    rgba(14,203,129,.08);
+  --bear-bg:    rgba(246,70,93,.08);
+  --neutral-bg: rgba(240,185,11,.08);
+  --accent-bg:  rgba(30,128,255,.08);
+  --purple-bg:  rgba(155,114,255,.08);
+  --font-sans: 'IBM Plex Sans KR', 'IBM Plex Sans', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px;
+  --r1: 4px; --r2: 6px; --r3: 8px; --r4: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,185,11,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(240,185,11,.015) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0}
+
+/* nav bar */
+.pillar-nav{position:sticky;top:0;z-index:50;background:rgba(11,13,15,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:2px;padding:10px var(--s5)}
+.pillar-nav a{font-family:var(--font-mono);font-size:11.5px;padding:7px 12px;border-radius:var(--r2);text-decoration:none;color:var(--text2);border:1px solid transparent;white-space:nowrap;transition:all .15s}
+.pillar-nav a:hover{color:var(--text);background:var(--bg3);border-color:var(--border-dim)}
+.pillar-nav a.current{color:var(--neutral);background:var(--neutral-bg);border-color:rgba(240,185,11,.3);font-weight:600}
+.pillar-nav a.hub{color:#fff;font-weight:600}
+
+.hero{position:relative;z-index:1;background:linear-gradient(180deg,#0B1220 0%,#0B0D0F 100%);border-bottom:1px solid var(--border);padding:56px 40px 48px;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(240,185,11,.06) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--neutral);margin-bottom:var(--s3)}
+.hero h1{font-family:var(--font-display);font-size:clamp(26px,4.2vw,44px);font-weight:700;line-height:1.2;letter-spacing:-.02em;color:#fff;margin-bottom:var(--s4)}
+.hero h1 em{font-style:normal;color:var(--neutral)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:760px;margin-bottom:var(--s5);line-height:1.8}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r3);overflow:hidden;max-width:680px;margin-bottom:var(--s5)}
+.stat-cell{background:var(--bg2);padding:var(--s3) var(--s4)}
+.stat-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.stat-val{font-family:var(--font-mono);font-size:18px;font-weight:600;color:var(--bull)}
+@media(max-width:640px){.stats-row{grid-template-columns:repeat(2,1fr)}.hero{padding:40px 18px 32px}}
+
+.disclaimer{display:flex;gap:var(--s3);padding:var(--s4);border-radius:var(--r3);background:var(--bear-bg);border:1px solid rgba(246,70,93,.3);margin-bottom:var(--s4);max-width:760px}
+.disclaimer-icon{font-size:20px;flex-shrink:0}
+.disclaimer strong{display:block;color:var(--bear);font-size:13.5px;margin-bottom:3px}
+.disclaimer p{font-size:12.5px;color:var(--text2);line-height:1.7}
+
+.ts-note{display:flex;gap:var(--s2);align-items:center;font-family:var(--font-mono);font-size:11px;color:var(--text3);max-width:760px;margin-bottom:var(--s5)}
+.ts-note::before{content:'⏱';font-size:13px}
+
+.badge-legend{display:flex;flex-wrap:wrap;gap:var(--s3);max-width:900px}
+.bl-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2);padding:6px 12px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:20px}
+.bl-item b{color:var(--text)}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 var(--s5);position:relative;z-index:1}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--s6);margin:var(--s6) auto;max-width:1140px;position:sticky;top:47px;z-index:40}
+.toc-header{display:flex;align-items:center;gap:var(--s3);margin-bottom:var(--s4)}
+.toc-header h2{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
+.toc-header::before{content:'≡';color:var(--neutral);font-size:16px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--s2)}
+.toc-item{display:flex;align-items:center;gap:var(--s3);padding:10px var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r2);text-decoration:none;color:var(--text2);font-size:12.5px;transition:all .15s}
+.toc-item:hover{border-color:var(--neutral);color:var(--text);background:var(--neutral-bg);transform:translateX(3px)}
+.toc-num{font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--neutral);min-width:24px}
+
+.chapter{position:relative;z-index:1;margin:var(--s5) auto;max-width:1140px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;scroll-margin-top:120px}
+.chapter-header{display:flex;align-items:flex-start;gap:var(--s4);padding:var(--s5) var(--s6);border-bottom:1px solid var(--border);background:linear-gradient(90deg,rgba(240,185,11,.04) 0%,transparent 40%);position:relative}
+.chapter-header::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--neutral)}
+.chapter.core .chapter-header::before{background:var(--bear)}
+.ch-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:52px;height:52px;background:var(--neutral-bg);border:1px solid rgba(240,185,11,.25);border-radius:var(--r3);flex-shrink:0}
+.chapter.core .ch-badge{background:var(--bear-bg);border-color:rgba(246,70,93,.3)}
+.chapter.core .ch-num,.chapter.core .ch-idx{color:var(--bear)}
+.ch-num{font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--neutral);margin-bottom:2px}
+.ch-idx{font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--neutral)}
+.chapter-meta h2{font-family:var(--font-display);font-size:19px;font-weight:700;color:#fff;margin-bottom:5px;letter-spacing:-.01em}
+.chapter-meta p{font-size:12.5px;color:var(--text2)}
+.chapter-meta .ch-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chapter-body{padding:var(--s6)}
+
+.quote{border-left:3px solid var(--neutral);padding:var(--s3) var(--s4);margin:var(--s4) 0;background:var(--neutral-bg);border-radius:0 var(--r2) var(--r2) 0;font-size:13.5px;color:var(--text2);line-height:1.75;font-style:italic}
+.quote strong{color:var(--neutral);font-style:normal}
+.quote.bull{border-color:var(--bull);background:var(--bull-bg)}.quote.bull strong{color:var(--bull)}
+.quote.bear{border-color:var(--bear);background:var(--bear-bg)}.quote.bear strong{color:var(--bear)}
+.quote.accent{border-color:var(--accent);background:var(--accent-bg)}.quote.accent strong{color:var(--accent)}
+.quote.purple{border-color:var(--purple);background:var(--purple-bg)}.quote.purple strong{color:var(--purple)}
+.lecture-text{font-size:13.5px;color:var(--text2);line-height:1.95;margin:var(--s3) 0}
+.lecture-text strong{color:var(--text)}
+.lecture-text em{color:var(--neutral);font-style:normal}
+.subhead{font-family:var(--font-display);font-size:15.5px;font-weight:700;color:#fff;margin:var(--s6) 0 var(--s3);padding-top:var(--s5);border-top:1px solid var(--border-dim);display:flex;align-items:center;gap:8px}
+.subhead::before{content:'▸';color:var(--neutral);font-size:13px}
+.subhead:first-child{margin-top:0;padding-top:0;border-top:none}
+
+.alert{display:flex;gap:var(--s3);padding:var(--s3) var(--s4);border-radius:var(--r3);margin:var(--s4) 0;font-size:13px}
+.alert-warn{background:var(--bear-bg);border:1px solid rgba(246,70,93,.25)}
+.alert-tip{background:var(--bull-bg);border:1px solid rgba(14,203,129,.25)}
+.alert-key{background:var(--neutral-bg);border:1px solid rgba(240,185,11,.25)}
+.alert-link{background:var(--accent-bg);border:1px solid rgba(30,128,255,.25)}
+.alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-text{color:var(--text2);line-height:1.65}
+.alert-text strong{display:block;margin-bottom:4px;color:var(--text);font-size:14px}
+
+/* 음모론 경고 카드 — 상세서술 금지, 존재고지+경고 전용 */
+.conspiracy-card{margin:var(--s5) 0;padding:var(--s5);border-radius:var(--r4);background:repeating-linear-gradient(135deg,rgba(246,70,93,.06) 0 12px,rgba(246,70,93,.1) 12px 24px);border:2px solid rgba(246,70,93,.4);position:relative}
+.conspiracy-card::before{content:'⚠ 상세 서술 금지 구간';position:absolute;top:-11px;left:20px;background:var(--bg);padding:2px 10px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--bear);border:1px solid rgba(246,70,93,.4);border-radius:10px}
+.conspiracy-card h4{color:var(--bear);font-size:14.5px;margin-bottom:var(--s3);display:flex;align-items:center;gap:8px}
+.conspiracy-card p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:var(--s3)}
+.conspiracy-card p:last-child{margin-bottom:0}
+.conspiracy-card strong{color:var(--text)}
+
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:var(--s3);margin:var(--s4) 0}
+.concept-card{padding:var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);position:relative;overflow:hidden;transition:border-color .15s}
+.concept-card:hover{border-color:var(--neutral)}
+.concept-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--neutral),transparent)}
+.concept-icon{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--neutral);margin-bottom:var(--s3);display:flex;align-items:center;gap:6px}
+.concept-icon::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--neutral);display:inline-block}
+.concept-card h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.concept-card p{font-size:12.5px;color:var(--text2);line-height:1.65}
+
+.steps{display:flex;flex-direction:column;gap:var(--s3);margin:var(--s4) 0}
+.step{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);transition:border-color .15s}
+.step:hover{border-color:var(--border)}
+.step-num{width:36px;height:36px;border-radius:var(--r2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:14px;font-weight:700;color:#000;background:var(--neutral)}
+.step-content h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:5px;font-family:var(--font-display)}
+.step-content p,.step-content ul{font-size:13px;color:var(--text2)}
+.step-content ul{padding-left:14px;margin-top:5px}
+.step-content li{margin-bottom:3px}
+.step-content strong{color:var(--text)}
+.step-content .rebuttal{margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.03);border-left:2px dashed var(--text3);border-radius:0 var(--r2) var(--r2) 0;font-size:12px;color:var(--text3)}
+.step-content .rebuttal strong{color:var(--text2)}
+
+.diagram{background:#080A0D;border:1px solid var(--border);border-radius:var(--r3);padding:var(--s4) var(--s5);font-family:var(--font-mono);font-size:12.5px;color:#7CC7A4;line-height:2;margin:var(--s4) 0;overflow-x:auto;white-space:pre;box-shadow:var(--shadow-md);position:relative}
+.chart-box{background:#080A0D;border:1px solid var(--border);border-radius:var(--r3);padding:var(--s5) var(--s5) var(--s4);margin:var(--s5) 0;box-shadow:var(--shadow-md);position:relative}
+.chart-box::before{content:'DIAGRAM';position:absolute;top:var(--s3);right:var(--s4);font-size:9px;letter-spacing:.12em;color:var(--text3);font-family:var(--font-mono)}
+.chart-box svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--neutral);text-transform:uppercase;margin-bottom:var(--s4)}
+.chart-caption{margin-top:var(--s3);font-size:12.5px;color:var(--text2);line-height:1.7;padding-top:var(--s3);border-top:1px solid var(--border-dim)}
+.chart-caption strong{color:var(--text)}
+
+.table-wrap{overflow-x:auto;margin:var(--s4) 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:var(--bg3)}
+th{padding:9px var(--s3);text-align:left;font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border)}
+td{padding:9px var(--s3);border-bottom:1px solid var(--border-dim);color:var(--text2)}
+tr:hover td{background:rgba(255,255,255,.02)}
+.badge{display:inline-block;padding:2px 7px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.05em;white-space:nowrap}
+.badge-bull{background:var(--bull-bg);color:var(--bull);border:1px solid rgba(14,203,129,.3)}
+.badge-bear{background:var(--bear-bg);color:var(--bear);border:1px solid rgba(246,70,93,.3)}
+.badge-neutral{background:var(--neutral-bg);color:var(--neutral);border:1px solid rgba(240,185,11,.3)}
+.badge-accent{background:var(--accent-bg);color:var(--accent);border:1px solid rgba(30,128,255,.3)}
+.badge-purple{background:var(--purple-bg);color:var(--purple);border:1px solid rgba(155,114,255,.3)}
+.ts-links{display:flex;flex-wrap:wrap;gap:6px;margin:var(--s3) 0}
+.ts-link{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:3px;text-decoration:none;font-family:var(--font-mono);font-size:11px;color:var(--text2);transition:all .15s}
+.ts-link:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.ts-link::before{content:'▶';font-size:8px;color:var(--accent)}
+.section-sep{display:flex;align-items:center;gap:var(--s3);margin:var(--s5) 0}
+.section-sep::before,.section-sep::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-sep span{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);white-space:nowrap}
+.footer{position:relative;z-index:1;text-align:center;padding:var(--s6) var(--s5);background:var(--bg2);border-top:1px solid var(--border);margin-top:var(--s8)}
+.footer p{font-size:12px;color:var(--text3);line-height:2}
+.footer strong{color:var(--text2)}
+
+.insight3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);margin:var(--s4) 0}
+.insight3 .ic{padding:var(--s3) var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);border-top:2px solid var(--purple)}
+.insight3 .ic b{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+.insight3 .ic p{font-size:12px;color:var(--text2);line-height:1.6}
+@media(max-width:760px){.insight3{grid-template-columns:1fr}}
+
+.worldview-box{margin-top:var(--s4);padding:var(--s4);background:linear-gradient(135deg,var(--purple-bg),transparent);border:1px solid rgba(155,114,255,.25);border-radius:var(--r3)}
+.worldview-box b{color:var(--purple);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
+.worldview-box p{font-size:12.5px;color:var(--text2);line-height:1.75}
+
+/* tabs */
+.tabs-nav{display:flex;flex-wrap:wrap;gap:6px;margin:var(--s4) 0;border-bottom:1px solid var(--border-dim);padding-bottom:var(--s3)}
+.tab-btn{padding:8px 16px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r2) var(--r2) 0 0;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{background:var(--neutral-bg);border-color:var(--neutral);color:var(--neutral)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* accordion */
+.acc-item{border:1px solid var(--border-dim);border-radius:var(--r3);margin-bottom:var(--s2);overflow:hidden;background:var(--bg3)}
+.acc-head{display:flex;align-items:center;justify-content:space-between;padding:var(--s4);cursor:pointer;gap:var(--s3)}
+.acc-head:hover{background:rgba(255,255,255,.02)}
+.acc-head h4{font-size:14px;color:#fff;font-weight:600;display:flex;align-items:center;gap:8px}
+.acc-arrow{font-size:11px;color:var(--text3);transition:transform .2s;flex-shrink:0}
+.acc-item.open .acc-arrow{transform:rotate(90deg);color:var(--neutral)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.acc-item.open .acc-body{max-height:2000px}
+.acc-body-inner{padding:0 var(--s4) var(--s4);font-size:12.5px;color:var(--text2);line-height:1.8}
+.acc-body-inner strong{color:var(--text)}
+
+/* filter/sort */
+.filter-bar{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s4) 0;align-items:center}
+.filter-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-right:4px}
+.filter-btn{padding:6px 12px;background:var(--bg3);border:1px solid var(--border-dim);border-radius:20px;color:var(--text2);font-size:12px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.filter-btn:hover{border-color:var(--neutral);color:var(--text)}
+.filter-btn.active{background:var(--neutral-bg);border-color:var(--neutral);color:var(--neutral);font-weight:600}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--neutral)}
+th.sortable::after{content:'⇅';margin-left:5px;opacity:.4;font-size:9px}
+th.sortable.sort-asc::after{content:'↑';opacity:1;color:var(--neutral)}
+th.sortable.sort-desc::after{content:'↓';opacity:1;color:var(--neutral)}
+.yt-link{color:var(--accent);text-decoration:none}
+.yt-link:hover{text-decoration:underline}
+
+/* spectrum bar */
+.spectrum-wrap{margin:var(--s4) 0}
+.spectrum-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);margin-top:var(--s5)}
+@media(max-width:800px){.spectrum-cards{grid-template-columns:repeat(2,1fr)}}
+.spec-card{padding:var(--s4);background:var(--bg3);border:1px solid var(--border-dim);border-radius:var(--r3);border-top:3px solid var(--accent)}
+.spec-card h4{font-size:13.5px;color:#fff;margin-bottom:6px}
+.spec-card .role{font-family:var(--font-mono);font-size:10.5px;color:var(--text3);margin-bottom:8px}
+.spec-card p{font-size:12px;color:var(--text2);line-height:1.65}
+</style>
+</head>
+<body>
+
+<nav class="pillar-nav">
+  <a href="260711_moningnews_hub.html" class="hub">🏠 허브</a>
+  <a href="260711_moningnews_p1_ai_dev.html">기둥1 · AI개발실무</a>
+  <a href="260711_moningnews_p2_saylor.html">기둥2 · Saylor Series</a>
+  <a href="260711_moningnews_p3_btc_macro.html" class="current">기둥3 · 비트코인·매크로</a>
+  <a href="260711_moningnews_p4_life_thinking.html">기둥4 · 삶·사고법</a>
+  <a href="260711_moningnews_p5_synthesis.html">기둥5 · 종합</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">moningnews · 기둥 3 / 5</div>
+    <h1>비트코인 · 매크로 — <em>유동성 · 안보 · 규제</em> · 돈의 역사</h1>
+    <p class="hero-sub">라울 팔의 100년 거시 사이클부터 아서 헤이즈의 유동성 인과 사슬, 리처드 워너의 신용창출 실증, SOFTWAR의 안보 철학, 그리고 Bitcoin 2026 무대 위 4인의 자유·규제 스펙트럼까지 — 12편의 원문 자막을 통독해 재구성한 강의록입니다.</p>
+
+    <div class="disclaimer">
+      <div class="disclaimer-icon">📌</div>
+      <div>
+        <strong>투자 조언 아님 (Not Investment Advice)</strong>
+        <p>본 문서는 유튜브 콘텐츠의 논증 구조·인용·화자 검증을 정리한 분석 자료이며, 매수·매도 권유나 가격 예측의 근거로 사용할 수 없습니다. 화자들의 가격 전망·수익률 주장은 모두 "주장 vs 검증 필요" 형태로 병기했습니다.</p>
+      </div>
+    </div>
+
+    <div class="ts-note">타임스탬프 인용은 원문 자막 기준이며 ±30초 오차가 있을 수 있습니다. 링크 클릭 시 해당 지점부터 유튜브가 재생됩니다.</div>
+
+    <div class="badge-legend">
+      <div class="bl-item"><b>🔬 검증필요</b> — 출처·수치가 화자 주장에만 의존, 교차검증 미완</div>
+      <div class="bl-item"><b>📢 스폰서 콘텐츠</b> — 광고주 코드/제품이 본문에 삽입된 구간</div>
+      <div class="bl-item"><b>⚠️ 화자 미확정·트리아지 정정</b> — 자동 트리아지 화자 태그가 원문과 불일치해 수동 정정</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-label">분석 영상</div><div class="stat-val">12편</div></div>
+      <div class="stat-cell"><div class="stat-label">SVG 도식</div><div class="stat-val">6개</div></div>
+      <div class="stat-cell"><div class="stat-label">화자 정정</div><div class="stat-val">3건 ⚠️</div></div>
+      <div class="stat-cell"><div class="stat-label">경고 카드</div><div class="stat-val">1건 🚫</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" id="toc">
+    <div class="toc-header"><h2>목차</h2></div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#ch0"><span class="toc-num">00</span>트리아지 오류 사전 고지</a>
+      <a class="toc-item" href="#ch1"><span class="toc-num">01</span>라울 팔 — 8단계 거시 사이클</a>
+      <a class="toc-item" href="#ch2"><span class="toc-num">02</span>리처드 워너 — 신용창출 실증</a>
+      <a class="toc-item" href="#ch3"><span class="toc-num">03</span>이안 캐럴 — 돈의 흐름과 경계</a>
+      <a class="toc-item" href="#ch4"><span class="toc-num">04</span>SOFTWAR — 물리력·추상권력</a>
+      <a class="toc-item" href="#ch5"><span class="toc-num">05</span>4편 교차 — 수렴과 충돌</a>
+      <a class="toc-item" href="#ch6"><span class="toc-num">06</span>아서 헤이즈 — 유동성 인과사슬</a>
+      <a class="toc-item" href="#ch7"><span class="toc-num">07</span>아담 백 — 정신의 확산</a>
+      <a class="toc-item" href="#ch8"><span class="toc-num">08</span>아인 랜드 — 돈에 관한 연설</a>
+      <a class="toc-item" href="#ch9"><span class="toc-num">09</span>클래리티 법안</a>
+      <a class="toc-item" href="#ch10"><span class="toc-num">10</span>Bitcoin 2026 — 자유·규제 스펙트럼</a>
+      <a class="toc-item" href="#ch11"><span class="toc-num">11</span>편간 연결 서사 종합</a>
+      <a class="toc-item" href="#ch12"><span class="toc-num">12</span>검증 가능한 사실 주장 종합표</a>
+    </div>
+  </nav>
+
+</div>
+<div class="wrap">
+
+<section class="chapter core" id="ch0">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">00</span></div>
+    <div class="chapter-meta">
+      <h2>트리아지 오류 사전 고지 — 원문 재확정본</h2>
+      <p>Haiku 자동 트리아지의 화자 태그를 원문(text/*.txt) 전편 통독으로 대조·정정한 결과. 본 문서 전체는 이 재확정본을 기준으로 서술합니다.</p>
+      <div class="ch-tags"><span class="badge badge-bear">⚠️ 화자 정정 3건</span><span class="badge badge-neutral">🔬 검증필요 다수</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">본 기둥이 다루는 12편 중 <strong>정확히 3건</strong>이 자동 트리아지 단계에서 화자를 잘못 태깅했거나 누락했습니다. 세 건 모두 원문 자막을 전편 통독해 화자 본인의 1인칭 발화(자기소개, 경력 서술, 소속 언급)를 근거로 재확정했습니다.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>영상 ID</th><th>트리아지 기재</th><th>원문 확정 결과</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-bear">⚠️ 정정 1</span></td>
+          </tr>
+          <tr>
+            <td><code>ZhCGz_-8mi8</code></td>
+            <td>Rachel Brewster (Breedlove)</td>
+            <td><strong>이안 캐럴(Ian Carroll)</strong></td>
+            <td>"저는 게임스톱 직원이었어요"[<a class="yt-link" href="https://youtu.be/ZhCGz_-8mi8?t=153" target="_blank">02:33</a>], "제 아이디는 cancel입니다"[<a class="yt-link" href="https://youtu.be/ZhCGz_-8mi8?t=9335" target="_blank">155:35</a>] — "Breedlove"는 실제로 쇼 진행자(로버트 브리드러브 추정) 이름의 파편이 게스트와 혼동된 것</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-bear">⚠️ 정정 2</span></td>
+          </tr>
+          <tr>
+            <td><code>riffmvEOWlg</code></td>
+            <td>speaker: null (미기재)</td>
+            <td><strong>리처드 워너(Richard Werner)</strong></td>
+            <td>"자딘 플레밍 증권 도쿄 지사 수석 경제학자로 재직"[02:12], "제 책 제목은 [엔의] 왕자들"[120:44], "양적완화라는 개념을 새로 제안"[<a class="yt-link" href="https://youtu.be/riffmvEOWlg?t=6938" target="_blank">115:38</a>]</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-bear">⚠️ 정정 3</span></td>
+          </tr>
+          <tr>
+            <td><code>9gy_CbliS68</code></td>
+            <td>Jason Lowery (제이슨 로워리 본인)</td>
+            <td><strong>화자 실명 미확정</strong> — 로워리의 SOFTWAR 논제를 3인칭으로 요약·해설하는 2인 논평자 대담</td>
+            <td>전편이 "로우리는 ~라고 말한다"는 3인칭 서술뿐, 1인칭 "제 논문/제 연구" 발화 전무[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=31" target="_blank">00:31</a>][<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=733" target="_blank">12:13</a>]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-key">
+      <div class="alert-icon">🔗</div>
+      <div class="alert-text"><strong>공통 맥락</strong>위 세 영상 중 처음 두 편(<code>1inMUNY-5v4</code> 라울 팔 포함 시 3편)은 동일한 "돈이란 무엇인가(What is Money)" 팟캐스트 에피소드로 확인됩니다 — 공통 오프닝 문구, 그리고 스폰서 코드 <span class="badge badge-purple">📢 스폰서 콘텐츠</span> "breedlove"가 heartandsoil.co · mindlabpro.com · onrampbitcoin.com · wolfnyc.com 등 동일 광고주 세트로 반복 삽입됩니다.</div>
+    </div>
+
+    <p class="lecture-text">이 외에도 P3B 8편에서 트리아지 신뢰도가 낮은 항목이 다수 발견되었으나, 위 3건과 달리 화자 자체는 맞고 <strong>부가 메타데이터(수치·법안명·소속)</strong>가 틀린 경우라 정정 배지가 아닌 <span class="badge badge-neutral">🔬 검증필요</span> 각주로 처리했습니다 — 아담 백 컨퍼런스 참석 인원("50만 명"→원문 "5만 명"), 클래리티 법안 영상의 트리아지 speaker 필드("클래리티 법안"이라는 <em>법안명</em>이 화자로 오기), SEC 의장 발언 영상(실명이 자막 원문에 전혀 등장하지 않아 제목 메타데이터에만 의존) 등입니다. 각 해당 챕터에서 개별 고지합니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch1">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">01</span></div>
+    <div class="chapter-meta">
+      <h2>라울 팔 — "궁극의 거시경제 프레임워크"</h2>
+      <p><a class="yt-link" href="https://youtu.be/1inMUNY-5v4" target="_blank">1inMUNY-5v4</a> · 2.4시간 · Real Vision/Global Macro Investor 창업자, 前 골드만삭스·JP모건 헤지펀드 매니저</p>
+      <div class="ch-tags"><span class="badge badge-accent">인구통계-부채-유동성 8단계</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">라울 팔은 30년 거시경제 경력을 바탕으로 자신의 "전체 거시적 틀"을 처음으로 통합 발표하는 자리라고 직접 밝힙니다[<a class="yt-link" href="https://youtu.be/1inMUNY-5v4?t=8348" target="_blank">139:08</a>]. 겉보기엔 산발적인 잡담처럼 흘러가지만, 실제로는 지난 100년의 정치·경제사를 관통하는 명확한 인과 사슬입니다. 그 사슬을 8단계로 재구성하면 아래와 같습니다 — 4번째 단계(베이비부머 노동시장 진입 완료)가 전체 프레임워크의 회전축입니다: 이후의 모든 임금 정체·금융화·세계화·반복적 위기가 이 지점에서 파생된다고 팔은 주장합니다.</p>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 1 — 인구통계-부채-유동성 8단계 세로 플로우</div>
+      <svg viewBox="0 0 900 1060" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="라울 팔 8단계 거시 사이클 세로 플로우 다이어그램">
+        <defs>
+          <marker id="arrowY" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5A6478"/></marker>
+        </defs>
+        <line x1="90" y1="40" x2="90" y2="1000" stroke="#243047" stroke-width="2"/>
+        <!-- step template repeated -->
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <!-- step 1 -->
+          <circle cx="90" cy="70" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="75" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">1</text>
+          <rect x="130" y="40" width="720" height="60" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="63" font-size="13" fill="#EAECEF" font-weight="600">제국의 구조적 붕괴 → 권력 공백</text>
+          <text x="150" y="83" font-size="11" fill="#848E9C">대영제국 부채 부담 → 프란츠 페르디난트 암살 → 1차대전 → 오스만 붕괴, 2천만 명 사망 [02:16-04:19]</text>
+          <line x1="90" y1="84" x2="90" y2="130" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 2 -->
+          <circle cx="90" cy="160" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="165" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">2</text>
+          <rect x="130" y="130" width="720" height="60" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="153" font-size="13" fill="#EAECEF" font-weight="600">배상금·부채 → 통화 절하 → 초인플레이션 → 전체주의</text>
+          <text x="150" y="173" font-size="11" fill="#848E9C">베르사유 조약 배상금 ≈현대가치 5천억 달러 → 독일 통화절하 선택 → 히틀러 등장 [05:25-06:30]</text>
+          <line x1="90" y1="174" x2="90" y2="220" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 3 -->
+          <circle cx="90" cy="250" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="255" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">3</text>
+          <rect x="130" y="220" width="720" height="60" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="243" font-size="13" fill="#EAECEF" font-weight="600">전후 인구 폭증 → 사상 최대 수요 충격 → 임금 상승 황금기</text>
+          <text x="150" y="263" font-size="11" fill="#848E9C">美 인구 40%↑(7,800만 출생) · 브레튼우즈·UN·GATT·NATO 질서 구축 [10:10-16:36]</text>
+          <line x1="90" y1="264" x2="90" y2="330" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 4 pivot -->
+          <circle cx="90" cy="360" r="20" fill="#2A1418" stroke="#F6465D" stroke-width="3"/>
+          <text x="90" y="366" text-anchor="middle" font-size="13" fill="#F6465D" font-weight="700">4</text>
+          <rect x="130" y="322" width="720" height="76" rx="8" fill="#2A1418" stroke="#F6465D" stroke-width="2"/>
+          <text x="150" y="348" font-size="13" fill="#fff" font-weight="700">★ 회전축 — 베이비부머 노동시장 진입완료 → 공급초과 → 임금정체 → 브레튼우즈 붕괴</text>
+          <text x="150" y="368" font-size="11" fill="#F6465D">"기록적인 수의 사람들이 유입된다면 임금은 오르지 않죠"[19:12] — 임금정체를 화폐현상이 아닌</text>
+          <text x="150" y="384" font-size="11" fill="#F6465D">인구통계학적 현상으로 규정. 1971년 닉슨 금태환 정지 [16:36-19:12]</text>
+          <line x1="90" y1="380" x2="90" y2="430" stroke="#F6465D" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 5 -->
+          <circle cx="90" cy="460" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="465" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">5</text>
+          <rect x="130" y="430" width="720" height="60" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="453" font-size="13" fill="#EAECEF" font-weight="600">임금-생산성 분리 → 자산가격 상승 → 부채 기반 소비 → 금융화</text>
+          <text x="150" y="473" font-size="11" fill="#848E9C">"자산은 증가하는데 임금이 오르지 않으면 미래의 당신은 더 가난해진다"[20:50] · 대처·레이건 규제완화 [19:12-30:31]</text>
+          <line x1="90" y1="474" x2="90" y2="520" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 6 -->
+          <circle cx="90" cy="550" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="555" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">6</text>
+          <rect x="130" y="520" width="720" height="60" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="543" font-size="13" fill="#EAECEF" font-weight="600">세계화(자유무역) → 노동차익거래 → 중산층 파괴</text>
+          <text x="150" y="563" font-size="11" fill="#848E9C">제임스 골드스미스 1996년 예언 "노동력 차익거래, 사회계약 파기" 적중 — 팔 자신의 과거 입장 자기수정 [35:09-38:51]</text>
+          <line x1="90" y1="564" x2="90" y2="610" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 7 -->
+          <circle cx="90" cy="640" r="14" fill="#161E2D" stroke="#F0B90B" stroke-width="2"/>
+          <text x="90" y="645" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">7</text>
+          <rect x="130" y="610" width="720" height="76" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="150" y="633" font-size="13" fill="#EAECEF" font-weight="600">반복되는 금융위기 → 매번 금리인하로 "구제" → 중앙은행 정책만능주의 → QE 고착</text>
+          <text x="150" y="653" font-size="11" fill="#848E9C">1987 블랙먼데이 → 1997-98 아시아위기 → 2000 닷컴 → 2008 GFC, 매번 개입</text>
+          <text x="150" y="669" font-size="11" fill="#848E9C">자산가격÷연준대차대조표 = 대부분 정체, 유일한 예외 비트코인·나스닥 [43:28-64:15]</text>
+          <line x1="90" y1="686" x2="90" y2="740" stroke="#243047" stroke-width="2" marker-end="url(#arrowY)"/>
+
+          <!-- step 8 -->
+          <circle cx="90" cy="770" r="14" fill="#161E2D" stroke="#0ECB81" stroke-width="2"/>
+          <text x="90" y="775" text-anchor="middle" font-size="12" fill="#0ECB81" font-weight="700">8</text>
+          <rect x="130" y="740" width="720" height="76" rx="8" fill="#0E1F19" stroke="#0ECB81" stroke-width="2"/>
+          <text x="150" y="763" font-size="13" fill="#fff" font-weight="700">코로나19 → 무제한 화폐발행 → 4번째 전환점 → 비트코인·메타버스로 이주</text>
+          <text x="150" y="783" font-size="11" fill="#0ECB81">2020.3 = "화폐 디지털화 이후 두 번째 진정한 전환점", 법정화폐 가치하락 불가역 판단</text>
+          <text x="150" y="799" font-size="11" fill="#0ECB81">결론: 유일한 탈출구는 비트코인·메타버스·온라인 국가로의 이주 [70:33-100:19]</text>
+
+          <rect x="130" y="850" width="720" height="46" rx="8" fill="none" stroke="#5A6478" stroke-dasharray="4,3"/>
+          <text x="150" y="878" font-size="12" fill="#848E9C" font-style="italic">"주어진 패를 가지고 플레이하세요." — 클로징 메시지 [141:08]</text>
+        </g>
+      </svg>
+      <div class="chart-caption"><strong>읽는 법</strong> 붉은 노드(4번)가 팔 프레임워크의 회전축입니다 — 이후 모든 단계(임금정체·금융화·세계화·반복위기)가 이 인구통계학적 필연에서 파생된다는 것이 그의 핵심 차별점입니다.</div>
+    </div>
+
+    <div class="quote"><strong>[07:00]</strong> "당신은 빚을 갚을 수 없겠죠. 당신은 할 수 있을 때까지 통화 가치를 떨어뜨립니다." — 영상 전체를 관통하는 핵심 공리로 이후 반복 재사용됩니다.</div>
+    <div class="quote bull"><strong>[64:15]</strong> "재무제표를 크게 상회하고 2008년보다 높은 실적을 보인 자산이 두 개 있었는데... 하나는 비트코인이고 다른 하나는 나스닥입니다."</div>
+
+    <div class="alert alert-warn">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증필요 — 인용 착오 정정</strong>P3A 원문 분석 §1-4의 인용 6번("그것을 완전히 청소하는 방법은... 권력의 중앙집권화")은 팔의 발화가 아니라 리처드 워너 인터뷰(§2) 오프닝 몽타주 문장이 착오로 팔 챕터에 배치되었던 것으로 확인되어, 본 문서는 해당 인용을 §2(워너)로 이동했습니다.</div>
+    </div>
+
+    <div class="subhead">핵심 개념</div>
+    <div class="concept-grid">
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>의도치 않은 결과의 법칙</h4><p>"한 가지 문제를 해결하려 할 때마다 다른 문제를 만들어내는" 것[01:43]. 영상 전체의 메타 프레임.</p></div>
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>통화 절하 ≠ 인플레이션</h4><p>절하는 부채상환 수단, 인플레이션은 CPI 현상. 팔이 명시적으로 구분[05:58].</p></div>
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>금융 억압</h4><p>수익률 상한선으로 인플레이션이 채권수익률보다 높게 유지되도록 강제하는 정책[77:54].</p></div>
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>네 번째 전환점</h4><p>스트라우스-하우 세대이론 차용, 세대간 권력이양·질서재편 주기[70:33][130:12].</p></div>
+    </div>
+
+    <div class="subhead">인사이트 3축</div>
+    <div class="insight3">
+      <div class="ic"><b>삶</b><p>정치적 양극화는 "사람들이 뒤처지고 있다는 것을 느끼지만 그 이유를 모르기 때문"에 발생[22:51].</p></div>
+      <div class="ic"><b>공부</b><p>"거대한 이야기의 일부분만 보면서 전체 그림을 놓친다"[01:11] — 원인을 계속 거슬러 올라가야 함.</p></div>
+      <div class="ic"><b>적용</b><p>자산가격을 화폐공급/대차대조표로 디플레이트해서 봐야 진짜 실질가치가 보인다[60:35].</p></div>
+    </div>
+
+    <div class="worldview-box"><b>화자 세계관</b><p>모든 정치·사회 갈등의 근본 원인을 인구통계학적 필연으로 환원하고, 화폐정책·금융화·세계화는 그 필연에 대한 부적절한 대증요법이었다고 봅니다. 법정화폐 체제는 이미 되돌릴 수 없는 궤도에 진입했으며, 유일한 합리적 대응은 자산을 실질가치로 재평가하고 비트코인·나스닥·메타버스 등으로 이주하는 것 — 냉소적이되 숙명론적이지 않은 실용주의가 최종 태도입니다.</p></div>
+  </div>
+</section>
+
+<section class="chapter" id="ch2">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">02</span></div>
+    <div class="chapter-meta">
+      <h2>리처드 워너 — "돈의 역사에 관해 우리가 속아온 것"</h2>
+      <p><a class="yt-link" href="https://youtu.be/riffmvEOWlg" target="_blank">riffmvEOWlg</a> · 2.4시간 · 옥스퍼드 PPE·前 자딘 플레밍 증권 도쿄 수석 이코노미스트, 『엔의 왕자들』 저자, "양적완화" 용어 최초 제안자</p>
+      <div class="ch-tags"><span class="badge badge-bear">⚠️ 화자 정정 (§00 정정2)</span><span class="badge badge-bull">실증 검증됨</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">워너는 4편 중 방법론적으로 가장 엄격한 화자입니다. "돈이 무엇인가"라는 질문 자체가 회피되어 왔다는 메타 문제 제기로 시작합니다 — 연준 공식 입장조차 "우리는 모른다"고 인정하며[03:46], 화폐수량방정식(MV=PY)은 1970년대부터 "속도 감소"로 붕괴했다고 지적합니다[08:52]. 그는 이 은폐가 우연이 아니라 중앙은행이 학계·저널을 수십 년간 관리해온 결과라고 주장합니다.</p>
+
+    <div class="quote bear"><strong>[00:30]</strong> "중앙은행은 마치 방화범이 다음 사람인 척 가장하고 소방관인 것처럼... 재앙을 만들어냅니다. 그러고 나서... 그것을 정리하는 방법이라며 그들 권력의 더욱 중앙집권화와 통제로 나아갑니다."</div>
+
+    <div class="subhead">은행업 3대 이론 비교</div>
+    <div class="tabs-nav" role="tablist" aria-label="은행업 이론 비교 탭">
+      <button class="tab-btn active" data-tab="t1">① 금융중개 이론</button>
+      <button class="tab-btn" data-tab="t2">② 부분지급준비 이론</button>
+      <button class="tab-btn" data-tab="t3">③ 신용창출 이론</button>
+    </div>
+    <div class="tab-panel active" id="t1">
+      <p class="lecture-text"><strong>주장</strong>: 은행=단순 중개자, 예금을 모아 대출, 신용창출 없음. <strong>채택</strong>: 현재 주류·중앙은행 공식 입장·거시모형 표준. <strong>워너 판정</strong>: <span class="badge badge-bear">틀림</span> — "은행업은 경제에서 제외"되어야 모형이 성립하는 자기충족적 은폐라고 지적합니다[<a class="yt-link" href="https://youtu.be/riffmvEOWlg?t=2012" target="_blank">33:32</a>].</p>
+    </div>
+    <div class="tab-panel" id="t2">
+      <p class="lecture-text"><strong>주장</strong>: 개별은행은 중개자이나 은행 시스템 전체에서 신용창출 발생. <strong>채택</strong>: 1960년대까지 교과서 주류. <strong>워너 판정</strong>: <span class="badge badge-neutral">절충적, 낡음</span>[34:02].</p>
+    </div>
+    <div class="tab-panel" id="t3">
+      <p class="lecture-text"><strong>주장</strong>: 개별 은행이 대출 실행 시 <em>무(無)에서</em> 예금을 창출. <strong>채택</strong>: 슘페터가 지지, 케인즈도 초기엔 지지했으나 1936년 『일반이론』에서 전향[59:41]. <strong>워너 판정</strong>: <span class="badge badge-bull">실증적으로 검증됨</span> (워너 본인 2014년 실험, 아래 참조).</p>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 2 — 금세공사 사기 메커니즘 4단계</div>
+      <svg viewBox="0 0 880 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="중세 금세공사 예탁영수증 사기 구조 시퀀스">
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <rect x="10" y="60" width="190" height="120" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="105" y="100" text-anchor="middle" font-size="12" fill="#EAECEF" font-weight="600">① 금 예치</text>
+          <text x="105" y="122" text-anchor="middle" font-size="10.5" fill="#848E9C">고객이 금세공사에</text>
+          <text x="105" y="136" text-anchor="middle" font-size="10.5" fill="#848E9C">금을 맡김</text>
+          <text x="105" y="160" text-anchor="middle" font-size="22" fill="#F0B90B">🪙</text>
+
+          <path d="M200,120 L235,120" stroke="#5A6478" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="235" y="60" width="190" height="120" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="330" y="100" text-anchor="middle" font-size="12" fill="#EAECEF" font-weight="600">② 예탁영수증 발행</text>
+          <text x="330" y="122" text-anchor="middle" font-size="10.5" fill="#848E9C">영수증이 화폐처럼</text>
+          <text x="330" y="136" text-anchor="middle" font-size="10.5" fill="#848E9C">유통되기 시작</text>
+          <text x="330" y="160" text-anchor="middle" font-size="22" fill="#1E80FF">📜</text>
+
+          <path d="M425,120 L460,120" stroke="#5A6478" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="460" y="60" width="190" height="120" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="555" y="100" text-anchor="middle" font-size="12" fill="#EAECEF" font-weight="600">③ "인출은 드물다" 발견</text>
+          <text x="555" y="122" text-anchor="middle" font-size="10.5" fill="#848E9C">보관된 금 대부분이</text>
+          <text x="555" y="136" text-anchor="middle" font-size="10.5" fill="#848E9C">움직이지 않음을 눈치챔</text>
+          <text x="555" y="160" text-anchor="middle" font-size="22" fill="#F0B90B">👁</text>
+
+          <path d="M650,120 L685,120" stroke="#F6465D" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="685" y="60" width="190" height="120" rx="8" fill="#2A1418" stroke="#F6465D" stroke-width="2"/>
+          <text x="780" y="94" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">④ 허위영수증 대출</text>
+          <text x="780" y="116" text-anchor="middle" font-size="10.5" fill="#F6465D">금 보유 확인 없이</text>
+          <text x="780" y="130" text-anchor="middle" font-size="10.5" fill="#F6465D">이자부 대출 시작</text>
+          <text x="780" y="130" text-anchor="middle" font-size="10.5" fill="#F6465D"></text>
+          <text x="780" y="158" text-anchor="middle" font-size="22" fill="#F6465D">⚠️</text>
+
+          <text x="440" y="220" text-anchor="middle" font-size="11" fill="#848E9C" font-style="italic">복식부기의 역설: 자산(대출채권)·부채(신규예금) 동시 증가로 회계상 균형처럼 보이나 실제로는 사기 [55:34]</text>
+        </g>
+      </svg>
+      <div class="chart-caption"><strong>워너의 사기 증명 2단계</strong>① 대출 전 차입자에게 금 보유 여부 미확인 ② 전체 금 보유량은 그대로인데 예탁영수증 발행량만 증가 → "이것은 명백한 사기"[55:34].</div>
+    </div>
+
+    <p class="lecture-text"><strong>실증 실험(2014, 피어리뷰 논문)</strong>: 유럽 최대 협동조합은행에서 20만 유로 대출을 실행하며 BBC 입회 촬영, 은행 내부시스템을 실시간 확인한 결과 대출금이 예금에서도 지급준비금에서도 이체되지 않고 은행이 "새로 추가"했음을 확인했습니다[63:49]. 영란은행법상 "예금"이라는 법적 개념 자체가 없으며 예금자는 법적으로 은행에 대한 무담보 대출자라는 근거도 병기합니다[65:21]. 결론: 전 세계 통화량의 약 <strong>97%</strong>가 은행 대출을 통해 창출되며 중앙은행 발행분은 3%에 불과합니다[33:32].</p>
+
+    <p class="lecture-text">이 메커니즘은 역사적으로도 반복됩니다. 노르만 정복 이후 영국은 세금 나뭇조각(tally stick)을 분할집계 방식으로 유통시켰는데, 이는 위조불가능한 화폐이자 "정부가 직접 화폐를 발행하면 이자 없이 지출 가능"하다는 명제의 원형이었습니다 — 워너는 은행가들이 이 시스템을 "단계적으로 폐지"하려 한 이유가 여기 있다고 봅니다[87:26]. 20세기에는 1980년대 일본 부동산버블을 은행 대출담당자·지점장·일본은행 전략기획부서 인터뷰로 실증해, 버블이 "창구지도(window guidance)"로 의도적으로 조장되었음을 보였습니다[118:40].</p>
+
+    <div class="alert alert-warn">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증필요 — 실증과 해석의 경계</strong>"중앙은행이 의도적으로 20년 불황을 설계했다"는 워너의 해석은 실증 데이터(버블이 창구지도로 조장되었다는 것)와는 별개의 <strong>강한 해석적 비약</strong>입니다. 실증된 것은 "버블 조장"까지이고 "불황 20년 지속의 의도성"은 원문에서도 별도 검증이 필요하다고 분석 문서가 명시합니다.</div>
+    </div>
+
+    <div class="subhead">핵심 개념</div>
+    <div class="concept-grid">
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>분리신용이론</h4><p>신용창출을 소비신용·생산투자신용·자산구매신용 3가지로 분리 — 워너의 독자 이론.</p></div>
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>창구지도</h4><p>중앙은행이 개별은행 대출 총량·용도를 직접 지시하는 정책수단(일본은행 사례)[200:].</p></div>
+      <div class="concept-card"><div class="concept-icon">개념</div><h4>QE1 vs QE2</h4><p>QE1(부실채권 매입)=인플레 유발 안함, QE2(비은행부문 자산 직접매입)=강제 신용창출. 연준이 2020.3 QE2를 실제 시행해 인플레 초래.</p></div>
+    </div>
+
+    <div class="subhead">인사이트 3축</div>
+    <div class="insight3">
+      <div class="ic"><b>삶</b><p>"아무도 그 이유를 알아내려 하지 않았기 때문"에 연구를 진행했다는 동기 — 질문하지 않음이 레드플래그[03:46].</p></div>
+      <div class="ic"><b>공부</b><p>"저는 그것[가설]을 실증적으로 테스트했습니다" — 20만 유로 실험 + 3단계 1차 인터뷰 방법론.</p></div>
+      <div class="ic"><b>적용</b><p>소규모 지역은행 다수 vs 소수 대형은행 구조가 중소기업 대출 접근성·소득불평등을 좌우.</p></div>
+    </div>
+
+    <div class="worldview-box"><b>화자 세계관</b><p>화폐를 둘러싼 통설(은행=단순 중개자)을 직접 실증 실험과 1차 인터뷰로 반증한 경제학자의 태도를 견지합니다. 다만 "실증(계량경제학)"과 "해석(의도 추정)"의 경계가 청중에게는 동일한 확신도로 전달될 위험이 있습니다. 정책적으로는 반권위주의적이되 무정부주의는 아닌, 독일·일본·중국의 분산형 지역은행 모델을 대안으로 제시하는 제도개혁론자입니다.</p></div>
+  </div>
+</section>
+
+<section class="chapter core" id="ch3">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">03</span></div>
+    <div class="chapter-meta">
+      <h2>이안 캐럴 — "돈의 흐름을 따라 진실을 찾는 법"</h2>
+      <p><a class="yt-link" href="https://youtu.be/ZhCGz_-8mi8" target="_blank">ZhCGz_-8mi8</a> · 2.6시간 · 前 게임스톱 소매직원, 틱톡발 1인 콘텐츠 제작자</p>
+      <div class="ch-tags"><span class="badge badge-bear">⚠️ 화자 정정 (§00 정정1)</span><span class="badge badge-bear">🚫 음모론 구간 포함</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">캐럴의 논증은 2021년 게임스톱 사태에서 "금융 시스템의 부패"를 목격한 개인적 각성에서 출발합니다[03:36]. 이후 블랙록·뱅가드·스테이트 스트리트 3사가 미국 상장기업 지분 약 30%를 보유하고 있으며, 법적 소유자는 대중(연기금·인덱스펀드 자금)이지만 <strong>의결권은 펀드매니저가 대리 행사</strong>한다는 점을 지적합니다[81:17]. 캐럴 스스로도 이 설계를 "기술적으로 정말 훌륭하네요"라며 반박 불가능함을 인정하는 대목이 있습니다[79:43].</p>
+
+    <div class="quote"><strong>[14:53]</strong> "돈의 흐름을 따라가 보세요. 진실을 추구하라." — 캐럴의 슬로건이자 쇼 제목과도 연결됩니다.</div>
+    <div class="quote"><strong>[83:19]</strong> "이해 충돌이란... 그들 모두의 최선의 이익, 즉 은행가의 이익... 문제를 만들고 그들이 해결책을 만들어내는 것."</div>
+
+    <p class="lecture-text">여기까지는 소유구조·의결권·신탁의무 재해석("그들의 신탁 의무는 더 이상 당신에게 있지 않습니다... 블랙록에 [있다]"[82:48])이라는, 검증 가능한 기업지배구조 분석입니다. 화폐독점이 중앙정부의 성장을 가능하게 하고 인플레이션이 "저항할 기회조차 없는" 숨은 세금이라는 주장[21:34]까지도 마찬가지입니다.</p>
+
+    <div class="conspiracy-card">
+      <h4>🚫 검증 불가 구간 — 상세 서술을 생략합니다</h4>
+      <p>이 지점부터 캐럴의 논증은 <strong>금융 비판에서 정보기관·인신매매·지정학 음모론으로 확장</strong>됩니다 (CIA-조직범죄-은행 결탁론, 협박 산업 가설, 엡스타인/디디 사건 연결, 밸푸어 선언부터 이스라엘 건국·9·11까지 이어지는 단일 계보 서사 등).</p>
+      <p><strong>본 문서는 이 구간의 구체 내용을 서술하지 않습니다.</strong> 이유는 세 가지입니다: ① 캐럴 본인이 반복적으로 <strong>"이건 순전히 추측", "저는 무엇도 주장하는 게 아니다"</strong>라고 자기제한을 명시했음에도 서술 구조상 인과 확정처럼 읽히는 대목이 다수라는 점 [133:03][143:19][154:03], ② 1차 사료 없이 "패턴에 기반한 순전한 추측"이라 밝힌 부분과 위키피디아 등 공개기록으로 확인 가능한 역사적 사실이 뒤섞여 있어 레이어 분리 없이는 신뢰도 판정이 불가능하다는 점, ③ 이스라엘·유대인 관련 서술은 캐럴 본인이 "이스라엘은 모든 유대인을 대표하지 않는다"는 안전장치를 삽입했음에도 최고 민감도 구간이라는 점.</p>
+      <p><strong>원문 분석 문서(P3A §2-2 5~6단계)는 원자료 통독 기록으로서 이 구간의 존재·구조·검증상태를 기록하고 있으나, 그 내용을 본 대중용 HTML로 재생산하지 않습니다.</strong> 필요 시 원문 자막(text/ZhCGz_-8mi8.txt) 직접 확인을 권장합니다.</p>
+    </div>
+
+    <p class="lecture-text">캐럴이 제시하는 대응책은 교육(지식), 비트코인(중앙집권 축 붕괴), 소비 보이콧(가족기업 지지)의 3단계 실천입니다[65:51].</p>
+
+    <div class="alert alert-key">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증 가능한 사실 주장 (교차검증 가능 부분만)</strong>미국 대기업 최대주주는 블랙록·뱅가드·스테이트 스트리트 3사(약 30% 지분, 캐럴 자신이 대략치로 명시)[81:17] · 틱톡 3개월 만에 팔로워 30만→100만[06:43] · 헌터 바이든 노트북 관련 前 정보기관 간부 51명 공개서한(2020, 서한 내 "증거 없음" 자체 인용)[102:50].</div>
+    </div>
+
+    <div class="subhead">인사이트 3축</div>
+    <div class="insight3">
+      <div class="ic"><b>삶</b><p>"세상의 모든 부패를 깨닫는 순간부터 시스템을 의식적으로 피할 수 있다"[00:00-02:00].</p></div>
+      <div class="ic"><b>공부</b><p>"전문가 의견에 의존하기 전에, 그 전문가를 교육시키는 기관과 재정 출처를 파악해야 한다"[17:29] — 1차·2차 사료 구분 교육.</p></div>
+      <div class="ic"><b>적용</b><p>"일상의 식료품 선택 하나하나가... 경제 투표"[08:45].</p></div>
+    </div>
+
+    <div class="worldview-box"><b>화자 세계관</b><p>세상의 모든 부패는 인센티브 구조의 불일치로 수렴하며, 그 최종 원천을 화폐 발행 독점(중앙은행)이라는 단일 축으로 봅니다. 검증 가능한 소유구조 분석에서 출발해 검증 난이도가 극히 높은 영역까지 <strong>동일한 서사적 신뢰도로</strong> 다룬다는 방법론적 취약점을 스스로도 부분적으로 인지하면서도("저는 추측만 하고 있습니다"를 반복) 서사의 추진력상 계속 확장하는 경향을 보입니다.</p></div>
+  </div>
+</section>
+
+<section class="chapter" id="ch4">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">04</span></div>
+    <div class="chapter-meta">
+      <h2>SOFTWAR 논평 — 물리력과 추상권력의 교차점</h2>
+      <p><a class="yt-link" href="https://youtu.be/9gy_CbliS68" target="_blank">9gy_CbliS68</a> · 약 26분 · 제이슨 로워리(MIT 강사·미 우주군 소령) 저서 『Softwar』를 3인칭으로 해설하는 2인 대담 (⚠️ 화자 실명 미확정)</p>
+      <div class="ch-tags"><span class="badge badge-purple">진화·게임이론·안보 프레임</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">이 대담은 시종일관 3인칭("로우리는 ~라고 말한다")으로 진행되며, 화폐·경제가 아닌 <strong>진화생물학·게임이론·안보(국방)</strong> 프레임으로 비트코인을 정당화한다는 점에서 나머지 화자들과 인식론적으로 가장 이질적입니다. 아래 각 명제 옆에는 원문 분석이 지적한 반론 여지를 회색 점선으로 병기했습니다.</p>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 3 — 물리력/추상권력 스펙트럼과 비트코인의 위치 (+ 반론 주석)</div>
+      <svg viewBox="0 0 880 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="물리력과 추상권력 스펙트럼, 비트코인의 교차점 위치">
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <line x1="60" y1="100" x2="820" y2="100" stroke="#243047" stroke-width="3"/>
+          <circle cx="60" cy="100" r="7" fill="#1E80FF"/>
+          <circle cx="820" cy="100" r="7" fill="#9B72FF"/>
+          <text x="60" y="128" font-size="12" fill="#1E80FF" font-weight="600">순수 물리력</text>
+          <text x="60" y="144" font-size="10" fill="#5A6478">서열 = 신체적 힘 직접투사</text>
+          <text x="820" y="128" text-anchor="end" font-size="12" fill="#9B72FF" font-weight="600">순수 추상권력</text>
+          <text x="820" y="144" text-anchor="end" font-size="10" fill="#5A6478">서열 = 신념·상징·합의</text>
+
+          <circle cx="440" cy="100" r="16" fill="#0E1F19" stroke="#0ECB81" stroke-width="3"/>
+          <text x="440" y="105" text-anchor="middle" font-size="16" fill="#0ECB81">₿</text>
+          <text x="440" y="70" text-anchor="middle" font-size="12" fill="#0ECB81" font-weight="700">작업증명(PoW) — 두 축의 교차점</text>
+          <text x="440" y="145" text-anchor="middle" font-size="10.5" fill="#848E9C">"물리 법칙의 무결성을 사회 영역으로" [24:18]</text>
+        </g>
+      </svg>
+      <div class="chart-caption"><strong>핵심 명제</strong>비트코인의 공급 안정성은 작업증명 채굴이라는 물리적 전력 투사로 보장되는 동시에 "그냥 아이디어일 뿐"이라는 이중성을 가집니다[11:41] — 이 이중성이 스펙트럼 중앙에 위치하는 근거입니다.</div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h4>지능 = 권력투사 진화기술</h4><p>"지능은 물리적 힘을 투사하는 진화론적 기술이다"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=31" target="_blank">00:31</a>] — 추상적 사고가 협력을 가능케 해 인간을 최상위 포식자로 만들었다는 전제.</p><div class="rebuttal"><strong>반론 여지</strong> 지능의 진화적 기원을 "권력투사"로 단일 환원하는 것은 강한 기능주의적 가정이며, 성선택·사회적 학습 등 다른 진화적 압력을 배제한 목적론적 단순화라는 비판이 가능합니다.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h4>물리적 위계 vs 추상적 위계의 이분</h4><p>동물은 순수 물리력으로, 인간은 "추상적 개념과 신념"으로 서열을 형성한다는 구분[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=122" target="_blank">02:02</a>].</p><div class="rebuttal"><strong>반론 여지</strong> 실제 인간 위계는 물리력(군사력)과 추상적 정당성(이념·법)이 상시 혼합되어 있어 이분보다 스펙트럼에 가깝다고 대담자들 스스로도 곧바로 인정합니다[04:10].</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h4>협력의 기하급수성 → 추상적 위계의 취약성</h4><p>"협력은 선형이 아니라 기하급수적"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=509" target="_blank">08:29</a>] — 그러나 물리적 현실과 괴리되면 "외부의 침략을 받아 집어삼켜진다"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=763" target="_blank">12:43</a>].</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h4>비트코인 = 두 권력의 교차점</h4><p>51% 공격이 "유일하게 알려진 위협"이며 이미 투입된 컴퓨팅파워 과반을 동원해야 하므로 "가장 방대하고 안전한 컴퓨팅 네트워크"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=1022" target="_blank">17:02</a>].</p><div class="rebuttal"><strong>반론 여지</strong> 51% 공격 비용의 경제적 비합리성이 곧 "물리 법칙과 동등한 무결성"을 의미하지는 않습니다 — 여전히 비용-편익 구조이며, 채굴 인센티브 장기 지속가능성·풀 집중 등 취약점은 대담에서 다뤄지지 않습니다.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><h4>"한 명의 엔지니어가 기관을 전복" — 사토시 유추</h4><p>"역사가 수없이 보여주듯이... 사토시 나카모토 한 명만으로도 전 세계 금융 시스템의 권위를 전복"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=1146" target="_blank">19:06</a>].</p><div class="rebuttal"><strong>반론 여지</strong> "역사가 수없이 보여주듯이"의 구체적 사례가 본 대담에서는 제시되지 않습니다 — 주장→근거 생략이 원문 분석에서 명시적으로 기록되었습니다.</div></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-content"><h4>물리 법칙의 무결성을 사회 영역으로</h4><p>"누가 수호자를 감시하는가"라는 고전 딜레마가 "논리로 해결하려 했기 때문"에 항상 실패했다며[23:48], "비트코인은 물리 법칙의 무결성을 사회 영역으로 가져왔다... 제로 트러스트, 허가 불필요, 평등주의적"[<a class="yt-link" href="https://youtu.be/9gy_CbliS68?t=1458" target="_blank">24:18</a>]이라 결론짓습니다.</p></div></div>
+    </div>
+
+    <div class="worldview-box"><b>화자 세계관</b><p>물리적 강제력과 사회적 신뢰(추상적 권력)를 이분한 뒤, 작업증명을 "물리 법칙의 무결성을 사회로 가져온" 제3의 종합으로 제시하는 구조는 설득력 있는 은유이나, 핵심 역사적 유추의 근거가 대담 내에서 검증되지 않은 채 수사적으로만 소비된다는 한계가 있습니다.</p></div>
+  </div>
+</section>
+
+<section class="chapter" id="ch5">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">05</span></div>
+    <div class="chapter-meta">
+      <h2>4편 교차 — "돈의 흐름을 따라가면" 수렴과 충돌</h2>
+      <p>라울 팔 · 이안 캐럴 · 리처드 워너 · SOFTWAR 논평 — 4편이 공유하는 단일 문법과 상반된 인과 해석</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">4편은 표면적으로 화폐사·거시경제·음모론·안보철학이라는 이질적 장르로 보이나, <strong>"돈을 창출·통제하는 자가 진짜 권력을 갖는다"</strong>는 단일 문법을 각기 다른 검증 강도로 반복합니다. 워너가 메커니즘을 제공하고(은행은 실제로 무에서 신용을 창출), 팔이 거시적 결과를 제공하며(그 신용창출이 인구통계 압력과 결합해 지난 100년간의 부의 재분배를 만듦), 캐럴이 미시적 권력구조를 제공하고(그 부가 오늘날 누구의 손에 있는가), 로워리 논평이 규범적 대안을 제공합니다(왜 신뢰 기반 위계가 필연적으로 부패하는가).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>관계</th><th>화자 A</th><th>화자 B</th><th>연결 논리</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-bull">수렴</span></td><td>라울 팔</td><td>리처드 워너</td><td>"중앙은행이 위기를 만들고 다시 그 위기로 권력을 중앙집권화한다" — 팔의 "자기기만"[74:11] ≈ 워너의 "방화범-소방관"[00:30] 동형 관찰</td></tr>
+          <tr><td><span class="badge badge-bull">보강</span></td><td>리처드 워너</td><td>이안 캐럴</td><td>워너는 어떻게(How) 신용이 창출되는지를, 캐럴은 누가 이득을 보는가(Cui bono)를 각각 담당 — 메커니즘적 상호보완</td></tr>
+          <tr><td><span class="badge badge-neutral">동형</span></td><td>SOFTWAR 논평</td><td>전체</td><td>"괴리된 시스템은 붕괴한다"는 공통 문법 — 워너의 창구지도 왜곡, 팔의 규칙기반 질서 파괴[70:33]와 구조적으로 동형</td></tr>
+          <tr><td><span class="badge badge-bear">긴장·충돌</span></td><td>라울 팔</td><td>이안 캐럴</td><td>동일 현상(금융화)에 대해 팔은 "인구통계 필연", 캐럴은 "의도적 설계·범죄 네트워크"로 <strong>인과관 자체가 충돌</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-key">
+      <div class="alert-icon">📊</div>
+      <div class="alert-text"><strong>인식론적 지위 스펙트럼</strong>네 화자 모두 동일한 처방(비트코인/탈중앙화 시스템으로의 이주)에 도달하지만 논증의 검증 강도는 뚜렷이 다릅니다 — 워너는 계량경제학적 실증, 팔은 거시적 패턴인식, 캐럴은 서사적 추론(검증강도 낮음), 로워리 논평은 이론적 유추(핵심 근거 미제시)라는 스펙트럼을 이룹니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch6">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">06</span></div>
+    <div class="chapter-meta">
+      <h2>아서 헤이즈 — 달러 유동성과 비트코인, 왜 다시 상승인가</h2>
+      <p><a class="yt-link" href="https://youtu.be/Z9HFJsja3m4" target="_blank">Z9HFJsja3m4</a> · BitMEX 공동창립자 · Maelstrom 창립자 · Bitcoin 2026 컨퍼런스(라스베가스) 세션 추정</p>
+      <div class="ch-tags"><span class="badge badge-accent">2채널 유동성 인과사슬</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">헤이즈의 발표는 "전쟁 중에도 비트코인이 더 오를 것"이라는 결론을 향한 다단계 인과 논증입니다. 먼저 이란-이스라엘 전쟁을 "가격만 본다"는 필터로 판단합니다 — WTI 원유 6개월 선물과 최근월물 스프레드가 개선되고 있으므로 "상황이 엉망이긴 하지만 아주 심각하게 엉망인 건 아니"라 전제하고[<a class="yt-link" href="https://youtu.be/Z9HFJsja3m4?t=121" target="_blank">02:01</a>], 유동성 논의로 전환합니다.</p>
+
+    <p class="lecture-text">부정 요인 두 가지를 먼저 제시합니다 — ① AI의 지식노동자 대체가 유발하는 "신용 디플레이션"이 은행 시스템에 수천억 달러 규모 문제가 될 수 있다는 것("AI가 새로운 서브프라임 모기지가 될 수 있다"[<a class="yt-link" href="https://youtu.be/Z9HFJsja3m4?t=334" target="_blank">05:34</a>]), ② 케빈 워시 연준의장 지명에 대한 매파 우려입니다.</p>
+
+    <p class="lecture-text">핵심 반박이 이어집니다 — 워시의 "대차대조표 축소" 발언은 매파적 긴축이 아니라 연준 보유 국채·MBS·레포를 지급준비금과 <strong>맞바꾸는(스왑) 규제상의 허구</strong>일 뿐이라는 것입니다: "판매되는 것도 없고, 구매되는 것도 없습니다. 그냥 물물교환일 뿐이에요"[<a class="yt-link" href="https://youtu.be/Z9HFJsja3m4?t=608" target="_blank">10:08</a>]. 이 스왑의 순 유동성 효과는 <strong>중립</strong>입니다.</p>
+
+    <p class="lecture-text">두 번째 축으로 넘어갑니다 — 미국은 38조 달러 부채를 계속 발행해야 하고[10:39], 2026 회계연도 재정적자는 평시 최대 규모이며 국방예산은 50% 증가한 1조 5천억 달러입니다[11:40]. 외국인의 미 국채 매수 비중은 25%에서 정체되어 "누가 그 부채를 사들이는가"라는 질문이 제기됩니다. 답은 미국 상업은행 시스템입니다 — 4월 1일 시행된 <strong>강화된 추가 레버리지 비율(eSLR)</strong> 완화로 은행이 보유해야 할 준비금이 줄어, S&P 글로벌은 이를 "1조 3천억 달러의 신규 대출 창출"로 추산합니다[<a class="yt-link" href="https://youtu.be/Z9HFJsja3m4?t=792" target="_blank">13:12</a>]. 대출 수요는 국방부(무기 제조 기업)와 AI 데이터센터 자본지출(국가안보 재분류)이 채웁니다.</p>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 4 — 아서 헤이즈: 달러 유동성 2채널 인과사슬 (필수 지정 스펙)</div>
+      <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="아서 헤이즈의 연준 스왑 채널과 은행 레버리지 완화 채널, 두 채널이 합류해 순유동성 플러스로 전환되는 인과사슬">
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <!-- Channel A neutral -->
+          <text x="20" y="30" font-size="11" fill="#5A6478" font-weight="700">채널 A — 중립 (회색)</text>
+          <rect x="20" y="40" width="180" height="52" rx="6" fill="#161E2D" stroke="#5A6478"/>
+          <text x="110" y="62" text-anchor="middle" font-size="10.5" fill="#EAECEF">연준 대차대조표</text>
+          <text x="110" y="78" text-anchor="middle" font-size="10" fill="#848E9C">국채·MBS·레포 보유</text>
+          <path d="M200,66 L245,66" stroke="#5A6478" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="245" y="40" width="180" height="52" rx="6" fill="#161E2D" stroke="#5A6478"/>
+          <text x="335" y="62" text-anchor="middle" font-size="10.5" fill="#EAECEF">워시 "축소" 발언</text>
+          <text x="335" y="78" text-anchor="middle" font-size="10" fill="#848E9C">지급준비금 ↔ 국채 스왑</text>
+          <path d="M425,66 L470,66" stroke="#5A6478" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="470" y="40" width="200" height="52" rx="6" fill="#0F1216" stroke="#5A6478" stroke-dasharray="4,3"/>
+          <text x="570" y="62" text-anchor="middle" font-size="11" fill="#848E9C" font-weight="700">순효과: 0</text>
+          <text x="570" y="78" text-anchor="middle" font-size="10" fill="#5A6478">"그냥 물물교환일 뿐" [10:08]</text>
+
+          <!-- red negative box -->
+          <rect x="470" y="120" width="400" height="60" rx="6" fill="#2A1418" stroke="#F6465D" stroke-dasharray="4,3"/>
+          <text x="490" y="142" font-size="10.5" fill="#F6465D" font-weight="700">부정 요인: AI발 지식노동자 실업</text>
+          <text x="490" y="160" font-size="10" fill="#F6465D">→ 상업은행 신용 익스포저 수천억 달러 손실 위험 [02:32-05:34]</text>
+
+          <!-- Channel B positive -->
+          <text x="20" y="220" font-size="11" fill="#0ECB81" font-weight="700">채널 B — 플러스 (메인 스토리라인)</text>
+          <rect x="20" y="232" width="195" height="56" rx="6" fill="#0E1F19" stroke="#0ECB81"/>
+          <text x="117" y="253" text-anchor="middle" font-size="10.5" fill="#EAECEF">$38조 연방부채</text>
+          <text x="117" y="268" text-anchor="middle" font-size="10" fill="#0ECB81">+ 국방예산 $1.5조(+50%)</text>
+          <path d="M215,260 L255,260" stroke="#0ECB81" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="255" y="232" width="180" height="56" rx="6" fill="#0E1F19" stroke="#0ECB81"/>
+          <text x="345" y="253" text-anchor="middle" font-size="10.5" fill="#EAECEF">외국인 매수 정체</text>
+          <text x="345" y="268" text-anchor="middle" font-size="10" fill="#0ECB81">25% 지분, "누가 사는가?"</text>
+          <path d="M435,260 L475,260" stroke="#0ECB81" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="475" y="232" width="195" height="56" rx="6" fill="#0E1F19" stroke="#0ECB81"/>
+          <text x="572" y="250" text-anchor="middle" font-size="10.5" fill="#EAECEF">eSLR 완화 (4/1 시행)</text>
+          <text x="572" y="266" text-anchor="middle" font-size="10" fill="#0ECB81">은행 레버리지 여력 확대</text>
+          <path d="M670,260 L710,260" stroke="#0ECB81" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="710" y="232" width="170" height="56" rx="6" fill="#0E1F19" stroke="#0ECB81"/>
+          <text x="795" y="253" text-anchor="middle" font-size="10.5" fill="#EAECEF">S&P 추산 신규대출</text>
+          <text x="795" y="268" text-anchor="middle" font-size="10" fill="#0ECB81">$1.3조 [13:12]</text>
+
+          <path d="M117,288 L117,320" stroke="#0ECB81" stroke-width="2" marker-end="url(#arrowY)"/>
+          <rect x="20" y="320" width="860" height="56" rx="6" fill="#0E1F19" stroke="#0ECB81"/>
+          <text x="450" y="341" text-anchor="middle" font-size="10.5" fill="#EAECEF">수요처: 국방부 대출(무기 제조) + AI 데이터센터 자본지출(국가안보 재분류)</text>
+          <text x="450" y="360" text-anchor="middle" font-size="10" fill="#0ECB81">→ 은행 신용승수 ×3(경험적, 출처미상) → <tspan fill="#fff" font-weight="700">약 $4조 유동성 창출</tspan> [13:44-14:19]</text>
+
+          <path d="M450,376 L450,410" stroke="#F0B90B" stroke-width="3" marker-end="url(#arrowY)"/>
+          <rect x="220" y="410" width="460" height="60" rx="8" fill="#241C08" stroke="#F0B90B" stroke-width="2"/>
+          <text x="450" y="434" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">채널A(0) + 채널B(+4조) − 부정요인 → 순유동성 플러스 전환</text>
+          <text x="450" y="454" text-anchor="middle" font-size="10.5" fill="#EAECEF">BTC 2025.11 바닥 → 연말 목표 $125,000 (헤이즈 개인 전망, 검증필요) [14:19-14:49]</text>
+        </g>
+      </svg>
+      <div class="chart-caption"><strong>주의 — 두 채널은 다른 메커니즘</strong>"연준 스왑=중립"이라는 채널A 결론과 "eSLR발 은행대출 확대=+4조"라는 채널B 결론이 언뜻 모순처럼 들릴 수 있으나, 전자는 연준↔은행 간 자산 교환(제로섬)이고 후자는 은행의 신규 신용창조(플러스섬)로 <strong>각기 다른 채널</strong>이 결합된 결과입니다.</div>
+    </div>
+
+    <div class="quote bull"><strong>[14:19]</strong> "은행 대출의 가장 큰 장점은 중앙은행 대출보다 승수 효과가 더 크다... 경험적으로 약 3배 정도. 제 유동성 차트는 비트코인과 마찬가지로 작년 11월에 바닥을 찍었고... 연말 목표 주가는 12만 5천 달러 정도입니다."</div>
+
+    <div class="alert alert-warn">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증필요</strong>은행대출 승수 "경험적으로 약 3배"는 출처 미상(헤이즈 개인 경험칙)입니다. 또한 헤이즈가 언급한 "경제적 고정금리 상환 제도"는 eSLR(Enhanced Supplementary Leverage Ratio)의 정식 명칭과 다른 구어체 설명으로, 원문 그대로 인용하되 대조 검증이 필요합니다.</div>
+    </div>
+
+    <div class="subhead">인사이트 3축</div>
+    <div class="insight3">
+      <div class="ic"><b>삶</b><p>"가격만 본다"는 필터링 원칙[02:01] — 노이즈(선전·정치 발언)와 신호(가격 스프레드)를 분리.</p></div>
+      <div class="ic"><b>공부</b><p>연준 대차대조표의 자산·부채 구조를 이해해야 "대차대조표 축소"의 실제 의미를 해석할 수 있음[08:06].</p></div>
+      <div class="ic"><b>적용</b><p>규제 변화 발표 시 "누가 이득을 보는가"를 자금 흐름으로 추적 — 은행 여력→대출 수요처→신용창조 규모 체인 계산.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch7">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">07</span></div>
+    <div class="chapter-meta">
+      <h2>아담 백 — 비트코인은 전세계 금융을 흡수할 것이다</h2>
+      <p><a class="yt-link" href="https://youtu.be/1xHR3zU3ikQ" target="_blank">1xHR3zU3ikQ</a> · Blockstream CEO·창업자, 사이퍼펑크 원년 멤버 · Bitcoin <strong>2025</strong> 컨퍼런스(라스베가스 베네시안, ⚠️ 아래 챕터들의 2026과 다른 해)</p>
+      <div class="ch-tags"><span class="badge badge-neutral">🔬 트리아지 수치 오류</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="alert alert-warn">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증필요 — 트리아지 수치 오기</strong>트리아지는 컨퍼런스 참석 인원을 "50만 명"으로 기재했으나 원문은 "5만 명"입니다[<a class="yt-link" href="https://youtu.be/1xHR3zU3ikQ?t=93" target="_blank">01:33</a>]. 또한 이 영상은 <strong>Bitcoin 2025</strong>(2025년) 행사로, 후술할 루미스·앳킨스·맥코맥·맥아피의 <strong>Bitcoin 2026</strong>과는 별개 연도의 행사입니다 — 같은 라스베가스 개최지라도 동일 컨퍼런스로 묶어 인용하면 안 됩니다.</div>
+    </div>
+
+    <p class="lecture-text">인터뷰는 "비트코인의 정신(ethos)이 기관화 과정에서 희석되는가, 확산되는가"라는 질문을 축으로 전개됩니다. 백은 2013~2014년 초기 채팅 로그의 자유지상주의적 성향과 현재의 제도적 도입 환영 사이의 "인지 부조화" 지적에 대해, 정신이 "전염성이 강하고 확산된다"고 반박합니다[<a class="yt-link" href="https://youtu.be/1xHR3zU3ikQ?t=282" target="_blank">04:42</a>]. 근거로 정치인들의 이해도 증가, 엘살바도르 채택, 그리고 <strong>Larry Fink 사례</strong>: 단순 판매자가 아니라 "개인적으로 투자한" 신봉자로의 전환을 제시합니다[06:14].</p>
+
+    <p class="lecture-text">시장 규모 논증으로 이동합니다 — Hal Finney가 네트워크 시작 이틀째 "잠재 시장 규모는 200조 달러"라 예측했다는 일화[<a class="yt-link" href="https://youtu.be/1xHR3zU3ikQ?t=470" target="_blank">07:50</a>]를 인용하고, "시가총액 기준으로 금과 9배 차이가 나며, 200조 달러 시나리오에서는 10배는 더 높은 수치가 나올 것"이라 추론합니다[08:20]. 그럼에도 기관 관계자들은 "2015년식 질문"을 반복하고 있어 아직 초기 단계라고 평가합니다.</p>
+
+    <p class="lecture-text">자가양육권 경로 논증: ETF를 "안전한 시작점"으로 규정하며, 동시에 개인 보관의 리스크(백업 분실, 상속 문제, 화재)를 구체적으로 나열합니다. 마지막으로 <strong>화폐 가치 프리미엄 경쟁</strong> 논증으로 결론짓습니다 — "M2 통화량 증가분을 제외하면 코로나19 이후로 지수는 사실상 정체 상태"[27:54]이며, 비트코인이 이 프리미엄 경쟁에서 가장 효율적인 결제 수단이 되어가고 있다고 봅니다.</p>
+
+    <div class="quote"><strong>[09:53]</strong> "만약 자기 주권을 원한다면, 직접 쟁취해야 한다는 것입니다. 그건 일종의 사이버펑크적인 태도라고 할 수 있겠죠?"</div>
+    <div class="quote bull"><strong>[28:59]</strong> "버크셔 해서웨이, 마이크로소프트, 애플이 보유한 전 현금을 쏟아붓더라도 소용없습니다. 하지만 그 격차가 하루아침에 사라지지는 않을 것입니다."</div>
+
+    <div class="subhead">비트코인 채택 타임라인 (2009~2025)</div>
+    <div class="diagram">2009 사토시 메일링리스트 · Hal Finney "$200조 시장" 예측(1/10)
+   │
+2013-14 백 최초 참석 컨퍼런스 "유령도시" → BTC $1,300→$200 폭락, 공포 국면
+   │
+2021 Sean Bhill, 산타클라라 연기금 최초 BTC 편입 제안 [18:05]
+   │
+2024~ BlackRock IBIT 출시, 기관 보유자 33% [09:22]
+   │
+2025 Bitcoin 2025 라스베가스 베네시안, 5만 명 [01:33]
+   │
+현재 금 대비 시총 1/9 · 기관은 여전히 "2015년식 질문" 반복 [26:21]</div>
+
+    <div class="subhead">인사이트 3축</div>
+    <div class="insight3">
+      <div class="ic"><b>삶</b><p>"자기 주권을 원한다면 직접 쟁취해야 한다" — 편의(ETF)와 주권(self-custody) 사이 단계적 전환.</p></div>
+      <div class="ic"><b>공부</b><p>기관 투자자의 질문 성숙도를 "2015년식 질문"으로 규정 — 채택 곡선 위치를 질문 수준으로 판별.</p></div>
+      <div class="ic"><b>적용</b><p>ETF로 시작 → 소량 직접 보유로 학습 → 하드웨어 지갑·멀티시그로 이전, 백업의 백업까지.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch8">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">08</span></div>
+    <div class="chapter-meta">
+      <h2>"돈에 관한 세계 최고의 연설" — 아인 랜드 화폐철학 낭독</h2>
+      <p><a class="yt-link" href="https://youtu.be/G8YnO9iXy2k" target="_blank">G8YnO9iXy2k</a> · 유튜브 진행자(실명 미상)가 『아틀라스 슈러그드』(1957) 속 프란시스코 단코니아의 "돈에 관한 연설"을 낭독</p>
+      <div class="ch-tags"><span class="badge badge-purple">철학적 기초 텍스트</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">트리아지가 <code>speaker: null</code>로 남긴 것이 정확한 판단이었습니다 — 이 영상은 실존 인터뷰가 아니라, 어느 유튜브 진행자가 아인 랜드(Ayn Rand)의 소설 『아틀라스 슈러그드』 410~415쪽 "돈에 관한 연설(Money Speech)"을 전체 낭독하는 콘텐츠입니다. 화자 층위가 3겹입니다: ① 실제 낭독자(미상) ② 소설 속 화자(프란시스코 단코니아) ③ 원저자(아인 랜드).</p>
+
+    <p class="lecture-text">연설은 "돈이 모든 악의 근원인가?"라는 질문에 대한 반박으로 시작해 문명 붕괴론으로 확장됩니다. 돈은 "재화가 생산되고 그것을 생산할 수 있는 사람이 없으면 존재할 수 없다"[<a class="yt-link" href="https://youtu.be/G8YnO9iXy2k?t=66" target="_blank">01:06</a>]는 존재론에서 출발해, "생산의 근원을 찾아본 적이 있습니까?"라는 수사적 질문으로 인간 정신이 모든 부의 근원임을 논증합니다[<a class="yt-link" href="https://youtu.be/G8YnO9iXy2k?t=161" target="_blank">02:41</a>]. "강자가 약자를 착취한다"는 통념을 반박하며 "정직한 사람이란 자신이 생산한 것보다 더 많이 소비할 수 없다는 것을 아는 사람"이라 정의합니다[<a class="yt-link" href="https://youtu.be/G8YnO9iXy2k?t=252" target="_blank">04:12</a>].</p>
+
+    <p class="lecture-text">"돈은 당신을 원하는 곳으로 데려다주겠지만, 운전대를 잡는 당신을 대신할 수는 없습니다"[<a class="yt-link" href="https://youtu.be/G8YnO9iXy2k?t=347" target="_blank">05:47</a>]라는 도구성 한계 명제를 거쳐, "오직 음악이 필요 없는 사람만이 재산을 상속받을 자격이 있다"[07:20]는 역설적 표현으로 사회주의적 재분배 논리를 선제 반박합니다. 부정한 돈벌이는 자기징벌을 받는다는 명제를 지나 "돈은 사회의 미덕을 가늠하는 척도"[<a class="yt-link" href="https://youtu.be/G8YnO9iXy2k?t=783" target="_blank">13:03</a>]라는 선언으로 문명 붕괴 메커니즘을 경고하고, "미국인들은 부는 창조되어야 한다는 것을 처음으로 이해한 사람들"이라는 미국 예외주의 확장을 거쳐 최종 명제로 맺습니다.</p>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 5 — 아인 랜드 "돈에 관한 연설" 개념 방사형 구조</div>
+      <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="돈에 관한 연설 개념 방사형 구조도">
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <circle cx="350" cy="260" r="58" fill="#241C08" stroke="#F0B90B" stroke-width="2"/>
+          <text x="350" y="256" text-anchor="middle" font-size="15" fill="#F0B90B" font-weight="700">돈</text>
+          <text x="350" y="274" text-anchor="middle" font-size="10" fill="#EAECEF">Money</text>
+
+          <line x1="350" y1="202" x2="350" y2="110" stroke="#243047" stroke-width="2"/>
+          <rect x="230" y="40" width="240" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="350" y="65" text-anchor="middle" font-size="11.5" fill="#EAECEF" font-weight="600">① 존재론</text>
+          <text x="350" y="83" text-anchor="middle" font-size="10" fill="#848E9C">생산 → 교환 → 돈</text>
+          <text x="350" y="98" text-anchor="middle" font-size="9.5" fill="#5A6478">약탈·구걸로는 생성 불가 [01:06]</text>
+
+          <line x1="404" y1="222" x2="530" y2="140" stroke="#243047" stroke-width="2"/>
+          <rect x="470" y="150" width="210" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="575" y="175" text-anchor="middle" font-size="11.5" fill="#EAECEF" font-weight="600">② 도구성</text>
+          <text x="575" y="193" text-anchor="middle" font-size="10" fill="#848E9C">수단일 뿐, 운전대 아님</text>
+          <text x="575" y="208" text-anchor="middle" font-size="9.5" fill="#5A6478">상속·부정취득 자기파멸 [05:47]</text>
+
+          <line x1="404" y1="298" x2="530" y2="380" stroke="#243047" stroke-width="2"/>
+          <rect x="470" y="345" width="210" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="575" y="370" text-anchor="middle" font-size="11.5" fill="#EAECEF" font-weight="600">③ 사회적 척도</text>
+          <text x="575" y="388" text-anchor="middle" font-size="10" fill="#848E9C">자발적거래 vs 특혜·무력</text>
+          <text x="575" y="403" text-anchor="middle" font-size="9.5" fill="#5A6478">저울이 무너지면 파멸 [13:03]</text>
+
+          <line x1="296" y1="298" x2="170" y2="380" stroke="#243047" stroke-width="2"/>
+          <rect x="20" y="345" width="210" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="125" y="370" text-anchor="middle" font-size="11.5" fill="#EAECEF" font-weight="600">④ 미국 예외주의</text>
+          <text x="125" y="388" text-anchor="middle" font-size="10" fill="#848E9C">"돈을 번다"는 표현의 탄생</text>
+          <text x="125" y="403" text-anchor="middle" font-size="9.5" fill="#5A6478">정신과 돈의 자유 [17:43]</text>
+
+          <line x1="296" y1="222" x2="170" y2="140" stroke="#243047" stroke-width="2"/>
+          <rect x="20" y="150" width="210" height="70" rx="8" fill="#161E2D" stroke="#243047"/>
+          <text x="125" y="175" text-anchor="middle" font-size="11.5" fill="#EAECEF" font-weight="600">착취론 반박</text>
+          <text x="125" y="193" text-anchor="middle" font-size="10" fill="#848E9C">유능한 자가 무능한 자를</text>
+          <text x="125" y="208" text-anchor="middle" font-size="9.5" fill="#5A6478">착취하지 않는다 [03:12]</text>
+
+          <rect x="120" y="450" width="460" height="50" rx="8" fill="#2A1418" stroke="#F6465D" stroke-width="2"/>
+          <text x="350" y="480" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">"피, 채찍, 총, 아니면 달러 — 선택하라" [20:17]</text>
+        </g>
+      </svg>
+      <div class="chart-caption">랜드가 "돈은 생산의 산물"이라 정의한 도덕적 공리는, 뒤이은 화자들이 명시적이든 암묵적이든 전제로 삼는 세계관입니다 — §11 편간 연결 서사 참조.</div>
+    </div>
+
+    <div class="quote purple"><strong>[04:12]</strong> "정직한 사람이란 자신이 생산한 것보다 더 많이 소비할 수 없다는 것을 아는 사람이다."</div>
+    <div class="quote purple"><strong>[13:03]</strong> "돈은 사회의 미덕을 가늠하는 척도입니다."</div>
+
+    <div class="alert alert-warn">
+      <div class="alert-icon">🔬</div>
+      <div class="alert-text"><strong>검증필요</strong>낭독자 본인이 "410-415쪽, 약 15분 분량"이라 언급하나 페이지 번호는 판본에 따라 상이할 수 있습니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch9">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">09</span></div>
+    <div class="chapter-meta">
+      <h2>클래리티 법안: 비트코인 슈퍼사이클의 청신호인가?</h2>
+      <p><a class="yt-link" href="https://youtu.be/seTc2HoZc7M" target="_blank">seTc2HoZc7M</a> · 6분 41초 · 이름 미상 내레이터의 뉴스 해설형 단독 브리핑</p>
+      <div class="ch-tags"><span class="badge badge-bear">⚠️ 트리아지 speaker 필드 오류</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="alert alert-warn">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-text"><strong>화자 필드 오류 (정정 배지 3건과 별도 — 법안명 vs 화자 혼동)</strong>트리아지 <code>speaker: "클래리티 법안"</code>은 명백한 오류입니다 — CLARITY Act는 화자가 아니라 법안명(주제)입니다. 실제로는 이름이 밝혀지지 않은 단독 내레이터의 해설입니다.</div>
+    </div>
+
+    <p class="lecture-text">내레이터는 스스로 예고한 6단계 구성("법안이 뭔지 → 워싱턴 상황 → 통과 확률 → 통과 시 가격 → 위험 → 최종 전망")을 그대로 따릅니다. 배경: 미국은 "문제가 터지면 그때그때 단속하는 집행에 의한 규제"를 해와서 혁신 기업들이 해외로 떠났다고 진단하고, 클래리티 법안을 SEC·CFTC 관할을 "교통 정리"하는 법으로 정의합니다.</p>
+
+    <div class="diagram">2025.07  하원 압도적 표차 통과
+2025.09  상원行 → "수익률 전쟁"으로 문제 발생
+         (스테이블코인 이자 금지 조항 + 디파이 감시의무 → 코인베이스 등 지지 철회)
+2026.01  핵심 논의 갑자기 중단
+2026.02  백악관 긴급 회담
+─────────────────────────────
+예측시장 통과 확률: 54% (2026년 2월 기준)
+  낙관 60~75%(백악관 중재, 4월 초 서명) · 기본 50~55%(중간선거 전 타협) · 비관 20~30%(은행 로비 무산)</div>
+
+    <p class="lecture-text">가격 상승 도미노 논증: 통과 → 비트코인이 "디지털 상품" 법적 지위 획득 → 규제 리스크 소멸 → 기관 컴플라이언스 승인 → 연기금·보험사·대기업 자금 유입, 이라는 3단 인과입니다. 촉매는 회계 규칙 명확화(포춘 500대 기업 보유 가능), JP모건급 은행의 직접 수탁, 완전 제도화된 ETF 생태계입니다.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>시나리오</th><th>단기(1~4주)</th><th>중기(3개월~1년)</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-bull">통과 시</span></td><td>$105,000 ~ $130,000</td><td>$150,000, 많게는 $220,000</td></tr>
+          <tr><td><span class="badge badge-bear">실패 시</span></td><td colspan="2">$45,000 ~ $65,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quote bear"><strong>[05:08]</strong> "전직 SEC 수석 회계사였던 린 터너 같은 인물은... 지금 이 법안 초안는 결함이 너무 많아서 제2의 FTX 사태를 터지게 만들 위험이 있다는 거죠."</div>
+    <div class="quote bear"><strong>[05:39]</strong> "만약 스테이블 코인이 은행 예금처럼 높은 이자를 계속 주게 되면 최대 6조 달러... 은행에서 빠져나가 스테이블 코인으로 옮겨갈 수 있다는 겁니다." — 뱅크오브아메리카 CEO 경고.</div>
+
+    <div class="alert alert-key">
+      <div class="alert-icon">🔗</div>
+      <div class="alert-text"><strong>3중 교차검증 가능 사건</strong>이 법안은 루미스(§10, 입법자 관점 "5월 수정안 제출 예정")·앳킨스(§10, 규제기관 수장 관점)와 <strong>동일 사건을 세 시점에서</strong> 교차확인할 수 있는 드문 구조를 이룹니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch10">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">10</span></div>
+    <div class="chapter-meta">
+      <h2>Bitcoin 2026 컨퍼런스 — 자유·규제 스펙트럼 4인</h2>
+      <p>신시아 루미스(상원의원) · 폴 앳킨스(SEC 의장 추정) · 피터 맥코맥(미디어 전도사) · 재니스 맥아피(존 맥아피 미망인) — 동일 무대, 상반된 정부관</p>
+      <div class="ch-tags"><span class="badge badge-accent">가로축 스펙트럼 SVG (필수 지정)</span></div>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">이 4편은 모두 "Bitcoin 2026" 컨퍼런스(라스베가스, 아담 백의 Bitcoin 2025와는 별개 연도) 현장에서 촬영된 것으로 원문상 확인됩니다 — 루미스는 "비트코인 2026에 오신 것을 환영합니다"[00:00]라 말하고, 맥아피 영상 제목에는 "Bitcoin 2026"이 명기되어 있습니다. 네 화자는 "정부·규제기관과 개인 자유의 관계"라는 동일 질문에 서로 다른 위치에서 답합니다.</p>
+
+    <div class="chart-box">
+      <div class="chart-title">도식 6 — 자유·규제 스펙트럼 가로축 (Bitcoin 2026 · 필수 지정 스펙)</div>
+      <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="규제 순응부터 자유 저항까지 4인의 위치를 보여주는 가로축 스펙트럼">
+        <g font-family="IBM Plex Sans KR, sans-serif">
+          <line x1="70" y1="110" x2="830" y2="110" stroke="#243047" stroke-width="3"/>
+          <text x="70" y="90" font-size="12" fill="#1E80FF" font-weight="700">제도 신뢰 · 규제 순응</text>
+          <text x="830" y="90" text-anchor="end" font-size="12" fill="#F6465D" font-weight="700">정부 불신 · 개인 자유</text>
+
+          <circle cx="130" cy="110" r="12" fill="#0B1220" stroke="#1E80FF" stroke-width="3"/>
+          <text x="130" y="140" text-anchor="middle" font-size="12" fill="#1E80FF" font-weight="700">앳킨스</text>
+          <text x="130" y="156" text-anchor="middle" font-size="9.5" fill="#5A6478">SEC 의장 추정</text>
+
+          <circle cx="360" cy="110" r="12" fill="#0B1220" stroke="#0ECB81" stroke-width="3"/>
+          <text x="360" y="140" text-anchor="middle" font-size="12" fill="#0ECB81" font-weight="700">루미스</text>
+          <text x="360" y="156" text-anchor="middle" font-size="9.5" fill="#5A6478">상원의원, 입법자</text>
+
+          <circle cx="590" cy="110" r="12" fill="#0B1220" stroke="#F0B90B" stroke-width="3"/>
+          <text x="590" y="140" text-anchor="middle" font-size="12" fill="#F0B90B" font-weight="700">맥코맥</text>
+          <text x="590" y="156" text-anchor="middle" font-size="9.5" fill="#5A6478">개인 전도사</text>
+
+          <circle cx="820" cy="110" r="12" fill="#0B1220" stroke="#F6465D" stroke-width="3"/>
+          <text x="820" y="140" text-anchor="middle" font-size="12" fill="#F6465D" font-weight="700">맥아피</text>
+          <text x="820" y="156" text-anchor="middle" font-size="9.5" fill="#5A6478">프라이버시 활동가</text>
+
+          <text x="450" y="195" text-anchor="middle" font-size="10.5" fill="#848E9C" font-style="italic">루미스·맥아피는 결국 국가(입법/사면)에 호소한다는 점에서 순수 극단은 아님</text>
+        </g>
+      </svg>
+      <div class="chart-caption">앳킨스는 "권한(authority)"과 "법률(law)"의 언어로만 사고하는 관료적 세계관, 맥아피는 국가권력에 배우자를 잃은 1인칭 트라우마발 불신 — 같은 행사에서 나란히 발화되었다는 사실 자체가 이 씬이 정치적으로 균질하지 않음을 보여줍니다.</div>
+    </div>
+
+    <div class="acc-item open">
+      <div class="acc-head" onclick="toggleAcc(this)"><h4>① 신시아 루미스 — "비트코인은 자유의 자산이다"</h4><span class="acc-arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p><a class="yt-link" href="https://youtu.be/9F9HxALQEag" target="_blank">9F9HxALQEag</a> · 와이오밍주 상원의원(공화당), 목장주 겸 변호사, 은퇴를 앞둔 <strong>고별 연설</strong>[00:00]</p>
+        <p style="margin-top:8px">하원의원 4선 선거운동 중 남편이 심장마비로 급사했고, 계좌 이전 도중이라 <strong>은행 계좌에 접근할 수 없었던</strong> 위기를 겪습니다[<a class="yt-link" href="https://youtu.be/9F9HxALQEag?t=125" target="_blank">02:05</a>]. "믿을 만한 제3자에게 의존하지 않고도 필요할 때 접근할 수 있는 방법은 없을까?"라는 질문에서 사위가 비트코인을 소개하고, 2013·2014년 각각 $300에 BTC 3개를 매입합니다[04:10]. 상원 입성 후 IRS의 "브로커" 정의 과잉 확장(채굴 SW/HW 개발자까지 포함 시도)을 저지하는 입법 활동을 벌였다고 증언합니다[<a class="yt-link" href="https://youtu.be/9F9HxALQEag?t=315" target="_blank">05:15</a>]. 결론: 비트코인은 "자산이 아니라 하나의 문화"이며[07:23], "5월에 명확성 법안 수정안을 제출할 예정"임을 예고합니다[<a class="yt-link" href="https://youtu.be/9F9HxALQEag?t=476" target="_blank">07:56</a>].</p>
+        <div class="quote bull" style="margin-top:10px"><strong>[03:40]</strong> "안전하게 보호하고 믿을 만한 제3자에게 의존하지 않고도 필요할 때 언제든 접근할 수 있는 방법은 없을까?"</div>
+        <p><strong>화자 세계관</strong>: "제도권 내부에서 싸우는 자유주의자" — 개인적 비극을 계기로 국가 시스템의 자의성을 체감했으나 시스템 밖 탈주가 아닌 입법을 통한 시스템 교정을 택합니다.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><h4>② 폴 앳킨스 — SEC 의장: 선거가 가져온 변화 <span class="badge badge-bear" style="margin-left:6px">⚠️ 실명 미확정</span></h4><span class="acc-arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p><a class="yt-link" href="https://youtu.be/UU18ymPWDK4" target="_blank">UU18ymPWDK4</a> · 트리아지·제목상 SEC 의장 앳킨스로 표기되나 <strong>자막 원문에 화자 실명이 전혀 등장하지 않습니다</strong> — SEC를 "우리"로 지칭하는 정황상 SEC 소속 화자임은 타당하나 이름은 메타데이터 의존. 2분 미만 매우 짧은 클립.</p>
+        <p style="margin-top:8px">"선거는 중대한 결과를 초래할 수 있습니다"[00:00]로 시작해, SEC의 현재 권한이 법률상 광범위한 재량은 있으나 "기본적으로는 여전히 1930년대 유형"이라는 구조적 제약을 인정합니다[<a class="yt-link" href="https://youtu.be/UU18ymPWDK4?t=32" target="_blank">00:32</a>]. 해법은 심의 중인 신법안이 "새로운 권한과 유연성"을 부여하는 것이라 말합니다[<a class="yt-link" href="https://youtu.be/UU18ymPWDK4?t=63" target="_blank">01:03</a>].</p>
+        <div class="quote" style="margin-top:10px"><strong>[01:03]</strong> "법률만큼 미래를 보장해주는 것은 없습니다."</div>
+        <p><strong>화자 세계관</strong>: 네 화자 중 가장 "제도 내부"에 위치한 관료적 세계관 — 자유·저항의 언어가 없고 오직 "권한"과 "법률"의 언어로만 사고합니다.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><h4>③ 피터 맥코맥 — "비트코이너의 역할은 자유를 퍼뜨리는 것이다"</h4><span class="acc-arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p><a class="yt-link" href="https://youtu.be/AxcamUjDu8g" target="_blank">AxcamUjDu8g</a> · "What Bitcoin Did" 팟캐스트 진행자</p>
+        <p style="margin-top:8px">정치인이 될지 개별 전도사로 남을지의 딜레마로 시작해 <strong>알카트라즈 탈옥 비유</strong>를 듭니다 — 전원 집단행동보다 "두세 명이 탈출을 시도하고 생각을 퍼뜨리는" 방식이 낫다는 것[<a class="yt-link" href="https://youtu.be/AxcamUjDu8g?t=30" target="_blank">00:30</a>]. 뉴욕 사회주의 정책에 반대하며 차베스 정권 베네수엘라 거주 경험을 근거로 듭니다[01:34]. <strong>재정적 자유의 시험대</strong>: "재정적 자유를 얻었는지 여부를 가늠하는 시험대가 있습니다. 그걸로 뭘 하실 거예요?"[<a class="yt-link" href="https://youtu.be/AxcamUjDu8g?t=154" target="_blank">02:34</a>]라 자문하며, 자신의 특권을 부담으로 느낀다고 고백합니다[03:06].</p>
+        <div class="quote" style="margin-top:10px"><strong>[01:01]</strong> "저는 비트코인 지지자로서 여러분의 역할은 가능한 한 가장 효과적인 방법으로 자유를 확산시키는 것이라고 생각합니다."</div>
+        <p><strong>화자 세계관</strong>: "정치적 회의주의자이자 개인 전도자" — 집단적·제도적 해법을 의심하고 1:1 설득과 모범을 통한 점진적 확산을 택합니다.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><h4>④ 재니스 맥아피 — "프라이버시는 범죄가 아니다"</h4><span class="acc-arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <p><a class="yt-link" href="https://youtu.be/6zwG7-t3LCE" target="_blank">6zwG7-t3LCE</a> · 안티바이러스 창업자 <strong>존 맥아피의 배우자(미망인)</strong> — 존 맥아피 본인이 아닙니다(2021년 스페인 구금 중 사망).</p>
+        <p style="margin-top:8px">"IRS 혐의는 가벼운 질책이나 벌금형 정도였을 텐데, 카리브해 전역에서 추적할 사안은 아니었다"며 혐의 경중과 대응의 불균형을 지적합니다[<a class="yt-link" href="https://youtu.be/6zwG7-t3LCE?t=33" target="_blank">00:33</a>]. 핵심 명제: "사생활 보호는 기본권입니다. 특권이 아닙니다... 그것은 인권입니다"[<a class="yt-link" href="https://youtu.be/6zwG7-t3LCE?t=125" target="_blank">02:05</a>]. 규제 이중잣대 비판: 은행·웨스턴유니온 CEO는 감옥에 있지 않다는 점을 대조합니다[03:06].</p>
+        <div class="alert alert-warn" style="margin-top:10px"><div class="alert-icon">🔬</div><div class="alert-text"><strong>검증필요 — 심각한 미검증 주장</strong>"프랑스 한 당국이 암호화폐 보유자 지갑정보를 판매했고 이로 인해 납치 사건이 증가했다"[<a class="yt-link" href="https://youtu.be/6zwG7-t3LCE?t=284" target="_blank">04:44</a>]는 구체 시점·기관명 없이 제시된 심각한 혐의 주장으로 최우선 검증 대상입니다.</div></div>
+        <p><strong>화자 세계관</strong>: 네 화자 중 스펙트럼 가장 극단(반정부·저항)이나 이는 국가권력에 배우자를 잃은 1인칭 트라우마에서 나온 것 — 순수 무정부주의가 아니라 형평성과 사면을 통한 시스템 내 구제를 요청합니다.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="ch11">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">11</span></div>
+    <div class="chapter-meta">
+      <h2>편간 연결 서사 종합 — 철학에서 개인 증언까지 4계층 피라미드</h2>
+      <p>P3A(4편) + P3B(8편) 12편 전체를 관통하는 단일 문법</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <p class="lecture-text">P3B의 8편은 <strong>철학 → 거시 메커니즘 → 입법 절차 → 개인 증언</strong>의 4계층으로 하나의 논증 피라미드를 이룹니다.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">Ⅰ</div><div class="step-content"><h4>기초층 — 아인 랜드의 화폐철학</h4><p>"돈은 생산의 산물이며 강제의 도구가 아니다"라는 도덕적 공리는, 뒤이은 모든 화자가 명시적이든 암묵적이든 전제로 삼는 세계관입니다. 맥코맥의 "사회주의라는 암덩어리" 비판과 랜드의 반재분배 논증이 직결됩니다.</p></div></div>
+      <div class="step"><div class="step-num">Ⅱ</div><div class="step-content"><h4>거시 유동성 메커니즘 — 헤이즈 + 백</h4><p>헤이즈는 국가가 랜드의 "돈=생산의 산물" 정의를 어떻게 우회하는지(스왑, 레버리지 규제완화)를 보여줍니다. 백의 "화폐 가치 프리미엄 경쟁" 논증이 랜드와 헤이즈를 잇습니다 — 통화팽창이 프리미엄을 왜곡시키고, 비트코인이 그 프리미엄을 되찾아온다는 것입니다.</p></div></div>
+      <div class="step"><div class="step-num">Ⅲ</div><div class="step-content"><h4>입법·규제 절차 — 클래리티 법안 · 앳킨스 · 루미스</h4><p>클래리티 법안 해설이 제도 변화의 전체 지도를 그리고, 앳킨스가 규제기관, 루미스가 입법자 관점에서 <strong>같은 법안을 3중 교차확인</strong>합니다 — 루미스의 "5월 수정안 제출"[07:56] 예고는 클래리티 법안 해설이 그린 입법 타임라인의 다음 장입니다.</p></div></div>
+      <div class="step"><div class="step-num">Ⅳ</div><div class="step-content"><h4>개인 증언 — 루미스·맥아피·맥코맥</h4><p>루미스의 배우자 사망 서사, 맥아피의 남편 사법피해 서사, 맥코맥의 특권-부담 고백은 앞선 3개 층이 왜 "중요한가"에 대한 감정적 정당화를 제공합니다. 앳킨스의 관료적 낙관과 맥아피의 트라우마발 불신이 같은 행사에서 나란히 발화되었다는 사실 자체가 이 씬이 정치적으로 균질하지 않다는 증거입니다.</p></div></div>
+    </div>
+    <p class="lecture-text">마지막으로 아담 백은 <strong>다른 해(2025)의 목소리</strong>로 이 피라미드 전체에 시간적 깊이를 더합니다 — "2015년식 질문을 반복하는 기관"이라는 그의 관찰은, 2026년 컨퍼런스의 루미스·앳킨스가 이미 "기관 자금의 청신호"를 기정사실처럼 말하는 것과 대비하면, 1년 사이 담론이 "채택 여부"에서 "채택 속도·법제화 방식"으로 이동했다는 변화를 보여줍니다.</p>
+    <p class="lecture-text">P3A의 4편도 동일한 문법(§05 참조)을 공유합니다 — 워너가 메커니즘, 팔이 거시적 결과, 캐럴이 미시적 권력구조, SOFTWAR 논평이 규범적 대안을 제공합니다. 결국 P3 전체 12편은 <strong>"돈을 창출·통제하는 자가 진짜 권력을 갖는다"</strong>는 단일 문법을, 철학적 공리(랜드) → 실증 메커니즘(워너) → 거시 패턴(팔) → 미시 권력구조(캐럴) → 유동성 채널(헤이즈) → 입법 절차(클래리티·앳킨스·루미스) → 개인 증언(루미스·맥아피·맥코맥) → 안보 철학(SOFTWAR)까지, 서로 다른 검증 강도로 반복하는 하나의 거대한 논증 지도로 읽을 수 있습니다.</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch12">
+  <div class="chapter-header">
+    <div class="ch-badge"><span class="ch-num">CH</span><span class="ch-idx">12</span></div>
+    <div class="chapter-meta">
+      <h2>검증 가능한 사실 주장 종합표</h2>
+      <p>12편 전체에서 교차검증 입력용으로 추출한 사실 주장 — 화자 필터 · 컬럼 클릭 정렬</p>
+    </div>
+  </div>
+  <div class="chapter-body">
+    <div class="filter-bar" id="factFilterBar">
+      <span class="filter-label">화자 필터</span>
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="pal">라울 팔</button>
+      <button class="filter-btn" data-filter="carroll">이안 캐럴</button>
+      <button class="filter-btn" data-filter="werner">리처드 워너</button>
+      <button class="filter-btn" data-filter="softwar">SOFTWAR</button>
+      <button class="filter-btn" data-filter="hayes">헤이즈</button>
+      <button class="filter-btn" data-filter="back">아담 백</button>
+      <button class="filter-btn" data-filter="clarity">클래리티</button>
+      <button class="filter-btn" data-filter="btc2026">Bitcoin2026 4인</button>
+    </div>
+    <div class="table-wrap">
+      <table id="factTable">
+        <thead>
+          <tr>
+            <th class="sortable" data-key="speaker">화자</th>
+            <th class="sortable" data-key="claim">주장</th>
+            <th class="sortable" data-key="conf">신뢰도</th>
+            <th>근거·비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-speaker="pal"><td>라울 팔</td><td>1차대전 사망 2천만 명 / 2차대전 7천만 명</td><td><span class="badge badge-bull">확인됨</span></td><td>공개 역사기록과 합치 [<a class="yt-link" href="https://youtu.be/1inMUNY-5v4?t=259" target="_blank">04:19</a>]</td></tr>
+          <tr data-speaker="pal"><td>라울 팔</td><td>美 가계부채/소득 레버리지 20~25배</td><td><span class="badge badge-neutral">🔬검증필요</span></td><td>출처 미상, 팔 개인 주장 [46:46]</td></tr>
+          <tr data-speaker="pal"><td>라울 팔</td><td>1975년 이후 임금 연 0.3% 상승</td><td><span class="badge badge-bull">확인됨</span></td><td>미 노동통계 추세와 방향 일치 [19:12]</td></tr>
+          <tr data-speaker="werner"><td>리처드 워너</td><td>세계 통화량 97%가 은행신용 창출, 중앙은행분 3%</td><td><span class="badge badge-bull">확인됨</span></td><td>2014 피어리뷰 논문 실증 [33:32]</td></tr>
+          <tr data-speaker="werner"><td>리처드 워너</td><td>일본은행 창구지도가 버블 조장</td><td><span class="badge badge-bull">확인됨</span></td><td>1994 국제경제학저널 게재, 1차 인터뷰 3단계 [105:52]</td></tr>
+          <tr data-speaker="werner"><td>리처드 워너</td><td>불황 20년 "의도적 설계"</td><td><span class="badge badge-bear">🔬검증필요</span></td><td>실증 아닌 해석적 비약으로 별도 검증 필요 [123:52]</td></tr>
+          <tr data-speaker="carroll"><td>이안 캐럴</td><td>3대 자산운용사 미 상장기업 지분 약 30%</td><td><span class="badge badge-neutral">부분확인</span></td><td>캐럴 자신이 대략치로 명시 [81:17]</td></tr>
+          <tr data-speaker="carroll"><td>이안 캐럴</td><td>이스라엘·정보기관·인신매매 연결 서사</td><td><span class="badge badge-bear">🔬검증불가</span></td><td>캐럴 본인 "순전한 추측" 자인 — 본문 상세서술 생략 (§03 경고카드)</td></tr>
+          <tr data-speaker="softwar"><td>SOFTWAR 논평</td><td>"한 엔지니어가 기관 전복" 사토시 유추</td><td><span class="badge badge-bear">🔬근거미제시</span></td><td>구체 역사적 사례 대담 내 미제시 [19:06]</td></tr>
+          <tr data-speaker="softwar"><td>SOFTWAR 논평</td><td>51% 공격이 BTC 유일 알려진 위협</td><td><span class="badge badge-neutral">부분확인</span></td><td>경제적 비합리성≠물리법칙 등가성, 채굴집중 등 별도 취약점 미논의 [17:02]</td></tr>
+          <tr data-speaker="hayes"><td>아서 헤이즈</td><td>BTC 사상최고 $126,000 이후 약 50% 하락</td><td><span class="badge badge-bull">확인됨</span></td><td>가격 데이터로 대조 가능 [04:34]</td></tr>
+          <tr data-speaker="hayes"><td>아서 헤이즈</td><td>은행대출 승수 약 3배 → $4조 창출</td><td><span class="badge badge-bear">🔬출처미상</span></td><td>헤이즈 개인 경험칙 [14:19]</td></tr>
+          <tr data-speaker="hayes"><td>아서 헤이즈</td><td>eSLR 완화, S&P 추산 $1.3조 신규대출</td><td><span class="badge badge-neutral">부분확인</span></td><td>S&P 글로벌 추산 인용, 1차 자료 대조 필요 [13:12]</td></tr>
+          <tr data-speaker="back"><td>아담 백</td><td>Bitcoin 2025 컨퍼런스 참석 "5만 명"</td><td><span class="badge badge-bull">확인됨(트리아지 정정)</span></td><td>트리아지 "50만 명" 오기, 원문은 5만 명 [01:33]</td></tr>
+          <tr data-speaker="back"><td>아담 백</td><td>Hal Finney "$200조 시장" 예측(2009.1.10)</td><td><span class="badge badge-neutral">부분확인</span></td><td>백의 일화 인용, 1차 발언 기록 대조 필요 [07:50]</td></tr>
+          <tr data-speaker="back"><td>아담 백</td><td>BlackRock IBIT 보유자 33% 기관</td><td><span class="badge badge-neutral">부분확인</span></td><td>백의 발언 인용 [09:22]</td></tr>
+          <tr data-speaker="clarity"><td>클래리티 해설</td><td>2025.07 하원 통과, 2026.01 논의 중단</td><td><span class="badge badge-bull">확인됨</span></td><td>입법 타임라인, 루미스·앳킨스와 3중 교차확인 [01:31]</td></tr>
+          <tr data-speaker="clarity"><td>클래리티 해설</td><td>예측시장 통과확률 54%</td><td><span class="badge badge-neutral">부분확인</span></td><td>"2020년 2월"은 2026년 2월 오기로 판단 [02:32]</td></tr>
+          <tr data-speaker="clarity"><td>클래리티 해설</td><td>BofA CEO 예금이탈 최대 $6조 경고</td><td><span class="badge badge-neutral">부분확인</span></td><td>2차 인용, 1차 발언 대조 필요 [05:39]</td></tr>
+          <tr data-speaker="btc2026"><td>루미스</td><td>2013·2014년 각 $300에 BTC 3개 매입</td><td><span class="badge badge-bull">확인됨(1인칭)</span></td><td>본인 증언 [04:10]</td></tr>
+          <tr data-speaker="btc2026"><td>맥아피</td><td>존 맥아피 IRS 혐의 "가벼운 질책 수준"</td><td><span class="badge badge-bear">🔬일방주장</span></td><td>배우자 주관적 평가, 실제 기소내용 대조 필요 [00:33]</td></tr>
+          <tr data-speaker="btc2026"><td>맥아피</td><td>프랑스 당국 지갑정보 판매→납치 증가</td><td><span class="badge badge-bear">🔬최우선검증</span></td><td>구체 시점·기관명 없이 제시된 심각한 혐의 [04:44]</td></tr>
+          <tr data-speaker="btc2026"><td>앳킨스</td><td>SEC 권한이 "1930년대 유형" 유지</td><td><span class="badge badge-neutral">부분확인</span></td><td>구체 법명 미제시, 1933/34 증권법 추정 [00:32]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lecture-text" style="margin-top:12px">이 표는 "주장 vs 근거"의 병기 원칙을 따릅니다 — 특히 <span class="badge badge-bear">🔬</span> 표기 항목은 가격 전망이나 투자 판단의 근거로 사용해서는 안 됩니다.</p>
+  </div>
+</section>
+
+</div>
+<div class="wrap" id="footer-wrap"></div>
+<footer class="footer">
+  <p><strong>moningnews 기둥3 · 비트코인·매크로</strong> — analysis/P3A_macro_long.md + P3B_btc_voices.md 원문 통독 기반<br>
+  화자 귀속·타임스탬프는 트리아지 자동분류가 아닌 원문(text/*.txt) 대조로 확정했습니다. 오류 발견 시 원문 재확인 바랍니다.<br>
+  본 문서는 투자 조언이 아니며, 검증 불가 구간(이안 캐럴 §3)은 상세 서술 없이 경고만 제공합니다.</p>
+</footer>
+
+<script>
+// ── 아코디언 (Bitcoin2026 4인 카드, Werner 등) ──────────────────────────
+function toggleAcc(headEl){
+  var item = headEl.closest('.acc-item');
+  item.classList.toggle('open');
+}
+
+// ── 탭 (Werner 은행업 3대 이론) ──────────────────────────────────────
+document.querySelectorAll('.tabs-nav').forEach(function(nav){
+  var btns = nav.querySelectorAll('.tab-btn');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = btn.getAttribute('data-tab');
+      var scope = nav.parentElement;
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      scope.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      var target = document.getElementById(targetId);
+      if (target) target.classList.add('active');
+    });
+  });
+});
+
+// ── 필터 (검증 가능한 사실 주장 종합표) ─────────────────────────────
+(function(){
+  var bar = document.getElementById('factFilterBar');
+  if (!bar) return;
+  var table = document.getElementById('factTable');
+  var rows = table.querySelectorAll('tbody tr');
+  bar.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      rows.forEach(function(row){
+        if (f === 'all' || row.getAttribute('data-speaker') === f) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+
+// ── 정렬 (검증 가능한 사실 주장 종합표) ─────────────────────────────
+(function(){
+  var table = document.getElementById('factTable');
+  if (!table) return;
+  var tbody = table.querySelector('tbody');
+  table.querySelectorAll('th.sortable').forEach(function(th, colIdx){
+    // 실제 컬럼 인덱스 계산 (thead 내 th 순서)
+    var allTh = Array.from(table.querySelectorAll('thead th'));
+    var idx = allTh.indexOf(th);
+    th.addEventListener('click', function(){
+      var asc = !th.classList.contains('sort-asc');
+      table.querySelectorAll('th.sortable').forEach(function(t){ t.classList.remove('sort-asc','sort-desc'); });
+      th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+      var rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort(function(a, b){
+        var av = a.children[idx].innerText.trim().toLowerCase();
+        var bv = b.children[idx].innerText.trim().toLowerCase();
+        if (av < bv) return asc ? -1 : 1;
+        if (av > bv) return asc ? 1 : -1;
+        return 0;
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+})();
+
+// ── TOC 활성 챕터 하이라이트 (스크롤 스파이) ─────────────────────────
+(function(){
+  var chapters = document.querySelectorAll('.chapter[id]');
+  var tocItems = document.querySelectorAll('.toc-item');
+  var map = {};
+  tocItems.forEach(function(item){
+    var href = item.getAttribute('href').replace('#','');
+    map[href] = item;
+  });
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = entry.target.getAttribute('id');
+      var link = map[id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        tocItems.forEach(function(i){ i.style.borderColor=''; i.style.color=''; });
+        link.style.borderColor = 'var(--neutral)';
+        link.style.color = 'var(--text)';
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  chapters.forEach(function(ch){ observer.observe(ch); });
+})();
+</script>
+</body>
+</html>
