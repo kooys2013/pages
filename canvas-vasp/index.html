@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>가상자산 이용자 보호 등에 관한 법률 — 한 장 체계도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --bg-soft:#F7F8F7; --border:#E3E6E3; --border-dim:#EEF0EE;
+  --text:#1A1D1A; --text2:#4A524A; --text3:#8A928A;
+  --accent:#1E7A46; --accent-bg:#E8F4EC;
+  --risk:#C77700; --risk-bg:#FBF3E4;
+  --wait:#9AA39A; --wait-bg:#F2F3F2;
+  --danger:#B3261E;
+  --font-sans:'Pretendard','IBM Plex Sans KR',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+body{font-size:15px;line-height:1.6;padding-bottom:64px;}
+a{color:var(--accent)}
+.wrap{max-width:1160px;margin:0 auto;padding:24px 20px 0;}
+
+/* ---------- header ---------- */
+header.dashboard{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:24px;}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
+.badge{font-family:var(--font-mono);font-size:12px;padding:3px 9px;border:1px solid var(--border);
+  border-radius:4px;color:var(--text2);background:var(--bg);}
+.badge.verify{border-color:var(--accent);color:var(--accent);font-weight:600;}
+.badge.verify::before{content:"● ";}
+h1{font-size:26px;line-height:1.35;margin:0 0 10px;font-weight:700;}
+.one-liner{color:var(--text2);font-size:15px;margin:0 0 18px;max-width:820px;}
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--border-dim);}
+.stat{padding:14px 12px 4px;border-left:1px solid var(--border-dim);}
+.stat:first-child{border-left:none;padding-left:0;}
+.stat .num{font-family:var(--font-mono);font-weight:700;font-size:22px;display:block;}
+.stat .label{font-size:12px;color:var(--text3);}
+.stat.warn .num{color:var(--risk);}
+
+/* ---------- as-of / disclaimer ---------- */
+.meta-strip{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--text3);margin-top:14px;}
+.meta-strip b{color:var(--text2);font-weight:600;}
+
+/* ---------- section headers ---------- */
+section{margin-bottom:36px;}
+.sec-title{font-size:17px;font-weight:700;margin:0 0 4px;}
+.sec-desc{font-size:13px;color:var(--text3);margin:0 0 14px;}
+
+/* ---------- toggle ---------- */
+.toggle-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.toggle-btn{font-family:var(--font-mono);font-size:12.5px;padding:6px 14px;border:1px solid var(--border);
+  border-radius:20px;background:var(--bg);color:var(--text2);cursor:pointer;}
+.toggle-btn.active{background:var(--text);color:#fff;border-color:var(--text);}
+.scroll-hint{font-size:12px;color:var(--text3);margin-left:auto;}
+.scroll-hint::before{content:"↔ ";}
+
+/* ---------- diagram ---------- */
+.diagram-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:8px;background:var(--bg-soft);
+  padding:14px;position:relative;}
+.diagram-inner{position:relative;min-width:920px;}
+table.grid{border-collapse:collapse;width:100%;table-layout:fixed;position:relative;z-index:2;background:transparent;}
+table.grid th, table.grid td{border:1px solid var(--border-dim);vertical-align:top;padding:6px;}
+table.grid th{background:var(--bg);font-size:12px;color:var(--text2);font-weight:600;text-align:left;padding:8px 6px;}
+table.grid th.corner{background:var(--bg-soft);border:none;}
+table.grid td.lane-head{background:var(--bg);font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap;width:140px;}
+table.grid td.lane-head .kind{display:block;font-size:10px;font-weight:400;color:var(--text3);font-family:var(--font-mono);}
+table.grid td.cell{min-width:150px;}
+svg.edges{position:absolute;inset:0;pointer-events:none;z-index:1;width:100%;height:100%;}
+.edge{fill:none;stroke:var(--text3);stroke-width:1.6;}
+.edge-regress{fill:none;stroke:var(--risk);stroke-width:1.6;stroke-dasharray:5 4;}
+
+.node{border:1px solid var(--border);border-radius:6px;padding:6px 8px;margin-bottom:6px;background:var(--bg);
+  cursor:pointer;font-size:12.5px;position:relative;transition:box-shadow .12s;}
+.node:hover{box-shadow:0 0 0 2px var(--accent-bg);}
+.node.selected{box-shadow:0 0 0 2px var(--accent);}
+.node .nid{font-family:var(--font-mono);font-weight:700;font-size:11px;color:var(--text3);margin-right:4px;}
+.node .nstat{font-family:var(--font-mono);font-size:10px;padding:1px 5px;border-radius:3px;float:right;}
+.node .nname{display:block;margin-top:3px;font-weight:500;line-height:1.35;}
+.node .nregress{display:block;margin-top:3px;font-size:10.5px;color:var(--risk);}
+.node.st-done{background:var(--bg-soft);border-color:var(--border);}
+.node.st-done .nstat{background:var(--border-dim);color:var(--text2);}
+.node.st-current{border-color:var(--accent);border-width:2px;background:var(--accent-bg);}
+.node.st-current .nstat{background:var(--accent);color:#fff;}
+.node.st-risk{border-color:var(--risk);border-style:dashed;background:var(--risk-bg);}
+.node.st-risk .nstat{background:var(--risk);color:#fff;}
+.node.st-wait{border-style:dashed;color:var(--text3);}
+.node.st-wait .nstat{background:var(--wait-bg);color:var(--text3);}
+.node.hidden{display:none;}
+.node .warn-icon{color:var(--risk);}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:11.5px;color:var(--text3);align-items:center;}
+.legend span{display:inline-flex;align-items:center;gap:5px;}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
+.sw.done{background:var(--bg-soft);border:1px solid var(--border);}
+.sw.risk{background:var(--risk-bg);border:1px dashed var(--risk);}
+.sw.wait{background:#fff;border:1px dashed var(--wait);}
+.ln{width:16px;height:0;border-top:1.6px solid var(--text3);display:inline-block;}
+.ln.rg{border-top:1.6px dashed var(--risk);}
+
+/* ---------- detail panel ---------- */
+.detail-panel{border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-top:16px;background:var(--bg);min-height:64px;}
+.detail-empty{color:var(--text3);font-size:13px;}
+.detail-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+.detail-head .did{font-family:var(--font-mono);font-weight:700;}
+.detail-path{font-size:12px;color:var(--text3);margin-bottom:10px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.chip{font-size:11.5px;border:1px solid var(--border);border-radius:4px;padding:2px 8px;color:var(--text2);background:var(--bg-soft);}
+.kv-row{display:flex;gap:0;border:1px solid var(--border-dim);border-radius:6px;overflow:hidden;margin-bottom:10px;max-width:420px;}
+.kv{flex:1;padding:8px 12px;border-left:1px solid var(--border-dim);}
+.kv:first-child{border-left:none;}
+.kv .k{font-size:11px;color:var(--text3);}
+.kv .v{font-family:var(--font-mono);font-weight:600;font-size:13px;}
+.basis-list{list-style:none;padding:0;margin:0 0 8px;font-size:13px;}
+.basis-list li{padding:6px 0;border-top:1px dotted var(--border-dim);}
+.basis-list li:first-child{border-top:none;}
+.basis-list a{font-weight:600;text-decoration:none;}
+.basis-list a:hover{text-decoration:underline;}
+.basis-list .b-summary{color:var(--text2);font-size:12.5px;}
+.basis-list .unverified{color:var(--danger);font-size:11px;font-family:var(--font-mono);}
+.bottleneck-note{font-size:12.5px;background:var(--risk-bg);border:1px solid var(--risk);border-radius:6px;
+  padding:8px 10px;color:#7a4d00;margin-top:4px;}
+.bottleneck-note::before{content:"⚠ 병목 · ";font-weight:700;}
+
+/* ---------- 8-slot canvas ---------- */
+.canvas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.slot{border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:var(--bg);}
+.slot.bottleneck-slot{background:var(--risk-bg);border-color:var(--risk);}
+.slot h3{font-size:13px;margin:0 0 8px;color:var(--text2);font-weight:700;}
+.slot h3 .n{font-family:var(--font-mono);color:var(--text3);font-weight:400;margin-right:4px;}
+.slot p, .slot li{font-size:13px;color:var(--text);line-height:1.55;}
+.slot ul{margin:0;padding-left:18px;}
+.slot ul li{margin-bottom:6px;}
+.slot .src{font-size:12px;color:var(--text2);margin-bottom:6px;padding-bottom:6px;border-bottom:1px dotted var(--border-dim);}
+.slot .src:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.slot .src a{font-weight:600;}
+.related-item{font-size:12.5px;margin-bottom:8px;}
+.related-item .t{font-weight:600;}
+.related-item .w{color:var(--text3);display:block;}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--border);padding-top:16px;font-size:12px;color:var(--text3);}
+footer .report-link{color:var(--accent);font-weight:600;}
+
+@media (max-width:820px){
+  .stat-row{grid-template-columns:repeat(3,1fr);}
+  .stat:nth-child(4){border-left:none;padding-left:0;margin-top:8px;}
+  .canvas-grid{grid-template-columns:1fr;}
+  .kv-row{max-width:100%;}
+  h1{font-size:21px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="dashboard">
+    <div class="badge-row" id="badgeRow"></div>
+    <h1 id="titleEl"></h1>
+    <p class="one-liner" id="oneLinerEl"></p>
+    <div class="stat-row" id="statRow"></div>
+    <div class="meta-strip" id="metaStrip"></div>
+  </header>
+
+  <section id="diagramSection">
+    <p class="sec-title">업무구조도 — 스윔레인 × 게이트</p>
+    <p class="sec-desc">행위자(레인) × 절차 단계(게이트)로 배치한 법 구조. 실선=순방향, 주황 점선=회귀(대기·재확인 사이클). 노드를 클릭하면 근거 조문·확신도·병목이 아래 패널에 나타납니다.</p>
+    <div class="toggle-row">
+      <button class="toggle-btn active" id="btnCore" data-mode="core">핵심 흐름</button>
+      <button class="toggle-btn" id="btnFull" data-mode="full">전체 구조도</button>
+      <span class="scroll-hint">가로 스크롤로 전체 게이트 확인</span>
+    </div>
+    <div class="diagram-scroll">
+      <div class="diagram-inner" id="diagramInner">
+        <table class="grid" id="gridTable"></table>
+        <svg class="edges" id="edgeSvg"></svg>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="sw done"></i>완료(제도 확정)</span>
+      <span><i class="sw risk"></i>위험/병목</span>
+      <span><i class="sw wait"></i>조건부 대기(트리거 발생시만)</span>
+      <span><i class="ln"></i>순방향 연결</span>
+      <span><i class="ln rg"></i>회귀(대기·재확인 사이클)</span>
+    </div>
+    <div class="detail-panel" id="detailPanel">
+      <p class="detail-empty">노드를 클릭하면 근거 조문·기한·확신도·병목이 여기 표시됩니다.</p>
+    </div>
+  </section>
+
+  <section id="canvasSection">
+    <p class="sec-title">한 장 캔버스 — 고정 8슬롯</p>
+    <p class="sec-desc">대상마다 슬롯 구성은 바꾸지 않습니다. 해당 내용이 없으면 "해당 없음"으로 표기합니다.</p>
+    <div class="canvas-grid" id="canvasGrid"></div>
+  </section>
+
+  <footer>
+    <div id="footerMeta"></div>
+  </footer>
+
+</div>
+
+<script id="canvasData" type="application/json">
+{
+  "meta": {
+    "no": 1,
+    "slug": "vasp-user-protection-act",
+    "title": "가상자산 이용자 보호 등에 관한 법률",
+    "one_liner": "가상자산 이용자의 예치금·가상자산을 안전하게 보호하고, 미공개정보 이용·시세조종 등 불공정거래를 금지·감시·처벌하여 가상자산시장의 투명하고 건전한 거래질서를 확립하는 법률.",
+    "category": "금융·자본시장 규제",
+    "type_tag": "국가운영·통제형",
+    "as_of": "2025-04-23",
+    "disclaimer": "본 콘텐츠는 참고자료이며 법적 자문이 아닙니다. 실제 적용 여부는 법제처 국가법령정보센터(law.go.kr) 원문 확인 및 전문가 자문을 거치시기 바랍니다."
+  },
+  "diagram": {
+    "lanes": [
+      { "id": "user", "name": "이용자", "kind": "actor" },
+      { "id": "vasp", "name": "가상자산사업자", "kind": "actor" },
+      { "id": "fsc", "name": "금융위원회(금감원)", "kind": "actor" },
+      { "id": "bok", "name": "한국은행", "kind": "actor" },
+      { "id": "inv", "name": "수사기관(검찰)", "kind": "actor" },
+      { "id": "sys", "name": "관리기관·보험(시스템)", "kind": "system" }
+    ],
+    "gates": [
+      { "id": "G0", "name": "총칙·정의" },
+      { "id": "G1", "name": "이용자 자산의 보호" },
+      { "id": "G2", "name": "불공정거래 규제" },
+      { "id": "G3", "name": "감독·조사" },
+      { "id": "G4", "name": "처분·제재" },
+      { "id": "G5", "name": "벌칙·형사·구제" }
+    ],
+    "nodes": [
+      {
+        "id": "P01", "name": "정의·적용범위·타법관계 확인", "lane": "vasp", "gate": "G0",
+        "status": "done", "core": true, "confidence": 92,
+        "basis": [
+          { "label": "제2조(정의)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제2조", "summary": "가상자산·가상자산사업자·이용자·가상자산시장 정의, 제외대상 8목", "verified": true },
+          { "label": "제3조(국외행위에 대한 적용)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제3조", "summary": "국외행위라도 국내에 효과가 미치면 적용", "verified": true },
+          { "label": "제4조(다른 법률과의 관계)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제4조", "summary": "다른 법률에 특별규정 없으면 이 법 적용", "verified": true },
+          { "label": "시행령 제2조(가상자산 제외범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제2조", "summary": "전자채권·모바일상품권·CBDC 등 5호 제외", "verified": true },
+          { "label": "시행령 제3조(가상자산 이전의 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제3조", "summary": "이전행위=가상자산주소 간 전송", "verified": true }
+        ],
+        "edges_to": ["P02", "P03", "P08"]
+      },
+      {
+        "id": "P02", "name": "가상자산위원회 설치·자문", "lane": "fsc", "gate": "G0",
+        "status": "done", "core": false, "confidence": 90,
+        "basis": [
+          { "label": "제5조(가상자산 관련 위원회의 설치)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제5조", "summary": "금융위 자문 위원회 설치·운영 근거", "verified": true },
+          { "label": "시행령 제4조(위원회 설치 및 구성)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제4조", "summary": "위원장 1명 포함 15명 이내, 임명요건 7종", "verified": true },
+          { "label": "시행령 제5~7조(해임·제척·운영)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제5조", "summary": "위원 해임·해촉, 제척·기피·회피, 운영방식", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P03", "name": "예치금 분리예치·신탁", "lane": "vasp", "gate": "G1",
+        "status": "done", "core": true, "confidence": 93,
+        "deadline": "즉시(수시 예치·신탁)",
+        "docs": ["예치금 신탁(예치)계약서", "이용자명부"],
+        "basis": [
+          { "label": "제6조①②③(예치금의 보호)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제6조", "summary": "고유재산과 분리, 이용자재산 명시, 상계·압류 금지", "verified": true },
+          { "label": "시행령 제8조(예치금의 보호)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제8조", "summary": "관리기관 4종, 계약 필수기재사항, 이용자별 예치금 100% 이상 예치", "verified": true },
+          { "label": "시행령 제9조(양도·담보제공 금지의 예외)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제9조", "summary": "합병·영업양도 등 3가지 예외", "verified": true }
+        ],
+        "edges_to": ["S01", "P04"]
+      },
+      {
+        "id": "S01", "name": "관리기관 수탁·안전운용", "lane": "sys", "gate": "G1",
+        "status": "done", "core": true, "confidence": 90,
+        "basis": [
+          { "label": "시행령 제8조①②", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제8조", "summary": "은행·농협은행·수협은행·중소기업은행 4종, 국채·지방채 등 안전자산 운용 후 수익을 사업자에 지급", "verified": true }
+        ],
+        "edges_to": ["P04"]
+      },
+      {
+        "id": "P04", "name": "예치금 우선지급 청구", "lane": "user", "gate": "G1",
+        "status": "wait", "core": false, "confidence": 88,
+        "bottleneck": "발동조건(사업자 신고말소)은 이 법이 아닌 특정 금융거래정보법 소관 사무라 이 법만으로 절차가 완결되지 않음",
+        "basis": [
+          { "label": "제6조④(예치금의 우선 지급)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제6조", "summary": "신고말소·해산합병·파산선고 시 이용자에게 우선지급", "verified": true },
+          { "label": "시행령 제10조(우선 지급 방법 및 절차)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제10조", "summary": "안분비율 산정방법, 공고 등 절차, 금융정보분석원장 통지의무", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P05", "name": "가상자산 분리보관(콜드월렛)", "lane": "vasp", "gate": "G1",
+        "status": "done", "core": true, "confidence": 90,
+        "docs": ["이용자명부", "가상자산 보관내역"],
+        "basis": [
+          { "label": "제7조①②③(가상자산의 보관)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제7조", "summary": "이용자명부 작성, 자기·이용자 가상자산 분리보관, 콜드월렛 비율 준수", "verified": true },
+          { "label": "시행령 제11조①", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제11조", "summary": "70% 이상 범위에서 금융위 고시비율 인터넷 분리보관, 사고 우려시 별도비율 통보", "verified": true }
+        ],
+        "edges_to": ["S02"]
+      },
+      {
+        "id": "S02", "name": "외부 보관위탁기관", "lane": "sys", "gate": "G1",
+        "status": "done", "core": false, "confidence": 85,
+        "basis": [
+          { "label": "제7조④(위탁보관)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제7조", "summary": "보안기준 충족 기관에 위탁보관 가능", "verified": true },
+          { "label": "시행령 제11조②(보안기준)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제11조", "summary": "업무지침 공시, 정보시스템 연1회 점검·평가, 재위탁 금지 등 4호", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P06", "name": "보험·공제 가입 또는 준비금 적립", "lane": "vasp", "gate": "G1",
+        "status": "done", "core": false, "confidence": 88,
+        "docs": ["보험증권/공제증서"],
+        "basis": [
+          { "label": "제8조(보험의 가입 등)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제8조", "summary": "해킹·전산장애 등 사고 책임이행 위해 보험·공제·준비금 등 조치", "verified": true },
+          { "label": "시행령 제12조(보험사고의 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제12조", "summary": "접근매체 위변조, 전산사고, 해킹 등 5호 사고 범위", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P07", "name": "거래기록 생성·보존(15년)·파기", "lane": "vasp", "gate": "G1",
+        "status": "done", "core": false, "confidence": 90,
+        "deadline": "거래관계 종료 시점부터 15년간 보존",
+        "docs": ["가상자산거래기록"],
+        "basis": [
+          { "label": "제9조(거래기록의 생성·보존 및 파기)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제9조", "summary": "가상자산거래기록 15년 보존 의무", "verified": true },
+          { "label": "시행령 제13조(가상자산거래기록의 종류)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제13조", "summary": "9종 기록(거래내역·가상자산주소·전자장치·접속기록 등)", "verified": true },
+          { "label": "시행령 제14조(보관 및 파기 등)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제14조", "summary": "전자금융거래법 시행령·개인정보 보호법 시행령 준용", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P08", "name": "미공개중요정보 이용금지(내부자 등)", "lane": "vasp", "gate": "G2",
+        "status": "done", "core": true, "confidence": 90,
+        "basis": [
+          { "label": "제10조①(미공개중요정보 이용금지)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제10조", "summary": "임직원·주요주주·감독권자·계약상대방 등 7호 대상 이용금지", "verified": true },
+          { "label": "시행령 제15조(미공개중요정보의 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제15조", "summary": "신문·방송·연합뉴스·거래소 공시 등 매체별 공개시점·경과시간 기준 6호", "verified": true }
+        ],
+        "edges_to": ["P13", "P14"]
+      },
+      {
+        "id": "P09", "name": "시세조종·부정거래 금지(누구든지)", "lane": "user", "gate": "G2",
+        "status": "done", "core": true, "confidence": 90,
+        "basis": [
+          { "label": "제10조②③④(시세조종·부정거래)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제10조", "summary": "통정매매·가장매매·시세변동목적매매·부정한 수단 사용 금지", "verified": true }
+        ],
+        "edges_to": ["P14"]
+      },
+      {
+        "id": "P10", "name": "자기발행 가상자산 거래 제한", "lane": "vasp", "gate": "G2",
+        "status": "done", "core": false, "confidence": 88,
+        "basis": [
+          { "label": "제10조⑤(자기발행 가상자산 거래 제한)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제10조", "summary": "자기·특수관계인 발행 가상자산 거래 원칙 금지, 2가지 예외", "verified": true },
+          { "label": "시행령 제16조(자기발행 거래금지의 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제16조", "summary": "특수관계인 범위, 공시+분기별 금융위 제출 조건부 허용", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P11", "name": "임의적 입출금 차단 금지", "lane": "vasp", "gate": "G2",
+        "status": "risk", "core": true, "confidence": 85,
+        "bottleneck": "정당한 사유 7개 항목(전산장애·실사업무·행정기관 요청·자금세탁 의심 등)이 광범위하고 세부 목이 다수라 실효성 논란",
+        "docs": ["차단사유 통지서"],
+        "basis": [
+          { "label": "제11조①②(임의적 입·출금 차단 금지)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제11조", "summary": "정당사유 없는 차단 금지, 사전통지+금융위 즉시보고", "verified": true },
+          { "label": "시행령 제17조(정당한 사유)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제17조", "summary": "전산장애·실사업무·행정기관 요청·자금세탁 의심(최대 2개월+2회연장) 등 7호", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P12", "name": "이상거래 상시감시·통보", "lane": "vasp", "gate": "G2",
+        "status": "done", "core": true, "confidence": 88,
+        "docs": ["이상거래 감시보고서", "금융위 통보서"],
+        "basis": [
+          { "label": "제12조①②(이상거래에 대한 감시)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제12조", "summary": "가상자산시장 개설·운영자 상시감시 의무, 제10조 위반의심시 금융위·금감원 통보 또는 수사기관 신고", "verified": true },
+          { "label": "시행령 제18조(이상거래의 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제18조", "summary": "가격·거래량 비정상변동, 풍문·보도 영향 등 3호", "verified": true }
+        ],
+        "edges_to": ["P14"]
+      },
+      {
+        "id": "P13", "name": "가상자산사업자 감독·검사", "lane": "fsc", "gate": "G3",
+        "status": "done", "core": true, "confidence": 90,
+        "basis": [
+          { "label": "제13조(가상자산사업자의 감독·검사 등)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제13조", "summary": "금융위 감독·검사권, 자료제출·보고·증인출석 요구", "verified": true },
+          { "label": "시행령 제23조①2호(권한의 위탁)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제23조", "summary": "검사업무를 금융감독원장에 위탁", "verified": true }
+        ],
+        "edges_to": ["P16", "P22"]
+      },
+      {
+        "id": "P14", "name": "불공정거래 조사·자료제출명령", "lane": "fsc", "gate": "G3",
+        "status": "done", "core": true, "confidence": 90,
+        "docs": ["자료제출요구문서(조사목적·대상 명시)"],
+        "basis": [
+          { "label": "제14조(불공정거래행위에 대한 조사·조치)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제14조", "summary": "위반혐의자 보고·자료제출명령, 영치, 사무소 출입조사", "verified": true },
+          { "label": "시행령 제20조①(자료제출 요구 방법)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제20조", "summary": "조사목적·대상 가상자산 종류 등을 명시한 문서로 요구", "verified": true }
+        ],
+        "edges_to": ["P16", "P17", "P19", "P22"]
+      },
+      {
+        "id": "P15", "name": "통화신용정책 목적 자료제출요구", "lane": "bok", "gate": "G3",
+        "status": "done", "core": false, "confidence": 88,
+        "basis": [
+          { "label": "제16조(한국은행의 자료제출 요구)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제16조", "summary": "금융통화위원회 인정시 자료제출요구, 필요최소범위 한정", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P16", "name": "사업자·임직원 조치(시정명령 등)", "lane": "fsc", "gate": "G4",
+        "status": "done", "core": true, "confidence": 88,
+        "docs": ["시정명령서", "조치통지서"],
+        "basis": [
+          { "label": "제15조①②③(가상자산사업자에 대한 조치)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제15조", "summary": "시정명령·경고·주의·영업정지·수사기관통보, 임직원 해임권고/면직/정직/문책, 청문(해임·면직) 필수", "verified": true },
+          { "label": "시행령 제21조(시정명령 등 대상자 범위)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제21조", "summary": "이해관계자 범위는 제19조②(검사대상)와 동일 준용", "verified": true }
+        ],
+        "edges_to": ["P22"]
+      },
+      {
+        "id": "P17", "name": "불공정거래 과징금 부과", "lane": "fsc", "gate": "G4",
+        "status": "risk", "core": true, "confidence": 87,
+        "deadline": "통지 후 60일 이내 납부(시행령 제22조③)",
+        "docs": ["과징금부과통지서"],
+        "bottleneck": "과징금 부과 전 검찰 수사·처분결과 확인이 원칙(2가지 예외만 인정)이라 행정제재가 형사절차 완료를 기다리며 지연될 소지",
+        "basis": [
+          { "label": "제17조(불공정거래행위에 대한 과징금)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제17조", "summary": "위반이익(미실현 포함)의 2배 이하 또는 산정곤란시 40억원 이하", "verified": true },
+          { "label": "시행령 제22조①②③(과징금 부과 기준 및 절차)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제22조", "summary": "산정기준(별표1), 검찰 수사·처분결과 확인 원칙+2가지 예외, 60일내 납부", "verified": true },
+          { "label": "별표1(위반행위로 얻은 이익 등의 산정방식)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령", "summary": "별표 본문 미크롤 - 조문 존재만 확인, 표 내용 미확인", "verified": false }
+        ],
+        "regress_to": ["P19"]
+      },
+      {
+        "id": "P18", "name": "권한의 위탁(금융감독원)", "lane": "fsc", "gate": "G4",
+        "status": "done", "core": false, "confidence": 90,
+        "basis": [
+          { "label": "제18조(권한의 위탁)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제18조", "summary": "업무 일부를 금융감독원장에 위탁하는 근거", "verified": true },
+          { "label": "시행령 제23조(권한의 위탁)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제23조", "summary": "보고접수·검사·자료제출요구·경고주의 등 6개 업무 위탁, 6개월마다 보고", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P19", "name": "수사·기소, 형사처벌(징역·벌금)", "lane": "inv", "gate": "G5",
+        "status": "done", "core": true, "confidence": 90,
+        "basis": [
+          { "label": "제19조①~⑥(벌칙)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제19조", "summary": "미공개정보이용·시세조종 등 1년이상 유기징역+이익 3~5배 벌금, 5억원 이상시 가중처벌", "verified": true },
+          { "label": "별표1(부당이득 산정방식, 시행령 제27조 관련)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령", "summary": "별표 본문 미크롤 - 조문 존재만 확인", "verified": false }
+        ],
+        "edges_to": ["P20", "P21"]
+      },
+      {
+        "id": "P20", "name": "몰수·추징", "lane": "inv", "gate": "G5",
+        "status": "done", "core": false, "confidence": 90,
+        "basis": [
+          { "label": "제20조①②(몰수·추징)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제20조", "summary": "위반행위로 취득한 재산 몰수, 몰수불능시 가액 추징", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P21", "name": "양벌규정(법인 처벌)", "lane": "vasp", "gate": "G5",
+        "status": "done", "core": false, "confidence": 90,
+        "basis": [
+          { "label": "제21조(양벌규정)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제21조", "summary": "법인 대표자·임직원 위반시 법인도 벌금, 상당한 주의감독시 면책", "verified": true }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P22", "name": "과태료 부과", "lane": "fsc", "gate": "G5",
+        "status": "done", "core": true, "confidence": 85,
+        "docs": ["과태료부과통지서"],
+        "basis": [
+          { "label": "제22조①②(과태료)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제22조", "summary": "예치금·보관·보험·거래기록·검사불응 등 8호 위반시 1억원 이하 과태료, 금융위 부과징수", "verified": true },
+          { "label": "시행령 제28조·별표2(과태료 부과기준)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령/제28조", "summary": "별표 본문 미크롤 - 조문 존재만 확인, 세부 부과기준 미확인", "verified": false }
+        ],
+        "edges_to": []
+      },
+      {
+        "id": "P23", "name": "손해배상청구(민사)", "lane": "user", "gate": "G5",
+        "status": "done", "core": false, "confidence": 88,
+        "deadline": "안 날부터 2년 또는 행위시부터 5년(제11조④, 소멸시효)",
+        "docs": ["손해배상청구서"],
+        "basis": [
+          { "label": "제10조⑥(손해배상책임)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제10조", "summary": "제1~5항 위반으로 이용자가 입은 손해 배상책임", "verified": true },
+          { "label": "제11조③④(입출금차단 손해배상·시효)", "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률/제11조", "summary": "위반행위로 형성된 가격거래 손해배상, 2년/5년 시효 소멸", "verified": true }
+        ],
+        "edges_to": []
+      }
+    ]
+  },
+  "canvas": {
+    "purpose_basis": {
+      "purpose": "가상자산 이용자 자산의 보호와 불공정거래행위 규제 등에 관한 사항을 정함으로써 가상자산 이용자의 권익을 보호하고 가상자산시장의 투명하고 건전한 거래질서를 확립하기 위해 제정되었다(제1조). 자본시장법과 달리 가상자산업 진입규제(등록·인가) 자체는 다루지 않고, 이미 특정 금융거래정보법상 신고된 사업자를 전제로 이용자 자산보호와 시장 감시·제재에 집중한다.",
+      "sources": [
+        {
+          "name": "가상자산 이용자 보호 등에 관한 법률",
+          "kind": "법률",
+          "articles": [
+            { "ref": "제1조", "gist": "목적: 이용자 자산보호+불공정거래규제로 권익보호·건전질서 확립", "verified": true }
+          ],
+          "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률"
+        },
+        {
+          "name": "가상자산 이용자 보호 등에 관한 법률 시행령",
+          "kind": "대통령령",
+          "articles": [
+            { "ref": "제1조", "gist": "목적: 법에서 위임된 사항과 시행에 필요한 사항 규정", "verified": true }
+          ],
+          "url": "https://law.go.kr/법령/가상자산이용자보호등에관한법률시행령"
+        }
+      ]
+    },
+    "authority": [
+      { "org": "금융위원회", "role": "감독·검사·조사·조치·과징금·과태료 부과 등 이 법 집행의 총괄 권한자(제13~15,17,22조)" },
+      { "org": "금융감독원(장)", "role": "금융위로부터 검사·조사·자료제출요구·경고주의 등 업무를 위탁받아 수행, 6개월마다 처리결과 보고(제18조, 시행령 23조)" },
+      { "org": "검찰(검찰총장)", "role": "제19~21조 형사처벌(징역·벌금) 수사·기소 주체, 금융위 과징금 부과 전 수사·처분결과 확인 협의 상대(시행령 22조②)" },
+      { "org": "한국은행(금융통화위원회)", "role": "통화신용정책·금융안정 목적으로 가상자산사업자에 자료제출요구(제16조), 감독·제재 권한은 없음" },
+      { "org": "관리기관(은행 등)", "role": "이용자 예치금을 고유재산과 분리하여 예치·신탁받아 안전자산으로 운용, 사업자 파산 등 시 이용자에게 우선지급 실행(제6조, 시행령 8~10조)" },
+      { "org": "가상자산사업자", "role": "예치금·가상자산 보호, 불공정거래 금지, 이상거래 감시 등 이 법상 1차 의무 이행 주체" }
+    ],
+    "money_flow": "이용자가 예치한 금전(예치금)은 가상자산사업자의 고유재산과 분리되어 관리기관(은행 등)에 예치·신탁되며, 관리기관은 국채·지방채 매수 등 안전자산으로 운용한 수익을 사업자에게 지급한다(시행령 8조②2호). 예치금은 이용자 재산으로서 상계·압류가 금지되고(제6조③), 사업자가 신고말소·해산·파산에 이르면 이용자에게 우선하여 지급된다(제6조④). 불공정거래에 대한 과징금(위반이익의 2배 또는 최대 40억원, 제17조①)과 과태료(최대 1억원, 제22조①)는 금융위원회가 부과·징수하며 국고에 귀속되고, 몰수·추징(제20조)은 위반행위로 취득한 재산 자체를 대상으로 한다. 예치금 운용수익이 최종적으로 이용자에게도 귀속되는지는 원문에 명문 규정이 없어 확인이 필요하다.",
+    "document_flow": "이용자명부(제7조①) → 가상자산거래기록(제9조, 시행령 13조, 15년 보존) → 이상거래 감시기록·금융위 통보(제12조, 시행령 13조5~7호) → 금융위 자료제출요구 문서(조사목적·대상 명시, 시행령 20조①) → 조치·과징금 부과 통지서면(시행령 22조②) → 과태료 부과통지(시행령 28조·별표2). 디지털 시스템 연계: 관리기관 인터넷 홈페이지 공고(예치금 우선지급 시기·장소, 시행령 10조①2호나), 가상자산거래소 자체 전자전달매체 공시(자기발행 가상자산 취득내역, 시행령 16조②).",
+    "bottlenecks": [
+      "임의적 입출금 차단 금지의 예외사유(시행령 17조)가 전산장애·실사업무·행정기관 요청·자금세탁 의심(최대 2개월+2회연장) 등 7개 항목·다수 세부 목으로 폭넓어 '차단 금지 원칙'의 실효성이 약화될 수 있다는 지적이 가능하다.",
+      "불공정거래 과징금(제17조) 부과 전 검찰 수사·처분결과 확인이 원칙(시행령 22조②, 예외 2가지)이라, 행정제재가 형사절차 완료 시점에 종속되어 신속한 제재가 지연될 소지가 있다.",
+      "가상자산사업자의 진입(등록·신고) 자체는 이 법이 아닌 특정 금융거래정보법 소관이라, 제6조④1호(신고말소)처럼 이 법의 발동조건이 타법 절차에 의존하는 구조적 갭이 있다.",
+      "이상거래 상시감시·통보 의무(제12조①)는 '가상자산시장을 개설·운영하는 가상자산사업자'로 한정되어, 단순 보관·중개만 하는 사업자의 이상거래 감시는 이 조문상 공백일 수 있다.",
+      "예치금 운용수익의 최종 귀속(이용자 vs 사업자)에 대한 명문 규정이 없어(시행령 8조②2호는 '수익을 가상자산사업자에게 지급'만 규정) 해석 여지가 남는다."
+    ],
+    "improvements": [
+      "(제안) 자금세탁 의심에 따른 입출금차단(시행령 17조6호, 최대 2개월+2회연장)에 대해 이용자 통지·이의절차를 명문화하는 방안 검토",
+      "(제안) 과징금-형사절차 병행 시 검찰 수사·처분결과 확인 소요기간에 대한 상한 또는 처리기한을 명확화하는 방안 검토",
+      "(제안) 이상거래 상시감시 의무의 적용대상을 가상자산시장 개설·운영자 외 사업자(보관·중개 전업자 등)로 확대하는 방안 검토",
+      "(제안) 예치금 운용수익의 이용자 귀속 여부·비율을 금융위 고시 또는 시행령 차원에서 명문화하는 방안 검토"
+    ],
+    "related": [
+      { "title": "특정 금융거래정보의 보고 및 이용 등에 관한 법률", "why": "가상자산사업자 신고·실명확인 입출금계정 등 진입규제를 규정 - 이 법의 '사업자 신고말소'(제6조④1호) 등 발동조건의 전제 법률" },
+      { "title": "자본시장과 금융투자업에 관한 법률", "why": "과징금 부과에 대한 의견제출·이의신청·징수·환급 절차를 이 법 제17조④가 준용" },
+      { "title": "전자금융거래법 및 동법 시행령", "why": "접근매체 정의(시행령 12조1호), 거래기록 보관방법(시행령 14조①)을 준용" },
+      { "title": "개인정보 보호법 시행령", "why": "가상자산거래기록 파기절차·방법(시행령 14조②)을 준용" },
+      { "title": "전기통신금융사기 피해 방지 및 피해금 환급에 관한 특별법", "why": "전기통신금융사기 피해 예방·환급 목적의 72시간 출금차단(시행령 17조5호) 근거 법률" }
+    ],
+    "field_verification_needed": [
+      "가상자산 보관비율(콜드월렛) 70% 이상 범위 내 금융위원회가 정하여 고시하는 구체적 비율(시행령 11조①) - 고시 원문 미확인",
+      "이상거래 유형 판단기준 중 '그 밖에 공정한 거래질서를 해칠 우려가 있는 경우'(시행령 18조3호)의 세부 기준 - 금융위 고시 미확인",
+      "별표1(위반행위로 얻은 이익 등의 산정방식, 시행령 22조·27조 관련) 세부 산식 - 별표 본문 미크롤",
+      "별표2(과태료 부과기준, 시행령 28조 관련) 세부 부과금액표 - 별표 본문 미크롤",
+      "미공개중요정보 공개방법 중 '금융위원회가 정하여 고시하는 방법'(시행령 15조6호) 등 다수 위임고시 - 별도 고시 미확인",
+      "예치금 이자·운용수익의 이용자 귀속 실무(시행령 8조④ '세부 사항은 금융위원회가 정하여 고시') - 고시 원문 미확인"
+    ]
+  },
+  "verification": {
+    "status": "scope_needed",
+    "checked": 49,
+    "total": 52,
+    "checker": "Claude Sonnet 5 (원문 직접 대조, 별표1·별표2·개별 금융위 고시 본문은 미크롤)",
+    "checked_at": "2026-07-12",
+    "report_channel": "mailto:kooys2013@gmail.com"
+  }
+}
+
+</script>
+<script>
+(function(){
+  "use strict";
+  const DATA = JSON.parse(document.getElementById('canvasData').textContent);
+  const meta = DATA.meta, diagram = DATA.diagram, canvas = DATA.canvas, verification = DATA.verification;
+  const nodes = diagram.nodes, lanes = diagram.lanes, gates = diagram.gates;
+  const nodeById = {}; nodes.forEach(n => nodeById[n.id] = n);
+
+  const STATUS_LABEL = {done:'완료', current:'현재', risk:'위험/회귀', wait:'대기'};
+  const CONF_ICON = c => c < 50 ? ' <span class="warn-icon">⚠️</span>' : '';
+
+  /* ---------- dashboard auto-calc (하드코딩 금지, JSON에서 산출) ---------- */
+  const basisAll = nodes.flatMap(n => n.basis || []);
+  const basisChecked = basisAll.filter(b => b.verified).length;
+  const basisTotal = basisAll.length;
+  const bottleneckCount = nodes.filter(n => n.bottleneck).length + (canvas.bottlenecks ? canvas.bottlenecks.length : 0);
+
+  /* header badges */
+  const badgeRow = document.getElementById('badgeRow');
+  badgeRow.innerHTML = `
+    <span class="badge">NO ${String(meta.no).padStart(2,'0')}</span>
+    <span class="badge">${meta.category}</span>
+    <span class="badge">${meta.type_tag || ''}</span>
+    <span class="badge verify">조문 검증 ${basisChecked}/${basisTotal}</span>
+  `;
+  document.getElementById('titleEl').textContent = meta.title;
+  document.getElementById('oneLinerEl').textContent = meta.one_liner;
+
+  const statRow = document.getElementById('statRow');
+  const stats = [
+    {num: nodes.length, label:'절차 노드'},
+    {num: lanes.length, label:'행위 레인'},
+    {num: gates.length, label:'게이트'},
+    {num: `${basisChecked}/${basisTotal}`, label:'출처 확인', warn: basisChecked < basisTotal},
+    {num: bottleneckCount, label:'병목 구간', warn: bottleneckCount > 0}
+  ];
+  statRow.innerHTML = stats.map(s => `<div class="stat${s.warn?' warn':''}"><span class="num">${s.num}</span><span class="label">${s.label}</span></div>`).join('');
+
+  const metaStrip = document.getElementById('metaStrip');
+  metaStrip.innerHTML = `
+    <span><b>원문 기준일</b> ${meta.as_of} (법률 시행 2024-07-19 / 시행령 시행 2025-04-23)</span>
+    <span><b>검증</b> ${verification.checker} · ${verification.checked_at}</span>
+    <span><b>고지</b> ${meta.disclaimer}</span>
+    <span><b>오류 신고</b> <a class="report-link" href="${verification.report_channel}">${verification.report_channel}</a></span>
+  `;
+
+  document.getElementById('footerMeta').innerHTML = `
+    ${meta.title} 한 장 체계도 · onepage-canvas 스킬 산출물 · 기준일 ${meta.as_of} ·
+    검증상태 <b>${verification.status}</b> (${basisChecked}/${basisTotal}) ·
+    본 문서는 참고자료이며 법적 자문이 아닙니다. 오류 신고: <a class="report-link" href="${verification.report_channel}">${verification.report_channel}</a>
+  `;
+
+  /* ---------- diagram grid ---------- */
+  const gridTable = document.getElementById('gridTable');
+  let mode = 'core';
+
+  function laneIndex(id){ return lanes.findIndex(l => l.id === id); }
+  function gateIndex(id){ return gates.findIndex(g => g.id === id); }
+
+  function buildGrid(){
+    let thead = '<tr><th class="corner"></th>' + gates.map(g => `<th>${g.id} · ${g.name}</th>`).join('') + '</tr>';
+    let rows = lanes.map(lane => {
+      let cells = gates.map(gate => {
+        const cellNodes = nodes.filter(n => n.lane === lane.id && n.gate === gate.id);
+        const html = cellNodes.map(n => nodeCardHtml(n)).join('');
+        return `<td class="cell" data-lane="${lane.id}" data-gate="${gate.id}">${html}</td>`;
+      }).join('');
+      return `<tr><td class="lane-head">${lane.name}<span class="kind">${lane.kind === 'system' ? 'SYSTEM' : 'ACTOR'}</span></td>${cells}</tr>`;
+    }).join('');
+    gridTable.innerHTML = thead + rows;
+  }
+
+  function nodeCardHtml(n){
+    const hidden = (mode === 'core' && !n.core) ? ' hidden' : '';
+    const regressNote = (n.regress_to && n.regress_to.length)
+      ? `<span class="nregress">↩ ${n.id} → ${n.regress_to.join(',')} 재확인 대기</span>` : '';
+    return `<div class="node st-${n.status}${hidden}" data-node="${n.id}">
+      <span class="nstat">${STATUS_LABEL[n.status]||n.status}</span>
+      <span class="nid">${n.id}</span>
+      <span class="nname">${n.name}${n.confidence<50?' <span class="warn-icon">⚠️</span>':''}</span>
+      ${regressNote}
+    </div>`;
+  }
+
+  function drawEdges(){
+    const svg = document.getElementById('edgeSvg');
+    const inner = document.getElementById('diagramInner');
+    svg.innerHTML = '';
+    const c = inner.getBoundingClientRect();
+    inner.style.height = gridTable.getBoundingClientRect().height + 'px';
+
+    function getEl(id){ return gridTable.querySelector(`.node[data-node="${id}"]`); }
+    function visible(el){ return el && !el.classList.contains('hidden'); }
+
+    function drawEdge(fromId, toId, regress){
+      const fromEl = getEl(fromId), toEl = getEl(toId);
+      if(!visible(fromEl) || !visible(toEl)) return;
+      const a = fromEl.getBoundingClientRect(), b = toEl.getBoundingClientRect();
+      const x1 = a.right - c.left, y1 = a.top + a.height/2 - c.top;
+      const x2 = b.left - c.left, y2 = b.top + b.height/2 - c.top;
+      let d;
+      if(regress){
+        const midx = (x1+x2)/2, topY = Math.min(y1,y2) - 36;
+        d = `M${x2},${y2} Q${midx},${topY} ${x1},${y1}`;
+      } else {
+        d = `M${x1},${y1} L${x2},${y2}`;
+      }
+      const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+      p.setAttribute('d', d);
+      p.setAttribute('class', regress ? 'edge-regress' : 'edge');
+      if(!regress){
+        p.setAttribute('marker-end', 'url(#arrow)');
+      }
+      svg.appendChild(p);
+    }
+
+    // arrow marker def
+    const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+    defs.innerHTML = `<marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="var(--text3)"></path></marker>`;
+    svg.appendChild(defs);
+
+    nodes.forEach(n => {
+      (n.edges_to||[]).forEach(t => drawEdge(n.id, t, false));
+      (n.regress_to||[]).forEach(t => drawEdge(n.id, t, true));
+    });
+  }
+
+  function render(){
+    buildGrid();
+    drawEdges();
+    requestAnimationFrame(drawEdges);
+    setTimeout(drawEdges, 300);
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(drawEdges).catch(()=>{}); }
+    gridTable.querySelectorAll('.node').forEach(el => {
+      el.addEventListener('click', () => selectNode(el.getAttribute('data-node')));
+    });
+  }
+
+  let debounceTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(drawEdges, 150);
+  });
+
+  document.getElementById('btnCore').addEventListener('click', () => setMode('core'));
+  document.getElementById('btnFull').addEventListener('click', () => setMode('full'));
+  function setMode(m){
+    mode = m;
+    document.getElementById('btnCore').classList.toggle('active', m==='core');
+    document.getElementById('btnFull').classList.toggle('active', m==='full');
+    render();
+  }
+
+  /* ---------- detail panel ---------- */
+  function selectNode(id){
+    const n = nodeById[id];
+    if(!n) return;
+    gridTable.querySelectorAll('.node').forEach(el => el.classList.toggle('selected', el.getAttribute('data-node')===id));
+    const lane = lanes.find(l => l.id === n.lane);
+    const gate = gates.find(g => g.id === n.gate);
+    const docsHtml = (n.docs||[]).map(d => `<span class="chip">${d}</span>`).join('');
+    const basisHtml = (n.basis||[]).map(b => `<li>
+        <a href="${b.url}" target="_blank" rel="noopener">${b.label}</a>
+        ${b.verified ? '' : '<span class="unverified">확인필요</span>'}<br>
+        <span class="b-summary">${b.summary||''}</span>
+      </li>`).join('');
+    const kvHtml = `
+      <div class="kv"><span class="k">기한</span><br><span class="v">${n.deadline||'명시 없음'}</span></div>
+      <div class="kv"><span class="k">확신도</span><br><span class="v">${n.confidence!=null?n.confidence+'%':'-'}${CONF_ICON(n.confidence||100)}</span></div>
+    `;
+    document.getElementById('detailPanel').innerHTML = `
+      <div class="detail-head">
+        <span class="did">${n.id}</span>
+        <span class="badge">${STATUS_LABEL[n.status]||n.status}</span>
+        <strong>${n.name}</strong>
+      </div>
+      <div class="detail-path">${gate?gate.id+' '+gate.name:''} · ${lane?lane.name:''}</div>
+      ${docsHtml?`<div class="chip-row">${docsHtml}</div>`:''}
+      <div class="kv-row">${kvHtml}</div>
+      <div><strong style="font-size:12.5px;color:var(--text2)">법적 근거</strong>
+        <ul class="basis-list">${basisHtml || '<li>해당 없음</li>'}</ul>
+      </div>
+      ${n.bottleneck ? `<div class="bottleneck-note">${n.bottleneck}</div>` : ''}
+    `;
+  }
+
+  /* ---------- 8-slot canvas ---------- */
+  const cv = canvas;
+  const slots = [];
+  slots.push({
+    n:1, title:'목적과 법적 근거',
+    body: `<p>${cv.purpose_basis.purpose}</p>` +
+      cv.purpose_basis.sources.map(s => `<div class="src"><a href="${s.url}" target="_blank" rel="noopener">${s.name}</a> (${s.kind})<br>` +
+        s.articles.map(a => `${a.ref} — ${a.gist}${a.verified?'':' <span class="unverified">확인필요</span>'}`).join('<br>') + `</div>`).join('')
+  });
+  slots.push({ n:2, title:'권한 관계',
+    body:`<ul>${cv.authority.map(a=>`<li><b>${a.org}</b> — ${a.role}</li>`).join('')}</ul>` });
+  slots.push({ n:3, title:'돈의 흐름', body:`<p>${cv.money_flow}</p>` });
+  slots.push({ n:4, title:'문서의 흐름', body:`<p>${cv.document_flow}</p>` });
+  slots.push({ n:5, title:'병목', bottleneck:true,
+    body:`<ul>${cv.bottlenecks.map(b=>`<li>${b}</li>`).join('')}</ul>` });
+  slots.push({ n:6, title:'개선점', body:`<ul>${cv.improvements.map(b=>`<li>${b}</li>`).join('')}</ul>` });
+  slots.push({ n:7, title:'관련 제도', body: cv.related.length ?
+      cv.related.map(r=>`<div class="related-item"><span class="t">${r.title}</span><span class="w">${r.why}</span></div>`).join('')
+      : '<p>해당 없음</p>' });
+  slots.push({ n:8, title:'현장 검증 필요', body:`<ul>${cv.field_verification_needed.map(b=>`<li>${b}</li>`).join('')}</ul>` });
+
+  document.getElementById('canvasGrid').innerHTML = slots.map(s =>
+    `<div class="slot${s.bottleneck?' bottleneck-slot':''}"><h3><span class="n">#${s.n}</span>${s.title}</h3>${s.body}</div>`
+  ).join('');
+
+  render();
+})();
+</script>
+</body>
+</html>
