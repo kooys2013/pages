@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>머스크 디코더 — 2026년의 일론 머스크를 읽는 법</title>
+<meta name="description" content="AI가 상한, 에너지가 병목, 로봇이 실행. 2026년 머스크의 발언과 실제 행동을 숫자로 뜯어보고, 그의 예측을 어떻게 번역해서 들어야 하는지까지 배우는 인터랙티브 교재.">
+<meta property="og:title" content="머스크 디코더 — 2026년의 일론 머스크를 읽는 법">
+<meta property="og:description" content="방향은 신호, 시각표는 노이즈. 600건 예측의 실측 오차율로 만든 번역기.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#05070e; --bg2:#0c1220; --bg3:#131b2c;
+  --line:#1c2740; --line2:#2b3a57;
+  --tx:#e8eefc; --tx2:#a5b4d0; --tx3:#6f809f;
+  --acc:#60a5fa; --acc2:#93c5fd; --acc-d:#2563eb;
+  --watt:#facc15; --bot:#a78bfa; --green:#4ade80; --red:#fb7185; --orange:#fb923c;
+  --r:16px; --maxw:760px; --fs:clamp(16px,1.6vw,17.5px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  font-size:var(--fs);line-height:1.75;letter-spacing:-.011em;overflow-x:hidden;word-break:keep-all}
+img,svg{max-width:100%;display:block}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 540px at 50% -12%,rgba(96,165,250,.15),transparent 65%),
+             radial-gradient(700px 500px at 100% 100%,rgba(250,204,21,.06),transparent 60%),
+             radial-gradient(600px 480px at 0% 60%,rgba(167,139,250,.06),transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--watt));transition:width .1s linear}
+
+header.hero{padding:78px 0 44px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.76em;font-weight:700;letter-spacing:.06em;
+  color:var(--acc2);background:rgba(96,165,250,.09);border:1px solid rgba(96,165,250,.28);
+  padding:6px 13px;border-radius:100px;margin-bottom:22px}
+h1{font-size:clamp(2.05rem,7.4vw,3.15rem);line-height:1.2;font-weight:800;letter-spacing:-.035em}
+h1 .hl{background:linear-gradient(180deg,transparent 58%,rgba(96,165,250,.32) 58%);padding:0 .06em}
+h1 .hlw{background:linear-gradient(180deg,transparent 58%,rgba(250,204,21,.3) 58%);padding:0 .06em}
+.sub{color:var(--tx2);margin-top:18px;font-size:1.03em}
+.srcline{margin-top:26px;font-size:.8em;color:var(--tx3);line-height:1.6}
+.srcline a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(147,197,253,.35)}
+
+.verdict{margin:34px 0 12px;border:1px solid rgba(96,165,250,.32);border-radius:22px;
+  background:linear-gradient(160deg,rgba(96,165,250,.12),rgba(96,165,250,.02));padding:26px 22px}
+.verdict .lbl{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--acc2);margin-bottom:14px}
+.verdict p{font-size:1.16em;font-weight:600;line-height:1.62}
+.verdict p+p{margin-top:11px}
+.verdict .em{color:var(--acc2);font-weight:800}
+.verdict .emw{color:var(--watt);font-weight:800}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 8px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:18px 10px;text-align:center}
+.stat .n{font-size:clamp(1.45rem,6vw,2rem);font-weight:800;color:var(--acc);letter-spacing:-.04em;line-height:1.1}
+.stat .n small{font-size:.5em;font-weight:700}
+.stat .k{font-size:.76em;color:var(--tx2);margin-top:8px;line-height:1.4}
+.stat.w .n{color:var(--watt)}
+.stat.r .n{color:var(--red)}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.snum{font-size:.74em;font-weight:800;letter-spacing:.14em;color:var(--acc);margin-bottom:9px}
+h2{font-size:clamp(1.5rem,5vw,2.05rem);font-weight:800;letter-spacing:-.03em;line-height:1.28}
+.lead{color:var(--tx2);margin-top:13px;font-size:1.02em}
+h3{font-size:1.16em;font-weight:700;margin:34px 0 12px;letter-spacing:-.02em}
+p{margin:13px 0}
+strong{color:var(--acc2);font-weight:700}
+em.w{font-style:normal;color:var(--watt);font-weight:700}
+.mute{color:var(--tx3);font-size:.87em}
+blockquote{margin:16px 0;padding:14px 18px;border-left:3px solid var(--acc-d);background:var(--bg2);
+  border-radius:0 12px 12px 0;font-size:.95em;color:var(--tx2);line-height:1.7}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.85em;color:var(--tx3)}
+
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.acc{border-color:rgba(96,165,250,.28);background:linear-gradient(160deg,rgba(96,165,250,.07),rgba(96,165,250,.01))}
+.card.warn{border-color:rgba(250,204,21,.3);background:rgba(250,204,21,.05)}
+.card.dngr{border-color:rgba(251,113,133,.32);background:rgba(251,113,133,.06)}
+.card.vio{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.05)}
+.card h4{font-size:1.02em;font-weight:700;margin-bottom:9px}
+
+.fig{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 16px;margin:18px 0}
+.fig .cap{font-size:.8em;color:var(--tx3);margin-top:12px;text-align:center;line-height:1.55}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;justify-content:center}
+.flow .n{background:var(--bg3);border:1px solid var(--line2);border-radius:11px;padding:10px 13px;font-size:.85em;font-weight:600;text-align:center}
+.flow .n.hot{border-color:rgba(96,165,250,.5);background:rgba(96,165,250,.11);color:var(--acc2)}
+.flow .n.wt{border-color:rgba(250,204,21,.5);background:rgba(250,204,21,.1);color:var(--watt)}
+.flow .n.bad{border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.09);color:var(--red)}
+.flow .ar{color:var(--tx3);font-size:1.1em}
+
+/* 사례 / 오해 카드 */
+.myths{display:grid;gap:12px;margin:22px 0}
+.myth{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);overflow:hidden;cursor:pointer;transition:.2s}
+.myth:hover{border-color:var(--line2)}
+.myth .q{padding:17px 18px;display:flex;gap:12px;align-items:flex-start}
+.myth .q .badge{flex:0 0 auto;font-size:.7em;font-weight:800;letter-spacing:.05em;padding:4px 9px;border-radius:7px;
+  background:rgba(251,113,133,.14);color:var(--red);margin-top:2px;white-space:nowrap}
+.myth.true .q .badge{background:rgba(74,222,128,.14);color:var(--green)}
+.myth.half .q .badge{background:rgba(250,204,21,.14);color:var(--watt)}
+.myth .q .txt{flex:1;font-weight:600;font-size:.99em}
+.myth .q .txt .hint{display:block;font-size:.76em;color:var(--tx3);font-weight:500;margin-top:4px}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.myth.open .a{max-height:1400px}
+.myth .a .inner{padding:0 18px 18px;font-size:.93em;color:var(--tx2);line-height:1.72}
+.myth .a .inner>hr{border:none;border-top:1px dashed var(--line2);margin:0 0 14px}
+.verdictline{display:inline-block;font-weight:800;font-size:.86em;padding:4px 11px;border-radius:8px;margin:0 0 10px}
+.v-x{background:rgba(251,113,133,.14);color:var(--red)}
+.v-o{background:rgba(74,222,128,.14);color:var(--green)}
+.v-t{background:rgba(250,204,21,.14);color:var(--watt)}
+
+/* 탭 */
+.tabs{display:flex;gap:8px;margin:24px 0 0;flex-wrap:wrap}
+.tab{flex:1;min-width:104px;padding:13px 10px;border-radius:13px;border:1px solid var(--line);background:var(--bg2);
+  color:var(--tx2);font:inherit;font-size:.89em;font-weight:700;cursor:pointer;transition:.2s;text-align:center}
+.tab.on{background:rgba(96,165,250,.13);border-color:rgba(96,165,250,.45);color:var(--acc2)}
+.panel{display:none;animation:fade .35s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 막대 */
+.chart{margin:22px 0}
+.bar-row{margin:15px 0}
+.bar-lab{display:flex;justify-content:space-between;font-size:.86em;margin-bottom:6px;gap:10px}
+.bar-lab .v{font-weight:800;color:var(--acc2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--bg3);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;width:0;border-radius:100px;transition:width 1.15s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--acc2))}
+.bar-fill.wattb{background:linear-gradient(90deg,#b45309,var(--watt))}
+.bar-fill.redb{background:linear-gradient(90deg,#9f1239,var(--red))}
+.bar-fill.ref{background:linear-gradient(90deg,#1e2942,#3d4d6b)}
+
+/* 비교표 */
+.cmp{margin:20px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp .hd,.cmp .rw{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:1px;background:var(--line)}
+.cmp .hd>div{background:var(--bg3);padding:12px 10px;font-size:.83em;font-weight:800;text-align:center}
+.cmp .hd>div:first-child{text-align:left}
+.cmp .rw>div{background:var(--bg2);padding:12px 10px;font-size:.85em;text-align:center;display:flex;align-items:center;justify-content:center}
+.cmp .rw>div:first-child{justify-content:flex-start;text-align:left;font-weight:600;color:var(--tx2)}
+.pill{font-size:.88em;font-weight:700;padding:3px 9px;border-radius:7px}
+.p-o{background:rgba(74,222,128,.13);color:var(--green)}
+.p-t{background:rgba(250,204,21,.13);color:var(--watt)}
+.p-x{background:rgba(251,113,133,.13);color:var(--red)}
+
+/* 타임라인 */
+.tl{margin:24px 0;position:relative;padding-left:26px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--acc-d),var(--acc),rgba(250,204,21,.6))}
+.tlrow{position:relative;margin-bottom:18px}
+.tlrow::before{content:"";position:absolute;left:-24px;top:7px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2.5px solid var(--acc)}
+.tlrow.wt::before{border-color:var(--watt)}
+.tlrow.rd::before{border-color:var(--red)}
+.tlrow .d{font-size:.76em;font-weight:800;letter-spacing:.06em;color:var(--acc);margin-bottom:3px}
+.tlrow.wt .d{color:var(--watt)}
+.tlrow.rd .d{color:var(--red)}
+.tlrow .t{font-weight:700;font-size:.99em}
+.tlrow .x{font-size:.87em;color:var(--tx3);margin-top:3px;line-height:1.62}
+
+/* 디코더 */
+.decoder{border:1px solid rgba(96,165,250,.35);border-radius:20px;padding:24px 20px;margin:24px 0;
+  background:linear-gradient(160deg,rgba(96,165,250,.09),rgba(250,204,21,.03))}
+.decoder .dh{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--acc2);margin-bottom:14px}
+.decoder label{display:block;font-size:.9em;color:var(--tx2);margin-bottom:10px;font-weight:600}
+.decoder input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:100px;
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--watt));outline:none;margin:6px 0 4px}
+.decoder input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  background:#fff;border:4px solid var(--acc);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.decoder input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;
+  border:4px solid var(--acc);cursor:pointer}
+.decoder .ticks{display:flex;justify-content:space-between;font-size:.72em;color:var(--tx3);margin-bottom:16px}
+.dout{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px}
+.dout .said{font-size:.85em;color:var(--tx3)}
+.dout .said b{color:var(--acc2);font-size:1.15em}
+.dout .arrowdown{text-align:center;color:var(--tx3);margin:8px 0;font-size:1.1em}
+.dout .real{font-size:1.02em;font-weight:700;line-height:1.6}
+.dout .real b{color:var(--watt);font-size:1.3em;font-variant-numeric:tabular-nums}
+.dout .yr{margin-top:10px;padding-top:12px;border-top:1px dashed var(--line2);font-size:.9em;color:var(--tx2)}
+.dout .yr b{color:var(--acc2)}
+.dpreset{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.dpreset button{flex:1;min-width:98px;padding:9px 8px;border-radius:10px;border:1px solid var(--line);
+  background:var(--bg3);color:var(--tx2);font:inherit;font-size:.8em;font-weight:600;cursor:pointer;transition:.18s}
+.dpreset button:hover{border-color:var(--line2);color:var(--tx)}
+.dpreset button.on{border-color:rgba(96,165,250,.5);background:rgba(96,165,250,.12);color:var(--acc2)}
+
+/* 대조 미러 */
+.mirror{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;margin:20px 0}
+.mirror .mh{background:var(--bg3);padding:11px 14px;font-size:.82em;font-weight:800;text-align:center}
+.mirror .mh.a{color:var(--acc2)}
+.mirror .mh.b{color:var(--red)}
+.mirror .mc{background:var(--bg2);padding:14px;font-size:.88em;line-height:1.65;color:var(--tx2)}
+.mirror .mc b{color:var(--tx);font-weight:700}
+
+/* 체크 */
+.check{margin:20px 0}
+.cline{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--bg2);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+.cline:hover{border-color:var(--line2)}
+.cline.sel{border-color:rgba(96,165,250,.5);background:rgba(96,165,250,.08)}
+.cline .bx{flex:0 0 20px;height:20px;border:2px solid var(--line2);border-radius:6px;margin-top:3px;
+  display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:transparent;transition:.18s}
+.cline.sel .bx{background:var(--acc);border-color:var(--acc);color:#04101f}
+.cline .lt{font-size:.92em}
+.cline .lt em{display:block;font-style:normal;font-size:.85em;color:var(--tx3);margin-top:2px}
+.result{margin-top:16px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);font-size:.95em;line-height:1.7}
+.result.ok{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.07)}
+.result.mid{border-color:rgba(250,204,21,.42);background:rgba(250,204,21,.07)}
+.result.no{border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.08)}
+.result b{display:block;font-size:1.1em;margin-bottom:7px}
+
+/* 퀴즈 */
+.qbox{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;margin-bottom:14px}
+.qbox .qh{font-size:.76em;color:var(--acc2);font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+.qbox .qq{font-weight:700;font-size:1.01em;line-height:1.6}
+.opts{display:grid;gap:8px;margin-top:14px}
+.opt{text-align:left;padding:12px 15px;border-radius:11px;border:1px solid var(--line);background:var(--bg3);
+  color:var(--tx2);font:inherit;font-size:.92em;cursor:pointer;transition:.18s}
+.opt:hover:not(:disabled){border-color:var(--line2);color:var(--tx)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:rgba(74,222,128,.55);background:rgba(74,222,128,.11);color:var(--green);font-weight:700}
+.opt.wrong{border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.1);color:var(--red)}
+.expl{margin-top:12px;padding:12px 14px;border-radius:11px;background:rgba(96,165,250,.06);
+  border:1px solid rgba(96,165,250,.22);font-size:.87em;color:var(--tx2);line-height:1.68;display:none}
+.expl.on{display:block;animation:fade .3s}
+.score{text-align:center;padding:24px;border-radius:var(--r);border:1px solid rgba(96,165,250,.35);
+  background:linear-gradient(160deg,rgba(96,165,250,.1),transparent);display:none}
+.score.on{display:block;animation:fade .4s}
+.score .n{font-size:2.4rem;font-weight:900;color:var(--acc);letter-spacing:-.04em}
+.score .m{color:var(--tx2);margin-top:6px;font-size:.95em}
+
+.final{background:linear-gradient(160deg,rgba(96,165,250,.13),rgba(250,204,21,.03));
+  border:1px solid rgba(96,165,250,.35);border-radius:22px;padding:28px 22px;margin:26px 0}
+.final ol{margin:0;padding-left:20px}
+.final li{font-size:1.06em;font-weight:600;line-height:1.65;margin:12px 0}
+.final li::marker{color:var(--acc);font-weight:800}
+
+.srcbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0;font-size:.84em;line-height:1.85}
+.srcbox a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(147,197,253,.25);word-break:break-all}
+.srcbox .t{font-weight:800;color:var(--tx);margin-bottom:8px;font-size:1.05em}
+
+footer{padding:44px 0 70px;border-top:1px solid var(--line);color:var(--tx3);font-size:.83em;line-height:1.7}
+footer a{color:var(--acc2);text-decoration:none}
+.disc{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0}
+
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:15px 18px}
+  .stat .k{margin-top:0;text-align:right}
+  section{padding:46px 0}
+  .cmp .hd,.cmp .rw{grid-template-columns:1fr .8fr .8fr}
+  .mirror{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">🛰 인사이트 교재 · 04</div>
+  <h1><span class="hl">머스크</span> 디코더</h1>
+  <p class="sub">2026년의 일론 머스크가 말하는 것과<br><strong>실제로 하고 있는 것</strong>을 나란히 놓고 읽는 법.</p>
+  <p class="srcline">
+    기준일 2026-08-23 · 공개 실적발표·인터뷰·보도 기반<br>
+    <span style="color:var(--tx3)">모든 수치에 출처 링크를 달았습니다. 맨 아래에서 전부 확인하실 수 있습니다.</span>
+  </p>
+</header>
+
+<!-- 결론 -->
+<section style="border-top:none;padding-top:0">
+  <div class="verdict">
+    <div class="lbl">결론부터 말합니다</div>
+    <p>머스크의 2026년 세계관은 딱 한 문장입니다.<br><span class="em">"AI가 상한을 정하고, <span class="emw">에너지</span>가 병목이고, 로봇이 실행한다."</span></p>
+    <p>그런데 올해 그의 진짜 인사이트는 <span class="em">말이 아니라 회사 지도를 다시 그린 행동</span>에 있습니다. 로켓 회사가 AI 회사와 합쳐졌습니다.</p>
+    <p>그리고 그를 읽는 규칙 하나. <span class="em">방향은 사되, 시각표는 2~5배로 나누십시오.</span> 이건 비난이 아니라 <span class="em">실측된 오차율</span>입니다.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat r"><div class="n" data-cnt="20" data-suf="%↓">0</div><div class="k">공개 예측 600여 건 중<br>약속대로 이행된 비율</div></div>
+    <div class="stat"><div class="n">$1.77<small>조</small></div><div class="k">2026년 6월 SpaceX<br>상장 시 기업가치</div></div>
+    <div class="stat w"><div class="n" data-cnt="92" data-suf="%">0</div><div class="k">SpaceX 2026 2분기<br>매출 성장률(YoY)</div></div>
+  </div>
+  <p class="mute" style="text-align:center">※ 이 세 숫자가 이 교재의 전부입니다. 아래에서 왜 그런지 하나씩 뜯습니다.</p>
+
+  <div class="card vio">
+    <h4 style="color:var(--bot)">📌 이 교재를 만든 이유</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      머스크 이야기는 극단 둘로 갈립니다. <b>"천재의 예언"</b> 아니면 <b>"사기꾼의 허풍"</b>.
+      둘 다 쓸모없습니다. 쓸모 있는 건 <b>번역기</b>입니다.
+      어떤 부분이 신뢰할 만한 신호이고, 어떤 부분이 걸러야 할 노이즈이고, 그 비율이 얼마인지를 아는 것.
+      <br><br>이 교재는 그 번역기를 만드는 과정입니다. 그를 좋아하든 싫어하든,
+      그가 움직이는 자본의 규모 때문에 <b>그의 발언은 이미 당신의 산업·직업·투자에 영향을 줍니다.</b>
+      좋아할 필요는 없지만, 읽을 줄은 알아야 합니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH01 삼각형 -->
+<section id="triangle">
+  <div class="snum">CHAPTER 01</div>
+  <h2>먼저 삼각형 하나만 외우세요</h2>
+  <p class="lead">머스크의 최근 발언 수백 개는 사실상 <strong>세 꼭짓점의 조합</strong>입니다. 이걸 알면 새 발언이 나와도 즉시 분류됩니다.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 620 400" width="100%" role="img" aria-label="AI가 상한, 에너지가 병목, 로봇이 실행을 담당하는 삼각형 구조 도해">
+      <defs>
+        <marker id="mt" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#6f809f"/></marker>
+        <linearGradient id="gAI" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+        <linearGradient id="gEN" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#eab308"/></linearGradient>
+        <linearGradient id="gRB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+      </defs>
+
+      <!-- 연결선 -->
+      <path d="M310 108 L152 300" stroke="#2b3a57" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <path d="M310 108 L468 300" stroke="#2b3a57" stroke-width="1.6" stroke-dasharray="5 5"/>
+      <path d="M175 316 L445 316" stroke="#2b3a57" stroke-width="1.6" stroke-dasharray="5 5"/>
+
+      <!-- AI 꼭짓점 -->
+      <g>
+        <circle cx="310" cy="86" r="52" fill="rgba(96,165,250,.12)" stroke="url(#gAI)" stroke-width="2.5"/>
+        <text x="310" y="80" fill="#93c5fd" font-size="19" font-weight="800" text-anchor="middle" font-family="sans-serif">AI</text>
+        <text x="310" y="101" fill="#a5b4d0" font-size="12" text-anchor="middle" font-family="sans-serif">상한을 정한다</text>
+        <animate attributeName="opacity" values="1;.75;1" dur="3.6s" repeatCount="indefinite"/>
+      </g>
+      <text x="310" y="160" fill="#6f809f" font-size="12" text-anchor="middle" font-family="sans-serif">얼마나 똑똑해질 수 있나</text>
+
+      <!-- 에너지 -->
+      <g>
+        <circle cx="140" cy="316" r="52" fill="rgba(250,204,21,.1)" stroke="url(#gEN)" stroke-width="2.5"/>
+        <text x="140" y="310" fill="#facc15" font-size="17" font-weight="800" text-anchor="middle" font-family="sans-serif">에너지</text>
+        <text x="140" y="331" fill="#a5b4d0" font-size="12" text-anchor="middle" font-family="sans-serif">병목이다</text>
+      </g>
+      <text x="140" y="388" fill="#6f809f" font-size="12" text-anchor="middle" font-family="sans-serif">얼마나 빨리 갈 수 있나</text>
+
+      <!-- 로봇 -->
+      <g>
+        <circle cx="480" cy="316" r="52" fill="rgba(167,139,250,.11)" stroke="url(#gRB)" stroke-width="2.5"/>
+        <text x="480" y="310" fill="#c4b5fd" font-size="17" font-weight="800" text-anchor="middle" font-family="sans-serif">로봇</text>
+        <text x="480" y="331" fill="#a5b4d0" font-size="12" text-anchor="middle" font-family="sans-serif">실행한다</text>
+      </g>
+      <text x="480" y="388" fill="#6f809f" font-size="12" text-anchor="middle" font-family="sans-serif">현실 세계에 어떻게 닿나</text>
+
+      <!-- 가운데 -->
+      <text x="310" y="243" fill="#e8eefc" font-size="13.5" font-weight="700" text-anchor="middle" font-family="sans-serif">이 셋이 서로를 제한한다</text>
+      <text x="310" y="264" fill="#6f809f" font-size="11.5" text-anchor="middle" font-family="sans-serif">한 축이 막히면 나머지도 못 간다</text>
+    </svg>
+    <div class="cap">도해 1 — 머스크 2026 세계관의 골격. 새 발언이 나오면 이 셋 중 어느 꼭짓점인지 먼저 물으세요.</div>
+  </div>
+
+  <h3>가장 크게 바뀐 건 "병목"의 위치</h3>
+  <p>이게 최근 그의 사고에서 제일 중요한 변화입니다. 병목이 <strong>알고리즘 → 칩 → 전기</strong>로 이동했습니다.</p>
+
+  <div class="flow">
+    <div class="n">~2020<br><b style="color:var(--tx3)">배터리·생산</b></div>
+    <div class="ar">›</div>
+    <div class="n">2023~24<br><b style="color:var(--acc2)">GPU·칩</b></div>
+    <div class="ar">›</div>
+    <div class="n wt">2025~26<br><b>전기·전력망</b></div>
+  </div>
+
+  <blockquote>
+    "이제 경화(hard currency)는 달러가 아니라 <em class="w">와트</em>다."
+    <cite>— 173분 대담(2025년 말 녹음, 2026-01-07 공개)에서의 취지 발언</cite>
+  </blockquote>
+
+  <p>그가 멤피스에 짓는 1GW 규모 AI 공장이 <strong>천연가스 발전기 + 메가팩 배터리</strong>로 굴러가는 이유가 이겁니다. 전력망 증설을 기다리지 않고 발전소를 옆에 붙여버린 것이죠. 그의 표현대로 <strong>"칩보다 전기가 더 귀하다."</strong></p>
+
+  <div class="card acc">
+    <h4>💡 이 챕터에서 가져갈 한 가지</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      머스크가 <b>지목하는 병목은 산업 지형보다 6~18개월 앞서 움직이는 경향</b>이 있습니다.
+      그가 배터리를 말할 때 배터리 공급망이 뜨거워졌고, 칩을 말할 때 GPU가 품귀였습니다.
+      지금 그는 <b>전기</b>를 말합니다. 변압기·터빈·냉각·그리드 인터커넥트를 눈여겨보라는 신호로 읽을 수 있습니다.
+      <br><span class="mute">(단, 이건 상관 관찰이지 검증된 인과가 아닙니다. 투자 조언 아님.)</span>
+    </p>
+  </div>
+</section>
+
+<!-- CH02 자본구조 -->
+<section id="empire">
+  <div class="snum">CHAPTER 02</div>
+  <h2>말은 흔하다. 구조 변경은 드물다.</h2>
+  <p class="lead">2026년 머스크가 한 <strong>진짜 발언</strong>은 인터뷰가 아니라 <strong>법인 재편</strong>이었습니다. 순서대로 보면 의도가 드러납니다.</p>
+
+  <div class="tl">
+    <div class="tlrow">
+      <div class="d">2026 · 02</div>
+      <div class="t">SpaceX ↔ xAI 합병</div>
+      <div class="x">합병 법인 가치 약 <b style="color:var(--acc2)">$1.25조</b>. SpaceX가 xAI의 데이터센터·Grok 모델·소셜 네트워크 X를 통째로 품었습니다.</div>
+    </div>
+    <div class="tlrow wt">
+      <div class="d">2026 · 04 · 07</div>
+      <div class="t">Terafab에 Intel 합류</div>
+      <div class="x">Tesla·SpaceX·xAI 공동 칩 메가팹(오스틴 Seaholm 발전소 부지). 목표는 <b style="color:var(--watt)">연간 1테라와트급 AI 연산</b>, 2027년까지 훈련 컴퓨트 50GW. 남는 칩은 궤도 데이터센터용.</div>
+    </div>
+    <div class="tlrow">
+      <div class="d">2026 · 06</div>
+      <div class="t">SpaceX 상장 (IPO)</div>
+      <div class="x">공모가 <b style="color:var(--acc2)">주당 $135</b>, 기업가치 약 <b style="color:var(--acc2)">$1.77조</b>. 우주 기업 역사상 최대 규모.</div>
+    </div>
+    <div class="tlrow rd">
+      <div class="d">2026 · 07 · 22~23</div>
+      <div class="t">Tesla 2분기 실적 → 주가 12% 급락</div>
+      <div class="x">매출은 예상 상회, EPS는 하회. 하루 만에 시총 <b style="color:var(--red)">약 $140B 증발</b>. "그냥 나를 믿어라"가 더는 안 통한다는 신호로 해석됐습니다.</div>
+    </div>
+    <div class="tlrow">
+      <div class="d">2026 · 08 · 04</div>
+      <div class="t">SpaceX 첫 상장사 분기 실적</div>
+      <div class="x">매출 <b style="color:var(--acc2)">+92% YoY</b>, 순손실 <b style="color:var(--red)">$541M</b>. 성장은 폭발적, 수익은 아직 적자.</div>
+    </div>
+  </div>
+
+  <h3>이 순서가 말하는 것</h3>
+  <p>표면적으로는 "로켓 회사가 AI 회사를 샀다"입니다. 실제로는 반대에 가깝습니다.</p>
+
+  <div class="mirror">
+    <div class="mh a">겉보기 서사</div>
+    <div class="mh b">구조가 말하는 것</div>
+    <div class="mc">우주 기업 SpaceX가 <b>AI 부문을 하나 추가</b>했다.</div>
+    <div class="mc">AI 회사가 <b>로켓·자동차·위성통신을 에너지·유통·데이터 채널로 흡수</b>했다.</div>
+    <div class="mc">화성 프로그램이 본체, AI는 곁가지.</div>
+    <div class="mc">사내 발언: <b>"4~5년 안에 AI가 SpaceX 가치의 99%가 된다."</b> 화성 자금을 AI가 댄다.</div>
+    <div class="mc">각 회사가 독립 사업체.</div>
+    <div class="mc">Tesla·SpaceX·xAI가 <b>하나의 미션을 나눠 맡은 모듈</b>. 칩(Terafab)·전력·로봇·통신이 한 파이프라인.</div>
+  </div>
+
+  <blockquote>
+    "우리는 AI에서 반드시 이겨야 한다. 미래는 압도적으로 AI와 로봇이기 때문이다."
+    <cite>— 사내 커뮤니케이션으로 보도된 취지 발언, 2026</cite>
+  </blockquote>
+
+  <div class="card warn">
+    <h4 style="color:var(--watt)">⚖️ 읽기 원칙 — 말 vs 자본</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      누구든 말과 행동이 충돌하면 <b>행동을 믿습니다</b>. 기업에서 행동의 최상위 형태는 <b>자본구조 변경</b>입니다.
+      인터뷰는 비용이 0이지만, 합병·상장·팹 건설은 되돌릴 수 없는 수십조 원짜리 베팅입니다.
+      <br><br>따라서 머스크 발언을 평가할 때 순서는 이렇습니다:
+      <b>① 어디에 돈을 넣었나 → ② 조직을 어떻게 바꿨나 → ③ 뭐라고 말했나.</b> ③은 마지막입니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH03 전선별 숫자 -->
+<section id="fronts">
+  <div class="snum">CHAPTER 03</div>
+  <h2>전선별 실제 숫자</h2>
+  <p class="lead">여기부터는 <strong>2026년 2분기 실적 발표에서 나온 공개 수치</strong>입니다. 예언이 아니라 회계·운영 데이터입니다.</p>
+
+  <div class="tabs" id="frTabs">
+    <button class="tab on" data-p="p-star">🚀 Starship</button>
+    <button class="tab" data-p="p-link">📡 Starlink</button>
+    <button class="tab" data-p="p-ai">🧠 Grok / AI</button>
+    <button class="tab" data-p="p-bot">🤖 Optimus</button>
+  </div>
+
+  <div id="fronts-panels">
+    <!-- Starship -->
+    <div class="panel on" id="p-star">
+      <h3>궤도 수송량 = 그의 진짜 점수판</h3>
+      <p>머스크는 Starship의 의미를 "로켓이 크다"가 아니라 <strong>"연간 궤도로 올릴 수 있는 톤수"</strong>로 설명합니다. 이 지표로 보면 그림이 달라집니다.</p>
+
+      <div class="chart" data-chart>
+        <div class="bar-row">
+          <div class="bar-lab"><span>전 세계 경쟁사 전부 합계</span><span class="v">~300톤/년</span></div>
+          <div class="bar-track"><div class="bar-fill ref" data-w="35"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><span>현재 SpaceX (시장 80~90%)</span><span class="v">2,500톤/년</span></div>
+          <div class="bar-track"><div class="bar-fill" data-w="49"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><span>근시일 목표</span><span class="v">100만톤/년</span></div>
+          <div class="bar-track"><div class="bar-fill wattb" data-w="86"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-lab"><span>최종 목표</span><span class="v">1,000만톤/년</span></div>
+          <div class="bar-track"><div class="bar-fill wattb" data-w="100"></div></div>
+        </div>
+        <p class="mute" style="text-align:center;margin-top:4px">※ 막대는 <b>로그 스케일</b>입니다. 선형으로 그리면 현재치가 보이지도 않습니다. 목표는 현재의 <b>약 4,000배</b>.</p>
+      </div>
+
+      <blockquote>
+        "Starship의 진짜 의미를 대부분의 사람에게 설명하기가 어렵다. 궤도 수송량으로 표현하는 게 문명에 미칠 영향의 크기를 이해하는 좋은 방법이다."
+        <cite>— SpaceX 2026 Q2 실적 발표</cite>
+      </blockquote>
+
+      <div class="card">
+        <h4>🎯 Flight 14 (2026년 8월 말 예정) 관전 포인트 2개</h4>
+        <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+          ① <b>실제 상용 화물 배치</b> — Starlink V3 위성을 운용 궤도에 처음으로 실제 투입. 지금까지 Starship은 시험 비행만 했습니다.<br>
+          ② <b>상단(Ship) 타워 캐치 첫 시도</b> — 부스터는 이미 여러 번 잡았지만, 윗단을 젓가락 팔로 잡는 건 처음입니다. 이게 되면 <b>완전 재사용</b>의 마지막 조각이 맞춰집니다.<br><br>
+          첫 재비행 시점은 <b>2026년 말~2027년 초</b>로 제시됐습니다. 3강의 디코더를 적용하면 실제 도착은 그보다 뒤일 가능성이 높습니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- Starlink -->
+    <div class="panel" id="p-link">
+      <h3>"10년 안에 세계 인터넷의 과반"</h3>
+      <p>과장처럼 들리는 주장인데, 밑에 깔린 <strong>논거 자체는 꽤 단단합니다.</strong> 대역폭 수요가 인구가 아니라 <strong>기계 대수</strong>를 따라가기 때문입니다.</p>
+
+      <div class="fig">
+        <svg viewBox="0 0 620 250" width="100%" role="img" aria-label="인간의 초당 1비트 소비와 기계의 초당 수십억 비트 소비를 비교한 도해">
+          <text x="26" y="30" fill="#93c5fd" font-size="13" font-weight="700" font-family="sans-serif">인간 한 명이 소비하는 정보량</text>
+          <rect x="26" y="44" width="6" height="26" rx="3" fill="#60a5fa"/>
+          <text x="46" y="63" fill="#e8eefc" font-size="15" font-weight="800" font-family="sans-serif">초당 약 1비트</text>
+          <text x="46" y="83" fill="#6f809f" font-size="11.5" font-family="sans-serif">하루 종일 깨어 있어도 약 86,400비트 — 읽고 보고 듣는 총량</text>
+
+          <line x1="26" y1="106" x2="594" y2="106" stroke="#1c2740"/>
+
+          <text x="26" y="134" fill="#facc15" font-size="13" font-weight="700" font-family="sans-serif">기계 · AI · 로봇 한 대가 소비하는 정보량</text>
+          <g>
+            <rect x="26" y="148" width="470" height="26" rx="6" fill="rgba(250,204,21,.18)" stroke="rgba(250,204,21,.5)"/>
+            <rect x="26" y="148" width="0" height="26" rx="6" fill="rgba(250,204,21,.45)">
+              <animate attributeName="width" values="0;470" dur="2.2s" fill="freeze"/>
+            </rect>
+          </g>
+          <text x="510" y="167" fill="#facc15" font-size="14" font-weight="800" font-family="sans-serif">초당 수십억 비트</text>
+          <text x="26" y="200" fill="#6f809f" font-size="11.5" font-family="sans-serif">로봇 한 대가 인간 수억 명분의 대역폭을 먹는다 — 그래서 수요 곡선이 인구와 분리된다</text>
+          <text x="26" y="224" fill="#a5b4d0" font-size="12" font-weight="600" font-family="sans-serif">→ 지상망만으로는 못 받는다는 것이 Starlink 확장의 논거</text>
+        </svg>
+        <div class="cap">도해 2 — "인간용 인터넷"에서 "기계용 인터넷"으로. 이 프레임 전환이 Starlink V3 투자의 근거입니다.</div>
+      </div>
+
+      <div class="cmp">
+        <div class="hd"><div>항목</div><div>현재</div><div>주장/목표</div></div>
+        <div class="rw"><div>서비스 국가</div><div>167개국</div><div>허용되는 모든 국가</div></div>
+        <div class="rw"><div>V3 성능</div><div>V2 대비 자릿수 개선</div><div><span class="pill p-t">10배 매출</span></div></div>
+        <div class="rw"><div>세계 인터넷 점유</div><div>일부</div><div>10년 내 과반</div></div>
+        <div class="rw"><div>Tesla 차량 연동</div><div>진행 중</div><div>전 차량 기본 탑재</div></div>
+      </div>
+
+      <p class="mute">※ "10배 매출"은 단가를 10분의 1로 낮춰도 총매출이 10배가 된다는 취지의 주장입니다. 실현 여부는 검증되지 않았습니다.</p>
+    </div>
+
+    <!-- AI -->
+    <div class="panel" id="p-ai">
+      <h3>모델보다 인프라 이야기가 길어졌다</h3>
+      <p>주목할 점은 그가 <strong>모델 자랑보다 전력·칩·데이터센터 이야기를 더 오래 한다</strong>는 것입니다. 1챕터의 "병목 이동"이 여기서 그대로 확인됩니다.</p>
+
+      <div class="cmp">
+        <div class="hd"><div>항목</div><div>상태</div><div>메모</div></div>
+        <div class="rw"><div>Grok 4.5</div><div><span class="pill p-o">출시</span></div><div>Tesla 차량 OTA 통합</div></div>
+        <div class="rw"><div>Grok 4.6 / 4.7</div><div><span class="pill p-t">수 주 내</span></div><div>연속 출시 예고</div></div>
+        <div class="rw"><div>Grok 5</div><div><span class="pill p-x">지연</span></div><div>Q1 2026 목표 미달</div></div>
+        <div class="rw"><div>훈련 클러스터</div><div>Colossus 2</div><div>7개 모델 동시 훈련</div></div>
+        <div class="rw"><div>GPU</div><div>Nvidia 독점</div><div>Vera Rubin NVL72</div></div>
+      </div>
+
+      <p><strong>주목할 두 가지 구상</strong>이 실적 발표에서 나왔습니다.</p>
+
+      <div class="myths">
+        <div class="myth">
+          <div class="q"><span class="badge" style="background:rgba(96,165,250,.14);color:var(--acc2)">구상 1</span>
+            <span class="txt">2002년 이후 SpaceX 전체 데이터를 Grok에 통합
+              <span class="hint">탭하면 왜 중요한지 펼쳐집니다</span></span></div>
+          <div class="a"><div class="inner"><hr>
+            로켓 엔진 시험 데이터, 실패 로그, 설계 이터레이션 20여 년치를 모델에 넣겠다는 계획입니다.
+            목표는 <b>"AI 로켓 엔지니어"</b>. 규제가 허용한다면, 이라는 단서가 붙었습니다.
+            <br><br><b>왜 중요한가:</b> 일반 LLM 경쟁은 공개 웹 데이터로 붙습니다. 여기서는
+            <b>누구도 가지지 못한 폐쇄 물리 데이터</b>가 자산입니다. 데이터 해자(moat)의 성격이 다릅니다.
+            제조·항공·의료처럼 폐쇄 데이터가 쌓인 산업에도 같은 논리가 적용될 수 있습니다.
+          </div></div>
+        </div>
+        <div class="myth">
+          <div class="q"><span class="badge" style="background:rgba(250,204,21,.14);color:var(--watt)">구상 2</span>
+            <span class="txt">우주 태양광 데이터센터
+              <span class="hint">탭하면 계산 논리가 펼쳐집니다</span></span></div>
+          <div class="a"><div class="inner"><hr>
+            지상 데이터센터의 진짜 한계는 부지가 아니라 <b>전력과 냉각</b>입니다.
+            궤도에서는 ① 태양광을 대기 감쇠 없이 24시간 받고 ② 그늘 쪽으로 열을 복사로 버립니다.
+            Terafab이 <b>"남는 칩은 궤도 데이터센터로"</b>라고 못박은 이유가 이것입니다.
+            <br><br><b>솔직한 평가:</b> 발사 비용·방사선·유지보수·감가상각을 감안하면 현재로선
+            <b>경제성이 입증되지 않은 구상</b>입니다. 다만 이 아이디어가 왜 나왔는지를 보면
+            그가 전력 병목을 얼마나 심각하게 보는지가 드러납니다. <b>결론보다 동기가 정보</b>입니다.
+          </div></div>
+        </div>
+        <div class="myth">
+          <div class="q"><span class="badge" style="background:rgba(167,139,250,.14);color:var(--bot)">사업부</span>
+            <span class="txt">Macrohard — 소프트웨어 회사를 통째로 에이전트로 대체
+              <span class="hint">이름이 농담 같지만 사업부입니다</span></span></div>
+          <div class="a"><div class="inner"><hr>
+            xAI 내부 사업부 구조는 <b>Grok / Coding / Imagine / Macrohard</b>로 나뉩니다.
+            Macrohard의 목표는 소프트웨어 기업의 기능 전체를 AI 에이전트 조합으로 재현하는 것.
+            머스크는 2026년 3월 여기에 <b>"Digital Optimus"</b>라는 두 번째 이름을 붙였습니다.
+            로봇 Optimus가 물리 노동을 맡는다면, 이쪽은 <b>디지털 노동</b>을 맡는다는 뜻입니다.
+            <br><br><b>실무자에게 주는 함의:</b> 휴머노이드보다 <b>이쪽이 먼저 옵니다.</b>
+            물리 로봇은 공급망·부품 문제로 램프가 느리지만, 소프트웨어 에이전트는 복제 비용이 0입니다.
+            그리고 그가 밝힌 제약은 알고리즘이 아니라 다시 <b>전기와 칩</b>이었습니다.
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optimus -->
+    <div class="panel" id="p-bot">
+      <h3>여기서 그는 스스로 기대를 낮췄다 — 드문 일</h3>
+      <p>이 챕터가 이 교재에서 제일 중요할 수 있습니다. <strong>머스크가 자기 제품의 속도를 스스로 늦춰 말한 사례</strong>이기 때문입니다.</p>
+
+      <blockquote>
+        "Optimus는 역대 최대 제품이 될 것이다."<br>
+        "동시에 테슬라가 만든 것 중 <b style="color:var(--red)">제조 스케일이 가장 어려운 제품</b>이다. 로봇의 모든 것이 새 부품이고, <b style="color:var(--red)">기존 공급망이 없다.</b>"<br>
+        "정상적인 제조 램프 S커브를 따르겠지만, <b style="color:var(--red)">초반 구간이 아주 평평하고 길 것이다.</b>"
+        <cite>— Tesla 2026 Q2 실적 발표</cite>
+      </blockquote>
+
+      <div class="fig">
+        <svg viewBox="0 0 620 240" width="100%" role="img" aria-label="Optimus 생산 S커브에서 초반 구간이 길고 평평하다는 것을 보여주는 그래프">
+          <line x1="52" y1="196" x2="590" y2="196" stroke="#2b3a57" stroke-width="1.5"/>
+          <line x1="52" y1="24" x2="52" y2="196" stroke="#2b3a57" stroke-width="1.5"/>
+          <text x="30" y="30" fill="#6f809f" font-size="11" font-family="sans-serif" text-anchor="middle">대수</text>
+          <text x="580" y="216" fill="#6f809f" font-size="11" font-family="sans-serif" text-anchor="end">시간</text>
+
+          <!-- 기대 곡선 -->
+          <path d="M52 196 C 180 190, 240 60, 400 34 S 520 28, 588 26" fill="none" stroke="#2b3a57" stroke-width="2" stroke-dasharray="6 5"/>
+          <text x="404" y="60" fill="#6f809f" font-size="11.5" font-family="sans-serif">사람들이 상상하는 램프</text>
+
+          <!-- 실제 주장 곡선 -->
+          <path d="M52 196 C 200 194, 300 190, 372 176 C 450 158, 500 90, 588 44" fill="none" stroke="#a78bfa" stroke-width="3">
+            <animate attributeName="stroke-dasharray" values="0 900;900 0" dur="2.4s" fill="freeze"/>
+          </path>
+          <text x="120" y="182" fill="#c4b5fd" font-size="11.5" font-weight="700" font-family="sans-serif">← 길고 평평한 구간</text>
+
+          <!-- 구간 표시 -->
+          <rect x="52" y="150" width="320" height="46" fill="rgba(167,139,250,.07)"/>
+          <line x1="372" y1="150" x2="372" y2="200" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="376" y="146" fill="#c4b5fd" font-size="11.5" font-weight="700" font-family="sans-serif">여기부터 급증</text>
+
+          <text x="52" y="228" fill="#6f809f" font-size="11" font-family="sans-serif">초기 물량은 고객 배포가 아니라 훈련 데이터 수집용</text>
+        </svg>
+        <div class="cap">도해 3 — 머스크 본인이 제시한 Optimus 램프. 점선(대중의 상상)과 실선(그의 설명)의 간격이 이 챕터의 핵심입니다.</div>
+      </div>
+
+      <div class="cmp">
+        <div class="hd"><div>항목</div><div>내용</div><div>판정</div></div>
+        <div class="rw"><div>V3 전신 양산</div><div>2026 여름 시작 (3월 발표)</div><div><span class="pill p-t">진행</span></div></div>
+        <div class="rw"><div>Gen3 손</div><div>손당 22 자유도 · 총 50 액추에이터</div><div><span class="pill p-o">공개</span></div></div>
+        <div class="rw"><div>초기 출하분</div><div>고객 배포 <b>아님</b> · 데이터 수집</div><div><span class="pill p-t">주의</span></div></div>
+        <div class="rw"><div>음성/두뇌</div><div>Grok 통합</div><div><span class="pill p-o">가동</span></div></div>
+      </div>
+
+      <div class="card acc">
+        <h4>🤖 Robotaxi — 이쪽은 실제로 지표가 움직인다</h4>
+        <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+          Optimus가 아직 서사라면, Robotaxi는 <b>측정 가능한 운영 지표</b>가 있습니다.
+          무인 주행 마일이 2026년 내내 <b>매주 두 자릿수 성장</b>(주당 10%+)을 유지했습니다.
+          도시 단위에서 주(state) 단위 확장을 목표로 하고 있고,
+          <b>전 차량에 Starlink를 기본 탑재</b>합니다. 머스크의 표현: <b>"로보택시가 실종되면 안 되니까."</b>
+          <br><br><b>읽는 법:</b> 주당 10%는 복리로 무섭습니다(52주면 이론상 140배). 하지만 초기 소규모 기저에서의
+          성장률이므로 그대로 외삽하면 안 됩니다. <b>성장률이 아니라 절대 마일 수와 안전 사고율</b>을 보세요.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH04 디코더 -->
+<section id="decoder">
+  <div class="snum">CHAPTER 04</div>
+  <h2>디코더 — 이 교재의 본론</h2>
+  <p class="lead">여기까지는 그가 말한 내용이었습니다. 이제 <strong>그 말을 어떻게 번역해서 들을지</strong>를 배웁니다. 이게 유일하게 오래 쓸 도구입니다.</p>
+
+  <h3>먼저 그의 실측 오차율</h3>
+  <p>감이 아니라 집계된 숫자로 봅니다. 뉴욕타임스가 그의 공개 예측·약속 <strong>600건 이상</strong>을 추적한 결과입니다.</p>
+
+  <div class="chart" data-chart>
+    <div class="bar-row">
+      <div class="bar-lab"><span>2015년에 발표한 목표의 이행률</span><span class="v">약 74%</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="74"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>전체 기간 누적 이행률</span><span class="v">20% 미만</span></div>
+      <div class="bar-track"><div class="bar-fill redb" data-w="19"></div></div>
+    </div>
+  </div>
+  <p class="mute" style="text-align:center">시간이 갈수록 <b style="color:var(--red)">악화</b>됐습니다. 회사가 커지고 약속이 잦아질수록 이행률이 떨어졌다는 뜻입니다.</p>
+
+  <p>그리고 방향성 있는 오차입니다. WIRED 분석에 따르면 그의 <strong>시각표는 통상 2~5배 초과</strong>합니다. 무작위로 틀리는 게 아니라 <strong>항상 같은 방향으로 틀립니다.</strong> 그래서 <strong>보정이 가능합니다.</strong></p>
+
+  <!-- 인터랙티브 디코더 -->
+  <div class="decoder">
+    <div class="dh">🔧 머스크 타임라인 번역기</div>
+    <label for="decIn">머스크가 "몇 년 안에 된다"고 말했나요?</label>
+    <input type="range" id="decIn" min="1" max="10" step="1" value="2">
+    <div class="ticks"><span>1년</span><span>3년</span><span>5년</span><span>7년</span><span>10년</span></div>
+
+    <div class="dout">
+      <div class="said">그가 말한 시각표 &nbsp; <b id="dSaid">2년</b></div>
+      <div class="arrowdown">▼ &nbsp;<span style="font-size:.72em">×2 ~ ×5 보정</span></div>
+      <div class="real">현실적인 도착 구간 &nbsp; <b id="dReal">4~10년</b></div>
+      <div class="yr">기준 2026년 → 실제 도착 예상 <b id="dYear">2030~2036년</b><br>
+        <span class="mute" id="dNote">사실상 "다음 정권 이야기"입니다. 지금 인생 계획을 여기 맞추지 마세요.</span></div>
+    </div>
+
+    <div class="dpreset" id="dPre">
+      <button data-v="1" data-l="FSD 완전자율 &quot;내년&quot;">FSD "내년"</button>
+      <button data-v="1" data-l="Grok 5 &quot;다음 분기&quot;">Grok 5 "곧"</button>
+      <button data-v="4" data-l="AI가 SpaceX 가치의 99% (4~5년)">AI 99% "4~5년"</button>
+      <button data-v="10" data-l="노동이 선택이 되는 사회 (10~20년)">노동 선택 "10~20년"</button>
+    </div>
+    <p class="mute" style="margin:12px 0 0">※ 이 번역기는 <b>비꼬는 장치가 아닙니다.</b> 실측 오차율을 반영한 보정 계수일 뿐이고, 사실 이 편향은 인간 계획 일반의 특성(계획 오류, planning fallacy)이기도 합니다. 당신 자신의 프로젝트 일정에 똑같이 적용해보면 꽤 잘 맞습니다.</p>
+  </div>
+
+  <h3>실제 대조 — 약속 vs 현재</h3>
+  <p>번역기가 필요한 이유를 사례로 확인합니다. 탭하면 펼쳐집니다.</p>
+
+  <div class="myths">
+    <div class="myth">
+      <div class="q"><span class="badge">2배 이상 지연</span>
+        <span class="txt">Tesla 완전자율주행(FSD)
+          <span class="hint">2014년부터 거의 매년 "내년"</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">약속: 매년 "내년" · 현실: 2026년 초 기준 여전히 SAE Level 2</span>
+        SAE Level 2는 <b>"운전자가 항상 감시해야 하는 보조 시스템"</b>입니다. 자율주행 등급으로는 하위입니다.
+        <br><br>다만 <b>여기가 중요합니다.</b> 등급은 그대로여도 실제 성능과 무인 로보택시 운영 마일은 실제로 증가했습니다.
+        <b>"거짓말이다"와 "느리다"는 다릅니다.</b> 이 사례가 디코더의 정확한 용법을 보여줍니다 —
+        <b>방향(자율주행은 온다)은 유지, 시각표(내년)는 폐기.</b>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">50배 미달</span>
+        <span class="txt">Neuralink 임플란트 1,000건
+          <span class="hint">목표 연도가 2026년이었습니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">목표: 2026년까지 1,000명 · 현실: 2026년 6월 기준 21명</span>
+        약 <b>2%</b> 달성입니다. 의료기기는 규제·안전 시험 때문에 소프트웨어처럼 램프가 안 됩니다.
+        <br><br><b>패턴 학습 포인트:</b> 그의 오차는 분야마다 크기가 다릅니다.
+        <b>규제 강도가 높을수록 오차가 커집니다.</b> 로켓·자동차보다 <b>의료·금융</b> 쪽 예측에 더 큰 보정 계수를 쓰세요.
+      </div></div>
+    </div>
+
+    <div class="myth half">
+      <div class="q"><span class="badge">지연</span>
+        <span class="txt">Grok 5 — "AGI 확률 10%"
+          <span class="hint">Q1 2026 목표는 이미 지났습니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-t">목표: Q1 2026 · 현실: 미출시, API는 하반기로 밀릴 수 있음</span>
+        파라미터 규모 목표도 발표마다 달라졌습니다(6조 → 10조 로드맵). 숫자가 흔들린다는 것 자체가 신호입니다.
+        <br><br>참고로 <b>그의 AGI 시점 예측은 지금까지 전부 빗나갔습니다.</b>
+        "2026년에 AGI"라는 최근 발언 역시 같은 계열로 취급하는 게 안전합니다.
+      </div></div>
+    </div>
+
+    <div class="myth true">
+      <div class="q"><span class="badge">방향 적중</span>
+        <span class="txt">그런데 방향은 계속 맞았다
+          <span class="hint">이 카드를 안 보면 절반만 배웁니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-o">전부 조롱받았고, 전부 왔다 (늦게)</span>
+        <b>재사용 로켓</b> — "불가능하다"던 것이 지금 세계 궤도 수송의 80~90%.<br>
+        <b>전기차 대중화</b> — 기존 완성차 전부가 뒤따라왔습니다.<br>
+        <b>위성 인터넷</b> — 앞선 시도들은 전부 파산했지만 167개국 서비스가 됐습니다.<br>
+        <b>휴머노이드</b> — 조롱받다가 지금은 주요 기업 다수가 뛰어들었습니다.
+        <br><br><b>그래서 번역기의 결론은 "무시하라"가 아닙니다.</b>
+        <b>방향은 사되 시각표는 나눠라</b>입니다. 방향만 맞아도 대비할 가치가 충분합니다.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h4 style="color:var(--watt)">🎭 왜 안 고쳐지는가 — 불가능한 시각표는 "도구"다</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      가장 자주 놓치는 관점입니다. 그의 공격적 일정은 단순한 착오라기보다 <b>기능</b>을 합니다.
+      ① <b>인재</b>를 끌어옵니다(역사적 프로젝트에 참여한다는 감각) ② <b>자본</b>을 앞당깁니다(투자자 기대 형성)
+      ③ <b>조직</b>을 압박합니다(불가능한 마감이 관행을 깹니다).
+      <br><br>즉 시각표 오차는 <b>버그가 아니라 경영 기법</b>에 가깝습니다. 그래서 개선 인센티브가 없습니다.
+      <b>고쳐질 것이라 기대하지 말고, 당신이 보정해서 들으십시오.</b>
+    </p>
+  </div>
+</section>
+
+<!-- CH05 UHI -->
+<section id="uhi">
+  <div class="snum">CHAPTER 05</div>
+  <h2>가장 논쟁적인 부분 — 돈과 노동</h2>
+  <p class="lead">기술 예측은 틀려도 시간 문제입니다. 그러나 <strong>경제 구조 주장</strong>은 틀리면 성격이 다릅니다. 여기는 특히 조심해서 들어야 합니다.</p>
+
+  <h3>그의 주장 3단</h3>
+  <div class="flow">
+    <div class="n hot">AI·로봇이<br>생산을 폭증</div>
+    <div class="ar">›</div>
+    <div class="n">노동이<br>선택이 됨 (10~20년)</div>
+    <div class="ar">›</div>
+    <div class="n wt">정부가 돈을 지급<br><b>Universal High Income</b></div>
+  </div>
+
+  <blockquote>
+    "AI와 로봇이 통화량 증가분을 훨씬 초과하는 재화·서비스를 생산할 것이므로, <b>인플레이션은 발생하지 않는다.</b>"<br>
+    "돈은 결국 노동과 자원을 배분하는 데이터베이스이기를 그만둔다."
+    <cite>— 2026 Abundance Summit 및 관련 발언 (2026년 4월 보도)</cite>
+  </blockquote>
+
+  <p>기존 기본소득(UBI)이 "최소한의 생계"라면, 그가 말하는 <strong>Universal High Income은 "풍요로운 수준"</strong>을 뜻합니다. 이름부터 야심이 다릅니다.</p>
+
+  <h3>양쪽 논리를 나란히</h3>
+  <div class="mirror">
+    <div class="mh a">그의 논리</div>
+    <div class="mh b">비판</div>
+    <div class="mc"><b>공급이 폭증하면 인플레는 없다.</b> 생산량이 통화량보다 빨리 늘면 물가는 오히려 내려간다.</div>
+    <div class="mc"><b>생산 폭증은 균등하지 않다.</b> 반도체·전력·부동산·의료처럼 <b>병목이 있는 재화</b>에는 그대로 인플레가 발생한다. "AI가 만들 수 있는 것"만 싸진다.</div>
+    <div class="mc"><b>노동이 선택이 되는 건 해방이다.</b> "생각할 수 있는 건 무엇이든 가질 수 있다."</div>
+    <div class="mc"><b>전환 구간이 문제다.</b> 일자리가 사라지는 시점과 UHI가 도입되는 시점 사이 공백을 누가 견디나. 영국 각료 등은 이를 <b>"노동 선택이라는 판타지"</b>라 비판했다.</div>
+    <div class="mc"><b>기술이 문제를 푼다.</b> 정치는 따라온다.</div>
+    <div class="mc"><b>재정·정치 경로가 비어 있다.</b> 누가 과세하고 누가 배분하는지가 없다. <b>AI 소유자에게 부가 집중된 상태</b>에서 배분 권력을 누가 갖는가가 핵심인데 답이 없다.</div>
+  </div>
+
+  <div class="card dngr">
+    <h4 style="color:var(--red)">⚠️ 판단 유예 권고</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      이 챕터는 <b>정답을 주지 않습니다.</b> UHI가 옳은지 그른지는 아직 아무도 모릅니다.
+      다만 다음 두 가지는 확실합니다.<br><br>
+      ① <b>시점을 믿지 마세요.</b> 디코더를 적용하면 "10~20년"은 <b>20~50년</b>입니다. 당신 인생 계획을 여기 맞추면 위험합니다.<br>
+      ② <b>그런데 방향은 이미 시작됐습니다.</b> 물리 로봇은 느려도 <b>디지털 노동 대체(Macrohard)</b>는 이미 진행 중입니다. 사무·코딩·문서 업무가 먼저입니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH06 적용 -->
+<section id="apply">
+  <div class="snum">CHAPTER 06</div>
+  <h2>그래서 나는 뭘 하나</h2>
+  <p class="lead">그의 세계관이 <strong>절반만 맞아도</strong> 유효한 행동들만 골랐습니다. 100% 맞아야 성립하는 조언은 조언이 아닙니다.</p>
+
+  <div class="myths">
+    <div class="myth true">
+      <div class="q"><span class="badge">행동 1</span>
+        <span class="txt">"전자를 다루는 쪽"의 희소성을 인식하라
+          <span class="hint">에너지가 병목이라면 따라오는 결론</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        AI 수요가 절반만 실현돼도 병목은 <b>전력·변압기·터빈·냉각·그리드 인터커넥트</b>입니다.
+        반도체보다 이쪽이 대체 불가에 가깝습니다. 공장은 2년이면 짓지만 송전선은 10년이 걸립니다.
+        <br><br><b>커리어로 읽으면:</b> 전력공학·설비·열관리·인프라 엔지니어링의 상대적 가치가 오릅니다.
+        <b>투자로 읽으면:</b> 판단은 본인 몫입니다. 이 교재는 종목을 권하지 않습니다.
+      </div></div>
+    </div>
+    <div class="myth true">
+      <div class="q"><span class="badge">행동 2</span>
+        <span class="txt">준비할 것은 UBI가 아니라 "질문하는 능력"
+          <span class="hint">그 자신의 말에서 나온 결론</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        그가 인터뷰에서 한 말 중 가장 실용적인 문장은 예측이 아니라 이겁니다:
+        <b>"답보다 질문이 중요해진다."</b>
+        <br><br>논리는 단순합니다. <b>실행 비용이 0에 수렴하면, 희소해지는 건 문제 정의</b>입니다.
+        코드를 짜는 능력이 아니라 <b>무엇을 왜 만들지 정하는 능력</b>, 산출물을 <b>검증하는 능력</b>이 남습니다.
+        AI를 쓰는 사람과 안 쓰는 사람의 격차보다, <b>AI에게 좋은 질문을 하는 사람</b>과 아닌 사람의 격차가 큽니다.
+      </div></div>
+    </div>
+    <div class="myth half">
+      <div class="q"><span class="badge">행동 3</span>
+        <span class="txt">디코더를 당신 자신의 계획에도 적용하라
+          <span class="hint">이게 제일 즉시 써먹을 수 있습니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        2~5배 초과는 머스크의 결함이라기보다 <b>인간 계획 일반의 편향</b>(계획 오류)입니다.
+        <br><br><b>당장 해볼 것:</b> 지금 진행 중인 프로젝트의 예상 완료일에 <b>×2</b>를 해보세요.
+        과거 프로젝트를 떠올려 보면 대체로 그쪽이 실제에 가까웠을 겁니다.
+        타인의 편향을 웃기 전에 자기 것에 적용하는 게 이 도구의 정직한 용법입니다.
+      </div></div>
+    </div>
+    <div class="myth">
+      <div class="q"><span class="badge">행동 4</span>
+        <span class="txt">휴머노이드 공포는 아직 이르다. 순서를 틀리지 마라
+          <span class="hint">머스크 본인이 근거를 제공했습니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        Optimus 램프의 초반이 "평평하고 길다"고 <b>머스크 본인이 인정</b>했고, 초기 물량은 고객 배포도 아닙니다.
+        즉 <b>2026~2028년의 대량 실직 위험은 물리 로봇 쪽이 아닙니다.</b>
+        <br><br>먼저 오는 건 <b>디지털 노동</b>입니다. 복제 비용이 0이고 공급망이 필요 없기 때문입니다.
+        문서·코딩·고객응대·리서치·기초 분석 업무가 먼저입니다.
+        <b>대비 순서를 뒤집으면 엉뚱한 데 시간을 씁니다.</b>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CH07 자가체크 -->
+<section id="self">
+  <div class="snum">CHAPTER 07</div>
+  <h2>자가 진단 — 나는 어떻게 소비하고 있나</h2>
+  <p class="lead">해당되는 항목을 탭해서 선택하세요. 아래에 진단이 나옵니다.</p>
+
+  <div class="check" id="chkA">
+    <div class="cline"><div class="bx">✓</div><div class="lt">머스크 발언을 보면 <b>먼저 좋다/싫다</b>가 정해지고, 근거는 나중에 찾는다<em>진영 판단이 사실 판단을 앞서는 상태</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">그가 말한 <b>연도를 그대로</b> 계획에 반영한 적이 있다<em>보정 없이 원문 수용</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">유튜브 <b>요약 영상이나 짧은 클립</b>으로만 접했고 원 발언·실적자료는 본 적 없다<em>2차 가공만 소비</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">"머스크가 이랬대"를 <b>출처 확인 없이</b> 남에게 전한 적 있다<em>어그리게이터 재유통</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">그의 <b>실패 사례를 세 개 이상</b> 구체적으로 대지 못한다<em>반대 증거 미보유</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">그의 <b>성공 사례를 세 개 이상</b> 구체적으로 대지 못한다<em>반대 방향의 같은 문제</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">발언은 자주 보지만 <b>실적 발표나 재무 수치</b>는 한 번도 확인한 적 없다<em>말만 보고 행동은 안 봄</em></div></div>
+    <div class="cline"><div class="bx">✓</div><div class="lt">그의 예측이 <b>내 직업에 어떤 의미인지</b> 구체적으로 생각해본 적 없다<em>구경만 하고 적용은 안 함</em></div></div>
+  </div>
+  <div class="result ok" id="chkRes">
+    <b>✅ 아직 선택 없음</b>항목을 눌러 체크해보세요. 정답을 맞히는 테스트가 아니라, <b>자기 소비 습관을 점검</b>하는 도구입니다.
+  </div>
+</section>
+
+<!-- CH08 퀴즈 -->
+<section id="quiz">
+  <div class="snum">CHAPTER 08</div>
+  <h2>확인 퀴즈 8문항</h2>
+  <p class="lead">외웠는지가 아니라 <strong>번역기를 쓸 줄 아는지</strong>를 봅니다.</p>
+  <div id="quizBox"></div>
+  <div class="score" id="scoreBox">
+    <div class="n"><span id="sc">0</span> / 8</div>
+    <div class="m" id="scMsg"></div>
+  </div>
+</section>
+
+<!-- 정리 -->
+<section id="wrapup">
+  <div class="snum">FINAL</div>
+  <h2>세 줄 요약</h2>
+  <div class="final">
+    <ol>
+      <li>그의 2026 세계관은 <strong>AI(상한) · 에너지(병목) · 로봇(실행)</strong>. 가장 큰 변화는 병목이 칩에서 <em class="w">전기</em>로 옮겨간 것이다.</li>
+      <li>진짜 인사이트는 발언이 아니라 <strong>SpaceX–xAI 합병 · IPO · Terafab</strong>. 그는 자기 제국을 "AI 회사 + 부속 인프라"로 재정의했다.</li>
+      <li><strong>방향은 사되 시각표는 2~5배로 나눠라.</strong> 600여 건 중 20% 미만 이행이 실측 오차율이고, 그 편향은 방향이 일정해서 보정이 가능하다.</li>
+    </ol>
+  </div>
+
+  <div class="card vio">
+    <h4 style="color:var(--bot)">🧭 마지막으로 — 이 교재가 진짜 가르치려던 것</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      이건 머스크에 관한 교재가 아닙니다. <b>강한 신호와 강한 편향이 섞인 정보원을 다루는 법</b>에 관한 교재입니다.
+      <br><br>세상의 유용한 정보원 대부분이 이렇습니다. 뛰어난 투자자, 유명한 의사, 카리스마 있는 경영자, 잘 나가는 유튜버 —
+      전부 신호와 노이즈가 섞여 있습니다. <b>"이 사람 믿을까 말까"는 잘못된 질문</b>입니다.
+      옳은 질문은 <b>"이 사람은 어느 축에서 강하고, 어느 축에서 얼마만큼 틀리는가"</b>입니다.
+      <br><br>그 보정 계수를 알아내는 순간, 편향된 정보원도 <b>쓸 수 있는 자산</b>이 됩니다. 그게 이 교재의 진짜 내용입니다.
+    </p>
+  </div>
+
+  <div class="srcbox">
+    <div class="t">📚 출처 (전부 직접 확인 가능)</div>
+    · SpaceX 2026 Q2 실적발표 요약 — <a href="https://www.teslaoracle.com/2026/08/10/space-connectivity-ai-key-takeaways-from-elon-musks-spacex-q2-2026-earnings-call/" target="_blank" rel="noopener">teslaoracle.com</a><br>
+    · Starship 캐치 시도 계획 — <a href="https://www.space.com/space-exploration/launches-spacecraft/spacex-wants-to-launch-next-starship-this-month-and-catch-it-too-elon-musk-says-in-1st-earnings-call-since-historic-ipo" target="_blank" rel="noopener">space.com</a><br>
+    · Tesla 2026 Q2 실적발표 전문 — <a href="https://www.fool.com/earnings/call-transcripts/2026/08/05/tesla-tsla-q2-2026-earnings-call-transcript/" target="_blank" rel="noopener">fool.com</a><br>
+    · Tesla 주가 12% 급락 — <a href="https://electrek.co/2026/07/23/tesla-tsla-crashes-12-q2-2026-earnings-miss/" target="_blank" rel="noopener">electrek.co</a><br>
+    · 173분 대담(AI·에너지·로봇) 정리 — <a href="https://eu.36kr.com/en/p/3630015413138182" target="_blank" rel="noopener">36kr.com</a><br>
+    · WTF 인터뷰 10대 아이디어 — <a href="https://www.thevccorner.com/p/elon-musk-wtf-interview-10-big-ideas-for-founders-investors" target="_blank" rel="noopener">thevccorner.com</a><br>
+    · Grok 로드맵·파라미터 — <a href="https://www.mindstudio.ai/blog/xai-grok-roadmap-7-models-training-grok-5-10-trillion" target="_blank" rel="noopener">mindstudio.ai</a><br>
+    · Universal High Income 제안 — <a href="https://www.semafor.com/article/04/24/2026/musk-pitches-universal-high-income" target="_blank" rel="noopener">semafor.com</a><br>
+    · "노동 선택 판타지" 비판 — <a href="https://fortune.com/2026/02/01/elon-musk-optional-work-fantasy-universal-basic-income-uk-minister-jason-stockwood/" target="_blank" rel="noopener">fortune.com</a><br>
+    · 예측 이행률·지연 트래커 — <a href="https://tesorb.com/musk-prediction-scorecard-promises-vs-reality/" target="_blank" rel="noopener">tesorb.com</a><br>
+    · 과잉 약속 이력 분석 — <a href="https://money.usnews.com/investing/articles/elon-musk-track-record-overpromising-underdelivering" target="_blank" rel="noopener">money.usnews.com</a>
+  </div>
+
+  <div class="disc">
+    <b style="color:var(--tx)">⚠️ 출처 원칙과 한계</b><br>
+    · 이 교재의 수치는 <b>공개 실적발표·주요 매체 보도</b>를 기준으로 했습니다. 인용문은 보도된 취지를 옮긴 것으로, 토씨까지 동일한 축자 인용이 아닌 경우가 있습니다.<br>
+    · "머스크가 이런 말을 했다"는 한국어 콘텐츠 중 상당수는 <b>원문이 확인되지 않는 어그리게이터·요약 영상</b>입니다. 특히 자극적인 경고성 제목(예: "○○세 이상은 3년 남았다")은 <b>출처 불명인 경우가 많으니 신뢰하지 마세요.</b><br>
+    · 이 교재는 <b>투자 조언이 아닙니다.</b> 특정 종목·자산의 매수·매도를 권하지 않습니다.<br>
+    · 미래 예측은 그 성격상 검증 불가능합니다. 이 교재가 제공하는 것은 <b>예측이 아니라 예측을 다루는 방법</b>입니다.
+  </div>
+</section>
+
+<footer>
+  <p>머스크 디코더 · 인사이트 교재 04 — 2026-08-23 작성</p>
+  <p style="margin-top:8px">시리즈 : <a href="https://kooys2013.github.io/pages/sauna-antiaging/">🔥 사우나 항노화</a> · <a href="https://kooys2013.github.io/pages/creatine-guide/">⚡ 크레아틴</a> · <a href="https://kooys2013.github.io/pages/ai-enclosure/">🐑 AI 인클로저</a> · <b style="color:var(--acc2)">🛰 머스크 디코더</b></p>
+  <p style="margin-top:12px;color:var(--tx3)">본문의 모든 수치에는 출처 링크가 달려 있습니다. 동의하지 않는 부분이 있다면 원문을 직접 확인해보시길 권합니다 — 그게 이 교재가 가르치려는 태도입니다.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%';}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;io.unobserve(el);
+      if(el.hasAttribute('data-cnt'))countUp(el);
+      if(el.hasAttribute('data-chart'))fillBars(el);
+    });
+  },{threshold:.35});
+
+  function countUp(el){
+    var t=parseFloat(el.getAttribute('data-cnt'));
+    var suf=el.getAttribute('data-suf')||'%';
+    var dec=(String(t).split('.')[1]||'').length;
+    var d=1100,s=performance.now();
+    (function tick(now){
+      var p=Math.min(1,(now-s)/d),e=1-Math.pow(1-p,3);
+      el.innerHTML=(t*e).toFixed(dec)+'<small>'+suf+'</small>';
+      if(p<1)requestAnimationFrame(tick);
+    })(s);
+  }
+  function fillBars(box){
+    box.querySelectorAll('.bar-fill').forEach(function(b,i){
+      setTimeout(function(){b.style.width=b.getAttribute('data-w')+'%';},i*110);
+    });
+  }
+  document.querySelectorAll('[data-cnt],[data-chart]').forEach(function(el){io.observe(el);});
+
+  /* 아코디언 */
+  document.querySelectorAll('.myth').forEach(function(m){
+    m.addEventListener('click',function(){m.classList.toggle('open');});
+  });
+
+  /* 탭 */
+  var tabs=document.getElementById('frTabs');
+  tabs.addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;
+    tabs.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    document.querySelectorAll('#fronts-panels .panel').forEach(function(p){p.classList.remove('on');});
+    var pane=document.getElementById(b.dataset.p);
+    pane.classList.add('on');
+    pane.querySelectorAll('[data-chart]').forEach(function(c){
+      if(!c.dataset.fired){c.dataset.fired='1';fillBars(c);}
+    });
+  });
+
+  /* 디코더 */
+  var BASE=2026;
+  var decIn=document.getElementById('decIn'),
+      dSaid=document.getElementById('dSaid'),
+      dReal=document.getElementById('dReal'),
+      dYear=document.getElementById('dYear'),
+      dNote=document.getElementById('dNote');
+  function note(lo){
+    if(lo<=3)  return '가까워 보이지만 최소 한 세대의 제품 사이클이 더 필요합니다. "곧"이라는 말에 재고·채용·이직을 걸지 마세요.';
+    if(lo<=6)  return '중기 계획 구간입니다. 방향은 대비하되, 이 시점에 맞춘 고정 비용 지출은 위험합니다.';
+    if(lo<=12) return '사실상 "다음 정권 이야기"입니다. 지금 인생 계획을 여기 맞추지 마세요.';
+    if(lo<=20) return '개인 커리어 단위를 넘어섭니다. 지금 할 일은 대비가 아니라 관찰입니다.';
+    return '이 구간은 예측이 아니라 비전입니다. 사실 진술로 취급하지 마세요.';
+  }
+  function updDec(){
+    var v=+decIn.value, lo=v*2, hi=v*5;
+    dSaid.textContent=v+'년';
+    dReal.textContent=lo+'~'+hi+'년';
+    dYear.textContent=(BASE+lo)+'~'+(BASE+hi)+'년';
+    dNote.textContent=note(lo);
+  }
+  decIn.addEventListener('input',function(){
+    document.querySelectorAll('#dPre button').forEach(function(x){x.classList.remove('on');});
+    updDec();
+  });
+  document.getElementById('dPre').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;
+    document.querySelectorAll('#dPre button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    decIn.value=b.dataset.v;
+    updDec();
+    dSaid.textContent=decIn.value+'년 ('+b.dataset.l+')';
+  });
+  updDec();
+
+  /* 자가체크 */
+  var res=document.getElementById('chkRes');
+  function updateChk(){
+    var sel=document.querySelectorAll('#chkA .cline.sel').length;
+    if(sel===0){
+      res.className='result ok';
+      res.innerHTML='<b>✅ 아직 선택 없음</b>항목을 눌러 체크해보세요. 정답을 맞히는 테스트가 아니라, <b>자기 소비 습관을 점검</b>하는 도구입니다.';
+    } else if(sel<=2){
+      res.className='result ok';
+      res.innerHTML='<b>🟢 '+sel+'개 해당 — 양호</b>이미 균형 잡힌 소비를 하고 계십니다. 남은 항목만 보완하세요. 특히 <b>실적 발표 원문</b>을 분기에 한 번만 봐도 대부분의 왜곡이 걸러집니다.';
+    } else if(sel<=5){
+      res.className='result mid';
+      res.innerHTML='<b>🟡 '+sel+'개 해당 — 보정 필요</b>가장 효과가 큰 처방 두 가지입니다. ① <b>그의 실패 3개와 성공 3개를 각각 말할 수 있게 만드세요</b> — 양쪽을 다 못 대면 진영 판단입니다. ② <b>연도는 무조건 ×2~×5</b>. 이 둘만으로 소비 품질이 크게 올라갑니다.';
+    } else {
+      res.className='result no';
+      res.innerHTML='<b>🔴 '+sel+'개 해당 — 재설계 권장</b>현재는 <b>가공된 서사만 소비</b>하고 계실 가능성이 높습니다. 시작점은 하나면 충분합니다 — <b>실적 발표 전문 한 편</b>을 직접 읽어보세요(맨 아래 출처의 fool.com 링크). 요약 영상 100편보다 낫습니다. 그다음 4챕터 디코더를 습관화하세요.';
+    }
+  }
+  document.querySelectorAll('.cline').forEach(function(c){
+    c.addEventListener('click',function(e){e.preventDefault();c.classList.toggle('sel');updateChk();});
+  });
+
+  /* 퀴즈 */
+  var QS=[
+    {q:'머스크의 2026년 세계관을 한 문장으로 정확히 요약하면?',
+     o:['AI가 상한을 정하고, 에너지가 병목이고, 로봇이 실행한다','알고리즘만 좋으면 나머지는 따라온다','화성 이주가 모든 것의 중심이다'],
+     a:0,e:'세 꼭짓점 삼각형입니다. 특히 중요한 건 병목이 알고리즘 → 칩 → 전기로 이동했다는 점입니다. 그가 멤피스 1GW AI 공장을 가스 발전기와 메가팩으로 굴리는 이유가 이것입니다.'},
+    {q:'2026년 머스크의 "진짜 발언"으로 이 교재가 지목한 것은?',
+     o:['인터뷰에서의 AGI 시점 예측','SpaceX–xAI 합병, IPO, Terafab 같은 자본구조 변경','SNS 게시물'],
+     a:1,e:'말은 비용이 0이지만 합병·상장·팹 건설은 되돌릴 수 없는 수십조 원짜리 베팅입니다. 말과 행동이 충돌하면 행동을 믿으세요. 평가 순서는 ① 어디에 돈을 넣었나 ② 조직을 어떻게 바꿨나 ③ 뭐라고 말했나입니다.'},
+    {q:'머스크가 "3년 안에 된다"고 말했습니다. 디코더를 적용하면?',
+     o:['3년 그대로 받아들인다','6~15년, 즉 2032~2041년경으로 본다','절대 안 온다고 본다'],
+     a:1,e:'실측 오차는 2~5배이고 방향이 일정합니다. 3년 → 6~15년. 중요한 건 "절대 안 온다"가 아니라는 점입니다. 방향은 살리고 시각표만 나누는 것이 이 도구의 정확한 용법입니다.'},
+    {q:'NYT가 집계한 그의 공개 예측 600여 건의 이행률 추세는?',
+     o:['꾸준히 개선됐다','2015년 약 74%에서 전체 누적 20% 미만으로 악화됐다','줄곧 90% 이상이었다'],
+     a:1,e:'회사가 커지고 약속 빈도가 늘수록 이행률이 떨어졌습니다. 이 방향성이 중요합니다 — 최근 발언일수록 더 큰 보정 계수를 써야 한다는 뜻이니까요.'},
+    {q:'Tesla FSD 사례가 디코더 사용법에 대해 알려주는 것은?',
+     o:['그의 말은 전부 거짓이므로 무시해야 한다','"거짓말이다"와 "느리다"는 다르다 — 방향은 유지하고 시각표만 폐기한다','자율주행은 영원히 안 온다'],
+     a:1,e:'2014년부터 매년 "내년"이었고 2026년 초 기준 여전히 SAE Level 2입니다. 그런데 무인 로보택시 마일은 실제로 매주 두 자릿수로 늘었습니다. 방향은 오고 있고 시각표만 틀렸습니다.'},
+    {q:'그의 예측 오차가 특히 커지는 분야의 공통점은?',
+     o:['규제 강도가 높은 분야 (예: Neuralink 목표 1,000건 vs 실제 21건)','자기가 관심 없는 분야','경쟁자가 많은 분야'],
+     a:0,e:'의료기기는 규제·안전시험 때문에 소프트웨어식 램프가 불가능합니다. 따라서 의료·금융처럼 규제가 강한 영역의 예측에는 더 큰 보정 계수를 적용하는 것이 합리적입니다.'},
+    {q:'Optimus에 대해 머스크 본인이 인정한 것은?',
+     o:['내년에 수백만 대가 배포된다','제조 스케일이 가장 어려운 제품이고 S커브 초반이 길고 평평하다','이미 고객 배포가 시작됐다'],
+     a:1,e:'모든 부품이 신품이고 기존 공급망이 없다는 것이 이유입니다. 초기 물량도 고객 배포가 아니라 훈련 데이터 수집용입니다. 그래서 2026~2028년 대량 실직 위험은 물리 로봇이 아니라 디지털 노동(Macrohard) 쪽이 먼저입니다.'},
+    {q:'이 교재가 최종적으로 가르치려 한 것은?',
+     o:['머스크를 믿어야 한다','머스크를 무시해야 한다','편향된 정보원에서 "어느 축이 강하고 어느 축이 얼마나 틀리는가"를 알아내는 법'],
+     a:2,e:'"이 사람 믿을까 말까"는 잘못된 질문입니다. 뛰어난 정보원 대부분이 신호와 노이즈를 함께 갖고 있습니다. 축별 강점과 보정 계수를 알아내는 순간, 편향된 정보원도 쓸 수 있는 자산이 됩니다.'}
+  ];
+  var qbox=document.getElementById('quizBox'),score=0,done=0;
+  QS.forEach(function(Q,i){
+    var d=document.createElement('div');d.className='qbox';
+    d.innerHTML='<div class="qh">Q'+(i+1)+'</div><div class="qq">'+Q.q+'</div><div class="opts">'+
+      Q.o.map(function(o,j){return '<button class="opt" data-i="'+j+'">'+o+'</button>';}).join('')+
+      '</div><div class="expl"></div>';
+    d.addEventListener('click',function(e){
+      var b=e.target.closest('.opt');if(!b||d.dataset.done)return;
+      d.dataset.done='1';done++;
+      var pick=+b.dataset.i;
+      d.querySelectorAll('.opt').forEach(function(x,j){
+        x.disabled=true;
+        if(j===Q.a)x.classList.add('right');else if(j===pick)x.classList.add('wrong');
+      });
+      if(pick===Q.a)score++;
+      var ex=d.querySelector('.expl');
+      ex.innerHTML='<b style="color:'+(pick===Q.a?'#4ade80':'#fb7185')+'">'+(pick===Q.a?'정답':'오답')+'</b> · '+Q.e;
+      ex.classList.add('on');
+      if(done===QS.length){
+        var sb=document.getElementById('scoreBox');
+        document.getElementById('sc').textContent=score;
+        document.getElementById('scMsg').textContent =
+          score>=7?'완벽합니다. 이제 이 번역기를 머스크 말고 다른 정보원에도 써보세요.':
+          score>=5?'좋습니다. 챕터 04(디코더)만 한 번 더 훑으면 정리됩니다.':
+                   '챕터 01(삼각형)과 04(디코더)를 다시 보세요. 그 둘이 이 교재의 뼈대입니다.';
+        sb.classList.add('on');
+        sb.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    });
+    qbox.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
