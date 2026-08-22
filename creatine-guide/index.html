@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>크레아틴 교재 — 몸에 배터리를 하나 더 단다</title>
+<meta name="description" content="근육을 넘어 뇌·뼈·항노화까지. 2025년 최신 논문으로 검증한 크레아틴의 모든 것. 부작용 오해 4가지부터 복용법까지 인터랙티브 교재.">
+<meta property="og:title" content="크레아틴 교재 — 몸에 배터리를 하나 더 단다">
+<meta property="og:description" content="'전 지구인이 안 먹을 이유를 못 찾겠다'는 주장, 논문으로 팩트체크했습니다.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#070c10; --bg2:#0e161c; --bg3:#141f28;
+  --line:#1e2d38; --line2:#2c4150;
+  --tx:#e9f2f7; --tx2:#a6bdcc; --tx3:#70889a;
+  --acc:#22d3ee; --acc2:#67e8f9; --acc-d:#0891b2;
+  --lime:#a3e635; --green:#4ade80; --red:#fb7185; --yellow:#fbbf24; --violet:#a78bfa;
+  --r:16px; --maxw:760px; --fs:clamp(16px,1.6vw,17.5px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  font-size:var(--fs);line-height:1.75;letter-spacing:-.011em;overflow-x:hidden;word-break:keep-all}
+img,svg{max-width:100%;display:block}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 520px at 50% -12%,rgba(34,211,238,.15),transparent 65%),
+             radial-gradient(700px 500px at 0% 100%,rgba(167,139,250,.07),transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--acc2));transition:width .1s linear}
+
+header.hero{padding:78px 0 44px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.76em;font-weight:700;letter-spacing:.06em;
+  color:var(--acc2);background:rgba(34,211,238,.09);border:1px solid rgba(34,211,238,.28);
+  padding:6px 13px;border-radius:100px;margin-bottom:22px}
+h1{font-size:clamp(2.05rem,7.4vw,3.15rem);line-height:1.2;font-weight:800;letter-spacing:-.035em}
+h1 .hl{background:linear-gradient(180deg,transparent 58%,rgba(34,211,238,.32) 58%);padding:0 .06em}
+.sub{color:var(--tx2);margin-top:18px;font-size:1.03em}
+.srcline{margin-top:26px;font-size:.8em;color:var(--tx3);line-height:1.6}
+.srcline a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(103,232,249,.35)}
+
+.verdict{margin:34px 0 12px;border:1px solid rgba(34,211,238,.32);border-radius:22px;
+  background:linear-gradient(160deg,rgba(34,211,238,.12),rgba(34,211,238,.02));padding:26px 22px}
+.verdict .lbl{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--acc2);margin-bottom:14px}
+.verdict p{font-size:1.16em;font-weight:600;line-height:1.62}
+.verdict p+p{margin-top:11px}
+.verdict .em{color:var(--acc2);font-weight:800}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 8px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:18px 10px;text-align:center}
+.stat .n{font-size:clamp(1.45rem,6vw,2rem);font-weight:800;color:var(--acc);letter-spacing:-.04em;line-height:1.1}
+.stat .n small{font-size:.5em;font-weight:700}
+.stat .k{font-size:.76em;color:var(--tx2);margin-top:8px;line-height:1.4}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.snum{font-size:.74em;font-weight:800;letter-spacing:.14em;color:var(--acc);margin-bottom:9px}
+h2{font-size:clamp(1.5rem,5vw,2.05rem);font-weight:800;letter-spacing:-.03em;line-height:1.28}
+.lead{color:var(--tx2);margin-top:13px;font-size:1.02em}
+h3{font-size:1.16em;font-weight:700;margin:34px 0 12px;letter-spacing:-.02em}
+p{margin:13px 0}
+strong{color:var(--acc2);font-weight:700}
+.mute{color:var(--tx3);font-size:.87em}
+
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.acc{border-color:rgba(34,211,238,.28);background:linear-gradient(160deg,rgba(34,211,238,.07),rgba(34,211,238,.01))}
+.card.warn{border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.05)}
+.card.dngr{border-color:rgba(251,113,133,.32);background:rgba(251,113,133,.06)}
+.card.vio{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.05)}
+.card h4{font-size:1.02em;font-weight:700;margin-bottom:9px}
+
+/* 도해 */
+.fig{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 16px;margin:18px 0}
+.fig .cap{font-size:.8em;color:var(--tx3);margin-top:12px;text-align:center;line-height:1.55}
+
+/* 흐름 */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;justify-content:center}
+.flow .n{background:var(--bg3);border:1px solid var(--line2);border-radius:11px;padding:10px 13px;font-size:.85em;font-weight:600;text-align:center}
+.flow .n.hot{border-color:rgba(34,211,238,.5);background:rgba(34,211,238,.11);color:var(--acc2)}
+.flow .n.bad{border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.09);color:var(--red)}
+.flow .n.good{border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.1);color:var(--green)}
+.flow .ar{color:var(--tx3);font-size:1.1em}
+
+/* 오해 카드 */
+.myths{display:grid;gap:12px;margin:22px 0}
+.myth{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);overflow:hidden;cursor:pointer;transition:.2s}
+.myth:hover{border-color:var(--line2)}
+.myth .q{padding:17px 18px;display:flex;gap:12px;align-items:flex-start}
+.myth .q .badge{flex:0 0 auto;font-size:.7em;font-weight:800;letter-spacing:.05em;padding:4px 9px;border-radius:7px;
+  background:rgba(251,113,133,.14);color:var(--red);margin-top:2px}
+.myth.true .q .badge{background:rgba(74,222,128,.14);color:var(--green)}
+.myth.half .q .badge{background:rgba(251,191,36,.14);color:var(--yellow)}
+.myth .q .txt{flex:1;font-weight:600;font-size:.99em}
+.myth .q .txt .hint{display:block;font-size:.76em;color:var(--tx3);font-weight:500;margin-top:4px}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.myth.open .a{max-height:900px}
+.myth .a .inner{padding:0 18px 18px;font-size:.93em;color:var(--tx2);line-height:1.72}
+.myth .a .inner>hr{border:none;border-top:1px dashed var(--line2);margin:0 0 14px}
+.verdictline{display:inline-block;font-weight:800;font-size:.86em;padding:4px 11px;border-radius:8px;margin:0 0 10px}
+.v-x{background:rgba(251,113,133,.14);color:var(--red)}
+.v-o{background:rgba(74,222,128,.14);color:var(--green)}
+.v-t{background:rgba(251,191,36,.14);color:var(--yellow)}
+
+/* 탭 */
+.tabs{display:flex;gap:8px;margin:24px 0 0;flex-wrap:wrap}
+.tab{flex:1;min-width:110px;padding:13px 10px;border-radius:13px;border:1px solid var(--line);background:var(--bg2);
+  color:var(--tx2);font:inherit;font-size:.89em;font-weight:700;cursor:pointer;transition:.2s;text-align:center}
+.tab.on{background:rgba(34,211,238,.13);border-color:rgba(34,211,238,.45);color:var(--acc2)}
+.panel{display:none;animation:fade .35s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 막대 */
+.chart{margin:22px 0}
+.bar-row{margin:15px 0}
+.bar-lab{display:flex;justify-content:space-between;font-size:.86em;margin-bottom:6px;gap:10px}
+.bar-lab .v{font-weight:800;color:var(--acc2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--bg3);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;width:0;border-radius:100px;transition:width 1.15s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--acc2))}
+.bar-fill.warnb{background:linear-gradient(90deg,#b45309,#fbbf24)}
+.bar-fill.ref{background:linear-gradient(90deg,#25333d,#3d5464)}
+
+/* 비교표 */
+.cmp{margin:20px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp .hd,.cmp .rw{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:1px;background:var(--line)}
+.cmp .hd>div{background:var(--bg3);padding:12px 10px;font-size:.83em;font-weight:800;text-align:center}
+.cmp .hd>div:first-child{text-align:left}
+.cmp .rw>div{background:var(--bg2);padding:12px 10px;font-size:.85em;text-align:center;display:flex;align-items:center;justify-content:center}
+.cmp .rw>div:first-child{justify-content:flex-start;text-align:left;font-weight:600;color:var(--tx2)}
+.pill{font-size:.88em;font-weight:700;padding:3px 9px;border-radius:7px}
+.p-o{background:rgba(74,222,128,.13);color:var(--green)}
+.p-t{background:rgba(251,191,36,.13);color:var(--yellow)}
+.p-x{background:rgba(251,113,133,.13);color:var(--red)}
+
+/* 근거 등급 */
+.grades{display:grid;gap:10px;margin:20px 0}
+.grade{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:15px 17px}
+.grade .g{flex:0 0 44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:1.2rem;color:#04141a}
+.grade[data-g="A"] .g{background:linear-gradient(150deg,#86efac,#22c55e)}
+.grade[data-g="B"] .g{background:linear-gradient(150deg,#7dd3fc,#22d3ee)}
+.grade[data-g="C"] .g{background:linear-gradient(150deg,#fde68a,#fbbf24)}
+.grade[data-g="D"] .g{background:linear-gradient(150deg,#cbd5e1,#94a3b8)}
+.grade .gt{flex:1;min-width:0}
+.grade .gt b{display:block;font-weight:700;font-size:.98em}
+.grade .gt span{font-size:.84em;color:var(--tx3);display:block;margin-top:2px;line-height:1.55}
+
+/* 누가 먹나 */
+.who{display:grid;gap:10px;margin:20px 0}
+.wrow{display:flex;gap:13px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;padding:15px 17px}
+.wrow .ic{flex:0 0 34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.wrow.must .ic{background:rgba(74,222,128,.13)}
+.wrow.good .ic{background:rgba(34,211,238,.13)}
+.wrow.ok .ic{background:rgba(251,191,36,.13)}
+.wrow.no .ic{background:rgba(251,113,133,.13)}
+.wrow .wt b{font-weight:700}
+.wrow .wt span{display:block;font-size:.87em;color:var(--tx3);margin-top:3px;line-height:1.6}
+.wrow.must{border-color:rgba(74,222,128,.32)}
+.wrow.no{border-color:rgba(251,113,133,.32)}
+
+/* 체크 */
+.check{margin:20px 0}
+.cline{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--bg2);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+.cline:hover{border-color:var(--line2)}
+.cline.sel{border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.08)}
+.cline .bx{flex:0 0 20px;height:20px;border:2px solid var(--line2);border-radius:6px;margin-top:3px;
+  display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:transparent;transition:.18s}
+.cline.sel .bx{background:var(--red);border-color:var(--red);color:#fff}
+.cline .lt{font-size:.92em}
+.cline .lt em{display:block;font-style:normal;font-size:.85em;color:var(--tx3);margin-top:2px}
+.result{margin-top:16px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);font-size:.95em;line-height:1.7}
+.result.ok{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.07)}
+.result.no{border-color:rgba(251,113,133,.45);background:rgba(251,113,133,.08)}
+.result b{display:block;font-size:1.1em;margin-bottom:7px}
+
+/* 퀴즈 */
+.qbox{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;margin-bottom:14px}
+.qbox .qh{font-size:.76em;color:var(--acc2);font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+.qbox .qq{font-weight:700;font-size:1.01em;line-height:1.6}
+.opts{display:grid;gap:8px;margin-top:14px}
+.opt{text-align:left;padding:12px 15px;border-radius:11px;border:1px solid var(--line);background:var(--bg3);
+  color:var(--tx2);font:inherit;font-size:.92em;cursor:pointer;transition:.18s}
+.opt:hover:not(:disabled){border-color:var(--line2);color:var(--tx)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:rgba(74,222,128,.55);background:rgba(74,222,128,.11);color:var(--green);font-weight:700}
+.opt.wrong{border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.1);color:var(--red)}
+.expl{margin-top:12px;padding:12px 14px;border-radius:11px;background:rgba(34,211,238,.06);
+  border:1px solid rgba(34,211,238,.22);font-size:.87em;color:var(--tx2);line-height:1.68;display:none}
+.expl.on{display:block;animation:fade .3s}
+.score{text-align:center;padding:24px;border-radius:var(--r);border:1px solid rgba(34,211,238,.35);
+  background:linear-gradient(160deg,rgba(34,211,238,.1),transparent);display:none}
+.score.on{display:block;animation:fade .4s}
+.score .n{font-size:2.4rem;font-weight:900;color:var(--acc);letter-spacing:-.04em}
+.score .m{color:var(--tx2);margin-top:6px;font-size:.95em}
+
+.final{background:linear-gradient(160deg,rgba(34,211,238,.13),rgba(34,211,238,.02));
+  border:1px solid rgba(34,211,238,.35);border-radius:22px;padding:28px 22px;margin:26px 0}
+.final ol{margin:0;padding-left:20px}
+.final li{font-size:1.06em;font-weight:600;line-height:1.65;margin:12px 0}
+.final li::marker{color:var(--acc);font-weight:800}
+
+footer{padding:44px 0 70px;border-top:1px solid var(--line);color:var(--tx3);font-size:.83em;line-height:1.7}
+footer a{color:var(--acc2);text-decoration:none}
+.disc{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0}
+
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:15px 18px}
+  .stat .k{margin-top:0;text-align:right}
+  section{padding:46px 0}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">⚡ 항노화 교재 · 02</div>
+  <h1>몸에 <span class="hl">배터리</span>를<br>하나 더 단다</h1>
+  <p class="sub">헬스장 보충제로만 알던 크레아틴이<br><strong>뇌·뼈·생체나이</strong>까지 건드린다는 연구가 쏟아지고 있다.</p>
+  <p class="srcline">
+    원본 · 닥터딩요 「최신 과학이 밝힌 크레아틴의 항노화, 뇌인지 기능, 뼈 건강 추가 효과」 (2026-07-21)<br>
+    <a href="https://youtu.be/s9uMukg7fYg" target="_blank" rel="noopener">youtu.be/s9uMukg7fYg</a>
+  </p>
+</header>
+
+<!-- 결론 -->
+<section style="border-top:none;padding-top:0">
+  <div class="verdict">
+    <div class="lbl">결론부터 말합니다</div>
+    <p>크레아틴은 <span class="em">불로장생 약이 아니다.</span> 하지만 <span class="em">"기능적 건강수명을 지키기 위한 조건부 필수 영양소"</span>다.</p>
+    <p>복용법은 허무할 만큼 간단하다. <span class="em">모노하이드레이트 3~5g, 매일, 로딩 없이.</span></p>
+    <p>가장 확실한 근거는 화려한 회춘이 아니라 <span class="em">근감소를 막는다는 것</span>이다. 그것만으로도 이미 장수 전략이다.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">3~5<small>g</small></div><div class="k">하루 섭취량<br>로딩 불필요</div></div>
+    <div class="stat"><div class="n" data-cnt="40" data-suf="~50%">0</div><div class="k">체내 크레아틴 합성에<br>쓰이는 메틸기 비율</div></div>
+    <div class="stat"><div class="n">1kg</div><div class="k">같은 양을 채우려면<br>필요한 소고기</div></div>
+  </div>
+  <p class="mute" style="text-align:center">※ 아래에서 하나씩, 왜 그런지까지 전부 뜯어봅니다.</p>
+
+  <div class="card vio">
+    <h4 style="color:var(--violet)">📌 이 논쟁이 시작된 배경</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      캐나다 리자이나 대학의 <b>대런 캔도우(Darren Candow) 교수</b>는 크레아틴 논문만 120편 이상을 낸 이 분야 최고 권위자다.
+      그가 구독자 1,700만 규모의 팟캐스트에서
+      <b>"연구를 해보니 전 지구인이 이걸 안 먹을 이유를 찾지 못했다"</b>고 말하면서 미국이 발칵 뒤집혔다.
+      <br><br>그의 주장은 두 갈래다. ① <b>건강한 사람에서 부작용을 못 찾겠다</b> ② <b>근육 말고 항노화·인지·여성건강에 새로운 효과가 있다</b>.
+      이 교재는 그 두 주장을 논문으로 하나씩 검증한 결과다.
+    </p>
+  </div>
+</section>
+
+<!-- 1. 원리 -->
+<section id="how">
+  <div class="snum">CHAPTER 01</div>
+  <h2>원리는 초등학생도 이해할 수 있다</h2>
+  <p class="lead">크레아틴은 어렵지 않다. 딱 한 문장이다. <strong>우리 몸의 보조 배터리.</strong></p>
+
+  <h3>주 배터리 = ATP</h3>
+  <p>우리 몸 모든 세포는 <strong>ATP(아데노신 삼인산)</strong>를 에너지 화폐로 쓴다. 인산이 세 개 붙어 있다는 뜻이다. 에너지를 쓰면 인산이 하나씩 떨어져 나간다.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 620 260" width="100%" role="img" aria-label="크레아틴인산이 ADP에 인산을 넘겨 ATP를 재생하는 과정 도해">
+      <defs>
+        <marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#70889a"/></marker>
+        <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#22d3ee"/></marker>
+      </defs>
+      <!-- 상단: 소모 -->
+      <text x="26" y="30" fill="#70889a" font-size="13" font-family="sans-serif">① 에너지를 쓰면</text>
+      <g>
+        <rect x="26" y="44" width="112" height="52" rx="13" fill="rgba(74,222,128,.1)" stroke="rgba(74,222,128,.45)"/>
+        <text x="82" y="68" fill="#4ade80" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">ATP</text>
+        <text x="82" y="86" fill="#70889a" font-size="11" text-anchor="middle" font-family="sans-serif">인산 3개 · 충전</text>
+      </g>
+      <path d="M144 70 L192 70" stroke="#70889a" stroke-width="2" marker-end="url(#a1)"/>
+      <text x="168" y="58" fill="#70889a" font-size="11.5" text-anchor="middle" font-family="sans-serif">사용</text>
+      <g>
+        <rect x="198" y="44" width="112" height="52" rx="13" fill="rgba(251,113,133,.09)" stroke="rgba(251,113,133,.4)"/>
+        <text x="254" y="68" fill="#fb7185" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">ADP</text>
+        <text x="254" y="86" fill="#70889a" font-size="11" text-anchor="middle" font-family="sans-serif">인산 2개 · 방전</text>
+      </g>
+      <path d="M316 70 L364 70" stroke="#70889a" stroke-width="2" marker-end="url(#a1)"/>
+      <g>
+        <rect x="370" y="44" width="120" height="52" rx="13" fill="rgba(112,136,154,.1)" stroke="#2c4150"/>
+        <text x="430" y="68" fill="#a6bdcc" font-size="14" font-weight="700" text-anchor="middle" font-family="sans-serif">아데노신</text>
+        <text x="430" y="86" fill="#70889a" font-size="11" text-anchor="middle" font-family="sans-serif">= 피로 물질</text>
+      </g>
+      <!-- 하단: 크레아틴 개입 -->
+      <line x1="26" y1="124" x2="594" y2="124" stroke="#1e2d38"/>
+      <text x="26" y="150" fill="#22d3ee" font-size="13" font-weight="700" font-family="sans-serif">② 크레아틴이 있으면 — 1초 만에 재충전</text>
+      <g>
+        <rect x="26" y="164" width="150" height="58" rx="13" fill="rgba(34,211,238,.11)" stroke="rgba(34,211,238,.5)"/>
+        <text x="101" y="188" fill="#67e8f9" font-size="14" font-weight="800" text-anchor="middle" font-family="sans-serif">크레아틴인산</text>
+        <text x="101" y="207" fill="#70889a" font-size="11" text-anchor="middle" font-family="sans-serif">보조 배터리</text>
+        <animate attributeName="opacity" values=".6;1;.6" dur="2s" repeatCount="indefinite"/>
+      </g>
+      <path d="M182 193 L240 193" stroke="#22d3ee" stroke-width="2.4" marker-end="url(#a2)"/>
+      <text x="211" y="182" fill="#22d3ee" font-size="11.5" text-anchor="middle" font-family="sans-serif">인산 1개</text>
+      <g>
+        <rect x="246" y="164" width="104" height="58" rx="13" fill="rgba(251,113,133,.08)" stroke="rgba(251,113,133,.35)"/>
+        <text x="298" y="198" fill="#fb7185" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">ADP</text>
+      </g>
+      <path d="M356 193 L414 193" stroke="#22d3ee" stroke-width="2.4" marker-end="url(#a2)"/>
+      <g>
+        <rect x="420" y="164" width="118" height="58" rx="13" fill="rgba(74,222,128,.12)" stroke="rgba(74,222,128,.5)"/>
+        <text x="479" y="190" fill="#4ade80" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">ATP</text>
+        <text x="479" y="209" fill="#4ade80" font-size="11" text-anchor="middle" font-family="sans-serif">다시 충전 완료</text>
+      </g>
+      <text x="310" y="248" fill="#a6bdcc" font-size="12.5" text-anchor="middle" font-family="sans-serif">10개를 들고 고갈된 상태에서 → 11개를 들게 해준다</text>
+    </svg>
+    <div class="cap">그림 1. 크레아틴의 작동 원리 — ADP에 인산을 넘겨 ATP를 즉시 재생</div>
+  </div>
+
+  <h3>언제 필요하고, 언제는 필요 없나</h3>
+  <div class="cmp">
+    <div class="hd"><div>상황</div><div>필요성</div><div>이유</div></div>
+    <div class="rw"><div>마라톤 · 중강도 유산소</div><div><span class="pill p-x">거의 없음</span></div><div style="font-size:.8em">지방으로 ATP를 실시간 공급 (하이브리드차처럼)</div></div>
+    <div class="rw"><div>단거리 질주 · 스프린트</div><div><span class="pill p-o">필요</span></div><div style="font-size:.8em">순간적으로 ATP가 고갈되는 구간</div></div>
+    <div class="rw"><div>고강도 웨이트</div><div><span class="pill p-o">필요</span></div><div style="font-size:.8em">마지막 1~2회를 더 들게 해준다</div></div>
+  </div>
+
+  <h3>왜 "3~5g 추가"인가</h3>
+  <p>몸은 이미 크레아틴을 만든다. 하루 <strong>1~2g 자체 합성</strong>, 육식으로 <strong>약 1g 보충</strong>. 그리고 걷고 생활하며 <strong>1~2g 소모</strong>. 즉 <strong>평소엔 부족하지 않다.</strong></p>
+  <p>부족해지는 건 <strong>고강도 운동에서 순간 고갈될 때</strong>다. 그래서 3~5g이 "필요한 총량"이 아니라 <strong>"추가로 필요한 양"</strong>인 것이다.</p>
+  <div class="card acc">
+    <h4>🥩 음식으로 채우려면?</h4>
+    <p style="margin:6px 0 0;font-size:.95em;color:var(--tx2)">
+      <b>소고기 1kg = 크레아틴 3~5g.</b> 매일 소고기 1kg은 말이 안 된다.
+      참고로 <b>청어</b>는 크레아틴이 상당히 많은 편이고, 그 자체로 슈퍼푸드다(과메기 포함).
+      결국 보충제는 "딸깍" 한 번으로 끝나는 문제다.
+    </p>
+  </div>
+</section>
+
+<!-- 2. 부작용 오해 -->
+<section id="myths">
+  <div class="snum">CHAPTER 02</div>
+  <h2>부작용 오해 4가지</h2>
+  <p class="lead">크레아틴만큼 오해가 많은 보충제도 드물다. 하나씩 카드를 눌러 확인하세요.</p>
+
+  <div class="myths">
+    <div class="myth">
+      <div class="q"><span class="badge">오해</span><span class="txt">"크레아틴은 신장(콩팥)을 망가뜨린다"
+        <span class="hint">가장 뿌리 깊은 오해 · 탭하여 세면대 비유 보기</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">✕ 손상시키지 않는다. 검사 수치만 흔든다</span>
+        <p style="margin:0">왜 이런 오해가 생겼는지가 핵심이다. 신장 기능은 <b>여과율</b>인데, 이걸 직접 재는 건 매우 복잡하다.
+        그래서 병원은 <b>크레아티닌(creatinine)</b>이라는 물질의 혈중 농도를 <b>간접 지표</b>로 쓴다.</p>
+        <p>그런데 <b>크레아틴을 먹으면 부산물로 크레아티닌이 생긴다.</b> 크레아티닌 자체는 독성 물질이 아니고, 그저 지표로 우연히 채택된 물질일 뿐이다.</p>
+        <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.22);border-radius:12px;padding:14px 16px;margin:14px 0">
+          <b style="color:var(--acc2)">🚰 세면대 비유</b><br>
+          배수구가 막혔는지 직접 볼 수 없으니 <b>물 높이</b>로 짐작한다. 물이 높으면 "배수가 안 되는구나" 하는 것.
+          그 물 높이가 바로 크레아티닌이다.<br><br>
+          크레아틴을 먹는 건 <b>물을 한 컵 더 붓는 것</b>이다. 배수가 완벽히 정상이어도 수위는 살짝 올라간다.
+          배수관이 고장난 게 아니다.
+        </div>
+        <p><b>19개 RCT 메타분석</b> 결과, 건강한 성인에서 크레아틴 복용과 사구체 여과율은 <b>관계가 없었다.</b> 전형적인 위양성이다.</p>
+        <p style="margin-bottom:0"><b>💡 실전 팁:</b> 크레아틴 복용 중 혈액검사에서 "크레아티닌이 높으니 콩팥이 안 좋습니다"라는 말을 들으면,
+        <b>"제가 크레아틴을 먹고 있습니다. 크레아티닌 말고 시스타틴 C(Cystatin C)로 검사해 주세요"</b>라고 하면 된다.
+        시스타틴 C는 크레아틴과 무관한 신장 기능 지표다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">오해</span><span class="txt">"크레아틴 먹으면 몸이 붓는다"
+        <span class="hint">부종과 세포 팽창은 전혀 다른 현상 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">✕ 부종이 아니라 근육이 붙는 것</span>
+        <p style="margin:0">용어 정리부터. <b>부종(edema)</b>은 세포도 혈관도 아닌 <b>그 사이 공간(간질)</b>에 물이 차는 것이다.</p>
+        <p>크레아틴이 하는 일은 정반대다. <b>물을 세포 안으로 끌어당긴다.</b> 근육 세포가 물을 머금고 탱탱해지는 것이다. 부종이 아니라 근육량 증가다.</p>
+        <p>결과적으로 지방은 그대로인데 근육량이 늘어나니 <b>체지방률은 오히려 살짝 떨어진다.</b></p>
+        <p style="margin-bottom:0">보너스도 있다. 근육 세포가 팽창하며 받는 압력이 <b>단백질 분해를 억제</b>한다.
+        (일부 논문은 mTOR를 켠다고 주장하지만, 크레아틴이 mTOR를 자극한다는 증거는 아직 없다.)</p>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">오해</span><span class="txt">"근육 경련이 생긴다"
+        <span class="hint">사실은 정반대 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">✕ 오히려 경련을 방지한다</span>
+        <p style="margin:0">크레아틴은 근육 세포에 수분을 공급한다. 탈수성 경련을 막는 방향으로 작용하지, 유발하지 않는다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">오해</span><span class="txt">"탈모를 유발한다"
+        <span class="hint">2025년 RCT로 정리됨 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <span class="verdictline v-x">✕ 남성호르몬 수치·모발 건강과 무관</span>
+        <p style="margin:0">오해의 출처는 오래된 연구 하나다. <b>럭비 선수들</b>이 크레아틴을 먹고 혈액검사를 했더니
+        탈모 유발 호르몬인 <b>DHT(디하이드로테스토스테론)</b> 수치가 높게 나왔다.</p>
+        <p>문제는 <b>럭비를 해서 올라간 건지 크레아틴 때문인지 구분할 수 없는 설계</b>였다는 것이다.</p>
+        <p style="margin-bottom:0"><b>2025년 12주 RCT</b>에서 크레아틴 복용은 남성호르몬 수치와도, 모발 건강과도 상관이 없음이 확인됐다. 이 논쟁은 정리됐다.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="margin:0"><b>정리:</b> 근육에 대한 효과와 마찬가지로, 안전성 역시 <b>수십 년간 검증된 영역</b>이다.
+    근력운동을 하면서 크레아틴을 먹는 것은 <b>이론의 여지가 없다.</b> (뒤에 나올 "먹으면 안 되는 사람"은 예외)</p>
+  </div>
+</section>
+
+<!-- 3. 추가 효과 -->
+<section id="extra">
+  <div class="snum">CHAPTER 03</div>
+  <h2>근육 밖의 세계 — 뇌 · 여성 · 뼈</h2>
+  <p class="lead">근육 효과는 팩트체크할 필요도 없다. 진짜 새로운 이야기는 여기서 시작한다.</p>
+
+  <div class="tabs" id="exTabs">
+    <button class="tab on" data-p="e1">🧠 뇌·인지</button>
+    <button class="tab" data-p="e2">♀ 여성 건강</button>
+    <button class="tab" data-p="e3">🦴 뼈·골밀도</button>
+  </div>
+
+  <!-- 뇌 -->
+  <div class="panel on" id="e1">
+    <h3>생각해보면 당연한 이야기</h3>
+    <p>우리 몸에서 ATP를 가장 많이 쓰는 장기 1위는 <strong>근육</strong>, 2위는 <strong>뇌</strong>다. 뇌는 체중의 <strong>2%</strong>밖에 안 되면서 에너지의 <strong>20%</strong>를 쓴다. 엄청난 고전력 데이터센터다.</p>
+    <p>보조 배터리가 근육에서 통했다면, 같은 원리로 뇌에서도 통해야 한다. 실제로 실험이 됐다.</p>
+
+    <div class="card acc">
+      <h4>🔬 수면박탈 실험</h4>
+      <p style="margin:6px 0 0;font-size:.95em;color:var(--tx2)">
+        <b>21시간 동안 재우지 않아</b> 몽롱한 상태를 만든 뒤, 크레아틴을 <b>20~30g 고용량</b>으로 투여했다.
+        (평소 권장량 3~5g의 몇 배다.) 그리고 <b>스트룹 테스트</b>—글자와 색깔이 다른 그 어려운 과제—를 시켰다.
+        <br><br>결과: <b>크레아틴 그룹의 점수가 유의하게 높았다.</b>
+      </p>
+    </div>
+
+    <h3>카페인과 뭐가 다른가 — 이 비유가 핵심이다</h3>
+    <div class="fig">
+      <svg viewBox="0 0 620 240" width="100%" role="img" aria-label="카페인은 신호를 차단하고 크레아틴은 배터리를 추가하는 차이 도해">
+        <defs>
+          <marker id="b1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#fb7185"/></marker>
+          <marker id="b2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#22d3ee"/></marker>
+        </defs>
+        <!-- 카페인 -->
+        <rect x="16" y="16" width="288" height="208" rx="16" fill="rgba(251,113,133,.05)" stroke="rgba(251,113,133,.3)"/>
+        <text x="160" y="44" fill="#fb7185" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">☕ 카페인</text>
+        <text x="160" y="66" fill="#70889a" font-size="12" text-anchor="middle" font-family="sans-serif">신호를 차단한다</text>
+        <!-- 폰 -->
+        <rect x="60" y="86" width="60" height="100" rx="11" fill="#141f28" stroke="#2c4150" stroke-width="2"/>
+        <text x="90" y="130" font-size="20" text-anchor="middle">🔥</text>
+        <text x="90" y="156" fill="#fb7185" font-size="10.5" text-anchor="middle" font-family="sans-serif">과열 中</text>
+        <path d="M128 136 L178 136" stroke="#fb7185" stroke-width="2" marker-end="url(#b1)" stroke-dasharray="5 4"/>
+        <line x1="146" y1="122" x2="162" y2="150" stroke="#fb7185" stroke-width="2.5"/>
+        <line x1="162" y1="122" x2="146" y2="150" stroke="#fb7185" stroke-width="2.5"/>
+        <rect x="184" y="110" width="102" height="52" rx="12" fill="rgba(251,113,133,.1)" stroke="rgba(251,113,133,.4)"/>
+        <text x="235" y="132" fill="#fb7185" font-size="11.5" font-weight="700" text-anchor="middle" font-family="sans-serif">"안 뜨겁다"</text>
+        <text x="235" y="150" fill="#fb7185" font-size="11.5" font-weight="700" text-anchor="middle" font-family="sans-serif">거짓 신호</text>
+        <text x="160" y="206" fill="#a6bdcc" font-size="11.5" text-anchor="middle" font-family="sans-serif">성능은 돌아오지만 폰은 계속 망가진다</text>
+        <!-- 크레아틴 -->
+        <rect x="316" y="16" width="288" height="208" rx="16" fill="rgba(34,211,238,.05)" stroke="rgba(34,211,238,.3)"/>
+        <text x="460" y="44" fill="#22d3ee" font-size="15" font-weight="800" text-anchor="middle" font-family="sans-serif">⚡ 크레아틴</text>
+        <text x="460" y="66" fill="#70889a" font-size="12" text-anchor="middle" font-family="sans-serif">배터리를 더 단다</text>
+        <rect x="360" y="86" width="60" height="100" rx="11" fill="#141f28" stroke="#2c4150" stroke-width="2"/>
+        <rect x="370" y="106" width="40" height="60" rx="5" fill="rgba(34,211,238,.15)" stroke="#22d3ee"/>
+        <text x="390" y="142" fill="#67e8f9" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">80%</text>
+        <path d="M428 136 L478 136" stroke="#22d3ee" stroke-width="2" marker-end="url(#b2)"/>
+        <rect x="484" y="102" width="100" height="68" rx="12" fill="rgba(34,211,238,.1)" stroke="rgba(34,211,238,.45)"/>
+        <text x="534" y="128" font-size="18" text-anchor="middle">🔋</text>
+        <text x="534" y="152" fill="#67e8f9" font-size="11.5" font-weight="700" text-anchor="middle" font-family="sans-serif">보조 배터리</text>
+        <text x="460" y="206" fill="#a6bdcc" font-size="11.5" text-anchor="middle" font-family="sans-serif">하락 자체를 지연시킨다 (속이지 않는다)</text>
+      </svg>
+      <div class="cap">그림 2. 카페인은 아데노신 신호를 차단해 뇌를 속이고, 크레아틴은 에너지 고갈 자체를 늦춘다</div>
+    </div>
+
+    <p><strong>카페인의 원리:</strong> ATP를 쓰고 남은 찌꺼기인 <strong>아데노신</strong>이 뇌에 쌓이면 우리는 "졸리다, 피곤하다"를 느낀다. 카페인은 <strong>그 신호를 차단</strong>한다. 아데노신은 그대로 있는데 뇌가 없다고 착각하는 것이다.</p>
+    <p><strong>크레아틴의 원리:</strong> 고갈 자체를 늦춘다. 그래서 커피처럼 "번쩍" 하는 각성감은 없다. 대신 <strong>수면 방해도, 심박 상승도, 금단 증상도 없다.</strong></p>
+
+    <h3>인지 효과 근거는 얼마나 쌓였나</h3>
+    <div class="grades">
+      <div class="grade" data-g="A">
+        <div class="g">A</div>
+        <div class="gt"><b>기억력 · 주의력 개선</b>
+        <span>16개 RCT 메타분석에서 기억력 유의 개선. 2025년 체계적 문헌고찰에서 6개 연구 중 5개가 양성 연관 확인.</span></div>
+      </div>
+      <div class="grade" data-g="C">
+        <div class="g">C</div>
+        <div class="gt"><b>우울증 관해율 2배</b>
+        <span>소수 논문 수준. 흥미롭게도 이 연구는 여성 우울증 대상이었다.</span></div>
+      </div>
+      <div class="grade" data-g="C">
+        <div class="g">C</div>
+        <div class="gt"><b>뇌진탕 보호 · 치매 개선</b>
+        <span>"그런 주장이 있다" 정도까지만 받아들이면 된다.</span></div>
+      </div>
+    </div>
+    <p class="mute">정리: <b>기억력·주의력은 거의 맞는 것 같고</b>, 우울증·뇌진탕·치매는 아직 소수 논문 단계다.</p>
+  </div>
+
+  <!-- 여성 -->
+  <div class="panel" id="e2">
+    <h3>여성에게 오히려 효과가 클 수 있다</h3>
+    <p>크레아틴은 오랫동안 "남성 헬스인 전용"으로 오해받았다. 그런데 여성 호르몬과의 상호작용에서 나온 데이터가 만만치 않다.</p>
+    <div class="grades">
+      <div class="grade" data-g="B"><div class="g">B</div><div class="gt"><b>월경 주기 황체기 피로 감소</b><span>여성 호르몬 변동에 따른 에너지 저하를 완충한다는 연구.</span></div></div>
+      <div class="grade" data-g="B"><div class="g">B</div><div class="gt"><b>체지방률 감소</b><span>지방이 빠지는 게 아니라 근육량이 늘어 비율이 떨어지는 것.</span></div></div>
+      <div class="grade" data-g="C"><div class="g">C</div><div class="gt"><b>우울증 관해율 2배</b><span>이 연구가 여성 우울증 대상이었다는 점이 흥미롭다.</span></div></div>
+      <div class="grade" data-g="A"><div class="g">A</div><div class="gt"><b>골밀도 손실 방어</b><span>다음 탭(🦴 뼈)에서 자세히. 여성에게 가장 권할 만한 부분이다.</span></div></div>
+    </div>
+
+    <div class="card dngr">
+      <h4 style="color:var(--red)">💬 꼭 전하고 싶은 이야기 — "근육 커질까 봐 운동 못 하겠어요"</h4>
+      <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+        영상에서 화자(의사 20년, 유튜브 8년)가 가장 답답해하는 말이 이것이다.
+        <b>"울퉁불퉁 근육이 너무 커지면 안 되는 거 아닙니까?"</b>
+        <br><br>
+        임상 경험: 2차 병원에서 당뇨 환자 전원의 인바디를 측정했는데,
+        <b>여성 중 근육량이 정상 범위에 들어간 사람을 거의 본 적이 없다.</b>
+        높은 사람은 단 한 명도 없었다. 남성은 많은 사람, 중간, 적은 사람이 다양했는데 여성은 하나같이 부족했다.
+        <br><br>
+        <b>여성의 90%는 인생을 걸고 최대치로 근력운동을 해도 지금 상상하는 그 몸이 되지 않는다.</b>
+        보디빌더처럼 될까 봐 운동을 못 하겠다는 건
+        <b>"재벌이 될까 봐 무서워서 취직을 못 하겠다"</b>는 말과 같다.
+        <br><br>
+        살을 빼고 싶어도 근육이 있어야 한다. 근육이 있어야 기초대사량이 높아져 <b>평소에 에너지를 많이 쓰는 몸</b>이 된다.
+      </p>
+    </div>
+    <p><strong>여성에게 드리는 두 가지 결론:</strong> ① 근력운동을 반드시 하실 것 ② 근력운동을 한다면 최소한 <strong>크레아틴 3~5g</strong>은 챙기실 것.</p>
+  </div>
+
+  <!-- 뼈 -->
+  <div class="panel" id="e3">
+    <h3>뼈와 근육은 같이 간다</h3>
+    <p>당연한 이야기다. 근력운동을 하는데 뼈가 튼튼해지지 않을 방법이 없다. 크레아틴이 근육을 키우는 데 기여하면 뼈도 따라온다.</p>
+    <p>문제는 시기다. 근감소는 <strong>40세 이후 매년 1%씩</strong> 진행되고, 여성은 <strong>폐경 이후 골밀도가 수직으로 떨어진다.</strong></p>
+
+    <h3>골밀도 손실 방어 효과</h3>
+    <div class="chart" data-chart>
+      <div class="bar-row">
+        <div class="bar-lab"><span>아무것도 안 했을 때 골밀도 손실</span><span class="v" data-cnt="4" data-suf="% 손실">0</span></div>
+        <div class="bar-track"><div class="bar-fill warnb" data-w="100"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span><b style="color:var(--tx)">크레아틴 + 근력운동</b></span><span class="v" data-cnt="1.2" data-suf="% 손실">0</span></div>
+        <div class="bar-track"><div class="bar-fill" data-w="30"></div></div>
+      </div>
+    </div>
+    <p>주의해서 읽어야 한다. <strong>손실이 사라지는 게 아니고 반등하는 것도 아니다.</strong> 떨어지는 속도가 확연히 느려지는 것 — 말 그대로 <strong>저속노화</strong>다.</p>
+
+    <div class="card warn">
+      <h4 style="color:var(--yellow)">⚠︎ 믿기 어려운 연구 하나, 그리고 경고</h4>
+      <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+        "크레아틴 + 근력운동이 <b>비스포스포네이트(골다공증 치료제)</b>만큼의 효과를 냈다"는 연구가 있다.
+        솔직히 믿기 어려운 크기다.
+        <br><br>
+        <b style="color:var(--red)">중요:</b> 이건 골다공증 약을 끊어도 된다는 뜻이 절대 아니다.
+        필요한 약은 당연히 드셔야 한다. 크레아틴은 <b>약의 대체재가 아니라 추가 전략</b>이다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 항노화 -->
+<section id="aging">
+  <div class="snum">CHAPTER 04</div>
+  <h2>오늘의 메인 — 정말 회춘하나</h2>
+  <p class="lead">이 챕터가 미국을 뒤집은 지점이다. 동시에 <strong>가장 정직하게 한계를 말해야 하는</strong> 지점이기도 하다.</p>
+
+  <div class="card acc">
+    <h4>🔬 2025년 게재 연구</h4>
+    <p style="margin:6px 0 0;font-size:.95em;color:var(--tx2)">
+      대상 · 미국 <b>50세 이상</b>(평균 68세) 약 <b>5,000명</b><br>
+      측정 · <b>식이</b> 크레아틴 섭취량 vs <b>DNA 메틸화 생체나이</b><br>
+      참가자 평균 식이 섭취량 · <b>하루 0.77g</b> (권장 3~5g에 턱없이 부족)
+    </p>
+  </div>
+
+  <h3>결과: 깨끗한 용량-반응 역상관</h3>
+  <div class="verdict" style="margin-top:16px">
+    <div class="lbl">핵심 수치</div>
+    <p>크레아틴을 <span class="em">1g 더</span> 먹을 때마다<br>생체나이가 <span class="em">1.3세씩</span> 젊어졌다.</p>
+    <p style="font-size:1em;font-weight:500;color:var(--tx2)">산술적으로 계산하면 하루 3g 추가 = <b style="color:var(--acc2)">약 4세 회춘</b>.
+    68세 어르신이 매일 3g을 드시면 생체나이가 64세가 된다는 뜻이다.</p>
+  </div>
+
+  <h3>논문이 제시한 6가지 기전</h3>
+  <p>이 중 <strong>4개는 이미 우리가 앞에서 다 확인한 것</strong>이고, 진짜 새로운 건 뒤의 2개다.</p>
+  <div class="grades">
+    <div class="grade" data-g="A"><div class="g">✓</div><div class="gt"><b>① 에너지 대사</b><span>보조 배터리 — 챕터 1에서 확인</span></div></div>
+    <div class="grade" data-g="A"><div class="g">✓</div><div class="gt"><b>② 근육 보존</b><span>근감소 방어 — 가장 확실하게 입증된 역할</span></div></div>
+    <div class="grade" data-g="A"><div class="g">✓</div><div class="gt"><b>③ 뇌신경 보호</b><span>인지 기능 — 챕터 3에서 확인</span></div></div>
+    <div class="grade" data-g="D"><div class="g">?</div><div class="gt"><b>④ 영양 밀도</b><span style="color:var(--yellow)">주의: 크레아틴이 많은 음식 = 소고기·청어. 영양 밀도가 높은 식사를 하는 사람이라서 젊은 것일 수 있다 — 전형적인 <b>교란 요인</b>이다.</span></div></div>
+    <div class="grade" data-g="B"><div class="g">★</div><div class="gt"><b>⑤ DNA 안정화 (메틸기 절약)</b><span>크레아틴 고유의 항노화 기전 후보 — 아래에서 자세히</span></div></div>
+    <div class="grade" data-g="B"><div class="g">★</div><div class="gt"><b>⑥ 항산화</b><span>활성산소 감소 — 아래에서 자세히</span></div></div>
+  </div>
+
+  <h3>⑤ 메틸기 — 이 파트가 가장 놀랍다</h3>
+  <p>메틸기(methyl group)는 우리 몸의 <strong>유전자 스위치</strong>다. 이해하려면 암 이야기부터 해야 한다.</p>
+  <p><strong>암 발생 유전자는 우리 모두가 가지고 있다.</strong> 어린아이부터 노인까지 전부. 그런데 왜 암에 안 걸리나? <strong>메틸기를 붙여서 그 유전자를 꺼놨기 때문</strong>이다. 나이가 들면 이 메틸화 능력이 떨어지고, 그래서 암이 생긴다. 생체나이를 이 메틸기 개수로 측정하는 이유이기도 하다.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 620 250" width="100%" role="img" aria-label="메틸기가 암 유전자를 끄고, 크레아틴 합성이 메틸기의 절반을 소모한다는 도해">
+      <defs><marker id="c1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9z" fill="#70889a"/></marker></defs>
+      <!-- 상단 -->
+      <text x="20" y="28" fill="#70889a" font-size="12.5" font-family="sans-serif">메틸기가 충분할 때</text>
+      <g>
+        <rect x="20" y="40" width="128" height="46" rx="11" fill="rgba(251,113,133,.07)" stroke="rgba(251,113,133,.3)"/>
+        <text x="84" y="60" fill="#fb7185" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">암 발생 유전자</text>
+        <text x="84" y="77" fill="#70889a" font-size="10.5" text-anchor="middle" font-family="sans-serif">누구나 가지고 있음</text>
+      </g>
+      <circle cx="168" cy="63" r="16" fill="rgba(74,222,128,.15)" stroke="#4ade80" stroke-width="1.5"/>
+      <text x="168" y="68" fill="#4ade80" font-size="11" font-weight="800" text-anchor="middle" font-family="sans-serif">CH₃</text>
+      <path d="M190 63 L228 63" stroke="#70889a" stroke-width="2" marker-end="url(#c1)"/>
+      <g>
+        <rect x="234" y="40" width="106" height="46" rx="11" fill="rgba(74,222,128,.1)" stroke="rgba(74,222,128,.4)"/>
+        <text x="287" y="69" fill="#4ade80" font-size="13" font-weight="800" text-anchor="middle" font-family="sans-serif">스위치 OFF</text>
+      </g>
+      <!-- SAM 가방 -->
+      <text x="380" y="28" fill="#70889a" font-size="12.5" font-family="sans-serif">메틸기 운반 가방 = SAM</text>
+      <g>
+        <rect x="380" y="40" width="90" height="46" rx="11" fill="rgba(34,211,238,.1)" stroke="rgba(34,211,238,.45)"/>
+        <text x="425" y="69" fill="#67e8f9" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">SAM</text>
+      </g>
+      <path d="M476 63 L508 63" stroke="#70889a" stroke-width="2" marker-end="url(#c1)"/>
+      <g>
+        <rect x="514" y="40" width="92" height="46" rx="11" fill="rgba(251,113,133,.09)" stroke="rgba(251,113,133,.35)"/>
+        <text x="560" y="60" fill="#fb7185" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">호모시스테인</text>
+        <text x="560" y="77" fill="#70889a" font-size="10" text-anchor="middle" font-family="sans-serif">염증 → 심혈관질환</text>
+      </g>
+      <!-- 하단: 소모 파이 -->
+      <line x1="20" y1="110" x2="600" y2="110" stroke="#1e2d38"/>
+      <text x="20" y="136" fill="#22d3ee" font-size="13" font-weight="700" font-family="sans-serif">그런데 — 우리 몸의 메틸기는 어디에 쓰이고 있나?</text>
+      <!-- 파이 -->
+      <g transform="translate(96,192)">
+        <circle r="46" fill="#141f28" stroke="#2c4150"/>
+        <path d="M0,0 L0,-46 A46,46 0 0,1 0,46 Z" fill="rgba(34,211,238,.55)"/>
+        <text y="5" fill="#e9f2f7" font-size="13" font-weight="800" text-anchor="middle" font-family="sans-serif">50%</text>
+      </g>
+      <text x="166" y="180" fill="#67e8f9" font-size="13" font-weight="700" font-family="sans-serif">체내 크레아틴 합성에 40~50%</text>
+      <text x="166" y="200" fill="#a6bdcc" font-size="12" font-family="sans-serif">암·심혈관을 막아주는 그 소중한 메틸기의 절반을</text>
+      <text x="166" y="218" fill="#a6bdcc" font-size="12" font-family="sans-serif">고작 크레아틴 1~2g 만드는 데 쓰고 있다</text>
+      <text x="166" y="240" fill="#4ade80" font-size="12.5" font-weight="700" font-family="sans-serif">→ 먹어서 보충하면, 그 소모를 아낄 수 있다</text>
+    </svg>
+    <div class="cap">그림 3. 메틸기 경제학 — 크레아틴 보충이 메틸기 소모를 절약한다는 가설</div>
+  </div>
+
+  <p>SAM은 메틸기를 담아 나르는 가방이다. 메틸기를 주고 나면 <strong>호모시스테인</strong>이라는 염증 물질로 변하고, 이게 심혈관질환을 일으킨다. 우리가 <strong>엽산·시금치·브로콜리</strong>를 챙겨 먹는 이유가 바로 메틸기 보충이다.</p>
+  <p>그런데 여기서 놀라운 사실. <strong>우리 몸이 하루 1~2g의 크레아틴을 만드는 데 전체 메틸기의 40~50%를 쓰고 있다.</strong> 암과 심혈관질환을 막아주는 그 소중한 자원의 절반을, 고작 크레아틴 만드는 데 쓰는 것이다.</p>
+  <p>그렇다면 <strong>크레아틴을 먹어서 보충하는 것만으로 그 소모를 아낄 수 있다</strong>는 계산이 나온다. 실제로 크레아틴 복용 시 <strong>호모시스테인 감소, SAM 보존</strong>을 보고한 연구들이 있다.</p>
+
+  <h3>⑥ 항산화 — 이것도 논리가 단순하다</h3>
+  <div class="flow">
+    <div class="n">미토콘드리아 = 핵발전소</div><div class="ar">→</div>
+    <div class="n bad">활성산소 = 방사선</div>
+  </div>
+  <div class="flow">
+    <div class="n hot">크레아틴이 ATP 보존</div><div class="ar">→</div>
+    <div class="n">발전소를 덜 돌림</div><div class="ar">→</div>
+    <div class="n good">활성산소 감소</div>
+  </div>
+  <p>간접 기여 외에 <strong>크레아틴이 활성산소를 직접 제거한다</strong>는 원리도 제시되고 있다.</p>
+
+  <!-- 한계 -->
+  <h3>🛑 여기서 반드시 브레이크를 밟아야 한다</h3>
+  <div class="card dngr">
+    <h4 style="color:var(--red)">이 연구의 한계 — 정직하게</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      <b>① 논문이 단 한 편이다.</b><br>
+      <b>② 관찰 연구도 아니고 단면(cross-sectional) 연구다.</b> 한 시점의 스냅샷이라 인과를 밝힐 수 없다.<br>
+      <b>③ 역인과 가능성.</b> 크레아틴을 먹어서 젊어진 건지, <b>원래 젊게 사는 사람이 소고기·청어를 많이 먹은 건지</b> 구분할 수 없다.<br>
+      <b>④ 보충제가 아니라 식이 섭취만 측정했다.</b> 정작 우리가 먹는 보충제 데이터가 빠졌다.<br>
+      <b>⑤ 동물 연구는 반반이다.</b> 수명이 늘었다는 연구도, 늘지 않았다는 연구도 있다.<br>
+      <b>⑥ 사람에서 크레아틴으로 수명이 늘었다는 연구는 없다.</b> 있었다면 우리가 모를 리 없다.
+    </p>
+  </div>
+
+  <div class="card acc">
+    <h4>✅ 그럼에도 남는 결론</h4>
+    <p style="margin:6px 0 0;font-size:.96em;color:var(--tx2)">
+      메틸기니 DNA 안정화니 하는 어려운 기전을 전부 걷어내도, 확실한 게 하나 남는다.
+      <br><br>
+      <b>고령자에서 근감소를 막고 신체 기능을 지킨다</b>는 연구는 <b>차고 넘친다.</b>
+      그리고 근감소를 막는 것만으로도 그 자체가 <b>롱제비티(장수 전략)</b>다.
+      <br><br>
+      <b>고령자는 크레아틴을 반드시 드셔야 한다</b>는 결론은, 회춘 논문이 없어도 이미 성립한다.
+      (물론 <b>근력운동 병행</b>이 전제다.)
+    </p>
+  </div>
+</section>
+
+<!-- 5. 누가 -->
+<section id="who">
+  <div class="snum">CHAPTER 05</div>
+  <h2>그래서 누가 먹어야 하나</h2>
+  <p class="lead">"효과가 없다"와 "먹으면 안 된다"는 완전히 다른 말이다. 이 뉘앙스 차이가 중요하다.</p>
+
+  <div class="who">
+    <div class="wrow must"><div class="ic">🥬</div><div class="wt"><b>채식주의자</b>
+      <span>식단에서 크레아틴을 거의 못 얻는다. <b>효과가 가장 크다.</b></span></div></div>
+    <div class="wrow must"><div class="ic">👵</div><div class="wt"><b>고령층 — 무조건</b>
+      <span>근감소가 있든 없든, 운동을 하든 안 하든 드세요. 단 <b>근력운동은 반드시 병행</b>.</span></div></div>
+    <div class="wrow must"><div class="ic">🏋️</div><div class="wt"><b>고강도 운동인</b>
+      <span>이론의 여지가 없다. 당연히.</span></div></div>
+    <div class="wrow good"><div class="ic">🌙</div><div class="wt"><b>수면박탈자 · 고강도 인지노동자 · 밤샘 업무자</b>
+      <span>커피 마시듯 먹어볼 만하다. 카페인과 달리 수면 방해·금단이 없다.</span></div></div>
+    <div class="wrow ok"><div class="ic">🚶</div><div class="wt"><b>걷기만 하는 일반 성인</b>
+      <span><b>효과는 거의 없을 수도 있다. 하지만 먹어서 나쁠 이유도 없다.</b> 이 차이를 정확히 아는 게 중요하다.</span></div></div>
+  </div>
+
+  <h3>최종 판정 — 주장별 근거 등급</h3>
+  <div class="grades">
+    <div class="grade" data-g="A"><div class="g">A</div><div class="gt"><b>고령자·근감소·근력운동인 → 반드시</b><span>수십 년간 축적된 확실한 근거</span></div></div>
+    <div class="grade" data-g="B"><div class="g">B</div><div class="gt"><b>뇌인지 (기억력·주의력) → 거의 맞다</b><span>메타분석·체계적 문헌고찰 다수. 웬만하면 먹는 게 좋아 보인다</span></div></div>
+    <div class="grade" data-g="B"><div class="g">B</div><div class="gt"><b>건강한 일반인 → 나쁠 게 없다</b><span>신장독성·간독성 없음. 단백질과 달리 mTOR를 과자극한다는 증거도 없음</span></div></div>
+    <div class="grade" data-g="C"><div class="g">C</div><div class="gt"><b>노화 방지·회춘 → 애매하다</b><span>일리는 있으나 연구가 더 필요하다. 사람 수명 데이터 없음</span></div></div>
+  </div>
+
+  <h3>🔴 먹으면 안 되는 사람</h3>
+  <div class="who">
+    <div class="wrow no"><div class="ic">⚠️</div><div class="wt"><b>양극성 장애(조울증)</b>
+      <span><b>조증으로 전환</b>되는 경우가 많다는 보고가 있다. 이 그룹이 가장 명확한 금기다.</span></div></div>
+    <div class="wrow no"><div class="ic">⚠️</div><div class="wt"><b>신장 질환자 (신장내과 다니는 분)</b>
+      <span>크레아틴이 콩팥을 <b>손상시키는 건 아니다.</b> 하지만 ① 혈액검사를 교란시키고 ② 신증후군에서 부담을 가중시킬 수 있다는 얘기가 있다. 그냥 안 드시는 게 좋다.</span></div></div>
+    <div class="wrow no"><div class="ic">⚠️</div><div class="wt"><b>임산부 · 수유부</b>
+      <span>나쁘다는 근거가 아니라 <b>데이터 자체가 없다.</b> 모르는 건 안 하는 게 원칙.</span></div></div>
+    <div class="wrow no"><div class="ic">⚠️</div><div class="wt"><b>크레아틴 알레르기가 있는 사람</b>
+      <span>당연히 금지.</span></div></div>
+    <div class="wrow ok"><div class="ic">🎓</div><div class="wt"><b>청소년 — 애매함 (비추천)</b>
+      <span><b>위험하다는 증명도 없지만, 안전하다는 증명도 없다.</b> 캔도우 교수는 청소년도 먹이라고 하지만,
+      화자는 보수적 입장에서 고3 딸에게도 먹이지 않는다고 밝혔다. 판단은 각자의 몫이되, 근거가 없다는 사실은 알고 결정해야 한다.</span></div></div>
+  </div>
+</section>
+
+<!-- 6. 복용법 -->
+<section id="howto">
+  <div class="snum">CHAPTER 06</div>
+  <h2>복용법 — 허무할 만큼 간단하다</h2>
+
+  <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+    <div class="stat"><div class="n" style="font-size:1.4rem">3~5g</div><div class="k">매일 · 로딩 불필요</div></div>
+    <div class="stat"><div class="n" style="font-size:1.4rem">모노<br>하이드레이트</div><div class="k">일수화물. 다른 제형 필요 없음</div></div>
+    <div class="stat"><div class="n" style="font-size:1.4rem">크레아퓨어</div><div class="k">독일산 인증 마크<br>(Creapure)</div></div>
+    <div class="stat"><div class="n" style="font-size:1.4rem">운동 직후</div><div class="k">탄수화물+단백질 식사와 함께</div></div>
+  </div>
+
+  <h3>① 로딩은 이제 필요 없다</h3>
+  <p>예전에는 <strong>20g 로딩</strong> 후 혈중 농도가 오르면 3g씩 유지하라는 방식이 있었다. 요즘은 아니다. <strong>그냥 3~5g, 끝.</strong> 아무것도 없다.</p>
+
+  <h3>② 제형은 하나만 기억하면 된다</h3>
+  <p>시중에 크레아틴 종류가 엄청나게 많지만 <strong>전부 필요 없다.</strong> <strong>크레아틴 모노하이드레이트(일수화물)</strong>만 사면 된다. "크레아틴 일수화물"로 검색해서 나오는 것.</p>
+
+  <h3>③ 원료 산지가 의외로 중요하다</h3>
+  <div class="card warn">
+    <p style="margin:0;font-size:.95em">
+      <b>독일산이 정답이다.</b> 순도 <b>99.9%</b>.<br>
+      중국산은 99.9%까지는 아니고 <b>불순물이 섞여 있다</b>고 한다. 그 불순물에 독성 물질이 들어 있을 <b>가능성</b>이 있다.
+      무조건 들어 있다는 뜻은 아니지만, 순도가 높은 걸 먹는 게 누가 봐도 낫다.
+      <br><br>
+      <b style="color:var(--acc2)">찾는 법:</b> <b>"크레아퓨어(Creapure)"</b>로 검색하면 된다.
+      상표명이 아니라 <b>인증 마크</b>다. 어떤 회사 제품이든 이 마크가 붙어 있으면 독일산이다.
+      쿠팡·네이버에서 "크레아퓨어"로 검색해 마크가 붙은 제품을 고르면 끝.
+    </p>
+  </div>
+  <p class="mute">※ 특정 브랜드 추천이 아니다. 원본 영상 화자도 본인이 먹던 제품이 중국산이었음을 확인하고 다음부터 독일산으로 바꾸겠다고 밝혔다.</p>
+
+  <h3>④ 타이밍</h3>
+  <p>언제 먹어도 상관없다. 다만 가장 효율이 좋은 타이밍은 <strong>운동 직후, 탄수화물+단백질 식사와 함께</strong>다. <strong>무맛</strong>이라 밥에 넣어 먹어도, 어디에 타 먹어도 상관없다.</p>
+</section>
+
+<!-- 7. 자가체크 -->
+<section id="check">
+  <div class="snum">CHAPTER 07</div>
+  <h2>나는 먹어도 되나 — 자가체크</h2>
+  <p class="lead">해당되는 항목을 눌러보세요.</p>
+  <div class="check" id="chkA">
+    <label class="cline"><span class="bx">✓</span><span class="lt">양극성 장애(조울증) 진단을 받았다</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">신장 질환이 있다 / 신장내과에 다닌다<em>투석·신증후군 포함</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">임신 중이거나 수유 중이다</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">크레아틴 알레르기가 있다</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">청소년(미성년자)이다<em>안전성 근거 부족 — 보수적으로 비권장</em></span></label>
+  </div>
+  <div class="result" id="chkRes">
+    <b>체크한 항목이 없습니다</b>
+    해당되는 항목을 눌러보세요.
+  </div>
+</section>
+
+<!-- 8. 퀴즈 -->
+<section id="quiz">
+  <div class="snum">CHAPTER 08</div>
+  <h2>이해도 체크</h2>
+  <p class="lead">7문항. 답을 고르면 바로 해설이 나옵니다.</p>
+  <div id="quizBox"></div>
+  <div class="score" id="scoreBox"><div class="n"><span id="sc">0</span> / 7</div><div class="m" id="scMsg"></div></div>
+</section>
+
+<!-- 마무리 -->
+<section id="final">
+  <div class="snum">SUMMARY</div>
+  <h2>세 줄 요약</h2>
+  <div class="final">
+    <ol>
+      <li>크레아틴은 <b>ATP 보조 배터리</b>다. 근육 효과는 논쟁의 여지가 없고, <b>신장 손상·부종·경련·탈모는 전부 오해</b>로 정리됐다. 크레아티닌 수치가 오르는 건 손상이 아니라 <b>세면대에 물 한 컵 더 부은 것</b>이다.</li>
+      <li>새 영역 중 <b>기억력·주의력(뇌)</b>과 <b>골밀도 손실 방어(뼈)</b>는 근거가 상당히 쌓였다. <b>회춘·수명연장</b>은 단면 연구 1편뿐이라 <b>아직 애매하다</b> — 다만 <b>근감소를 막는 것만으로 이미 장수 전략</b>이다.</li>
+      <li>먹는 법은 <b>모노하이드레이트 3~5g, 매일, 로딩 없이, 크레아퓨어(독일산)</b>. 단 <b>조울증·신장질환자·임산부·수유부·청소년</b>은 제외.</li>
+    </ol>
+  </div>
+
+  <div class="card acc">
+    <h4>🎯 한 문장 정의</h4>
+    <p style="margin:6px 0 0;font-size:1.05em;font-weight:600">
+      크레아틴은 불로장생을 위한 마법의 수명연장제가 아니라,<br>
+      <b style="color:var(--acc2)">기능적 건강수명 유지를 위한 조건부 필수 영양소</b>다.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="disc">
+    <b style="color:var(--tx2)">면책 고지</b><br>
+    이 교재는 원본 영상(2026-07-21 공개)의 내용을 정리한 <b>교육·정보 제공 목적</b> 자료입니다.
+    의료 조언·진단·처방이 아닙니다. 기저질환이 있거나 복용 중인 약이 있다면 <b>반드시 의사·약사와 상담</b>하세요.
+    특히 신장 질환·양극성 장애가 있거나 임신·수유 중이라면 복용 전 전문가 상담이 필수입니다.
+  </div>
+  <p>출처 · 닥터딩요(Dr. Dinho) 「최신 과학이 밝힌 크레아틴의 항노화, 뇌인지 기능, 뼈 건강 추가 효과」 (2026-07-21)<br>
+  <a href="https://youtu.be/s9uMukg7fYg" target="_blank" rel="noopener">https://youtu.be/s9uMukg7fYg</a></p>
+  <p style="margin-top:14px;color:var(--tx3)">본문의 모든 수치·주장은 위 영상에서 인용한 것이며, 원 논문의 정확한 서지사항은 영상을 참조하세요.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%';}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;io.unobserve(el);
+      if(el.hasAttribute('data-cnt'))countUp(el);
+      if(el.hasAttribute('data-chart'))fillBars(el);
+    });
+  },{threshold:.35});
+
+  function countUp(el){
+    var t=parseFloat(el.getAttribute('data-cnt'));
+    var suf=el.getAttribute('data-suf')||'%';
+    var dec=(String(t).split('.')[1]||'').length;
+    var d=1100,s=performance.now();
+    (function tick(now){
+      var p=Math.min(1,(now-s)/d),e=1-Math.pow(1-p,3);
+      el.innerHTML=(t*e).toFixed(dec)+'<small>'+suf+'</small>';
+      if(p<1)requestAnimationFrame(tick);
+    })(s);
+  }
+  function fillBars(box){
+    box.querySelectorAll('.bar-fill').forEach(function(b,i){
+      setTimeout(function(){b.style.width=b.getAttribute('data-w')+'%';},i*110);
+    });
+  }
+  document.querySelectorAll('[data-cnt],[data-chart]').forEach(function(el){io.observe(el);});
+
+  document.querySelectorAll('.myth').forEach(function(m){m.addEventListener('click',function(){m.classList.toggle('open');});});
+
+  var tabs=document.getElementById('exTabs');
+  tabs.addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;
+    tabs.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    document.querySelectorAll('#extra .panel').forEach(function(p){p.classList.remove('on');});
+    document.getElementById(b.dataset.p).classList.add('on');
+  });
+
+  var res=document.getElementById('chkRes');
+  function updateChk(){
+    var sel=document.querySelectorAll('#chkA .cline.sel').length;
+    if(sel>0){
+      res.className='result no';
+      res.innerHTML='<b>🔴 '+sel+'개 항목에 해당</b>크레아틴 복용을 권하지 않습니다. 특히 <b>조울증</b>은 조증 전환 보고가 있어 명확한 금기이고, <b>신장 질환</b>은 손상 문제가 아니라 검사 교란과 부담 가중 때문입니다. <b>임신·수유·청소년</b>은 "위험하다"가 아니라 <b>"안전하다는 데이터가 없다"</b>는 이유입니다. 복용 전 반드시 의사와 상의하세요.';
+    } else {
+      res.className='result ok';
+      res.innerHTML='<b>✅ 해당 항목 없음</b>일반적으로 복용에 문제가 없는 조건입니다. <b>모노하이드레이트 3~5g, 매일, 로딩 없이, 크레아퓨어(독일산)</b>로 시작하세요. 그리고 크레아틴은 <b>근력운동과 함께일 때</b> 가장 값어치를 합니다.';
+    }
+  }
+  document.querySelectorAll('.cline').forEach(function(c){
+    c.addEventListener('click',function(e){e.preventDefault();c.classList.toggle('sel');updateChk();});
+  });
+
+  var QS=[
+    {q:'크레아틴을 먹고 혈액검사에서 크레아티닌 수치가 올랐다면?',
+     o:['신장이 손상된 것이다. 즉시 중단해야 한다','신장 기능 지표 물질이 늘어난 것일 뿐, 손상이 아니다','신장이 좋아진 것이다'],
+     a:1,e:'세면대 비유를 기억하세요. 크레아티닌은 배수 상태를 짐작하는 "물 높이"일 뿐이고, 크레아틴 복용은 "물을 한 컵 더 붓는 것"입니다. 배수(신장)는 멀쩡합니다. 19개 RCT 메타분석에서 건강한 성인의 사구체 여과율과 무관함이 확인됐습니다. 정확한 검사를 원하면 시스타틴 C를 요청하세요.'},
+    {q:'마라톤 선수에게 크레아틴이 거의 필요 없는 이유는?',
+     o:['근육이 필요 없어서','지방을 태워 ATP를 실시간 공급하므로 순간 고갈이 일어나지 않아서','크레아틴이 지구력을 떨어뜨려서'],
+     a:1,e:'중강도 유산소는 하이브리드 자동차처럼 지방으로 ATP를 실시간 생성하며 달립니다. 크레아틴이 값어치를 하는 건 스프린트나 고강도 웨이트처럼 ATP가 순간적으로 고갈되는 구간입니다.'},
+    {q:'카페인과 크레아틴의 결정적 차이는?',
+     o:['카페인은 아데노신 신호를 차단해 뇌를 속이고, 크레아틴은 에너지 고갈 자체를 늦춘다','둘 다 같은 방식으로 각성시킨다','크레아틴이 더 강한 각성감을 준다'],
+     a:0,e:'휴대폰 비유: 카페인은 폰이 과열됐는데 "안 뜨겁다"고 신호를 끊어 성능을 유지시킵니다(폰은 계속 망가짐). 크레아틴은 배터리를 하나 더 다는 것이라 성능 하락 자체를 지연시킵니다. 그래서 크레아틴엔 각성감이 없는 대신 수면 방해·심박 상승·금단도 없습니다.'},
+    {q:'2025년 항노화 연구의 결과와 한계를 정확히 말하면?',
+     o:['크레아틴 1g당 생체나이 1.3세 젊음. 다만 단면 연구 1편이라 인과를 밝힐 수 없다','무작위 대조 시험으로 회춘이 입증됐다','효과가 전혀 없었다'],
+     a:0,e:'용량-반응 역상관은 인상적이지만, ① 논문 1편 ② 관찰도 아닌 단면 연구 ③ 역인과 가능(젊게 사는 사람이 소고기를 많이 먹었을 수도) ④ 보충제가 아닌 식이만 측정 — 이 한계를 함께 말해야 정직한 전달입니다.'},
+    {q:'"메틸기 절약" 기전이 놀라운 이유는?',
+     o:['크레아틴이 메틸기를 새로 만들어내기 때문','체내 크레아틴 합성이 우리 몸 메틸기의 40~50%를 소모하고 있기 때문','메틸기가 근육을 만들기 때문'],
+     a:1,e:'메틸기는 암 유전자를 꺼두는 유전자 스위치입니다. 그 소중한 자원의 절반을 고작 크레아틴 1~2g 만드는 데 쓰고 있죠. 먹어서 보충하면 그 소모를 아낄 수 있다는 계산입니다. 실제로 복용 시 호모시스테인 감소·SAM 보존 보고가 있습니다.'},
+    {q:'"걷기만 하는 건강한 일반 성인"에 대한 정확한 결론은?',
+     o:['효과가 없으므로 먹으면 안 된다','효과는 거의 없을 수 있지만, 먹어서 나쁠 이유도 없다','반드시 먹어야 한다'],
+     a:1,e:'"효과가 없다"와 "먹으면 안 된다"는 완전히 다른 말입니다. 신장독성·간독성이 없고, 단백질과 달리 mTOR를 과자극한다는 증거도 없습니다. 다만 크레아틴은 근력운동과 함께일 때 값어치를 하므로, 운동을 하시는 게 먼저입니다.'},
+    {q:'제품을 고를 때 확인해야 할 것은?',
+     o:['크레아틴 종류가 다양할수록 좋다','모노하이드레이트 + 크레아퓨어(독일산) 인증 마크','로딩용 20g 대용량 제품'],
+     a:1,e:'제형은 모노하이드레이트(일수화물) 하나면 충분합니다. 원료는 독일산이 순도 99.9%이고, "크레아퓨어(Creapure)"는 상표명이 아니라 인증 마크라 어떤 회사 제품이든 이 마크만 확인하면 됩니다. 로딩은 이제 필요 없습니다.'}
+  ];
+  var qbox=document.getElementById('quizBox'),score=0,done=0;
+  QS.forEach(function(Q,i){
+    var d=document.createElement('div');d.className='qbox';
+    d.innerHTML='<div class="qh">Q'+(i+1)+'</div><div class="qq">'+Q.q+'</div><div class="opts">'+
+      Q.o.map(function(o,j){return '<button class="opt" data-i="'+j+'">'+o+'</button>';}).join('')+
+      '</div><div class="expl"></div>';
+    d.addEventListener('click',function(e){
+      var b=e.target.closest('.opt');if(!b||d.dataset.done)return;
+      d.dataset.done='1';done++;
+      var pick=+b.dataset.i;
+      d.querySelectorAll('.opt').forEach(function(x,j){
+        x.disabled=true;
+        if(j===Q.a)x.classList.add('right');else if(j===pick)x.classList.add('wrong');
+      });
+      if(pick===Q.a)score++;
+      var ex=d.querySelector('.expl');
+      ex.innerHTML='<b style="color:'+(pick===Q.a?'#4ade80':'#fb7185')+'">'+(pick===Q.a?'정답':'오답')+'</b> · '+Q.e;
+      ex.classList.add('on');
+      if(done===QS.length){
+        var sb=document.getElementById('scoreBox');
+        document.getElementById('sc').textContent=score;
+        document.getElementById('scMsg').textContent =
+          score>=6?'완벽합니다. 이제 사랑하는 분들께 설명해주세요.':
+          score>=4?'좋습니다. 헷갈린 부분만 다시 훑어보세요.':
+                   '챕터 02(오해)와 04(항노화)를 한 번 더 보시면 정리됩니다.';
+        sb.classList.add('on');
+        sb.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    });
+    qbox.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
