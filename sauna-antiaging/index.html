@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>사우나 항노화 교재 — 20분이 수명을 바꾼다</title>
+<meta name="description" content="핀란드 21년 코호트 연구로 검증된 사우나의 항노화·수명연장 효과. 기전부터 프로토콜, 팩트체크, 금기까지 인터랙티브 교재.">
+<meta property="og:title" content="사우나 항노화 교재 — 20분이 수명을 바꾼다">
+<meta property="og:description" content="총사망 40% 감소. 논문 기반으로 왜 그런지 끝까지 설명하는 인터랙티브 교재.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#0e0b09; --bg2:#171210; --bg3:#1f1815;
+  --line:#332822; --line2:#463830;
+  --tx:#f3ece7; --tx2:#c3b4a9; --tx3:#8d7d72;
+  --ember:#ff7a1a; --ember2:#ffab4d; --ember-d:#c25200;
+  --cool:#4dc3ff; --green:#4ade80; --red:#ff5f56; --yellow:#fbbf24;
+  --r:16px; --maxw:760px;
+  --fs:clamp(16px,1.6vw,17.5px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  font-size:var(--fs); line-height:1.75; letter-spacing:-.011em;
+  overflow-x:hidden; word-break:keep-all;
+}
+img,svg{max-width:100%;display:block}
+/* ambient glow */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 50% -10%,rgba(255,122,26,.16),transparent 65%),
+             radial-gradient(700px 500px at 100% 100%,rgba(255,122,26,.06),transparent 60%);}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* progress */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+  background:linear-gradient(90deg,var(--ember-d),var(--ember),var(--ember2));transition:width .1s linear}
+
+/* ── HERO ── */
+header.hero{padding:78px 0 44px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.76em;font-weight:700;letter-spacing:.06em;
+  color:var(--ember2);background:rgba(255,122,26,.1);border:1px solid rgba(255,122,26,.28);
+  padding:6px 13px;border-radius:100px;margin-bottom:22px}
+h1{font-size:clamp(2.05rem,7.4vw,3.15rem);line-height:1.2;font-weight:800;letter-spacing:-.035em}
+h1 .hl{background:linear-gradient(180deg,transparent 58%,rgba(255,122,26,.38) 58%);padding:0 .06em}
+.sub{color:var(--tx2);margin-top:18px;font-size:1.03em}
+.srcline{margin-top:26px;font-size:.8em;color:var(--tx3);line-height:1.6}
+.srcline a{color:var(--ember2);text-decoration:none;border-bottom:1px solid rgba(255,171,77,.35)}
+
+/* ── 결론 박스 ── */
+.verdict{margin:34px 0 12px;border:1px solid rgba(255,122,26,.35);border-radius:22px;
+  background:linear-gradient(160deg,rgba(255,122,26,.13),rgba(255,122,26,.03));padding:26px 22px}
+.verdict .lbl{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--ember2);margin-bottom:14px}
+.verdict p{font-size:1.16em;font-weight:600;line-height:1.62}
+.verdict p+p{margin-top:11px}
+.verdict .em{color:var(--ember2);font-weight:800}
+
+/* 큰 숫자 3종 */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 8px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:18px 10px;text-align:center}
+.stat .n{font-size:clamp(1.5rem,6.4vw,2.1rem);font-weight:800;color:var(--ember);letter-spacing:-.04em;line-height:1}
+.stat .n small{font-size:.5em;font-weight:700}
+.stat .k{font-size:.76em;color:var(--tx2);margin-top:8px;line-height:1.4}
+
+/* ── 섹션 ── */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.snum{font-size:.74em;font-weight:800;letter-spacing:.14em;color:var(--ember);margin-bottom:9px}
+h2{font-size:clamp(1.5rem,5vw,2.05rem);font-weight:800;letter-spacing:-.03em;line-height:1.28}
+.lead{color:var(--tx2);margin-top:13px;font-size:1.02em}
+h3{font-size:1.16em;font-weight:700;margin:34px 0 12px;letter-spacing:-.02em}
+p{margin:13px 0}
+strong{color:var(--ember2);font-weight:700}
+.mute{color:var(--tx3);font-size:.87em}
+
+/* card */
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.warm{border-color:rgba(255,122,26,.3);background:linear-gradient(160deg,rgba(255,122,26,.08),rgba(255,122,26,.02))}
+.card.cool{border-color:rgba(77,195,255,.28);background:rgba(77,195,255,.05)}
+.card.dngr{border-color:rgba(255,95,86,.32);background:rgba(255,95,86,.06)}
+.card h4{font-size:1.02em;font-weight:700;margin-bottom:9px}
+
+/* ── 티어 ── */
+.tier{display:flex;align-items:stretch;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:11px 0;
+  background:var(--bg2);cursor:pointer;transition:.2s}
+.tier:hover,.tier.open{border-color:var(--line2);transform:translateY(-1px)}
+.tier .rank{flex:0 0 62px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;
+  letter-spacing:-.03em;color:#160f0a}
+.tier[data-t="S"] .rank{background:linear-gradient(150deg,#ffb648,#ff7a1a)}
+.tier[data-t="A"] .rank{background:linear-gradient(150deg,#9be7a0,#3fbf6a)}
+.tier[data-t="B"] .rank{background:linear-gradient(150deg,#8fd0f5,#3d9fd6)}
+.tier[data-t="C"] .rank{background:linear-gradient(150deg,#b9b0a6,#7d746a)}
+.tier .body{flex:1;padding:14px 16px;min-width:0}
+.tier .tt{font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tier .tt .chev{color:var(--tx3);font-size:.8em;transition:.25s;flex:0 0 auto}
+.tier.open .tt .chev{transform:rotate(180deg)}
+.tier .tag{font-size:.79em;color:var(--tx2);margin-top:3px}
+.tier .det{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.9em;color:var(--tx2)}
+.tier.open .det{max-height:340px}
+.tier .det .inner{padding-top:11px;border-top:1px dashed var(--line2);margin-top:11px;line-height:1.7}
+
+/* ── 막대 차트 ── */
+.chart{margin:22px 0}
+.bar-row{margin:15px 0}
+.bar-lab{display:flex;justify-content:space-between;font-size:.86em;margin-bottom:6px;gap:10px}
+.bar-lab .v{font-weight:800;color:var(--ember2);font-variant-numeric:tabular-nums}
+.bar-track{height:13px;background:var(--bg3);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;width:0;border-radius:100px;transition:width 1.15s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--ember-d),var(--ember),var(--ember2))}
+.bar-fill.ref{background:linear-gradient(90deg,#4b4038,#6b5b50)}
+
+/* ── 보정 체크 ── */
+.adj{display:grid;gap:9px;margin:16px 0}
+.adjrow{display:flex;gap:11px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);
+  border-radius:12px;padding:13px 15px;opacity:.25;transform:translateY(6px);transition:.5s}
+.adjrow.on{opacity:1;transform:none}
+.adjrow .ck{flex:0 0 22px;height:22px;border-radius:50%;background:rgba(74,222,128,.15);color:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:.8em;font-weight:900;margin-top:2px}
+.adjrow .t{font-size:.92em}
+.adjrow .t b{display:block;font-weight:700;color:var(--tx)}
+.adjrow .t span{color:var(--tx3);font-size:.9em}
+
+/* ── 탭 ── */
+.tabs{display:flex;gap:8px;margin:24px 0 0;flex-wrap:wrap}
+.tab{flex:1;min-width:140px;padding:13px 12px;border-radius:13px;border:1px solid var(--line);background:var(--bg2);
+  color:var(--tx2);font:inherit;font-size:.9em;font-weight:700;cursor:pointer;transition:.2s;text-align:center}
+.tab.on{background:rgba(255,122,26,.14);border-color:rgba(255,122,26,.45);color:var(--ember2)}
+.panel{display:none;animation:fade .35s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 도해 박스 */
+.fig{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 16px;margin:18px 0}
+.fig .cap{font-size:.8em;color:var(--tx3);margin-top:12px;text-align:center;line-height:1.55}
+.fig svg{margin:0 auto}
+
+/* 흐름 */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;justify-content:center}
+.flow .n{background:var(--bg3);border:1px solid var(--line2);border-radius:11px;padding:10px 13px;font-size:.85em;font-weight:600;text-align:center}
+.flow .n.hot{border-color:rgba(255,122,26,.5);background:rgba(255,122,26,.12);color:var(--ember2)}
+.flow .n.bad{border-color:rgba(255,95,86,.45);background:rgba(255,95,86,.1);color:#ff8a80}
+.flow .n.good{border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.1);color:var(--green)}
+.flow .ar{color:var(--tx3);font-size:1.1em}
+
+/* ── 팩트체크 플립 ── */
+.myths{display:grid;gap:12px;margin:22px 0}
+.myth{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);overflow:hidden;cursor:pointer;transition:.2s}
+.myth:hover{border-color:var(--line2)}
+.myth .q{padding:17px 18px;display:flex;gap:12px;align-items:flex-start}
+.myth .q .badge{flex:0 0 auto;font-size:.7em;font-weight:800;letter-spacing:.05em;padding:4px 9px;border-radius:7px;
+  background:rgba(255,95,86,.14);color:#ff8a80;margin-top:2px}
+.myth.true .q .badge{background:rgba(74,222,128,.14);color:var(--green)}
+.myth.half .q .badge{background:rgba(251,191,36,.14);color:var(--yellow)}
+.myth .q .txt{flex:1;font-weight:600;font-size:.99em}
+.myth .q .txt .hint{display:block;font-size:.76em;color:var(--tx3);font-weight:500;margin-top:4px}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.myth.open .a{max-height:600px}
+.myth .a .inner{padding:0 18px 18px;font-size:.93em;color:var(--tx2);line-height:1.72;border-top:1px dashed var(--line2);margin:0 18px;padding-left:0;padding-right:0}
+.verdictline{display:inline-block;font-weight:800;font-size:.86em;padding:4px 11px;border-radius:8px;margin:14px 0 10px}
+.v-x{background:rgba(255,95,86,.14);color:#ff8a80}
+.v-o{background:rgba(74,222,128,.14);color:var(--green)}
+.v-t{background:rgba(251,191,36,.14);color:var(--yellow)}
+
+/* ── 비교표 ── */
+.cmp{margin:20px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp .hd,.cmp .rw{display:grid;grid-template-columns:1.15fr .95fr .95fr;gap:1px;background:var(--line)}
+.cmp .hd>div{background:var(--bg3);padding:12px 10px;font-size:.83em;font-weight:800;text-align:center}
+.cmp .hd>div:first-child{text-align:left}
+.cmp .rw>div{background:var(--bg2);padding:12px 10px;font-size:.85em;text-align:center;display:flex;align-items:center;justify-content:center}
+.cmp .rw>div:first-child{justify-content:flex-start;text-align:left;font-weight:600;color:var(--tx2)}
+.pill{font-size:.88em;font-weight:700;padding:3px 9px;border-radius:7px}
+.p-o{background:rgba(74,222,128,.13);color:var(--green)}
+.p-t{background:rgba(251,191,36,.13);color:var(--yellow)}
+.p-x{background:rgba(255,95,86,.13);color:#ff8a80}
+
+/* ── 프로토콜 스텝 ── */
+.steps{margin:22px 0;position:relative;padding-left:28px}
+.steps::before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:2px;
+  background:linear-gradient(180deg,var(--ember),rgba(255,122,26,.15))}
+.step{position:relative;margin:0 0 14px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;
+  padding:15px 17px;cursor:pointer;transition:.2s}
+.step:hover{border-color:var(--line2)}
+.step::before{content:"";position:absolute;left:-24px;top:20px;width:12px;height:12px;border-radius:50%;
+  background:var(--ember);box-shadow:0 0 0 4px var(--bg)}
+.step .st{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.step .st b{font-size:1em;font-weight:700}
+.step .st .tm{font-size:.8em;color:var(--ember2);font-weight:700;white-space:nowrap}
+.step .sd{font-size:.89em;color:var(--tx2);margin-top:6px;line-height:1.65}
+.step .more{max-height:0;overflow:hidden;transition:max-height .35s;font-size:.86em;color:var(--tx3)}
+.step.open .more{max-height:200px}
+.step .more .inner{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2);line-height:1.7}
+
+/* ── 자가체크 ── */
+.check{margin:20px 0}
+.cline{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--bg2);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+.cline:hover{border-color:var(--line2)}
+.cline.sel{border-color:rgba(255,95,86,.5);background:rgba(255,95,86,.08)}
+.cline .bx{flex:0 0 20px;height:20px;border:2px solid var(--line2);border-radius:6px;margin-top:3px;
+  display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:transparent;transition:.18s}
+.cline.sel .bx{background:var(--red);border-color:var(--red);color:#fff}
+.cline .lt{font-size:.92em}
+.cline .lt em{display:block;font-style:normal;font-size:.85em;color:var(--tx3);margin-top:2px}
+.result{margin-top:16px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);
+  font-size:.95em;line-height:1.7}
+.result.ok{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.07)}
+.result.no{border-color:rgba(255,95,86,.45);background:rgba(255,95,86,.08)}
+.result b{display:block;font-size:1.1em;margin-bottom:7px}
+
+/* ── 퀴즈 ── */
+.quiz{margin:20px 0}
+.qbox{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;margin-bottom:14px}
+.qbox .qh{font-size:.76em;color:var(--ember2);font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+.qbox .qq{font-weight:700;font-size:1.01em;line-height:1.6}
+.opts{display:grid;gap:8px;margin-top:14px}
+.opt{text-align:left;padding:12px 15px;border-radius:11px;border:1px solid var(--line);background:var(--bg3);
+  color:var(--tx2);font:inherit;font-size:.92em;cursor:pointer;transition:.18s}
+.opt:hover:not(:disabled){border-color:var(--line2);color:var(--tx)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:rgba(74,222,128,.55);background:rgba(74,222,128,.11);color:var(--green);font-weight:700}
+.opt.wrong{border-color:rgba(255,95,86,.5);background:rgba(255,95,86,.1);color:#ff8a80}
+.expl{margin-top:12px;padding:12px 14px;border-radius:11px;background:rgba(255,122,26,.07);
+  border:1px solid rgba(255,122,26,.22);font-size:.87em;color:var(--tx2);line-height:1.68;display:none}
+.expl.on{display:block;animation:fade .3s}
+.score{text-align:center;padding:24px;border-radius:var(--r);border:1px solid rgba(255,122,26,.35);
+  background:linear-gradient(160deg,rgba(255,122,26,.12),transparent);display:none}
+.score.on{display:block;animation:fade .4s}
+.score .n{font-size:2.4rem;font-weight:900;color:var(--ember);letter-spacing:-.04em}
+.score .m{color:var(--tx2);margin-top:6px;font-size:.95em}
+
+/* 3줄 요약 */
+.final{background:linear-gradient(160deg,rgba(255,122,26,.15),rgba(255,122,26,.03));
+  border:1px solid rgba(255,122,26,.38);border-radius:22px;padding:28px 22px;margin:26px 0}
+.final ol{margin:0;padding-left:20px}
+.final li{font-size:1.06em;font-weight:600;line-height:1.65;margin:12px 0}
+.final li::marker{color:var(--ember);font-weight:800}
+
+/* footer */
+footer{padding:44px 0 70px;border-top:1px solid var(--line);color:var(--tx3);font-size:.83em;line-height:1.7}
+footer a{color:var(--ember2);text-decoration:none}
+.disc{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0}
+
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:15px 18px}
+  .stat .k{margin-top:0;text-align:right}
+  .cmp .hd,.cmp .rw{grid-template-columns:1.1fr .9fr .9fr}
+  .tier .rank{flex:0 0 50px;font-size:1.25rem}
+  section{padding:46px 0}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<div class="wrap">
+
+<!-- ═══════ HERO ═══════ -->
+<header class="hero">
+  <div class="eyebrow">🔥 항노화 교재 · 01</div>
+  <h1>사우나 <span class="hl">20분</span>이<br>수명을 바꾼다</h1>
+  <p class="sub">"땀 빼고 개운해지는 것" 정도로 알던 사우나가<br>21년 추적 연구에서 <strong>총사망률 40% 감소</strong>를 찍었다.</p>
+  <p class="srcline">
+    원본 · 닥터딩요 「사우나의 항노화 효과」 (2026-08-18)<br>
+    <a href="https://youtu.be/ITZYlifSCNY" target="_blank" rel="noopener">youtu.be/ITZYlifSCNY</a>
+  </p>
+</header>
+
+<!-- ═══════ 결론부터 ═══════ -->
+<section id="conclusion" style="border-top:none;padding-top:0">
+  <div class="verdict">
+    <div class="lbl">결론부터 말합니다</div>
+    <p>목욕 방법 중 항노화·수명연장 근거가 압도적인 건 <span class="em">핀란드식 건식 사우나</span> 하나다.</p>
+    <p>처방은 딱 한 줄. <span class="em">80~100℃ 건식, 주 4회 이상, 매회 20분.</span></p>
+    <p>그리고 최고의 조합은 사우나 단독이 아니라 <span class="em">유산소 운동 직후의 사우나</span>다. 혈압약 한 알만큼의 효과가 공짜로 얹힌다.</p>
+  </div>
+
+  <div class="stats" id="statBox">
+    <div class="stat"><div class="n" data-cnt="63">0</div><div class="k">급성 심장사<br>감소 (주 4~7회)</div></div>
+    <div class="stat"><div class="n" data-cnt="40">0</div><div class="k">모든 원인<br>총사망 감소</div></div>
+    <div class="stat"><div class="n" data-cnt="8" data-suf="mmHg">0</div><div class="k">운동＋사우나<br>추가 혈압 강하</div></div>
+  </div>
+  <p class="mute" style="text-align:center">※ 숫자는 아래에서 하나씩, 이게 왜 믿을 만한지까지 뜯어봅니다.</p>
+</section>
+
+<!-- ═══════ 1. 티어 ═══════ -->
+<section id="tier">
+  <div class="snum">CHAPTER 01</div>
+  <h2>목욕법 티어표</h2>
+  <p class="lead">찜질방, 온천, 반신욕, 냉수욕… 다 좋다고들 하는데 <strong>수명 데이터가 있는 건 딱 두 개뿐</strong>이다. 카드를 눌러 근거를 펼쳐보세요.</p>
+
+  <div class="tier" data-t="S">
+    <div class="rank">S</div>
+    <div class="body">
+      <div class="tt"><span>핀란드식 건식 사우나</span><span class="chev">▾</span></div>
+      <div class="tag">유일하게 "사망률"을 움직인 압도적 1위</div>
+      <div class="det"><div class="inner">
+        80~100℃ 저습 건식. 핀란드 중년 남성 2,300명을 21년 추적한 코호트에서
+        급성 심장사 63%↓, 관상동맥질환 48%↓, 심혈관 사망 50%↓, <b>총사망 40%↓</b>.
+        치매도 약 1/3 수준으로 떨어졌다. 목욕법 중 연구량 자체가 압도적이다.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="tier" data-t="A">
+    <div class="rank">A</div>
+    <div class="body">
+      <div class="tt"><span>일본식 일상 온수욕 (탕 목욕)</span><span class="chev">▾</span></div>
+      <div class="tag">의외의 2위 — 온천이 아니라 "집 욕조"</div>
+      <div class="det"><div class="inner">
+        일본 가정에서 매일 탕에 몸을 담그는 습관. 코호트 규모가 <b>6만 명</b>으로 핀란드보다 훨씬 크다.
+        심혈관 질환 28%↓, 뇌졸중 26%↓. 사우나에 없는 무기가 하나 있는데 <b>정수압</b>이다.
+        물이 몸을 눌러 정맥 환류(피가 심장으로 돌아오는 흐름)를 밀어준다.
+        특별한 장비가 필요 없다 — 우리 집 욕조가 곧 A티어다.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="tier" data-t="B">
+    <div class="rank">B</div>
+    <div class="body">
+      <div class="tt"><span>와온요법 (60℃ 저온 사우나)</span><span class="chev">▾</span></div>
+      <div class="tag">심장이 약한 사람을 위해 일본이 설계한 버전</div>
+      <div class="det"><div class="inner">
+        "심장이 안 좋은 사람도 사우나를 즐기고 싶다"는 발상에서 나온 저온 프로토콜.
+        <b>중증 만성 심부전 환자</b> 대상으로 60℃까지 낮춰 시행했더니 심장 사건이 68.7% → 31.3%로 절반 이하가 됐다.
+        다만 이건 의료적 관리하의 치료 프로토콜이지, 환자가 혼자 따라할 것은 아니다.
+      </div></div>
+    </div>
+  </div>
+
+  <div class="tier" data-t="C">
+    <div class="rank">C</div>
+    <div class="body">
+      <div class="tt"><span>반신욕 · 찜질방 · 온천 · 냉수욕</span><span class="chev">▾</span></div>
+      <div class="tag">효과는 있는데 "수명" 데이터가 없다</div>
+      <div class="det"><div class="inner">
+        반신욕 → 동맥 경직도 감소.  찜질방 → 혈압 하강 (단, 탈수·심장 부하 주의).<br>
+        온천 → 항노화보다는 <b>근골격계·류마티스/골관절염 개선</b> 논문이 많다.<br>
+        냉수욕 → 수명·심장 데이터 없음. 지연성 근육통(알배김) 방지와 도파민 급상승은 확실하다.
+        단 <b>고강도 웨이트 직후 냉탕은 금물</b> — mTOR를 억제해 애써 켠 근성장 스위치에 찬물을 끼얹는다.
+        <br><span style="color:var(--tx3)">→ 찜질방이 나쁘다는 뜻이 아니라, 논문이 아직 없다는 뜻이다.</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 2. 숫자의 근거 ═══════ -->
+<section id="evidence">
+  <div class="snum">CHAPTER 02</div>
+  <h2>이 숫자, 믿어도 되나</h2>
+  <p class="lead">40%라는 숫자는 솔직히 말이 안 되는 크기다. 운동에 육박한다. 그래서 <strong>어떻게 뽑은 숫자인지</strong>부터 봐야 한다.</p>
+
+  <div class="card warm">
+    <h4>연구 설계</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      핀란드 중년 남성 <b>2,300명</b> · <b>21년</b> 추적 관찰 코호트<br>
+      기준선(reference)은 <b>주 1회</b> 사우나. 핀란드에서 주 1회는 "거의 안 가는 사람"이다.
+    </p>
+  </div>
+
+  <h3>① 많이 갈수록 더 떨어진다 — 용량-반응 관계</h3>
+  <p>이게 핵심이다. 하면 좋다가 아니라 <strong>할수록 좋다</strong>는 계단이 보인다는 것. 우연이나 편향으로는 이런 계단이 잘 안 나온다.</p>
+  <div class="chart" data-chart>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 1회 (기준)</span><span class="v">기준선</span></div>
+      <div class="bar-track"><div class="bar-fill ref" data-w="8"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 2~3회 · 심장마비</span><span class="v" data-cnt="22" data-suf="% ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="35"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 4~7회 · 관상동맥질환</span><span class="v" data-cnt="48" data-suf="% ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="76"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 4~7회 · 심혈관 사망</span><span class="v" data-cnt="50" data-suf="% ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="79"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 4~7회 · <b style="color:var(--tx)">급성 심장사</b></span><span class="v" data-cnt="63" data-suf="% ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="100"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>주 4~7회 · <b style="color:var(--tx)">총사망 (모든 원인)</b></span><span class="v" data-cnt="40" data-suf="% ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="64"></div></div>
+    </div>
+  </div>
+  <p class="mute">읽는 법: "63% 감소"는 100명이 돌아가실 상황에서 <b>37명</b>만 돌아가신다는 뜻이다. 63%로 준다는 게 아니라 63%<b>가</b> 준다.</p>
+
+  <h3>② 시간에도 문턱이 있다</h3>
+  <p>단순히 오래 앉아있으면 좋은 게 아니라, <strong>19분 근처에 계단이 하나 더 있다</strong>. 11~19분은 10분 미만과 큰 차이가 없다가, 19분을 넘기면 추가로 52%가 더 떨어진다. 오늘 "20분"이라는 숫자가 나온 이유가 이것이다.</p>
+  <div class="chart" data-chart>
+    <div class="bar-row">
+      <div class="bar-lab"><span>11분 미만</span><span class="v">기준선</span></div>
+      <div class="bar-track"><div class="bar-fill ref" data-w="10"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span>11~19분</span><span class="v">거의 차이 없음</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="18"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-lab"><span><b style="color:var(--tx)">19분 초과 (≈20분)</b></span><span class="v" data-cnt="52" data-suf="% 추가 ↓">0</span></div>
+      <div class="bar-track"><div class="bar-fill" data-w="100"></div></div>
+    </div>
+  </div>
+
+  <h3>③ 그럼 "원래 건강한 사람이 사우나 간 것" 아닌가?</h3>
+  <p>당연히 나와야 할 의심이다. 이 연구는 그 의심을 하나씩 통계적으로 걷어냈다.</p>
+  <div class="adj" data-adj>
+    <div class="adjrow"><div class="ck">✓</div><div class="t"><b>돈 많은 사람이라서?</b><span>사회경제적 지위(SES) 보정 → 효과 유지</span></div></div>
+    <div class="adjrow"><div class="ck">✓</div><div class="t"><b>원래 체력이 좋아서?</b><span>심폐체력·신체활동량 보정 → 효과 유지</span></div></div>
+    <div class="adjrow"><div class="ck">✓</div><div class="t"><b>아파서 사우나를 못 간 것 아닌가? (역인과)</b><span>첫 5년 내 사망자 제외 후 재분석 → 효과 유지</span></div></div>
+    <div class="adjrow"><div class="ck">✓</div><div class="t"><b>그냥 스트레스 풀려서 아닌가?</b><span>주 1회보다 매일이 더 좋은 <em style="font-style:normal;color:var(--ember2)">용량-반응 계단</em>은 릴렉스만으로 설명되지 않는다</span></div></div>
+  </div>
+  <div class="card">
+    <p style="margin:0;font-size:.95em">이 네 겹을 다 통과하고도 효과가 남았다. 논문의 결론은 <strong>"순수한 열 자극 자체에 독립적인 효과가 있다"</strong>는 것이다.</p>
+  </div>
+  <div class="card cool">
+    <h4 style="color:var(--cool)">⚠︎ 정직한 한계</h4>
+    <p style="margin:0;font-size:.92em;color:var(--tx2)">이건 <b>관찰 연구</b>다. 아무리 보정해도 "사우나를 해서 오래 산다"는 <b>인과</b>를 100% 못 박지는 못한다.
+    다만 ⑴ 용량-반응 계단이 뚜렷하고 ⑵ 뒤에 나올 <b>생물학적 기전</b>이 말이 되기 때문에, 지금 인류가 가진 최선의 근거라는 뜻이다.</p>
+  </div>
+</section>
+
+<!-- ═══════ 3. 기전 ═══════ -->
+<section id="mech">
+  <div class="snum">CHAPTER 03</div>
+  <h2>왜 그런가 — 기전 두 가지</h2>
+  <p class="lead">숫자보다 이게 더 중요하다. <strong>"말이 되는 이유"</strong>가 있어야 그 숫자를 믿을 수 있다. 사우나가 몸을 젊게 만드는 경로는 크게 두 갈래다.</p>
+
+  <div class="tabs" id="mechTabs">
+    <button class="tab on" data-p="p1">① 전단응력 → 혈관</button>
+    <button class="tab" data-p="p2">② 열충격단백질 → 세포</button>
+  </div>
+
+  <!-- 기전 1 -->
+  <div class="panel on" id="p1">
+    <h3>피가 혈관 벽을 "두드린다"</h3>
+    <p>뜨거운 곳에 들어가면 심장이 쿵쿵 뛴다. 그러면 빨라진 혈류가 혈관 안쪽 벽을 밀며 스치는데, 이 힘을 <strong>전단응력(shear stress)</strong>이라 한다. 운동할 때 나오는 바로 그 자극이다.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 620 210" width="100%" role="img" aria-label="전단응력이 혈관 내피에서 산화질소를 만들어 혈압을 낮추는 과정 도해">
+      <defs>
+        <linearGradient id="vg" x1="0" x2="1">
+          <stop offset="0" stop-color="#c25200"/><stop offset="1" stop-color="#ffab4d"/>
+        </linearGradient>
+        <marker id="ar1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 z" fill="#ffab4d"/>
+        </marker>
+      </defs>
+      <!-- 혈관 -->
+      <rect x="30" y="58" width="440" height="86" rx="43" fill="#1f1815" stroke="#463830" stroke-width="2"/>
+      <rect x="38" y="66" width="424" height="70" rx="35" fill="rgba(255,122,26,.07)"/>
+      <text x="30" y="46" fill="#8d7d72" font-size="13" font-family="sans-serif">혈관</text>
+      <text x="392" y="46" fill="#8d7d72" font-size="13" font-family="sans-serif">내피세포</text>
+      <!-- 내피 세포 라인 -->
+      <g stroke="#463830" stroke-width="1.5">
+        <line x1="60" y1="66" x2="60" y2="76"/><line x1="120" y1="66" x2="120" y2="76"/>
+        <line x1="180" y1="66" x2="180" y2="76"/><line x1="240" y1="66" x2="240" y2="76"/>
+        <line x1="300" y1="66" x2="300" y2="76"/><line x1="360" y1="66" x2="360" y2="76"/>
+        <line x1="420" y1="66" x2="420" y2="76"/>
+      </g>
+      <!-- 흐르는 혈류 -->
+      <g class="flowdot">
+        <circle cx="70" cy="90" r="7" fill="url(#vg)"><animate attributeName="cx" values="55;450" dur="1.9s" repeatCount="indefinite"/></circle>
+        <circle cx="70" cy="112" r="6" fill="url(#vg)" opacity=".8"><animate attributeName="cx" values="55;450" dur="1.6s" begin="-.5s" repeatCount="indefinite"/></circle>
+        <circle cx="70" cy="101" r="5" fill="url(#vg)" opacity=".6"><animate attributeName="cx" values="55;450" dur="2.2s" begin="-1s" repeatCount="indefinite"/></circle>
+        <circle cx="70" cy="80" r="4.5" fill="url(#vg)" opacity=".55"><animate attributeName="cx" values="55;450" dur="1.4s" begin="-.9s" repeatCount="indefinite"/></circle>
+      </g>
+      <!-- 벽 두드림 -->
+      <g stroke="#ffab4d" stroke-width="2" marker-end="url(#ar1)" opacity=".85">
+        <line x1="150" y1="84" x2="150" y2="70"><animate attributeName="opacity" values=".2;1;.2" dur="1.3s" repeatCount="indefinite"/></line>
+        <line x1="260" y1="84" x2="260" y2="70"><animate attributeName="opacity" values=".2;1;.2" dur="1.3s" begin="-.45s" repeatCount="indefinite"/></line>
+        <line x1="370" y1="84" x2="370" y2="70"><animate attributeName="opacity" values=".2;1;.2" dur="1.3s" begin="-.9s" repeatCount="indefinite"/></line>
+      </g>
+      <!-- NO 방출 -->
+      <g>
+        <circle cx="150" cy="52" r="13" fill="rgba(74,222,128,.16)" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="150" y="57" fill="#4ade80" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">NO</text>
+        <animate attributeName="opacity" values=".3;1;.3" dur="1.3s" repeatCount="indefinite"/>
+      </g>
+      <g>
+        <circle cx="370" cy="52" r="13" fill="rgba(74,222,128,.16)" stroke="#4ade80" stroke-width="1.5"/>
+        <text x="370" y="57" fill="#4ade80" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">NO</text>
+        <animate attributeName="opacity" values=".3;1;.3" dur="1.3s" begin="-.65s" repeatCount="indefinite"/>
+      </g>
+      <!-- 결과 -->
+      <path d="M478 101 L512 101" stroke="#463830" stroke-width="2" marker-end="url(#ar1)"/>
+      <rect x="516" y="66" width="94" height="70" rx="14" fill="rgba(74,222,128,.09)" stroke="rgba(74,222,128,.4)"/>
+      <text x="563" y="92" fill="#4ade80" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">혈관 확장</text>
+      <text x="563" y="112" fill="#4ade80" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">혈압 ↓</text>
+      <text x="250" y="176" fill="#c3b4a9" font-size="14" text-anchor="middle" font-family="sans-serif">심박↑ → 혈류 가속 → 벽을 규칙적으로 두드림 = 전단응력</text>
+    </svg>
+    <div class="cap">그림 1. 열 자극 → 심박 상승 → 전단응력 → 산화질소(NO) 분비 → 혈관 확장·혈압 하강</div>
+  </div>
+
+    <h3>같은 자극인데 왜 고혈압은 나쁘고 사우나는 좋은가</h3>
+    <p>여기가 헷갈리는 지점이다. 고혈압도 혈관을 밀지 않나? 결정적 차이는 <strong>"짧고 규칙적이냐, 24시간 내내냐"</strong>다.</p>
+    <div class="cmp">
+      <div class="hd"><div>비교</div><div>사우나 / 운동</div><div>고혈압</div></div>
+      <div class="rw"><div>자극 시간</div><div><span class="pill p-o">20분, 끝나면 회복</span></div><div><span class="pill p-x">자는 동안에도 24시간</span></div></div>
+      <div class="rw"><div>혈관 반응</div><div><span class="pill p-o">NO 분비 · 적응</span></div><div><span class="pill p-x">지속 손상 · 경직</span></div></div>
+      <div class="rw"><div>결과</div><div><span class="pill p-o">혈압 ↓</span></div><div><span class="pill p-x">심혈관질환 ↑</span></div></div>
+    </div>
+    <div class="card warm">
+      <h4>🔑 오늘의 핵심 개념 — 호르메시스(Hormesis)</h4>
+      <p style="margin:6px 0 0;font-size:.95em;color:var(--tx2)">
+        <b>적당한 스트레스를 주면 몸이 오히려 더 건강해진다</b>는 원리.
+        운동도, 사우나도, 단식도 전부 이 원리 위에 있다.
+        mTOR도 같다 — 운동 없이 단백질만 들이부어 24시간 켜두면 노화지만, 운동할 때 켜지는 mTOR는 건강한 mTOR다.
+        <br><br>핵심은 <b>용량</b>과 <b>회복</b>. 자극이 짧고 회복이 붙으면 약, 자극이 끝없이 이어지면 독.
+      </p>
+    </div>
+  </div>
+
+  <!-- 기전 2 -->
+  <div class="panel" id="p2">
+    <h3>단백질은 접혀야 일한다</h3>
+    <p>단백질은 아미노산 구슬을 꿴 긴 줄이다. 이 줄은 그냥 있으면 아무 기능이 없고, <strong>정확한 모양으로 접혀야만</strong> 인슐린이든 효소든 제 일을 한다.</p>
+    <p>그런데 열을 받으면 접힘이 망가진다. 계란 흰자가 익는 게 딱 그거다. 잘못 접힌 단백질은 <strong>강력한 노화 물질</strong>이다.</p>
+
+    <div class="fig">
+      <svg viewBox="0 0 620 250" width="100%" role="img" aria-label="열충격단백질이 잘못 접힌 단백질을 다시 접고, 실패하면 오토파지로 넘기는 과정">
+        <defs>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#8d7d72"/>
+          </marker>
+          <marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#4ade80"/>
+          </marker>
+        </defs>
+        <!-- 1 정상 -->
+        <g>
+          <circle cx="72" cy="70" r="40" fill="rgba(74,222,128,.08)" stroke="rgba(74,222,128,.4)" stroke-width="1.5"/>
+          <path d="M52 78 q10 -22 20 -6 q10 16 20 -8 q-8 22 -20 12 q-12 -10 -20 2z" fill="none" stroke="#4ade80" stroke-width="2.6" stroke-linecap="round"/>
+          <text x="72" y="128" fill="#4ade80" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">정상 접힘</text>
+          <text x="72" y="146" fill="#8d7d72" font-size="11.5" text-anchor="middle" font-family="sans-serif">기능 O</text>
+        </g>
+        <!-- 열 -->
+        <path d="M120 70 L168 70" stroke="#ff7a1a" stroke-width="2.5" marker-end="url(#ar1)"/>
+        <text x="144" y="58" fill="#ff7a1a" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">열</text>
+        <!-- 2 오접힘 -->
+        <g>
+          <circle cx="216" cy="70" r="40" fill="rgba(255,95,86,.08)" stroke="rgba(255,95,86,.45)" stroke-width="1.5"/>
+          <path d="M196 84 l12 -20 l-8 -6 l20 -4 l-6 18 l14 -6 l-10 20 l-14 -4z" fill="none" stroke="#ff5f56" stroke-width="2.4" stroke-linejoin="round"/>
+          <text x="216" y="128" fill="#ff5f56" font-size="13" font-weight="700" text-anchor="middle" font-family="sans-serif">잘못 접힘</text>
+          <text x="216" y="146" fill="#8d7d72" font-size="11.5" text-anchor="middle" font-family="sans-serif">노화 물질</text>
+        </g>
+        <!-- HSP 등장 -->
+        <path d="M264 70 L312 70" stroke="#8d7d72" stroke-width="2" marker-end="url(#ar2)"/>
+        <g>
+          <rect x="316" y="38" width="102" height="64" rx="14" fill="rgba(255,122,26,.13)" stroke="rgba(255,122,26,.5)" stroke-width="1.5"/>
+          <text x="367" y="64" fill="#ffab4d" font-size="13" font-weight="800" text-anchor="middle" font-family="sans-serif">열충격단백질</text>
+          <text x="367" y="84" fill="#ffab4d" font-size="11.5" text-anchor="middle" font-family="sans-serif">(샤페론)</text>
+          <animate attributeName="opacity" values=".55;1;.55" dur="2s" repeatCount="indefinite"/>
+        </g>
+        <text x="367" y="122" fill="#8d7d72" font-size="11.5" text-anchor="middle" font-family="sans-serif">"내가 다시 접어볼게"</text>
+        <!-- 분기 -->
+        <path d="M420 56 q56 -18 96 -18" stroke="#4ade80" stroke-width="2.2" fill="none" marker-end="url(#ar3)"/>
+        <path d="M420 90 q56 40 96 56" stroke="#8d7d72" stroke-width="2.2" fill="none" marker-end="url(#ar2)"/>
+        <g>
+          <rect x="520" y="18" width="90" height="44" rx="12" fill="rgba(74,222,128,.1)" stroke="rgba(74,222,128,.45)"/>
+          <text x="565" y="38" fill="#4ade80" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">성공 →</text>
+          <text x="565" y="54" fill="#4ade80" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">기능 회복</text>
+        </g>
+        <g>
+          <rect x="520" y="86" width="90" height="44" rx="12" fill="rgba(141,125,114,.12)" stroke="#463830"/>
+          <text x="565" y="106" fill="#c3b4a9" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">실패 →</text>
+          <text x="565" y="122" fill="#c3b4a9" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">오토파지</text>
+        </g>
+        <!-- 하단 결과 -->
+        <line x1="30" y1="176" x2="590" y2="176" stroke="#332822" stroke-width="1"/>
+        <text x="30" y="202" fill="#8d7d72" font-size="12.5" font-family="sans-serif">잘못 접힌 단백질이 쌓이면 →</text>
+        <g>
+          <rect x="238" y="184" width="150" height="30" rx="10" fill="rgba(255,95,86,.08)" stroke="rgba(255,95,86,.3)"/>
+          <text x="313" y="204" fill="#ff8a80" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">췌장에 쌓이면 당뇨</text>
+        </g>
+        <g>
+          <rect x="400" y="184" width="150" height="30" rx="10" fill="rgba(255,95,86,.08)" stroke="rgba(255,95,86,.3)"/>
+          <text x="475" y="204" fill="#ff8a80" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">뇌에 쌓이면 치매</text>
+        </g>
+        <text x="310" y="238" fill="#c3b4a9" font-size="12.5" text-anchor="middle" font-family="sans-serif">사우나는 이 쓰레기를 미리 치우는 청소 스위치를 켠다</text>
+      </svg>
+      <div class="cap">그림 2. 열충격단백질(HSP)의 역할 — 먼저 다시 접어보고, 안 되면 오토파지로 넘긴다</div>
+    </div>
+
+    <h3>몸은 "손상되기 전에" 미리 대비한다</h3>
+    <p>가장 재미있는 부분. 열충격단백질은 <strong>단백질이 실제로 망가진 다음에 나오는 게 아니다.</strong> 뜨거운 게 닿는 순간 "아, 이제 곧 손상되겠다" 싶어서 미리 튀어나온다. 진화가 그렇게 학습시켜 놓았다.</p>
+    <div class="card warm">
+      <p style="margin:0;font-size:.95em">사우나 온도가 <b>80~100℃</b>인 것이 우연이 아니다. 단백질이 실제로 익을 만한 온도이기 때문에 몸이 진지하게 반응한다.
+      실측 데이터로는 <b>73℃에 30분</b> 노출 시 열충격단백질이 <b>49% 증가(약 1.5배)</b>했고, 사우나가 끝난 뒤에도 한동안 유지됐다.</p>
+    </div>
+
+    <h3>흔한 오해 정정: 사우나 = 오토파지 항진?</h3>
+    <p>아니다. 정확히 하자.</p>
+    <div class="flow">
+      <div class="n hot">열충격단백질</div><div class="ar">→</div>
+      <div class="n">일단 직접 다시 접어본다</div><div class="ar">→</div>
+      <div class="n bad">실패</div><div class="ar">→</div>
+      <div class="n good">그때서야 오토파지로 넘김</div>
+    </div>
+    <p>즉 사우나가 하는 일은 <strong>오토파지를 켜는 게 아니라, 오토파지까지 안 가도 되게 먼저 수리해보는 것</strong>이다. 결과적으로 간접 기여는 하지만(CMA 경로), "사우나 = 오토파지 항진"은 틀린 문장이다.</p>
+    <div class="card">
+      <p style="margin:0;font-size:.93em;color:var(--tx2)">✅ 정직하게: 사우나 → HSP 증가는 <b>측정된 사실</b>이다. 하지만 "그 HSP 때문에 치매가 줄었다"는 직접 증거는 아직 없다.
+      기전이 말이 되고(<b>개연성</b>), 역학 데이터도 있다(<b>상관</b>) — 이 두 개가 만나서 신뢰도를 만든다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 4. 프로토콜 ═══════ -->
+<section id="protocol">
+  <div class="snum">CHAPTER 04</div>
+  <h2>그래서 어떻게 하면 되나</h2>
+  <p class="lead">치매·심장마비 예방, 열충격단백질 확보를 목표로 한 <strong>근거가 가장 많은 조건</strong>이다. 복잡하지 않다.</p>
+
+  <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+    <div class="stat"><div class="n" style="font-size:1.5rem">80~100℃</div><div class="k">온도 · 핀란드식</div></div>
+    <div class="stat"><div class="n" style="font-size:1.5rem">건식</div><div class="k">습도는 낮게 유지</div></div>
+    <div class="stat"><div class="n" style="font-size:1.5rem">주 4회+</div><div class="k">거의 매일이 최선</div></div>
+    <div class="stat"><div class="n" style="font-size:1.5rem">20분</div><div class="k">19분 넘겨야 계단을 탄다</div></div>
+  </div>
+
+  <div class="card dngr">
+    <h4 style="color:#ff8a80">🔰 초보자는 20분부터 시작하면 안 된다</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      20분은 <b>단련자 기준</b>이다. 처음이라면 <b>10분</b>으로 시작해서 적응된 뒤 20분으로 올린다.
+      초보자는 절대 19분을 넘기지 않는다. 점진적 과부하 원칙은 사우나에도 그대로 적용된다.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ 5. 팩트체크 ═══════ -->
+<section id="fact">
+  <div class="snum">CHAPTER 05</div>
+  <h2>인터넷 사우나 상식 팩트체크</h2>
+  <p class="lead">유튜브에 도는 주장 6개. 카드를 눌러 판정을 확인하세요.</p>
+
+  <div class="myths">
+    <div class="myth">
+      <div class="q"><span class="badge">거짓</span><span class="txt">"사우나 하면 미세플라스틱이 86% 빠져나온다"
+        <span class="hint">브라이언 존슨(항노화 바이오해커) 주장 · 탭하여 근거 보기</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-x">✕ 현대 의학상 불가능</span>
+        <p style="margin:0">미세플라스틱은 <b>땀샘을 뚫고 나올 수 있는 크기가 아니다.</b> 그리고 이건 개인 주장이지 논문이 아니다.</p>
+        <p>땀으로 나오는 게 있긴 하다 — <b>미세플라스틱에 묻어 있던 환경호르몬</b>(비스페놀A, 프탈레이트). 얘들은 액상이라 땀샘을 통과한다. 이건 실제로 입증됐다.</p>
+        <p>2022년에 "땀에서 미세플라스틱이 나왔다"는 보고가 있긴 한데, 땀을 닦아서 측정한 것이라 <b>피부에 원래 묻어있던 건지 옷에서 나온 건지 구분이 안 되고</b>, 동료심사(peer review)를 거친 정식 논문도 아니다.</p>
+        <p style="margin-bottom:0"><b>2025년 최신 전체 리뷰의 결론:</b> 혈관·조직에 이미 침착된 미세플라스틱을 배출시키는 검증된 전략은 <b>현재 하나도 없다.</b> (활성탄, 클로렐라, 키토산, 오토파지, 설포라판, 혈장교환술 등이 연구 중이지만 전부 실험 단계)</p>
+      </div></div>
+    </div>
+
+    <div class="myth half">
+      <div class="q"><span class="badge">절반만</span><span class="txt">"땀으로 나오는 중금속이 소변의 25배다"
+        <span class="hint">농도는 맞다. 그런데… · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-t">△ 농도는 맞지만 총량이 틀렸다</span>
+        <p style="margin:0">사실 관계 정리:</p>
+        <p>① 땀으로 중금속이 나오는 건 <b>맞다.</b> ② 땀이 소변보다 <b>농도</b>가 높은 것도 맞다.<br>
+        ③ 그런데 땀은 소변보다 <b>절대량이 압도적으로 적다.</b> 농도 25배 × 아주 적은 양 = 총량 비교가 안 된다.</p>
+        <p>실제로 중금속 배출은 대부분 <b>간과 신장</b>이 한다. 땀샘의 기여는 전체의 <b>1~5%</b>에 불과하다.</p>
+        <p style="margin-bottom:0">게다가 중금속 배출이 목적이라면 <b>사우나 땀보다 운동 땀의 중금속 농도가 더 높다.</b>
+        결론: 중금속 빼려고 사우나 갈 이유는 없다. 사우나는 항노화 효과가 워낙 좋으니 "중금속도 좀 나오네" 정도의 보너스로 보면 된다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth half">
+      <div class="q"><span class="badge">이유가 틀림</span><span class="txt">"사우나 하면 뇌혈류가 늘어서 BDNF가 나온다"
+        <span class="hint">결론은 맞는데 설명이 반대다 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-t">△ 결과는 맞고, 기전 설명이 틀렸다</span>
+        <p style="margin:0">BDNF(뇌유래신경영양인자)는 "천연 치매 예방 물질"로 불리는 좋은 물질이다.
+        <b>사우나로 BDNF가 나오는 건 맞다.</b></p>
+        <p style="margin-bottom:0">그런데 "뇌혈류가 증가해서"는 틀렸다. 논문상 사우나 중에는 오히려 <b>뇌혈류가 감소</b>한다.
+        BDNF가 나오는 진짜 이유는 <b>열 스트레스</b> 그 자체다. 사소해 보이지만, 기전을 잘못 알면 엉뚱한 응용을 하게 된다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">거짓</span><span class="txt">"사우나가 오토파지를 항진시킨다"
+        <span class="hint">가장 많이 퍼진 오해 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-x">✕ 순서가 반대다</span>
+        <p style="margin:0">열충격단백질은 잘못 접힌 단백질을 <b>먼저 직접 다시 접어보려고</b> 한다.
+        폐기물 처리장(오토파지)으로 바로 보내는 게 아니다.</p>
+        <p style="margin-bottom:0">자기가 해보다가 "이건 내가 못 하겠다" 싶을 때만 오토파지로 넘긴다(CMA 경로).
+        그래서 <b>간접적으로 오토파지를 약간 돕는</b> 것은 맞지만, "사우나 = 오토파지 항진"은 정확한 표현이 아니다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth true">
+      <div class="q"><span class="badge">중요</span><span class="txt">"몸에 좋다니까 참고서라도 해야 하나?"
+        <span class="hint">불쾌하면 하지 마세요 · 탭하여 이유 확인</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-o">◎ 불쾌하면 즉시 중단. 억지로 할 이유 없다</span>
+        <p style="margin:0">설문상 <b>39%</b>가 목욕을 싫어하고 샤워만 선호한다. 이분들이 억지로 사우나를 해야 할까? <b>전혀 아니다.</b></p>
+        <p>논리가 명확하다. 사우나가 몸을 좋게 하는 원리 자체가 <b>호르메시스</b> — 적당한 자극이라 좋은 것이다.
+        그런데 <b>기분이 나쁘다는 것 자체가 이미 호르메시스 범위를 벗어났다는 신호</b>다.</p>
+        <p style="margin-bottom:0">숨 막히고, 답답하고, 심장 터질 것 같은 느낌.
+        <b>그 불쾌감은 나약함이 아니라 생리적 경보다.</b> 내 몸이 알려주는 것이니 그냥 안 하면 된다.
+        판단 기준을 어렵게 잡을 필요 없다 — <b>기분</b>으로 파악하면 된다.</p>
+      </div></div>
+    </div>
+
+    <div class="myth half">
+      <div class="q"><span class="badge">부분만</span><span class="txt">"운동 못 한 날엔 사우나로 대신할 수 있다"
+        <span class="hint">몇 %가 아니라, 되는 게 있고 안 되는 게 있다 · 탭하여 확인</span></span></div>
+      <div class="a"><div class="inner">
+        <span class="verdictline v-t">△ 심혈관은 대체되고, 나머지는 0이다</span>
+        <p style="margin:0">"몇 % 대체 가능하냐"는 질문 자체가 잘못됐다. 기전이 아예 다르기 때문에
+        <b>대체되는 축과 전혀 안 되는 축이 따로 있다.</b> 아래 비교표를 보세요.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <h3>사우나 vs 운동 — 축별 비교</h3>
+  <div class="cmp">
+    <div class="hd"><div>항목</div><div>사우나</div><div>유산소 운동</div></div>
+    <div class="rw"><div>심박수 상승</div><div><span class="pill p-o">유사</span></div><div><span class="pill p-o">기준</span></div></div>
+    <div class="rw"><div>혈압 반응 패턴</div><div><span class="pill p-o">유사</span></div><div><span class="pill p-o">기준</span></div></div>
+    <div class="rw"><div>칼로리 (30분)</div><div><span class="pill p-x">약 100kcal</span></div><div><span class="pill p-o">300~600kcal</span></div></div>
+    <div class="rw"><div>근골격계 자극</div><div><span class="pill p-x">0</span></div><div><span class="pill p-o">100</span></div></div>
+    <div class="rw"><div>ATP·미토콘드리아 소비</div><div><span class="pill p-x">거의 없음</span></div><div><span class="pill p-o">대량</span></div></div>
+    <div class="rw"><div>열충격단백질</div><div><span class="pill p-o">O</span></div><div><span class="pill p-o">러닝도 유사</span></div></div>
+    <div class="rw"><div>오토파지</div><div><span class="pill p-t">간접</span></div><div><span class="pill p-o">확실</span></div></div>
+  </div>
+  <p><strong>심혈관만 놓고 보면 대체된다.</strong> 80℃ 핀란드식 사우나에 15~20분 앉아 있는 것이 <strong>60~100W 실내 자전거</strong>와 유사한 심혈관 부하다. 앉아만 있는데 이 정도가 나온다는 게 사우나가 대단한 이유다.</p>
+  <p>하지만 칼로리는 5배 차이, 근육·골밀도는 아예 0이다. 사우나의 자랑인 열충격단백질조차 러닝이 비슷하게 뽑아낸다.</p>
+  <div class="card">
+    <p style="margin:0"><b>정리:</b> 건강한 사람은 운동이 먼저다. 사우나가 운동을 대체하는 게 아니라,
+    <b>관절 문제·고도비만·부상·거동이 어려운 분들</b>이 심혈관이라도 단련해볼 수 있는 대안으로서 의미가 있다.
+    <br><br>그리고 진짜 답은 다음 장에 있다 — <b>대체할 게 아니라 같이 하면 된다.</b></p>
+  </div>
+</section>
+
+<!-- ═══════ 6. EXS ═══════ -->
+<section id="exs">
+  <div class="snum">CHAPTER 06</div>
+  <h2>1 + 1 = 3 · EXS 프로토콜</h2>
+  <p class="lead">Exercise–Sauna. 운동만 한 그룹 vs 운동 + 사우나 그룹을 비교한 연구가 실제로 있다. 이 챕터가 오늘의 하이라이트다.</p>
+
+  <div class="verdict" style="margin-top:22px">
+    <div class="lbl">운동만 한 사람 대비 · 사우나를 얹었을 때</div>
+    <p><span class="em">혈압 8mmHg 추가 하강</span> — 혈압약 한 알 먹은 것과 맞먹는다.</p>
+    <p><span class="em">심폐지구력 추가 상승 · 콜레스테롤 개선</span></p>
+  </div>
+  <p class="mute">참고로 저염식으로 식단을 바꿨을 때 떨어지는 혈압이 약 3mmHg다. 운동 끝나고 앉아서 쉬기만 했는데 8이 더 떨어진다.</p>
+
+  <h3>왜 더해지나 — 세 가지 기전</h3>
+  <div class="flow">
+    <div class="n hot">전단응력 ↑↑</div>
+    <div class="n hot">열충격단백질 ↑↑</div>
+    <div class="n hot">혈장 팽창</div>
+    <div class="ar">→</div>
+    <div class="n good">심혈관 리모델링</div>
+  </div>
+  <p>특히 세 번째가 재미있다. 사우나로 약한 탈수 비슷한 환경이 되면 몸이 "피 양을 늘려야겠다"고 판단해 <strong>적혈구 생성</strong>을 밀어준다. 고산지대 훈련과 비슷한 원리다.</p>
+
+  <h3>실행 순서 5단계</h3>
+  <p class="mute">각 단계를 눌러 주의사항을 펼쳐보세요.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="st"><b>1. 유산소 운동</b><span class="tm">40~60분</span></div>
+      <div class="sd">먼저 유산소를 제대로 한다. 꽤 많은 양이다.</div>
+      <div class="more"><div class="inner">⚠︎ <b>고강도 근력(웨이트) 운동 후에는 이 프로토콜을 쓰지 않는다.</b> 논문은 유산소 후에만 사우나를 권한다.</div></div>
+    </div>
+    <div class="step">
+      <div class="st"><b>2. 쿨다운</b><span class="tm">5~10분</span></div>
+      <div class="sd">물 500cc를 마시며 <b>심박수가 100 이하로 떨어질 때까지</b> 쉰다.</div>
+      <div class="more"><div class="inner">운동 직후 바로 사우나에 들어가는 것은 금물이다. 탈수 상태에서의 사우나는 위험하다.</div></div>
+    </div>
+    <div class="step">
+      <div class="st"><b>3. 사우나</b><span class="tm">15~20분</span></div>
+      <div class="sd">핀란드식 건식 환경. 스마트워치로 <b>심박수 120~150</b>을 목표로 한다.</div>
+      <div class="more"><div class="inner">심박수를 목표로 잡는다는 게 포인트다. 감이 아니라 숫자로 관리하면 과부하를 피할 수 있다.</div></div>
+    </div>
+    <div class="step">
+      <div class="st"><b>4. 미지근한 물 샤워 또는 야외 쿨다운</b><span class="tm">—</span></div>
+      <div class="sd"><b>절대 찬물 금지.</b> 미지근한 물 샤워나 그냥 바깥 공기로 식힌다.</div>
+      <div class="more"><div class="inner">찬물은 <b>성장호르몬 분비를 방해</b>한다. 시원한 맛에 냉탕으로 직행하면 효과의 일부를 버리는 셈이다.</div></div>
+    </div>
+    <div class="step">
+      <div class="st"><b>5. 전해질 수분 보충</b><span class="tm">—</span></div>
+      <div class="sd">맹물보다 <b>당이 없고 전해질만 있는 음료</b>가 낫다. 야채 육수도 좋다.</div>
+      <div class="more"><div class="inner">당분이 많은 스포츠 음료보다는 전해질 위주가 목적에 맞다.</div></div>
+    </div>
+  </div>
+
+  <div class="card dngr">
+    <h4 style="color:#ff8a80">⚠︎ 근력 운동을 한 날은</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      고강도 웨이트 직후 사우나는 <b>2~4시간 뒤</b>로 미루거나, 가능하면 그날은 건너뛴다.
+      오버트레이닝 증후군 위험이 있고, <b>mTOR가 방해받을 수 있다</b>(근성장 신호 차단).
+      같은 이유로 <b>웨이트 직후 냉탕도 금지</b>다 — 냉수는 mTOR를 확실하게 억제한다. 미지근한 물 샤워가 정답.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════ 7. 금기 ═══════ -->
+<section id="safety">
+  <div class="snum">CHAPTER 07</div>
+  <h2>안전 · 금기 자가체크</h2>
+  <p class="lead">여기가 가장 중요하다. 사우나는 <strong>무릅쓰고 해야 할 만큼 대단한 것이 아니다.</strong> 해당되는 항목이 있으면 눌러보세요.</p>
+
+  <h3>🔴 절대 금기 — 하나라도 해당되면 하지 않는다</h3>
+  <div class="check" id="chkA">
+    <label class="cline"><span class="bx">✓</span><span class="lt">불안정 협심증<em>협심증 2단계</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">급성 심근경색 직후</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">급성 심부전</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">혈압 조절이 안 됨<em>수축기 180 이상</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">음주 상태<em>술 먹고 사우나, 절대 안 됩니다</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">심한 탈수 상태<em>운동·노동으로 땀을 많이 흘린 직후 포함</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">임신 초기<em>중·후기도 권하지 않음</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">발열 또는 감염이 있는 상태</span></label>
+  </div>
+
+  <h3>🟡 상대적 금기 — 주치의 상의 대상, 사실상 권하지 않음</h3>
+  <div class="check" id="chkB">
+    <label class="cline"><span class="bx">✓</span><span class="lt">피부 상처 · 급성기 습진</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">임신을 준비 중인 남성<em>고환 온도 상승 → 가임력 저하 가능</em></span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">최근 뇌졸중(중풍)을 겪음</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">기립성 저혈압이 심함</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">항응고제(피 묽게 하는 약) 복용 중</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">조절되지 않는 당뇨</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">말기 신부전 · 투석 중</span></label>
+    <label class="cline"><span class="bx">✓</span><span class="lt">사우나에 들어가면 불쾌하고 답답하다<em>호르메시스 범위 초과 신호</em></span></label>
+  </div>
+
+  <div class="result" id="chkRes">
+    <b>체크한 항목이 없습니다</b>
+    아직 아무것도 선택하지 않았습니다. 해당되는 항목을 눌러보세요.
+  </div>
+
+  <h3>✅ 건강한 사람도 반드시 지킬 4원칙</h3>
+  <div class="card">
+    <p style="margin:0"><b>1. 식후 1시간 이내 금지</b> — 소화가 어느 정도 된 뒤에 들어간다.</p>
+    <p><b>2. 운동 직후 금지</b> — 최소 15분 쿨다운 후 입장.</p>
+    <p><b>3. 반드시 2인 이상</b> — 한 사람이 쓰러졌을 때 구조할 사람이 필요하다.
+    <span class="mute">사우나 유튜버들이 혼자 찍는 건 매체 특성상 어쩔 수 없는 것이고, 우리는 따라할 이유가 없다.</span></p>
+    <p style="margin-bottom:0"><b>4. 초보자는 10분부터</b> — 20분은 단련자 기준. 점진적 과부하.</p>
+  </div>
+</section>
+
+<!-- ═══════ 8. 퀴즈 ═══════ -->
+<section id="quiz">
+  <div class="snum">CHAPTER 08</div>
+  <h2>이해도 체크</h2>
+  <p class="lead">7문항. 답을 고르면 바로 해설이 나옵니다.</p>
+  <div class="quiz" id="quizBox"></div>
+  <div class="score" id="scoreBox"><div class="n"><span id="sc">0</span> / 7</div><div class="m" id="scMsg"></div></div>
+</section>
+
+<!-- ═══════ 마무리 ═══════ -->
+<section id="final">
+  <div class="snum">SUMMARY</div>
+  <h2>세 줄 요약</h2>
+  <div class="final">
+    <ol>
+      <li>목욕법 중 <b>수명 데이터</b>가 있는 건 <b>핀란드식 건식 사우나</b>(총사망 40%↓)와 <b>일본식 일상 온수욕</b>(심혈관 28%↓) 둘뿐이다. 나머지는 효과가 없다기보다 <b>논문이 아직 없다.</b></li>
+      <li>작동 원리는 <b>전단응력 → 산화질소 → 혈압 하강</b>과 <b>열충격단백질 → 잘못 접힌 단백질 수리</b> 두 갈래. 둘 다 <b>호르메시스</b>(적당한 스트레스가 약이 된다)라는 한 원리 위에 있다.</li>
+      <li>처방은 <b>80~100℃ 건식 · 주 4회+ · 20분</b>(초보 10분부터). 최고의 조합은 <b>유산소 40~60분 → 쿨다운 → 사우나 20분 → 미지근한 물 → 전해질</b>. 단, <b>불쾌하면 즉시 그만둔다.</b></li>
+    </ol>
+  </div>
+
+  <div class="card warm">
+    <h4>🎯 마지막 한 마디</h4>
+    <p style="margin:6px 0 0">"진정한 바이오해킹은 <b>검증된 과학에 귀를 기울이는 것</b>이다."</p>
+    <p style="margin-bottom:0;font-size:.93em;color:var(--tx2)">86% 미세플라스틱 배출 같은 화려한 주장보다,
+    21년간 2,300명을 따라다니며 교란변수를 하나씩 걷어낸 지루한 데이터가 결국 우리를 더 오래 살게 한다.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="disc">
+    <b style="color:var(--tx2)">면책 고지</b><br>
+    이 교재는 원본 영상(2026-08-18 공개)의 내용을 정리한 <b>교육·정보 제공 목적</b> 자료입니다.
+    의료 조언·진단·처방이 아니며, 원인·증상·치료법에는 개인차가 있습니다.
+    기저질환이 있거나 복용 중인 약이 있다면 <b>반드시 의사와 상담</b>하세요.
+    이 자료를 근거로 자가 치료나 약물 조정을 하지 마세요.
+  </div>
+  <p>출처 · 닥터딩요(Dr. Dinho) 「사우나의 항노화 효과」 (2026-08-18)<br>
+  <a href="https://youtu.be/ITZYlifSCNY" target="_blank" rel="noopener">https://youtu.be/ITZYlifSCNY</a></p>
+  <p style="margin-top:14px;color:var(--tx3)">본문의 모든 수치·주장은 위 영상에서 인용한 것이며, 원 논문의 정확한 서지사항은 영상을 참조하세요.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* 진행 바 */
+  var prog=document.getElementById('prog');
+  function onScroll(){
+    var h=document.documentElement;
+    var p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+    prog.style.width=(p*100)+'%';
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* 스크롤 진입 관찰 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el=e.target;
+      io.unobserve(el);
+      if(el.hasAttribute('data-cnt')) countUp(el);
+      if(el.hasAttribute('data-chart')) fillBars(el);
+      if(el.hasAttribute('data-adj')) revealAdj(el);
+    });
+  },{threshold:.35});
+
+  function countUp(el){
+    var t=parseFloat(el.getAttribute('data-cnt'));
+    var suf=el.getAttribute('data-suf')||'%';
+    var d=1100, s=performance.now();
+    (function tick(now){
+      var p=Math.min(1,(now-s)/d);
+      var e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(t*e)+ (el.classList.contains('n')&&suf==='%'? '' : '');
+      el.innerHTML=Math.round(t*e)+'<small>'+suf+'</small>';
+      if(p<1) requestAnimationFrame(tick);
+    })(s);
+  }
+  function fillBars(box){
+    box.querySelectorAll('.bar-fill').forEach(function(b,i){
+      setTimeout(function(){ b.style.width=b.getAttribute('data-w')+'%'; }, i*110);
+    });
+  }
+  function revealAdj(box){
+    box.querySelectorAll('.adjrow').forEach(function(r,i){
+      setTimeout(function(){ r.classList.add('on'); }, i*220);
+    });
+  }
+  document.querySelectorAll('[data-cnt],[data-chart],[data-adj]').forEach(function(el){io.observe(el);});
+
+  /* 티어 아코디언 */
+  document.querySelectorAll('.tier').forEach(function(t){
+    t.addEventListener('click',function(){ t.classList.toggle('open'); });
+  });
+
+  /* 팩트체크 플립 */
+  document.querySelectorAll('.myth').forEach(function(m){
+    m.addEventListener('click',function(){ m.classList.toggle('open'); });
+  });
+
+  /* 스텝 */
+  document.querySelectorAll('.step').forEach(function(s){
+    s.addEventListener('click',function(){ s.classList.toggle('open'); });
+  });
+
+  /* 탭 */
+  var tabs=document.getElementById('mechTabs');
+  if(tabs){
+    tabs.addEventListener('click',function(e){
+      var b=e.target.closest('.tab'); if(!b) return;
+      tabs.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      document.querySelectorAll('#mech .panel').forEach(function(p){p.classList.remove('on');});
+      document.getElementById(b.dataset.p).classList.add('on');
+    });
+  }
+
+  /* 금기 자가체크 */
+  var res=document.getElementById('chkRes');
+  function updateChk(){
+    var a=document.querySelectorAll('#chkA .cline.sel').length;
+    var b=document.querySelectorAll('#chkB .cline.sel').length;
+    res.className='result';
+    if(a>0){
+      res.className='result no';
+      res.innerHTML='<b>🔴 절대 금기에 '+a+'개 해당</b>사우나를 하지 마세요. 이건 "조심해서 하라"가 아니라 <b>하면 안 된다</b>는 뜻입니다. 사우나는 위험을 무릅쓰고 할 만한 것이 아닙니다.'+(b>0?' (상대적 금기도 '+b+'개 해당)':'');
+    } else if(b>0){
+      res.className='result no';
+      res.innerHTML='<b>🟡 상대적 금기에 '+b+'개 해당</b>원칙적으로는 주치의와 상의 대상이지만, 원본 영상의 권고는 <b>"이 정도면 상의할 필요도 없이 그냥 안 하시는 게 좋다"</b>입니다. 특히 "불쾌하다"에 체크했다면 그것만으로 충분한 중단 사유입니다.';
+    } else {
+      res.className='result ok';
+      res.innerHTML='<b>✅ 해당 항목 없음</b>절대·상대 금기 어디에도 해당되지 않습니다. 다만 <b>4원칙</b>은 지키세요 — 식후 1시간 이내 금지, 운동 직후 15분 쿨다운, 반드시 2인 이상, 초보자는 10분부터.';
+    }
+  }
+  document.querySelectorAll('.cline').forEach(function(c){
+    c.addEventListener('click',function(e){
+      e.preventDefault();
+      c.classList.toggle('sel'); updateChk();
+    });
+  });
+
+  /* 퀴즈 */
+  var QS=[
+    {q:'핀란드 연구에서 "급성 심장사 63% 감소"의 정확한 의미는?',
+     o:['사망 위험이 63% 수준으로 낮아진다','사망 위험이 63%만큼 줄어 37% 수준이 된다','63명 중 1명이 산다'],
+     a:1,e:'"63%로 준다"가 아니라 "63%가 줄어든다"입니다. 100명이 사망할 상황에서 37명만 사망한다는 뜻이죠. 감소율 표기를 잘못 읽으면 효과 크기를 완전히 오해하게 됩니다.'},
+    {q:'이 관찰 연구를 믿을 만하게 만드는 가장 강력한 신호는?',
+     o:['표본이 2,300명으로 많아서','주 1회 → 주 4~7회로 갈수록 효과가 계단식으로 커져서(용량-반응)','핀란드에서 나온 연구라서'],
+     a:1,e:'용량-반응 관계입니다. "하면 좋다"가 아니라 "할수록 좋다"는 계단이 보이면, 단순 스트레스 해소나 사회적 교류만으로는 설명하기 어렵습니다. 순수한 열 자극에 독립적 효과가 있다는 근거가 됩니다.'},
+    {q:'고혈압도 혈관을 밀어붙이는데 왜 나쁘고, 사우나의 전단응력은 왜 좋은가?',
+     o:['압력의 세기가 달라서','짧고 규칙적인 자극 뒤 회복이 붙느냐, 24시간 지속되느냐의 차이','고혈압은 산화질소를 안 만들어서'],
+     a:1,e:'핵심은 호르메시스입니다. 자극의 세기가 아니라 용량과 회복이 갈랐습니다. 사우나·운동은 20분 자극 후 회복되지만, 고혈압은 자는 동안에도 계속 혈관을 때립니다.'},
+    {q:'열충격단백질(샤페론)이 잘못 접힌 단백질을 만나면 가장 먼저 하는 일은?',
+     o:['오토파지로 넘겨 분해시킨다','직접 다시 접어보려 시도한다','미토콘드리아로 보낸다'],
+     a:1,e:'먼저 스스로 다시 접어봅니다. 실패했을 때만 오토파지(CMA)로 넘기죠. 그래서 "사우나 = 오토파지 항진"은 틀린 표현이고, 정확히는 "오토파지까지 안 가도 되게 먼저 수리한다"입니다.'},
+    {q:'브라이언 존슨의 "사우나로 미세플라스틱 86% 배출" 주장은?',
+     o:['맞다. 땀으로 배출된다','미세플라스틱은 땀샘을 통과할 수 없다. 나오는 건 거기 묻은 환경호르몬이다','절반은 배출된다'],
+     a:1,e:'미세플라스틱은 땀샘을 뚫고 나올 크기가 아닙니다. 나오는 것은 미세플라스틱에 묻어 있던 액상 환경호르몬(비스페놀A, 프탈레이트)이고, 이건 실제로 입증됐습니다. 2025년 리뷰는 "조직에 침착된 미세플라스틱의 검증된 배출 전략은 없다"고 못 박았습니다.'},
+    {q:'사우나에 들어갔는데 답답하고 불쾌하다면?',
+     o:['참고 20분을 채운다. 적응하면 좋아진다','그만둔다. 불쾌감은 호르메시스 범위를 넘었다는 생리적 경보다','물을 마시고 다시 들어간다'],
+     a:1,e:'불쾌감은 나약함이 아니라 생리적 경보입니다. 사우나가 좋은 이유가 "적당한 자극"이기 때문인데, 기분이 나쁘다는 것 자체가 이미 그 범위를 벗어났다는 신호입니다. 억지로 할 이유가 전혀 없습니다.'},
+    {q:'EXS 프로토콜에서 사우나 직후에 절대 하면 안 되는 것은?',
+     o:['물 마시기','찬물 샤워·냉탕','바깥 공기로 식히기'],
+     a:1,e:'찬물은 성장호르몬 분비를 방해합니다. 미지근한 물 샤워나 야외 쿨다운이 정답입니다. 같은 맥락에서 고강도 웨이트 직후 냉탕도 금지인데, 냉수가 mTOR를 억제해 근성장 신호를 꺼버리기 때문입니다.'}
+  ];
+  var qbox=document.getElementById('quizBox'), score=0, done=0;
+  QS.forEach(function(Q,i){
+    var d=document.createElement('div'); d.className='qbox';
+    var opts=Q.o.map(function(o,j){return '<button class="opt" data-i="'+j+'">'+o+'</button>';}).join('');
+    d.innerHTML='<div class="qh">Q'+(i+1)+'</div><div class="qq">'+Q.q+'</div>'+
+                '<div class="opts">'+opts+'</div><div class="expl"></div>';
+    d.addEventListener('click',function(e){
+      var b=e.target.closest('.opt'); if(!b||d.dataset.done) return;
+      d.dataset.done='1'; done++;
+      var pick=+b.dataset.i;
+      d.querySelectorAll('.opt').forEach(function(x,j){
+        x.disabled=true;
+        if(j===Q.a) x.classList.add('right');
+        else if(j===pick) x.classList.add('wrong');
+      });
+      if(pick===Q.a) score++;
+      var ex=d.querySelector('.expl');
+      ex.innerHTML='<b style="color:'+(pick===Q.a?'#4ade80':'#ff8a80')+'">'+(pick===Q.a?'정답':'오답')+'</b> · '+Q.e;
+      ex.classList.add('on');
+      if(done===QS.length){
+        var sb=document.getElementById('scoreBox');
+        document.getElementById('sc').textContent=score;
+        var msg = score>=6? '완벽합니다. 이제 사랑하는 사람들에게 설명해주세요.'
+                : score>=4? '좋습니다. 헷갈린 부분만 다시 훑어보세요.'
+                : '기전 챕터(03)와 팩트체크(05)를 한 번 더 보시면 정리됩니다.';
+        document.getElementById('scMsg').textContent=msg;
+        sb.classList.add('on');
+        sb.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    });
+    qbox.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>
