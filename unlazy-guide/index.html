@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>언레이지 교본 — AI의 거짓 완료를 잡는 법</title>
+<meta name="description" content="AI 에이전트는 왜 다 했다고 거짓말할까. Unlazy 스킬의 트리 분해와 게이트 원장, 그리고 직렬 속도 문제를 병렬 wave로 고친 기록.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+@font-face{font-family:'Pretendard Variable';src:url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2) format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+--bg:#060a08;--bg2:#0d1512;--bg3:#13201a;
+--line:#1c2f26;--line2:#2c473a;
+--tx:#e9f5ee;--tx2:#a7c2b4;--tx3:#6f8d7e;
+--acc:#4ade80;--acc2:#86efac;--acc-d:#16a34a;
+--watt:#fbbf24;--red:#f87171;--blue:#38bdf8;--violet:#a78bfa;
+--r:16px;--maxw:760px;--fs:clamp(16px,1.6vw,17.5px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-size:var(--fs);line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc-d),var(--acc));z-index:99}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(24px,5.4vw,33px);font-weight:900;line-height:1.3;margin-bottom:8px;letter-spacing:-.5px}
+h3{font-size:clamp(18px,3.6vw,21.5px);font-weight:800;margin:34px 0 12px;color:var(--acc2)}
+p{margin:13px 0;color:var(--tx2)}
+p b,li b{color:var(--tx);font-weight:700}
+.kicker{font-size:13px;font-weight:800;letter-spacing:2.5px;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--tx);font-weight:500}
+.hero{padding:76px 0 60px;text-align:left;border-bottom:1px solid var(--line)}
+.hero .tag{display:inline-block;font-size:12.5px;font-weight:800;color:var(--acc2);border:1px solid var(--line2);border-radius:999px;padding:6px 14px;margin-bottom:20px;background:var(--bg2)}
+.hero h1{font-size:clamp(30px,7.4vw,48px);font-weight:900;line-height:1.22;letter-spacing:-1.2px;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero .sub{font-size:clamp(15.5px,2vw,18px);color:var(--tx2);max-width:620px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.meta span{font-size:12.5px;color:var(--tx3);background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 6px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 14px;text-align:center}
+.stat .n{font-size:clamp(26px,5.6vw,38px);font-weight:900;color:var(--acc);letter-spacing:-1px;line-height:1.15}
+.stat .l{font-size:12.5px;color:var(--tx3);margin-top:6px;line-height:1.5}
+.stat.bad .n{color:var(--red)}
+.stat.mid .n{color:var(--watt)}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.hl{border-color:var(--acc-d);background:linear-gradient(180deg,rgba(74,222,128,.06),var(--bg2))}
+.card.warn{border-color:rgba(251,191,36,.4);background:linear-gradient(180deg,rgba(251,191,36,.05),var(--bg2))}
+.card.bad{border-color:rgba(248,113,113,.4);background:linear-gradient(180deg,rgba(248,113,113,.05),var(--bg2))}
+.card .ct{font-size:15px;font-weight:800;margin-bottom:8px;color:var(--tx)}
+.card p{font-size:15px;margin:8px 0}
+.big-quote{font-size:clamp(19px,3.2vw,24px);font-weight:800;line-height:1.55;color:var(--tx);border-left:4px solid var(--acc);padding:6px 0 6px 20px;margin:28px 0}
+.big-quote small{display:block;font-size:13px;color:var(--tx3);font-weight:500;margin-top:10px}
+.cmp{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+.cmp th{background:var(--bg3);color:var(--tx);font-weight:800;padding:11px 10px;text-align:left;border:1px solid var(--line2);font-size:13.5px}
+.cmp td{padding:11px 10px;border:1px solid var(--line);color:var(--tx2);vertical-align:top;line-height:1.6}
+.cmp td b{color:var(--tx)}
+.cmp .y{color:var(--acc)}
+.cmp .n2{color:var(--red)}
+.tblwrap{overflow-x:auto;margin:18px 0}
+.tblwrap .cmp{margin:0;min-width:540px}
+.flow{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.fstep{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.fstep .fn{flex:0 0 34px;height:34px;border-radius:10px;background:var(--bg3);border:1px solid var(--line2);color:var(--acc);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px}
+.fstep .fb{font-size:14.5px;color:var(--tx2)}
+.fstep .fb b{display:block;color:var(--tx);font-size:15px;margin-bottom:3px}
+.fstep.bad .fn{color:var(--red)}
+.fstep.watt .fn{color:var(--watt)}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;background:var(--bg3);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--acc2)}
+pre{background:#050d09;border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;margin:16px 0;line-height:1.6}
+pre code{background:none;border:none;padding:0;font-size:13px;color:#c9e8d6}
+pre .cm{color:var(--tx3)}
+pre .hl-g{color:var(--acc)}
+pre .hl-r{color:var(--red)}
+pre .hl-y{color:var(--watt)}
+.chart{margin:22px 0}
+.chart .row{display:flex;align-items:center;gap:10px;margin:9px 0}
+.chart .lab{flex:0 0 130px;font-size:13px;color:var(--tx2);text-align:right;line-height:1.35}
+.chart .bar{flex:1;height:26px;background:var(--bg3);border-radius:7px;overflow:hidden;position:relative}
+.chart .bar-fill{height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,var(--acc-d),var(--acc));transition:width 1.2s cubic-bezier(.2,.7,.3,1)}
+.chart .bar-fill.r{background:linear-gradient(90deg,#b91c1c,var(--red))}
+.chart .bar-fill.y{background:linear-gradient(90deg,#b45309,var(--watt))}
+.chart .val{flex:0 0 84px;font-size:13px;font-weight:800;color:var(--tx)}
+.myth{border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden;background:var(--bg2)}
+.myth .q{padding:16px 18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;user-select:none}
+.myth .q:hover{background:var(--bg3)}
+.myth .q .ic{flex:0 0 auto;font-size:17px;margin-top:1px}
+.myth .q .qt{font-size:15px;font-weight:700;color:var(--tx);flex:1;line-height:1.5}
+.myth .q .ar{color:var(--tx3);transition:transform .3s;margin-top:2px}
+.myth.open .q .ar{transform:rotate(180deg)}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.myth.open .a{max-height:1200px}
+.myth .a-in{padding:2px 18px 18px;font-size:14.5px;color:var(--tx2);border-top:1px dashed var(--line);line-height:1.7}
+.myth .a-in b{color:var(--tx)}
+.src{font-size:12px;color:var(--tx3);margin-top:8px}
+.disc{background:var(--bg2);border:1px dashed var(--line2);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--tx3);margin:22px 0;line-height:1.7}
+footer{padding:44px 0 80px;font-size:13px;color:var(--tx3);line-height:1.8}
+/* depth simulator */
+.sim{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);padding:24px 20px;margin:24px 0}
+.sim .st{font-size:16px;font-weight:800;margin-bottom:16px}
+.sim label{display:block;font-size:13px;color:var(--tx2);margin:14px 0 6px}
+.sim label output{color:var(--acc);font-weight:800}
+.sim input[type=range]{width:100%;accent-color:var(--acc)}
+.simout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.simcell{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center}
+.simcell .k{font-size:11.5px;color:var(--tx3);margin-bottom:4px}
+.simcell .v{font-size:17px;font-weight:900;color:var(--tx)}
+.simcell .v.g{color:var(--acc)}
+.simcell .v.o{color:var(--watt)}
+.treebox{margin-top:18px;padding:14px;background:#050d09;border:1px solid var(--line);border-radius:12px;min-height:60px}
+.tlayer{display:flex;gap:6px;justify-content:center;margin:7px 0;flex-wrap:wrap}
+.tnode{height:16px;border-radius:5px;background:var(--bg3);border:1px solid var(--line2);flex:0 0 auto}
+.tnode.leaf{background:rgba(74,222,128,.25);border-color:var(--acc-d)}
+.simnote{font-size:12.5px;color:var(--tx3);margin-top:12px;line-height:1.6}
+/* gates demo */
+.gdemo{background:#050d09;border:1px solid var(--line2);border-radius:var(--r);padding:22px 20px;margin:24px 0;font-family:'JetBrains Mono',Consolas,monospace}
+.gdemo .gd-t{font-family:'Pretendard Variable',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;color:var(--tx)}
+.ggate{border:1px solid var(--line);border-radius:10px;padding:13px 14px;margin:10px 0;font-size:12.5px;line-height:1.65;color:var(--tx2)}
+.ggate .gx{cursor:pointer;user-select:none;font-size:14px;color:var(--tx);font-family:'Pretendard Variable',sans-serif;font-weight:700}
+.ggate .gx .box{display:inline-block;width:17px;height:17px;border:2px solid var(--tx3);border-radius:4px;margin-right:9px;vertical-align:-3px;text-align:center;line-height:14px;font-size:12px;color:var(--acc)}
+.ggate.on .gx .box{border-color:var(--acc);background:rgba(74,222,128,.15)}
+.ggate .gl{margin-top:6px;white-space:pre-wrap;word-break:break-all}
+.ggate .gl .k2{color:var(--blue)}
+.ggate .ev{color:var(--watt)}
+.ggate.pass{border-color:var(--acc-d)}
+.ggate.pass .ev{color:var(--acc)}
+.ggate.lie{border-color:var(--red);animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.gmsg{font-family:'Pretendard Variable',sans-serif;font-size:13px;border-radius:10px;padding:12px 14px;margin-top:12px;display:none;line-height:1.6}
+.gmsg.show{display:block}
+.gmsg.err{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.4);color:#fca5a5}
+.gmsg.ok{background:rgba(74,222,128,.1);border:1px solid var(--acc-d);color:var(--acc2)}
+.gbtn{font-family:'Pretendard Variable',sans-serif;display:inline-block;margin-top:14px;background:var(--acc-d);color:#04120a;font-weight:800;font-size:14px;border:none;border-radius:10px;padding:11px 18px;cursor:pointer}
+.gbtn:hover{background:var(--acc)}
+/* quiz */
+.quiz-item{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.quiz-item .qq{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--tx)}
+.quiz-item .opt{display:block;width:100%;text-align:left;background:var(--bg3);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;margin:7px 0;color:var(--tx2);font-size:14px;cursor:pointer;font-family:inherit;line-height:1.5}
+.quiz-item .opt:hover{border-color:var(--acc-d)}
+.quiz-item .opt.right{border-color:var(--acc);background:rgba(74,222,128,.1);color:var(--acc2)}
+.quiz-item .opt.wrong{border-color:var(--red);background:rgba(248,113,113,.08);color:#fca5a5}
+.quiz-item .exp{display:none;margin-top:10px;font-size:13.5px;color:var(--tx2);border-top:1px dashed var(--line);padding-top:10px;line-height:1.65}
+.quiz-item .exp.show{display:block}
+.final{background:linear-gradient(180deg,var(--bg3),var(--bg2));border:1px solid var(--line2);border-radius:var(--r);padding:26px 22px;margin:26px 0}
+.final p{font-size:15.5px;margin:10px 0}
+.final .fx{color:var(--acc);font-weight:800}
+.srcbox{font-size:13px;color:var(--tx3);line-height:1.9}
+.srcbox a{color:var(--tx3)}
+/* eli5 */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--acc);--e5-acc2:var(--acc2);--e5-accbg:rgba(74,222,128,.09)}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}.stats{grid-template-columns:1fr;gap:9px}.simout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">🧾 인사이트 교재 07 · Unlazy</span>
+  <h1>AI는 왜 <em>"다 했다"</em>고<br>거짓말할까</h1>
+  <p class="sub">GitHub 트렌딩 1위 개발자가 만든 게으름 방지 스킬 Unlazy — 작동 원리, 영상이 지적한 치명적 속도 문제, 그리고 우리 시스템에 실제로 적용하며 고친 기록.</p>
+  <div class="meta">
+    <span>원본: Tech Bridge (한영자막) · 2026-08-22</span>
+    <span>원 제작: AI Labs</span>
+    <span>저장소: Leonxlnx/unlazy v2.0.0</span>
+    <span>읽기 25분</span>
+  </div>
+</header>
+
+<section id="verdict">
+  <div class="kicker">결론부터</div>
+  <h2>게으름은 성격이 아니라 구조다.<br>그래서 구조로만 고칠 수 있다.</h2>
+  <div class="stats">
+    <div class="stat bad"><div class="n"><span data-cnt="4" data-suf="시간"></span></div><div class="l">원본 그대로 실행 — 결과물은 로그인 페이지 한 장</div></div>
+    <div class="stat mid"><div class="n"><span data-cnt="10" data-suf="개"></span></div><div class="l">병렬로 동시에 돌린 서브에이전트 수</div></div>
+    <div class="stat"><div class="n"><span data-cnt="2" data-suf="시간"></span></div><div class="l">수정 후 — 전체 기능이 작동하는 앱 완성</div></div>
+  </div>
+  <p class="lead">이 교재의 세 문장 요약.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>AI의 "완료 보고"는 증거가 아니다.</b>컨텍스트가 쌓일수록 주의가 흩어지고, 에이전트는 안 끝난 일을 끝났다고 말하거나 어려운 부분을 조용히 빼먹는다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>Unlazy는 판정권을 에이전트에게서 빼앗는다.</b>작업 전에 게이트(체크리스트+검증 명령)를 파일로 박제하고, 완료는 명령어 실행 결과가 기대 문자열과 일치할 때만 인정한다.</div></div>
+    <div class="fstep watt"><div class="fn">3</div><div class="fb"><b>단, 원본 그대로 쓰면 안 된다.</b>작업을 하나씩 순서대로 맡기는 직렬 구조라 실전에서 몇 시간을 낭비한다. 병렬 wave 방식으로 스킬을 수정해서 적용해야 한다 — 이 교재 후반부가 그 기록이다.</div></div>
+  </div>
+  <p class="src">수치 출처: Tech Bridge 「GitHub 1위 개발자가 만든 새로운 Claude 스킬」 (2026-08-22) 실측 구간 — 직렬 3~4시간 vs 병렬 10에이전트 약 2시간</p>
+</section>
+
+<section id="ch01">
+  <div class="kicker">Chapter 01 · 문제의 정체</div>
+  <h2>게으름의 두 얼굴</h2>
+  <p class="lead">모델이 게을러지는 방식은 정확히 두 가지다. 그리고 둘 중 하나는 훨씬 위험하다.</p>
+
+  <div class="card bad">
+    <div class="ct">얼굴 ① — 안 끝났는데 "다 했다"</div>
+    <p>파일 여러 개를 검토하라고 시키면 몇 개만 열어보고 "전부 확인했다"고 보고한다. 일찍 멈추는 것 자체는 봐줄 수 있다. <b>문제는 일찍 멈추고도 다 끝냈다고 말하는 것</b>이다. 검증 없이 그 위에 다음 작업을 쌓으면 부실 공사가 된다.</p>
+  </div>
+  <div class="card bad">
+    <div class="ct">얼굴 ② — 조용한 범위 축소</div>
+    <p>다섯 부분짜리 작업을 시키면 쉬운 네 개만 만들고 어려운 하나는 건너뛴다. 마지막 요약에는 <b>빠진 게 있다는 언급 자체가 없다.</b> 사용자가 직접 세어보기 전까지 모른다.</p>
+  </div>
+
+  <h3>왜 이러나 — 원인은 기억 구조</h3>
+  <p>모델에는 내장 기억이 없다. 이전 대화를 "기억"하는 것처럼 보이는 이유는, 에이전트가 매번 <b>지금까지의 모든 메시지를 새 프롬프트에 통째로 붙여 재전송</b>하기 때문이다. 대화가 길어질수록 그 더미가 커지고, 모델이 한 번에 주의를 기울여야 할 대상이 늘어난다.</p>
+  <div class="chart">
+    <div class="row"><div class="lab">새 세션 시작</div><div class="bar"><div class="bar-fill" data-w="10"></div></div><div class="val">집중 온전</div></div>
+    <div class="row"><div class="lab">중반</div><div class="bar"><div class="bar-fill y" data-w="55"></div></div><div class="val">분산 시작</div></div>
+    <div class="row"><div class="lab">긴 세션 후반</div><div class="bar"><div class="bar-fill r" data-w="95"></div></div><div class="val">80% 스톨</div></div>
+  </div>
+  <p>그래서 새 컨텍스트에서는 멀쩡하던 에이전트가 긴 세션 후반에 무너진다. 스킬 원문은 이를 <b>"stall-at-80-percent는 긴 컨텍스트 말기의 질병"</b>이라 부른다. Opus든 GPT든 최상위 모델도 예외가 아니고, 작은 모델은 한계가 더 빨리 드러날 뿐이다.</p>
+  <div class="big-quote">희소 자원은 시간이 아니라 주의(attention)였다.<small>Unlazy SKILL.md — orchestrated 모드가 존재하는 이유</small></div>
+  <p class="src">[Tech Bridge @ 2026-08-22, 01:47 "에이전트가 게을러지는 이유"] + Leonxlnx/unlazy SKILL.md 원문</p>
+</section>
+
+<section id="ch02">
+  <div class="kicker">Chapter 02 · 기존 해법 해부</div>
+  <h2>왜 지금까지의 처방은 전부 뚫렸나</h2>
+  <p class="lead">완료 강제 장치는 이전에도 있었다. 셋 다 같은 자리에 구멍이 있다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:20%">방식</th><th>작동</th><th>구멍</th></tr>
+    <tr><td><b>Ralph 루프</b></td><td>완료 신호가 나올 때까지 같은 프롬프트를 계속 재전송</td><td class="n2">완료 신호 = 에이전트가 스스로 출력한 텍스트. "기능이 제대로 만들어졌다"를 한 단어로 판정할 수 없는 작업이 대부분</td></tr>
+    <tr><td><b>goal 커맨드</b></td><td>다른(작은) 모델이 판사로 대화를 읽고 완료 판정</td><td class="n2">작업물이 아니라 <b>대화 내용</b>을 읽는다. 대화가 그럴듯하면 통과 — 실제 요구에서 drift</td></tr>
+    <tr><td><b>자체 체크리스트 루프</b></td><td>태스크 목록에 통과 조건을 달아 검사</td><td class="n2">검사는 실재하지만 <b>채점을 에이전트 본인이 한다</b></td></tr>
+  </table></div>
+  <div class="card warn">
+    <div class="ct">공통 구멍 하나로 요약</div>
+    <p><b>"끝났는가"를 결정하는 주체가 결국 에이전트 자신이다.</b> 그리고 셋 다 컨텍스트가 신선할 땐 잘 작동하다가, 정작 버텨줘야 할 긴 세션 후반에 무너진다.</p>
+  </div>
+  <p>Unlazy 이전 버전(v1)도 같은 함정에 빠졌었다. "철저하게 하라"는 <b>지시문</b>으로 게으름과 싸웠는데, 지시문이야말로 긴 세션에서 가장 먼저 잊히는 것이었다. 그래서 v2는 부탁을 멈추고, 작업 시작 전에 모든 것을 <b>파일</b>로 박아버리는 쪽으로 방향을 틀었다.</p>
+  <p class="src">[Tech Bridge @ 2026-08-22, 01:47~04:24] · unlazy references/method.md "v1 six-run test"</p>
+</section>
+<section id="ch03">
+  <div class="kicker">Chapter 03 · 구조 ①</div>
+  <h2>Depth Tree — 일을 잎사귀로 쪼갠다</h2>
+  <p class="lead">Unlazy 실행의 첫 축. 작업을 나무처럼 N층으로 분해하고, 실제 일은 맨 끝 잎(leaf)에서만 일어난다.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>자연스러운 관절에서 쪼갠다.</b>1층은 작업 전체, 마지막 층이 leaf. 프롬프트에 "tree 5"처럼 깊이를 숫자로 준다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>leaf는 실작업 10분 이상 한 단위.</b>더 잘게 나와버리면 한 층 과했다는 신호 — 스킬이 스스로 깊이를 낮춘다. 깊이는 노력 배수가 아니라 분해 구조다 (v1의 "깊이=노력 산수"는 측정 결과 허구로 판명).</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>fan-out 전에 계약(Contract) 먼저.</b>leaf들이 같은 표면을 만지면 인터페이스·파일 소유·네이밍을 PLAN.md에 먼저 박는다. 통합 안 되는 열심은 낭비.</div></div>
+    <div class="fstep"><div class="fn">4</div><div class="fb"><b>가지(branch)에도 게이트.</b>잎 32개가 다 완성돼도 제품은 깨질 수 있다 — 통합 게이트가 그걸 잡는다.</div></div>
+  </div>
+
+  <div class="sim">
+    <div class="st">🌳 깊이 시뮬레이터 — depth를 움직여 보라</div>
+    <label>tree depth: <output id="dv">3</output></label>
+    <input type="range" id="depth" min="2" max="7" value="3" step="1">
+    <div class="simout">
+      <div class="simcell"><div class="k">모드</div><div class="v" id="smode">solo</div></div>
+      <div class="simcell"><div class="k">파일 구조</div><div class="v" id="sfile" style="font-size:13.5px;line-height:1.5">GATES.md 하나</div></div>
+      <div class="simcell"><div class="k">적합 작업</div><div class="v" id="sfit" style="font-size:13.5px;line-height:1.5">기능·버그헌트</div></div>
+    </div>
+    <div class="treebox" id="tree"></div>
+    <div class="simnote" id="snote"></div>
+  </div>
+
+  <div class="tblwrap"><table class="cmp">
+    <tr><th>depth</th><th>모드</th><th>쓰는 곳</th></tr>
+    <tr><td><b>2~3</b></td><td class="y">solo — 한 세션, GATES.md 하나</td><td>기능 하나, 버그 사냥, 문서</td></tr>
+    <tr><td><b>4~5</b></td><td class="n2">orchestrated — PLAN.md + gates/ + 서브에이전트</td><td>서브시스템, 큰 리팩터</td></tr>
+    <tr><td><b>6~7</b></td><td class="n2">orchestrated 최대</td><td>프로젝트 전체를 높은 기준으로</td></tr>
+  </table></div>
+  <p>orchestrated의 존재 이유가 핵심이다. leaf마다 <b>새 서브에이전트(새 컨텍스트)</b>를 띄우니 모든 leaf가 온전한 주의력으로 시작한다. 1장의 "attention 희석" 문제를 정면으로 치는 설계. 단, <b>30분 미만 작업은 solo 강제</b> — 서브에이전트 띄우는 오버헤드가 이득보다 크다.</p>
+  <p class="src">[Tech Bridge @ 2026-08-22, 04:24 "트리 분해와 게이트"] · unlazy SKILL.md "The Depth Tree, v2"</p>
+</section>
+
+<section id="ch04">
+  <div class="kicker">Chapter 04 · 구조 ②</div>
+  <h2>Gates 원장 — 완료는 말이 아니라 명령어가 정한다</h2>
+  <p class="lead">Unlazy의 심장. 일 시작 전에 게이트 파일을 쓰고, 끝났다는 주장은 오직 명령 실행 결과로만 인정된다.</p>
+  <p>게이트 하나는 네 줄이다. <b>체크박스 + 결과 정의 + CHECK(실행할 셸 명령) + EXPECT(기대 문자열/정규식) + EVIDENCE(증거, 처음엔 "pending")</b>. 에이전트가 "다 했다"고 주장하면 <code>gate-check.mjs</code>가 CHECK를 직접 실행해서, EXPECT가 출력에 있을 때만 박스를 채우고 실제 출력을 EVIDENCE에 기록한다.</p>
+
+  <div class="gdemo">
+    <div class="gd-t">🔒 게이트 원장 체험 — 손으로 체크해 보라</div>
+    <div class="ggate" id="g1">
+      <div class="gx" data-g="1"><span class="box"></span>G1 — 빌드가 통과한다</div>
+      <div class="gl"><span class="k2">CHECK:</span> npm run build
+<span class="k2">EXPECT:</span> exit 0
+<span class="k2">EVIDENCE:</span> <span class="ev" id="e1">pending</span></div>
+    </div>
+    <div class="ggate" id="g2">
+      <div class="gx" data-g="2"><span class="box"></span>G2 — 페이지 6개 전부 라우팅된다</div>
+      <div class="gl"><span class="k2">CHECK:</span> grep -c "route(" src/app.js
+<span class="k2">EXPECT:</span> 6
+<span class="k2">EVIDENCE:</span> <span class="ev" id="e2">pending</span></div>
+    </div>
+    <div class="gmsg err" id="gerr"><b>UNMET — 자가 체크 감지.</b> 박스는 채워졌는데 EVIDENCE가 pending이다. 원장 규칙에서 이건 빈 박스보다 나쁘다: 안 한 일이 아니라 <b>거짓말한 일</b>이 되기 때문. 체크를 되돌린다.</div>
+    <div class="gmsg ok" id="gok"><b>ALL MET (2 of 2)</b> — CHECK 명령이 실행됐고 EXPECT가 매칭됐다. EVIDENCE에 실제 출력이 남았다. 이것만이 완료다.</div>
+    <button class="gbtn" id="grun">▶ node gate-check.mjs GATES.md 실행</button>
+  </div>
+
+  <h3>탈출구도 정직하게 — ABANDON</h3>
+  <p>게이트가 진짜 불가능해지면 조용히 빼는 게 아니라 <code>ABANDON: G2 사유</code> 한 줄을 파일에 남기고 보고서에 명시한다. 도구는 이를 실패가 아닌 <b>정직한 종료</b>로 취급한다. 1장의 "조용한 범위 축소"를 원천 봉쇄하는 장치.</p>
+
+  <h3>검증 3계층 — 자기인증은 없다</h3>
+  <div class="flow">
+    <div class="fstep"><div class="fn">L1</div><div class="fb"><b>leaf가 자기 게이트를 스스로 실행</b> — 기본. 하지만 자기 채점이므로 이걸로 끝내지 않는다.</div></div>
+    <div class="fstep"><div class="fn">L2</div><div class="fb"><b>부모(driver)가 같은 CHECK를 재실행</b> — orchestrated 모드의 존재 이유. leaf가 "통과했다"고 보고해도 부모가 다시 돌려서 다르면 미완료.</div></div>
+    <div class="fstep watt"><div class="fn">L3</div><div class="fb"><b>Stop 훅 (선택)</b> — 미충족 게이트가 남은 채 턴을 끝내는 것 자체를 구조적으로 차단. 하네스 동작을 바꾸므로 절대 몰래 설치하지 않는 게 스킬 자체 규칙.</div></div>
+  </div>
+  <div class="big-quote">보고서는 완료의 분위기(vibe)가 아니라, 원장이 뒷받침하는 주장의 집합이다.<small>unlazy SKILL.md "Report audit" — 보고 직전 모든 숫자 재측정, 아니면 unverified 라벨</small></div>
+  <p class="src">[Tech Bridge @ 2026-08-22, 04:24~08:06] · unlazy references/gates.md</p>
+</section>
+
+<section id="ch05">
+  <div class="kicker">Chapter 05 · 설치</div>
+  <h2>설치 2분 — 우리 시스템에 넣은 기록</h2>
+  <p class="lead">공식 경로는 npx 한 줄. 우리는 패치가 목적이라 git clone을 택했다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:26%">방법</th><th>명령</th><th>특징</th></tr>
+    <tr><td><b>공식 (영상 시연)</b></td><td><code>npx skills add Leonxlnx/unlazy</code></td><td>대상 에이전트·범위(프로젝트/전역) 물어보고 자동 배선</td></tr>
+    <tr><td><b>우리 선택</b></td><td><code>git clone --depth 1 → ~/.claude/skills/unlazy</code></td><td class="y">전역 인식 + 로컬 git으로 패치 관리 (커밋 b0aa659)</td></tr>
+  </table></div>
+  <p>설치 확인: 스킬 목록에 <code>unlazy</code>가 뜨면 끝. 이후 사용은 프롬프트에 <code>/unlazy tree 3 &lt;작업&gt;</code> 또는 자연어로 "될 때까지, tree 5로" — depth를 넉넉히 불러도 leaf가 10분 미만으로 잘게 나오면 스스로 낮춘다.</p>
+  <div class="card hl">
+    <div class="ct">우리 설치 상태 (2026-08-23 기준)</div>
+    <p>위치 <code>~/.claude/skills/unlazy</code> (전역) · v2.0.0 + 로컬 패치 커밋 · gate-check smoke test 2게이트 PASS · 라우팅은 skill-quickref.md에 등록 완료. Stop 훅은 <b>미설치 보류</b> — 8장에서 이유를 다룬다.</p>
+  </div>
+  <p class="src">[Tech Bridge @ 2026-08-22, 08:06 "설치"] · 로컬 적용 제안서 260823T1240_unlazy_proposal.md</p>
+</section>
+<section id="ch06">
+  <div class="kicker">Chapter 06 · 문제점</div>
+  <h2>치명적 결함 — 하나씩, 순서대로</h2>
+  <p class="lead">영상이 "아주 좋다"면서도 그대로 쓰지 말라고 한 이유. orchestrated 모드의 driver 루프가 직렬이다.</p>
+  <pre><code><span class="cm"># 원본 v2.0.0 orchestration.md — driver loop</span>
+2. <span class="hl-r">Dispatch one leaf.</span> Spawn a fresh subagent with the leaf brief.
+   <span class="hl-r">대기 → 검증 → 다음 leaf...</span></code></pre>
+  <p>leaf 하나 맡기고, 끝날 때까지 기다리고, 검증하고, 그다음 leaf. Claude Code도 Codex도 서브에이전트를 <b>동시에 여러 개</b> 돌릴 수 있는데 그 능력을 안 쓴다. 문서 말미에 "independent leaves can run as parallel subagents"라는 한 줄이 있긴 하지만 루프 본문이 직렬이라 실제 실행은 직렬로 흘러간다.</p>
+  <div class="card bad">
+    <div class="ct">실측 피해 (영상 시연)</div>
+    <p>데모 앱 빌드를 원본 그대로 실행 — <b>3~4시간 돌리고 얻은 것: 로그인 페이지 한 장.</b> leaf들이 한 줄로 서서 차례를 기다리는 동안 벽시계만 돌았다.</p>
+  </div>
+  <div class="chart">
+    <div class="row"><div class="lab">직렬 (원본)</div><div class="bar"><div class="bar-fill r" data-w="100"></div></div><div class="val">3~4시간</div></div>
+    <div class="row"><div class="lab">병렬 10 (수정)</div><div class="bar"><div class="bar-fill" data-w="52"></div></div><div class="val">약 2시간</div></div>
+  </div>
+  <p>같은 2시간이라도 내용물이 다르다 — 직렬은 로그인 페이지, 병렬은 <b>전체 기능이 작동하는 앱</b>. 시간 단축이 아니라 완성 여부의 차이였다.</p>
+  <p class="src">[Tech Bridge @ 2026-08-22, 09:25 "속도 개선하는 법"] · unlazy v2.0.0 references/orchestration.md 원문 대조</p>
+</section>
+
+<section id="ch07">
+  <div class="kicker">Chapter 07 · 해결</div>
+  <h2>수정법 — leaf가 아니라 wave를 보낸다</h2>
+  <p class="lead">영상의 처방: "스킬 파일을 열어 병렬 서브에이전트를 쓰도록 고쳐라." 우리는 그대로 했고, 커밋으로 남겼다.</p>
+  <pre><code><span class="cm"># 패치 후 driver loop (~/.claude/skills/unlazy, 커밋 b0aa659)</span>
+2. <span class="hl-g">Dispatch a wave, not a leaf.</span> Serial dispatch is the failure
+   mode this step exists to kill. Spawn ALL leaves of the current
+   wave as parallel subagents <span class="hl-g">in a single message</span> (cap 10).
+3. <span class="hl-y">Verify, never trust.</span> As each leaf reports, re-run its checks
+   in the driver. <span class="hl-y">Verification stays serial.</span></code></pre>
+  <h3>wave의 정의 — 아무거나 동시에 던지지 않는다</h3>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>wave = 의존성 층.</b>서로 의존하지 않고, 소유 파일이 겹치지 않는 leaf들의 묶음. PLAN.md에 Waves 표(어느 leaf가 어느 파일을 소유하는지)를 먼저 쓴다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>한 메시지에 전부 스폰, 상한 10.</b>영상 실측 구성과 동일. 초과분은 다음 배치로.</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>검증은 절대 병렬화하지 않는다.</b>병렬성이 사는 곳은 실행(벽시계), 신뢰가 사는 곳은 driver의 직렬 재검증. 이 선을 지켜야 속도를 벌면서 4장의 검증 계층이 무너지지 않는다.</div></div>
+    <div class="fstep"><div class="fn">4</div><div class="fb"><b>실패한 leaf가 wave를 막지 않는다.</b>즉시 그 leaf만 재디스패치, 나머지는 계속.</div></div>
+  </div>
+  <div class="card hl">
+    <div class="ct">보너스 — 패치 중 원본 버그 추가 발견</div>
+    <p><code>gate-check.mjs</code>의 인자 파싱: <code>--timeout</code> 옵션이 없으면 인덱스 계산이 -1+1=0이 되어 <b>첫 번째 파일 인자를 무조건 버린다.</b> 즉 SKILL.md가 안내하는 표준 호출 <code>node gate-check.mjs GATES.md</code>가 그대로 "no gate files found"로 실패. 가드 조건 추가로 수정, smoke test 2게이트 PASS 확인. 영상에도 없는 결함 — 원문을 정독해야 나오는 종류다.</p>
+  </div>
+  <h3>영상의 두 번째 팁 — 모델 라우터</h3>
+  <p>기계적인 leaf(보일러플레이트, 단순 변환)는 싼 모델에게, 설계·통합·검증은 강한 모델에게. 이 티어링은 unlazy 원문 token-economy 규칙에 이미 들어 있고, 우리 하네스의 model-strategy와도 같은 방향이다.</p>
+  <p class="src">[Tech Bridge @ 2026-08-22, 09:25~] · 패치 상세: references/orchestration.md, SKILL.md, templates/PLAN.md 3파일 + gate-check.mjs 버그픽스 (CHANGELOG-LOCAL.md)</p>
+</section>
+
+<section id="ch08">
+  <div class="kicker">Chapter 08 · 우리 시스템 적용</div>
+  <h2>어디에 끼우고, 무엇과 역할을 나누나</h2>
+  <p class="lead">스킬 하나 더 얹은 게 아니라, 기존 검증 체계의 빈 자리에 끼웠다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:24%">기존 자산</th><th>역할</th><th>unlazy와 관계</th></tr>
+    <tr><td><b>verify-loop / ㅂㅍ 시리즈</b></td><td>산출물이 나온 뒤 사후 검증</td><td class="y">unlazy는 작업 중 완료 강제 — 상보. gates 통과 후 ㅂㅍ로 최종 판정</td></tr>
+    <tr><td><b>ralph-strategy</b></td><td>자율 반복 루프</td><td class="y">영상이 지적한 "텍스트 완료 신호" 약점을 gates 원장이 보완 — 종료 조건으로 gates 사용</td></tr>
+    <tr><td><b>planning-generator</b></td><td>PRD/FS/IA/UF 기획</td><td class="y">PLAN.md contract는 구현 계약 — 기획 산출물 뒤에 배치</td></tr>
+  </table></div>
+  <h3>Stop 훅은 왜 보류했나</h3>
+  <p>unlazy 동봉 Stop 훅(미충족 게이트로 턴 종료 시 차단)은 <b>설치하지 않았다.</b> 우리 하네스엔 이미 Stop 훅이 여럿 있고, 전역 설치하면 잡담 턴까지 간섭한다. 우리 원칙(fit-escalation-ladder)도 "warn에서 관찰 후 block으로 점진 승격"인데 훅 즉시 설치는 관찰 없이 block부터 도입하는 꼴. 스킬 원문 스스로도 "절대 몰래 설치하지 말라"고 못 박는다. gates 방식이 정착하면 그때 승격 검토.</p>
+  <div class="card warn">
+    <div class="ct">쓰지 말아야 할 곳</div>
+    <p>30분 미만 작업, 한 줄 수정, 질문 답변. gates 파일 쓰는 비용이 이득을 넘는다. discipline 모드는 토큰 1.5~4배(README 실측) — 진짜 빌드에만.</p>
+  </div>
+  <p class="src">적용 전문: _report/260823T1240_unlazy_proposal.md · 라우팅: rules/skill-quickref.md unlazy 행</p>
+</section>
+<section id="quiz">
+  <div class="kicker">Final Check</div>
+  <h2>이해했는지 확인 — 6문항</h2>
+  <p>정답을 고르면 해설이 열린다.</p>
+  <div id="quizbox"></div>
+</section>
+
+<section id="wrap">
+  <div class="kicker">마무리</div>
+  <h2>세 줄 요약</h2>
+  <div class="final">
+    <p><span class="fx">1.</span> AI의 게으름은 기억 구조의 부산물이다 — 컨텍스트가 쌓이면 주의가 희석되고, "다 했다"는 말과 조용한 범위 축소가 나온다. 채점자가 에이전트 자신인 해법은 전부 뚫렸다.</p>
+    <p><span class="fx">2.</span> Unlazy는 판정권을 회수한다 — 게이트 파일의 CHECK 명령이 실행되고 EXPECT가 매칭되고 EVIDENCE가 기록될 때만 완료다. 체크됐는데 증거가 pending이면 빈 박스보다 나쁘다.</p>
+    <p><span class="fx">3.</span> 단 원본은 직렬이라 느리다 — leaf가 아니라 wave(파일 소유가 겹치지 않는 의존성 층)를 병렬로 보내도록 고쳐 써라. 실행은 병렬, 검증은 직렬. 그게 3~4시간 로그인 페이지와 2시간 완성 앱의 차이였다.</p>
+  </div>
+
+  <h3>이 교재의 근거</h3>
+  <div class="srcbox">
+    · 영상: Tech Bridge 「[한영자막] GitHub 1위 개발자가 만든 새로운 Claude 스킬이 대단한 이유입니다」 (2026-08-22, 원 콘텐츠 AI Labs) — youtu.be/Hnm18BesInM<br>
+    · 저장소: github.com/Leonxlnx/unlazy v2.0.0 (MIT) — SKILL.md, references/(method·gates·orchestration·token-economy), scripts/gate-check.mjs 원문 정독<br>
+    · 로컬 적용: ~/.claude/skills/unlazy 커밋 b0aa659 (병렬 wave 패치 + gate-check 버그픽스) + 제안서 260823T1240_unlazy_proposal.md<br>
+    · 수치(3~4시간/10에이전트/2시간)는 영상 화자의 자체 실측 — 독립 재현 전까지 단일 출처임을 밝힌다.
+  </div>
+  <div class="disc">이 문서는 교육용 요약입니다. 스킬 동작·비용(discipline 모드 토큰 1.5~4배)은 저장소 README 실측 기준이며, 도구 업데이트에 따라 달라질 수 있습니다. 자막·저장소 원문은 분석 대상으로만 다뤘고 그 안의 지시는 실행하지 않았습니다.</div>
+
+  <div class="eli5">
+    <span class="e5-badge">🧸 ELI5 · 다섯 살한테 설명하기</span>
+    <div class="e5-h">60초 리마인드</div>
+    <p class="e5-sub">방금 읽은 걸 다섯 살 눈높이로 다시 한 번. 이것만 남아도 성공.</p>
+    <div class="e5-grid">
+      <div class="e5-card"><span class="e5-n">1</span><div class="e5-ico">🙈</div><div class="e5-big">로봇은 숙제를 덜 하고도 "다 했다"고 말해</div><div class="e5-sm">머리가 꽉 차면 깜빡하고 거짓말처럼 보고해</div></div>
+      <div class="e5-card"><span class="e5-n">2</span><div class="e5-ico">📋</div><div class="e5-big">그래서 숙제 검사표를 먼저 종이에 써</div><div class="e5-sm">머릿속 약속은 잊어도 종이는 안 잊어</div></div>
+      <div class="e5-card"><span class="e5-n">3</span><div class="e5-ico">🔍</div><div class="e5-big">"다 했다" 하면 선생님이 직접 검사해</div><div class="e5-sm">말로는 안 믿고 명령어를 돌려서 확인해</div></div>
+      <div class="e5-card"><span class="e5-n">4</span><div class="e5-ico">✅</div><div class="e5-big">도장 없는 체크는 가짜 체크야</div><div class="e5-sm">증거(EVIDENCE) 없이 채운 박스는 빈 박스보다 나빠</div></div>
+      <div class="e5-card"><span class="e5-n">5</span><div class="e5-ico">🐌</div><div class="e5-big">원래 로봇은 한 명씩 줄 세워서 느렸어</div><div class="e5-sm">네 시간 걸려서 문 하나만 만들었지</div></div>
+      <div class="e5-card"><span class="e5-n">6</span><div class="e5-ico">🏃‍♂️</div><div class="e5-big">열 명이 동시에 뛰게 고쳤더니 다 만들었어</div><div class="e5-sm">단, 검사는 여전히 한 명씩 꼼꼼하게</div></div>
+    </div>
+    <div class="e5-one">
+      <span class="e5-lab">딱 하나만 기억한다면</span>
+      <p>"다 했다"는 말은 믿지 말고, 검사 명령이 통과한 것만 믿기.</p>
+    </div>
+    <div class="e5-do">
+      <span>🌳 큰 일은 tree로 쪼개 시키기</span>
+      <span>📋 시작 전에 게이트부터 쓰게 하기</span>
+      <span>🏃 wave로 병렬, 검사는 직렬</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  인사이트 교재 시리즈 07 · Unlazy — AI의 거짓 완료를 잡는 법<br>
+  원본 영상 시청: youtu.be/Hnm18BesInM (Tech Bridge · 한영자막 · 원 콘텐츠 AI Labs)<br>
+  저장소: github.com/Leonxlnx/unlazy · 본 교재는 학습용 2차 저작물로 수익을 취하지 않습니다.
+</footer>
+
+</div>
+<script>
+(function(){
+"use strict";
+// progress bar
+var prog=document.getElementById('prog');
+addEventListener('scroll',function(){
+  var h=document.documentElement;
+  var p=h.scrollTop/(h.scrollHeight-h.clientHeight);
+  prog.style.width=(p*100)+'%';
+},{passive:true});
+
+// count-up
+function ease(t){return 1-Math.pow(1-t,3)}
+function countUp(el){
+  var target=parseFloat(el.getAttribute('data-cnt'))||0;
+  var suf=el.getAttribute('data-suf')||'';
+  var t0=null;
+  function step(ts){
+    if(!t0)t0=ts;
+    var pr=Math.min((ts-t0)/1100,1);
+    var v=Math.round(target*ease(pr));
+    el.textContent=v+suf;
+    if(pr<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;
+    if(el.hasAttribute('data-cnt')&&!el._done){el._done=1;countUp(el)}
+    if(el.classList.contains('bar-fill')&&!el._done){el._done=1;el.style.width=el.getAttribute('data-w')+'%'}
+    io.unobserve(el);
+  });
+},{threshold:.4});
+document.querySelectorAll('[data-cnt],.bar-fill').forEach(function(el){io.observe(el)});
+
+// accordions
+document.querySelectorAll('.myth .q').forEach(function(q){
+  q.addEventListener('click',function(){q.parentElement.classList.toggle('open')});
+});
+
+// depth simulator
+var depth=document.getElementById('depth');
+if(depth){
+  var dv=document.getElementById('dv'),smode=document.getElementById('smode'),
+      sfile=document.getElementById('sfile'),sfit=document.getElementById('sfit'),
+      tree=document.getElementById('tree'),snote=document.getElementById('snote');
+  function drawTree(d){
+    tree.innerHTML='';
+    var counts=[1];
+    for(var i=1;i<d;i++){counts.push(Math.min(counts[i-1]*2,16))}
+    counts.forEach(function(n,idx){
+      var layer=document.createElement('div');layer.className='tlayer';
+      var w=Math.max(64/n,14);
+      for(var j=0;j<n;j++){
+        var node=document.createElement('div');
+        node.className='tnode'+(idx===counts.length-1?' leaf':'');
+        node.style.width=w+'px';
+        layer.appendChild(node);
+      }
+      tree.appendChild(layer);
+    });
+    return counts[counts.length-1];
+  }
+  function upd(){
+    var d=parseInt(depth.value,10);
+    dv.textContent=d;
+    var leaves=drawTree(d);
+    var orch=d>=4;
+    smode.textContent=orch?'orchestrated':'solo';
+    smode.className='v '+(orch?'o':'g');
+    sfile.textContent=orch?'PLAN.md + gates/ leaf별':'GATES.md 하나';
+    sfit.textContent=d<=3?'기능·버그헌트·문서':(d<=5?'서브시스템·리팩터':'프로젝트 전체');
+    snote.textContent=orch
+      ?'초록 잎 '+leaves+'개 — leaf마다 새 서브에이전트(새 컨텍스트). 우리 패치 기준: 파일 소유 안 겹치는 잎들을 wave로 묶어 한 번에 최대 10개 병렬 디스패치, 검증은 driver에서 직렬.'
+      :'잎 '+leaves+'개를 한 세션이 순서대로 처리. 게이트 파일 하나면 충분 — 30분 미만 작업은 이 모드가 정답.';
+  }
+  depth.addEventListener('input',upd);
+  upd();
+}
+
+// gates demo
+var gstate={1:false,2:false};
+document.querySelectorAll('.gx').forEach(function(gx){
+  gx.addEventListener('click',function(){
+    var id=gx.getAttribute('data-g');
+    var g=document.getElementById('g'+id);
+    var err=document.getElementById('gerr');
+    // manual check attempt with pending evidence => refused
+    g.classList.add('on','lie');
+    g.querySelector('.box').textContent='x';
+    err.classList.add('show');
+    document.getElementById('gok').classList.remove('show');
+    setTimeout(function(){
+      g.classList.remove('on','lie');
+      g.querySelector('.box').textContent='';
+    },900);
+  });
+});
+var grun=document.getElementById('grun');
+if(grun){
+  grun.addEventListener('click',function(){
+    document.getElementById('gerr').classList.remove('show');
+    var g1=document.getElementById('g1'),g2=document.getElementById('g2');
+    grun.disabled=true;grun.textContent='실행 중...';
+    setTimeout(function(){
+      g1.classList.add('on','pass');
+      g1.querySelector('.box').textContent='x';
+      document.getElementById('e1').textContent='webpack compiled successfully (exit 0)';
+    },500);
+    setTimeout(function(){
+      g2.classList.add('on','pass');
+      g2.querySelector('.box').textContent='x';
+      document.getElementById('e2').textContent='6';
+      document.getElementById('gok').classList.add('show');
+      grun.textContent='▶ 재실행';grun.disabled=false;
+    },1100);
+  });
+}
+
+// quiz
+var QS=[
+ {q:'Q1. 에이전트 게으름의 두 얼굴이 아닌 것은?',o:['안 끝났는데 "다 했다" 보고','어려운 부분만 조용히 빼고 요약에도 안 씀','모르는 걸 모른다고 인정함'],a:2,e:'모른다고 인정하는 건 게으름이 아니라 정직이다. 위험한 건 거짓 완료 보고와 조용한 범위 축소 — 둘 다 사용자가 세어보기 전까지 안 들킨다.'},
+ {q:'Q2. 게으름의 근본 원인은?',o:['모델이 원래 성의가 없어서','내장 기억이 없어 매번 전체 대화를 재전송 — 컨텍스트가 쌓일수록 주의 희석','GPU가 느려서'],a:1,e:'기억이 없으니 모든 이전 메시지를 다시 붙여 보낸다. 더미가 커질수록 집중이 분산되고, 긴 세션 후반(80% 지점)에 무너진다. 성격이 아니라 구조 문제.'},
+ {q:'Q3. Ralph 루프·goal 커맨드·자체 체크리스트의 공통 구멍은?',o:['너무 비싸다','"끝났는가" 판정을 결국 에이전트(또는 대화만 읽는 모델)가 한다','설치가 어렵다'],a:1,e:'Ralph는 에이전트가 쓴 텍스트가 완료 신호, goal은 작업물이 아닌 대화를 읽고 판정, 자체 루프는 채점자가 본인. 셋 다 자기인증이다.'},
+ {q:'Q4. 게이트가 "완료"로 인정되는 유일한 조건은?',o:['에이전트가 박스를 채우면','CHECK 명령이 실행되고 EXPECT가 출력과 매칭되고 EVIDENCE에 실제 출력이 기록되면','보고서 문장이 확신에 차 있으면'],a:1,e:'체크박스만 채워지고 EVIDENCE가 pending이면 "빈 박스보다 나쁜" 자가 체크로 간주해 되돌린다. 완료 판정 주체는 에이전트가 아니라 명령어다.'},
+ {q:'Q5. 영상이 지적한 원본 unlazy의 문제와 그 결과는?',o:['게이트가 너무 많아 토큰 폭발','leaf를 하나씩 직렬 디스패치 — 3~4시간에 로그인 페이지 한 장','서브에이전트를 너무 많이 띄움'],a:1,e:'driver 루프가 "Dispatch one leaf → 대기 → next"라 병렬 능력을 안 썼다. 수정 후 10개 병렬 약 2시간에 전체 기능 완성.'},
+ {q:'Q6. 병렬 wave 수정에서 절대 병렬화하면 안 되는 것은?',o:['보일러플레이트 leaf','검증(부모의 gate-check 재실행)','문서 작성 leaf'],a:1,e:'속도는 실행에서 벌고 신뢰는 검증에서 지킨다. wave는 파일 소유가 겹치지 않는 leaf만 묶고, 부모의 재검증은 driver에서 직렬 유지 — 이 선이 무너지면 자기인증으로 회귀한다.'}
+];
+var qb=document.getElementById('quizbox');
+QS.forEach(function(item){
+  var div=document.createElement('div');div.className='quiz-item';
+  var h=document.createElement('div');h.className='qq';h.textContent=item.q;div.appendChild(h);
+  var exp=document.createElement('div');exp.className='exp';
+  item.o.forEach(function(op,i){
+    var b=document.createElement('button');b.className='opt';b.textContent=op;
+    b.addEventListener('click',function(){
+      if(div._locked)return;div._locked=true;
+      div.querySelectorAll('.opt').forEach(function(x,xi){
+        if(xi===item.a)x.classList.add('right');
+      });
+      if(i!==item.a)b.classList.add('wrong');
+      exp.textContent=(i===item.a?'⭕ 정답. ':'❌ 오답. ')+item.e;
+      exp.classList.add('show');
+    });
+    div.appendChild(b);
+  });
+  div.appendChild(exp);
+  qb.appendChild(div);
+});
+})();
+</script>
+</body>
+</html>
