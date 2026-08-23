@@ -126,11 +126,6 @@
       "deployed": "2026-07-12 14:30"
     },
     {
-      "slug": "trading-verify",
-      "url": "https://kooys2013.github.io/pages/trading-verify/",
-      "deployed": "2026-08-23 09:59"
-    },
-    {
       "slug": "sauna-antiaging",
       "url": "https://kooys2013.github.io/pages/sauna-antiaging/",
       "deployed": "2026-08-23 11:37"
@@ -153,6 +148,11 @@
     {
       "slug": "ebs-science",
       "url": "https://kooys2013.github.io/pages/ebs-science/",
+      "deployed": "2026-08-23 11:37"
+    },
+    {
+      "slug": "trading-verify",
+      "url": "https://kooys2013.github.io/pages/trading-verify/",
       "deployed": "2026-08-23 11:37"
     }
   ]

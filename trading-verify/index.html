@@ -279,6 +279,25 @@ footer a{color:var(--acc2);text-decoration:none}
   .mirror{grid-template-columns:1fr}
   .dgrid{grid-template-columns:1fr}
 }
+
+/* ===== ELI5 리마인드 (다섯 살 설명) ===== */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--acc);--e5-acc2:var(--acc2);--e5-accbg:rgba(56,189,248,.09)}
 </style>
 </head>
 <body>
@@ -1170,6 +1189,23 @@ footer a{color:var(--acc2);text-decoration:none}
     <b>백테스트 수치를 공개</b>했고, 그 덕분에 이 검증이 가능했습니다.
     </span>
   </div>
+</section>
+
+
+<section class="eli5" id="eli5">
+  <div class="e5-badge">🧸 ELI5 · 다섯 살한테 설명하기</div>
+  <h2 class="e5-h">60초 리마인드</h2>
+  <p class="e5-sub">검증 48건, 챕터 10개를 그림 여섯 장으로. 사랑하는 사람에게 이것만 보여줘도 됩니다.</p>
+  <div class="e5-grid">
+  <div class="e5-card"><div class="e5-n">01</div><div class="e5-ico">💯</div><div class="e5-big">100명이 시작하면 1명 남는다</div><div class="e5-sm">브라질 데이트레이더 1,551명 추적 — 97%가 손실로 끝났다</div></div>
+  <div class="e5-card"><div class="e5-n">02</div><div class="e5-ico">➗</div><div class="e5-big">이기는 횟수보다 크기가 중요하다</div><div class="e5-sm">기대값 = 승률×손익비 − 패률 − 비용. 이 식이 전부다</div></div>
+  <div class="e5-card"><div class="e5-n">03</div><div class="e5-ico">🧾</div><div class="e5-big">수수료가 조용히 다 먹는다</div><div class="e5-sm">손익비 1:1이면 승률 50%로는 본전도 안 된다</div></div>
+  <div class="e5-card"><div class="e5-n">04</div><div class="e5-ico">🔬</div><div class="e5-big">백테스트 +18,000%는 증거가 아니다</div><div class="e5-sm">표본 밖 검증·비용·다중검정이 빠지면 그냥 숫자놀이</div></div>
+  <div class="e5-card"><div class="e5-n">05</div><div class="e5-ico">📓</div><div class="e5-big">일지는 결과가 아니라 과정을 적는다</div><div class="e5-sm">피드백 3번 중 1번은 성적을 오히려 떨어뜨렸다 (607건 메타분석)</div></div>
+  <div class="e5-card"><div class="e5-n">06</div><div class="e5-ico">🛑</div><div class="e5-big">먼저 정하는 건 손실 크기다</div><div class="e5-sm">한 번에 계좌의 2%까지. 켈리 공식의 1/4만</div></div>
+  </div>
+  <div class="e5-one"><span class="e5-lab">딱 하나만 기억한다면</span><p>버는 법을 배우기 전에, 안 잃는 규칙부터 종이에 적는다.</p></div>
+  <div class="e5-do"><span>진입 전에 손절가 먼저</span><span>표본 30건 전에는 판정 금지</span><span>비용 넣고 다시 계산</span></div>
 </section>
 
 <footer>
