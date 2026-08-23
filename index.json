@@ -131,11 +131,6 @@
       "deployed": "2026-07-12 14:30"
     },
     {
-      "slug": "sauna-antiaging",
-      "url": "https://kooys2013.github.io/pages/sauna-antiaging/",
-      "deployed": "2026-08-22 22:54"
-    },
-    {
       "slug": "creatine-guide",
       "url": "https://kooys2013.github.io/pages/creatine-guide/",
       "deployed": "2026-08-22 22:54"
@@ -154,6 +149,11 @@
       "slug": "trading-verify",
       "url": "https://kooys2013.github.io/pages/trading-verify/",
       "deployed": "2026-08-23 09:59"
+    },
+    {
+      "slug": "sauna-antiaging",
+      "url": "https://kooys2013.github.io/pages/sauna-antiaging/",
+      "deployed": "2026-08-23 11:37"
     }
   ]
 }

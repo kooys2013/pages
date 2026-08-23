@@ -250,6 +250,25 @@ footer a{color:var(--ember2);text-decoration:none}
   .tier .rank{flex:0 0 50px;font-size:1.25rem}
   section{padding:46px 0}
 }
+
+/* ===== ELI5 리마인드 (다섯 살 설명) ===== */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--ember);--e5-acc2:var(--ember2);--e5-accbg:rgba(255,122,26,.09)}
 </style>
 </head>
 <body>
@@ -870,6 +889,23 @@ footer a{color:var(--ember2);text-decoration:none}
     <p style="margin-bottom:0;font-size:.93em;color:var(--tx2)">86% 미세플라스틱 배출 같은 화려한 주장보다,
     21년간 2,300명을 따라다니며 교란변수를 하나씩 걷어낸 지루한 데이터가 결국 우리를 더 오래 살게 한다.</p>
   </div>
+</section>
+
+
+<section class="eli5" id="eli5">
+  <div class="e5-badge">🧸 ELI5 · 다섯 살한테 설명하기</div>
+  <h2 class="e5-h">60초 리마인드</h2>
+  <p class="e5-sub">이 교재 전체를 그림 여섯 장으로. 다 잊어도 이건 남기세요.</p>
+  <div class="e5-grid">
+  <div class="e5-card"><div class="e5-n">01</div><div class="e5-ico">🔥</div><div class="e5-big">몸을 일부러 조금 힘들게 한다</div><div class="e5-sm">80~100℃ 건식 사우나 20분. 심장은 가벼운 조깅과 비슷하게 뛴다</div></div>
+  <div class="e5-card"><div class="e5-n">02</div><div class="e5-ico">🩸</div><div class="e5-big">피가 빨라지면 혈관이 넓어진다</div><div class="e5-sm">전단응력 → 산화질소 분비 → 혈압이 내려간다</div></div>
+  <div class="e5-card"><div class="e5-n">03</div><div class="e5-ico">🧰</div><div class="e5-big">몸속 수리공이 깨어난다</div><div class="e5-sm">열충격단백질이 잘못 접힌 단백질을 고친다</div></div>
+  <div class="e5-card"><div class="e5-n">04</div><div class="e5-ico">📉</div><div class="e5-big">그래서 덜 죽는다</div><div class="e5-sm">주 4회 이상 하는 사람 총사망 40% 낮음 (핀란드 2,300명·21년)</div></div>
+  <div class="e5-card"><div class="e5-n">05</div><div class="e5-ico">🛁</div><div class="e5-big">사우나 없으면 욕조도 된다</div><div class="e5-sm">일본 일상 온수욕 — 심혈관 사망 28% 낮음</div></div>
+  <div class="e5-card"><div class="e5-n">06</div><div class="e5-ico">⚠️</div><div class="e5-big">무리하면 약이 독이 된다</div><div class="e5-sm">어지럽거나 불쾌하면 즉시 나온다. 음주 후는 절대 금지</div></div>
+  </div>
+  <div class="e5-one"><span class="e5-lab">딱 하나만 기억한다면</span><p>적당한 고생은 약이 된다 — 주 4회, 한 번에 20분. 그게 사실상 전부다.</p></div>
+  <div class="e5-do"><span>유산소 40~60분 → 쿨다운 → 사우나 20분</span><span>끝나면 물 + 전해질</span><span>초보는 10분부터</span></div>
 </section>
 
 <footer>
