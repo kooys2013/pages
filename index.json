@@ -131,11 +131,6 @@
       "deployed": "2026-07-12 14:30"
     },
     {
-      "slug": "musk-decoder",
-      "url": "https://kooys2013.github.io/pages/musk-decoder/",
-      "deployed": "2026-08-23 00:39"
-    },
-    {
       "slug": "trading-verify",
       "url": "https://kooys2013.github.io/pages/trading-verify/",
       "deployed": "2026-08-23 09:59"
@@ -153,6 +148,11 @@
     {
       "slug": "ai-enclosure",
       "url": "https://kooys2013.github.io/pages/ai-enclosure/",
+      "deployed": "2026-08-23 11:37"
+    },
+    {
+      "slug": "musk-decoder",
+      "url": "https://kooys2013.github.io/pages/musk-decoder/",
       "deployed": "2026-08-23 11:37"
     }
   ]
