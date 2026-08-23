@@ -243,6 +243,25 @@ footer a{color:var(--now2);text-decoration:none}
   .mirror .c.n{border-top:1px dashed var(--line2)}
   section{padding:46px 0}
 }
+
+/* ===== ELI5 리마인드 (다섯 살 설명) ===== */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--now);--e5-acc2:var(--now2);--e5-accbg:rgba(56,189,248,.09)}
 </style>
 </head>
 <body>
@@ -1099,6 +1118,23 @@ footer a{color:var(--now2);text-decoration:none}
       그리고 혹시 성공하지 못하더라도, <b>그런 시도를 한 인간들이 존재했다는 사실이 위로가 되기를</b> 바랍니다."
     </p>
   </div>
+</section>
+
+
+<section class="eli5" id="eli5">
+  <div class="e5-badge">🧸 ELI5 · 다섯 살한테 설명하기</div>
+  <h2 class="e5-h">60초 리마인드</h2>
+  <p class="e5-sub">600년 전 이야기와 지금 이야기를 그림 여섯 장으로.</p>
+  <div class="e5-grid">
+  <div class="e5-card"><div class="e5-n">01</div><div class="e5-ico">🌾</div><div class="e5-big">옛날엔 마을 땅이 모두의 것이었다</div><div class="e5-sm">누구나 양을 치고 나무를 줍던 공유지</div></div>
+  <div class="e5-card"><div class="e5-n">02</div><div class="e5-ico">🐑</div><div class="e5-big">양이 돈이 되자 울타리가 쳐졌다</div><div class="e5-sm">귀족이 땅을 막고, 농민은 쫓겨났다</div></div>
+  <div class="e5-card"><div class="e5-n">03</div><div class="e5-ico">🌐</div><div class="e5-big">웹이 지금의 공유지다</div><div class="e5-sm">우리가 올린 글·그림·영상이 새로 발견된 땅</div></div>
+  <div class="e5-card"><div class="e5-n">04</div><div class="e5-ico">🤖</div><div class="e5-big">양은 AI다</div><div class="e5-sm">그 땅의 풀(데이터)을 먹고 자란다</div></div>
+  <div class="e5-card"><div class="e5-n">05</div><div class="e5-ico">⚖️</div><div class="e5-big">울타리 높이는 법이 정한다</div><div class="e5-sm">1차 땐 3%만 사유화. 법이 귀족 편에 선 2차 땐 거의 전부</div></div>
+  <div class="e5-card"><div class="e5-n">06</div><div class="e5-ico">🫱</div><div class="e5-big">이번엔 우리가 약자가 아니다</div><div class="e5-sm">데이터를 주는 것도 돈을 내는 것도 사람. 최소 2년 남았다</div></div>
+  </div>
+  <div class="e5-one"><span class="e5-lab">딱 하나만 기억한다면</span><p>울타리는 아직 다 세워지지 않았다. 지금 목소리를 내면 서 있는 자리가 달라진다.</p></div>
+  <div class="e5-do"><span>내 창작물 이용약관 다시 읽기</span><span>출처 표기·보상 요구에 이름 얹기</span><span>2026년 소송 판결 뉴스 따라가기</span></div>
 </section>
 
 <footer>
