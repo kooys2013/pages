@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>트레이딩 검증 교본 — 유튜브 17편을 논문으로 뜯어보기</title>
+<meta name="description" content="한 트레이딩 유튜브 채널의 영상 17편에서 주장 124개를 뽑아 학술 근거로 하나씩 검증한 교본. 무엇이 맞고, 무엇이 틀렸고, 부족한 논리는 어떻게 채우는지를 수식과 출처로 정리했습니다.">
+<meta property="og:title" content="트레이딩 검증 교본 — 유튜브 17편을 논문으로 뜯어보기">
+<meta property="og:description" content="주장 124개 · 판정 48건 · 근거 논문 40여 편. 믿을 것과 버릴 것을 나눕니다.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#04070d; --bg2:#0b1220; --bg3:#121b2c;
+  --line:#1b2740; --line2:#2a3a58;
+  --tx:#e9eefb; --tx2:#a4b2ce; --tx3:#6e7f9d;
+  --acc:#38bdf8; --acc2:#7dd3fc; --acc-d:#0284c7;
+  --watt:#fbbf24; --bot:#a78bfa; --green:#34d399; --red:#f87171; --orange:#fb923c;
+  --r:16px; --maxw:760px; --fs:clamp(16px,1.6vw,17.5px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Malgun Gothic",sans-serif;
+  font-size:var(--fs);line-height:1.75;letter-spacing:-.011em;overflow-x:hidden;word-break:keep-all}
+img,svg{max-width:100%;display:block}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 540px at 50% -12%,rgba(56,189,248,.14),transparent 65%),
+             radial-gradient(700px 500px at 100% 100%,rgba(251,191,36,.06),transparent 60%),
+             radial-gradient(600px 480px at 0% 60%,rgba(248,113,113,.06),transparent 60%)}
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:99;
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--watt));transition:width .1s linear}
+
+header.hero{padding:74px 0 42px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.76em;font-weight:700;letter-spacing:.06em;
+  color:var(--acc2);background:rgba(56,189,248,.09);border:1px solid rgba(56,189,248,.28);
+  padding:6px 13px;border-radius:100px;margin-bottom:22px}
+h1{font-size:clamp(2rem,7.2vw,3.05rem);line-height:1.2;font-weight:800;letter-spacing:-.035em}
+h1 .hl{background:linear-gradient(180deg,transparent 58%,rgba(56,189,248,.32) 58%);padding:0 .06em}
+h1 .hlw{background:linear-gradient(180deg,transparent 58%,rgba(251,191,36,.3) 58%);padding:0 .06em}
+.sub{color:var(--tx2);margin-top:18px;font-size:1.03em}
+.srcline{margin-top:26px;font-size:.8em;color:var(--tx3);line-height:1.6}
+.srcline a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(125,211,252,.35)}
+
+.verdict{margin:34px 0 12px;border:1px solid rgba(56,189,248,.32);border-radius:22px;
+  background:linear-gradient(160deg,rgba(56,189,248,.12),rgba(56,189,248,.02));padding:26px 22px}
+.verdict .lbl{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--acc2);margin-bottom:14px}
+.verdict p{font-size:1.15em;font-weight:600;line-height:1.62}
+.verdict p+p{margin-top:11px}
+.verdict .em{color:var(--acc2);font-weight:800}
+.verdict .emw{color:var(--watt);font-weight:800}
+.verdict .emr{color:var(--red);font-weight:800}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 8px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:18px 10px;text-align:center}
+.stat .n{font-size:clamp(1.45rem,6vw,2rem);font-weight:800;color:var(--acc);letter-spacing:-.04em;line-height:1.1}
+.stat .n small{font-size:.5em;font-weight:700}
+.stat .k{font-size:.76em;color:var(--tx2);margin-top:8px;line-height:1.4}
+.stat.w .n{color:var(--watt)}
+.stat.r .n{color:var(--red)}
+.stat.g .n{color:var(--green)}
+
+section{padding:56px 0;border-top:1px solid var(--line)}
+.snum{font-size:.74em;font-weight:800;letter-spacing:.14em;color:var(--acc);margin-bottom:9px}
+h2{font-size:clamp(1.48rem,5vw,2.02rem);font-weight:800;letter-spacing:-.03em;line-height:1.28}
+.lead{color:var(--tx2);margin-top:13px;font-size:1.02em}
+h3{font-size:1.16em;font-weight:700;margin:34px 0 12px;letter-spacing:-.02em}
+h4{font-size:1.02em;font-weight:700;margin-bottom:9px}
+p{margin:13px 0}
+strong{color:var(--acc2);font-weight:700}
+em.w{font-style:normal;color:var(--watt);font-weight:700}
+em.r{font-style:normal;color:var(--red);font-weight:700}
+em.g{font-style:normal;color:var(--green);font-weight:700}
+.mute{color:var(--tx3);font-size:.87em}
+ul,ol{margin:13px 0 13px 20px}
+li{margin:7px 0}
+blockquote{margin:16px 0;padding:14px 18px;border-left:3px solid var(--acc-d);background:var(--bg2);
+  border-radius:0 12px 12px 0;font-size:.95em;color:var(--tx2);line-height:1.7}
+blockquote cite{display:block;margin-top:8px;font-style:normal;font-size:.85em;color:var(--tx3)}
+
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.acc{border-color:rgba(56,189,248,.28);background:linear-gradient(160deg,rgba(56,189,248,.07),rgba(56,189,248,.01))}
+.card.warn{border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.05)}
+.card.dngr{border-color:rgba(248,113,113,.32);background:rgba(248,113,113,.06)}
+.card.vio{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.05)}
+.card.good{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.05)}
+
+/* 3파트 블록 — 이 교재의 뼈대 */
+.tri{margin:22px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tri .blk{padding:17px 18px;border-bottom:1px solid var(--line);background:var(--bg2)}
+.tri .blk:last-child{border-bottom:none}
+.tri .tag{display:inline-block;font-size:.71em;font-weight:800;letter-spacing:.07em;padding:4px 10px;border-radius:7px;margin-bottom:9px}
+.tri .blk.said{background:rgba(110,127,157,.07)}
+.tri .blk.said .tag{background:rgba(110,127,157,.18);color:var(--tx2)}
+.tri .blk.chk{background:rgba(251,191,36,.05)}
+.tri .blk.chk .tag{background:rgba(251,191,36,.16);color:var(--watt)}
+.tri .blk.fix{background:rgba(56,189,248,.05)}
+.tri .blk.fix .tag{background:rgba(56,189,248,.16);color:var(--acc2)}
+.tri .blk p{margin:0;font-size:.94em;line-height:1.74;color:var(--tx2)}
+.tri .blk p+p{margin-top:9px}
+.tri .blk b{color:var(--tx);font-weight:700}
+.tri .blk ul,.tri .blk ol{margin:9px 0 0 19px;font-size:.93em;color:var(--tx2)}
+
+.fig{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 16px;margin:18px 0}
+.fig .cap{font-size:.8em;color:var(--tx3);margin-top:12px;text-align:center;line-height:1.55}
+
+/* 수식 */
+.eq{background:var(--bg3);border:1px solid var(--line2);border-radius:12px;padding:15px 16px;margin:15px 0;
+  text-align:center;font-size:1.02em;font-weight:700;letter-spacing:-.01em;line-height:1.7;color:var(--acc2);
+  font-variant-numeric:tabular-nums;overflow-x:auto}
+.eq small{display:block;margin-top:7px;font-size:.72em;font-weight:500;color:var(--tx3);letter-spacing:0}
+
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;justify-content:center}
+.flow .n{background:var(--bg3);border:1px solid var(--line2);border-radius:11px;padding:10px 13px;font-size:.85em;font-weight:600;text-align:center}
+.flow .n.hot{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.11);color:var(--acc2)}
+.flow .n.wt{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.1);color:var(--watt)}
+.flow .n.bad{border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.09);color:var(--red)}
+.flow .ar{color:var(--tx3);font-size:1.1em}
+
+/* 판정 아코디언 */
+.myths{display:grid;gap:12px;margin:22px 0}
+.myth{border:1px solid var(--line);border-radius:var(--r);background:var(--bg2);overflow:hidden;cursor:pointer;transition:.2s}
+.myth:hover{border-color:var(--line2)}
+.myth .q{padding:17px 18px;display:flex;gap:12px;align-items:flex-start}
+.myth .q .badge{flex:0 0 auto;font-size:.68em;font-weight:800;letter-spacing:.04em;padding:4px 8px;border-radius:7px;
+  background:rgba(251,191,36,.14);color:var(--watt);margin-top:2px;white-space:nowrap}
+.myth.no .q .badge{background:rgba(248,113,113,.15);color:var(--red)}
+.myth.ok .q .badge{background:rgba(52,211,153,.14);color:var(--green)}
+.myth.un .q .badge{background:rgba(167,139,250,.16);color:var(--bot)}
+.myth .q .txt{flex:1;font-weight:600;font-size:.97em}
+.myth .q .txt .hint{display:block;font-size:.76em;color:var(--tx3);font-weight:500;margin-top:4px}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.myth.open .a{max-height:2600px}
+.myth .a .inner{padding:0 18px 18px;font-size:.92em;color:var(--tx2);line-height:1.72}
+.myth .a .inner>hr{border:none;border-top:1px dashed var(--line2);margin:0 0 14px}
+.myth .a .inner h5{font-size:.8em;font-weight:800;letter-spacing:.05em;color:var(--tx3);margin:14px 0 5px}
+.myth .a .inner h5:first-of-type{margin-top:0}
+.myth .a .inner .cite{font-size:.85em;color:var(--tx3);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2)}
+.myth .a .inner .cite a{color:var(--acc2);text-decoration:none;word-break:break-all;border-bottom:1px solid rgba(125,211,252,.25)}
+
+/* 탭 */
+.tabs{display:flex;gap:8px;margin:24px 0 0;flex-wrap:wrap}
+.tab{flex:1;min-width:100px;padding:13px 10px;border-radius:13px;border:1px solid var(--line);background:var(--bg2);
+  color:var(--tx2);font:inherit;font-size:.88em;font-weight:700;cursor:pointer;transition:.2s;text-align:center}
+.tab.on{background:rgba(56,189,248,.13);border-color:rgba(56,189,248,.45);color:var(--acc2)}
+.panel{display:none;animation:fade .35s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 막대 */
+.chart{margin:22px 0}
+.bar-row{margin:15px 0}
+.bar-lab{display:flex;justify-content:space-between;font-size:.86em;margin-bottom:6px;gap:10px}
+.bar-lab .v{font-weight:800;color:var(--acc2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar-track{height:13px;background:var(--bg3);border-radius:100px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;width:0;border-radius:100px;transition:width 1.15s cubic-bezier(.16,1,.3,1);
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--acc2))}
+.bar-fill.wattb{background:linear-gradient(90deg,#b45309,var(--watt))}
+.bar-fill.redb{background:linear-gradient(90deg,#9f1239,var(--red))}
+.bar-fill.greenb{background:linear-gradient(90deg,#047857,var(--green))}
+.bar-fill.ref{background:linear-gradient(90deg,#1e2942,#3d4d6b)}
+
+/* 표 */
+.cmp{margin:20px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp .hd,.cmp .rw{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:1px;background:var(--line)}
+.cmp.c4 .hd,.cmp.c4 .rw{grid-template-columns:1fr 1fr 1fr 1fr}
+.cmp .hd>div{background:var(--bg3);padding:12px 10px;font-size:.82em;font-weight:800;text-align:center}
+.cmp .hd>div:first-child{text-align:left}
+.cmp .rw>div{background:var(--bg2);padding:12px 10px;font-size:.85em;text-align:center;display:flex;align-items:center;justify-content:center}
+.cmp .rw>div:first-child{justify-content:flex-start;text-align:left;font-weight:600;color:var(--tx2)}
+.pill{font-size:.88em;font-weight:700;padding:3px 9px;border-radius:7px}
+.p-o{background:rgba(52,211,153,.13);color:var(--green)}
+.p-t{background:rgba(251,191,36,.13);color:var(--watt)}
+.p-x{background:rgba(248,113,113,.13);color:var(--red)}
+
+/* 계산기 */
+.calc{border:1px solid rgba(56,189,248,.35);border-radius:20px;padding:24px 20px;margin:24px 0;
+  background:linear-gradient(160deg,rgba(56,189,248,.09),rgba(251,191,36,.03))}
+.calc .dh{font-size:.76em;font-weight:800;letter-spacing:.1em;color:var(--acc2);margin-bottom:14px}
+.calc label{display:block;font-size:.9em;color:var(--tx2);margin-bottom:6px;font-weight:600}
+.calc label b{color:var(--acc2);font-variant-numeric:tabular-nums}
+.calc input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:100px;
+  background:linear-gradient(90deg,var(--acc-d),var(--acc),var(--watt));outline:none;margin:6px 0 4px}
+.calc input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+  background:#fff;border:4px solid var(--acc);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.calc input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;
+  border:4px solid var(--acc);cursor:pointer}
+.calc .ticks{display:flex;justify-content:space-between;font-size:.72em;color:var(--tx3);margin-bottom:14px}
+.dout{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:6px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dcell{background:var(--bg3);border:1px solid var(--line);border-radius:11px;padding:13px 12px;text-align:center}
+.dcell .k{font-size:.75em;color:var(--tx3);line-height:1.4}
+.dcell .v{font-size:1.32rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;margin-top:5px;color:var(--acc2)}
+.dcell.big{grid-column:1/-1}
+.dcell.big .v{font-size:1.7rem}
+.dverd{margin-top:12px;padding:13px 14px;border-radius:12px;font-size:.9em;line-height:1.62;font-weight:600}
+.dverd.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.35);color:var(--green)}
+.dverd.mid{background:rgba(251,191,36,.09);border:1px solid rgba(251,191,36,.35);color:var(--watt)}
+.dverd.no{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.38);color:var(--red)}
+.dpreset{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.dpreset button{flex:1;min-width:96px;padding:9px 8px;border-radius:10px;border:1px solid var(--line);
+  background:var(--bg3);color:var(--tx2);font:inherit;font-size:.79em;font-weight:600;cursor:pointer;transition:.18s}
+.dpreset button:hover{border-color:var(--line2);color:var(--tx)}
+.dpreset button.on{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.12);color:var(--acc2)}
+
+/* 미러 */
+.mirror{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;margin:20px 0}
+.mirror .mh{background:var(--bg3);padding:11px 14px;font-size:.82em;font-weight:800;text-align:center}
+.mirror .mh.a{color:var(--acc2)}
+.mirror .mh.b{color:var(--red)}
+.mirror .mc{background:var(--bg2);padding:14px;font-size:.88em;line-height:1.65;color:var(--tx2)}
+.mirror .mc b{color:var(--tx);font-weight:700}
+.mirror .mfull{grid-column:1/-1;background:var(--bg2);padding:13px 14px;font-size:.86em;color:var(--tx2);border-top:1px dashed var(--line2)}
+.mirror .mfull b{color:var(--watt)}
+
+/* 체크 */
+.check{margin:20px 0}
+.cline{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);
+  border-radius:12px;background:var(--bg2);margin-bottom:8px;cursor:pointer;transition:.18s;user-select:none}
+.cline:hover{border-color:var(--line2)}
+.cline.sel{border-color:rgba(56,189,248,.5);background:rgba(56,189,248,.08)}
+.cline .bx{flex:0 0 20px;height:20px;border:2px solid var(--line2);border-radius:6px;margin-top:3px;
+  display:flex;align-items:center;justify-content:center;font-size:.75em;font-weight:900;color:transparent;transition:.18s}
+.cline.sel .bx{background:var(--acc);border-color:var(--acc);color:#04101f}
+.cline .lt{font-size:.92em}
+.cline .lt em{display:block;font-style:normal;font-size:.85em;color:var(--tx3);margin-top:2px}
+.result{margin-top:16px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg2);font-size:.95em;line-height:1.7}
+.result.ok{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.07)}
+.result.mid{border-color:rgba(251,191,36,.42);background:rgba(251,191,36,.07)}
+.result.no{border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.08)}
+.result b{display:block;font-size:1.1em;margin-bottom:7px}
+
+/* 퀴즈 */
+.qbox{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;margin-bottom:14px}
+.qbox .qh{font-size:.76em;color:var(--acc2);font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+.qbox .qq{font-weight:700;font-size:1.01em;line-height:1.6}
+.opts{display:grid;gap:8px;margin-top:14px}
+.opt{text-align:left;padding:12px 15px;border-radius:11px;border:1px solid var(--line);background:var(--bg3);
+  color:var(--tx2);font:inherit;font-size:.92em;cursor:pointer;transition:.18s}
+.opt:hover:not(:disabled){border-color:var(--line2);color:var(--tx)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:rgba(52,211,153,.55);background:rgba(52,211,153,.11);color:var(--green);font-weight:700}
+.opt.wrong{border-color:rgba(248,113,113,.5);background:rgba(248,113,113,.1);color:var(--red)}
+.expl{margin-top:12px;padding:12px 14px;border-radius:11px;background:rgba(56,189,248,.06);
+  border:1px solid rgba(56,189,248,.22);font-size:.87em;color:var(--tx2);line-height:1.68;display:none}
+.expl.on{display:block;animation:fade .3s}
+.score{text-align:center;padding:24px;border-radius:var(--r);border:1px solid rgba(56,189,248,.35);
+  background:linear-gradient(160deg,rgba(56,189,248,.1),transparent);display:none}
+.score.on{display:block;animation:fade .4s}
+.score .n{font-size:2.4rem;font-weight:900;color:var(--acc);letter-spacing:-.04em}
+.score .m{color:var(--tx2);margin-top:6px;font-size:.95em}
+
+.final{background:linear-gradient(160deg,rgba(56,189,248,.13),rgba(251,191,36,.03));
+  border:1px solid rgba(56,189,248,.35);border-radius:22px;padding:28px 22px;margin:26px 0}
+.final ol{margin:0;padding-left:20px}
+.final li{font-size:1.05em;font-weight:600;line-height:1.65;margin:12px 0}
+.final li::marker{color:var(--acc);font-weight:800}
+
+.srcbox{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0;font-size:.83em;line-height:1.85}
+.srcbox a{color:var(--acc2);text-decoration:none;border-bottom:1px solid rgba(125,211,252,.25);word-break:break-all}
+.srcbox .t{font-weight:800;color:var(--tx);margin-bottom:8px;font-size:1.05em}
+.srcbox ol{margin:6px 0 0 18px}
+.srcbox li{margin:9px 0}
+
+footer{padding:44px 0 70px;border-top:1px solid var(--line);color:var(--tx3);font-size:.83em;line-height:1.7}
+footer a{color:var(--acc2);text-decoration:none}
+.disc{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:18px 0}
+
+@media(max-width:560px){
+  .stats{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:15px 18px}
+  .stat .k{margin-top:0;text-align:right}
+  section{padding:46px 0}
+  .cmp .hd,.cmp .rw{grid-template-columns:1fr .8fr .8fr}
+  .cmp.c4 .hd,.cmp.c4 .rw{grid-template-columns:1fr .75fr .75fr .75fr}
+  .mirror{grid-template-columns:1fr}
+  .dgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">📊 인사이트 교재 · 05</div>
+  <h1><span class="hl">트레이딩</span> 검증 교본</h1>
+  <p class="sub">유튜브 트레이딩 강의 <strong>17편</strong>을 통째로 뜯어서<br>주장 하나하나를 <strong>논문·전수 데이터</strong>와 대조한 기록.</p>
+  <p class="srcline">
+    분석 대상: 국내 트레이딩 채널 1곳의 공개 영상 17편(총 2시간 20분 분량 자막) + 해당 채널 운영 교육 서비스 웹사이트<br>
+    기준일 2026-08-23 · 주장 124건 추출 → 48건 정밀 판정 · 인용 논문·공공자료 40여 건<br>
+    <span style="color:var(--tx3)">이 교재는 특정인을 공격하지 않습니다. <b style="color:var(--tx2)">주장 단위로만</b> 판정합니다.</span>
+  </p>
+</header>
+
+<!-- 결론 -->
+<section style="border-top:none;padding-top:0">
+  <div class="verdict">
+    <div class="lbl">결론부터 말합니다</div>
+    <p>이 채널의 강의는 <span class="em">"심리·기록·태도"</span> 부분은 <span class="em">학술적으로 상당히 정확</span>합니다. 처분효과, 감정 라벨링, 결과 편향 — 실제 논문이 뒷받침합니다.</p>
+    <p>반면 <span class="emw">"기법·수치·성과"</span> 부분은 <span class="emw">거의 전부 검증 불가이거나 부정확</span>합니다. 진입 규칙에 숫자가 없고, 백테스트에는 표본외 검증이 없고, 성과 수치에는 증빙이 없습니다.</p>
+    <p>그리고 가장 중요한 것. <span class="emr">"열심히 하면 된다"는 서사는 통계적으로 반증됩니다.</span> 3년 넘게 버틴 사람들만 따로 모아도 <span class="emr">97%가 손실</span>입니다.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat r"><div class="n" data-cnt="97" data-suf="%">0</div><div class="k">300거래일 이상 <b>버틴</b><br>개인 트레이더의 손실 비율</div></div>
+    <div class="stat g"><div class="n" data-cnt="2" data-suf="건">0</div><div class="k">정밀 판정 48건 중<br>완전히 지지된 주장 수</div></div>
+    <div class="stat w"><div class="n" data-cnt="0" data-suf="개">0</div><div class="k">17편 전체에서 발견된<br>숫자로 정의된 진입 규칙</div></div>
+  </div>
+  <p class="mute" style="text-align:center">※ 이 세 숫자가 이 교재의 요약입니다. 아래에서 하나씩 근거를 답니다.</p>
+
+  <div class="card vio">
+    <h4 style="color:var(--bot)">📌 이 교재를 만든 이유</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      트레이딩 콘텐츠 소비는 보통 둘 중 하나로 끝납니다. <b>"이 사람 진짜다"</b> 아니면 <b>"다 사기다"</b>.
+      둘 다 아무것도 알려주지 않습니다.<br><br>
+      쓸모 있는 건 <b>문장 단위 판정</b>입니다. 같은 영상 안에서도
+      어떤 문장은 노벨상 수상 이론과 정확히 일치하고, 바로 다음 문장은 자기 영상끼리 모순됩니다.
+      그 둘을 갈라내는 법을 배우면, <b>이 채널뿐 아니라 앞으로 볼 모든 트레이딩 콘텐츠에 그대로 적용</b>됩니다.<br><br>
+      그래서 이 교재의 목표는 "이 사람을 믿을까 말까"가 아니라
+      <b>"어떤 주장이든 3초 안에 검증 가능한 형태인지 판별하는 능력"</b>입니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h4>🧭 이 교재를 읽는 법 — 모든 챕터가 같은 3층 구조입니다</h4>
+    <div class="tri" style="margin-bottom:0">
+      <div class="blk said"><span class="tag">화자가 말한 것</span>
+        <p>영상 자막에서 그대로 뽑은 주장. 각색·요약하지 않았습니다.</p></div>
+      <div class="blk chk"><span class="tag">검증 결과</span>
+        <p>학술 논문·전수 거래 데이터·공공기관 자료와 대조한 판정. <b>지지 / 부분지지 / 반증 / 검증불가 / 근거없음</b> 5단계.</p></div>
+      <div class="blk fix"><span class="tag">보강 — 부족한 논리 채우기</span>
+        <p>맞는 말이어도 <b>실행 불가능하면 쓸모없습니다.</b> 빠진 숫자·수식·표본 기준을 채워 <b>내일 바로 쓸 수 있는 규칙</b>으로 바꿉니다. 이 층이 이 교재의 본체입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CH01 기저율 -->
+<section id="base">
+  <div class="snum">CHAPTER 01</div>
+  <h2>어떤 강의를 듣기 전에<br>이 숫자를 먼저 봐야 합니다</h2>
+  <p class="lead">기법을 배우기 전에 <strong>기저율(base rate)</strong>을 알아야 합니다. 기저율이란 "이 일을 시도한 전체 인구 중 성공한 비율"입니다. 이걸 모르면 성공 사례 한 명의 이야기가 실제보다 100배 강하게 들립니다.</p>
+
+  <div class="card dngr">
+    <h4 style="color:var(--red)">가장 흔한 반박부터 처리합니다 — "버티면 된다"</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      "대부분 실패하는 건 중간에 포기해서다"라는 말은 거의 모든 트레이딩 콘텐츠에 등장합니다.
+      이 문장은 <b>실제 데이터로 검정된 적이 있고, 결과는 부정적</b>입니다.<br><br>
+      브라질 선물시장 전수 데이터에서 <b>300거래일(약 1년 3개월) 이상 계속 매매한 사람만 따로 1,551명을 골라냈습니다.</b>
+      이미 "포기한 사람"은 전부 제외한 표본입니다. 그런데도 <em class="r">97%가 수수료 후 손실</em>이었습니다.
+      최저임금 이상을 번 사람은 1.1%, 은행 창구직 초임 이상은 0.5%.
+      같은 논문은 <b>"데이트레이딩을 통한 학습의 증거를 찾지 못했다"</b>고 명시합니다.
+    </p>
+  </div>
+
+  <h3>100명이 시작하면 어떻게 되는가</h3>
+  <div class="fig">
+    <div class="chart" data-chart>
+      <div class="bar-row">
+        <div class="bar-lab"><span>시작 (100명)</span><span class="v">100%</span></div>
+        <div class="bar-track"><div class="bar-fill ref" data-w="100"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>1년 후에도 매매 중</span><span class="v">44%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-w="44"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>2년 후에도 매매 중</span><span class="v">24%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-w="24"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>3년 후에도 매매 중</span><span class="v">15%</span></div>
+        <div class="bar-track"><div class="bar-fill wattb" data-w="15"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>5년 후에도 매매 중</span><span class="v">7%</span></div>
+        <div class="bar-track"><div class="bar-fill wattb" data-w="7"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>수수료 후 <b style="color:var(--tx)">지속적으로</b> 초과수익</span><span class="v">1% 미만</span></div>
+        <div class="bar-track"><div class="bar-fill redb" data-w="1"></div></div>
+      </div>
+    </div>
+    <div class="cap">생존율은 대만 증권거래소 전수 데이터(1992~2006), 최하단 지속 수익 비율은 같은 연구진의 스킬 분석 논문 기준.<br>두 수치는 같은 데이터셋에서 나왔습니다.</div>
+  </div>
+
+  <div class="tri">
+    <div class="blk said"><span class="tag">화자가 말한 것</span>
+      <p>"1년 공부하고도 3년을 계속 잃었습니다. 4년째부터 벌기 시작했어요. 저널을 2~3년은 꾸준히 써야 성과가 나오는데 대부분 이 구간을 못 버티고 포기합니다."</p></div>
+    <div class="blk chk"><span class="tag">검증 결과 — 앞은 맞고 뒤는 반증됨</span>
+      <p><b>"대부분 못 버티고 포기한다"는 정확합니다.</b> 대만 전수 데이터에서 데이트레이더의 80%가 2년 내 이탈합니다.</p>
+      <p><b>그러나 여기 붙는 함의 — "버티면 된다" — 는 정반대 증거가 있습니다.</b> 브라질 연구는 300거래일 이상 버틴 사람만 골라도 97%가 손실이라고 보고합니다. 또 다른 연구는 10년 누적 마이너스에도 계속 매매하는 집단을 문서화했습니다. 즉 이탈률 통계는 <b>"버티는 게 충분조건"이 아니라 "버텨도 대부분 실패한다"</b>는 방향으로 읽어야 합니다.</p></div>
+    <div class="blk fix"><span class="tag">보강 — 시간 규칙을 통계 규칙으로 바꾸기</span>
+      <p>"2~3년 버텨라"는 <b>위험한 형태의 조언</b>입니다. 시간은 손실 한도가 아니기 때문입니다. 대신 이렇게 바꿉니다.</p>
+      <ol>
+        <li><b>사전 중단 기준</b> — 100거래 시점에서 기대값의 95% 신뢰구간 <b>상한</b>이 비용선 아래면 그 전략은 폐기하고 재설계합니다. "조금 더 해보자"가 아니라 계산으로 끊습니다.</li>
+        <li><b>자본 예산</b> — 총 학습 비용 상한을 <b>시간이 아니라 금액</b>으로 미리 고정합니다(예: 총 금융자산의 3%). 이 금액이 소진되면 기간과 무관하게 종료합니다.</li>
+        <li><b>기저율 병기</b> — 위 그래프를 매매일지 첫 페이지에 붙여둡니다. 연패 중에 이걸 보면 "내가 특별히 못한다"가 아니라 "정상 분포 안에 있다"를 알 수 있습니다.</li>
+        <li><b>생존자 편향 인식</b> — "4년째에 됐다"는 서사가 들리는 이유는, <b>4년째에 안 된 96~97%가 유튜브를 하지 않기 때문</b>입니다. 채널 자체가 이미 편향된 표본입니다.</li>
+      </ol></div>
+  </div>
+
+  <h3>손실의 진짜 원인은 기법이 아니라 비용입니다</h3>
+  <p>대만 전수 데이터에서 데이트레이더 전체의 <strong>수수료 차감 전</strong> 일평균 총이익은 <em class="g">+NT$36.4백만</em>이었습니다. 그런데 <strong>수수료를 차감하면</strong> 일평균 <em class="r">−NT$68.9백만 순손실</em>로 뒤집힙니다. 반기 기준 84.3%가 손실이었습니다.</p>
+  <div class="eq">순손익 = N × ( p·W − (1−p)·L ) − N × c
+  <small>N = 거래 횟수 · p = 승률 · W = 평균이익 · L = 평균손실 · c = 왕복 거래비용</small></div>
+  <p>이 식에서 <strong>N(거래 횟수)은 앞항과 뒷항에 동시에 곱해집니다.</strong> 기대값이 양수면 N을 늘릴수록 좋지만, 기대값이 <em class="r">c보다 작으면 N을 늘릴수록 정확히 그만큼 빠르게 잃습니다.</em> 미국 개인투자자 연구에서 회전율 상위 20% 가구는 연 <em class="r">11.4%</em>, 하위 20%는 <em class="g">18.5%</em>였습니다(시장 17.9%). <strong>비용 차감 전 수익률은 두 집단이 거의 같았습니다.</strong> 차이는 전부 비용에서 났습니다.</p>
+
+  <div class="card warn">
+    <h4>⚠️ 프랍(prop) 챌린지를 생각한다면</h4>
+    <p style="margin:6px 0 0;font-size:.93em;color:var(--tx2)">
+      업계 집계 기준 챌린지 통과율은 <b>5~15%</b>대(30만 계좌 분석 14%, 한 대형사 2025년 공시 16.8%),
+      실제로 <b>출금까지 도달한 비율은 전체의 약 7%</b>입니다. 실패 원인 1위는 기법이 아니라 <b>일일 손실 한도 위반</b>입니다.<br>
+      <span class="mute">단, 이 수치들의 출처 상당수가 프랍 업계 자체 매체입니다. 학술 자료가 아니므로 신뢰도는 중간으로 표기합니다.</span>
+    </p>
+  </div>
+</section>
+
+<!-- CH02 기대값 엔진 -->
+<section id="ev">
+  <div class="snum">CHAPTER 02</div>
+  <h2>트레이딩의 전부는<br>이 식 하나입니다</h2>
+  <p class="lead">이 채널 영상 17편에 나오는 <strong>모든 조언은 이 식의 어떤 변수를 건드리는지로 분류됩니다.</strong> 이 식을 이해하면 어떤 조언이 실질적인지 30초 만에 판별할 수 있습니다.</p>
+
+  <div class="eq">E = p · R − (1 − p) − c
+  <small>E = 거래당 기대값 (단위: R) · p = 승률 · R = 손익비(이익÷손실) · c = 왕복 비용(R 단위 환산)</small></div>
+
+  <p><strong>R-multiple</strong>이란 "손절 폭을 1로 놓고 재는 단위"입니다. 손절이 −1%이고 이익이 +2%면 그 거래는 +2R입니다. 계좌 크기·종목·레버리지가 달라도 이 단위로 재면 전부 비교 가능해집니다. <strong>이 채널을 포함해 대부분의 국내 트레이딩 콘텐츠가 이 단위를 쓰지 않는 것이 검증을 어렵게 만드는 1차 원인</strong>입니다.</p>
+
+  <h3>손익분기 승률 — 외워야 할 단 하나의 표</h3>
+  <div class="eq">p* = (1 + c) / (1 + R)
+  <small>이 승률보다 낮으면, 아무리 열심히 해도 수학적으로 잃습니다</small></div>
+  <div class="cmp c4">
+    <div class="hd"><div>손익비 R</div><div>비용 0</div><div>비용 0.1R</div><div>비용 0.2R</div></div>
+    <div class="rw"><div>1 : 1</div><div>50.0%</div><div>55.0%</div><div>60.0%</div></div>
+    <div class="rw"><div>1 : 1.5</div><div>40.0%</div><div>44.0%</div><div>48.0%</div></div>
+    <div class="rw"><div>1 : 2</div><div>33.3%</div><div>36.7%</div><div>40.0%</div></div>
+    <div class="rw"><div>1 : 3</div><div>25.0%</div><div>27.5%</div><div>30.0%</div></div>
+    <div class="rw"><div>1 : 5</div><div>16.7%</div><div>18.3%</div><div>20.0%</div></div>
+  </div>
+  <p class="mute">비용 0.2R은 극단이 아닙니다. 손절 폭을 <b>10틱</b>으로 잡고 왕복 수수료·스프레드·슬리피지가 <b>2틱</b>이면 정확히 0.2R입니다. 스캘핑일수록 이 칸으로 이동합니다.</p>
+
+  <div class="card acc">
+    <h4>💡 여기서 바로 나오는 결론</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      "승률을 올려라"와 "손익비를 키워라"는 <b>둘 다 맞지만 서로 맞바꿈 관계</b>입니다.
+      목표를 멀리 잡으면 도달 확률이 떨어지고, 확인 후 진입하면 승률은 오르지만 진입가가 불리해져 손익비가 깎입니다.<br><br>
+      그래서 정확한 문장은 <b>"승률을 올려라"가 아니라 "p·R − (1−p) 라는 값이 실제로 커지는 지점을 찾아라"</b>입니다.
+      실제 반례: 승률 45% → 55%로 올렸는데 손익비 2.0 → 1.4로 깎이면
+      기대값은 <b>+0.35R → +0.32R로 오히려 나빠집니다.</b>
+    </p>
+  </div>
+
+  <div class="calc">
+    <div class="dh">📐 기대값 계산기 — 직접 움직여보세요</div>
+    <label>승률 p = <b id="lp">45%</b></label>
+    <input type="range" id="ip" min="10" max="85" step="1" value="45">
+    <div class="ticks"><span>10%</span><span>45%</span><span>85%</span></div>
+
+    <label>손익비 R = <b id="lr">2.0</b> (손실 1을 걸고 이익 R을 노림)</label>
+    <input type="range" id="ir" min="5" max="60" step="1" value="20">
+    <div class="ticks"><span>0.5</span><span>2.0</span><span>6.0</span></div>
+
+    <label>왕복 비용 c = <b id="lc">0.05R</b> (수수료 + 스프레드 + 슬리피지)</label>
+    <input type="range" id="ic" min="0" max="40" step="1" value="5">
+    <div class="ticks"><span>0</span><span>0.20R</span><span>0.40R</span></div>
+
+    <div class="dout">
+      <div class="dgrid">
+        <div class="dcell big"><div class="k">거래당 기대값 E</div><div class="v" id="oe">+0.30R</div></div>
+        <div class="dcell"><div class="k">손익분기 승률 p*</div><div class="v" id="op">35.0%</div></div>
+        <div class="dcell"><div class="k">여유 (p − p*)</div><div class="v" id="om">+10.0%p</div></div>
+        <div class="dcell"><div class="k">Kelly 최적 비중 f*</div><div class="v" id="ok">17.5%</div></div>
+        <div class="dcell"><div class="k">권장 거래당 리스크<br><span style="font-size:.85em">(1/4 켈리 · 2% 상한)</span></div><div class="v" id="or">2.0%</div></div>
+        <div class="dcell"><div class="k">200거래 중 기대 최장 연패</div><div class="v" id="ol">8회</div></div>
+        <div class="dcell"><div class="k">기대값 판정에 필요한<br>최소 표본</div><div class="v" id="on">120회</div></div>
+      </div>
+      <div class="dverd ok" id="ov">양의 기대값입니다.</div>
+    </div>
+
+    <div class="dpreset" id="dPre">
+      <button data-p="30" data-r="50" data-c="8">추세추종형 (승률30·손익비5)</button>
+      <button data-p="65" data-r="8" data-c="8">역추세형 (승률65·손익비0.8)</button>
+      <button data-p="55" data-r="10" data-c="20">스캘핑 (고비용)</button>
+      <button data-p="34" data-r="20" data-c="5">영상 속 백테스트값</button>
+    </div>
+    <p class="mute" style="margin:12px 0 0">
+      맨 오른쪽 프리셋이 이 채널이 영상에서 공개한 백테스트 결과값(승률 34% · 손익비 2)입니다. 직접 눌러보세요.
+      비용 슬라이더를 <b>0.05R에서 0.20R로만 올려도</b> 기대값이 어떻게 변하는지 보시면,
+      왜 대만 데이터에서 총이익이 순손실로 뒤집혔는지 그대로 재현됩니다.
+    </p>
+  </div>
+
+  <h3>Kelly — "얼마를 걸 것인가"가 "무엇을 살 것인가"보다 중요한 이유</h3>
+  <div class="eq">f* = p − (1 − p) / R
+  <small>f* = 매 거래에 걸어야 할 자본 비율의 이론적 최적값</small></div>
+  <p>기대값이 <strong>양수여도</strong> 베팅 비율이 f*를 넘으면 <em class="r">장기 자본 성장률이 음수가 됩니다.</em> 즉 <strong>이기는 전략으로도 파산합니다.</strong> 심리 문제가 아니라 산술입니다. 복리 성장률은 대략</p>
+  <div class="eq">g ≈ μ − σ² / 2
+  <small>μ = 평균 수익률 · σ = 변동성. 변동성이 커지면 평균이 같아도 실제 복리 성장은 깎입니다</small></div>
+  <p>이 σ²/2 항 때문에 <strong>손실은 대칭이 아닙니다.</strong> 50% 잃으면 100% 벌어야 본전입니다. 회복에 필요한 수익률은</p>
+  <div class="eq">필요 회복률 = d / (1 − d)
+  <small>d = 낙폭 · d=20% → +25% · d=50% → +100% · d=80% → +400%</small></div>
+  <p>실무에서는 f*를 그대로 쓰지 않습니다. 추정 오차 때문에 <strong>1/4 켈리(f*÷4)</strong>가 표준이고, 거기에 다시 <strong>거래당 최대 2%</strong> 하드캡을 겁니다. 위 계산기의 "권장 리스크"가 그 계산입니다.</p>
+
+  <div class="card">
+    <h4>📏 연패는 실력 문제가 아닙니다 — 미리 계산해두세요</h4>
+    <div class="eq" style="margin:10px 0">기대 최장 연패 ≈ ln(N) / ( −ln(1−p) )
+    <small>N = 총 거래 횟수 · p = 승률</small></div>
+    <p style="margin:6px 0 0;font-size:.93em;color:var(--tx2)">
+      승률 45% · 손익비 2:1인 <b>양의 기대값 전략</b>도 <b>6연패가 약 47거래마다 한 번</b> 나옵니다.
+      연 200거래면 <b>1년에 4번</b>입니다. 승률 30% 추세추종이면 <b>10연패 이상이 정상 범위</b>입니다.<br><br>
+      이 숫자를 <b>미리</b> 알고 시작하는 것과, 연패 중에 처음 마주치는 것은 완전히 다른 경험입니다.
+      대부분의 "뇌동매매"는 <b>정상 변동을 이상 신호로 오독</b>한 데서 시작합니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH03 기법 해부 -->
+<section id="method">
+  <div class="snum">CHAPTER 03</div>
+  <h2>화자의 기법을<br>실행 가능한 규칙으로 번역하기</h2>
+  <p class="lead">영상 17편 전체에서 <strong>구체적 기법 언급은 25건</strong>이었습니다. 그중 <em class="r">숫자로 정의된 진입 규칙은 0개</em>입니다. 아래는 발언을 최대한 호의적으로 재구성한 뒤, 빠진 숫자를 채운 것입니다.</p>
+
+  <div class="tabs">
+    <button class="tab on" data-t="t1">① 진입</button>
+    <button class="tab" data-t="t2">② 손절</button>
+    <button class="tab" data-t="t3">③ 사이징</button>
+  </div>
+
+  <div class="panel on" id="t1">
+    <h3>진입 — "거래량 장대봉 + 되돌림"</h3>
+    <div class="tri">
+      <div class="blk said"><span class="tag">화자가 말한 것</span>
+        <p>"거래량이 크게 실린 장대봉이 나오고, 그 봉의 되돌림 구간에서 들어갑니다. 저는 역추세로 매매합니다. 지지·저항에서 반대 방향으로 잡는 거죠."</p></div>
+      <div class="blk chk"><span class="tag">검증 결과 — 용어 사용이 부정확합니다</span>
+        <p><b>본인이 공개한 백테스트 수치는 승률 30~34%, 손익비 1:2~1:5입니다.</b> 이 조합은 학술·업계 분류상 <em class="w">추세추종(trend-following)의 전형적 시그니처</em>입니다. 역추세 전략은 정반대로 <b>고승률·저손익비</b>(승률 60~70%, 손익비 0.5~1.0)가 나옵니다. 평균회귀는 작은 이익을 자주 먹고 가끔 크게 잃기 때문입니다.</p>
+        <p>또 "장대봉 후 되돌림 진입"은 <b>추세 방향으로 유리한 가격을 기다리는 것</b>이므로 되돌림 매수(pullback entry)이지 역추세가 아닙니다. <b>단기적으로만 반대 방향</b>일 뿐 포지션 방향은 추세와 같습니다.</p>
+        <p>즉 <b>기법 자체가 틀렸다는 게 아니라, 자기 기법에 붙인 이름표가 틀렸습니다.</b> 이게 왜 중요하냐면 — 시청자가 "역추세"라는 단어를 그대로 믿고 <b>진짜 역추세(고점 매도·저점 매수)</b>를 하면 완전히 다른 손익 분포를 만나게 됩니다.</p>
+        <p>거래량 자체는 근거가 있습니다. Order Flow Imbalance(주문 흐름 불균형)와 단기 가격 변화는 <b>선형 관계</b>가 실증되어 있고, 계수는 호가 두께에 반비례합니다. 다만 "장대봉"은 OFI의 <b>매우 거친 대용치</b>입니다.</p></div>
+      <div class="blk fix"><span class="tag">보강 — 숫자로 다시 쓰기</span>
+        <p>"거래량 장대봉"을 검증 가능한 규칙으로 바꾸면:</p>
+        <ol>
+          <li><b>장대봉 정의</b> — 봉 몸통 ≥ 최근 20봉 ATR × 1.5, <b>그리고</b> 거래량 ≥ 최근 20봉 거래량 중앙값 × 2.0. (배수는 예시이며, 본인 데이터로 최적화 대신 <b>인접값 검사</b>를 해야 합니다 — 아래 4장)</li>
+          <li><b>되돌림 정의</b> — 장대봉 고저 범위의 <b>38.2~61.8% 구간</b>으로 되돌아온 뒤, 되돌림을 <b>거부하는 봉</b>(반대 방향 마감)이 나올 때 진입.</li>
+          <li><b>유효 기간</b> — 장대봉 이후 <b>N봉 이내</b>에 조건 미충족이면 무효 처리. N을 안 정하면 사후에 아무 시점이나 "그때가 진입이었다"고 말할 수 있게 됩니다. 이게 <b>검증 불가능성의 핵심 원인</b>입니다.</li>
+          <li><b>이름표 교정</b> — 이 규칙은 <b>추세 방향 되돌림 진입(trend pullback)</b>입니다. 그렇게 부르면 참고할 수 있는 선행 연구·백테스트가 수백 배 많아집니다.</li>
+        </ol></div>
+    </div>
+  </div>
+
+  <div class="panel" id="t2">
+    <h3>손절 — "반대 캔들의 꼬리 끝"</h3>
+    <div class="tri">
+      <div class="blk said"><span class="tag">화자가 말한 것</span>
+        <p>"손절은 진입 근거가 된 캔들의 꼬리 바깥에 둡니다. 그 자리가 깨지면 내 논리가 틀린 거니까요. 손절은 반드시 있어야 하고, 손절을 옮기는 건 최악입니다."</p></div>
+      <div class="blk chk"><span class="tag">검증 결과 — 원칙은 정확, 구현이 위험</span>
+        <p><b>"논리가 무효화되는 지점에 손절을 둔다"는 것은 정확한 원칙입니다.</b> 손절을 옮기지 말라는 것도 처분효과(disposition effect) 연구와 일치합니다.</p>
+        <p>문제는 <b>꼬리 끝은 시장이 가장 자주 건드리는 자리</b>라는 점입니다. 유동성 사냥(stop hunt)은 실제로 관측되는 현상이고, 눈에 보이는 극값 바로 바깥에 주문이 몰립니다. 또 꼬리 길이는 <b>변동성에 따라 제멋대로</b>여서, 같은 규칙이 어떤 날은 0.3%, 어떤 날은 3% 손절이 됩니다. <em class="r">손절 폭이 통제되지 않으면 R 단위 자체가 무너지고, 2장의 모든 계산이 무의미해집니다.</em></p></div>
+      <div class="blk fix"><span class="tag">보강 — ATR로 바닥 고정</span>
+        <div class="eq">손절가 = 무효화 지점 ∓ k × ATR(14)
+        <small>k는 보통 0.3~0.5. 꼬리 끝에 딱 붙이지 않고 변동성만큼 여유를 둡니다</small></div>
+        <ol>
+          <li><b>하한 설정</b> — 손절 폭이 ATR의 0.5배보다 작으면 그 거래는 <b>건너뜁니다</b>. 너무 좁은 손절은 비용 대비 손절폭(c/R)을 폭발시킵니다.</li>
+          <li><b>상한 설정</b> — 손절 폭이 ATR의 3배를 넘으면 역시 건너뜁니다. 사이징이 지나치게 작아져 기대값이 나와도 계좌에 의미가 없습니다.</li>
+          <li><b>"옮기지 마라"의 예외</b> — 손절을 <b>불리한 쪽으로</b> 옮기는 것만 금지입니다. 이익 방향으로 당기는 것(trailing)은 다른 규칙이며, 사전에 정의되어 있으면 허용입니다. 이 구분을 안 하면 "본전 손절도 하지 말라"는 잘못된 결론이 나옵니다.</li>
+        </ol></div>
+    </div>
+  </div>
+
+  <div class="panel" id="t3">
+    <h3>사이징 — "레버리지 = 목표 리스크 ÷ 이격"</h3>
+    <div class="tri">
+      <div class="blk said"><span class="tag">화자가 말한 것</span>
+        <p>"손절까지의 거리가 얼마인지 보고 레버리지를 정합니다. 이격이 좁으면 레버리지를 높이고 넓으면 낮춥니다. 한 번에 3% 정도 리스크를 잡습니다." <span class="mute">(다른 영상에서는 "2% 이하"로 말합니다 — 8장 모순 목록 참조)</span></p></div>
+      <div class="blk chk"><span class="tag">검증 결과 — 수식은 정확, 상수는 과대</span>
+        <p><b>"이격의 역수로 크기를 정한다"는 것은 변동성 기반 포지션 사이징의 정석입니다.</b> 이 부분은 이 채널에서 가장 잘 설명된 대목이고, 학술적으로도 표준입니다.</p>
+        <div class="eq">포지션 크기 = (계좌 × 리스크%) ÷ (진입가 − 손절가)
+        <small>이렇게 하면 손절이 넓든 좁든 손실 금액은 항상 같습니다 — 그래서 R 단위가 성립합니다</small></div>
+        <p>문제는 <b>3%</b>입니다. 승률 45%·손익비 2:1인 <b>양의 기대값</b> 전략도 6연패가 47거래마다 나옵니다. 거래당 3%면 6연패 = <em class="r">−18%</em>, 10연패면 <em class="r">−30%</em>이고, −30%를 회복하려면 +43%가 필요합니다. 승률 30%대 추세추종이면 10연패는 <b>정상 범위</b>입니다.</p></div>
+      <div class="blk fix"><span class="tag">보강 — 상수를 계산으로 대체</span>
+        <ol>
+          <li><b>2장 계산기의 "권장 리스크"를 쓰세요.</b> 1/4 켈리 + 2% 하드캡. 승률·손익비를 넣으면 자동으로 나옵니다.</li>
+          <li><b>파산 확률은 실력이 아니라 사이징의 함수입니다.</b> 같은 전략, 같은 승률이라도 거래당 리스크를 2배로 올리면 파산 확률은 2배가 아니라 <b>기하급수적으로</b> 올라갑니다.</li>
+          <li><b>동시 포지션 상관을 고려하세요.</b> 알트코인 3개를 각 2%로 잡으면 실제로는 6% 단일 베팅입니다. 상관 0.8 이상 자산군은 <b>합산해서</b> 한도를 겁니다.</li>
+        </ol></div>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h4>⚠️ 이 장의 결론</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      화자의 기법은 <b>골격이 틀리지 않았습니다.</b> 거래량·되돌림·무효화 지점 손절·변동성 사이징은 전부 표준 요소입니다.<br>
+      결정적 문제는 <b>단 하나 — 숫자가 없다</b>는 것입니다. 배수가 없고, 유효 기간이 없고, 하한·상한이 없습니다.
+      숫자가 없으면 <b>백테스트도, 반증도, 개선도 불가능</b>합니다. 그래서 시청자는 영상을 다 봐도
+      <em class="r">내일 아침 무엇을 눌러야 하는지 알 수 없습니다.</em>
+    </p>
+  </div>
+</section>
+
+<!-- CH04 백테스트 -->
+<section id="bt">
+  <div class="snum">CHAPTER 04</div>
+  <h2>공개된 백테스트를<br>그대로 뜯어봤습니다</h2>
+  <p class="lead">이 채널은 드물게 <strong>파인스크립트 백테스트 결과를 화면에 공개</strong>했습니다. 검증 가능한 자료를 낸 것 자체가 대부분의 국내 트레이딩 콘텐츠보다 낫습니다. 그래서 <strong>정확히 그 숫자로 검증</strong>합니다.</p>
+
+  <div class="cmp c4">
+    <div class="hd"><div>시간프레임</div><div>거래 수</div><div>총수익</div><div>최대낙폭(MDD)</div></div>
+    <div class="rw"><div>4시간</div><div>257회</div><div>+20%</div><div>41%</div></div>
+    <div class="rw"><div>15분</div><div>—</div><div>—</div><div><em class="r">97.9%</em></div></div>
+    <div class="rw"><div><b>1시간</b></div><div><b>1,057회</b></div><div><b>+18,388%</b></div><div>—</div></div>
+    <div class="rw"><div>5거래소 평균</div><div>1,048회</div><div>+18,629%</div><div>34.4%</div></div>
+  </div>
+  <p class="mute">6년치 비트코인. 1시간봉 승률 34%, 4시간봉 승률 30%로 발표됨. 5거래소 평균은 같은 전략을 바이낸스·바이비트 등에서 각각 돌린 결과.</p>
+
+  <h3>지적 1 — 인샘플/아웃오브샘플 분리가 없습니다</h3>
+  <div class="tri">
+    <div class="blk chk"><span class="tag">문제</span>
+      <p>6년 전체를 한 번에 돌려 파라미터를 맞췄다면, 그 결과는 <b>"과거를 얼마나 잘 외웠는가"</b>이지 <b>"미래에 얼마나 통할까"</b>가 아닙니다. 이것을 과최적화(overfitting)라고 부르며, 백테스트 실패의 압도적 1순위 원인입니다.</p></div>
+    <div class="blk fix"><span class="tag">해야 할 것</span>
+      <p><b>워크포워드 검증</b> — 6년을 6구간으로 자르고, 1~2구간으로 파라미터를 정한 뒤 <b>3구간에서 손대지 않고</b> 성과를 측정합니다. 그다음 창을 한 칸 밀어 반복합니다. <b>OOS(아웃오브샘플) 구간의 성과만</b> 실제 기대값으로 인정합니다.</p>
+      <p>보통 OOS 성과는 IS의 <b>절반 이하</b>로 떨어집니다. 만약 +18,388%가 OOS에서도 유지된다면 그건 정말 대단한 발견이고, 유지되지 않는다면 그 숫자는 <b>과거 데이터에 대한 기억</b>이었을 뿐입니다.</p></div>
+  </div>
+
+  <h3>지적 2 — 비용이 반영되지 않았습니다 (가장 치명적)</h3>
+  <p>승률 34%, 손익비 2:1이면 손익분기 승률은 <strong>33.3%</strong>입니다. 여유는 <em class="w">0.7%p</em>. 승률 30%·손익비 5:1이면 손익분기 16.7%, 여유 13.3%p로 넉넉해 보이지만 — <strong>비용을 0.2R만 넣어도</strong> 손익분기가 20%로 올라갑니다.</p>
+  <div class="fig">
+    <div class="chart" data-chart>
+      <div class="bar-row">
+        <div class="bar-lab"><span>발표 승률 (1시간봉)</span><span class="v">34.0%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-w="34"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>손익분기 승률 — 비용 0</span><span class="v">33.3%</span></div>
+        <div class="bar-track"><div class="bar-fill ref" data-w="33.3"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>손익분기 승률 — 비용 0.1R</span><span class="v">36.7%</span></div>
+        <div class="bar-track"><div class="bar-fill wattb" data-w="36.7"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>손익분기 승률 — 비용 0.2R</span><span class="v">40.0%</span></div>
+        <div class="bar-track"><div class="bar-fill redb" data-w="40"></div></div>
+      </div>
+    </div>
+    <div class="cap">파란 막대(실제 승률)가 회색·노랑·빨강보다 <b>위</b>여야 돈을 법니다.<br>비용 0.1R만 되어도 순서가 뒤집힙니다 — 1,057회 거래에서 이 차이는 계좌 전체를 결정합니다.</div>
+  </div>
+  <p><strong>15분봉 MDD 97.9%가 결정적 증거입니다.</strong> 낙폭 97.9%면 사실상 청산입니다. 같은 전략이 1시간봉에서는 되고 15분봉에서는 전멸했다는 것은 — <em class="r">시간프레임이 짧아질수록 거래당 이익 대비 비용 비중이 커진다</em>는 구조를 그대로 보여줍니다. 즉 <strong>이 전략의 성패를 가른 것은 로직이 아니라 비용선</strong>입니다.</p>
+
+  <h3>지적 3 — 5거래소 평균은 독립 검증이 아닙니다</h3>
+  <div class="tri">
+    <div class="blk said"><span class="tag">화자의 논리</span>
+      <p>"한 거래소만 그런 게 아니라 5개 거래소 평균으로도 같은 결과가 나왔습니다."</p></div>
+    <div class="blk chk"><span class="tag">문제 — 유효 독립 시행 수는 5가 아니라 약 1</span>
+      <p>비트코인 가격은 거래소 간 <b>상관계수가 0.99 이상</b>입니다. 차익거래가 실시간으로 가격차를 지웁니다. 따라서 5거래소 백테스트는 <b>거의 같은 데이터를 5번 돌린 것</b>이며, 통계적 <b>유효 표본 수는 1에 가깝습니다.</b></p>
+      <p>정보 이론적으로도 같습니다. 같은 가격 데이터를 다르게 가공한 지표를 여러 개 겹치면 <b>확신은 올라가지만 정확도는 안 올라갑니다.</b> 경마 핸디캐퍼 실험에서 정보를 5개 → 40개로 늘렸을 때 <b>적중률은 17%로 변하지 않았고, 확신만 19% → 34%로 올랐습니다.</b></p></div>
+    <div class="blk fix"><span class="tag">진짜 독립 검증은 이렇게</span>
+      <ol>
+        <li><b>다른 자산군</b> — 이더리움, 나스닥 선물, 금. 상관이 낮은 시장에서도 작동하면 로직이 일반적입니다.</li>
+        <li><b>다른 기간</b> — 2017~2018 사이클과 2021~2022 사이클을 분리해서 각각 봅니다.</li>
+        <li><b>인접 파라미터 검사</b> — 배수 2.0이 좋다면 1.8과 2.2도 비슷해야 합니다. <em class="r">인접값에서 성과가 3배 이상 튀면 그건 과최적화의 지문</em>입니다.</li>
+      </ol></div>
+  </div>
+
+  <h3>지적 4 — 다중검정 보정 (여기가 가장 중요합니다)</h3>
+  <p>파라미터 조합을 수십·수백 개 시도해서 가장 좋은 것을 고르면, <strong>순전한 운으로도</strong> 좋아 보이는 결과가 반드시 나옵니다. 이걸 데이터 스누핑(data snooping)이라 하고, 금융 전략 백테스트에서 체계적으로 문서화된 문제입니다.</p>
+  <div class="eq">보정 유의수준 α' = α / k
+  <small>k = 시도한 전략·파라미터 조합의 수. 100개를 시도했으면 5%가 아니라 0.05%를 넘어야 유의합니다</small></div>
+  <p>실무 기준 3가지:</p>
+  <div class="check">
+    <div class="cline"><div class="bx">1</div><div class="lt"><em>Deflated Sharpe Ratio</em> — 시도 횟수와 수익률 분포의 왜도·첨도를 반영해 샤프비율을 깎아내린 값. 이게 0보다 유의하게 크지 않으면 <b>발견이 아니라 잡음</b>입니다.</div></div>
+    <div class="cline"><div class="bx">2</div><div class="lt"><em>PBO (Probability of Backtest Overfitting)</em> — 인샘플 1등 전략이 아웃샘플에서 중앙값 아래로 떨어질 확률. 50%를 넘으면 그 백테스트 절차 자체가 무작위보다 나쁩니다.</div></div>
+    <div class="cline"><div class="bx">3</div><div class="lt"><em>Reality Check</em> — 전체 탐색 공간을 부트스트랩으로 재현해, 최고 성과가 <b>운으로 나올 확률</b>을 직접 계산합니다.</div></div>
+  </div>
+
+  <div class="card acc">
+    <h4>💡 공정하게 말하면</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      이 채널은 <b>백테스트 수치를 공개했습니다.</b> 그건 검증받을 각오가 있다는 뜻이고, 실제로 이 장의 분석이 가능해진 이유입니다.
+      "저만 아는 비법"이라며 아무 숫자도 안 내는 콘텐츠보다 <b>훨씬 정직한 태도</b>입니다.<br><br>
+      다만 <b>공개된 숫자가 곧 검증된 숫자는 아닙니다.</b> 위 4개 절차 중 하나라도 통과한 근거가 영상에 없습니다.
+      시청자로서 해야 할 일은 "믿는다/안 믿는다"가 아니라 — <b>"OOS 결과는 얼마였나요?"라고 묻는 것</b>입니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH05 매매일지 -->
+<section id="journal">
+  <div class="snum">CHAPTER 05</div>
+  <h2>매매일지 —<br>이 채널에서 가장 옳은 부분,<br>그리고 빠진 조건</h2>
+  <p class="lead">17편 중 <strong>10편이 매매일지를 다룹니다.</strong> 이건 이 채널의 중심 주제이고, 검증 결과 <strong>가장 근거가 탄탄한 영역</strong>이었습니다. 다만 그냥 쓰기만 하면 효과가 없거나 <em class="r">오히려 나빠질 수 있다</em>는 조건이 빠져 있습니다.</p>
+
+  <div class="tri">
+    <div class="blk said"><span class="tag">화자가 말한 것</span>
+      <p>"매매일지를 쓰세요. 결과가 아니라 과정을 기록하세요. 그때 무슨 생각을 했는지, 왜 들어갔는지를 적어야 합니다. 이걸 2~3년 하면 반드시 달라집니다."</p></div>
+    <div class="blk chk"><span class="tag">검증 결과 — 방향은 맞지만 조건부입니다</span>
+      <p>피드백 효과에 대한 가장 큰 메타분석은 <b>607개 효과크기, 23,663개 관측</b>을 종합했습니다. 평균 효과는 <em class="g">d = 0.41</em>로 확실히 양수입니다.</p>
+      <p><b>그런데 같은 분석에서 전체 피드백 개입의 3분의 1 이상이 성과를 오히려 떨어뜨렸습니다.</b> 이건 예외가 아니라 규모 있는 하위 집단입니다.</p>
+      <p>악화되는 조건이 특정되어 있습니다 — <b>피드백이 과제(task)가 아니라 자아(self)를 향할 때</b>입니다. "이 진입은 규칙 3번을 위반했다"는 개선을 만들고, "나는 왜 이렇게 멍청하지"는 성과를 떨어뜨립니다. 매매일지는 <b>구조상 자아 지향으로 흐르기 쉽습니다.</b> 돈이 걸려 있고, 혼자 쓰고, 감정이 생생하기 때문입니다.</p>
+      <p>또 하나 — 경험 자체가 학습이 되려면 <b>친절한 환경(kind environment)</b>이어야 합니다. 피드백이 빠르고 정확하고 규칙이 안정적인 환경(체스, 골프)에서는 반복이 실력이 됩니다. <em class="r">시장은 사악한 환경(wicked environment)입니다.</em> 나쁜 판단이 좋은 결과를 낳고, 좋은 판단이 손실로 끝납니다. 이 환경에서 <b>결과만 보고 배우면 잘못된 것을 학습합니다.</b></p></div>
+    <div class="blk fix"><span class="tag">보강 — 효과가 나는 일지의 조건</span>
+      <p>"과정을 적어라"는 정확한 처방입니다. 여기에 <b>구조</b>를 붙입니다.</p></div>
+  </div>
+
+  <h3>프로세스 × 결과 2×2 — 일지의 핵심 도구</h3>
+  <div class="mirror">
+    <div class="mh a">좋은 프로세스</div>
+    <div class="mh b">나쁜 프로세스</div>
+    <div class="mc"><b style="color:var(--green)">+ 결과도 좋음 → 마땅한 성공</b><br>규칙대로 했고 벌었습니다. 기록만 하고 넘어갑니다. 여기서 배울 건 적습니다.</div>
+    <div class="mc"><b style="color:var(--red)">+ 결과는 좋음 → 눈먼 행운</b><br><em class="r">가장 위험한 칸입니다.</em> 규칙을 어겼는데 벌었습니다. 뇌는 이걸 "내 감이 맞았다"로 저장합니다. 다음번에 반드시 반복하고, 그때는 잃습니다.</div>
+    <div class="mc"><b style="color:var(--watt)">+ 결과는 나쁨 → 정당한 손실</b><br>규칙대로 했는데 잃었습니다. <b>아무것도 바꾸지 마세요.</b> 여기서 규칙을 고치는 게 대부분의 전략이 죽는 방식입니다.</div>
+    <div class="mc"><b>+ 결과도 나쁨 → 응당한 처벌</b><br>규칙을 어겼고 잃었습니다. 배우기 가장 쉬운 칸이고, 실제로는 가장 덜 위험합니다.</div>
+  </div>
+  <p><strong>일지의 존재 이유는 이 2×2에서 오른쪽 위 칸(눈먼 행운)을 잡아내는 것</strong>입니다. 결과만 기록하면 이 칸은 <em class="r">영원히 성공으로 분류됩니다.</em> 화자가 말한 "결과가 아니라 과정"은 정확히 이 문제를 겨냥합니다.</p>
+
+  <h3>최소 기록 필드 — 이거면 충분합니다</h3>
+  <div class="check">
+    <div class="cline"><div class="bx">1</div><div class="lt"><em>진입 전에</em> 적는 것: 셋업 태그 / 손절가 / 목표가 / 계산된 R / 포지션 크기. <b>진입 후에 적으면 사후합리화가 섞입니다.</b></div></div>
+    <div class="cline"><div class="bx">2</div><div class="lt"><em>규칙 준수 여부</em>: Y/N 한 글자. 이 필드가 2×2를 만듭니다. 없으면 일지가 그냥 손익 기록이 됩니다.</div></div>
+    <div class="cline"><div class="bx">3</div><div class="lt"><em>결과</em>: 실현 R (금액 아님). 금액으로 적으면 계좌가 커질 때 과거와 비교가 안 됩니다.</div></div>
+    <div class="cline"><div class="bx">4</div><div class="lt"><em>MFE / MAE</em>: 청산 전 최대 미실현 이익 / 최대 미실현 손실. 이 두 개가 <b>"목표가 너무 멀었나 / 손절이 너무 좁았나"</b>를 데이터로 답합니다.</div></div>
+    <div class="cline"><div class="bx">5</div><div class="lt"><em>감정 라벨</em>: 단어 하나. "조급", "복수", "불안". 문장으로 쓰면 자아 지향으로 흐릅니다. <b>라벨 하나가 오히려 효과가 큽니다</b> (6장).</div></div>
+  </div>
+
+  <h3>일지를 통계로 바꾸는 법</h3>
+  <p>기록만 쌓으면 감상문입니다. 아래 규칙으로 <strong>의사결정 도구</strong>가 됩니다.</p>
+  <div class="check">
+    <div class="cline"><div class="bx">6</div><div class="lt"><b>태그당 최소 표본</b> — 셋업 태그별 기대값은 <em>n ≥ 30</em>부터 참고, <em>n ≥ 100</em>부터 신뢰. 20거래에서 승률 65%가 나와도 <b>진짜 승률이 20%일 확률이 0.2를 넘습니다.</b> 노이즈입니다.</div></div>
+    <div class="cline"><div class="bx">7</div><div class="lt"><b>다중검정 보정</b> — 태그를 10개 만들어놓고 "이 태그가 제일 좋다"를 고르는 건 10번 검정한 것입니다. 유의수준을 <em>α/10</em>으로 낮춰야 합니다. 안 그러면 <b>가장 운 좋았던 태그를 실력으로 착각</b>합니다.</div></div>
+    <div class="cline"><div class="bx">8</div><div class="lt"><b>60/40 분할 검증</b> — 기록의 앞 60%에서 "좋은 태그"를 찾고, <b>뒤 40%에서 손대지 않고</b> 확인합니다. 4장의 워크포워드를 일지에 적용한 것입니다.</div></div>
+    <div class="cline"><div class="bx">9</div><div class="lt"><b>중단 규칙</b> — 태그별 기대값 95% 신뢰구간의 <b>상한</b>이 비용선 아래로 내려가면 그 셋업은 폐기합니다. "조금 더 해보자"를 계산으로 대체합니다.</div></div>
+  </div>
+
+  <div class="card good">
+    <h4>✅ 이 장의 결론</h4>
+    <p style="margin:6px 0 0;font-size:.94em;color:var(--tx2)">
+      <b>"일지를 써라"는 이 채널에서 가장 근거가 강한 조언입니다.</b> 48건 검증 중 완전 지지 판정 2건이 모두 이 영역에서 나왔습니다.<br><br>
+      다만 <b>"2~3년 꾸준히"가 아니라 "n≥100, 분할 검증, 자아 아닌 과제 지향"</b>이 정확한 조건입니다.
+      조건 없이 오래 쓰면 <b>1/3 확률로 아무 효과가 없거나 나빠집니다.</b>
+    </p>
+  </div>
+</section>
+
+<!-- CH06 심리 -->
+<section id="psy">
+  <div class="snum">CHAPTER 06</div>
+  <h2>심리 —<br>여기서 이 채널은<br>대부분의 학자보다 정확합니다</h2>
+  <p class="lead">48건 검증 중 <strong>완전 지지 판정이 나온 2건은 모두 심리 영역</strong>이었습니다. 화자가 자기 경험에서 도출한 내용이 <strong>실험 결과와 정확히 일치</strong>합니다.</p>
+
+  <div class="tri">
+    <div class="blk said"><span class="tag">화자가 말한 것 ①</span>
+      <p>"손실을 만회하려고 들어가면 반드시 더 잃습니다. 그리고 우리는 이익은 빨리 확정하고 손실은 계속 들고 갑니다. 그게 사람 본능이에요."</p></div>
+    <div class="blk chk"><span class="tag">검증 — 완전 지지, 숫자까지 있습니다</span>
+      <p>미국 개인 계좌 <b>1만 개</b>를 추적한 연구에서, 투자자가 매도한 종목의 <em class="g">60%가 수익 종목</em>, <em class="r">40%가 손실 종목</em>이었습니다. 이익 실현 비율이 손실 실현 비율보다 <b>약 50% 높았습니다.</b> 이걸 처분효과(disposition effect)라고 부릅니다.</p>
+      <p>결정적으로 — <b>이 행동은 이후 성과로 정당화되지 않았습니다.</b> 판 종목이 계속 올랐고, 들고 있던 손실 종목은 더 떨어졌습니다. 즉 "느낌상 옳은" 행동이 <b>측정 가능한 손해</b>였습니다.</p></div>
+    <div class="blk fix"><span class="tag">보강 — 의지가 아니라 구조로 막습니다</span>
+      <p>이 부분이 화자의 조언에서 빠진 결정적 조각입니다. 화자는 "마인드를 잡아라"로 끝나는데, <b>실험은 구조가 의지를 이긴다</b>고 말합니다.</p>
+      <p>한 실험에서 <b>매입가를 화면에 표시하지 않는 것만으로</b> 처분효과가 <em class="g">25% 감소</em>했습니다. 교육도, 결심도, 훈련도 아니고 <b>화면에서 숫자 하나를 지운 것</b>입니다.</p>
+      <ol>
+        <li><b>손익 금액을 가리세요.</b> 포지션 화면에서 평가손익을 숨기고 <b>R 단위</b>만 봅니다. "−$3,200"은 감정을 만들지만 "−0.6R"은 정보입니다.</li>
+        <li><b>손절·익절 주문을 진입과 동시에 넣으세요.</b> 나중에 결정할 여지를 남기지 않습니다. 결정하지 않으면 편향이 작동할 자리가 없습니다.</li>
+        <li><b>일일 손실 한도를 거래소 단에서 잠그세요.</b> 프랍 챌린지 실패 원인 1위가 일일 손실 한도 위반입니다. 한도를 <b>스스로 지키는 것</b>과 <b>못 어기게 만드는 것</b>은 다른 문제입니다.</li>
+      </ol></div>
+  </div>
+
+  <div class="tri">
+    <div class="blk said"><span class="tag">화자가 말한 것 ②</span>
+      <p>"감정을 억누르려고 하지 마세요. 오히려 '아 내가 지금 조급하구나' 하고 인정하고 적으면 가라앉습니다."</p></div>
+    <div class="blk chk"><span class="tag">검증 — 완전 지지. 두 개의 독립된 실험 계열과 일치</span>
+      <p><b>억제하면 강해집니다.</b> 사고 억제 연구는 "생각하지 말자"고 결심하면 그 생각의 빈도가 <b>오히려 증가</b>한다는 것을 반복적으로 보였습니다. 감시 과정이 계속 대상을 확인하기 때문입니다. 인지 부하가 높을 때(= 손실 중일 때) 효과가 더 강해집니다.</p>
+      <p><b>이름 붙이면 약해집니다.</b> 감정에 단어를 붙이는 것(affect labeling)만으로 편도체 반응이 감소하고 전전두엽 활동이 증가하는 것이 관찰됩니다. 중요한 건 — <b>이 효과는 본인이 효과가 있다고 느끼지 못해도 나타납니다.</b></p>
+      <p>화자는 실험을 모르는 채로 <b>"억제하지 말고 라벨링하라"</b>는 정확한 처방에 도달했습니다. 이건 이 채널에서 가장 값진 대목입니다.</p></div>
+    <div class="blk fix"><span class="tag">보강 — 그래서 5장의 감정 필드는 "단어 하나"입니다</span>
+      <p>일지에 감정을 <b>문장으로</b> 쓰면 반추(rumination)가 되고, 반추는 자아 지향 피드백이 되어 <b>성과를 떨어뜨리는 1/3에 들어갑니다.</b> <b>단어 하나</b>가 라벨링이고, 문단은 반추입니다. 이 차이가 5장에서 감정 필드를 <b>한 단어로 제한한 이유</b>입니다.</p></div>
+  </div>
+
+  <h3>연패는 이상 신호가 아닙니다</h3>
+  <p>대부분의 "뇌동매매"는 <strong>정상 변동을 이상 신호로 오독</strong>하면서 시작됩니다. "규칙이 안 통하나 봐" → 규칙 변경 → 표본 리셋 → 영원히 검증 불가. 2장의 연패 계산기를 <strong>미리</strong> 돌려두면 이 고리가 끊깁니다.</p>
+  <div class="flow">
+    <div class="n">연패 시작</div><div class="ar">→</div>
+    <div class="n bad">"내 전략 죽었나?"</div><div class="ar">→</div>
+    <div class="n bad">규칙 변경</div><div class="ar">→</div>
+    <div class="n bad">표본 리셋</div><div class="ar">→</div>
+    <div class="n bad">영원히 n&lt;100</div>
+  </div>
+  <div class="flow">
+    <div class="n">연패 시작</div><div class="ar">→</div>
+    <div class="n hot">"승률 45%면 6연패는 47거래마다"</div><div class="ar">→</div>
+    <div class="n hot">규칙 유지</div><div class="ar">→</div>
+    <div class="n hot">표본 누적</div><div class="ar">→</div>
+    <div class="n wt">n=100에서 판정</div>
+  </div>
+</section>
+
+<!-- CH07 판정 -->
+<section id="verdicts">
+  <div class="snum">CHAPTER 07</div>
+  <h2>주요 발언 판정<br><span style="font-size:.62em;font-weight:700;color:var(--tx3)">— 카드를 눌러 근거를 확인하세요</span></h2>
+  <p class="lead">17편에서 <strong>124건의 주장</strong>을 추출해 <strong>48건</strong>을 학술·통계 기준으로 검증했습니다. 아래는 그중 대표 14건입니다. <span class="pill p-o">지지</span> <span class="pill p-t">부분</span> <span class="pill p-x">반증</span></p>
+
+  <div class="myths">
+
+    <div class="myth ok">
+      <div class="q"><span class="badge">완전 지지</span><span class="txt">"결과가 아니라 과정을 봐야 한다"<span class="hint">복기를 하지 않는다면, 당신의 계좌는 절대 불지 않는다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>검증</h5>
+        <p>결과 편향(outcome bias)은 실험적으로 확립된 현상입니다. 동일한 의사결정 과정을 보여주고 결과만 바꿔서 제시하면, 사람들은 <b>결과가 좋았던 쪽의 판단 품질을 유의하게 높게</b> 평가합니다. 판단 과정 정보가 충분히 주어져도 그렇습니다.</p>
+        <p>시장은 나쁜 판단이 좋은 결과를 낳는 일이 흔한 환경이라, 결과 기반 학습은 <b>체계적으로 틀린 것을 강화</b>합니다.</p>
+        <h5>보강</h5>
+        <p>5장의 프로세스×결과 2×2가 이 원칙을 실행 가능한 형태로 바꾼 것입니다. "규칙 준수 Y/N" 한 글자만 기록해도 <b>눈먼 행운 칸</b>이 분리됩니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/l1xghhOhwVA">https://youtu.be/l1xghhOhwVA</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth ok">
+      <div class="q"><span class="badge">완전 지지</span><span class="txt">"감정을 누르지 말고 인정하고 적어라"<span class="hint">매번 뇌동매매하는 사람들은 필수로 시청해야 하는 영상</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>검증</h5>
+        <p>사고 억제는 역효과(ironic process)를 냅니다. 억제하려는 대상의 출현 빈도가 오히려 증가하며, 인지 부하가 높을수록 강해집니다. 반대로 감정에 단어를 붙이는 것(affect labeling)은 편도체 반응을 낮춥니다. 화자의 처방이 두 실험 계열과 <b>정확히 일치</b>합니다.</p>
+        <h5>보강</h5>
+        <p>단, <b>단어 하나</b>여야 합니다. 문단으로 쓰면 반추가 되고 자아 지향 피드백으로 변질됩니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/-cswpRnOsjM">https://youtu.be/-cswpRnOsjM</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth no">
+      <div class="q"><span class="badge">반증</span><span class="txt">"저는 역추세로 매매합니다"<span class="hint">5년간 미친듯이 연구했던 역추세 패턴 대공개</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>왜 반증인가</h5>
+        <p>본인이 공개한 백테스트 수치가 <b>승률 30~34%, 손익비 1:2~1:5</b>입니다. 이 조합은 <b>추세추종의 전형적 시그니처</b>입니다. 역추세(평균회귀) 전략은 구조상 반대 분포 — <b>고승률·저손익비</b>가 나옵니다. 작은 이익을 자주 먹고 가끔 크게 잃기 때문입니다.</p>
+        <p>기법 자체가 틀렸다는 뜻이 <b>아닙니다.</b> 자기 기법에 붙인 <b>이름표가 틀렸습니다.</b> 시청자가 이 단어를 그대로 믿고 진짜 역추세(고점 매도)를 하면 완전히 다른 손익 분포를 만납니다.</p>
+        <h5>보강</h5>
+        <p>정확한 이름은 <b>추세 방향 되돌림 진입(trend pullback)</b>입니다. 그렇게 부르면 참고 가능한 선행 연구가 수백 배 늘어납니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/biVKykmvNN4">https://youtu.be/biVKykmvNN4</a> · <a href="https://youtu.be/cEO-wun3zJg">https://youtu.be/cEO-wun3zJg</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth no">
+      <div class="q"><span class="badge">반증</span><span class="txt">"장대봉 되돌림에서 잡는 게 역추세다"<span class="hint">아무도 알려주지 않은 구체적인 매매일지 작성법 외</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>왜 반증인가</h5>
+        <p>되돌림 진입은 <b>추세 방향으로 유리한 가격을 기다리는 행위</b>입니다. 진입 순간의 단기 움직임만 반대일 뿐, <b>포지션 방향은 추세와 같습니다.</b> 이건 업계 표준 용어로 pullback / retracement entry이며 counter-trend와 명확히 구분됩니다.</p>
+        <h5>왜 중요한가</h5>
+        <p>용어가 틀리면 <b>손절 위치·목표 설정·기대 승률이 전부 어긋납니다.</b> 역추세 전략의 손절은 극값 바깥이지만, 되돌림 진입의 손절은 <b>되돌림 구간의 무효화 지점</b>입니다. 같은 규칙을 다른 이름으로 실행하면 다른 결과가 나옵니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/5_WOLjYmyFA">https://youtu.be/5_WOLjYmyFA</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth un">
+      <div class="q"><span class="badge">검증 불가</span><span class="txt">"내 매매 원칙만 지키면 됩니다"<span class="hint">10분만에 돈버는 매매전략을 선택하는 방법</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>왜 검증 불가인가</h5>
+        <p>"원칙"의 내용이 <b>어느 영상에도 숫자로 정의되어 있지 않습니다.</b> 진입 조건의 배수, 유효 기간, 손절 하한·상한이 없습니다. 정의가 없으면 <b>지켰는지 여부조차 판정할 수 없고</b>, 따라서 반증도 불가능합니다.</p>
+        <p>결과가 좋으면 "원칙을 지켰다", 나쁘면 "원칙을 어겼다"로 <b>사후에 언제나 설명 가능</b>해집니다. 이 구조를 가진 주장은 참·거짓을 논할 수 없습니다.</p>
+        <h5>보강</h5>
+        <p>3장의 4개 항목(장대봉 정의·되돌림 정의·유효 기간·이름표)을 채우면 검증 가능한 명제가 됩니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/xsbiZNa4tKg">https://youtu.be/xsbiZNa4tKg</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth un">
+      <div class="q"><span class="badge">검증 불가</span><span class="txt">"매매일지를 2~3년 쓰면 반드시 달라진다"<span class="hint">아무도 알려주지 않은 구체적인 매매일지 작성법</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>왜 검증 불가인가</h5>
+        <p>"달라진다"의 판정 기준이 없습니다. 수익률인지, 규칙 준수율인지, 심리 안정인지 불명확합니다. 기간도 <b>2~3년</b>이라 반증하려면 최소 3년이 필요하고, 3년 후 실패하면 "제대로 안 썼다"로 회피 가능합니다.</p>
+        <h5>실제 데이터는 이렇게 말합니다</h5>
+        <p>피드백 개입 메타분석(효과크기 607개, 관측 23,663개)의 평균 효과는 <b>d=0.41</b>로 양수입니다. 그러나 <b>전체의 3분의 1 이상에서 성과가 오히려 떨어졌습니다.</b> 즉 "반드시"는 성립하지 않습니다. 조건부입니다.</p>
+        <h5>보강</h5>
+        <p>기간(2~3년) 대신 <b>표본(n≥100) + 과제 지향 + 60/40 분할 검증</b>으로 조건을 바꾸면 검증 가능해집니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/5_WOLjYmyFA">https://youtu.be/5_WOLjYmyFA</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth un">
+      <div class="q"><span class="badge">근거 없음</span><span class="txt">"80억"<span class="hint">80억 트레이더의 하루는 어떨까? / 채널명은 50억</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>확인된 것</h5>
+        <p>채널명은 <b>50억</b>, 영상 제목은 <b>80억</b>입니다. 두 수치의 근거·시점·산정 방식(총자산인지 수익 누계인지 운용 규모인지)이 <b>어디에도 제시되지 않습니다.</b> 감사받은 거래명세서나 제3자 검증 자료가 없습니다.</p>
+        <h5>제도적 맥락</h5>
+        <p>국내에서 유사투자자문업은 <b>등록이 아니라 신고</b>만으로 영업 가능하며, 금융분쟁조정 대상이 아닙니다. 금융감독원은 <b>허위·미실현 수익률 표시광고를 금지</b>하고 있고, 2025년 10월 관련 캠페인을 진행했습니다.</p>
+        <h5>독자가 할 일</h5>
+        <p>수익 인증은 <b>거래소 API 기반 원장</b> 또는 <b>세무 자료</b>가 아니면 검증할 수 없습니다. 스크린샷은 검증 자료가 아닙니다. 이건 이 채널만의 문제가 아니라 <b>업계 전체의 구조적 문제</b>입니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/-Ee22Kd-NTI">https://youtu.be/-Ee22Kd-NTI</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"시장 분석은 필요 없다"<span class="hint">매매에서 시장분석이 필요 없는 이유</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분</h5>
+        <p>정보를 늘려도 정확도는 안 오르고 확신만 오릅니다. 경마 핸디캐퍼 실험에서 정보를 <b>5개 → 40개</b>로 늘렸을 때 적중률은 <b>17%로 불변</b>, 확신은 <b>19% → 34%</b>로 올랐습니다. 같은 가격 데이터를 재가공한 지표를 여러 개 겹치는 것은 <b>정보량 증가가 아닙니다</b>(다중공선성).</p>
+        <h5>틀린 부분</h5>
+        <p>개인 손실의 주원인은 <b>분석 스타일이 아니라 비용과 과매매</b>입니다. 대만 전수 데이터에서 데이트레이더의 수수료 차감 전 총이익은 <b>일평균 +NT$36.4백만</b>이었지만, 차감 후에는 <b>−NT$68.9백만 순손실</b>이었습니다. 반기 기준 84.3%가 손실. 즉 "분석을 줄여라"보다 <b>"거래 횟수와 비용을 줄여라"</b>가 정확한 처방입니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/PTLIQrmH0qE">https://youtu.be/PTLIQrmH0qE</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"시장은 이번 폭락을 미리 말해줬다"<span class="hint">분명 시장은 이번 비트 폭락을 미리 말해줬습니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분</h5>
+        <p>파생 포지션 과열 지표(펀딩비·미결제약정·레버리지 비율)와 대규모 청산 사이의 관계는 실증됩니다. 2025년 10월 청산 규모는 <b>약 190억 달러</b>였습니다. 사후적으로 과열 신호가 있었던 것도 사실입니다.</p>
+        <h5>문제 — 같은 채널의 다른 영상과 정면 충돌</h5>
+        <p>이 영상은 <b>"시장이 신호를 줬다"</b>고 말하는데, 같은 채널의 <a href="https://youtu.be/PTLIQrmH0qE">시장분석 필요 없다</a> 영상은 <b>"분석은 무용하다"</b>고 말합니다. 두 명제는 양립하기 어렵습니다.</p>
+        <h5>더 큰 문제 — 사후 선택</h5>
+        <p>과열 신호는 <b>폭락하지 않은 구간에서도 수없이 나타납니다.</b> 사전에 임계값을 고정하고 <b>모든 발생 사례의 결과</b>를 세지 않으면, "미리 말해줬다"는 명제는 <b>맞은 경우만 세는 것</b>이 됩니다. 필요한 것은 신호의 <b>정밀도(precision)와 재현율(recall)</b>입니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/aP0ZJ5vyIAE">https://youtu.be/aP0ZJ5vyIAE</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"트레이딩은 투자가 아니라 사업이다"<span class="hint">트레이딩은 투자가 아니라 "사업" 입니다</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분</h5>
+        <p>비유 자체는 유용합니다. 고정비(수수료·데이터·시간), 재고 회전(포지션), 손익계산서(R 기록)로 사고하게 만듭니다. 특히 <b>"수익은 매출이 아니라 이익"</b>이라는 관점은 비용 인식을 개선합니다.</p>
+        <h5>빠진 것</h5>
+        <p>사업과 결정적으로 다른 점 — <b>사업은 규모의 경제가 있고 트레이딩에는 역(逆)규모가 있습니다.</b> 자본이 커지면 시장 충격 비용이 늘고 실행 가능한 전략이 줄어듭니다. 또 사업은 고객을 늘려 매출을 늘리지만, 트레이딩은 <b>거래를 늘리면 비용이 먼저 늘어납니다</b>(1장 회전율 데이터: 상위 20% 연 11.4% vs 하위 20% 18.5%).</p>
+        <div class="cite">출처: <a href="https://youtu.be/hkpRX2gXRi8">https://youtu.be/hkpRX2gXRi8</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"불가능하다고 말하는 사람들의 말을 듣지 마라"<span class="hint">불가능하다고 말하는 사람들에게 해주고 싶은 말</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분</h5>
+        <p>지속적 초과수익을 내는 개인이 <b>존재하는 것은 데이터로 확인됩니다.</b> 대만 전수 데이터에서 <b>직전 성과 상위 500명</b>은 다음 해에 <em class="g">+37.9bp/일</em>, 하위는 <em class="r">−28.9bp/일</em>로 성과 지속성이 통계적으로 유의했습니다. "전부 도박"은 틀린 말입니다.</p>
+        <h5>틀린 부분 — 비율이 빠졌습니다</h5>
+        <p>같은 연구에서 그 비율은 <b>전체의 1% 미만</b>입니다. "가능하다"와 "당신에게 가능하다"는 다른 명제이며, 두 번째 명제의 사전 확률이 1% 미만이라는 사실을 <b>같이 말해야</b> 공정합니다.</p>
+        <h5>비대칭 문제</h5>
+        <p>"불가능하다"고 말하는 사람은 <b>당신이 성공해도 잃을 게 없습니다.</b> "가능하다"고 말하는 사람이 강의·구독으로 수익을 얻는다면 <b>이해관계가 있습니다.</b> 두 조언을 같은 무게로 듣는 것이 오히려 편향입니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/XkqqLrKVrOE">https://youtu.be/XkqqLrKVrOE</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"손절은 반드시, 손절을 옮기는 건 최악"<span class="hint">여러 영상 공통</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분</h5>
+        <p>손실 방향으로 손절을 미루는 행위는 처분효과의 직접 발현이며, 계좌 파괴의 주경로입니다. 원칙은 정확합니다.</p>
+        <h5>빠진 구분</h5>
+        <p><b>불리한 방향</b>으로 옮기는 것만 금지입니다. 이익 방향으로 당기는 것(trailing)은 <b>사전에 규칙으로 정의되어 있으면</b> 허용이며, 오히려 추세추종의 핵심 장치입니다. 이 구분을 안 하면 "본전 손절도 하면 안 된다"는 잘못된 결론이 나옵니다.</p>
+        <h5>구현 위험</h5>
+        <p>"반대 캔들 꼬리 끝"은 유동성이 몰리는 자리이고, 꼬리 길이가 변동성에 따라 제멋대로여서 <b>R 단위 자체가 무너집니다.</b> 3장의 ATR 보정을 쓰세요.</p>
+        <div class="cite">출처: <a href="https://youtu.be/biVKykmvNN4">https://youtu.be/biVKykmvNN4</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"20~30거래 해보면 이 전략이 되는지 안다"<span class="hint">트레이딩 코칭 경력 3년차가 바라보는 문제점</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>왜 부족한가</h5>
+        <p><b>20거래에서 승률 65%가 나와도 진짜 승률이 20%일 확률이 무시 못 할 수준입니다.</b> 표본이 작으면 신뢰구간이 너무 넓어 어떤 판정도 불가능합니다.</p>
+        <p>실무 기준: 승률·기대값 판정은 <b>최소 100거래</b>, 프로핏 팩터처럼 분포 꼬리에 민감한 지표는 <b>200~400거래</b>가 필요합니다.</p>
+        <h5>더 중요한 지적</h5>
+        <p>전략 개선의 지렛대는 승률·손익비 두 개가 아니라 <b>세 개</b>입니다. 세 번째가 <b>사이징(Kelly)</b>이고, 대부분 여기서 가장 큰 개선이 나옵니다. 승률을 65%로 올리는 것보다 <b>거래당 리스크를 3%에서 1.5%로 낮추는 것</b>이 장기 성장률에 더 크게 기여하는 구간이 흔합니다.</p>
+        <div class="cite">출처: <a href="https://youtu.be/vdoMHHOKkQw">https://youtu.be/vdoMHHOKkQw</a></div>
+      </div></div>
+    </div>
+
+    <div class="myth">
+      <div class="q"><span class="badge">부분 지지</span><span class="txt">"이 바닥에는 사기꾼이 많다"<span class="hint">평범한 내가 50억 트레이더가 되고 나서 보이는 이 바닥 현실</span></span></div>
+      <div class="a"><div class="inner"><hr>
+        <h5>맞는 부분 — 법적 근거가 있습니다</h5>
+        <p>변호사 해설 기준, 리딩방 운영은 사안에 따라 <b>무등록 금융투자업</b>(자본시장법), <b>유사수신행위</b>, <b>형법상 사기</b>, 해외 거래소 연계 시 <b>외국환거래법 신고의무 위반</b>에 해당할 수 있습니다. 금융감독원은 2025년 10월 유사투자자문 관련 소비자경보 캠페인을 진행했습니다.</p>
+        <h5>독자가 확인할 것</h5>
+        <p>화자는 <b>본인 서비스를 "불법리딩방·불법투자업·레퍼럴 팔이"의 대안</b>으로 포지셔닝합니다. 이 대비 자체는 마케팅 구조이므로, 판단 기준은 <b>말이 아니라 형태</b>여야 합니다 — 실시간 매수·매도 지시가 있는가, 수익을 보장하는가, 등록·신고 상태가 공개되는가, 손실 위험이 명시되는가.</p>
+        <div class="cite">출처: <a href="https://youtu.be/dj_uE4P7zGQ">https://youtu.be/dj_uE4P7zGQ</a></div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <h4>📊 48건 전체 판정 분포</h4>
+    <div class="chart" data-chart style="margin-top:14px">
+      <div class="bar-row">
+        <div class="bar-lab"><span>부분 지지 — 방향은 맞고 숫자가 없음</span><span class="v">40건</span></div>
+        <div class="bar-track"><div class="bar-fill wattb" data-w="83.3"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>검증 불가 — 반증 자체가 불가능</span><span class="v">3건</span></div>
+        <div class="bar-track"><div class="bar-fill" data-w="6.3"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>완전 지지 — 학술 근거와 일치</span><span class="v">2건</span></div>
+        <div class="bar-track"><div class="bar-fill greenb" data-w="4.2"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>반증 — 데이터가 반대를 가리킴</span><span class="v">2건</span></div>
+        <div class="bar-track"><div class="bar-fill redb" data-w="4.2"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-lab"><span>근거 없음 — 확인 자료 부재</span><span class="v">1건</span></div>
+        <div class="bar-track"><div class="bar-fill redb" data-w="2.1"></div></div>
+      </div>
+    </div>
+    <p class="mute" style="margin-top:12px">
+      <b>83%가 "부분 지지"</b>라는 점이 이 채널의 성격을 그대로 보여줍니다. <b>거짓말을 하는 채널이 아닙니다.</b>
+      방향이 맞는 말을 하는데 <b>숫자·조건·표본 기준이 빠져서 실행할 수 없는 상태</b>입니다.
+      이 교재는 그 빠진 부분을 채우는 문서입니다.
+    </p>
+  </div>
+</section>
+
+<!-- CH08 모순 -->
+<section id="contra">
+  <div class="snum">CHAPTER 08</div>
+  <h2>같은 채널 안에서<br>서로 부딪히는 말들</h2>
+  <p class="lead">이건 흠집 내기가 아닙니다. <strong>모순이 있는 지점이 바로 "아직 정리되지 않은 생각"이 있는 곳</strong>이고, 시청자가 가장 헷갈리는 지점입니다. 4건을 찾았습니다.</p>
+
+  <h3>① 분석은 무용한가, 신호를 주는가</h3>
+  <div class="mirror">
+    <div class="mh a">매매에서 시장분석이 필요 없는 이유</div>
+    <div class="mh b">시장은 이번 비트 폭락을 미리 말해줬습니다</div>
+    <div class="mc">"분석해봐야 소용없습니다. 차트에 다 나와 있는데 뉴스나 지표 본다고 달라지지 않아요."</div>
+    <div class="mc">"미결제약정과 펀딩비가 계속 올라가고 있었습니다. <b>시장은 신호를 주고 있었어요.</b>"</div>
+    <div class="mfull"><b>해소 방법</b> — 두 명제는 <b>"어떤 분석"</b>을 특정하면 양립합니다. 재가공 지표를 겹쳐 쌓는 것(다중공선성)은 정보량이 늘지 않지만, <b>포지션 데이터(펀딩·미결제약정·청산)</b>는 가격과 독립된 새 정보입니다. 정확한 문장은 "분석이 필요 없다"가 아니라 <b>"가격 재가공 지표는 늘려도 소용없고, 포지션 데이터는 다르다"</b>입니다. 다만 후자도 <b>사전 임계값 + 전체 발생 사례 집계</b> 없이는 사후 서사입니다.</div>
+  </div>
+
+  <h3>② 결과값만 입력하라 vs 결과가 아니라 과정이다</h3>
+  <div class="mirror">
+    <div class="mh a">일지 작성법 영상</div>
+    <div class="mh b">복기 영상</div>
+    <div class="mc">"엑셀에 <b>결과값만 넣으면</b> 승률이랑 손익비가 자동으로 나옵니다."</div>
+    <div class="mc">"<b>결과가 아니라 과정</b>을 봐야 합니다. 결과만 보면 잘못 배웁니다."</div>
+    <div class="mfull"><b>해소 방법</b> — 층위가 다릅니다. <b>집계</b>는 결과값(R)으로 하고, <b>학습</b>은 과정 필드(규칙 준수 Y/N)로 합니다. 5장의 최소 필드 5개가 이 둘을 <b>같은 표 안에서</b> 분리합니다. 결과값만 있으면 프로세스×결과 2×2를 만들 수 없고, <b>눈먼 행운 칸이 성공으로 분류</b>됩니다.</div>
+  </div>
+
+  <h3>③ 리스크 3% vs 2% 이하</h3>
+  <div class="mirror">
+    <div class="mh a">백테스팅 영상</div>
+    <div class="mh b">역추세 패턴 영상</div>
+    <div class="mc">"한 번에 <b>3%</b> 정도 리스크를 잡습니다."</div>
+    <div class="mc">"거래당 <b>2% 이하</b>로 관리해야 합니다."</div>
+    <div class="mfull"><b>해소 방법</b> — 이건 상수를 고르는 문제가 아니라 <b>계산해야 하는 값</b>입니다. 2장 계산기의 <b>1/4 켈리 + 2% 하드캡</b>을 쓰면 승률·손익비에 따라 자동으로 나옵니다. 참고로 승률 30%대 전략에서 <b>3%는 10연패 시 −30%</b>이고, 회복에 +43%가 필요합니다. 승률 30% 전략에서 10연패는 <b>정상 범위</b>입니다.</div>
+  </div>
+
+  <h3>④ 유튜브의 "역추세" vs 유료 클래스의 "추세추종"</h3>
+  <div class="mirror">
+    <div class="mh a">유튜브 채널</div>
+    <div class="mh b">TPT 터틀반 (tradingpt.kr)</div>
+    <div class="mc">"5년간 연구한 <b>역추세</b> 패턴" · 주 대상 <b>비트코인</b></div>
+    <div class="mc">"시스템 트레이딩 기반 <b>추세추종</b>" · 주 대상 <b>나스닥·미국 주식</b></div>
+    <div class="mfull"><b>해소 방법</b> — 3장·7장에서 확인했듯 화자의 실제 손익 분포(승률 30~34%, 손익비 1:2~1:5)는 <b>추세추종 시그니처</b>입니다. 즉 <b>유료 클래스 쪽 이름표가 실제와 일치하고, 유튜브 쪽 이름표가 어긋나 있습니다.</b> 시청자 입장에서 이건 중요한 정보입니다 — 유튜브에서 배운 용어로 클래스에 가면 <b>다른 전략군을 배우게 됩니다.</b> 자산군도 비트코인에서 나스닥으로 바뀝니다.</div>
+  </div>
+</section>
+
+<!-- CH09 TPT -->
+<section id="tpt">
+  <div class="snum">CHAPTER 09</div>
+  <h2>유료 서비스까지<br>같이 봐야 그림이 완성됩니다</h2>
+  <p class="lead">이 채널은 <strong>TPT 트레이딩</strong>(tradingpt.kr)이라는 자체 서비스를 운영합니다. 영상만 보고 판단하면 절반만 보는 것입니다. 서비스 페이지에 공개된 정보를 <strong>있는 그대로 수집</strong>한 뒤, 시청자 관점에서 확인할 지점을 정리했습니다.</p>
+
+  <div class="card">
+    <h4>📋 공개 정보 (사이트 게재 내용 그대로)</h4>
+    <ul style="margin:8px 0 0;padding-left:20px;font-size:.92em;color:var(--tx2);line-height:1.85">
+      <li><b>슬로건</b> — "TPT, 모든 매매를 기록하세요"</li>
+      <li><b>핵심 기능</b> — 매매일지 작성 / 맞춤형 피드백 / 체계적 트레이딩 교육</li>
+      <li><b>오프라인 클래스</b> — 무료, 초급반 1기 모집, "4주 올인원 통합 교육", Phase 01 생존의 토대 ~ Phase 06 실전 매매 전략 구축</li>
+      <li><b>수업 일정</b> — 월~일, 하루 5슬롯 (11:00~12:40 / 13:00~14:40 / 15:00~16:40 / 17:00~18:40 / 19:00~20:40)</li>
+      <li><b>터틀반(대표 과정)</b> — "시스템 트레이딩을 기반으로 <em class="w">추세추종</em> 매매 원칙을 지키며", 나스닥 흐름 분석 · 미장 시간대 분석 · 가상 매매 훈련 · 실전 자금 운용 · 전 매매 복기</li>
+      <li><b>퍼널 종착점</b> — 프랍 트레이딩 채용 심사. "채용 심사 기준에 합격하면 프랍 트레이더 자격이 주어집니다"</li>
+      <li><b>자기보고 수치</b> — 누적 수강생 1,000명+, 고객 만족도 4.9, 누적 피드백 2,000회+</li>
+      <li><b>지원 자격</b> — "1년 이상 포기하지 않고 노력할 의지가 있으신 분"</li>
+    </ul>
+  </div>
+
+  <h3>일관된 부분 — 여기는 칭찬할 만합니다</h3>
+  <p>서비스의 <strong>중심 기능이 매매일지</strong>라는 점은 유튜브 콘텐츠와 정확히 일치합니다. 그리고 5장에서 봤듯 <strong>매매일지는 이 채널에서 근거가 가장 강한 영역</strong>입니다. 즉 <strong>본인이 가장 잘 아는 것을 제품으로 만들었습니다.</strong> "비법 시그널"을 파는 구조가 아니라 <strong>기록·피드백 도구</strong>를 파는 구조라는 점은 업계 평균보다 낫습니다.</p>
+  <p>또 "가상 매매 훈련"과 "1주일간 시장 타입 확인 후 시나리오" 같은 표현은 <strong>실탄 투입 전 단계를 두는 구조</strong>로, 1장의 기저율을 생각하면 합리적입니다.</p>
+
+  <h3>확인해야 할 5가지 — 수강 전에 물어볼 질문</h3>
+  <div class="check">
+    <div class="cline"><div class="bx">1</div><div class="lt"><em>전략군이 다릅니다.</em> 유튜브는 "역추세", 터틀반은 "추세추종"입니다. 8장에서 봤듯 화자의 <b>실제 손익 분포는 추세추종 쪽</b>입니다. 물어볼 것 — <b>"수업에서 배우는 게 영상의 그 패턴과 같은 건가요, 다른 건가요?"</b></div></div>
+    <div class="cline"><div class="bx">2</div><div class="lt"><em>시장이 다릅니다.</em> 영상 사례는 <b>비트코인</b>, 터틀반은 <b>나스닥·미장</b>입니다. 거래 시간·변동성 구조·수수료 체계가 전부 다릅니다. 물어볼 것 — <b>"영상의 패턴이 미장에서도 백테스트된 자료가 있나요?"</b></div></div>
+    <div class="cline"><div class="bx">3</div><div class="lt"><em>무료의 수익 모델이 명시되지 않았습니다.</em> 사이트에 프랍 채용·상위 과정이 종착점으로 배치되어 있습니다. 무료 자체는 문제가 아니지만, <b>대가가 무엇인지 아는 상태에서</b> 들어가는 것과 아닌 것은 다릅니다. 물어볼 것 — <b>"이 과정 이후 유료 단계가 무엇이고 비용은 얼마인가요?"</b></div></div>
+    <div class="cline"><div class="bx">4</div><div class="lt"><em>자기보고 수치에 근거가 없습니다.</em> 1,000명 / 4.9점 / 2,000회의 <b>집계 기간·표본·산출 방식</b>이 표기되지 않았습니다. 물어볼 것 — <b>"수강생 중 실제로 수익을 낸 비율은 몇 %인가요?"</b> (1장 기저율을 생각하면 이게 가장 중요한 질문입니다)</div></div>
+    <div class="cline"><div class="bx">5</div><div class="lt"><em>후기가 전원 익명입니다.</em> 최OO / 한OO / 류OO / 마OO 형식으로 4건. 독립 검증이 불가능합니다. 이건 개인정보 보호 관행이기도 하므로 <b>단독으로는 문제 신호가 아니지만</b>, 위 4개와 합쳐지면 <b>검증 가능한 자료가 하나도 없다</b>는 뜻이 됩니다.</div></div>
+  </div>
+
+  <div class="card warn">
+    <h4>⚠️ 프랍 채용이 종착점이라는 점의 의미</h4>
+    <p style="margin:6px 0 0;font-size:.93em;color:var(--tx2)">
+      1장 수치를 다시 봅니다 — 프랍 챌린지 통과율 <b>5~15%</b>, <b>출금까지 도달은 약 7%</b>, 실패 원인 1위는 <b>일일 손실 한도 위반</b>.<br><br>
+      즉 "교육 → 프랍 합격 → 캐시플로우" 경로는 <b>존재하지만 좁습니다.</b>
+      그리고 실패 지점이 <b>기법이 아니라 리스크 관리</b>라는 사실은, 이 교재 2장·3장(사이징)이
+      <b>수업보다 먼저 이해되어야 할 내용</b>이라는 뜻입니다.
+    </p>
+  </div>
+
+  <div class="disc">
+    <b style="color:var(--tx)">🔎 이 교재의 입장</b><br>
+    <span style="font-size:.92em;color:var(--tx2);line-height:1.8">
+    이 문서는 TPT 트레이딩과 아무 관계가 없고, 추천도 비추천도 아닙니다.
+    공개된 정보를 수집해 <b>확인 질문 5개</b>로 정리한 것이 전부입니다.<br>
+    판단 기준은 <b>말이 아니라 형태</b>여야 합니다 — 실시간 매수·매도 지시가 있는가, 수익을 보장하는가,
+    등록·신고 상태가 공개되는가, 손실 위험이 명시되는가.
+    참고로 국내 유사투자자문업은 <b>등록이 아니라 신고제</b>이며, <b>금융분쟁조정 대상이 아닙니다.</b>
+    </span>
+  </div>
+</section>
+
+<!-- CH10 플레이북 -->
+<section id="play">
+  <div class="snum">CHAPTER 10</div>
+  <h2>그래서 내일부터<br>무엇을 하면 되는가</h2>
+  <p class="lead">여기까지가 검증이었습니다. 이제 <strong>실행 가능한 형태</strong>로 압축합니다. 아래 순서는 <strong>바꾸면 안 됩니다.</strong> 1번을 건너뛰고 4번부터 하는 것이 대부분의 실패 경로입니다.</p>
+
+  <h3>4단계 순서</h3>
+  <div class="flow">
+    <div class="n hot">① 비용선 측정</div><div class="ar">→</div>
+    <div class="n hot">② 규칙 숫자화</div><div class="ar">→</div>
+    <div class="n wt">③ 100거래 수집</div><div class="ar">→</div>
+    <div class="n">④ 판정·사이징</div>
+  </div>
+
+  <div class="check" id="pb">
+    <div class="cline"><div class="bx">①</div><div class="lt"><em>내 왕복 비용을 R 단위로 계산하세요.</em> (수수료 + 스프레드 + 평균 슬리피지) ÷ 평균 손절 폭. 이 값이 <b>0.15R을 넘으면 그 시간프레임은 버리세요.</b> 4장의 15분봉 MDD 97.9%가 정확히 이 문제였습니다. <b>이게 1번인 이유 — 여기서 탈락하면 나머지가 전부 무의미합니다.</b></div></div>
+    <div class="cline"><div class="bx">②</div><div class="lt"><em>진입 규칙을 숫자로 쓰세요.</em> 3장 형식: 몸통 ≥ ATR×a, 거래량 ≥ 중앙값×b, 되돌림 c~d%, 유효 기간 N봉. <b>"어차피 감이 필요하다"고 생각되면 그 부분만 남기고 나머지를 고정하세요.</b> 전부 재량이면 검증이 불가능합니다.</div></div>
+    <div class="cline"><div class="bx">③</div><div class="lt"><em>손절을 ATR로 고정하세요.</em> 무효화 지점 ∓ 0.3~0.5 ATR. 손절 폭이 ATR의 0.5배 미만 또는 3배 초과면 <b>그 거래는 건너뜁니다.</b></div></div>
+    <div class="cline"><div class="bx">④</div><div class="lt"><em>사이징은 계산하세요.</em> 2장 계산기의 1/4 켈리 + 2% 하드캡. 상관 0.8 이상 자산은 합산 한도. <b>"3%" 같은 상수를 외우지 마세요.</b></div></div>
+    <div class="cline"><div class="bx">⑤</div><div class="lt"><em>일지 5필드를 진입 <b>전에</b> 채우세요.</em> 셋업 태그 / 손절가 / 목표가 / 계산된 R / 규칙 준수 Y/N. 청산 후 MFE·MAE·감정 단어 하나 추가.</div></div>
+    <div class="cline"><div class="bx">⑥</div><div class="lt"><em>연패 기대값을 미리 적어두세요.</em> ln(N)/(−ln(1−p)). 일지 표지에 적습니다. 연패 중에 이걸 보면 <b>정상 범위인지 즉시 확인</b>됩니다.</div></div>
+    <div class="cline"><div class="bx">⑦</div><div class="lt"><em>100거래 전에는 규칙을 바꾸지 마세요.</em> 바꾸면 표본이 리셋됩니다. 규칙을 계속 바꾸는 사람은 <b>영원히 n&lt;100에 머물고, 따라서 영원히 자기 기대값을 모릅니다.</b></div></div>
+    <div class="cline"><div class="bx">⑧</div><div class="lt"><em>100거래에서 판정하세요.</em> 기대값 95% 신뢰구간 <b>상한</b>이 비용선 아래면 폐기. 태그를 여러 개 비교했다면 <b>α/k 보정</b>. 앞 60%에서 찾고 <b>뒤 40%에서 확인</b>.</div></div>
+    <div class="cline"><div class="bx">⑨</div><div class="lt"><em>총 학습 예산을 금액으로 정하세요.</em> "2~3년"이 아니라 "총 금융자산의 3%". 소진되면 기간과 무관하게 종료. <b>시간은 손실 한도가 아닙니다.</b></div></div>
+    <div class="cline"><div class="bx">⑩</div><div class="lt"><em>손익 금액을 화면에서 가리세요.</em> R 단위만 봅니다. 매입가 비표시만으로 처분효과가 25% 감소했습니다. <b>의지보다 구조가 강합니다.</b></div></div>
+  </div>
+  <p class="mute">항목을 눌러 체크할 수 있습니다.</p>
+
+  <h3>확인 문제</h3>
+  <p>여기까지 읽었다면 아래는 전부 풀 수 있어야 합니다. 못 풀면 해당 장으로 돌아가세요.</p>
+  <div id="quiz"></div>
+
+  <div class="final">
+    <h3 style="margin-top:0">세 줄 요약</h3>
+    <ol>
+      <li><b>기저율을 먼저 보세요.</b> 1년 3개월 이상 버틴 사람만 골라도 97%가 손실이었습니다. "버티면 된다"는 검증된 적이 있고 결과는 부정적이었습니다. 시간이 아니라 <b>금액으로 예산을 정하고, 100거래에서 통계로 판정</b>하세요.</li>
+      <li><b>이 채널의 심리·기록 조언은 정확합니다.</b> 감정 라벨링과 프로세스 기록은 실험 결과와 일치합니다. 다만 <b>조건부</b>입니다 — 자아가 아닌 과제 지향, n≥100, 분할 검증. 조건 없이 오래 쓰면 1/3 확률로 효과가 없거나 나빠집니다.</li>
+      <li><b>기법 부분은 이름표와 숫자를 고쳐야 씁니다.</b> "역추세"는 실제로는 추세 되돌림이고, 진입 조건에 숫자가 없어 검증이 불가능합니다. 3장의 배수·기간·ATR 하한을 채우고, 사이징은 <b>상수를 외우지 말고 계산</b>하세요. 그리고 무엇보다 — <b>비용선을 먼저 재세요.</b> 15분봉을 죽인 건 로직이 아니라 비용이었습니다.</li>
+    </ol>
+  </div>
+
+  <div class="srcbox">
+    <div class="t">📚 검증에 쓴 자료</div>
+    <ol>
+      <li><b>개인 트레이더 성과</b> — 브라질 선물시장 전수 분석(300거래일 이상 지속 1,551명 중 97% 손실), 대만 증권거래소 전수 분석 1992~2006(생존율·비용 전후 손익·상위 500명 성과 지속성), 미국 개인 계좌 회전율 연구(상위 20% 연 11.4% vs 하위 20% 18.5%)</li>
+      <li><b>행동 편향</b> — 처분효과 연구(1만 계좌, 매도 60/40, 실현비율 50% 차이), 매입가 비표시 실험(처분효과 25% 감소), 결과 편향 실험</li>
+      <li><b>피드백·학습</b> — 피드백 개입 메타분석(효과크기 607개·관측 23,663개, 평균 d=0.41, 3분의 1 이상에서 성과 하락), 친절한/사악한 학습 환경 구분</li>
+      <li><b>감정 조절</b> — 사고 억제의 역설적 효과(ironic process) 연구 계열, 감정 라벨링(affect labeling) 신경영상 연구 계열</li>
+      <li><b>정보량 vs 확신</b> — 경마 핸디캐퍼 실험(정보 5→40개, 적중률 17% 불변, 확신 19%→34%)</li>
+      <li><b>백테스트 방법론</b> — 데이터 스누핑 및 Reality Check, Deflated Sharpe Ratio, 백테스트 과최적화 확률(PBO), 워크포워드 검증</li>
+      <li><b>미시구조</b> — Order Flow Imbalance와 단기 가격 변화의 선형 관계(계수는 호가 두께에 반비례)</li>
+      <li><b>프랍 트레이딩</b> — 챌린지 통과율 5~15% / 출금 도달 약 7% / 실패 원인 1위 일일 손실 한도 위반. <b>출처 다수가 업계 자체 매체이므로 신뢰도 중간으로 표기</b></li>
+      <li><b>법·제도</b> — 자본시장법상 무등록 금융투자업, 유사수신행위 규제, 유사투자자문업 신고제(분쟁조정 대상 아님), 금융감독원 허위·미실현 수익률 표시광고 금지 및 2025년 10월 소비자경보 캠페인</li>
+      <li><b>1차 자료</b> — 유튜브 채널 영상 17편 전체 자막(약 78,000자), tradingpt.kr 공개 페이지</li>
+    </ol>
+  </div>
+
+  <div class="disc">
+    <b style="color:var(--tx)">⚠️ 고지</b><br>
+    <span style="font-size:.92em;color:var(--tx2);line-height:1.8">
+    이 문서는 <b>투자 자문이 아니며 특정 서비스의 추천·비추천이 아닙니다.</b>
+    공개된 영상과 웹페이지의 <b>주장을 학술·통계 기준으로 대조한 교육 자료</b>입니다.
+    수익률·자산 규모 등 화자의 자기보고 수치는 <b>독립적으로 검증되지 않았습니다.</b>
+    파생상품·레버리지 거래는 원금 전액을 잃을 수 있습니다.<br>
+    비판 대상은 <b>사람이 아니라 명제</b>입니다. 이 채널은 국내 트레이딩 콘텐츠 중 드물게
+    <b>백테스트 수치를 공개</b>했고, 그 덕분에 이 검증이 가능했습니다.
+    </span>
+  </div>
+</section>
+
+<footer>
+  트레이딩 검증 교본 · 유튜브 17편 + 서비스 페이지 1차 자료 기반<br>
+  주장 124건 추출 → 48건 정밀 검증 → 완전 지지 2 · 반증 2 · 검증 불가 3 · 근거 없음 1 · 부분 지지 40<br>
+  <span style="color:var(--tx3)">이 교재의 목적은 누구를 깎아내리는 게 아니라, 사랑하는 사람이 계좌를 잃지 않게 하는 것입니다.</span>
+</footer>
+
+</div>
+
+<script>
+(function(){"use strict";
+
+/* 스크롤 진행바 */
+var prog=document.getElementById('prog');
+function onScroll(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* 카운트업 + 바 채우기 */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(!e.isIntersecting)return;var el=e.target;io.unobserve(el);
+  if(el.hasAttribute('data-cnt'))countUp(el);
+  if(el.hasAttribute('data-chart'))fillBars(el);});},{threshold:.35});
+
+function countUp(el){
+  var t=parseFloat(el.getAttribute('data-cnt'));
+  var suf=el.getAttribute('data-suf')||'%';
+  var dec=(String(t).split('.')[1]||'').length,d=1100,s=performance.now();
+  (function tick(now){
+    var p=Math.min(1,(now-s)/d),e=1-Math.pow(1-p,3);
+    el.innerHTML=(t*e).toFixed(dec)+'<small>'+suf+'</small>';
+    if(p<1)requestAnimationFrame(tick);
+  })(s);
+}
+function fillBars(box){
+  Array.prototype.forEach.call(box.querySelectorAll('.bar-fill'),function(b,i){
+    setTimeout(function(){b.style.width=b.getAttribute('data-w')+'%';},i*110);});
+}
+Array.prototype.forEach.call(document.querySelectorAll('[data-cnt],[data-chart]'),function(el){io.observe(el);});
+
+/* 판정 카드 아코디언 */
+Array.prototype.forEach.call(document.querySelectorAll('.myth'),function(m){
+  m.addEventListener('click',function(){m.classList.toggle('open');});});
+
+/* 탭 */
+Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(t){
+  t.addEventListener('click',function(){
+    var box=t.parentNode;
+    Array.prototype.forEach.call(box.querySelectorAll('.tab'),function(x){x.classList.remove('on');});
+    t.classList.add('on');
+    var id=t.getAttribute('data-t');
+    Array.prototype.forEach.call(box.parentNode.querySelectorAll(':scope > .panel'),function(p){
+      p.classList.toggle('on',p.id===id);
+      if(p.id===id){
+        Array.prototype.forEach.call(p.querySelectorAll('[data-chart]'),function(c){
+          var f=c.querySelector('.bar-fill');
+          if(f&&(!f.style.width||f.style.width==='0px'||f.style.width===''))fillBars(c);});
+      }
+    });
+  });
+});
+
+/* 체크리스트 */
+Array.prototype.forEach.call(document.querySelectorAll('.cline'),function(c){
+  c.addEventListener('click',function(){c.classList.toggle('sel');});});
+
+/* 기대값 계산기 */
+var ip=document.getElementById('ip'),ir=document.getElementById('ir'),ic=document.getElementById('ic');
+if(ip&&ir&&ic){
+  var lp=document.getElementById('lp'),lr=document.getElementById('lr'),lc=document.getElementById('lc'),
+      oe=document.getElementById('oe'),op=document.getElementById('op'),om=document.getElementById('om'),
+      ok=document.getElementById('ok'),or_=document.getElementById('or'),ol=document.getElementById('ol'),
+      on=document.getElementById('on'),ov=document.getElementById('ov');
+
+  function calc(){
+    var p=(+ip.value)/100, R=(+ir.value)/10, c=(+ic.value)/100;
+    lp.textContent=(p*100).toFixed(0)+'%';
+    lr.textContent=R.toFixed(1);
+    lc.textContent=c.toFixed(2)+'R';
+
+    var E=p*R-(1-p)-c;
+    var pstar=(1+c)/(1+R);
+    var margin=(p-pstar)*100;
+    var f=p-(1-p)/R;
+
+    oe.textContent=(E>=0?'+':'')+E.toFixed(2)+'R';
+    oe.style.color=E>0.10?'var(--green)':(E>0?'var(--watt)':'var(--red)');
+    op.textContent=(pstar*100).toFixed(1)+'%';
+    om.textContent=(margin>=0?'+':'')+margin.toFixed(1)+'%p';
+    om.style.color=margin>0?'var(--green)':'var(--red)';
+
+    if(f>0){
+      ok.textContent=(f*100).toFixed(1)+'%';
+      ok.style.color='var(--tx)';
+      var rec=Math.min(f/4,0.02);
+      or_.textContent=(rec*100).toFixed(2)+'%';
+      or_.style.color=(f/4>0.02)?'var(--watt)':'var(--tx)';
+    }else{
+      ok.textContent='0%';ok.style.color='var(--red)';
+      or_.textContent='진입 금지';or_.style.color='var(--red)';
+    }
+
+    var streak=Math.log(200)/(-Math.log(1-p));
+    ol.textContent=Math.round(streak)+'회';
+    ol.style.color=streak>=8?'var(--red)':(streak>=5?'var(--watt)':'var(--tx)');
+
+    if(margin>0.0001){
+      var n=Math.pow(1.96*Math.sqrt(p*(1-p))/((p-pstar)),2);
+      n=Math.ceil(n/10)*10;
+      on.textContent=(n>5000?'5,000회+':n.toLocaleString()+'회');
+      on.style.color=n>1000?'var(--red)':(n>300?'var(--watt)':'var(--tx)');
+    }else{
+      on.textContent='판정 불가';on.style.color='var(--red)';
+    }
+
+    ov.className='dverd '+(E>0.10?'ok':(E>0?'mid':'no'));
+    if(E>0.10){
+      ov.innerHTML='✅ 견고한 양의 기대값입니다. 100거래 이상 쌓아 실제 분포를 확인하세요.';
+    }else if(E>0){
+      ov.innerHTML='⚠️ 간신히 양수입니다. 비용이 조금만 올라가거나 승률이 몇 %p 떨어지면 뒤집힙니다. '+
+        '<b>슬리피지·부분 체결까지 넣어도 양수인지</b> 확인하세요.';
+    }else{
+      ov.innerHTML='❌ 음의 기대값입니다. 이 조합은 <b>거래를 많이 할수록 정확히 그만큼 빠르게 잃습니다.</b> '+
+        '기법을 바꾸기 전에 <b>비용부터</b> 줄이세요.';
+    }
+  }
+  [ip,ir,ic].forEach(function(s){s.addEventListener('input',calc);});
+  calc();
+
+  var pre=document.getElementById('dPre');
+  if(pre){
+    Array.prototype.forEach.call(pre.querySelectorAll('button'),function(b){
+      b.addEventListener('click',function(){
+        Array.prototype.forEach.call(pre.querySelectorAll('button'),function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        ip.value=b.getAttribute('data-p');
+        ir.value=b.getAttribute('data-r');
+        ic.value=b.getAttribute('data-c');
+        calc();
+      });
+    });
+  }
+}
+
+/* 퀴즈 */
+var QS=[
+ {q:'승률 34%, 손익비 1:2로 매매합니다. 왕복 비용이 손절 폭의 10%(0.1R)라면?',
+  o:['수학적으로 이미 손실 구간입니다','아직 여유가 있으니 그대로 갑니다','승률을 40%로 올리면 해결됩니다'],
+  a:0,
+  e:'손익분기 승률 p* = (1+c)/(1+R) = 1.1/3 = 36.7%. 실제 승률 34%는 이보다 <b>낮습니다.</b> 즉 거래를 많이 할수록 잃습니다. 비용 0일 때는 33.3%라 간신히 양수였는데, 비용 0.1R만 들어와도 뒤집힙니다. 4장에서 15분봉이 MDD 97.9%로 전멸한 이유가 정확히 이것입니다.'},
+ {q:'20거래에서 승률 65%가 나왔습니다. 이 전략을 어떻게 판단해야 할까요?',
+  o:['좋은 전략이니 사이즈를 키웁니다','판단 불가입니다. 최소 100거래가 필요합니다','승률이 높으니 손익비를 낮춰도 됩니다'],
+  a:1,
+  e:'20거래에서 13승이 나와도 <b>진짜 승률이 20%일 확률이 무시 못 할 수준</b>입니다. 표본이 작으면 신뢰구간이 너무 넓어 어떤 판정도 불가능합니다. 승률·기대값 판정은 최소 100거래, 프로핏 팩터는 200~400거래가 필요합니다.'},
+ {q:'승률을 45%에서 55%로 올렸습니다. 대신 손익비가 2.0에서 1.4로 깎였습니다.',
+  o:['승률이 올랐으니 개선입니다','기대값이 오히려 나빠졌습니다','손익비가 1을 넘으니 상관없습니다'],
+  a:1,
+  e:'E = p·R − (1−p) 로 계산하면 이전 0.45×2.0−0.55 = <b>+0.35R</b>, 이후 0.55×1.4−0.45 = <b>+0.32R</b>입니다. 승률과 손익비는 <b>맞바꿈 관계</b>이므로 한쪽만 보면 안 됩니다. 항상 <b>기대값 자체</b>를 계산하세요.'},
+ {q:'같은 전략을 5개 거래소 비트코인 데이터로 백테스트해 전부 좋았습니다.',
+  o:['5번 독립 검증했으니 신뢰도가 높습니다','유효 독립 시행은 1에 가깝습니다','거래소가 많을수록 통계적으로 강해집니다'],
+  a:1,
+  e:'거래소 간 비트코인 가격 상관은 <b>0.99 이상</b>입니다. 차익거래가 실시간으로 가격차를 지웁니다. 즉 거의 같은 데이터를 5번 돌린 것이고 <b>유효 표본 수는 1에 가깝습니다.</b> 진짜 독립 검증은 다른 자산군·다른 기간·인접 파라미터 검사입니다.'},
+ {q:'승률 45%, 손익비 2:1인 양의 기대값 전략입니다. 지금 6연패 중입니다.',
+  o:['전략이 죽었으니 규칙을 수정합니다','정상 범위입니다. 규칙을 유지합니다','손절을 넓혀서 승률을 올립니다'],
+  a:1,
+  e:'승률 45%면 <b>6연패가 약 47거래마다</b> 나옵니다. 연 200거래면 1년에 4번입니다. 여기서 규칙을 바꾸면 <b>표본이 리셋되어 영원히 n&lt;100</b>에 머물고, 결국 자기 기대값을 영영 모르게 됩니다. 연패 기대값을 <b>미리</b> 계산해 일지 표지에 적어두세요.'},
+ {q:'매매일지를 매일 쓰면 반드시 실력이 늘어난다?',
+  o:['맞습니다. 기록은 항상 도움이 됩니다','조건부입니다. 3분의 1 이상에서 성과가 떨어졌습니다','아니요, 기록은 효과가 없습니다'],
+  a:1,
+  e:'피드백 개입 메타분석(효과크기 607개, 관측 23,663개)에서 평균 효과는 <b>d=0.41로 양수</b>지만, <b>전체의 3분의 1 이상에서 성과가 오히려 떨어졌습니다.</b> 악화 조건은 피드백이 <b>과제가 아니라 자아를 향할 때</b>입니다. 그래서 감정은 <b>단어 하나</b>로만 적고, 규칙 준수 Y/N 같은 과제 지향 필드를 중심에 둡니다.'},
+ {q:'규칙을 어겼는데 돈을 벌었습니다. 일지에 어떻게 기록해야 할까요?',
+  o:['수익 거래로 기록하고 넘어갑니다','실패로 분류합니다. 가장 위험한 칸입니다','규칙을 그 방향으로 수정합니다'],
+  a:1,
+  e:'프로세스×결과 2×2에서 <b>나쁜 프로세스 + 좋은 결과 = 눈먼 행운</b> 칸입니다. 뇌는 이걸 "내 감이 맞았다"로 저장하고 반드시 반복하며, 그때는 잃습니다. <b>결과값만 기록하면 이 칸은 영원히 성공으로 분류됩니다.</b> 그래서 "규칙 준수 Y/N" 한 글자가 일지의 핵심입니다.'},
+ {q:'"1년 넘게 버틴 사람들은 결국 성공한다"는 주장은?',
+  o:['맞습니다. 생존이 곧 실력입니다','반증되었습니다. 300거래일 이상 버틴 1,551명 중 97%가 손실이었습니다','표본이 없어 판단할 수 없습니다'],
+  a:1,
+  e:'브라질 선물시장 전수 데이터에서 <b>300거래일 이상 지속한 1,551명만</b> 따로 분석했습니다. 이미 포기한 사람을 전부 제외한 표본입니다. 그런데도 <b>97%가 손실</b>이었고, 논문은 "데이트레이딩을 통한 학습의 증거를 찾지 못했다"고 명시합니다. 시간이 아니라 <b>금액으로 예산을 정하고 100거래에서 통계로 판정</b>하세요.'}
+];
+
+var qbox=document.getElementById('quiz');
+if(qbox){
+  QS.forEach(function(item,i){
+    var d=document.createElement('div');
+    d.className='qbox';
+    var opts=item.o.map(function(t,j){
+      return '<button class="opt" data-i="'+j+'">'+t+'</button>';}).join('');
+    d.innerHTML='<div class="qh">Q'+(i+1)+' / '+QS.length+'</div>'+
+      '<div class="qq">'+item.q+'</div>'+
+      '<div class="opts">'+opts+'</div>'+
+      '<div class="expl"></div>';
+    qbox.appendChild(d);
+
+    var btns=d.querySelectorAll('.opt'), ex=d.querySelector('.expl'), locked=false;
+    Array.prototype.forEach.call(btns,function(b){
+      b.addEventListener('click',function(){
+        if(locked)return;locked=true;
+        var pick=+b.getAttribute('data-i');
+        Array.prototype.forEach.call(btns,function(x,j){
+          x.disabled=true;
+          if(j===item.a)x.classList.add('right');
+          else if(j===pick)x.classList.add('wrong');
+        });
+        ex.innerHTML=(pick===item.a?'✅ 정답입니다. ':'❌ ')+item.e;
+        ex.classList.add('on');
+      });
+    });
+  });
+}
+
+})();
+</script>
+</body>
+</html>
