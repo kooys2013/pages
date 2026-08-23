@@ -215,6 +215,25 @@ footer a{color:var(--acc2);text-decoration:none}
   .stat .k{margin-top:0;text-align:right}
   section{padding:46px 0}
 }
+
+/* ===== ELI5 리마인드 (다섯 살 설명) ===== */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--acc);--e5-acc2:var(--acc2);--e5-accbg:rgba(34,211,238,.09)}
 </style>
 </head>
 <body>
@@ -816,6 +835,23 @@ footer a{color:var(--acc2);text-decoration:none}
       <b style="color:var(--acc2)">기능적 건강수명 유지를 위한 조건부 필수 영양소</b>다.
     </p>
   </div>
+</section>
+
+
+<section class="eli5" id="eli5">
+  <div class="e5-badge">🧸 ELI5 · 다섯 살한테 설명하기</div>
+  <h2 class="e5-h">60초 리마인드</h2>
+  <p class="e5-sub">이 교재 전체를 그림 여섯 장으로. 다 잊어도 이건 남기세요.</p>
+  <div class="e5-grid">
+  <div class="e5-card"><div class="e5-n">01</div><div class="e5-ico">🔋</div><div class="e5-big">근육에 보조 배터리를 하나 더 단다</div><div class="e5-sm">힘 쓸 때 쓰는 연료(ATP)를 더 빨리 다시 채운다</div></div>
+  <div class="e5-card"><div class="e5-n">02</div><div class="e5-ico">💪</div><div class="e5-big">근육 효과는 논쟁이 끝났다</div><div class="e5-sm">가장 많이 검증된, 가장 확실한 부분</div></div>
+  <div class="e5-card"><div class="e5-n">03</div><div class="e5-ico">🧠</div><div class="e5-big">머리도 덜 흐려진다</div><div class="e5-sm">잠이 모자랄 때 기억력·주의력 도움 근거가 상당히 쌓였다</div></div>
+  <div class="e5-card"><div class="e5-n">04</div><div class="e5-ico">🦴</div><div class="e5-big">뼈가 새는 걸 늦춘다</div><div class="e5-sm">운동과 함께할 때 골밀도 손실 방어</div></div>
+  <div class="e5-card"><div class="e5-n">05</div><div class="e5-ico">🚫</div><div class="e5-big">신장 망가진다는 말은 오해다</div><div class="e5-sm">크레아티닌 수치 상승은 손상이 아니라 세면대에 물 한 컵 더 부은 것</div></div>
+  <div class="e5-card"><div class="e5-n">06</div><div class="e5-ico">🥄</div><div class="e5-big">먹는 법은 허무할 만큼 간단하다</div><div class="e5-sm">모노하이드레이트 3~5g, 매일, 로딩 없이</div></div>
+  </div>
+  <div class="e5-one"><span class="e5-lab">딱 하나만 기억한다면</span><p>불로장생 약이 아니다. 근육을 지켜서 건강수명을 버티게 하는 조건부 필수 영양소다.</p></div>
+  <div class="e5-do"><span>크레아퓨어(독일산) 표기 확인</span><span>매일 같은 시간, 물 넉넉히</span><span>조울증·신장질환·임신·수유·청소년 제외</span></div>
 </section>
 
 <footer>

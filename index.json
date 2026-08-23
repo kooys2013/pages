@@ -131,11 +131,6 @@
       "deployed": "2026-07-12 14:30"
     },
     {
-      "slug": "creatine-guide",
-      "url": "https://kooys2013.github.io/pages/creatine-guide/",
-      "deployed": "2026-08-22 22:54"
-    },
-    {
       "slug": "ai-enclosure",
       "url": "https://kooys2013.github.io/pages/ai-enclosure/",
       "deployed": "2026-08-22 23:04"
@@ -153,6 +148,11 @@
     {
       "slug": "sauna-antiaging",
       "url": "https://kooys2013.github.io/pages/sauna-antiaging/",
+      "deployed": "2026-08-23 11:37"
+    },
+    {
+      "slug": "creatine-guide",
+      "url": "https://kooys2013.github.io/pages/creatine-guide/",
       "deployed": "2026-08-23 11:37"
     }
   ]
