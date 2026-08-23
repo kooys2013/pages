@@ -1,11 +1,6 @@
 {
   "pages": [
     {
-      "slug": "ebs-science",
-      "url": "https://kooys2013.github.io/pages/ebs-science/",
-      "deployed": "2026-05-04 13:28"
-    },
-    {
       "slug": "zero-to-one",
       "url": "https://kooys2013.github.io/pages/zero-to-one/",
       "deployed": "2026-05-05 02:16"
@@ -153,6 +148,11 @@
     {
       "slug": "musk-decoder",
       "url": "https://kooys2013.github.io/pages/musk-decoder/",
+      "deployed": "2026-08-23 11:37"
+    },
+    {
+      "slug": "ebs-science",
+      "url": "https://kooys2013.github.io/pages/ebs-science/",
       "deployed": "2026-08-23 11:37"
     }
   ]
