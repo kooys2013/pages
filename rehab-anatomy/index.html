@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>재활 해부학 교본 — 아픈 곳은 범인이 아니다</title>
+<meta name="description" content="남스어프로치(남준록 원장) × 치중진담(Team CareFlow) 통합 재활 교재. 근막과 근육 해부학으로 다시 읽는 전신 연결 사슬, 그리고 통합 운동 로드맵.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+@font-face{font-family:'Pretendard Variable';src:url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2) format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+--bg:#060b0d;--bg2:#0c1518;--bg3:#122025;
+--line:#1b3038;--line2:#2b4a55;
+--tx:#e9f6f8;--tx2:#a5c4ca;--tx3:#6d8e96;
+--acc:#2dd4bf;--acc2:#7ceee0;--acc-d:#0d9488;
+--watt:#fbbf24;--red:#f87171;--blue:#38bdf8;--violet:#a78bfa;--pink:#f472b6;
+--r:16px;--maxw:760px;--fs:clamp(16px,1.6vw,17.5px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-size:var(--fs);line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc-d),var(--acc));z-index:99}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(24px,5.4vw,33px);font-weight:900;line-height:1.3;margin-bottom:8px;letter-spacing:-.5px}
+h3{font-size:clamp(18px,3.6vw,21.5px);font-weight:800;margin:34px 0 12px;color:var(--acc2)}
+p{margin:13px 0;color:var(--tx2)}
+p b,li b{color:var(--tx);font-weight:700}
+.kicker{font-size:13px;font-weight:800;letter-spacing:2.5px;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--tx);font-weight:500}
+.hero{padding:76px 0 60px;border-bottom:1px solid var(--line)}
+.hero .tag{display:inline-block;font-size:12.5px;font-weight:800;color:var(--acc2);border:1px solid var(--line2);border-radius:999px;padding:6px 14px;margin-bottom:20px;background:var(--bg2)}
+.hero h1{font-size:clamp(30px,7.4vw,48px);font-weight:900;line-height:1.22;letter-spacing:-1.2px;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero .sub{font-size:clamp(15.5px,2vw,18px);color:var(--tx2);max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.meta span{font-size:12.5px;color:var(--tx3);background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 6px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 14px;text-align:center}
+.stat .n{font-size:clamp(26px,5.6vw,38px);font-weight:900;color:var(--acc);letter-spacing:-1px;line-height:1.15}
+.stat .l{font-size:12.5px;color:var(--tx3);margin-top:6px;line-height:1.5}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.hl{border-color:var(--acc-d);background:linear-gradient(180deg,rgba(45,212,191,.06),var(--bg2))}
+.card.warn{border-color:rgba(251,191,36,.4);background:linear-gradient(180deg,rgba(251,191,36,.05),var(--bg2))}
+.card.bad{border-color:rgba(248,113,113,.4);background:linear-gradient(180deg,rgba(248,113,113,.05),var(--bg2))}
+.card .ct{font-size:15px;font-weight:800;margin-bottom:8px;color:var(--tx)}
+.card p{font-size:15px;margin:8px 0}
+.big-quote{font-size:clamp(19px,3.2vw,24px);font-weight:800;line-height:1.55;color:var(--tx);border-left:4px solid var(--acc);padding:6px 0 6px 20px;margin:28px 0}
+.big-quote small{display:block;font-size:13px;color:var(--tx3);font-weight:500;margin-top:10px}
+.cmp{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+.cmp th{background:var(--bg3);color:var(--tx);font-weight:800;padding:11px 10px;text-align:left;border:1px solid var(--line2);font-size:13.5px}
+.cmp td{padding:11px 10px;border:1px solid var(--line);color:var(--tx2);vertical-align:top;line-height:1.6}
+.cmp td b{color:var(--tx)}
+.cmp .y{color:var(--acc)}
+.cmp .n2{color:var(--red)}
+.tblwrap{overflow-x:auto;margin:18px 0}
+.tblwrap .cmp{margin:0;min-width:540px}
+.flow{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.fstep{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.fstep .fn{flex:0 0 34px;height:34px;border-radius:10px;background:var(--bg3);border:1px solid var(--line2);color:var(--acc);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px}
+.fstep .fb{font-size:14.5px;color:var(--tx2)}
+.fstep .fb b{display:block;color:var(--tx);font-size:15px;margin-bottom:3px}
+.fstep.bad .fn{color:var(--red)}
+.fstep.watt .fn{color:var(--watt)}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;background:var(--bg3);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--acc2)}
+.myth{border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden;background:var(--bg2)}
+.myth .q{padding:16px 18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;user-select:none}
+.myth .q:hover{background:var(--bg3)}
+.myth .q .ic{flex:0 0 auto;font-size:17px;margin-top:1px}
+.myth .q .qt{font-size:15px;font-weight:700;color:var(--tx);flex:1;line-height:1.5}
+.myth .q .ar{color:var(--tx3);transition:transform .3s;margin-top:2px}
+.myth.open .q .ar{transform:rotate(180deg)}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.myth.open .a{max-height:1400px}
+.myth .a-in{padding:2px 18px 18px;font-size:14.5px;color:var(--tx2);border-top:1px dashed var(--line);line-height:1.7}
+.myth .a-in b{color:var(--tx)}
+.src{font-size:12px;color:var(--tx3);margin-top:8px}
+.disc{background:var(--bg2);border:1px dashed var(--line2);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--tx3);margin:22px 0;line-height:1.7}
+footer{padding:44px 0 80px;font-size:13px;color:var(--tx3);line-height:1.8}
+/* chain */
+.chain{display:flex;flex-direction:column;gap:0;margin:24px 0}
+.clink{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:13px 16px;position:relative}
+.clink .ci{font-size:22px;flex:0 0 auto}
+.clink .cb{font-size:14.5px;color:var(--tx2)}
+.clink .cb b{color:var(--tx)}
+.carrow{text-align:center;color:var(--acc);font-size:16px;padding:3px 0;font-weight:900}
+.clink.hot{border-color:rgba(248,113,113,.5)}
+.clink.root{border-color:var(--acc-d)}
+/* fascia layers */
+.flayers{margin:24px 0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line2)}
+.flayer{padding:15px 18px;font-size:14px;color:var(--tx2);border-bottom:1px solid var(--line)}
+.flayer b{color:var(--tx);display:block;font-size:14.5px;margin-bottom:2px}
+.flayer:nth-child(1){background:rgba(244,114,182,.08)}
+.flayer:nth-child(2){background:rgba(56,189,248,.07)}
+.flayer:nth-child(3){background:rgba(45,212,191,.07)}
+.flayer:nth-child(4){background:rgba(167,139,250,.07)}
+.flayer:last-child{border-bottom:none}
+/* muscle explorer */
+.mx{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--r);padding:22px 18px;margin:26px 0}
+.mx-t{font-size:16px;font-weight:800;margin-bottom:4px}
+.mx-s{font-size:13px;color:var(--tx3);margin-bottom:16px}
+.mx-chips{display:flex;flex-wrap:wrap;gap:8px}
+.mchip{background:var(--bg3);border:1px solid var(--line2);border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:700;color:var(--tx2);cursor:pointer;font-family:inherit}
+.mchip:hover{border-color:var(--acc-d);color:var(--acc2)}
+.mchip.on{background:rgba(45,212,191,.14);border-color:var(--acc);color:var(--acc2)}
+.mpanel{margin-top:16px;background:var(--bg);border:1px solid var(--line2);border-radius:14px;padding:20px 18px;display:none}
+.mpanel.show{display:block}
+.mpanel .mh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.mpanel .mh .nm{font-size:19px;font-weight:900;color:var(--tx)}
+.mpanel .mh .en{font-size:12.5px;color:var(--tx3);font-family:'JetBrains Mono',Consolas,monospace}
+.mpanel .mrole{font-size:13px;color:var(--acc2);font-weight:700;margin-bottom:12px}
+.mpanel dl{display:grid;grid-template-columns:76px 1fr;gap:7px 12px;font-size:13.5px}
+.mpanel dt{color:var(--tx3);font-weight:700}
+.mpanel dd{color:var(--tx2);line-height:1.6}
+.mpanel dd b{color:var(--tx)}
+.mpanel .mv{margin-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.mv a{font-size:12px;color:var(--acc2);background:rgba(45,212,191,.08);border:1px solid var(--line2);border-radius:999px;padding:6px 11px;text-decoration:none}
+.mv a:hover{border-color:var(--acc)}
+/* video chips inline */
+.vids{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+.vids a{font-size:12px;color:var(--tx2);background:var(--bg3);border:1px solid var(--line2);border-radius:999px;padding:6px 11px;text-decoration:none}
+.vids a:hover{border-color:var(--acc);color:var(--acc2)}
+.vids a::before{content:'▶ ';color:var(--acc);font-size:10px}
+/* roadmap */
+.road{counter-reset:rd;display:flex;flex-direction:column;gap:12px;margin:22px 0}
+.rstep{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:17px 18px;position:relative}
+.rstep .rh{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.rstep .rn{counter-increment:rd;flex:0 0 auto;width:30px;height:30px;border-radius:9px;background:var(--bg3);border:1px solid var(--acc-d);color:var(--acc);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:14px}
+.rstep .rn::before{content:counter(rd)}
+.rstep .rt{font-size:15.5px;font-weight:800;color:var(--tx)}
+.rstep .rb{font-size:14px;color:var(--tx2);line-height:1.65}
+.rstep .rb b{color:var(--tx)}
+.rstep.r0 .rn::before{content:'0'}
+.rstep.r0{counter-increment:none}
+/* quiz */
+.quiz-item{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.quiz-item .qq{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--tx)}
+.quiz-item .opt{display:block;width:100%;text-align:left;background:var(--bg3);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;margin:7px 0;color:var(--tx2);font-size:14px;cursor:pointer;font-family:inherit;line-height:1.5}
+.quiz-item .opt:hover{border-color:var(--acc-d)}
+.quiz-item .opt.right{border-color:var(--acc);background:rgba(45,212,191,.1);color:var(--acc2)}
+.quiz-item .opt.wrong{border-color:var(--red);background:rgba(248,113,113,.08);color:#fca5a5}
+.quiz-item .exp{display:none;margin-top:10px;font-size:13.5px;color:var(--tx2);border-top:1px dashed var(--line);padding-top:10px;line-height:1.65}
+.quiz-item .exp.show{display:block}
+.final{background:linear-gradient(180deg,var(--bg3),var(--bg2));border:1px solid var(--line2);border-radius:var(--r);padding:26px 22px;margin:26px 0}
+.final p{font-size:15.5px;margin:10px 0}
+.final .fx{color:var(--acc);font-weight:800}
+.srcbox{font-size:13px;color:var(--tx3);line-height:1.9}
+/* eli5 */
+.eli5{margin:60px 0 0;padding:26px 20px 28px;border:1px solid var(--e5-line);border-radius:20px;background:linear-gradient(180deg,var(--e5-card2),var(--e5-card))}
+.eli5{--e5-card:var(--bg2);--e5-card2:var(--bg3);--e5-line:var(--line);--e5-tx:var(--tx);--e5-tx2:var(--tx2);--e5-tx3:var(--tx3);--e5-acc:var(--acc);--e5-acc2:var(--acc2);--e5-accbg:rgba(45,212,191,.09)}
+.eli5 .e5-badge{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2px;padding:6px 12px;border-radius:999px;color:var(--e5-acc2);background:var(--e5-accbg);border:1px solid var(--e5-line)}
+.eli5 .e5-h{font-size:clamp(23px,5.2vw,31px);font-weight:900;margin:14px 0 4px;color:var(--e5-tx);line-height:1.25;word-break:keep-all}
+.eli5 .e5-sub{font-size:14.5px;color:var(--e5-tx3);margin:0 0 20px;line-height:1.6;word-break:keep-all}
+.e5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.e5-card{position:relative;background:var(--e5-card);border:1px solid var(--e5-line);border-radius:16px;padding:20px 14px 18px;text-align:center}
+.e5-n{position:absolute;top:9px;left:11px;font-size:11px;font-weight:800;color:var(--e5-tx3);opacity:.7}
+.e5-ico{font-size:clamp(33px,8vw,44px);line-height:1.1;margin-bottom:10px}
+.e5-big{font-size:clamp(15.5px,2.3vw,17.5px);font-weight:800;color:var(--e5-tx);line-height:1.42;word-break:keep-all}
+.e5-sm{font-size:12.5px;color:var(--e5-tx3);margin-top:8px;line-height:1.55;word-break:keep-all}
+.e5-one{margin-top:16px;padding:20px 18px;border-radius:16px;border:1px dashed var(--e5-acc);background:var(--e5-accbg)}
+.e5-lab{font-size:11.5px;font-weight:800;color:var(--e5-acc2);letter-spacing:.4px}
+.e5-one p{margin:9px 0 0;font-size:clamp(17px,3vw,21px);font-weight:800;color:var(--e5-tx);line-height:1.5;word-break:keep-all}
+.e5-do{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.e5-do span{font-size:12.5px;font-weight:700;color:var(--e5-tx2);background:var(--e5-card);border:1px solid var(--e5-line);border-radius:999px;padding:8px 13px;word-break:keep-all}
+@media(max-width:430px){.e5-grid{grid-template-columns:repeat(2,1fr);gap:10px}.e5-card{padding:16px 10px 14px}.stats{grid-template-columns:1fr;gap:9px}.mpanel dl{grid-template-columns:64px 1fr}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="hero">
+  <span class="tag">🦴 인사이트 교재 08 · 재활 해부학</span>
+  <h1>아픈 곳은<br><em>범인이 아니다</em></h1>
+  <p class="sub">남스어프로치(남준록 원장) × 치중진담(Team CareFlow) — 두 재활 채널의 가르침을 하나로 합치고, 그 밑바닥에 깔린 근막과 근육 해부학을 보강한 통합 교본.</p>
+  <div class="meta">
+    <span>남스어프로치 · 동탄 바로본신경외과 남준록 원장</span>
+    <span>치중진담 · Team CareFlow (장회영 신경외과 · 남유미 마취통증의학과)</span>
+    <span>영상 40여 편 정리 + 해부학 보강</span>
+    <span>읽기 30분</span>
+  </div>
+</header>
+
+<section id="verdict">
+  <div class="kicker">결론부터</div>
+  <h2>목이 아픈 이유가 발에 있을 수 있다.<br>그 다리를 놓는 게 근막이다.</h2>
+  <div class="stats">
+    <div class="stat"><div class="n"><span data-cnt="25" data-suf="%"></span></div><div class="l">안정화(1형) 근섬유가 깨어나는 최대근력 상한 — 세게 하면 오히려 실패</div></div>
+    <div class="stat"><div class="n"><span data-cnt="4" data-suf="개"></span></div><div class="l">척추를 지키는 압력 통의 벽 — 횡격막·복횡근·다열근·골반기저근</div></div>
+    <div class="stat"><div class="n"><span data-cnt="23" data-suf=".5h"></span></div><div class="l">치료실 30분보다 중요한 나머지 하루 — 일상 관리가 본편</div></div>
+  </div>
+  <p class="lead">이 교재의 세 문장 요약.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>통증 부위 ≠ 원인 부위.</b>목·어깨 통증의 뿌리는 대개 횡격막·코어·골반의 기능 저하다. 두 채널이 독립적으로 같은 결론에 도달했다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>그 연결을 실제로 잇는 구조물이 근막과 심부 근육이다.</b>횡격막은 요추에 직접 붙고, 장요근과 같은 근막 라인으로 이어진다. "호흡이 허리를 지킨다"는 말은 은유가 아니라 해부학이다.</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>재활은 약하게, 느리게, 감각부터.</b>안정화 근섬유(1형)는 최대근력 25% 미만·느린 속도에서만 깨어난다. 마사지로 풀고 → 감각을 찾고 → 낮은 부하로 패턴을 만든 뒤에야 강도를 올린다.</div></div>
+  </div>
+</section>
+
+<section id="ch01">
+  <div class="kicker">Chapter 01 · 출발점</div>
+  <h2>전신 연결 사슬 — 두 채널의 공통 뼈대</h2>
+  <p class="lead">남스어프로치와 치중진담이 각자 그린 지도가 정확히 겹친다. 발끝에서 시작해 목에서 끝나는 도미노.</p>
+  <div class="chain">
+    <div class="clink root"><span class="ci">🦶</span><div class="cb"><b>발·종아리 경직</b> — 사슬의 시작. 바닥과 만나는 지점이 굳으면 위가 전부 보상한다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">🍑</span><div class="cb"><b>대둔근 약화</b> — 엉덩이가 일을 안 하면 골반이 흔들린다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">⚖️</span><div class="cb"><b>골반 불안정</b> — 척추가 서 있는 받침대가 기운다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">🫁</span><div class="cb"><b>코어 약화 · 횡격막 기능 저하</b> — 배 안의 압력(IAP)이 무너지고 호흡이 얕아진다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink hot"><span class="ci">😮‍💨</span><div class="cb"><b>보조호흡근 과사용</b> — 사각근·흉쇄유돌근이 횡격막 대신 하루 2만 번 숨을 끌어올린다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink hot"><span class="ci">🤕</span><div class="cb"><b>목·어깨 통증, 두통</b> — 사슬의 끝. 여기만 주무르면 반드시 재발한다.</div></div>
+  </div>
+  <div class="card hl">
+    <div class="ct">협응 — 이삿짐 인부 비유 (남준록 원장)</div>
+    <p>인부 10명 중 6명이 일을 못 하면 나머지 4명이 과로로 다친다. 아픈 근육은 <b>게으른 동료 몫까지 떠맡은 성실한 근육</b>이다. 그래서 "고생한 근육을 먼저 풀어주고", 일 안 하던 근육을 깨우는 게 치료 순서다.</p>
+  </div>
+  <p class="src">출처: 남스어프로치 「목·어깨 통증 기능적 접근」 (youtu.be/keL5B9crP-U) · 치중진담 「목어깨 통증, 허리·골반도 함께 치료해야 하는 이유」 (youtu.be/C9nw67Om_No)</p>
+</section>
+
+<section id="ch02">
+  <div class="kicker">Chapter 02 · 해부학 보강 ①</div>
+  <h2>근막 — 몸 전체를 잇는 한 벌의 그물옷</h2>
+  <p class="lead">강의들이 말하는 "전신 연결"의 물리적 실체. 근육은 따로따로가 아니라 근막이라는 결합조직 스타킹 안에 함께 들어 있다.</p>
+  <p><b>근막(fascia)</b>은 콜라겐 섬유로 짜인 3차원 결합조직 그물망이다. 피부 아래에서 근육·뼈·내장·혈관·신경을 감싸고 구획하며, 머리끝부터 발끝까지 <b>절단면 없이 이어진다.</b> 오렌지를 까면 알맹이를 싸고 있는 흰 속껍질 — 그게 사람 몸 전체에 입혀져 있다고 보면 된다.</p>
+  <div class="flayers">
+    <div class="flayer"><b>표층 근막 (superficial fascia)</b>피부 바로 아래. 지방·수분을 품고 피부와 근육 사이의 미끄러짐을 담당.</div>
+    <div class="flayer"><b>심부 근막 (deep fascia)</b>근육군을 감싸는 질긴 층. 흉요근막이 대표. 장력을 멀리 전달하는 고속도로.</div>
+    <div class="flayer"><b>근외막 → 근주막 → 근내막</b>근육 전체 → 근섬유 다발 → 근섬유 하나까지 3중 포장. 근육 힘의 30% 이상이 힘줄이 아니라 이 근막을 타고 이웃으로 전달된다는 연구들이 있다.</div>
+    <div class="flayer"><b>내장 근막 (visceral fascia)</b>장기를 매달고 감싼다. 횡격막의 움직임이 내장 마사지가 되는 통로.</div>
+  </div>
+
+  <h3>왜 근막이 "전신 연결"의 열쇠인가 — 세 가지 성질</h3>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>장력을 멀리 전달한다.</b>텐트 한 귀퉁이 줄을 당기면 천 전체가 우그러지듯, 종아리 근막이 굳으면 그 장력이 등줄기를 타고 목까지 올라간다. 1장의 사슬이 성립하는 물리적 이유.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>감각기관이다.</b>근막에는 고유수용감각·통각 수용체가 근육보다 촘촘하다. 재활 1단계가 "감각 인지 연습"인 이유 — 뇌가 몸 위치를 읽는 센서망이 바로 근막이다. 굳은 근막 = 흐려진 센서.</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>움직여야 미끄럽다.</b>근막 층 사이는 히알루론산 수분층이 윤활한다. 안 움직이면 층끼리 들러붙고(치밀화·유착) 뻣뻣함과 둔한 감각이 온다. "통증이 있어도 쉬기만 하면 악화"라는 디스크 강의 결론과 같은 원리.</div></div>
+  </div>
+
+  <h3>흉요근막 — 강의에 직접 등장한 근막</h3>
+  <p>남준록 원장의 허리 안정화 3요소: <b>복강내압(IAP) + 기둥지줄(대요근·척추기립근) + 흉요근막 긴장도.</b> 흉요근막(thoracolumbar fascia)은 허리 뒤를 덮는 다이아몬드형 심부 근막으로, 위로는 <b>광배근</b>(팔), 아래로는 <b>대둔근</b>(반대쪽 엉덩이), 앞으로는 <b>복횡근</b>이 부착된다. 팔-등-반대쪽 엉덩이가 한 장의 천으로 묶여 있는 셈 — 걸을 때 팔과 반대쪽 다리가 함께 흔들리며 이 천을 팽팽하게 감아 허리를 지킨다.</p>
+  <div class="card">
+    <div class="ct">근막경선 모델 (Anatomy Trains) — 사슬의 지도책</div>
+    <p>Thomas Myers의 모델은 근막으로 이어진 근육 사슬을 노선도로 그린다. <b>표면 후방선</b>: 발바닥→아킬레스→종아리→햄스트링→천골→척추기립근→후두→눈썹 위까지 한 줄 — "발·종아리를 풀면 목·두통이 좋아진다"의 해부학 버전. <b>심부 전방선</b>: 발 안쪽→내전근→<b>장요근→횡격막</b>→목 깊은 근육 — 호흡과 골반이 한 라인인 이유. 임상에서 널리 쓰이는 유용한 지도지만, 모든 경선이 실험으로 똑같이 검증된 건 아니라는 점은 알아두자(후방선 쪽 근거가 가장 탄탄).</p>
+  </div>
+  <div class="card hl">
+    <div class="ct">그래서 마사지가 0단계다</div>
+    <p>두 채널 모두 운동 전 마사지를 강제한다. 목적은 근육을 "부드럽게"가 아니라 — ① 굳은 근막 층의 미끄러짐 회복, ② 센서망 깨우기(감각 입력), ③ 과로한 근육의 긴장 내리기. <b>딱딱한 근육은 아무리 운동해도 활성화가 안 되기 때문.</b> 순서도 하지·골반부터(사슬의 뿌리), 강도는 "약간 뻐근한 정도"까지만(아프면 방어 긴장으로 역효과).</p>
+    <div class="vids">
+      <a href="https://youtu.be/vJZskjxqemY" target="_blank" rel="noopener">마사지 방법 1 — 하지·골반</a>
+      <a href="https://youtu.be/F5gPlhdJjrI" target="_blank" rel="noopener">마사지 방법 2</a>
+      <a href="https://youtu.be/2ptH2Tz6_v8" target="_blank" rel="noopener">허벅지 마사지볼 이완</a>
+      <a href="https://youtu.be/y_xf6DmvFMM" target="_blank" rel="noopener">종아리 마사지볼 이완</a>
+    </div>
+  </div>
+  <p class="src">해부학 보강: 표준 해부학 + Myers 「Anatomy Trains」 모델 (모델임을 명시). 강의 연결: 남스어프로치 「마사지의 중요성」 (youtu.be/KhYS8cIyAk0)</p>
+</section>
+<section id="ch03">
+  <div class="kicker">Chapter 03 · 해부학 보강 ②</div>
+  <h2>호흡 코어 유닛 — 압력으로 척추를 세우는 캔</h2>
+  <p class="lead">허리를 지키는 건 식스팩이 아니라 배 안의 공기압이다. 그 압력 통의 네 벽을 해부학으로 뜯어본다.</p>
+  <p>두 채널이 모두 강조하는 <b>복강내압(IAP, Intra-Abdominal Pressure)</b>. 배 안을 밀폐된 캔이라 생각하면 — 캔이 단단하려면 뚜껑·옆면·뒷면·바닥이 <b>동시에</b> 버텨야 한다. 하나라도 새면 압력은 0이다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:16%">벽</th><th style="width:22%">근육</th><th>해부학 요점</th></tr>
+    <tr><td><b>뚜껑 (위)</b></td><td class="y">횡격막</td><td>돔 모양. 흉골 검상돌기·하부 늑골 안쪽·<b>요추(L1~L3)</b>에서 시작해 중심건으로 모인다. 수축하면 돔이 내려가 흉강은 넓히고(흡기) 복강은 눌러 압력을 만든다.</td></tr>
+    <tr><td><b>옆·앞</b></td><td class="y">복횡근</td><td>가장 깊은 복근. 섬유가 <b>가로 방향</b>이라 천연 코르셋. 뒤로는 흉요근막에 붙어 허리 뒤까지 조인다. 몸이 움직이기 직전 먼저 켜지는 선제 안정 근육.</td></tr>
+    <tr><td><b>뒤</b></td><td class="y">다열근</td><td>척추뼈 한 마디 한 마디를 옆 마디와 잇는 짧은 근육 다발. 분절 단위 미세 안정 담당. 요통 환자에서 선택적으로 위축되는 대표 근육.</td></tr>
+    <tr><td><b>바닥</b></td><td class="y">골반기저근</td><td>골반 아래를 막는 해먹. 위에서 내려오는 압력을 받아낸다. 여기가 약하면 압력이 아래로 샌다.</td></tr>
+  </table></div>
+
+  <h3>횡격막의 이중 직업 — 호흡근이자 자세근</h3>
+  <p>핵심은 횡격막이 <b>요추에 직접 붙어 있다</b>는 사실이다. 횡격막 다리(crus)는 L1~L3 척추체 앞면에서 올라온다. 즉 숨 쉬는 근육이 곧 허리를 앞에서 붙잡는 근육이다. 게다가 이 다리는 <b>대요근·요방형근의 기시부와 근막으로 연결</b>된다 — 2장에서 본 심부 전방선. "호흡이 무너지면 허리가 무너진다"는 두 채널의 명제는 이 구조에서 나온다.</p>
+  <div class="card bad">
+    <div class="ct">보상 회로 — 보조호흡근 3인방</div>
+    <p>횡격막이 일을 안 하면 몸은 목에 있는 예비 인력을 부른다. 하루 호흡 약 2만 번을 이들이 대신 끌어올리면 목은 버틸 수 없다.</p>
+    <p>· <b>사각근(전·중·후)</b> — 경추 옆면에서 1·2번 늑골로. 원래는 급할 때만 늑골을 들어올리는 근육. 과사용하면 굳으면서 사이로 지나는 <b>팔신경얼기·혈관을 압박</b>해 팔저림(흉곽출구증후군)까지 만든다.<br>· <b>흉쇄유돌근(SCM)</b> — 가슴뼈·쇄골에서 귀 뒤 유양돌기로. 과긴장 시 <b>측두부 연관통(두통)</b>의 단골 범인.<br>· <b>소흉근</b> — 늑골 3~5에서 견갑골 오훼돌기로. 굳으면 어깨를 앞으로 말아 라운드숄더를 고정한다.</p>
+  </div>
+  <div class="card hl">
+    <div class="ct">IAP 훈련이 1순위인 이유 (치중진담 실전)</div>
+    <p>바로 누워 다리를 90°/90°로 든 <b>3개월 아기 자세</b>에서 숨을 아랫배 옆·뒤까지 360° 채우는 연습. 갈비뼈가 들리지 않게, 목·어깨에 힘이 들어가지 않게. 이 자세가 요추 전만을 중립으로 잠가서 횡격막과 골반기저면이 <b>마주 보게</b> 만들어 준다 — 압력 통이 기울면 압력이 안 만들어지기 때문.</p>
+    <div class="vids">
+      <a href="https://youtu.be/08FAMI2aGZM" target="_blank" rel="noopener">복강내압 실전 (치중진담)</a>
+      <a href="https://youtu.be/7h-7NJnJcnU" target="_blank" rel="noopener">3개월 아기 자세</a>
+      <a href="https://youtu.be/V7FHwKCKY_Y" target="_blank" rel="noopener">IAP 조절 훈련 (남스)</a>
+      <a href="https://youtu.be/nkXboZcQdTc" target="_blank" rel="noopener">국소 코어 세팅 + 감각 인지</a>
+    </div>
+  </div>
+  <p class="src">해부학 보강: 표준 해부학. 강의 연결: 남스어프로치 「코어 훈련에서 흔한 실수」 (youtu.be/QVsi3eLoW6w) · 치중진담 「코어 운동 하면 더 아픈 이유」 (youtu.be/IiRkhrzwIa0)</p>
+</section>
+
+<section id="ch04">
+  <div class="kicker">Chapter 04 · 해부학 보강 ③</div>
+  <h2>목·어깨 유닛 — 승모근은 하나가 아니다</h2>
+  <p class="lead">"승모근이 뭉쳤다"는 말은 절반만 맞다. 상부는 과로했고, 중부·하부는 잠들어 있다 — 같은 이름의 세 근육.</p>
+  <p><b>승모근(trapezius)</b>은 뒤통수부터 등 한가운데(T12)까지 덮는 다이아몬드형 근육인데, 섬유 방향에 따라 <b>세 부분이 사실상 다른 일</b>을 한다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:18%">부위</th><th style="width:30%">어디서 → 어디로</th><th>기능 / 흔한 상태</th></tr>
+    <tr><td><b>상부 승모근</b></td><td>뒤통수·목덜미 인대 → 쇄골 바깥 1/3</td><td class="n2">견갑골 올림 + 상방회전 보조. 스트레스·얕은 호흡·거북목에서 <b>만성 과활성</b> — "어깨 뭉침"의 그 부위.</td></tr>
+    <tr><td><b>중부 승모근</b></td><td>C7~T3 극돌기 → 견봉·견갑극</td><td class="y">견갑골을 척추 쪽으로 모음(후인). 안정의 핵심인데 <b>대개 약화·지연</b> — 라운드숄더에서 늘어난 채 잠든다.</td></tr>
+    <tr><td><b>하부 승모근</b></td><td>T4~T12 극돌기 → 견갑극 안쪽</td><td class="y">견갑골 내림 + 상방회전. 팔을 들 때 상부와 짝힘을 이루는 파트너. 역시 <b>약화 단골</b>.</td></tr>
+  </table></div>
+  <p>전형적 패턴이 이거다: 상부만 켜지고 중·하부가 안 켜지면 견갑골이 들리고 앞으로 말린다. 이때 상부를 주무르기만 하면 잠깐 시원하고 다시 뭉친다 — <b>일 안 하는 중·하부를 깨워야 상부가 쉰다.</b> 1장의 이삿짐 인부 비유가 어깨 안에서도 반복되는 것.</p>
+
+  <h3>전거근 — "어깨를 억지로 내리지 마세요"의 주인공</h3>
+  <p><b>전거근(serratus anterior)</b>은 늑골 1~9 옆면에서 시작해 견갑골 안쪽 모서리 <b>앞면</b>에 붙는다. 톱니 모양이라 톱니근. 하는 일 — 견갑골을 흉곽에 밀착시키고, 팔을 들 때 견갑골을 상방회전시킨다. 약하면 견갑골 안쪽이 날개처럼 들뜨는 <b>익상견갑</b>.</p>
+  <div class="card warn">
+    <div class="ct">치중진담의 교정 — 왜 "어깨 내려!"가 틀렸나</div>
+    <p>어깨를 억지로 끌어내리면 광배근·하부 섬유가 견갑골을 아래로 잡아당겨 <b>상방회전을 막아버린다.</b> 팔을 들려면 견갑골이 돌아야 하는데 돌지 못하니 어깨 관절에서 충돌이 난다. 올바른 신호는 "내리기"가 아니라 <b>겨드랑이 아래가 당기는 느낌</b> — 전거근이 견갑골을 흉곽에 붙이며 돌리는 감각이다.</p>
+    <div class="vids">
+      <a href="https://youtu.be/ZsWsny007LU" target="_blank" rel="noopener">전거근 — 어깨 내리지 마세요</a>
+      <a href="https://youtu.be/hojlgr23CQ0" target="_blank" rel="noopener">전거근 1세트 실습</a>
+      <a href="https://youtu.be/ceSN5Q6ODUY" target="_blank" rel="noopener">견갑골 안정화 1 (남스)</a>
+      <a href="https://youtu.be/7i6H-FNJVN4" target="_blank" rel="noopener">견갑골 안정화 3 — 저부하</a>
+    </div>
+  </div>
+  <p>보조 출연진도 있다. <b>견갑거근</b>(경추 C1~C4 → 견갑골 위쪽 모서리)은 거북목 자세에서 머리 무게를 하루 종일 버티다 굳는 근육 — 목 옆 뻐근함의 흔한 출처. <b>능형근</b>(C7~T5 → 견갑골 안쪽)은 중부 승모근과 함께 후인을 담당한다.</p>
+  <div class="big-quote">팔은 견갑골 위에 서 있다. 견갑골이 흔들리면 팔이 하는 모든 일이 목으로 올라간다.<small>견갑상완리듬 — 팔 벌림 180° 중 60°는 견갑골 회전이 만든다 (약 2:1 비율)</small></div>
+  <p class="src">해부학 보강: 표준 해부학. 강의 연결: 치중진담 「전거근 안정화」 · 남스어프로치 「견갑골 안정화 1~3」</p>
+</section>
+
+<section id="ch05">
+  <div class="kicker">Chapter 05 · 해부학 보강 ④</div>
+  <h2>골반·고관절 유닛 — 장요근이라는 기둥 지지줄</h2>
+  <p class="lead">사용자가 콕 집은 그 근육. 장골근과 대요근은 왜 묶어서 장요근이라 부르고, 왜 허리 재활의 열쇠인가.</p>
+  <p><b>장요근(iliopsoas)</b>은 두 근육의 합체다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th style="width:20%">근육</th><th style="width:36%">어디서 → 어디로</th><th>성격</th></tr>
+    <tr><td><b>대요근<br>(psoas major)</b></td><td><b>흉추 T12~요추 L5 척추체·횡돌기</b> → 골반 안쪽을 지나 대퇴골 소전자</td><td>척추에 직접 붙는 유일한 고관절 근육. 남준록 원장이 말한 <b>"기둥 지지줄"</b> — 텐트 기둥(요추)을 앞에서 당겨 세우는 줄. 단, 과긴장하면 요추를 앞으로 당겨 압박한다.</td></tr>
+    <tr><td><b>장골근<br>(iliacus)</b></td><td>장골 안쪽 오목면(장골와) 전체 → 대요근과 합쳐져 소전자</td><td>골반 안쪽에 부채꼴로 붙는 순수 고관절 굴곡근. <b>척추를 건드리지 않고</b> 다리를 든다.</td></tr>
+  </table></div>
+  <div class="card hl">
+    <div class="ct">남스어프로치의 정밀 처방 — "장골근 우세 활성화"</div>
+    <p>고관절 굴곡 훈련에서 대요근이 우세하면 요추가 당겨져 허리 통증이 재점화된다. 그래서 <b>요추를 중립에 고정한 채(코어 세팅 먼저) 낮은 부하로 장골근 위주 굴곡</b>을 훈련한다 — 순서가 "국소 코어 세팅 → IAP → 장골근"인 이유. 치중진담도 같은 취지로 "통증 없는 장요근 저부하 운동"을 처방한다.</p>
+    <div class="vids">
+      <a href="https://youtu.be/il91bFHIfms" target="_blank" rel="noopener">장골근 우세 활성화 (남스)</a>
+      <a href="https://youtu.be/tKKn4Vbtqaw" target="_blank" rel="noopener">장요근 통증 없이 (치중진담)</a>
+    </div>
+  </div>
+  <p>기억할 연결 하나 — 대요근의 기시부(T12~L1)는 <b>횡격막 다리와 근막으로 맞닿아 있다.</b> 심호흡이 장요근 긴장을 낮추는 게 기분 탓이 아니라는 뜻이다. 호흡 유닛(3장)과 골반 유닛은 해부학적으로 한 집이다.</p>
+
+  <h3>대둔근·중둔근 — 사슬의 엔진</h3>
+  <p><b>대둔근</b>은 장골 뒤·천골·미골, 그리고 <b>흉요근막</b>에서 시작해 대퇴골과 장경인대로 내려간다. 고관절 신전(걷기·계단·일어서기의 엔진)과 외회전 담당. 흉요근막을 사이에 두고 <b>반대쪽 광배근과 연결</b>되어(후방 사선 사슬) 걸을 때 허리를 감아 지킨다 — 대둔근이 잠들면 이 장력이 사라져 허리 기립근이 대신 일하다 굳는다. 치중진담은 특히 <b>하부 섬유</b>(신전 주력)를 겨냥한 운동을 처방한다.</p>
+  <p><b>중둔근</b>은 장골 바깥면에서 대전자로. 한 다리로 설 때마다 골반이 반대쪽으로 무너지지 않게 잡는 수평 유지 장치다. 약하면 걸을 때마다 골반이 좌우로 출렁이고(트렌델렌버그 징후) 그 진동이 요추로 올라간다. <b>클램쉘</b>이 이 근육(+대둔근 상부)의 표준 저부하 운동 — 단, 골반이 뒤로 굴러가며 허리로 여는 보상을 막으려면 여기서도 코어 세팅이 먼저다.</p>
+  <div class="vids">
+    <a href="https://youtu.be/jbzlxTX_7i0" target="_blank" rel="noopener">클램쉘 가이드</a>
+    <a href="https://youtu.be/4GLUXn1OhO4" target="_blank" rel="noopener">클램쉘 + 국소 코어 세팅</a>
+    <a href="https://youtu.be/WjnpYfkMz4U" target="_blank" rel="noopener">대둔근 하부 섬유 운동</a>
+  </div>
+  <p class="src">해부학 보강: 표준 해부학. 강의 연결: 남스어프로치 「장골근 우세 활성화」 · 치중진담 「클램쉘」 「대둔근 하부 섬유」</p>
+</section>
+<section id="atlas">
+  <div class="kicker">근육 도감 · 인터랙티브</div>
+  <h2>이 교재의 근육 12 — 눌러서 찾아보기</h2>
+  <p class="lead">강의에 나온 근육을 한 장씩 카드로. 기시·정지·기능·문제 신호·재활 포인트, 그리고 바로 볼 영상.</p>
+  <div class="mx">
+    <div class="mx-t">🫀 근육 카드 탐색기</div>
+    <div class="mx-s">근육 이름을 누르면 카드가 열린다. 유닛순 정렬 — 호흡코어 → 목어깨 → 골반.</div>
+    <div class="mx-chips" id="mxChips"></div>
+    <div class="mpanel" id="mxPanel">
+      <div class="mh"><span class="nm" id="mpNm"></span><span class="en" id="mpEn"></span></div>
+      <div class="mrole" id="mpRole"></div>
+      <dl>
+        <dt>기시</dt><dd id="mpO"></dd>
+        <dt>정지</dt><dd id="mpI"></dd>
+        <dt>기능</dt><dd id="mpF"></dd>
+        <dt>문제 신호</dt><dd id="mpP"></dd>
+        <dt>재활 포인트</dt><dd id="mpR"></dd>
+      </dl>
+      <div class="mv" id="mpV"></div>
+    </div>
+  </div>
+  <p class="src">기시·정지·기능: 표준 해부학 요약. 재활 포인트·영상: 남스어프로치 / 치중진담 강의.</p>
+</section>
+
+<section id="ch06">
+  <div class="kicker">Chapter 06 · 근섬유 과학</div>
+  <h2>왜 "약하게"가 처방인가 — 1형 근섬유와 크기 원리</h2>
+  <p class="lead">재활 운동이 답답할 만큼 순한 데는 생리학적 이유가 있다. 세게 하는 순간 목표 근육이 훈련에서 빠진다.</p>
+  <div class="tblwrap"><table class="cmp">
+    <tr><th></th><th>1형 (지근 · 안정화)</th><th>2형 (속근 · 이동성)</th></tr>
+    <tr><td><b>하는 일</b></td><td class="y">관절을 제자리에 붙잡기 — 자세 유지, 미세 조정</td><td>크고 빠른 힘 — 던지기, 점프, 들기</td></tr>
+    <tr><td><b>성격</b></td><td>피로에 강함, 느리게 켜지고 오래 버팀</td><td>힘은 세지만 금방 지침</td></tr>
+    <tr><td><b>켜지는 조건</b></td><td class="y"><b>최대근력 25% 미만의 낮은 부하 + 느린 속도</b></td><td class="n2">높은 부하·빠른 속도에서 합류</td></tr>
+    <tr><td><b>대표 근육</b></td><td>다열근, 복횡근, 회전근개 등 심부 안정근</td><td>대둔근·광배근 등 표층 대근육 비중 높음</td></tr>
+  </table></div>
+  <p><b>헨네만 크기 원리(Henneman's size principle)</b> — 신경은 작은 운동단위(1형)부터 순서대로 동원한다. 낮은 부하에서는 1형만 조용히 일하고, 부하가 커질수록 2형이 합류한다. 그런데 통증으로 1형이 잠든 사람이 <b>세게</b> 운동하면? 몸은 즉시 2형 대근육으로 동작을 해치워 버리고, 정작 깨우려던 심부 안정근은 <b>구경만 한다.</b> 이것이 치중진담 "기능회복운동은 왜 세게 하면 안 되는가" 23분의 요지다.</p>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>활성화 ≠ 근력.</b>재활 초기의 문제는 근육이 약한 게 아니라 <b>동원되는 섬유 수가 적은 것.</b> 그래서 무게를 올리는 게 아니라 "켜지는 감각"을 찾는 게 먼저다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>등척성부터.</b>길이를 바꾸지 않는 버티기 수축이 통증 없이 활성화를 되살리는 안전한 입구 — 세팅한 자세를 짧게(호흡 유지하며) 버티는 것부터.</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>반사적 안정화가 최종 목표.</b>의식적으로 배에 힘주는 단계는 훈련용 비계다. 진짜 목표는 손을 뻗기 전에 코어가 <b>먼저, 저절로</b> 켜지는 무의식 반응(피드포워드) 복구 — 치중진담 28분 강의의 핵심.</div></div>
+    <div class="fstep watt"><div class="fn">!</div><div class="fb"><b>초기 부하 설정은 "너무 쉬운데?" 수준.</b>남준록 원장 기준 — 통증 0, 다음날 피로감 0에서 시작해 아주 천천히 올린다. 회복 속도는 기대 속도보다 늘 느리다.</div></div>
+  </div>
+  <div class="vids">
+    <a href="https://youtu.be/vnLfzT6HcLc" target="_blank" rel="noopener">왜 세게 하면 안 되나 (치중진담 23분)</a>
+    <a href="https://youtu.be/xvtYH7Eb-24" target="_blank" rel="noopener">반사적 안정화 (치중진담 28분)</a>
+    <a href="https://youtu.be/4RE2RLdToRc" target="_blank" rel="noopener">안정화 vs 이동성 근섬유 (남스)</a>
+    <a href="https://youtu.be/w4rLPEu2Lag" target="_blank" rel="noopener">초기 부하 설정 (남스)</a>
+    <a href="https://youtu.be/QMIpBt-RWJs" target="_blank" rel="noopener">회복 속도와 기대 속도</a>
+  </div>
+  <p class="src">헨네만 크기 원리: 표준 생리학. 25% 기준·프로토콜: 두 채널 강의 공통.</p>
+</section>
+
+<section id="ch07">
+  <div class="kicker">Chapter 07 · 오해 교정</div>
+  <h2>두 채널이 함께 부수는 통념 6개</h2>
+  <p class="lead">눌러서 열어보기. 각 항목마다 "왜 틀렸나"의 해부학이 붙어 있다.</p>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🐢</span><span class="qt">"거북목엔 턱 당기기(친턱)" — 두 채널 모두 반대</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">머리 위치는 의식이 아니라 <b>정위 반응(righting reflex)</b> — 눈·전정기관이 수평을 맞추는 무의식 반사가 결정한다. 턱을 당겨 "바른 위치"에 놓아도 반사가 다시 원위치시킨다. 게다가 거북목의 뿌리는 목이 아니라 <b>흉추 후만·견갑 불안정·얕은 호흡</b> — 아래층이 기울어서 꼭대기가 앞으로 나간 것. 아래층(코어·견갑)을 세우면 머리는 반사가 알아서 데려온다.<div class="vids"><a href="https://youtu.be/DoYFmPGkEII" target="_blank" rel="noopener">친턱이 의미 없는 이유 (남스 11분)</a><a href="https://youtu.be/n5yZwJa-IEA" target="_blank" rel="noopener">턱당기기 하지 마세요 (치중진담 6분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🪑</span><span class="qt">"허리는 꼿꼿이 펴고 앉아야 한다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">뻣뻣하게 세운 "바른 자세"는 기립근을 등척성으로 하루 종일 쥐어짜는 자세다. 좋은 자세란 하나의 정답 각도가 아니라 <b>자주 바뀌는 자세</b> — 디스크 영양 공급(아래 항목)도, 근막 윤활(2장)도 움직임이 조건이기 때문. 최고의 자세는 다음 자세다.<div class="vids"><a href="https://youtu.be/peZpj6J7mt0" target="_blank" rel="noopener">뻣뻣하게 앉지 마라 (남스)</a><a href="https://youtu.be/rmqquyVGpGY" target="_blank" rel="noopener">바른자세 오해 (남스)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💿</span><span class="qt">"디스크는 아끼고 쉬어야 낫는다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">추간판은 성인이 되면 혈관이 거의 없어 <b>삼투압 + 펌핑</b>으로 먹고산다 — 눌렸다 풀렸다 하며 수분과 영양을 빨아들이는 스펀지. 안 움직이면 굶는다. 그래서 "쉬기만 하는 디스크"는 악화 코스이고, 통증 범위 안의 부드러운 움직임이 치료의 일부다. MRI의 디스크 소견이 곧 통증 원인도 아니다 — 무증상 인구에서도 팽윤·탈출은 흔하게 발견된다. 치중진담은 "허리는 멀쩡한데 다리가 저린" 신경 주행 문제, "디스크를 믿게 되는 환경"까지 짚는다.<div class="vids"><a href="https://youtu.be/_5IqiB1MVpQ" target="_blank" rel="noopener">디스크 1탄 — 영양 공급 원리</a><a href="https://youtu.be/BfWq83J2NNU" target="_blank" rel="noopener">디스크 2탄 — 추간판성 요통</a><a href="https://youtu.be/NiVvchnW8Oo" target="_blank" rel="noopener">디스크 믿게 되는 환경 (치중진담)</a><a href="https://youtu.be/xKyP24sJKhE" target="_blank" rel="noopener">허리 멀쩡한데 다리 저림</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💉</span><span class="qt">"주사 맞았으니 됐다" — 마취통증의학과 전문의의 셀프 반박</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">신경차단술은 통증 회로를 끊어 <b>운동할 수 있는 창문</b>을 열어주는 도구다. 그 창문 안에서 기능(코어·둔근·호흡)을 재건하지 않으면 원인 구조가 그대로라 재발한다 — 주사를 놓는 남유미 전문의 본인이 "주사만 맞으면 100% 재발"이라 말하는 이유. 주사+운동은 세트다.<div class="vids"><a href="https://youtu.be/mB-nxa5XYyY" target="_blank" rel="noopener">주사만 맞으면 100% 재발 (10분)</a><a href="https://youtu.be/N1A5V77M20s" target="_blank" rel="noopener">주사가 재발 못 막는 이유</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🚶</span><span class="qt">"아프면 일단 많이 걸어라"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">걷기는 대둔근·중둔근·코어가 제 역할을 할 때만 약이다. 둔근이 잠들고 골반이 흔들리는 상태로 많이 걸으면 <b>잘못된 보상 패턴을 수천 보씩 반복 각인</b>하는 훈련이 된다. 순서는 마사지 → 코어·둔근 활성화 → 그 다음 걷기 늘리기.<div class="vids"><a href="https://youtu.be/aV014LHuIvI" target="_blank" rel="noopener">걷기 함부로 하지 마라 (남스)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">⏰</span><span class="qt">"치료실 30분이면 충분하다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">하루는 24시간 — 운동 30분보다 나머지 <b>23시간 30분</b>의 자세·호흡·움직임 습관이 결과를 결정한다. 치중진담의 CareFlow 철학도 같다: 환자·치료사·의사 삼두마차에서 가장 큰 바퀴는 환자의 일상이다. 앉는 방식 바꾸기, 자주 일어나기, 숨 아래로 쉬기 — 이게 본편이고 치료실은 예고편이다.<div class="vids"><a href="https://youtu.be/h3C0xufhKXs" target="_blank" rel="noopener">일상생활 관리 (남스)</a><a href="https://youtu.be/CWUURuujdh4" target="_blank" rel="noopener">기능재활 왜 빨리 못 배우나 (치중진담)</a></div></div></div>
+  </div>
+  <p class="src">각 항목 영상 링크 참조. 무증상 MRI 소견 빈도: 표준 영상의학 문헌 상식 수준 보강.</p>
+</section>
+<section id="ch08">
+  <div class="kicker">Chapter 08 · 실전</div>
+  <h2>통합 운동 로드맵 — 두 채널을 한 줄로 병합</h2>
+  <p class="lead">남스어프로치 6단계와 치중진담 5단계는 순서 철학이 같다. 겹치는 걸 합치면 이렇게 된다.</p>
+  <div class="road">
+    <div class="rstep r0"><div class="rh"><div class="rn"></div><div class="rt">마사지 — 사슬의 뿌리부터 푼다</div></div><div class="rb">허벅지 → 종아리 → 골반 순으로 마사지볼·폼롤러. 강도는 "약간 뻐근"까지, 절대 아프게 하지 않는다(방어 긴장 역효과). 목적: 근막 미끄러짐 회복 + 센서 깨우기. <b>딱딱한 근육은 활성화가 안 되므로 이 단계 생략 금지.</b></div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">국소 코어 세팅 + 감각 인지</div></div><div class="rb">누워서 요추 중립을 찾고, 아랫배 깊은 곳(복횡근)이 <b>살짝</b> 조여지는 감각을 배운다. 힘 크기는 최대의 20~25% 느낌 — 세게 조이면 겉근육이 가로챈다. 등척성 유지부터.</div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">IAP 호흡 — 3개월 아기 자세</div></div><div class="rb">바로 누워 고관절·무릎 90°/90°. 숨을 아랫배 옆·뒤까지 360°로 채우고, 내쉴 때 세팅 유지. 갈비 들림·목 힘 금지. 압력 통(3장)의 네 벽을 동시에 켜는 훈련.</div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">장골근·장요근 — 저부하 굴곡</div></div><div class="rb">코어 세팅을 유지한 채 다리를 낮은 범위로 천천히. 요추가 뜨거나 허리에 힘이 들어오면 부하 초과 신호 — 범위·강도를 낮춘다. 목표는 대요근 견인 없이 장골근 위주 동원.</div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">둔근 — 클램쉘·대둔근 하부</div></div><div class="rb">옆으로 누워 클램쉘(중둔근·대둔근 상부), 이어서 대둔근 하부 섬유 운동. 골반이 뒤로 구르며 허리로 여는 보상 금지 — 여기서도 코어 세팅이 바닥에 깔린다.</div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">견갑 안정화 — 전거근부터</div></div><div class="rb">어깨를 억지로 내리지 말고 <b>겨드랑이 아래 당김</b> 감각으로 견갑골을 흉곽에 밀착. 이후 저부하 견갑 안정화 시리즈로 중·하부 승모근을 깨운다. 목 통증 재활의 본론이 목이 아니라 여기다.</div></div>
+    <div class="rstep"><div class="rh"><div class="rn"></div><div class="rt">신경 가동 + 일상 통합</div></div><div class="rb">팔저림 등 신경 증상엔 신경가동기법(플로싱)을 추가. 마지막은 통합 — 앉기·서기·걷기·숨쉬기에 새 패턴을 심는 것. 30분 운동이 아니라 23시간 30분이 승부처.</div></div>
+  </div>
+  <div class="card warn">
+    <div class="ct">전 단계 공통 4원칙</div>
+    <p>① <b>운동 중 통증 0</b> — 아프면 즉시 강도·범위 하향. ② <b>다음날 피로·통증 0</b>에서 시작해 서서히 증량. ③ <b>순서 건너뛰기 금지</b> — 마사지 없이 활성화 없고, 코어 없이 팔다리 운동 없다. ④ <b>속도는 항상 느리게</b> — 빠르면 2형 섬유가 가로챈다(6장).</p>
+  </div>
+  <div class="vids">
+    <a href="https://youtu.be/mnr_CHI7nws" target="_blank" rel="noopener">셀프 마사지 상세 (남스)</a>
+    <a href="https://youtu.be/hgJq3mSNzEI" target="_blank" rel="noopener">상지 신경가동기법 (남스)</a>
+    <a href="https://youtu.be/XIrU8mheZIE" target="_blank" rel="noopener">허리통증 기능적 접근 (남스)</a>
+    <a href="https://youtu.be/Rv8y1oMoxZ8" target="_blank" rel="noopener">두통의 기능적 접근 (남스)</a>
+    <a href="https://youtu.be/A0xTPISVUT4" target="_blank" rel="noopener">왜 아프게 됐을까 (남스)</a>
+  </div>
+  <p class="src">병합 기준: 남스어프로치 운동 6 Step + 치중진담 운동 5 Step — 순서 원칙이 동일해 단계 합집합으로 구성.</p>
+</section>
+
+<section id="quiz">
+  <div class="kicker">최종 점검</div>
+  <h2>퀴즈 6문 — 교재를 닫기 전에</h2>
+  <div id="quizWrap"></div>
+  <div class="final">
+    <p class="fx">이 교재의 마지막 문장.</p>
+    <p>아픈 곳은 <b>제일 성실했던 곳</b>이다. 범인은 대개 조용히 놀고 있는 근막 사슬 어딘가에 있다 — 발바닥, 횡격막, 겨드랑이 밑, 엉덩이. 풀고(마사지), 느끼고(감각), 약하게 깨워서(활성화), 하루 23시간 30분에 심어라(일상). 그게 두 채널 40여 편이 반복해서 말한 전부다.</p>
+  </div>
+  <div class="disc"><b>의학 면책 조항</b> — 이 문서는 유튜브 공개 강의를 정리·보강한 교육 자료이며 진단·치료를 대체하지 않는다. 해부학 보강분은 표준 해부학 수준의 일반 지식이다. 급성 통증, 방사통·저림·근력 약화 동반, 외상 후 통증, 야간통·발열·체중감소 동반 시 운동 전에 반드시 의사 진료를 받을 것. 모든 운동은 통증 없는 범위에서만.</div>
+  <h3>출처</h3>
+  <p class="srcbox">
+    · 남스어프로치 — 남준록 원장 (동탄 바로본신경외과). 본문 인용 영상 25편, youtu.be 링크 각 챕터 병기.<br>
+    · 치중진담(治中眞談) — Team CareFlow: 장회영(신경외과 전문의)·남유미(마취통증의학과 전문의)·김실장(물리치료사). 본문 인용 영상 21편.<br>
+    · 원본 정리 가이드 2편 (2026.05 제작) 통합 + 해부학 챕터(2·3·4·5장 기시·정지·기능) 표준 해부학 지식으로 신규 보강.<br>
+    · 근막경선: Thomas Myers 「Anatomy Trains」 — 임상 모델임을 본문에 명시.
+  </p>
+</section>
+
+<section class="eli5" id="eli5">
+  <span class="e5-badge">🧒 조카도 이해하는 마지막 정리</span>
+  <div class="e5-h">몸은 한 벌의 그물옷이다</div>
+  <p class="e5-sub">위에서 본 걸 여섯 장의 그림으로 다시. 이것만 기억나도 교재값은 했다.</p>
+  <div class="e5-grid">
+    <div class="e5-card"><span class="e5-n">1</span><div class="e5-ico">🧦</div><div class="e5-big">몸엔 그물 스타킹이 입혀져 있다</div><div class="e5-sm">근막. 발끝을 당기면 목까지 우그러진다 — 그래서 아픈 곳과 범인이 다르다.</div></div>
+    <div class="e5-card"><span class="e5-n">2</span><div class="e5-ico">🥫</div><div class="e5-big">허리는 캔 압력이 지킨다</div><div class="e5-sm">뚜껑(횡격막)·옆(복횡근)·뒤(다열근)·바닥(골반기저근). 숨을 아랫배로 쉬면 캔이 단단해진다.</div></div>
+    <div class="e5-card"><span class="e5-n">3</span><div class="e5-ico">👷</div><div class="e5-big">아픈 근육은 과로한 성실 사원</div><div class="e5-sm">노는 동료(둔근·코어) 몫까지 일하다 뭉쳤다. 성실 사원 마사지, 노는 사원 출근.</div></div>
+    <div class="e5-card"><span class="e5-n">4</span><div class="e5-ico">🔅</div><div class="e5-big">속근육 스위치는 약하게 눌러야 켜진다</div><div class="e5-sm">최대 힘의 25% 미만, 느리게. 세게 하면 겉근육이 다 가로챈다.</div></div>
+    <div class="e5-card"><span class="e5-n">5</span><div class="e5-ico">⛺</div><div class="e5-big">허리는 텐트, 장요근은 지지줄</div><div class="e5-sm">횡격막과 한 줄로 이어진 줄. 세게 당기면(대요근) 기둥이 휘고, 잘 쓰면(장골근) 기둥이 선다.</div></div>
+    <div class="e5-card"><span class="e5-n">6</span><div class="e5-ico">🔄</div><div class="e5-big">최고의 자세는 다음 자세</div><div class="e5-sm">디스크도 근막도 움직여야 먹고산다. 꼿꼿이 버티기보다 자주 바꾸기.</div></div>
+  </div>
+  <div class="e5-one">
+    <span class="e5-lab">한 줄 요약</span>
+    <p>아픈 곳 말고, 일 안 하는 곳을 찾아라 — 풀고, 느끼고, 약하게 깨워서, 일상에 심는다.</p>
+  </div>
+  <div class="e5-do">
+    <span>✅ 운동 전 마사지볼 5분 (허벅지→종아리→골반)</span>
+    <span>✅ 하루 한 번 3개월 자세로 360° 호흡 10회</span>
+    <span>✅ 통증 0 · 다음날 피로 0 지키기</span>
+  </div>
+</section>
+
+<footer>
+  <p><b>인사이트 교재 시리즈 08</b> · 재활 해부학 교본 — 아픈 곳은 범인이 아니다</p>
+  <p>남스어프로치 × 치중진담 통합 + 근막·근육 해부학 보강 · 2026-08 제작 · 교육용 자료 (의료 자문 아님)</p>
+</footer>
+
+</div>
+<script>
+(function(){
+"use strict";
+/* progress bar */
+var prog=document.getElementById('prog');
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?(window.scrollY/h*100):0)+'%';
+},{passive:true});
+
+/* count-up */
+function ease(t){return 1-Math.pow(1-t,3);}
+var cntEls=document.querySelectorAll('[data-cnt]');
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    var el=en.target;io.unobserve(el);
+    var to=parseFloat(el.getAttribute('data-cnt'));
+    var suf=el.getAttribute('data-suf')||'';
+    var t0=null;
+    function step(ts){
+      if(!t0)t0=ts;
+      var p=Math.min((ts-t0)/1100,1);
+      el.textContent=Math.round(to*ease(p))+suf;
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+},{threshold:.5});
+cntEls.forEach(function(e){io.observe(e);});
+
+/* accordions */
+document.querySelectorAll('.myth .q').forEach(function(q){
+  q.addEventListener('click',function(){q.parentElement.classList.toggle('open');});
+});
+
+/* muscle explorer */
+var MUSCLES=[
+{n:'횡격막',e:'diaphragm',u:'호흡코어',role:'호흡 주동근 + 압력 통 뚜껑 + 요추 안정',o:'검상돌기 · 하부 늑골 6쌍 안쪽 · 요추 L1~L3(다리·crus)',i:'중심건 (돔 꼭대기)',f:'수축 시 돔 하강 — 흡기 + 복강내압 생성. 요추에 직접 붙는 자세근',p:'얕은 가슴호흡, 옆구리 안 벌어짐, 목 보조호흡근 과사용',r:'3개월 자세 360° 호흡 — 갈비 들림·목 힘 금지',v:[['08FAMI2aGZM','복강내압 실전'],['V7FHwKCKY_Y','IAP 조절 (남스)']]},
+{n:'복횡근',e:'transversus abdominis',u:'호흡코어',role:'가장 깊은 복근 — 천연 코르셋',o:'흉요근막 · 장골능 · 하부 늑연골 · 서혜인대',i:'백선(복부 정중선) — 가로 섬유가 배를 한 바퀴 감음',f:'복강내압 유지, 동작 직전 선제 수축(피드포워드)으로 척추 보호',p:'요통 시 수축 타이밍 지연 — 힘이 아니라 타이밍이 무너짐',r:'최대 20~25% 강도의 부드러운 세팅 + 등척성 유지. 세게 조이면 실패',v:[['nkXboZcQdTc','국소 코어 세팅'],['QVsi3eLoW6w','코어 흔한 실수']]},
+{n:'다열근',e:'multifidus',u:'호흡코어',role:'척추 분절 미세 안정 — 압력 통 뒷벽',o:'천골 · 각 척추 횡돌기(유두돌기)',i:'2~4마디 위 극돌기 — 마디마다 사다리처럼',f:'분절 단위 안정·미세 신전. 1형 섬유 비중 높은 대표 안정근',p:'요통 후 해당 분절만 선택적 위축 — 통증 사라져도 저절로 안 돌아옴',r:'저부하·느린 속도로만 깨어남. 코어 세팅과 함께 훈련',v:[['xvtYH7Eb-24','반사적 안정화 (치중진담)']]},
+{n:'골반기저근',e:'pelvic floor',u:'호흡코어',role:'압력 통 바닥 — 해먹',o:'치골 · 좌골극 주변 골반 내벽',i:'미골·회음부 중심건 (그물처럼 바닥을 막음)',f:'복강내압을 아래서 받침. 횡격막과 마주 보며 같은 리듬으로 오르내림',p:'바닥이 약하면 압력이 아래로 새어 IAP 훈련 효과 소실',r:'요추 중립(통이 안 기울게)에서 호흡과 함께 — 단독 쥐어짜기 아님',v:[['7h-7NJnJcnU','3개월 아기 자세']]},
+{n:'사각근',e:'scalenes',u:'목어깨',role:'보조호흡근 — 비상용 늑골 인양기',o:'경추 C2~C7 횡돌기 (전·중·후 세 갈래)',i:'1·2번 늑골 윗면',f:'늑골 들어올림(강한 흡기 시) + 경추 측굴',p:'횡격막 대신 하루 2만 번 호흡 견인 — 목 통증 + 전·중사각근 사이 신경·혈관 압박 시 팔저림(흉곽출구증후군)',r:'주무르기 전에 원인 제거 — 횡격막 호흡 복구가 근본 처방',v:[['keL5B9crP-U','목어깨 기능적 접근 (남스)']]},
+{n:'흉쇄유돌근',e:'sternocleidomastoid',u:'목어깨',role:'보조호흡근 + 머리 회전근',o:'흉골병 · 쇄골 안쪽 1/3',i:'귀 뒤 유양돌기 · 후두골',f:'한쪽: 머리 반대편 회전+측굴. 양쪽: 목 굴곡, 강한 흡기 보조',p:'과긴장 시 측두부·눈 주위 연관통 — 긴장성 두통 단골',r:'두통 재활도 목이 아니라 호흡·견갑에서 시작 (기능적 접근)',v:[['Rv8y1oMoxZ8','두통의 기능적 접근 (남스)']]},
+{n:'승모근 (상·중·하)',e:'trapezius',u:'목어깨',role:'견갑골 조종사 3인조 — 한 이름, 세 직업',o:'후두골·항인대(상) · C7~T3 극돌기(중) · T4~T12 극돌기(하)',i:'쇄골 외측(상) · 견봉·견갑극(중) · 견갑극 안쪽(하)',f:'거상+상방회전(상) / 후인(중) / 하강+상방회전(하)',p:'상부만 과활성 = "어깨 뭉침". 중·하부 약화로 견갑이 들리고 말림',r:'뭉친 상부는 이완, 잠든 중·하부는 저부하 활성화 — 주무르기만 하면 무한 재발',v:[['ceSN5Q6ODUY','견갑골 안정화 1 (남스)'],['RGlL7rcALu0','견갑골 안정화 2']]},
+{n:'전거근',e:'serratus anterior',u:'목어깨',role:'견갑골을 흉곽에 밀착시키는 톱니근',o:'늑골 1~9 바깥 옆면 (톱니 모양)',i:'견갑골 안쪽 모서리 앞면',f:'견갑 전인 + 상방회전 + 흉곽 밀착. 팔 들기의 숨은 주역',p:'약화 시 익상견갑(안쪽 모서리 들뜸), 어깨 충돌',r:'"어깨 내려!" 금지 — 겨드랑이 아래 당김 감각으로 훈련',v:[['ZsWsny007LU','어깨 내리지 마세요'],['hojlgr23CQ0','전거근 1세트 실습']]},
+{n:'대요근',e:'psoas major',u:'골반',role:'척추에 직접 붙는 기둥 지지줄',o:'T12~L5 척추체·횡돌기 — 횡격막 다리와 근막으로 연속',i:'대퇴골 소전자 (장골근과 합류)',f:'고관절 굴곡 + 요추 전방 지지. 텐트 지지줄',p:'과긴장 시 요추를 앞으로 견인·압박 — 허리 통증 재점화',r:'직접 강화보다 먼저 이완 + 요추 중립 확보. 호흡과 한 집(심부 전방선)',v:[['tKKn4Vbtqaw','장요근 통증 없이 (치중진담)']]},
+{n:'장골근',e:'iliacus',u:'골반',role:'척추를 안 건드리는 고관절 굴곡근',o:'장골 안쪽 오목면(장골와) 전체 — 부채꼴',i:'대요근 힘줄과 합쳐져 소전자',f:'순수 고관절 굴곡 — 요추 견인 없이 다리를 든다',p:'잠들면 대요근이 대신 일하며 허리를 당김',r:'코어 세팅 유지 + 저부하 굴곡으로 우세 활성화 (남스 핵심 처방)',v:[['il91bFHIfms','장골근 우세 활성화 (남스)']]},
+{n:'대둔근',e:'gluteus maximus',u:'골반',role:'보행 엔진 + 흉요근막 텐셔너',o:'장골 뒤 · 천골 · 미골 · 흉요근막',i:'둔근조면 · 장경인대',f:'고관절 신전·외회전. 흉요근막 경유로 반대쪽 광배근과 연결(후방 사선 사슬) — 걸을 때 허리를 감아 보호',p:'잠들면(둔근 기억상실) 기립근·햄스트링이 대신 일하다 굳음',r:'하부 섬유 겨냥 저부하 운동 — 허리로 차는 보상 금지',v:[['WjnpYfkMz4U','대둔근 하부 섬유']]},
+{n:'중둔근',e:'gluteus medius',u:'골반',role:'한 다리 서기 수평계',o:'장골 바깥 날개면',i:'대퇴골 대전자',f:'고관절 외전 + 보행 입각기 골반 수평 유지',p:'약화 시 걸음마다 골반 출렁임(트렌델렌버그) — 진동이 요추로 상납',r:'클램쉘 — 골반 뒤로 구르는 보상 없이, 코어 세팅 위에서',v:[['jbzlxTX_7i0','클램쉘 가이드'],['4GLUXn1OhO4','클램쉘 + 코어 세팅']]}
+];
+var chipsBox=document.getElementById('mxChips');
+var panel=document.getElementById('mxPanel');
+MUSCLES.forEach(function(m,idx){
+  var b=document.createElement('button');
+  b.className='mchip';b.type='button';b.textContent=m.n;
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.mchip').forEach(function(c){c.classList.remove('on');});
+    b.classList.add('on');
+    document.getElementById('mpNm').textContent=m.n;
+    document.getElementById('mpEn').textContent=m.e;
+    document.getElementById('mpRole').textContent='['+m.u+' 유닛] '+m.role;
+    document.getElementById('mpO').textContent=m.o;
+    document.getElementById('mpI').textContent=m.i;
+    document.getElementById('mpF').textContent=m.f;
+    document.getElementById('mpP').textContent=m.p;
+    document.getElementById('mpR').textContent=m.r;
+    var mv=document.getElementById('mpV');mv.innerHTML='';
+    m.v.forEach(function(vv){
+      var a=document.createElement('a');
+      a.href='https://youtu.be/'+vv[0];a.target='_blank';a.rel='noopener';
+      a.textContent='▶ '+vv[1];mv.appendChild(a);
+    });
+    panel.classList.add('show');
+  });
+  chipsBox.appendChild(b);
+  if(idx===0)setTimeout(function(){b.click();},0);
+});
+
+/* quiz */
+var QS=[
+{q:'Q1. "어깨가 뭉쳤다"며 상부 승모근만 계속 주무르는데 자꾸 재발한다. 이 교재의 처방은?',o:['더 세게, 더 자주 마사지한다','잠들어 있는 중부·하부 승모근과 전거근을 깨운다','어깨를 의식적으로 계속 끌어내린다'],a:1,x:'상부는 과로한 성실 사원. 견갑골을 받쳐야 할 중·하부 승모근·전거근이 일을 안 해서 상부가 다 떠맡은 것 — 일꾼을 깨워야 과로가 끝난다 (4장).'},
+{q:'Q2. 장요근 중에서 요추에 직접 붙어 과긴장 시 허리를 앞으로 당겨 압박하는 쪽은?',o:['장골근','대요근','중둔근'],a:1,x:'대요근은 T12~L5 척추체에서 시작한다. 그래서 재활에선 요추를 건드리지 않는 장골근 우세 활성화를 훈련한다 (5장).'},
+{q:'Q3. 안정화(1형) 근섬유가 훈련에 참여하는 조건은?',o:['최대근력 25% 미만의 저부하 + 느린 속도','최대한 무겁게, 빠르게','통증이 살짝 있을 정도의 강도'],a:0,x:'헨네만 크기 원리 — 낮은 부하에서 1형부터 동원된다. 세게 하면 2형 대근육이 동작을 가로채 심부 안정근은 구경만 한다 (6장).'},
+{q:'Q4. 흉요근막을 사이에 두고 연결되어 보행 중 허리를 감아 보호하는 근육 짝은?',o:['광배근 ↔ 반대쪽 대둔근','사각근 ↔ 횡격막','복직근 ↔ 다열근'],a:0,x:'후방 사선 사슬. 팔과 반대쪽 다리가 함께 흔들리며 흉요근막을 팽팽하게 감는다 — 대둔근이 잠들면 이 보호 장력이 사라진다 (2·5장).'},
+{q:'Q5. 성인 추간판(디스크)이 영양을 공급받는 방식은?',o:['풍부한 혈관으로 직접 공급','삼투압 + 움직임에 의한 펌핑 — 그래서 안 움직이면 굶는다','밤에 잘 때만 신경을 통해 공급'],a:1,x:'성인 디스크는 혈관이 거의 없다. 눌렸다 풀렸다 하는 스펀지 펌핑이 밥줄 — "쉬기만 하는 디스크"가 악화 코스인 이유 (7장).'},
+{q:'Q6. 전거근 운동에서 올바른 감각 신호는?',o:['어깨를 최대한 아래로 끌어내리는 느낌','겨드랑이 아래가 당기며 견갑골이 흉곽에 붙는 느낌','승모근 위쪽이 타는 느낌'],a:1,x:'어깨를 억지로 내리면 견갑골 상방회전이 막혀 충돌이 생긴다. 치중진담의 교정 신호는 "겨드랑이 당김" (4장).'}
+];
+var qw=document.getElementById('quizWrap');
+QS.forEach(function(it){
+  var d=document.createElement('div');d.className='quiz-item';
+  var h=document.createElement('div');h.className='qq';h.textContent=it.q;d.appendChild(h);
+  var exp=document.createElement('div');exp.className='exp';exp.textContent=it.x;
+  var done=false;
+  it.o.forEach(function(op,oi){
+    var b=document.createElement('button');b.className='opt';b.type='button';b.textContent=op;
+    b.addEventListener('click',function(){
+      if(done)return;done=true;
+      d.querySelectorAll('.opt').forEach(function(x,xi){
+        if(xi===it.a)x.classList.add('right');
+      });
+      if(oi!==it.a)b.classList.add('wrong');
+      exp.classList.add('show');
+    });
+    d.appendChild(b);
+  });
+  d.appendChild(exp);qw.appendChild(d);
+});
+})();
+</script>
+</body>
+</html>
