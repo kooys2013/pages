@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>1장 · 이론과 철학 — 재활 통합 교본</title>
+<meta name="description" content="재활 통합 교본 1장. 남스어프로치(남준록 원장) × 치중진담(Team CareFlow)의 기능적 접근 철학, 전신 연결 사슬, 두 채널 이론 강의 노트, 통념 교정 6가지.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+@font-face{font-family:'Pretendard Variable';src:url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/web/variable/woff2/PretendardVariable.woff2) format('woff2-variations');font-weight:45 920;font-display:swap}
+:root{
+--bg:#060b0d;--bg2:#0c1518;--bg3:#122025;
+--line:#1b3038;--line2:#2b4a55;
+--tx:#e9f6f8;--tx2:#a5c4ca;--tx3:#6d8e96;
+--acc:#2dd4bf;--acc2:#7ceee0;--acc-d:#0d9488;
+--watt:#fbbf24;--red:#f87171;--blue:#38bdf8;--violet:#a78bfa;--pink:#f472b6;
+--r:16px;--maxw:760px;--fs:clamp(16px,1.6vw,17.5px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-size:var(--fs);line-height:1.75;word-break:keep-all;-webkit-font-smoothing:antialiased}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc-d),var(--acc));z-index:99}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+h2{font-size:clamp(24px,5.4vw,33px);font-weight:900;line-height:1.3;margin-bottom:8px;letter-spacing:-.5px}
+h3{font-size:clamp(18px,3.6vw,21.5px);font-weight:800;margin:34px 0 12px;color:var(--acc2)}
+p{margin:13px 0;color:var(--tx2)}
+p b,li b{color:var(--tx);font-weight:700}
+.kicker{font-size:13px;font-weight:800;letter-spacing:2.5px;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--tx);font-weight:500}
+.hero{padding:76px 0 60px;border-bottom:1px solid var(--line)}
+.hero .tag{display:inline-block;font-size:12.5px;font-weight:800;color:var(--acc2);border:1px solid var(--line2);border-radius:999px;padding:6px 14px;margin-bottom:20px;background:var(--bg2)}
+.hero h1{font-size:clamp(30px,7.4vw,48px);font-weight:900;line-height:1.22;letter-spacing:-1.2px;margin-bottom:16px}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero .sub{font-size:clamp(15.5px,2vw,18px);color:var(--tx2);max-width:640px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.meta span{font-size:12.5px;color:var(--tx3);background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 6px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 14px;text-align:center}
+.stat .n{font-size:clamp(26px,5.6vw,38px);font-weight:900;color:var(--acc);letter-spacing:-1px;line-height:1.15}
+.stat .l{font-size:12.5px;color:var(--tx3);margin-top:6px;line-height:1.5}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;margin:18px 0}
+.card.hl{border-color:var(--acc-d);background:linear-gradient(180deg,rgba(45,212,191,.06),var(--bg2))}
+.card.warn{border-color:rgba(251,191,36,.4);background:linear-gradient(180deg,rgba(251,191,36,.05),var(--bg2))}
+.card.bad{border-color:rgba(248,113,113,.4);background:linear-gradient(180deg,rgba(248,113,113,.05),var(--bg2))}
+.card .ct{font-size:15px;font-weight:800;margin-bottom:8px;color:var(--tx)}
+.card p{font-size:15px;margin:8px 0}
+.big-quote{font-size:clamp(19px,3.2vw,24px);font-weight:800;line-height:1.55;color:var(--tx);border-left:4px solid var(--acc);padding:6px 0 6px 20px;margin:28px 0}
+.big-quote small{display:block;font-size:13px;color:var(--tx3);font-weight:500;margin-top:10px}
+.cmp{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+.cmp th{background:var(--bg3);color:var(--tx);font-weight:800;padding:11px 10px;text-align:left;border:1px solid var(--line2);font-size:13.5px}
+.cmp td{padding:11px 10px;border:1px solid var(--line);color:var(--tx2);vertical-align:top;line-height:1.6}
+.cmp td b{color:var(--tx)}
+.cmp .y{color:var(--acc)}
+.cmp .n2{color:var(--red)}
+.tblwrap{overflow-x:auto;margin:18px 0}
+.tblwrap .cmp{margin:0;min-width:540px}
+.flow{display:flex;flex-direction:column;gap:10px;margin:20px 0}
+.fstep{display:flex;gap:14px;align-items:flex-start;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.fstep .fn{flex:0 0 34px;height:34px;border-radius:10px;background:var(--bg3);border:1px solid var(--line2);color:var(--acc);font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px}
+.fstep .fb{font-size:14.5px;color:var(--tx2)}
+.fstep .fb b{display:block;color:var(--tx);font-size:15px;margin-bottom:3px}
+.fstep.bad .fn{color:var(--red)}
+.fstep.watt .fn{color:var(--watt)}
+code{font-family:'JetBrains Mono',Consolas,monospace;font-size:.86em;background:var(--bg3);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--acc2)}
+.myth{border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden;background:var(--bg2)}
+.myth .q{padding:16px 18px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;user-select:none}
+.myth .q:hover{background:var(--bg3)}
+.myth .q .ic{flex:0 0 auto;font-size:17px;margin-top:1px}
+.myth .q .qt{font-size:15px;font-weight:700;color:var(--tx);flex:1;line-height:1.5}
+.myth .q .ar{color:var(--tx3);transition:transform .3s;margin-top:2px}
+.myth.open .q .ar{transform:rotate(180deg)}
+.myth .a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.myth.open .a{max-height:1400px}
+.myth .a-in{padding:2px 18px 18px;font-size:14.5px;color:var(--tx2);border-top:1px dashed var(--line);line-height:1.7}
+.myth .a-in b{color:var(--tx)}
+.src{font-size:12px;color:var(--tx3);margin-top:8px}
+.disc{background:var(--bg2);border:1px dashed var(--line2);border-radius:12px;padding:16px 18px;font-size:13px;color:var(--tx3);margin:22px 0;line-height:1.7}
+footer{padding:44px 0 80px;font-size:13px;color:var(--tx3);line-height:1.8}
+/* chain */
+.chain{display:flex;flex-direction:column;gap:0;margin:24px 0}
+.clink{display:flex;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:13px 16px;position:relative}
+.clink .ci{font-size:22px;flex:0 0 auto}
+.clink .cb{font-size:14.5px;color:var(--tx2)}
+.clink .cb b{color:var(--tx)}
+.carrow{text-align:center;color:var(--acc);font-size:16px;padding:3px 0;font-weight:900}
+.clink.hot{border-color:rgba(248,113,113,.5)}
+.clink.root{border-color:var(--acc-d)}
+/* video chips inline */
+.vids{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+.vids a{font-size:12px;color:var(--tx2);background:var(--bg3);border:1px solid var(--line2);border-radius:999px;padding:6px 11px;text-decoration:none}
+.vids a:hover{border-color:var(--acc);color:var(--acc2)}
+.vids a::before{content:'▶ ';color:var(--acc);font-size:10px}
+/* book nav */
+.booknav{position:sticky;top:0;z-index:50;display:flex;gap:6px;background:rgba(6,11,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 20px;margin:0 -20px;overflow-x:auto}
+.booknav a{font-size:13px;font-weight:700;color:var(--tx2);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);white-space:nowrap}
+.booknav a.cur{color:var(--acc2);border-color:var(--acc-d);background:rgba(45,212,191,.1)}
+.pgnav{display:flex;justify-content:space-between;gap:10px;margin:44px 0 0}
+.pgnav a{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--tx)}
+.pgnav a small{display:block;font-size:12px;color:var(--tx3);margin-bottom:4px}
+.pgnav a.nx{text-align:right;border-color:var(--acc-d)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<nav class="booknav"><a href="index.html">📕 표지</a><a href="ch1.html" class="cur">1장 이론과 철학</a><a href="ch2.html">2장 해부학</a><a href="ch3.html">3장 실전</a></nav>
+
+<section id="ch-head">
+  <div class="kicker">제1장</div>
+  <h2>이론과 철학 — 왜 아픈 곳을 두고 온몸을 보는가</h2>
+  <p class="lead">운동을 따라 하기 전에, 두 채널이 왜 그렇게 시키는지부터. 1장은 남스어프로치와 치중진담의 이론 강의 전체를 노트로 압축하고, 둘이 공유하는 철학의 뼈대를 세운다.</p>
+</section>
+
+<section id="s11">
+  <div class="kicker">1.1 · 출발점</div>
+  <h2>두 채널, 한 결론</h2>
+  <p class="lead">서로 다른 병원, 서로 다른 사람들이 각자의 임상에서 같은 지도를 그렸다. 독립적으로 도달한 같은 결론은 그 자체로 강한 근거다.</p>
+
+  <div class="card">
+    <div class="ct">🎓 남스어프로치 — 남준록 원장</div>
+    <p>동탄 바로본신경외과의 남준록 원장이 운영하는 채널. 통증 부위가 아니라 <b>움직임의 기능</b>을 추적하는 "기능적 접근"을 이삿짐 인부, 압력 통 같은 비유로 풀어낸다. 이 교본의 이론 강의 노트(1.3)와 운동 로드맵(3장)의 큰 축.</p>
+  </div>
+
+  <div class="card">
+    <div class="ct">🩺 치중진담 (治中眞談) — Team CareFlow</div>
+    <p>"치료에 대한 진실된 이야기." <b>장회영 신경외과 전문의 · 남유미 마취통증의학과 전문의 · 물리치료사 김실장</b> 세 사람이 만드는 기능재활 채널. 주사를 직접 놓는 통증의학과 전문의가 "주사만 맞으면 100% 재발한다"고 말하는, 셀프 반박이 가능한 팀이다.</p>
+  </div>
+
+  <div class="card hl">
+    <div class="ct">🏎️ CareFlow 삼두마차 — 환자·치료사·의사의 3인 경주</div>
+    <p>기능재활은 의사 혼자, 치료사 혼자 완성할 수 없다. <b>환자·치료사·의사</b> 세 바퀴가 함께 굴러야 하고, 그중 가장 큰 바퀴는 환자다 — 운동을 이해하고 집에서 실천하는 것까지가 치료이기 때문. 치료받는 30분보다 나머지 23시간 30분이 더 중요하다는 원칙이 여기서 나온다.</p>
+    <div class="vids">
+      <a href="https://youtu.be/QMIpBt-RWJs" target="_blank" rel="noopener">회복 속도와 기대 속도의 차이 (14분)</a>
+      <a href="https://youtu.be/CWUURuujdh4" target="_blank" rel="noopener">기능재활, 왜 빨리 배울 수 없나 (15분)</a>
+    </div>
+  </div>
+
+  <h3>두 채널이 공유하는 4가지 원칙</h3>
+  <div class="flow">
+    <div class="fstep"><div class="fn">1</div><div class="fb"><b>통증 부위 ≠ 원인 부위.</b>목이 아파도 원인은 골반·코어일 수 있다. MRI에 보이는 디스크가 통증의 원인이 아닐 수 있다.</div></div>
+    <div class="fstep"><div class="fn">2</div><div class="fb"><b>낮은 부하로 안정화 근육(1형) 먼저.</b>세게 하면 이동성 근육(2형)만 일한다. 재활의 첫 목표는 근력이 아니라 활성화다.</div></div>
+    <div class="fstep"><div class="fn">3</div><div class="fb"><b>주사 + 운동 = 세트.</b>주사로 통증이 줄어든 "기회의 창"에 기능 회복 운동을 해야 재발을 막는다.</div></div>
+    <div class="fstep"><div class="fn">4</div><div class="fb"><b>수술 전에 기능적 접근 먼저.</b>수술이 필요한 경우도 있지만, 그 전에 기능 저하가 진짜 원인인지 확인해야 한다.</div></div>
+  </div>
+  <p class="src">출처: 치중진담 CareFlow 기본 개념 강의 · 남스어프로치 기능적 접근 시리즈 (각 강의 노트는 1.3 · 1.4)</p>
+</section>
+
+<section id="s12">
+  <div class="kicker">1.2 · 핵심 철학</div>
+  <h2>기능적 접근 — 아픈 근육은 범인이 아니라 피해자다</h2>
+  <p class="lead">이 한 문장을 받아들이면 나머지 전부가 따라온다. 왜 마사지를 먼저 하는지, 왜 약하게 운동하는지, 왜 목이 아픈데 발을 보는지.</p>
+
+  <div class="big-quote">"통증 부위와 원인 부위는 다르다.<br>아픈 곳은 일을 떠맡다 지친 곳이다."<small>— 두 채널 공통의 제1원리</small></div>
+
+  <div class="card hl">
+    <div class="ct">협응 — 이삿짐 인부 비유 (남준록 원장)</div>
+    <p>인부 10명 중 6명이 일을 못 하면 나머지 4명이 과로로 다친다. 아픈 근육은 <b>게으른 동료 몫까지 떠맡은 성실한 근육</b>이다. 그래서 치료 순서는 "고생한 근육을 먼저 풀어주고(마사지), 일 안 하던 근육을 깨우는 것(활성화)" — 아픈 곳을 강화하는 게 아니다.</p>
+  </div>
+
+  <h3>전신 연결 사슬 — 발끝에서 목까지의 도미노</h3>
+  <p>두 채널이 각자 그린 지도가 정확히 겹친다. 목·어깨 통증의 가장 흔한 전신 경로:</p>
+  <div class="chain">
+    <div class="clink root"><span class="ci">🦶</span><div class="cb"><b>발·종아리 경직</b> — 사슬의 시작. 바닥과 만나는 지점이 굳으면 위가 전부 보상한다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">🍑</span><div class="cb"><b>대둔근 약화</b> — 엉덩이가 일을 안 하면 골반이 흔들린다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">⚖️</span><div class="cb"><b>골반 불안정</b> — 척추가 서 있는 받침대가 기운다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink"><span class="ci">🫁</span><div class="cb"><b>코어 약화 · 횡격막 기능 저하</b> — 배 안의 압력(IAP)이 무너지고 호흡이 얕아진다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink hot"><span class="ci">😮‍💨</span><div class="cb"><b>보조호흡근 과사용</b> — 사각근·흉쇄유돌근이 횡격막 대신 하루 2만 번 숨을 끌어올린다.</div></div>
+    <div class="carrow">↓</div>
+    <div class="clink hot"><span class="ci">🤕</span><div class="cb"><b>목·어깨 통증, 두통</b> — 사슬의 끝. 여기만 주무르면 반드시 재발한다.</div></div>
+  </div>
+
+  <div class="card warn">
+    <div class="ct">⏰ 30분의 치료 &lt; 23시간 30분의 일상</div>
+    <p>치료실에서 아무리 완벽한 운동을 해도, 나머지 하루의 자세·호흡·움직임 습관이 그대로면 사슬은 다시 조립된다. 이 교본의 최종 목적지도 "운동 잘하기"가 아니라 <b>일상이 재활이 되는 상태</b>다.</p>
+  </div>
+  <p class="src">출처: 남스어프로치 「목·어깨 통증 기능적 접근」 (youtu.be/keL5B9crP-U) · 치중진담 「목어깨 통증, 허리·골반도 함께 치료해야 하는 이유」 (youtu.be/C9nw67Om_No)</p>
+</section>
+
+<section id="s13">
+  <div class="kicker">1.3 · 강의 노트 ①</div>
+  <h2>남스어프로치 이론 강의 노트</h2>
+  <p class="lead">채널의 이론 강의를 한 편씩 압축했다. 눌러서 열어보고, 칩을 눌러 원 영상으로.</p>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🫁</span><span class="qt">목·어깨 통증은 왜 생길까 — 기능적 접근 (9분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">목·어깨가 관여하는 기본 움직임 1위는 <b>호흡</b>, 2위는 팔 동작이다. 횡격막이 약해지면 사각근·흉쇄유돌근 같은 보조호흡근이 하루 2만 번의 호흡을 대신 끌어올리며 과로한다. 팔 동작도 체간→견갑→손끝 순서로 지지되어야 하는데, 이 순서가 무너지면 목이 대신 일한다. 이삿짐 인부 10명 중 6명이 놀면 남은 4명이 다치는 것과 같은 구조 — 그래서 치료는 아픈 곳이 아니라 일 안 하는 곳을 깨우는 것이다.<div class="vids"><a href="https://youtu.be/keL5B9crP-U" target="_blank" rel="noopener">목·어깨 통증 기능적 접근 (9분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🐢</span><span class="qt">친턱(턱 당기기) 훈련, 의미 없다 (11분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">머리 위치는 의식이 아니라 <b>정위 반응</b>이 결정한다 — 치타가 전력 질주할 때도 머리는 수평을 유지한다. 턱을 당겨 "바른 위치"에 놓아도 반사가 다시 원위치시킨다. 거북목의 실제 원인은 보조호흡근 과사용과 흉추·견갑의 기능 저하다. 횡격막과 코어를 회복하면 머리 위치는 반사가 알아서 데려온다.<div class="vids"><a href="https://youtu.be/DoYFmPGkEII" target="_blank" rel="noopener">친턱 훈련이 의미 없는 이유 (11분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💿</span><span class="qt">디스크의 진실 1·2탄 (10분 + 7분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">추간판은 수핵·섬유륜·인대로 이루어져 있고, 성인이 되면 혈관이 수핵까지 닿지 않아 <b>삼투압</b>으로 영양을 받는다. 눌렸다 풀렸다 하는 펌핑, 즉 움직임이 있어야 먹고산다 — 쉬기만 하면 굶어서 오히려 악화된다. 통증 범위 안의 부드러운 움직임이 치료의 일부인 이유다. 그리고 MRI에 디스크 소견이 보여도 그것이 지금 통증의 원인이라는 보장은 없다.<div class="vids"><a href="https://youtu.be/_5IqiB1MVpQ" target="_blank" rel="noopener">디스크 1탄 — 영양 공급 원리 (10분)</a><a href="https://youtu.be/BfWq83J2NNU" target="_blank" rel="noopener">디스크 2탄 — 추간판성 요통 (7분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🔋</span><span class="qt">초기 부하 설정 — 안정화 근섬유 깨우기 (9분 + 12분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">안정화(1형) 근섬유는 <b>최대근력 25% 미만의 낮은 부하 + 느린 속도</b>에서만 동원된다. 재활에서 "활성화"란 근육이 커지는 게 아니라 100개 중 실제로 일하는 근섬유 개수가 늘어나는 것. 초기 부하는 "너무 쉬운데?" 싶은 수준 — 통증 0, 다음날 피로감 0에서 시작한다. 관절을 움직이지 않고 버티는 등척성 운동부터 시작해 아주 천천히 올린다.<div class="vids"><a href="https://youtu.be/w4rLPEu2Lag" target="_blank" rel="noopener">초기 부하 설정 (9분)</a><a href="https://youtu.be/4RE2RLdToRc" target="_blank" rel="noopener">안정화 vs 이동성 근섬유 (12분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🏛️</span><span class="qt">허리 통증의 기능적 접근 1·2탄 (11분 + 10분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">허리는 대부분 <b>피해자</b>다 — 골반·고관절이 일을 안 하면 허리가 대신 움직이다 다친다. 허리를 지키는 안정화 3요소는 <b>복강내압(IAP) + 기둥지줄(대요근·척추기립근) + 흉요근막 긴장도</b>. 배에 억지로 힘을 주는 게 아니라 압력 통이 자연스럽게 유지되도록 만드는 것이 핵심이고, 그 출발이 호흡이다.<div class="vids"><a href="https://youtu.be/XIrU8mheZIE" target="_blank" rel="noopener">허리 통증 기능적 접근 1탄 (11분)</a><a href="https://youtu.be/A0xTPISVUT4" target="_blank" rel="noopener">허리 통증 기능적 접근 2탄 (10분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🪑</span><span class="qt">뻣뻣하게 앉지 마라 — 자세는 결과물 (8분 + 11분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">자세는 교정 대상이 아니라 <b>현재 몸 상태에서의 최효율 결과물</b>이다. 뻣뻣하게 세운 "바른 자세"는 기립근을 하루 종일 등척성으로 쥐어짜는 자세일 뿐이다. 좋은 자세란 하나의 정답 각도가 아니라 자주 바뀌는 자세. 기능이 회복되면 자세는 저절로 따라온다.<div class="vids"><a href="https://youtu.be/peZpj6J7mt0" target="_blank" rel="noopener">뻣뻣하게 앉지 마라 (8분)</a><a href="https://youtu.be/rmqquyVGpGY" target="_blank" rel="noopener">바른 자세에 대한 오해 (11분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🚶</span><span class="qt">걷기, 함부로 늘리지 마라 (9분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">걷기는 대둔근·중둔근·코어가 제 역할을 할 때만 약이 된다. 둔근이 잠들고 골반이 흔들리는 상태로 많이 걸으면 <b>잘못된 보상 패턴을 수천 보씩 반복 각인</b>하는 훈련이 된다. 순서는 마사지 → 코어·둔근 활성화 → 그 다음에 걷기 늘리기.<div class="vids"><a href="https://youtu.be/aV014LHuIvI" target="_blank" rel="noopener">걷기 함부로 하지 마라 (9분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">⏰</span><span class="qt">일상생활 관리 — 진짜 본편 (10분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">치료실 30분보다 나머지 <b>23시간 30분</b>의 자세·호흡·움직임 습관이 결과를 결정한다. 앉는 방식 바꾸기, 자주 일어나기, 숨을 아래로 쉬기 같은 작은 습관이 본편이고 치료실은 예고편이다. 증상이 심해지면 중단하고 부하를 낮추는 판단도 일상 관리의 일부다.<div class="vids"><a href="https://youtu.be/h3C0xufhKXs" target="_blank" rel="noopener">일상생활 관리 (10분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💆</span><span class="qt">마사지의 중요성 + 두통 이야기 (7분 + 10분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">마사지는 그 자체가 치료가 아니라 <b>운동 전 준비 단계</b>다 — 딱딱하게 굳은 근육은 아무리 운동해도 활성화가 되지 않기 때문. 과로한 근육의 긴장을 내리고 감각 센서를 깨우는 것이 목적이다. 두통 역시 목 기능 저하와 연결되는 경우가 많아, 같은 사슬 위에서 다룬다.<div class="vids"><a href="https://youtu.be/KhYS8cIyAk0" target="_blank" rel="noopener">마사지의 중요성 (7분)</a><a href="https://youtu.be/Rv8y1oMoxZ8" target="_blank" rel="noopener">두통 이야기 (10분)</a></div></div></div>
+  </div>
+  <p class="src">출처: 남스어프로치 채널 이론 강의 각 편. 운동 실습 영상은 3장 로드맵에 배치.</p>
+</section>
+
+<section id="s14">
+  <div class="kicker">1.4 · 강의 노트 ②</div>
+  <h2>치중진담 이론 강의 노트</h2>
+  <p class="lead">Team CareFlow의 이론 강의 7편. 남스어프로치와 같은 결론을 다른 각도 — 근섬유 생리학과 주사실 관점 — 에서 증명한다.</p>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🐢</span><span class="qt">거북목 — 턱 당기기(Chin Tuck) 하지 마세요 (6분 · 남유미 원장)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">거북목은 목만의 문제가 아니라 <b>전신 기능 저하의 결과</b>다. 턱 당기기를 열심히 할수록 뒷목이 더 아파지는 이유는 근본 원인을 건드리지 않은 채 이미 피로한 목 근육을 더 혹사시키기 때문. 먼저 호흡근·코어 기능을 회복해야 목 근육의 과사용이 줄어든다.<div class="vids"><a href="https://youtu.be/n5yZwJa-IEA" target="_blank" rel="noopener">거북목 턱 당기기 하지 마세요 (6분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💪</span><span class="qt">기능회복운동 — 왜 세게 하면 안 되는가 (23분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in"><b>헨네만의 크기 원리(Size Principle)</b>가 근거다: 낮은 부하에서는 작은 운동단위, 즉 1형(안정화) 근섬유부터 동원되고, 부하가 커지면 2형(이동성)이 추가된다. 세게 하면 2형만 일하고 1형은 쉰다 — 재활의 목적을 정확히 비껴가는 것. 낮은 부하로 1형을 충분히 활성화한 뒤에야 점진적으로 강도를 올린다. 이 채널에서 가장 긴 23분을 들여 설명하는 핵심 이론이다.<div class="vids"><a href="https://youtu.be/vnLfzT6HcLc" target="_blank" rel="noopener">왜 세게 하면 안 되나 (23분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🔄</span><span class="qt">반사적 안정화 (Reflexive Stabilization) (28분)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">재활의 최종 목표 상태를 정의하는 강의. 의식적으로 특정 근육을 조이는 게 아니라, 훈련을 통해 <b>움직임 중에 자동으로 안정화 패턴이 발동</b>되게 만드는 전략이다. 처음 자전거를 탈 때는 의식적으로 균형을 잡지만 익숙해지면 저절로 잡히는 것처럼, 훈련이 쌓이면 일상 동작에서 코어가 먼저, 저절로 켜진다.<div class="vids"><a href="https://youtu.be/xvtYH7Eb-24" target="_blank" rel="noopener">반사적 안정화 이론 (28분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🦴</span><span class="qt">목·어깨 통증 — 허리·골반도 함께 치료해야 하는 이유 (14분 · 장회영 원장)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">목·어깨 통증 환자의 상당수에서 <b>허리·골반 기능 저하가 함께</b> 발견된다. 골반 불안정 → 코어 약화 → 보조호흡근 과사용 → 목·어깨 과부하로 이어지는 전신 연결 고리 때문이다. 목만 치료하면 재발한다 — 1.2의 사슬을 신경외과 진료실 관점에서 다시 그린 강의.<div class="vids"><a href="https://youtu.be/C9nw67Om_No" target="_blank" rel="noopener">목어깨 통증, 허리·골반 함께 치료 (14분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">😣</span><span class="qt">코어 운동 열심히 했는데 더 아픈 이유 (20분 · 남유미 원장)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">잘못된 코어 운동은 2형 섬유만 자극해 <b>근육 긴장도만 올린다</b>. 복부를 억지로 조이거나 힘을 주면 국소 코어(1형)가 아니라 겉의 큰 근육이 반응하기 때문. 그래서 열심히 할수록 더 아파지는 역설이 생긴다. 처방은 낮은 부하 + 느린 속도 + 감각 인지 먼저.<div class="vids"><a href="https://youtu.be/IiRkhrzwIa0" target="_blank" rel="noopener">코어 운동 더 아픈 이유 (20분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💉</span><span class="qt">주사만 맞고 운동 안 하면 100% 재발 (10분 · 장회영 원장)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">주사(신경차단술)는 통증을 줄여주지만 <b>기능 저하는 해결하지 못한다</b>. 통증이 줄어든 "기회의 창"을 운동으로 활용해야 재발을 막는다. 올바른 치료 흐름은 주사 → 기능회복 운동 → 일상 관리 순서. 주사를 직접 놓는 팀이 하는 말이라 더 무겁다.<div class="vids"><a href="https://youtu.be/mB-nxa5XYyY" target="_blank" rel="noopener">주사만 맞으면 100% 재발 (10분)</a><a href="https://youtu.be/N1A5V77M20s" target="_blank" rel="noopener">허리 주사가 재발 못 막는 이유 (10분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🎯</span><span class="qt">디스크 때문이라고 굳게 믿게 되는 환경 (10분 · 장회영 원장)</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">MRI에서 디스크가 보인다고 <b>그것이 통증의 원인이라는 보장은 없다</b>. "디스크 돌출 = 통증 원인"이라는 인식이 과잉 치료로 이어지는 환경을 짚는다. 허리는 멀쩡한데 다리가 저린 신경 주행 문제처럼, 기능적 접근으로 디스크를 건드리지 않고도 회복 가능한 경우가 많다.<div class="vids"><a href="https://youtu.be/NiVvchnW8Oo" target="_blank" rel="noopener">디스크 믿게 되는 환경 (10분)</a><a href="https://youtu.be/xKyP24sJKhE" target="_blank" rel="noopener">허리 멀쩡한데 다리 저림 (9분)</a></div></div></div>
+  </div>
+  <p class="src">출처: 치중진담 채널 이론 강의 각 편. 복강내압·전거근·클램쉘 등 실습 강의는 3장에 배치.</p>
+</section>
+
+<section id="s15">
+  <div class="kicker">1.5 · 오해 교정</div>
+  <h2>두 채널이 함께 부수는 통념 6개</h2>
+  <p class="lead">눌러서 열어보기. 각 항목마다 "왜 틀렸나"의 근거가 붙어 있다 — 해부학적 상세는 2장에서 이어진다.</p>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🐢</span><span class="qt">"거북목엔 턱 당기기(친턱)" — 두 채널 모두 반대</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">머리 위치는 의식이 아니라 <b>정위 반응(righting reflex)</b> — 눈·전정기관이 수평을 맞추는 무의식 반사가 결정한다. 턱을 당겨 "바른 위치"에 놓아도 반사가 다시 원위치시킨다. 게다가 거북목의 뿌리는 목이 아니라 <b>흉추 후만·견갑 불안정·얕은 호흡</b> — 아래층이 기울어서 꼭대기가 앞으로 나간 것. 아래층(코어·견갑)을 세우면 머리는 반사가 알아서 데려온다.<div class="vids"><a href="https://youtu.be/DoYFmPGkEII" target="_blank" rel="noopener">친턱이 의미 없는 이유 (남스 11분)</a><a href="https://youtu.be/n5yZwJa-IEA" target="_blank" rel="noopener">턱당기기 하지 마세요 (치중진담 6분)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🪑</span><span class="qt">"허리는 꼿꼿이 펴고 앉아야 한다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">뻣뻣하게 세운 "바른 자세"는 기립근을 등척성으로 하루 종일 쥐어짜는 자세다. 좋은 자세란 하나의 정답 각도가 아니라 <b>자주 바뀌는 자세</b> — 디스크 영양 공급(아래 항목)도, 근막 윤활(2장)도 움직임이 조건이기 때문. 최고의 자세는 다음 자세다.<div class="vids"><a href="https://youtu.be/peZpj6J7mt0" target="_blank" rel="noopener">뻣뻣하게 앉지 마라 (남스)</a><a href="https://youtu.be/rmqquyVGpGY" target="_blank" rel="noopener">바른자세 오해 (남스)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💿</span><span class="qt">"디스크는 아끼고 쉬어야 낫는다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">추간판은 성인이 되면 혈관이 거의 없어 <b>삼투압 + 펌핑</b>으로 먹고산다 — 눌렸다 풀렸다 하며 수분과 영양을 빨아들이는 스펀지. 안 움직이면 굶는다. 그래서 "쉬기만 하는 디스크"는 악화 코스이고, 통증 범위 안의 부드러운 움직임이 치료의 일부다. MRI의 디스크 소견이 곧 통증 원인도 아니다 — 무증상 인구에서도 팽윤·탈출은 흔하게 발견된다. 치중진담은 "허리는 멀쩡한데 다리가 저린" 신경 주행 문제, "디스크를 믿게 되는 환경"까지 짚는다.<div class="vids"><a href="https://youtu.be/_5IqiB1MVpQ" target="_blank" rel="noopener">디스크 1탄 — 영양 공급 원리</a><a href="https://youtu.be/BfWq83J2NNU" target="_blank" rel="noopener">디스크 2탄 — 추간판성 요통</a><a href="https://youtu.be/NiVvchnW8Oo" target="_blank" rel="noopener">디스크 믿게 되는 환경 (치중진담)</a><a href="https://youtu.be/xKyP24sJKhE" target="_blank" rel="noopener">허리 멀쩡한데 다리 저림</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">💉</span><span class="qt">"주사 맞았으니 됐다" — 마취통증의학과 전문의의 셀프 반박</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">신경차단술은 통증 회로를 끊어 <b>운동할 수 있는 창문</b>을 열어주는 도구다. 그 창문 안에서 기능(코어·둔근·호흡)을 재건하지 않으면 원인 구조가 그대로라 재발한다 — 주사를 놓는 남유미 전문의 본인이 "주사만 맞으면 100% 재발"이라 말하는 이유. 주사+운동은 세트다.<div class="vids"><a href="https://youtu.be/mB-nxa5XYyY" target="_blank" rel="noopener">주사만 맞으면 100% 재발 (10분)</a><a href="https://youtu.be/N1A5V77M20s" target="_blank" rel="noopener">주사가 재발 못 막는 이유</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">🚶</span><span class="qt">"아프면 일단 많이 걸어라"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">걷기는 대둔근·중둔근·코어가 제 역할을 할 때만 약이다. 둔근이 잠들고 골반이 흔들리는 상태로 많이 걸으면 <b>잘못된 보상 패턴을 수천 보씩 반복 각인</b>하는 훈련이 된다. 순서는 마사지 → 코어·둔근 활성화 → 그 다음 걷기 늘리기.<div class="vids"><a href="https://youtu.be/aV014LHuIvI" target="_blank" rel="noopener">걷기 함부로 하지 마라 (남스)</a></div></div></div>
+  </div>
+
+  <div class="myth">
+    <div class="q"><span class="ic">⏰</span><span class="qt">"치료실 30분이면 충분하다"</span><span class="ar">▾</span></div>
+    <div class="a"><div class="a-in">하루는 24시간 — 운동 30분보다 나머지 <b>23시간 30분</b>의 자세·호흡·움직임 습관이 결과를 결정한다. 치중진담의 CareFlow 철학도 같다: 환자·치료사·의사 삼두마차에서 가장 큰 바퀴는 환자의 일상이다. 앉는 방식 바꾸기, 자주 일어나기, 숨 아래로 쉬기 — 이게 본편이고 치료실은 예고편이다.<div class="vids"><a href="https://youtu.be/h3C0xufhKXs" target="_blank" rel="noopener">일상생활 관리 (남스)</a><a href="https://youtu.be/CWUURuujdh4" target="_blank" rel="noopener">기능재활 왜 빨리 못 배우나 (치중진담)</a></div></div></div>
+  </div>
+  <p class="src">각 항목 영상 링크 참조. 무증상 MRI 소견 빈도: 표준 영상의학 문헌 상식 수준 보강.</p>
+
+  <div class="card hl">
+    <div class="ct">📖 다음 장에서</div>
+    <p>1장의 사슬이 "무엇이 무엇으로 이어진다"는 지도였다면, 2장은 그 연결이 실제로 어떤 조직을 타고 일어나는지를 연다 — 몸 전체를 한 벌로 잇는 근막, 그리고 횡격막·전거근·대둔근·장요근 같은 핵심 근육들의 해부학이다.</p>
+  </div>
+</section>
+
+<div class="pgnav">
+  <a href="index.html"><small>◀ 이전</small>표지</a>
+  <a class="nx" href="ch2.html"><small>다음 ▶</small>2장 해부학 — 근막과 근육</a>
+</div>
+
+<footer>
+  <div class="disc">이 문서는 공개 유튜브 강의를 학습용으로 요약·재구성한 교육 자료다. 의학적 진단·처방을 대신하지 않으며, 통증이 지속되거나 심해지면 반드시 진료를 받자.</div>
+  재활 통합 교본 · 1장 / 남스어프로치 × 치중진담 · 교육용 자료
+</footer>
+
+</div>
+<script>
+(function(){"use strict";
+var prog=document.getElementById('prog');
+function upd(){
+  var h=document.documentElement;
+  var max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(max>0?((h.scrollTop||document.body.scrollTop)/max*100):0)+'%';
+}
+window.addEventListener('scroll',upd,{passive:true});
+window.addEventListener('resize',upd,{passive:true});
+upd();
+var qs=document.querySelectorAll('.myth .q');
+for(var i=0;i<qs.length;i++){
+  qs[i].addEventListener('click',function(){this.parentElement.classList.toggle('open');});
+}
+})();
+</script>
+<script src="vdocs.js"></script>
+</body>
+</html>
