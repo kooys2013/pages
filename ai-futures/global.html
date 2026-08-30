@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>해외판 — 검증부터 시작하는 자동매매 커리큘럼</title>
+<style>
+:root{
+  --bg:#fafaf9;--surface:#fff;--raise:#f3f2ef;--ink:#1a1a18;--muted:#6b665f;--line:#e6e3dd;
+  --a:#0f766e;--a-soft:#ecfdf5;--a-ink:#0f766e;
+  --b:#7c3aed;--b-soft:#f5f0ff;--b-ink:#6d28d9;
+  --c:#b45309;--c-soft:#fffbeb;--c-ink:#92400e;
+  --ok:#047857;--ok-soft:#ecfdf5;--warn:#b45309;--warn-soft:#fffbeb;--bad:#be123c;--bad-soft:#fff1f4;
+  --code-bg:#f2f1ed;--k:var(--a);--k-soft:var(--a-soft);--k-ink:var(--a-ink);
+}
+@media (prefers-color-scheme:dark){
+ :root{--bg:#111413;--surface:#1a1e1d;--raise:#212625;--ink:#e9edeb;--muted:#93a09b;--line:#2b3130;
+ --a:#5eead4;--a-soft:#10231f;--a-ink:#99f6e4;
+ --b:#c4b5fd;--b-soft:#221b38;--b-ink:#ddd0ff;
+ --c:#fbbf24;--c-soft:#2a2213;--c-ink:#fcd34d;
+ --ok:#6ee7b7;--ok-soft:#0f231d;--warn:#fbbf24;--warn-soft:#2a2213;--bad:#fda4af;--bad-soft:#2d1218;
+ --code-bg:#212625;}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+ line-height:1.85;font-size:16.5px;letter-spacing:-0.01em;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 100px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--k);z-index:60;transition:width .1s linear}
+header.top{padding:44px 0 6px}
+.eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(25px,5.2vw,37px);line-height:1.26;margin:.35em 0 .3em;letter-spacing:-0.035em;font-weight:800}
+.sub{color:var(--muted);font-size:15.5px;margin:0}
+nav.tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);
+ backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;gap:6px;padding:10px 0;margin:22px 0 0}
+nav.tabs button{flex:1;appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+ font:inherit;font-size:13.5px;font-weight:700;padding:9px 8px;border-radius:11px;cursor:pointer;transition:.15s;text-align:center;line-height:1.35}
+nav.tabs button .n{display:block;font-size:10.5px;letter-spacing:.1em;opacity:.7;font-weight:800}
+nav.tabs button[aria-selected="true"]{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+section.page{padding-top:24px}
+h2{font-size:clamp(20px,3.8vw,27px);line-height:1.34;margin:2.5em 0 .5em;letter-spacing:-0.03em;font-weight:800}
+h2 .num{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--k-ink);
+ vertical-align:middle;margin-right:9px;padding:3px 9px;border-radius:999px;background:var(--k-soft)}
+h3{font-size:17.5px;margin:2em 0 .45em;font-weight:700;letter-spacing:-0.02em}
+h4{font-size:15.5px;margin:1.4em 0 .3em;font-weight:700;color:var(--k-ink)}
+p{margin:.7em 0}
+a{color:var(--k-ink)}
+ul,ol{padding-left:1.25em;margin:.7em 0}
+li{margin:.4em 0}
+li::marker{color:var(--muted)}
+.lead{font-size:17.5px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+.lead b{color:var(--k-ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px 20px;margin:16px 0}
+.card>h3,.card>h4{margin-top:0}
+.callout{border-left:3px solid var(--k);background:var(--k-soft);border-radius:0 12px 12px 0;padding:13px 18px;margin:18px 0;font-size:15.5px}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-soft)}
+.callout.bad{border-left-color:var(--bad);background:var(--bad-soft)}
+.callout .tag{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.eli{background:var(--ok-soft);border:1px dashed color-mix(in srgb,var(--ok) 45%,transparent);border-radius:15px;padding:16px 18px;margin:16px 0}
+.eli .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--ok);
+ border:1px solid color-mix(in srgb,var(--ok) 45%,transparent);border-radius:999px;padding:1px 10px;margin-bottom:7px}
+.eli p{margin:.35em 0;font-size:16px}
+.eli .real{margin-top:9px;padding-top:9px;border-top:1px dashed color-mix(in srgb,var(--ok) 30%,transparent);font-size:14.5px;color:var(--muted)}
+.eli .real b{color:var(--ok)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--k-soft);font-weight:800;font-size:12.5px;color:var(--k-ink)}
+tr:last-child td{border-bottom:0}
+td.y{color:var(--ok);font-weight:800;white-space:nowrap}
+td.n{color:var(--bad);font-weight:800;white-space:nowrap}
+td.p{color:var(--warn);font-weight:800;white-space:nowrap}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:15px 17px;overflow-x:auto;margin:13px 0;font-size:13.5px;line-height:1.7}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.92em}
+p code,li code,td code{background:var(--code-bg);padding:1.5px 6px;border-radius:6px;border:1px solid var(--line)}
+pre code{background:none;border:0;padding:0;white-space:pre-wrap;word-break:break-word}
+.codebox{position:relative}
+.copy{position:absolute;top:9px;right:9px;font:inherit;font-size:11.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--surface);color:var(--muted);border-radius:8px;padding:4px 9px;cursor:pointer}
+.copy:hover{color:var(--k-ink);border-color:var(--k)}
+.label{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 -4px}
+figure{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px 13px 11px}
+figure .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+figure svg{display:block;margin:0 auto;max-width:100%;height:auto;color:var(--ink)}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:9px;padding:0 4px;line-height:1.6}
+.ctrls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 4px 11px}
+.ctrls button{appearance:none;font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--raise);color:var(--ink);border-radius:9px;padding:6px 11px;cursor:pointer;transition:.13s}
+.ctrls button:hover{border-color:var(--k)}
+.ctrls button.on{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+.ctrls .spacer{flex:1}
+.ctrls .count{font-size:12.5px;font-weight:800;color:var(--muted)}
+.ed{stroke:currentColor;stroke-opacity:.3;stroke-width:1.3;fill:none;transition:.2s}
+.ed.act{stroke:var(--k);stroke-opacity:1;stroke-width:2}
+.elab{font-size:9.5px;font-weight:700;fill:currentColor;opacity:.55}
+.bx rect{fill:var(--surface);stroke:currentColor;stroke-opacity:.3;stroke-width:1.2}
+.bx text{fill:currentColor}
+.bx{opacity:.45;transition:opacity .2s;cursor:pointer}
+.bx.act{opacity:1}.bx.act rect{fill:var(--k-soft);stroke:var(--k);stroke-width:2}
+.bx.seen{opacity:.75}
+.detail{background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:11px 4px 0;font-size:15px}
+.detail .dt{font-size:16.5px;font-weight:800;letter-spacing:-0.02em}
+.detail .row{margin-top:7px}
+.detail .row b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.detail .e5{color:var(--ok);font-weight:600}
+.meta{font-size:13.5px;color:var(--muted)}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+[hidden]{display:none!important}
+.dict dt{font-weight:800;color:var(--k-ink);margin-top:12px;font-size:15.5px}
+.dict dd{margin:1px 0 0;font-size:15px}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:18px 20px;margin:16px 0}
+.tool .hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.tool .nm{font-size:19px;font-weight:800;letter-spacing:-0.025em}
+.tool .tagx{font-size:11.5px;font-weight:800;letter-spacing:.06em;border-radius:999px;padding:2px 10px;
+ background:var(--k-soft);color:var(--k-ink)}
+.tool .url{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">해외판 · 조코딩 선물거래 강의의 대응 커리큘럼</div>
+  <h1>검증부터 시작하는<br>자동매매 커리큘럼</h1>
+  <p class="sub">조코딩 강의가 <strong>13강에 놓은 것</strong>을 이 커리큘럼들은 <strong>1강에 놓는다.</strong> 그 순서 하나가 전부를 바꾼다. 전부 무료이고 오픈소스다.</p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1페이지</span>쉬운 설명</button>
+  <button role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="n">2페이지</span>도구와 개념</button>
+  <button role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="n">3페이지</span>비교 · 적용</button>
+</nav>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page" id="p1" role="tabpanel" aria-labelledby="t1">
+
+<p class="lead">해외에 <b>더 화려한 강의</b>가 있는 게 아니다. <b>순서가 다른 강의</b>가 있다. 조코딩은 <b>만드는 법</b>을 가르치고, 이쪽은 <b>그게 진짜인지 확인하는 법</b>을 가르친다. 후자가 훨씬 어렵고, 훨씬 중요하다.</p>
+
+<h2><span class="num">그림 1</span>시험을 먼저 볼 것인가, 모의고사를 먼저 볼 것인가</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>내일 진짜 시험이야. 근데 공부를 했는지 안 했는지 모르겠어.</p>
+  <p><strong>방법 1</strong> — 그냥 시험을 봐. 점수가 나오면 그때 알겠지. 근데 <strong>시험은 한 번뿐이고, 망하면 끝이야.</strong></p>
+  <p><strong>방법 2</strong> — 옛날 시험지를 잔뜩 가져와서 <strong>모의고사부터 봐.</strong> 여기서 60점이면 진짜 시험도 60점쯤 나오겠지. 망해도 아무도 안 다쳐.</p>
+  <p>돈이 걸린 일에서는 당연히 <strong>방법 2</strong>야. 그런데 놀랍게도 대부분의 자동매매 강의는 방법 1을 가르친다.</p>
+  <div class="real"><b>진짜 이름</b> — 옛날 시험지로 미리 풀어보기 = <b>백테스트</b>. 조코딩 강의는 실거래가 3강, 백테스트가 13강이다. <b>시험을 먼저 보고 모의고사를 나중에 본다.</b></div>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="ordA" class="on">조코딩 순서</button>
+    <button type="button" id="ordB">해외 커리큘럼 순서</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 180" role="img" aria-label="조코딩은 실거래를 3강에서 시작하고 백테스트를 13강에 두지만, 해외 커리큘럼은 리서치와 백테스트와 페이퍼 트레이딩을 모두 거친 뒤 실거래로 간다" style="min-width:400px">
+    <defs>
+      <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
+      <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--a)"/></marker>
+    </defs>
+    <g id="ordAg">
+      <rect x="8" y="34" width="96" height="42" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+      <text x="56" y="52" text-anchor="middle" font-size="10.5" font-weight="700" fill="currentColor">코드 작성</text>
+      <text x="56" y="67" text-anchor="middle" font-size="9" fill="currentColor" opacity=".6">1~2강</text>
+      <path d="M104 55 H124" class="ed" marker-end="url(#a1)"/>
+      <rect x="128" y="34" width="110" height="42" rx="9" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/>
+      <text x="183" y="52" text-anchor="middle" font-size="11" font-weight="800" fill="var(--bad)">실계좌 거래</text>
+      <text x="183" y="67" text-anchor="middle" font-size="9" fill="var(--bad)">3강 · 실제 돈</text>
+      <path d="M238 55 H258" class="ed" marker-end="url(#a1)"/>
+      <rect x="262" y="34" width="76" height="42" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+      <text x="300" y="52" text-anchor="middle" font-size="10.5" font-weight="700" fill="currentColor">기능 확장</text>
+      <text x="300" y="67" text-anchor="middle" font-size="9" fill="currentColor" opacity=".6">8~12강</text>
+      <path d="M338 55 H358" class="ed" marker-end="url(#a1)"/>
+      <rect x="362" y="34" width="70" height="42" rx="9" fill="var(--warn-soft)" stroke="var(--warn)"/>
+      <text x="397" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--warn)">백테스트</text>
+      <text x="397" y="67" text-anchor="middle" font-size="9" fill="var(--warn)">13강</text>
+      <text x="8" y="108" font-size="12.5" font-weight="800" fill="var(--bad)">검증이 맨 마지막에 온다</text>
+      <text x="8" y="128" font-size="11" fill="currentColor" opacity=".7">3강부터 13강까지 실계좌가 돌아간다. 페이퍼 트레이딩 단계가 없다.</text>
+      <text x="8" y="146" font-size="11" fill="currentColor" opacity=".7">바이낸스는 Futures Testnet을 무료로 제공하는데 사용하지 않는다.</text>
+      <text x="8" y="168" font-size="11" fill="currentColor" opacity=".7">그리고 그 백테스트는 3일·4거래이며 재현되지 않는다.</text>
+    </g>
+    <g id="ordBg" style="display:none">
+      <rect x="8" y="34" width="88" height="42" rx="9" fill="var(--a-soft)" stroke="var(--a)"/>
+      <text x="52" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--a-ink)">리서치</text>
+      <text x="52" y="67" text-anchor="middle" font-size="9" fill="var(--a-ink)">가설 수립</text>
+      <path d="M96 55 H114" class="ed act" marker-end="url(#a2)"/>
+      <rect x="118" y="34" width="88" height="42" rx="9" fill="var(--a-soft)" stroke="var(--a)"/>
+      <text x="162" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--a-ink)">백테스트</text>
+      <text x="162" y="67" text-anchor="middle" font-size="9" fill="var(--a-ink)">+ 워크포워드</text>
+      <path d="M206 55 H224" class="ed act" marker-end="url(#a2)"/>
+      <rect x="228" y="34" width="98" height="42" rx="9" fill="var(--a-soft)" stroke="var(--a)"/>
+      <text x="277" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--a-ink)">페이퍼 트레이딩</text>
+      <text x="277" y="67" text-anchor="middle" font-size="9" fill="var(--a-ink)">돈 안 걸고 실시간</text>
+      <path d="M326 55 H344" class="ed act" marker-end="url(#a2)"/>
+      <rect x="348" y="34" width="84" height="42" rx="9" fill="var(--surface)" stroke="var(--a)" stroke-width="2"/>
+      <text x="390" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--a-ink)">실거래</text>
+      <text x="390" y="67" text-anchor="middle" font-size="9" fill="var(--a-ink)">마지막에</text>
+      <text x="8" y="108" font-size="12.5" font-weight="800" fill="var(--a-ink)">각 단계를 통과해야만 다음으로 간다</text>
+      <text x="8" y="128" font-size="11" fill="currentColor" opacity=".75">Freqtrade는 dry-run(페이퍼)이 기본값이다. 실거래로 바꾸려면 설정을 명시적으로 바꿔야 한다.</text>
+      <text x="8" y="146" font-size="11" fill="currentColor" opacity=".75">QuantConnect는 같은 코드로 백테스트→페이퍼→실거래를 순서대로 태운다.</text>
+      <text x="8" y="168" font-size="11" fill="currentColor" opacity=".75">즉 <tspan font-weight="800">"검증을 건너뛰기 어렵게" 도구가 설계돼 있다.</tspan></text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>해외 도구들의 진짜 강점은 기능이 아니라 <strong>기본값(default)</strong>이다. 위험한 길이 기본값이 아니게 만들어져 있다.</figcaption>
+</figure>
+
+<h2><span class="num">그림 2</span>모의고사 답을 외우면 안 된다</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>모의고사를 100번 풀었어. 이제 100점이야! 신난다.</p>
+  <p>그런데 <strong>답을 외운 거야.</strong> 문제를 이해한 게 아니라. 진짜 시험은 <strong>다른 문제</strong>가 나오니까 0점이 나와.</p>
+  <p>그래서 똑똑한 방법이 있어. 모의고사를 <strong>반으로 갈라</strong>. 앞쪽으로만 공부하고, <strong>뒤쪽은 절대 안 봐.</strong> 그리고 뒤쪽으로 시험을 봐. 여기서도 점수가 나오면 <strong>진짜로 아는 거야.</strong></p>
+  <div class="real"><b>진짜 이름</b> — 답 외우기 = <b>과최적화(overfitting)</b> · 뒤쪽으로 시험보기 = <b>아웃오브샘플 검증</b> · 이걸 여러 구간으로 반복 = <b>워크포워드 분석</b></div>
+</div>
+
+<figure>
+  <div class="scroll">
+  <svg viewBox="0 0 440 175" role="img" aria-label="워크포워드 분석은 데이터를 여러 구간으로 나눠 앞 구간에서 학습하고 다음 구간에서 검증하는 것을 반복해 전 구간에서 성능이 유지되는지 확인한다" style="min-width:400px">
+    <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">워크포워드 — 학습 구간과 검증 구간을 밀면서 반복</text>
+    <rect x="10" y="30" width="130" height="20" rx="4" fill="var(--k-soft)" stroke="var(--a)"/>
+    <text x="75" y="44" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--a-ink)">학습</text>
+    <rect x="144" y="30" width="52" height="20" rx="4" fill="var(--warn-soft)" stroke="var(--warn)"/>
+    <text x="170" y="44" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--warn)">검증</text>
+    <text x="206" y="44" font-size="9.5" fill="currentColor" opacity=".55">← 1회차</text>
+    <rect x="88" y="58" width="130" height="20" rx="4" fill="var(--k-soft)" stroke="var(--a)"/>
+    <text x="153" y="72" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--a-ink)">학습</text>
+    <rect x="222" y="58" width="52" height="20" rx="4" fill="var(--warn-soft)" stroke="var(--warn)"/>
+    <text x="248" y="72" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--warn)">검증</text>
+    <text x="284" y="72" font-size="9.5" fill="currentColor" opacity=".55">← 2회차</text>
+    <rect x="166" y="86" width="130" height="20" rx="4" fill="var(--k-soft)" stroke="var(--a)"/>
+    <text x="231" y="100" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--a-ink)">학습</text>
+    <rect x="300" y="86" width="52" height="20" rx="4" fill="var(--warn-soft)" stroke="var(--warn)"/>
+    <text x="326" y="100" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--warn)">검증</text>
+    <text x="362" y="100" font-size="9.5" fill="currentColor" opacity=".55">← 3회차</text>
+    <line x1="10" y1="118" x2="430" y2="118" stroke="currentColor" stroke-opacity=".2"/>
+    <text x="10" y="138" font-size="12" font-weight="800" fill="var(--a-ink)">검증 구간 성적만 모아서 본다</text>
+    <text x="10" y="156" font-size="11" fill="currentColor" opacity=".7">한 구간만 잘 나오면 우연이다. <tspan font-weight="800">모든 구간에서 반복해서 증명해야</tspan> 엣지다.</text>
+    <text x="10" y="172" font-size="10.5" fill="currentColor" opacity=".55">기준선: 아웃오브샘플에서 샤프가 40% 넘게 떨어지거나 MDD가 두 배가 되면 과최적화로 본다.</text>
+  </svg>
+  </div>
+  <figcaption>조코딩 13강은 <strong>"프롬프트를 바꿔가며 어떤 게 잘 되는지 테스트해 보라"</strong>고 안내한다. 3일·4거래 구간에서 그렇게 고르면 고른 것은 엣지가 아니라 <strong>노이즈</strong>다. 정확히 답 외우기다.</figcaption>
+</figure>
+
+<h2><span class="num">그림 3</span>LLM은 이미 답지를 봤다 — 가장 중요한 그림</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>2024년 1월 시험지를 주면서 "이거 풀어봐" 했어.</p>
+  <p>그런데 이 친구는 <strong>2026년까지의 신문을 전부 읽은 상태야.</strong> 2024년 2월에 무슨 일이 있었는지 <strong>이미 알고 있어.</strong></p>
+  <p>그러니까 시험을 아주 잘 봐. 그런데 <strong>그건 실력이 아니야.</strong> 내일 일어날 일은 신문에 없으니까, 진짜 시험에서는 못 맞춰.</p>
+  <div class="real"><b>진짜 이름</b> — <b>룩어헤드 편향(look-ahead bias)</b>. 이건 코드로 막을 수 있는 종류의 버그가 아니다. <b>모델의 학습 데이터 안에 미래가 들어 있다.</b></div>
+</div>
+
+<figure>
+  <div class="scroll">
+  <svg viewBox="0 0 440 200" role="img" aria-label="일반 규칙 기반 전략은 과거 데이터만 보고 판단하지만, LLM은 학습 시점까지의 모든 정보를 이미 알고 있어서 과거 구간 백테스트에 미래 정보가 새어든다" style="min-width:400px">
+    <text x="10" y="16" font-size="11" font-weight="800" fill="currentColor" opacity=".6">2024년 1월 차트로 백테스트를 돌린다면</text>
+    <line x1="10" y1="60" x2="430" y2="60" stroke="currentColor" stroke-opacity=".25"/>
+    <text x="14" y="76" font-size="9.5" fill="currentColor" opacity=".5">2024·01</text>
+    <text x="420" y="76" text-anchor="end" font-size="9.5" fill="currentColor" opacity=".5">2026 (모델 학습 시점)</text>
+    <circle cx="70" cy="60" r="5" fill="var(--a)"/>
+    <text x="70" y="46" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--a-ink)">판단 시점</text>
+    <rect x="10" y="88" width="120" height="34" rx="8" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="70" y="102" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--a-ink)">규칙 기반 전략</text>
+    <text x="70" y="115" text-anchor="middle" font-size="9" fill="var(--a-ink)">이 시점 이전만 본다</text>
+    <path d="M70 88 V66" class="ed act"/>
+    <rect x="10" y="136" width="420" height="34" rx="8" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="1.6"/>
+    <text x="220" y="150" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--bad)">LLM — 2026년까지의 정보를 이미 학습한 상태</text>
+    <text x="220" y="163" text-anchor="middle" font-size="9" fill="var(--bad)">2024년 2월에 무슨 일이 있었는지 알고 있다</text>
+    <path d="M220 136 V66" class="ed" stroke="var(--bad)" stroke-opacity="1" stroke-dasharray="4 3"/>
+    <text x="228" y="106" font-size="9.5" font-weight="700" fill="var(--bad)">미래 정보 유입</text>
+    <text x="10" y="192" font-size="11" fill="currentColor" opacity=".7">백테스트 성적이 좋게 나와도 <tspan font-weight="800">그게 예측력인지 기억력인지 구분할 수 없다.</tspan></text>
+  </svg>
+  </div>
+  <figcaption>이건 연구 주제로 정식화돼 있다 — <strong>Look-Ahead-Bench</strong>(arXiv 2601.13770)는 금융용 point-in-time LLM의 룩어헤드 편향을 측정하는 표준 벤치마크다. <strong>LLM에게 과거 차트를 보여주는 백테스트는 이 문제를 통제하지 않으면 의미를 갖기 어렵다.</strong></figcaption>
+</figure>
+
+<div class="callout bad">
+<span class="tag">이 한 가지가 조코딩 13강의 결론을 무력화한다</span>
+GPT-4.5o에게 2026년 1월 1~3일 비트코인 차트를 주고 "롱이냐 숏이냐" 물었을 때 +9.71%가 나왔다 해도, <strong>모델이 그 기간의 결과를 이미 알고 있었을 가능성을 배제할 방법이 없다.</strong> 재현조차 안 되므로 분산도 측정할 수 없다. 이 두 가지가 겹치면 그 숫자로는 <strong>아무것도 주장할 수 없다.</strong>
+</div>
+
+<h2><span class="num">마지막</span>세 문장 요약</h2>
+<div class="card">
+<ol>
+<li><strong>순서가 전부다.</strong> 리서치 → 백테스트 → 페이퍼 → 실거래. 건너뛰면 검증이 아니라 도박이다.</li>
+<li><strong>한 번 잘 나온 결과는 증거가 아니다.</strong> 여러 구간에서 반복해서 살아남아야 한다.</li>
+<li><strong>LLM에게 과거를 물어보면 컨닝이 된다.</strong> LLM은 신호 생성보다 컨텍스트 요약에 쓰는 게 안전하다.</li>
+</ol>
+</div>
+
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+
+<p class="lead">아래 셋이 해외 표준이다. 전부 <b>무료·오픈소스</b>이고, 조코딩 강의가 다루지 않는 <b>검증 레이어</b>를 기본으로 갖고 있다. 셋 다 배울 필요는 없다 — 목적에 따라 하나를 고른다.</p>
+
+<h2><span class="num">1</span>세 가지 선택지</h2>
+
+<div class="tool">
+  <div class="hd"><span class="nm">Freqtrade</span><span class="tagx">암호화폐 특화 · 가장 실용적</span></div>
+  <div class="url">freqtrade.io · github.com/freqtrade/freqtrade</div>
+  <p>파이썬으로 작성된 무료 오픈소스 암호화폐 트레이딩 봇. <strong>조코딩 강의와 가장 직접적으로 대응되는 도구</strong>이며, 그가 손으로 만든 것을 이미 전부 갖추고 있다.</p>
+  <div class="tablewrap">
+  <table>
+  <thead><tr><th>조코딩이 손으로 만든 것</th><th>Freqtrade에서는</th></tr></thead>
+  <tbody>
+  <tr><td>ccxt로 차트 수집</td><td>내장 (거래소 추상화 포함)</td></tr>
+  <tr><td><code>while True</code> 루프</td><td>내장 스케줄러</td></tr>
+  <tr><td>SL/TP 주문 관리</td><td><code>stoploss</code>, <code>trailing_stop</code>, <code>custom_exit</code></td></tr>
+  <tr><td>SQLite 기록</td><td>내장 DB + 거래 이력</td></tr>
+  <tr><td>Streamlit 대시보드</td><td>내장 <strong>Web UI</strong> + <strong>Telegram</strong> 원격 제어</td></tr>
+  <tr><td>13강 백테스트 도구</td><td><code>freqtrade backtesting</code> — 수수료·슬리피지 모델 포함</td></tr>
+  <tr><td><strong>없음</strong></td><td class="y"><strong>dry-run(페이퍼)이 기본값</strong></td></tr>
+  <tr><td><strong>없음</strong></td><td class="y"><code>hyperopt</code> · <strong>워크포워드 분석</strong></td></tr>
+  <tr><td><strong>없음</strong></td><td class="y"><code>edge</code> 포지션 사이징 · 손익비 기반</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <p class="meta"><strong>FreqAI</strong> 모듈로 머신러닝 모델을 붙이는 것도 지원한다. 선물(futures) 거래도 지원한다.</p>
+  <div class="callout ok">
+  <span class="tag">핵심 차이 한 가지만 꼽으면</span>
+  <strong>dry-run이 기본값이라는 것.</strong> 실거래를 하려면 설정 파일에서 명시적으로 꺼야 한다. 조코딩 강의는 3강에서 아무 장치 없이 실계좌 주문이 나간다.
+  </div>
+</div>
+
+<div class="tool">
+  <div class="hd"><span class="nm">QuantConnect · LEAN</span><span class="tagx">가장 체계적인 무료 교육 과정</span></div>
+  <div class="url">quantconnect.com · Boot Camp / Algorithmic Trading A-Z</div>
+  <p>클라우드 백테스팅 플랫폼 + 오픈소스 엔진(LEAN). <strong>무료 백테스팅과 금융 데이터를 제공</strong>하고, <strong>Boot Camp</strong>이라는 코드를 직접 짜면서 진행하는 인터랙티브 튜토리얼이 있다.</p>
+  <h4>Boot Camp이 가르치는 것</h4>
+  <ul>
+  <li>포트폴리오 관리 · 기술적 지표 사용 · 자산 유니버스 거래</li>
+  <li>시장 상황에 따른 거래 자동화</li>
+  <li><strong>알고리즘 안팎으로 데이터가 어떻게 흐르는지</strong> — 이게 룩어헤드를 막는 기초다</li>
+  <li>퀀트 트레이딩에 필요한 금융·통계·소프트웨어 개발 기초를 함께</li>
+  </ul>
+  <div class="callout">
+  <span class="tag">이 플랫폼의 구조적 장점</span>
+  <strong>같은 코드가 백테스트 → 페이퍼 → 실거래를 순서대로 탄다.</strong> 조코딩 강의의 가장 큰 구멍(백테스트 도구와 라이브 코드가 서로 다른 시스템)이 여기서는 구조적으로 발생하지 않는다.
+  </div>
+  <p class="meta">주식·옵션 중심이지만 암호화폐도 지원한다. 데이터가 플랫폼에서 제공되므로 <strong>데이터 수집·정합 문제를 학습 초기에 안 만나도 된다</strong>는 것도 교육용으로 큰 장점이다.</p>
+</div>
+
+<div class="tool">
+  <div class="hd"><span class="nm">NautilusTrader</span><span class="tagx">프로덕션 지향 · 가장 엄격</span></div>
+  <div class="url">nautilustrader.io</div>
+  <p>오픈소스 고성능 이벤트 드리븐 알고리즘 트레이딩 플랫폼. 퀀트 트레이더가 <strong>이벤트 드리븐 엔진으로 과거 데이터에서 자동매매 전략 포트폴리오를 백테스트</strong>할 수 있게 한다.</p>
+  <h4>핵심 설계 철학</h4>
+  <p><strong>백테스트와 라이브가 동일한 코드 경로를 탄다.</strong> "백테스트에서는 되는데 실전에서는 안 된다"는 문제를 아키텍처 수준에서 차단하는 것이 이 프로젝트의 존재 이유다.</p>
+  <p class="meta">난이도가 셋 중 가장 높다. 이미 봇을 운영 중이고 <strong>백테-라이브 정합을 아키텍처로 강제하고 싶은 경우</strong>에 적합하다.</p>
+</div>
+
+<div class="callout warn">
+<span class="tag">선택 가이드</span>
+<strong>암호화폐 선물 자동매매를 실제로 돌리고 싶다</strong> → Freqtrade.<br>
+<strong>검증 방법론을 처음부터 제대로 배우고 싶다</strong> → QuantConnect Boot Camp.<br>
+<strong>이미 봇이 있고 정합성을 강제하고 싶다</strong> → NautilusTrader.
+</div>
+
+<h2><span class="num">2</span>검증 개념 사전</h2>
+<p>조코딩 강의에 <strong>한 번도 등장하지 않는</strong> 용어들이다. 그리고 이것들이 "돈을 버는가"를 판정하는 실제 도구다.</p>
+
+<dl class="dict">
+<dt>인샘플 / 아웃오브샘플 (In-sample / Out-of-sample)</dt>
+<dd>전략을 만들 때 본 데이터 / 만들 때 <strong>보지 않은</strong> 데이터. 성능 주장은 <strong>반드시 아웃오브샘플 기준</strong>이어야 한다.</dd>
+
+<dt>워크포워드 분석 (Walk-Forward Analysis)</dt>
+<dd>학습 구간에서 최적화하고 <strong>바로 다음의 보지 않은 구간</strong>에서 검증하는 것을 구간을 밀어가며 반복. 단일 검증 구간에서 오는 <strong>거짓 확신</strong>을 막는다. 전략이 <strong>서로 다른 시장 국면에서 반복적으로 스스로를 증명</strong>해야 한다.</dd>
+
+<dt>과최적화 (Overfitting)</dt>
+<dd>과거 데이터에 지나치게 맞춰져서 백테스트는 좋은데 실전에서 무너지는 상태. <strong>패턴이 아니라 노이즈를 외운 것.</strong></dd>
+
+<dt>룩어헤드 편향 (Look-ahead bias)</dt>
+<dd>판단 시점에 알 수 없었던 정보가 새어든 것. LLM에서는 <strong>모델 학습 데이터에 미래가 포함</strong>되므로 코드로 막을 수 없다. <em>Look-Ahead-Bench</em>(arXiv 2601.13770)가 이를 표준 벤치마크로 정식화했다.</dd>
+
+<dt>데이터 리키지 (Data leakage)</dt>
+<dd>정규화·피처 생성 과정에서 전체 기간 통계를 써버리는 등, 미래 정보가 간접적으로 새는 것.</dd>
+
+<dt>PBO (Probability of Backtest Overfitting)</dt>
+<dd>이 백테스트 결과가 과최적화의 산물일 확률. 여러 전략 후보를 비교할 때 <strong>선택 행위 자체가 만드는 편향</strong>을 정량화한다.</dd>
+
+<dt>CPCV (Combinatorial Purged Cross-Validation)</dt>
+<dd>시계열용 교차검증. 학습·검증 구간 사이를 <strong>purge/embargo</strong>로 격리해 인접 구간의 정보 누수를 막는다. López de Prado의 <em>Advances in Financial Machine Learning</em>이 표준 참고서다.</dd>
+
+<dt>Deflated Sharpe Ratio</dt>
+<dd>여러 번 시도해서 고른 전략의 샤프 비율을 <strong>시도 횟수로 할인</strong>한 값. 100개를 돌려 최고를 고르면 샤프가 높게 나오는 게 당연하다 — 그 편향을 뺀다.</dd>
+
+<dt>드라이런 / 페이퍼 트레이딩</dt>
+<dd>실시간 시세로 돌리되 <strong>실제 주문은 내지 않는</strong> 모드. 백테스트가 못 잡는 지연·API 오류·재접속 문제를 여기서 만난다.</dd>
+
+<dt>슬리피지 (Slippage)</dt>
+<dd>주문 의도 가격과 실제 체결가의 차이. 시장가 주문이면 <strong>반드시 발생</strong>한다.</dd>
+
+<dt>펀딩비 (Funding rate)</dt>
+<dd>무기한 선물에서 <strong>8시간마다</strong> 롱↔숏 간 정산되는 비용. 포지션을 오래 들고 있으면 누적된다. 조코딩 백테스트에는 반영돼 있지 않다.</dd>
+
+<dt>기대값 · 손익분기 승률</dt>
+<dd>손익비가 1:1이면 수수료·슬리피지 때문에 <strong>승률이 50%를 넘어야</strong> 본전이다. MVP의 SL/TP ±0.5%가 정확히 이 구조다.</dd>
+</dl>
+
+<h2><span class="num">3</span>Freqtrade 실전 순서</h2>
+<p>조코딩 커리큘럼과 <strong>같은 목표</strong>를 안전한 순서로 밟으면 이렇게 된다.</p>
+
+<p class="label">① 설치 · 전략 생성</p>
+<pre><code># 전략 템플릿 생성
+freqtrade new-strategy --strategy MyStrategy
+
+# 과거 데이터 다운로드 (충분히 길게 — 여러 시장 국면 포함)
+freqtrade download-data --exchange binance \
+  --pairs BTC/USDT:USDT --timeframes 15m 1h 4h \
+  --timerange 20240101-20260801</code></pre>
+
+<p class="label">② 백테스트 — 실거래 전에</p>
+<pre><code>freqtrade backtesting --strategy MyStrategy \
+  --timerange 20240101-20251231 \
+  --fee 0.0005 \
+  --timeframe 15m</code></pre>
+<p class="meta"><code>--fee</code>는 조코딩이 쓴 것과 같은 바이낸스 테이커 0.05%다. 슬리피지는 설정에서 별도 모델링한다.</p>
+
+<p class="label">③ 워크포워드 — 여기가 조코딩에 없는 단계</p>
+<pre><code>freqtrade hyperopt --strategy MyStrategy \
+  --hyperopt-loss SharpeHyperOptLoss \
+  --timerange 20240101-20250630 --epochs 200
+
+# 최적화에 쓰지 않은 구간에서만 검증
+freqtrade backtesting --strategy MyStrategy \
+  --timerange 20250701-20260801</code></pre>
+<div class="callout bad">
+<span class="tag">판정 기준</span>
+아웃오브샘플에서 <strong>샤프가 40% 넘게 떨어지거나 최대낙폭이 두 배가 되면 과최적화</strong>로 본다. 이때 해야 할 일은 파라미터를 다시 만지는 게 아니라 <strong>전략을 버리는 것</strong>이다.
+</div>
+
+<p class="label">④ 페이퍼 트레이딩 — 기본값</p>
+<pre><code>// config.json
+{
+  "dry_run": true,          // 기본값. 실거래 전 최소 수 주 유지
+  "dry_run_wallet": 1000,
+  "stoploss": -0.02,
+  "max_open_trades": 3
+}</code></pre>
+<pre><code>freqtrade trade --config config.json --strategy MyStrategy</code></pre>
+
+<p class="label">⑤ 실거래 — 마지막에, 격리된 자본으로</p>
+<pre><code>// dry_run을 false로 바꾸는 것은 명시적 결정이어야 한다
+{ "dry_run": false }</code></pre>
+
+<h2><span class="num">4</span>LLM을 쓴다면 — 안전한 자리</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>LLM 사용처</th><th>실패했을 때</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td>포지션 크기·레버리지 결정</td><td>자본에 직결. 되돌릴 수 없음</td><td class="n">쓰지 말 것</td></tr>
+<tr><td>승률 p 추정 → 켈리 입력</td><td>과대추정 시 over-betting → 파산 확률 급증</td><td class="n">쓰지 말 것</td></tr>
+<tr><td>진입 방향(롱/숏) 단독 결정</td><td>룩어헤드로 백테스트 검증 불가</td><td class="p">검증 불가 · 비권장</td></tr>
+<tr><td>뉴스·공시를 <strong>레짐 태그</strong>로 분류</td><td>부울/카테고리 하나가 틀림. 격리 가능</td><td class="y">검증 가능</td></tr>
+<tr><td>규칙 기반 신호에 <strong>필터</strong>로 부착</td><td>거래를 안 하게 될 뿐. 하방이 제한됨</td><td class="y">검증 가능</td></tr>
+<tr><td>전략 <strong>코드 작성</strong> 보조</td><td>사람이 리뷰. 백테스트가 잡음</td><td class="y">권장</td></tr>
+<tr><td>결과 리포트 <strong>해설·요약</strong></td><td>글이 틀릴 뿐</td><td class="y">권장</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout ok">
+<span class="tag">경계선 한 문장</span>
+<strong>LLM이 "얼마를 걸지"를 정하면 실패가 자본에 직결되고, "지금이 어떤 국면인지"만 태그하면 실패가 값 하나로 격리된다.</strong> 이 선을 넘지 않는 한 LLM은 유용하다.
+</div>
+<p class="meta">현재 업계 상태에 대한 정리 — <strong>완전 자율 LLM 트레이딩은 미해결 문제로 남아 있고, 하이브리드(AI + 규칙 기반)가 주류다.</strong> 또한 Princeton 연구는 AI 트레이딩 에이전트에 <strong>거짓 기억을 심어 결제를 공격자 지갑으로 유도</strong>할 수 있음을 보였다 — 9-4의 "과거 거래 내역을 프롬프트에 주입하는" 설계가 정확히 그 공격면이다.</p>
+
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+
+<p class="lead">당신은 이미 <b>CPCV · PBO · Deflated Sharpe · 켈리 · 킬스위치 · fail-closed 게이트</b>를 쓰는 실가동 시스템을 운영한다. 즉 <b>이 페이지의 내용을 이미 상당 부분 실천하고 있다.</b> 아래는 그 관점에서의 정밀 비교와, 실제로 가져올 것 세 가지다.</p>
+
+<h2><span class="num">3-1</span>3자 비교</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>항목</th><th>조코딩 강의</th><th>Freqtrade / QuantConnect</th><th>당신의 GO 시스템</th></tr></thead>
+<tbody>
+<tr><td>검증 순서</td><td class="n">실거래 3강 → 백테 13강</td><td class="y">백테 → 페이퍼 → 실거래</td><td class="y">동일 (백테 우선)</td></tr>
+<tr><td>페이퍼 트레이딩</td><td class="n">없음</td><td class="y">dry-run 기본값</td><td class="y">paper 모드 보유</td></tr>
+<tr><td>아웃오브샘플</td><td class="n">없음</td><td class="y">walk-forward 내장</td><td class="y">CPCV</td></tr>
+<tr><td>과최적화 방어</td><td class="n">없음 (프롬프트 튜닝 권장)</td><td class="p">hyperopt + WFA</td><td class="y">PBO · Deflated Sharpe</td></tr>
+<tr><td>백테-라이브 정합</td><td class="n">불일치 (반성 루프 누락)</td><td class="y">동일 코드 경로</td><td class="y">정합 규칙 보유</td></tr>
+<tr><td>재현성</td><td class="n">불가 (저자 인정)</td><td class="y">결정론적</td><td class="y">결정론적</td></tr>
+<tr><td>비용 모델</td><td class="p">수수료만</td><td class="y">수수료 + 슬리피지</td><td class="y">전체</td></tr>
+<tr><td>킬스위치</td><td class="n">없음 (Ctrl+C)</td><td class="p">stoploss · max_open_trades</td><td class="y">단계별 ok 플래그</td></tr>
+<tr><td>포지션 사이징</td><td class="n">LLM이 추정한 p로 켈리</td><td class="p">edge · 고정 비율</td><td class="y">검증된 켈리</td></tr>
+<tr><td>표본 크기</td><td class="n">4건 / 3일</td><td class="y">전 기간</td><td class="y">불변식 전수 검사</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout ok">
+<span class="tag">결론이 명확하다</span>
+당신의 시스템은 이미 <strong>Freqtrade·QuantConnect와 같은 열에 있거나 그 이상</strong>이다. 조코딩 강의를 도입할 이유는 없고, 해외 도구를 통째로 도입할 이유도 크지 않다. <strong>가져올 것은 개별 요소 몇 개뿐이다.</strong>
+</div>
+
+<h2><span class="num">3-2</span>실제로 가져올 것 — 3가지</h2>
+
+<div class="card">
+<h4>① 룩어헤드 편향 항목을 <em>LLM 사용처</em>까지 확장</h4>
+<p>당신의 누적 교훈에는 이미 <strong>"통계 검정만으로 처치 채택 금지 — 룩어헤드를 먼저 뒤진다"</strong>가 있고, 실제로 룩어헤드 산출물이 부트스트랩 CI를 통과했던 사고를 겪었다.</p>
+<p>여기에 <strong>새로운 축이 하나 추가된다</strong> — 지금까지의 룩어헤드는 <strong>데이터 파이프라인</strong>에서 왔다. LLM을 쓰는 순간 <strong>모델 가중치 자체</strong>가 룩어헤드 소스가 된다. 이건 코드 검사로 잡을 수 없다.</p>
+<div class="callout warn">
+<span class="tag">추가할 규칙 (제안)</span>
+<code>WHEN 백테스트 구간이 LLM 학습 컷오프 이전 THEN 그 LLM의 판단을 신호로 쓰지 않는다. 컷오프 이후 구간에서만 forward test로 평가한다.</code>
+</div>
+</div>
+
+<div class="card">
+<h4>② "실패가 어디로 흐르는가"로 LLM 사용처를 나누는 기준</h4>
+<p>2페이지의 표가 실제로 쓸 만한 기준이다. 당신 시스템에 적용하면 이렇게 갈린다.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>영역</th><th>LLM 허용</th><th>이유</th></tr></thead>
+<tbody>
+<tr><td>포지션 사이징 · 레버리지 · 진입 판단</td><td class="n">금지</td><td>실패가 자본에 직결. 되돌릴 수 없음</td></tr>
+<tr><td>레짐 태깅 · 뉴스 플래그</td><td class="p">조건부</td><td>부울 값 하나로 격리 가능 · 사후 검증 가능</td></tr>
+<tr><td>실험 설계 · 코드 작성 · 리뷰</td><td class="y">허용</td><td>사람과 백테스트가 잡음. 이미 하고 있음</td></tr>
+<tr><td>리포트 해설 · 회고</td><td class="y">허용</td><td>글이 틀릴 뿐</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="card">
+<h4>③ 프롬프트 튜닝을 <em>파라미터 최적화</em>로 취급</h4>
+<p>조코딩 13강의 <em>"프롬프트를 바꿔가며 어떤 게 잘 되는지 테스트해 보라"</em>는 안내는, 통계적으로는 <strong>파라미터 그리드 서치와 완전히 동일한 행위</strong>다. 그런데 프롬프트는 자연어라서 <strong>탐색 공간이 사실상 무한</strong>하고, 시도 횟수를 세기도 어렵다.</p>
+<div class="callout bad">
+<span class="tag">그래서 더 위험하다</span>
+Deflated Sharpe는 <strong>시도 횟수</strong>로 할인한다. 프롬프트 튜닝은 시도 횟수가 기록되지 않으므로 할인할 수조차 없다. <strong>프롬프트를 고쳤으면 그것도 시도 1회로 카운트하고 로그에 남겨야 한다.</strong>
+</div>
+<p class="meta">당신 하네스의 <code>llm-eval-suite</code>·<code>confidence-calibration</code>·<code>trajectory-tracker</code>가 이미 이 계열의 도구다. 프롬프트 변경을 실험 이력으로 남기는 규율을 트레이딩 쪽에도 적용하면 된다.</p>
+</div>
+
+<h2><span class="num">3-3</span>만약 검증 실험을 한다면 — 최소 설계</h2>
+<p>LLM 판단을 트레이딩에 붙이는 것을 <strong>진지하게 평가</strong>하려면 이 정도는 되어야 한다.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>설계 항목</th><th>구체 기준</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>포워드 테스트만 인정</strong></td><td>모델 학습 컷오프 <strong>이후</strong> 기간. 과거 백테스트는 참고용으로도 쓰지 않음</td></tr>
+<tr><td>2</td><td><strong>캘리브레이션 우선</strong></td><td>LLM이 말한 p vs 실제 승률의 <strong>Brier score</strong>. 이걸 통과하기 전엔 사이징에 절대 연결하지 않음</td></tr>
+<tr><td>3</td><td><strong>비결정성 정량화</strong></td><td>동일 입력 N≥20회 반복 → 판단 일치율. 일치율이 낮으면 신호로 부적격</td></tr>
+<tr><td>4</td><td><strong>대조군 필수</strong></td><td>같은 기간 Buy&amp;Hold + 기존 규칙 전략. 단독 수익률은 의미 없음</td></tr>
+<tr><td>5</td><td><strong>표본 하한</strong></td><td>거래 200건 이상, 2개 이상 시장 국면</td></tr>
+<tr><td>6</td><td><strong>비용 전량</strong></td><td>테이커 수수료 + 슬리피지 + <strong>펀딩비</strong></td></tr>
+<tr><td>7</td><td><strong>노출 하드캡</strong></td><td><code>position_size × leverage ≤ 1.0</code> · 하프 켈리 이하</td></tr>
+<tr><td>8</td><td><strong>자본 격리</strong></td><td>기존 봇 계좌와 완전 분리. 실계좌 이전에 <strong>Testnet 30일</strong></td></tr>
+<tr><td>9</td><td><strong>프롬프트 주입 방어</strong></td><td>뉴스·과거 거래를 프롬프트에 넣는다면 그건 <strong>신뢰 경계</strong>다. 외부 텍스트가 주문 파라미터를 바꾸지 못하게 스키마로 강제</td></tr>
+<tr><td>10</td><td><strong>fail-closed</strong></td><td>LLM 응답 파싱 실패 · 타임아웃 · 스키마 위반 → <strong>진입 안 함</strong>. 재시도로 뚫지 않음</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout bad">
+<span class="tag">9번을 특히 강조한다</span>
+조코딩 9-4는 <strong>DB의 과거 거래 내역</strong>을, 8-2는 <strong>SerpAPI로 긁은 뉴스 텍스트</strong>를 프롬프트에 넣는다. 둘 다 <strong>외부에서 내용을 조작할 수 있는 경로</strong>다. Princeton 연구가 보인 "AI 트레이딩 에이전트에 거짓 기억 주입" 공격이 정확히 이 구조를 노린다. <strong>프롬프트에 들어가는 외부 텍스트는 데이터이지 명령이 아니라는 것을 스키마로 강제</strong>해야 한다.
+</div>
+
+<h2><span class="num">3-4</span>한 문단 결론</h2>
+<div class="card">
+<p>해외에 <strong>"훨씬 우수한 강의"</strong>가 있느냐고 물으면, 답은 <strong>"더 화려한 건 없고, 순서가 옳은 건 있다"</strong>이다. Freqtrade와 QuantConnect는 조코딩이 손으로 만든 것을 전부 갖고 있으면서, 그가 마지막에 붙인 검증을 <strong>기본값으로</strong> 앞에 놓는다. NautilusTrader는 백테-라이브 정합을 아키텍처로 강제한다.</p>
+<p>그리고 <strong>당신에게 이 문서의 실제 값은 도구가 아니라 한 가지 개념에 있다</strong> — <strong>LLM을 트레이딩에 쓰는 순간 룩어헤드의 출처가 데이터 파이프라인에서 모델 가중치로 옮겨간다.</strong> 당신은 파이프라인 룩어헤드는 이미 잡고 있지만, 이 새 축은 기존 방어로 잡히지 않는다.</p>
+<p>결론은 단순하다 — <strong>LLM은 신호가 아니라 컨텍스트에 쓴다.</strong> 얼마를 걸지는 검증된 코드가 정한다.</p>
+</div>
+
+<h2><span class="num">부록</span>출처</h2>
+<ul class="meta">
+<li>Freqtrade — <a href="https://www.freqtrade.io/en/stable/">freqtrade.io</a> · <a href="https://github.com/freqtrade/freqtrade">github.com/freqtrade/freqtrade</a> · <a href="https://www.freqtrade.io/en/stable/backtesting/">Backtesting 문서</a></li>
+<li>QuantConnect — <a href="https://www.quantconnect.com/learning/course/5/Algorithmic-Trading-A-Z-The-Complete-Course">Algorithmic Trading A-Z</a> · <a href="https://www.quantconnect.com/docs/v2/cloud-platform/learning-center/training">Boot Camp / Training</a></li>
+<li>NautilusTrader — <a href="https://nautilustrader.io/">nautilustrader.io</a></li>
+<li>워크포워드 최적화 — <a href="https://blog.quantinsti.com/walk-forward-optimization-introduction/">QuantInsti 해설</a></li>
+<li>과최적화·룩어헤드·데이터 리키지 — <a href="https://www.blockchain-council.org/cryptocurrency/backtesting-ai-crypto-trading-strategies-avoiding-overfitting-lookahead-bias-data-leakage/">Backtesting AI Crypto Trading Strategies Safely</a></li>
+<li>LLM 룩어헤드 벤치마크 — <a href="https://arxiv.org/pdf/2601.13770">Look-Ahead-Bench (arXiv 2601.13770)</a></li>
+<li>백테스트 과최적화 (강화학습) — <a href="https://arxiv.org/pdf/2209.05559">DRL for Cryptocurrency Trading (arXiv 2209.05559)</a></li>
+<li>암호화폐 봇 백테스트 실무 — <a href="https://paybis.com/blog/how-to-backtest-crypto-bot/">Realistic Fees, Slippage, and Paper Trading</a></li>
+<li>오픈소스 봇 목록 — <a href="https://github.com/botcrypto-io/awesome-crypto-trading-bots">awesome-crypto-trading-bots</a> · <a href="https://docs.pytrade.org/trading">pytrade.org</a></li>
+</ul>
+
+</section>
+
+<footer>
+  2026-08-30 작성 · 조코딩 선물거래 강의(전 14강) 대응 문서<br>
+  <strong>이 문서는 기술 분석이며 투자 권유가 아니다.</strong> 레버리지 파생상품은 원금 전액 손실이 가능하다.<br>
+  도구 설명은 각 공식 문서와 검색된 출처에 근거했고, 3페이지의 적용 설계는 이 문서의 해석이다.
+</footer>
+
+</div>
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var KEY={p1:['--a','--a-soft','--a-ink'],p2:['--b','--b-soft','--b-ink'],p3:['--c','--c-soft','--c-ink']};
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  function show(id){
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    var k=KEY[id],r=document.documentElement.style;
+    r.setProperty('--k','var('+k[0]+')');r.setProperty('--k-soft','var('+k[1]+')');r.setProperty('--k-ink','var('+k[2]+')');
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('aria-controls'));});});
+  if(location.hash==='#p2'||location.hash==='#p3') show(location.hash.slice(1));
+  document.querySelectorAll('pre').forEach(function(pre){
+    var box=document.createElement('div'); box.className='codebox';
+    pre.parentNode.insertBefore(box,pre); box.appendChild(pre);
+    var b=document.createElement('button'); b.className='copy'; b.type='button'; b.textContent='복사';
+    b.addEventListener('click',function(){var el=pre.querySelector('code');var t=el?el.innerText:pre.innerText;
+      navigator.clipboard.writeText(t).then(function(){b.textContent='복사됨';setTimeout(function(){b.textContent='복사';},1400);}).catch(function(){b.textContent='실패';});});
+    box.appendChild(b);
+  });
+  var A=document.getElementById('ordAg'),B=document.getElementById('ordBg'),
+      ba=document.getElementById('ordA'),bb=document.getElementById('ordB');
+  function set(second){A.style.display=second?'none':'';B.style.display=second?'':'none';
+    ba.classList.toggle('on',!second);bb.classList.toggle('on',second);}
+  ba.addEventListener('click',function(){set(false);});
+  bb.addEventListener('click',function(){set(true);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 비트코인 선물 자동매매 — 조코딩 전 과정 교재</title>
+<style>
+:root{
+  --bg:#fbfaf8; --surface:#fff; --raise:#f4f1ec; --ink:#1b1a17; --muted:#6d665e; --line:#e7e2da;
+  --a:#0369a1; --a-soft:#eff8ff; --a-ink:#075985;
+  --b:#7c3aed; --b-soft:#f5f0ff; --b-ink:#6d28d9;
+  --c:#be123c; --c-soft:#fff1f4; --c-ink:#9f1239;
+  --ok:#047857; --ok-soft:#ecfdf5;
+  --warn:#b45309; --warn-soft:#fffbeb;
+  --code-bg:#f3f0ea;
+  --k:var(--a); --k-soft:var(--a-soft); --k-ink:var(--a-ink);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#121316;--surface:#1b1c21;--raise:#232429;--ink:#eceaf0;--muted:#99949f;--line:#2d2e35;
+  --a:#7dd3fc;--a-soft:#0d2233;--a-ink:#bae6fd;
+  --b:#c4b5fd;--b-soft:#221b38;--b-ink:#ddd0ff;
+  --c:#fda4af;--c-soft:#2d1218;--c-ink:#fecdd3;
+  --ok:#6ee7b7;--ok-soft:#0f231d;--warn:#fbbf24;--warn-soft:#2a2213;--code-bg:#232429;}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+ line-height:1.85;font-size:16.5px;letter-spacing:-0.01em;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 100px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--k);z-index:60;transition:width .1s linear}
+header.top{padding:44px 0 6px}
+.eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(25px,5.2vw,37px);line-height:1.26;margin:.35em 0 .3em;letter-spacing:-0.035em;font-weight:800}
+.sub{color:var(--muted);font-size:15.5px;margin:0}
+nav.tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);
+ backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;gap:6px;padding:10px 0;margin:22px 0 0}
+nav.tabs button{flex:1;appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+ font:inherit;font-size:13.5px;font-weight:700;padding:9px 8px;border-radius:11px;cursor:pointer;transition:.15s;text-align:center;line-height:1.35}
+nav.tabs button .n{display:block;font-size:10.5px;letter-spacing:.1em;opacity:.7;font-weight:800}
+nav.tabs button[aria-selected="true"]{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+section.page{padding-top:24px}
+h2{font-size:clamp(20px,3.8vw,27px);line-height:1.34;margin:2.5em 0 .5em;letter-spacing:-0.03em;font-weight:800}
+h2 .num{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--k-ink);
+ vertical-align:middle;margin-right:9px;padding:3px 9px;border-radius:999px;background:var(--k-soft)}
+h3{font-size:17.5px;margin:2em 0 .45em;font-weight:700;letter-spacing:-0.02em}
+h4{font-size:15.5px;margin:1.4em 0 .3em;font-weight:700;color:var(--k-ink)}
+p{margin:.7em 0}
+a{color:var(--k-ink)}
+ul,ol{padding-left:1.25em;margin:.7em 0}
+li{margin:.4em 0}
+li::marker{color:var(--muted)}
+.lead{font-size:17.5px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+.lead b{color:var(--k-ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px 20px;margin:16px 0}
+.card>h3,.card>h4{margin-top:0}
+.callout{border-left:3px solid var(--k);background:var(--k-soft);border-radius:0 12px 12px 0;padding:13px 18px;margin:18px 0;font-size:15.5px}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-soft)}
+.callout.danger{border-left-color:var(--c);background:var(--c-soft)}
+.callout .tag{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.eli{background:var(--ok-soft);border:1px dashed color-mix(in srgb,var(--ok) 45%,transparent);border-radius:15px;padding:16px 18px;margin:16px 0}
+.eli .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--ok);
+ border:1px solid color-mix(in srgb,var(--ok) 45%,transparent);border-radius:999px;padding:1px 10px;margin-bottom:7px}
+.eli p{margin:.35em 0;font-size:16px}
+.eli .real{margin-top:9px;padding-top:9px;border-top:1px dashed color-mix(in srgb,var(--ok) 30%,transparent);font-size:14.5px;color:var(--muted)}
+.eli .real b{color:var(--ok)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:540px;font-size:14.5px}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--k-soft);font-weight:800;font-size:12.5px;color:var(--k-ink)}
+tr:last-child td{border-bottom:0}
+td.y{color:var(--ok);font-weight:800;white-space:nowrap}
+td.n{color:var(--c);font-weight:800;white-space:nowrap}
+td.p{color:var(--warn);font-weight:800;white-space:nowrap}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:15px 17px;overflow-x:auto;margin:13px 0;font-size:13.5px;line-height:1.7}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.92em}
+p code,li code,td code{background:var(--code-bg);padding:1.5px 6px;border-radius:6px;border:1px solid var(--line)}
+pre code{background:none;border:0;padding:0;white-space:pre-wrap;word-break:break-word}
+.codebox{position:relative}
+.copy{position:absolute;top:9px;right:9px;font:inherit;font-size:11.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--surface);color:var(--muted);border-radius:8px;padding:4px 9px;cursor:pointer}
+.copy:hover{color:var(--k-ink);border-color:var(--k)}
+.label{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 -4px}
+figure{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px 13px 11px}
+figure .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+figure svg{display:block;margin:0 auto;max-width:100%;height:auto;color:var(--ink)}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:9px;padding:0 4px;line-height:1.6}
+.ctrls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 4px 11px}
+.ctrls button{appearance:none;font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--raise);color:var(--ink);border-radius:9px;padding:6px 11px;cursor:pointer;transition:.13s}
+.ctrls button:hover{border-color:var(--k)}
+.ctrls button.on{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+.ctrls .spacer{flex:1}
+.ctrls .count{font-size:12.5px;font-weight:800;color:var(--muted)}
+.ed{stroke:currentColor;stroke-opacity:.3;stroke-width:1.3;fill:none;transition:.2s}
+.ed.act{stroke:var(--k);stroke-opacity:1;stroke-width:2}
+.elab{font-size:9.5px;font-weight:700;fill:currentColor;opacity:.55}
+.bx rect{fill:var(--surface);stroke:currentColor;stroke-opacity:.3;stroke-width:1.2}
+.bx text{fill:currentColor}
+.bx{opacity:.45;transition:opacity .2s;cursor:pointer}
+.bx.act{opacity:1}.bx.act rect{fill:var(--k-soft);stroke:var(--k);stroke-width:2}
+.bx.seen{opacity:.75}
+.detail{background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:11px 4px 0;font-size:15px}
+.detail .dt{font-size:16.5px;font-weight:800;letter-spacing:-0.02em}
+.detail .row{margin-top:7px}
+.detail .row b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.detail .e5{color:var(--ok);font-weight:600}
+.meta{font-size:13.5px;color:var(--muted)}
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+[hidden]{display:none!important}
+.risk{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.risk:last-child{border-bottom:0}
+.risk .lv{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:7px;padding:3px 8px;white-space:nowrap;margin-top:3px}
+.lv.hi{background:var(--c-soft);color:var(--c-ink);border:1px solid var(--c)}
+.lv.md{background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn)}
+.lv.ok{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok)}
+.risk .body b{display:block;margin-bottom:1px}
+.risk .body span{font-size:14.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">조코딩 · 하락장도 수익낼 수 있는 AI 비트코인 투자 자동화 선물거래 편 · 전 14강</div>
+  <h1>AI에게 선물거래를<br>맡기는 법</h1>
+  <p class="sub">1~7강 무료편 82분 + 8강~14강 멤버십편 전량을 근거로 재구성했다. 1페이지는 다섯 살에게 설명하듯, 2페이지는 전 커리큘럼을 빠짐없이, 3페이지는 당신의 실가동 봇 기준으로 위험을 감사한다.</p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1페이지</span>쉬운 설명</button>
+  <button role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="n">2페이지</span>전 강의 상세</button>
+  <button role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="n">3페이지</span>위험 감사 · 적용</button>
+</nav>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page" id="p1" role="tabpanel" aria-labelledby="t1">
+
+<div class="callout danger">
+<span class="tag">먼저 읽을 것</span>
+이 강의는 <strong>고위험 파생상품</strong>을 다룬다. 강사 본인이 영상에서 <strong>청산 경험</strong>을 밝히고 <strong>"돈 버는 방법에 대한 강의가 아니다, 나는 투자 전문가가 아니다"</strong>라고 명시한다. 이 교재는 <strong>기술 문서</strong>이지 투자 권유가 아니다. 원금 전액 손실이 가능하고, 실제로 흔하다.
+</div>
+
+<p class="lead">한 줄 요약 — <b>AI에게 차트를 보여주고 "오를까 내릴까" 물어본 뒤, 그 답대로 자동으로 베팅하는 프로그램을 만든다.</b> 그리고 잃는 선과 버는 선을 미리 그어둔다.</p>
+
+<h2><span class="num">그림 1</span>선물거래가 뭔가</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>친구랑 내기를 해. "내일 아이스크림 값이 오를까, 내릴까?"</p>
+  <p><strong>오른다에 걸면 롱, 내린다에 걸면 숏.</strong> 그런데 내기를 하려면 판돈을 걸어야 하잖아. 그게 <strong>증거금</strong>이야.</p>
+  <p>여기서 이상한 게 있어. <strong>내 돈이 1만 원인데 10만 원짜리 내기를 할 수 있게 해줘.</strong> 이게 <strong>레버리지</strong>야. 이기면 열 배로 벌지만, <strong>지면 1만 원이 순식간에 0원이 돼.</strong></p>
+  <div class="real"><b>숫자로</b> — 증거금 1,000만 원 · 레버리지 10배 = 1억 투자. 가격이 <b>10% 오르면 내 돈이 2배</b>가 되고, <b>10% 반대로 가면 0원</b>이 된다. 이걸 <b>청산</b>이라고 한다.</div>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="lvA" class="on">현물 (레버리지 없음)</button>
+    <button type="button" id="lvB">선물 10배 레버리지</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 190" role="img" aria-label="현물 투자는 10퍼센트 변동에 원금이 10퍼센트 움직이지만, 10배 레버리지 선물은 같은 10퍼센트 변동에 원금이 두 배가 되거나 0원이 된다" style="min-width:400px">
+    <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">가격이 10% 움직였을 때, 내 1,000만 원은</text>
+    <g id="lvAg">
+      <rect x="10" y="34" width="200" height="52" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="110" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="var(--ok)">맞췄을 때</text>
+      <text x="110" y="76" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ok)">1,100만 원</text>
+      <rect x="228" y="34" width="200" height="52" rx="10" fill="var(--warn-soft)" stroke="var(--warn)"/>
+      <text x="328" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="var(--warn)">틀렸을 때</text>
+      <text x="328" y="76" text-anchor="middle" font-size="15" font-weight="800" fill="var(--warn)">900만 원</text>
+      <text x="10" y="118" font-size="12.5" font-weight="800" fill="currentColor" opacity=".7">천천히 움직인다. 틀려도 다음 기회가 있다.</text>
+      <text x="10" y="140" font-size="11.5" fill="currentColor" opacity=".6">가격이 90% 떨어져야 90%를 잃는다.</text>
+    </g>
+    <g id="lvBg" style="display:none">
+      <rect x="10" y="34" width="200" height="52" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="110" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="var(--ok)">맞췄을 때</text>
+      <text x="110" y="76" text-anchor="middle" font-size="15" font-weight="800" fill="var(--ok)">2,000만 원</text>
+      <rect x="228" y="34" width="200" height="52" rx="10" fill="var(--c-soft)" stroke="var(--c)" stroke-width="2"/>
+      <text x="328" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="var(--c-ink)">틀렸을 때</text>
+      <text x="328" y="76" text-anchor="middle" font-size="15" font-weight="800" fill="var(--c-ink)">0원 · 청산</text>
+      <text x="10" y="118" font-size="12.5" font-weight="800" fill="var(--c-ink)">10%면 끝난다. 그리고 비트코인은 하루에 10%씩 움직인다.</text>
+      <text x="10" y="140" font-size="11.5" fill="currentColor" opacity=".7">전체 흐름이 상승이어도, 중간에 한 번 급락하면 그 순간 청산된다.</text>
+      <text x="10" y="158" font-size="11.5" fill="currentColor" opacity=".7">청산된 뒤에 가격이 다시 올라도 <tspan font-weight="800">포지션이 없으므로 아무 소용이 없다.</tspan></text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>강사가 영상에서 가장 길게, 가장 반복해서 강조하는 부분이 이것이다. <strong>본인이 바이낸스에서 청산 문자를 받아봤고 "하늘이 무너지는 느낌"이라고 말한다.</strong></figcaption>
+</figure>
+
+<h2><span class="num">그림 2</span>그래서 안전벨트를 맨다</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>내기를 하기 <strong>전에</strong> 미리 정해두는 거야.</p>
+  <p><strong>"1,000원 잃으면 그냥 그만할래."</strong> ← 이게 손절, <strong>스톱로스</strong></p>
+  <p><strong>"2,000원 벌면 만족하고 나갈래."</strong> ← 이게 익절, <strong>테이크프로핏</strong></p>
+  <p>이걸 미리 안 정해두면? 아이스크림 값이 밤사이에 확 뒤집혀서 <strong>내 판돈이 통째로 없어져도 아무도 안 막아준다.</strong></p>
+  <div class="real"><b>강사의 표현</b> — "반드시, 반드시 스톱로스를 걸어 두세요. 절대 그냥 포지션 열어놓으시면 안 됩니다. 청산당합니다." 오징어게임의 조상우가 선물투자로 빚을 졌다는 얘기까지 꺼낸다.</div>
+</div>
+
+<h2><span class="num">그림 3</span>AI는 여기서 뭘 하나</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>원래는 <strong>사람이</strong> 차트를 들여다보고 "음... 오를 것 같은데?" 하고 결정했어.</p>
+  <p>이제는 그 차트를 <strong>AI한테 그대로 보여주고 물어보는 거야.</strong> "너는 트레이딩 전문가야. 이 데이터 보고 롱인지 숏인지만 대답해."</p>
+  <p>AI가 "숏"이라고 하면, 프로그램이 <strong>진짜로 숏 주문을 넣는다.</strong> 그리고 손절선·익절선도 같이 걸어둔다. 이걸 <strong>계속 반복</strong>시켜 놓으면 끝이야.</p>
+  <div class="real"><b>중요</b> — AI가 미래를 아는 게 아니다. <b>사람이 하던 눈대중을 대신할 뿐이다.</b> 강사도 "이 강의대로 하면 돈 번다는 강의가 아니다"라고 못박는다.</div>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="mPrev">◀ 이전</button>
+    <button type="button" id="mPlay">▶ 재생</button>
+    <button type="button" id="mNext">다음 ▶</button>
+    <span class="spacer"></span>
+    <span class="count" id="mCount">1 / 5</span>
+  </div>
+  <div class="scroll">
+  <svg id="mSvg" viewBox="0 0 440 330" role="img" aria-label="자동매매 5단계 순환. 차트 데이터를 가져와 AI에게 판단을 받고 주문을 넣고 손절 익절을 걸고 다시 반복한다" style="min-width:400px">
+    <defs><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+    <path class="ed" id="me1" d="M220 62 V84" marker-end="url(#am)"/>
+    <path class="ed" id="me2" d="M220 124 V146" marker-end="url(#am)"/>
+    <path class="ed" id="me3" d="M220 186 V208" marker-end="url(#am)"/>
+    <path class="ed" id="me4" d="M220 248 V270" marker-end="url(#am)"/>
+    <path class="ed" id="me5" d="M30 294 H14 V38 H30" marker-end="url(#am)" stroke-dasharray="5 4"/>
+    <text x="20" y="170" class="elab" transform="rotate(-90 20 170)">무한 반복</text>
+    <g class="bx" id="m1" data-s="0"><rect x="30" y="14" width="380" height="48" rx="11"/>
+      <text x="46" y="34" font-size="10" font-weight="800" opacity=".55">1단계</text>
+      <text x="46" y="52" font-size="13.5" font-weight="700">차트 데이터 가져오기 — 15분봉 96개 (=하루치)</text></g>
+    <g class="bx" id="m2" data-s="1"><rect x="30" y="84" width="380" height="48" rx="11"/>
+      <text x="46" y="104" font-size="10" font-weight="800" opacity=".55">2단계</text>
+      <text x="46" y="122" font-size="13.5" font-weight="700">AI에게 보여주고 "롱? 숏?" 물어보기</text></g>
+    <g class="bx" id="m3" data-s="2"><rect x="30" y="146" width="380" height="48" rx="11"/>
+      <text x="46" y="166" font-size="10" font-weight="800" opacity=".55">3단계</text>
+      <text x="46" y="184" font-size="13.5" font-weight="700">답변대로 실제 주문 넣기</text></g>
+    <g class="bx" id="m4" data-s="3"><rect x="30" y="208" width="380" height="48" rx="11"/>
+      <text x="46" y="228" font-size="10" font-weight="800" opacity=".55">4단계 · 가장 중요</text>
+      <text x="46" y="246" font-size="13.5" font-weight="700">손절선 · 익절선 걸어두기</text></g>
+    <g class="bx" id="m5" data-s="4"><rect x="30" y="270" width="380" height="48" rx="11"/>
+      <text x="46" y="290" font-size="10" font-weight="800" opacity=".55">5단계</text>
+      <text x="46" y="308" font-size="13.5" font-weight="700">포지션 끝나면 처음으로 돌아가기</text></g>
+  </svg>
+  </div>
+  <div class="detail" id="mDetail"></div>
+  <figcaption>이 다섯 단계가 무료편(1~7강) 전부다. 8강부터는 여기에 <strong>데이터를 늘리고, AI에게 더 많은 결정을 맡기는</strong> 작업이 붙는다.</figcaption>
+</figure>
+
+<h2><span class="num">그림 4</span>8강부터는 AI에게 권한을 넘긴다</h2>
+
+<div class="eli">
+  <span class="tag">다섯 살 설명</span>
+  <p>처음엔 AI에게 <strong>"오를까 내릴까"</strong> 하나만 물어봤어. 나머지는 전부 사람이 정해뒀지 — 얼마 걸지, 몇 배로 걸지, 언제 그만둘지.</p>
+  <p>8강부터는 그걸 <strong>하나씩 AI에게 넘긴다.</strong> "얼마 걸까?"도 AI가, "몇 배로?"도 AI가, "손절선 어디?"도 AI가.</p>
+  <p>편해지긴 하는데, <strong>AI가 틀렸을 때 잃는 크기도 AI가 정하게 된다는 뜻</strong>이야. 이게 나중에 문제가 된다.</p>
+  <div class="real"><b>3페이지에서 다룬다</b> — 실측에서 AI는 "성공 확률 70%"라고 스스로 추측하고 <b>원금의 35%를 5배 레버리지로</b> 걸었다. 그 70%가 맞는지는 아무도 검증하지 않았다.</div>
+</div>
+
+<figure>
+  <div class="scroll">
+  <svg viewBox="0 0 440 210" role="img" aria-label="1강에서 7강까지는 AI가 방향만 결정하고 나머지는 사람이 고정했지만, 8강 이후로는 포지션 크기 레버리지 손절 익절까지 모두 AI가 결정한다" style="min-width:400px">
+    <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">누가 결정하는가</text>
+    <text x="120" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="currentColor" opacity=".7">1~7강 (무료)</text>
+    <text x="330" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--c-ink)">8강 이후 (멤버십)</text>
+    <line x1="10" y1="46" x2="430" y2="46" stroke="currentColor" stroke-opacity=".2"/>
+    <text x="10" y="66" font-size="12" fill="currentColor" opacity=".8">방향 (롱/숏)</text>
+    <rect x="150" y="54" width="120" height="18" rx="5" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="210" y="67" text-anchor="middle" font-size="10" font-weight="800" fill="var(--a-ink)">AI</text>
+    <rect x="292" y="54" width="136" height="18" rx="5" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="360" y="67" text-anchor="middle" font-size="10" font-weight="800" fill="var(--a-ink)">AI + 관망 추가</text>
+    <text x="10" y="94" font-size="12" fill="currentColor" opacity=".8">투자 금액</text>
+    <rect x="150" y="82" width="120" height="18" rx="5" fill="var(--raise)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="210" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="currentColor" opacity=".7">사람 · 100 USDT 고정</text>
+    <rect x="292" y="82" width="136" height="18" rx="5" fill="var(--c-soft)" stroke="var(--c)"/>
+    <text x="360" y="95" text-anchor="middle" font-size="10" font-weight="800" fill="var(--c-ink)">AI · 켈리 기준</text>
+    <text x="10" y="122" font-size="12" fill="currentColor" opacity=".8">레버리지</text>
+    <rect x="150" y="110" width="120" height="18" rx="5" fill="var(--raise)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="210" y="123" text-anchor="middle" font-size="10" font-weight="700" fill="currentColor" opacity=".7">사람 · 5배 고정</text>
+    <rect x="292" y="110" width="136" height="18" rx="5" fill="var(--c-soft)" stroke="var(--c)"/>
+    <text x="360" y="123" text-anchor="middle" font-size="10" font-weight="800" fill="var(--c-ink)">AI · 1~20배</text>
+    <text x="10" y="150" font-size="12" fill="currentColor" opacity=".8">손절 · 익절선</text>
+    <rect x="150" y="138" width="120" height="18" rx="5" fill="var(--raise)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="210" y="151" text-anchor="middle" font-size="10" font-weight="700" fill="currentColor" opacity=".7">사람 · ±0.5% 고정</text>
+    <rect x="292" y="138" width="136" height="18" rx="5" fill="var(--c-soft)" stroke="var(--c)"/>
+    <text x="360" y="151" text-anchor="middle" font-size="10" font-weight="800" fill="var(--c-ink)">AI · 자유</text>
+    <text x="10" y="182" font-size="12" font-weight="800" fill="var(--c-ink)">위험의 크기를 정하는 주체가 사람에서 AI로 넘어간다</text>
+    <text x="10" y="200" font-size="11" fill="currentColor" opacity=".65">이게 이 커리큘럼의 실제 방향이고, 3페이지 감사의 대상이다.</text>
+  </svg>
+  </div>
+  <figcaption>강의는 이 이동을 <strong>"AI가 더 똑똑해지니까 더 많은 걸 맡기면 좋아진다"</strong>는 논리로 설명한다. 그 전제가 검증됐는지가 핵심 질문이다.</figcaption>
+</figure>
+
+<h2><span class="num">마지막</span>기억할 세 가지</h2>
+<div class="card">
+<ol>
+<li><strong>스톱로스 없이는 절대 포지션을 열지 않는다.</strong> 강사가 영상에서 여섯 번 넘게 반복한다.</li>
+<li><strong>AI는 미래를 모른다.</strong> 사람이 하던 눈대중을 자동화할 뿐이다.</li>
+<li><strong>이 강의는 "구현 방법"이지 "수익 전략"이 아니다.</strong> 강사 본인이 그렇게 못박는다. 데이터도 전략도 전부 예시다.</li>
+</ol>
+</div>
+
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+
+<p class="lead">전 14강을 실제 자막 기준으로 정리한다. <b>1~7강은 유튜브 무료 공개</b>, <b>8강~14강은 채널 멤버십</b>이다. 강의 자료는 조코딩 네이버 카페(무료편)와 비밀번호 걸린 별도 사이트(유료편)에 있다.</p>
+
+<h2><span class="num">1~2강</span>선물 개념과 계정 준비</h2>
+
+<h3>용어</h3>
+<div class="tablewrap">
+<table>
+<thead><tr><th>용어</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td><strong>선물 (Futures)</strong></td><td>선물(gift)이 아니라 먼저 선(先)+물건 물(物). 미래 가격이 오를지 내릴지 베팅</td></tr>
+<tr><td><strong>롱 / 숏</strong></td><td>상승에 베팅 / 하락에 베팅. 현물의 매수·매도와 다름</td></tr>
+<tr><td><strong>증거금 (마진)</strong></td><td>베팅에 거는 담보 금액</td></tr>
+<tr><td><strong>레버리지</strong></td><td>내 돈보다 큰 금액을 투자. 1,000만 원 × 10배 = 1억 투자</td></tr>
+<tr><td><strong>청산</strong></td><td>증거금 이상 손실이 나면 포지션이 강제 종료되고 <strong>증거금이 0원</strong>이 됨</td></tr>
+<tr><td><strong>스톱로스 (SL)</strong></td><td>손절. 지정가 도달 시 자동 종료</td></tr>
+<tr><td><strong>테이크프로핏 (TP)</strong></td><td>익절. 지정가 도달 시 자동 종료</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout danger">
+<span class="tag">강사가 가장 강조하는 사례</span>
+전체 흐름이 <strong>상승장</strong>이어도, 중간에 <strong>한 번의 급락</strong>으로 청산될 수 있다. 10배 롱에서 10% 하락이면 그 자리에서 끝이고, <strong>그 뒤로 아무리 올라도 포지션이 없으므로 회복되지 않는다.</strong> 강사 본인이 바이낸스 청산 문자를 받아봤다고 밝힌다.
+</div>
+
+<h3>계정 준비</h3>
+<ul>
+<li><strong>한국에는 선물을 지원하는 거래소가 없다.</strong> 해외 거래소를 써야 한다</li>
+<li><strong>바이낸스</strong> 선택 — CoinMarketCap 기준 현물·파생 모두 1위. FTX 파산 사례를 들며 "규모가 큰 곳이 안전하다"고 설명</li>
+<li>KYC(신분증 본인인증) → <strong>2FA(Google Authenticator OTP)</strong> → 선물 계좌 별도 개설</li>
+<li>기본 레버리지는 5배로 두고 시작(나중에 변경 가능)</li>
+</ul>
+
+<div class="callout warn">
+<span class="tag">이 부분은 따라하지 말 것</span>
+강사는 레퍼럴 코드를 안 넣고 가입했다면 <strong>"KYC를 해제하고 새 이메일로 재가입하라"</strong>고 안내한다. 이는 <strong>거래소 약관 위반 소지</strong>가 있다. 수수료 10% 할인을 위해 계정 이력을 초기화하는 행위는 권하지 않는다. 또한 강사는 <strong>거래량에 비례한 레퍼럴 리베이트</strong>를 받는 구조이므로, 과매매를 유도하는 설계에 대해서는 이해상충을 감안하고 읽어야 한다.
+</div>
+
+<h3>입금 경로 (한국 기준)</h3>
+<figure>
+  <div class="scroll">
+  <svg viewBox="0 0 440 130" role="img" aria-label="은행에서 국내거래소로 원화 입금 후 XRP를 사서 바이낸스로 전송하고 USDT로 교환한 뒤 선물지갑으로 이체하는 4단계 입금 경로" style="min-width:400px">
+    <defs><marker id="ai" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--a)"/></marker></defs>
+    <rect x="6" y="30" width="86" height="44" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="49" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">은행</text>
+    <text x="49" y="64" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".6">국민은행 등</text>
+    <path d="M92 52 H110" class="ed act" marker-end="url(#ai)"/>
+    <rect x="114" y="30" width="86" height="44" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="157" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">국내 거래소</text>
+    <text x="157" y="64" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".6">빗썸 · XRP 매수</text>
+    <path d="M200 52 H218" class="ed act" marker-end="url(#ai)"/>
+    <rect x="222" y="30" width="86" height="44" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+    <text x="265" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">바이낸스 현물</text>
+    <text x="265" y="64" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".6">XRP → USDT</text>
+    <path d="M308 52 H326" class="ed act" marker-end="url(#ai)"/>
+    <rect x="330" y="30" width="104" height="44" rx="9" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="382" y="50" text-anchor="middle" font-size="11" font-weight="800" fill="var(--a-ink)">선물 지갑</text>
+    <text x="382" y="64" text-anchor="middle" font-size="8.5" fill="var(--a-ink)">Transfer</text>
+    <text x="6" y="98" font-size="10.5" fill="currentColor" opacity=".65">원화는 직접 못 보낸다. 수수료 싼 코인(XRP)으로 옮긴 뒤 스테이블코인으로 바꾼다.</text>
+    <text x="6" y="114" font-size="10.5" fill="currentColor" opacity=".65">바이낸스 안에서도 현물 지갑과 선물 지갑이 분리돼 있어 한 번 더 이체가 필요하다. 전송에 5~10분.</text>
+  </svg>
+  </div>
+</figure>
+
+<h2><span class="num">2강</span>개발 환경</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>항목</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td>Python</td><td>3.13.2 (3.x면 무관). Windows는 설치 시 <strong>PATH 체크박스 전부 체크</strong></td></tr>
+<tr><td>에디터</td><td>VS Code + Python 확장. Cursor·Windsurf도 가능</td></tr>
+<tr><td>라이브러리</td><td><code>python-dotenv</code> · <code>openai</code> · <code>ccxt</code> · <code>pandas</code></td></tr>
+<tr><td>OpenAI 키</td><td>platform.openai.com에서 별도 발급. <strong>ChatGPT Plus/Pro 구독과 완전히 무관</strong> — 별도 카드 등록·크레딧 충전 필요</td></tr>
+<tr><td>바이낸스 키</td><td>API Management → <strong>Restrict IP 필수</strong> → Futures 권한 체크 → OTP·이메일 인증</td></tr>
+<tr><td>보관</td><td><code>.env</code> 파일에 <code>OPENAI_API_KEY</code>, <code>BINANCE_API_KEY</code>, <code>BINANCE_SECRET_KEY</code></td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout ok">
+<span class="tag">잘한 부분</span>
+API 키에 <strong>IP 제한</strong>을 거는 것을 기본으로 가르친다. 키가 유출돼도 다른 IP에서는 쓸 수 없다. 자동매매 강의에서 이걸 빼먹는 경우가 흔한데 여기서는 명시적으로 다룬다.
+</div>
+<p class="meta"><strong>흔한 오류 2가지</strong> — ① 저장 안 함(VS Code 탭의 흰 점). 강사가 "문의가 가장 많은 부분"이라며 반복 강조 ② <code>Timestamp for this request...</code> 오류 = 내 PC 시계와 거래소 서버 시각 불일치. Windows 시간 동기화로 해결.</p>
+
+<h2><span class="num">3~7강</span>MVP — 최소 기능 4단계</h2>
+
+<h3>① 차트 데이터</h3>
+<pre><code>파이썬을 활용해서 ccxt 라이브러리로 바이낸스 선물 투자를 진행하려고 해.
+차트 데이터를 가져오려고 하는데 최근 15분봉 96개를 불러오는 코드를 작성해 줘.</code></pre>
+<p><code>fetch_ohlcv</code>(Open/High/Low/Close/Volume). <strong>15분봉 × 96 = 1,440분 = 24시간</strong>. 이 단계는 API 키 없이도 조회된다.</p>
+
+<h3>② AI 판단</h3>
+<p><code>df.to_json()</code>으로 변환해 전달. 시스템 프롬프트:</p>
+<pre><code>You are a crypto trading expert.
+Analyze the market data and respond with only "long" or "short".
+Do not write any other characters.</code></pre>
+<div class="callout">
+<span class="tag">영어로 쓰는 이유</span>
+GPT-4 발표 자료의 MMLU 벤치마크 — <strong>영어 85.5% vs 한국어 77%</strong>. 강사는 이 차이를 근거로 시스템 프롬프트를 영어로 작성한다.
+</div>
+<p class="meta">응답에 <code>.lower()</code>를 적용해 대소문자를 통일한다.</p>
+
+<h3>③ 실제 주문</h3>
+<ul>
+<li>여기서부터 <strong>API 키 연동</strong> 필요. <code>enableRateLimit</code>, <code>adjustForTimeDifference</code> 옵션 추가</li>
+<li>수량: <strong>100 USDT 고정</strong> (바이낸스 최소 주문 금액 여유분 확보)</li>
+<li>레버리지: <strong>5배 고정</strong></li>
+<li><code>action == "long"</code> → market buy, <code>"short"</code> → market sell</li>
+</ul>
+<div class="callout danger">
+<span class="tag">여기서부터 실제 돈이 나간다</span>
+3강을 실행하는 순간 <strong>실계좌에 포지션이 들어간다.</strong> 그리고 이 시점에는 아직 스톱로스가 없다. 강사도 "테스트로 여는 거니까 빨리 종료 누르셔야 된다"고 말한다.
+</div>
+
+<h3>④ 스톱로스 · 테이크프로핏 — 가장 중요</h3>
+<p>진입가 기준 <strong>±0.5%</strong>로 <code>STOP_MARKET</code>, <code>TAKE_PROFIT_MARKET</code> 주문을 건다. 롱이면 SL은 아래·TP는 위, 숏이면 반대.</p>
+<p class="meta">레버리지 5배이므로 <strong>가격 0.5% 변동 = 증거금 2.5% 손익</strong>이다.</p>
+
+<h3>⑤ 반복문</h3>
+<pre><code>while True:
+    # 1) 포지션 있는지 확인 → 있으면 출력만 하고 대기
+    # 2) 포지션 없으면 → 남아있는 미체결 주문 전부 취소
+    # 3) 데이터 수집 → AI 판단 → 진입 → SL/TP
+    time.sleep(1)</code></pre>
+<p><strong>미체결 주문 취소 로직이 핵심</strong>이다. TP에 도달해 포지션이 닫혀도 반대편 SL 주문이 남아 있기 때문에, 이를 정리하지 않으면 다음 진입이 오염된다.</p>
+
+<h2><span class="num">8강</span>데이터 늘리기</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>강</th><th>추가하는 것</th><th>구체 내용</th></tr></thead>
+<tbody>
+<tr><td><strong>8-1</strong></td><td>멀티 타임프레임</td><td>15분봉 96개(단기) + 1시간봉 48개(중기) + 4시간봉 30개(장기)</td></tr>
+<tr><td><strong>8-2</strong></td><td>뉴스 데이터</td><td><strong>SerpAPI</strong>(구글 검색 결과 API, 월 100건 무료). 대안으로 OpenAI의 <code>web_search</code> 툴, Whale Alert 언급</td></tr>
+<tr><td><strong>8-3</strong></td><td>투자 철학</td><td>시스템 프롬프트에 워런 버핏 2원칙 삽입 — <em>Rule No.1: Never lose money / Rule No.2: Never forget Rule No.1</em></td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout ok">
+<span class="tag">이 강의의 진짜 교육 포인트</span>
+강사가 반복해서 말하는 것 — <strong>"이건 예시일 뿐이다. 방법론을 배워라."</strong> 코드 전체를 복사해 Claude에 붙여넣고 <strong>"이런 데이터를 추가하고 싶어"</strong>라고 자연어로 시키는 과정 자체가 학습 대상이다. 외주 개발자에게 지시하듯 쓰라고 안내한다.
+</div>
+
+<h2><span class="num">9강</span>투자 판단 고도화 — 이 커리큘럼의 분기점</h2>
+
+<h3>9-1 · 포지션 사이징 (켈리 기준)</h3>
+<p><strong>켈리 방정식</strong> — 승률과 배당이 정해져 있을 때 최적 베팅 비율을 구하는 공식. 강의의 시뮬레이션 예시: 승률 50%, 이기면 2배·지면 60% 손실인 게임에서 <strong>50%씩 베팅하면 수익률이 마이너스</strong>가 되고 <strong>최적 비율은 약 33%</strong>다.</p>
+<div class="callout danger">
+<span class="tag">구현 방식 — 반드시 짚어야 할 지점</span>
+강사는 DB에 거래 내역을 쌓아 실제 승률을 구하고 수학적으로 계산하는 방법을 <strong>언급만 하고 채택하지 않는다.</strong> 대신 <strong>"시스템 프롬프트만으로 AI 내부적으로 비율을 계산하도록"</strong> 지시한다. 이유는 <em>"수식이 많아지면 너무 복잡해져서 강의용이라"</em>.<br><br>
+즉 <strong>켈리 공식의 입력값인 승률 p를 LLM이 자기 느낌으로 추정</strong>하고, 그 값으로 베팅 크기가 결정된다.
+</div>
+<p>응답 형식을 <code>direction</code> + <code>recommended_position_size</code>(0.1~1)로 축소하고, <strong><code>no_position</code>(관망)</strong>을 추가했다. 관망일 때 무한 재호출을 막기 위해 <strong>10초 딜레이</strong>를 넣는다. 투자 기준 금액은 <strong>선물 계좌 전액</strong>으로 설정했다(1,000 USDT 고정 옵션도 코드에 주석으로 존재).</p>
+
+<h3>9-2 · 레버리지 · SL · TP · 판단 이유</h3>
+<ul>
+<li>레버리지: 고정 5배 → <strong>AI가 1~20배 중 결정</strong></li>
+<li>SL/TP: 고정 ±0.5% → <strong>AI가 결정</strong></li>
+<li><code>reason</code> 필드 추가 — 왜 그렇게 판단했는지 텍스트로 반환</li>
+<li>시스템 프롬프트에 원칙 삽입: <em>"변동성이 낮은 시장에서는 높은 레버리지, 높은 시장에서는 낮은 레버리지"</em></li>
+</ul>
+<div class="card">
+<h4>강의에 나온 실제 응답값</h4>
+<div class="tablewrap">
+<table>
+<thead><tr><th>필드</th><th>값</th></tr></thead>
+<tbody>
+<tr><td>direction</td><td>long</td></tr>
+<tr><td>position_size</td><td><strong>35%</strong></td></tr>
+<tr><td>leverage</td><td>5배</td></tr>
+<tr><td>stop_loss</td><td>1%</td></tr>
+<tr><td>take_profit</td><td>4%</td></tr>
+<tr><td>AI의 자체 승률 추정</td><td><strong>70%</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">근거로는 4시간·1시간 차트의 저점 회복세, 지지선 반등, 뉴스 심리를 종합했다고 서술한다.</p>
+</div>
+
+<h3>9-3 · DB 기록</h3>
+<p><strong>SQLite</strong>에 AI 판단과 매매 내역 저장. 뉴스도 별도 컬럼으로 보관.</p>
+
+<h3>9-4 · 거래 내역 반영 (반성 루프)</h3>
+<p>DB에서 <strong>최근 10건</strong>의 거래를 읽어 프롬프트에 주입하고, 시스템 프롬프트에 <em>"Review historical trading performance / Learn from past"</em>를 추가한다.</p>
+<p class="meta">현물 강의에서는 별도의 <strong>"반성문 작성 AI"</strong>를 2단으로 뒀지만, 이번에는 <strong>"굳이 AI를 2개까지 둘 필요는 없다"</strong>고 판단해 DB 데이터를 직접 주입하는 방식으로 단순화했다. 실행 시점에 DB가 비어 있어 AI가 "과거 데이터가 부족하다"고 응답하는 장면이 그대로 나온다.</p>
+
+<h2><span class="num">10~12강</span>운영</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>강</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td><strong>10</strong></td><td><strong>Streamlit</strong> 대시보드. DB 파일만 읽는 <strong>별도 Python 파일</strong>로 분리 — 자동매매 로직과 섞지 않는다</td></tr>
+<tr><td><strong>11</strong></td><td>전체 코드 정리 및 설명</td></tr>
+<tr><td><strong>12-1</strong></td><td><strong>AWS EC2</strong> 배포. 프리티어 12개월 · 월 750시간 무료. 계정에 <strong>2FA 필수</strong>(카드 등록돼 있고 과금되는 구조이므로)</td></tr>
+<tr><td><strong>12-2</strong></td><td>코드 수정 후 재배포 절차</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">배포 이유는 명확하다 — 내 PC에서 돌리면 터미널을 닫거나 VS Code 창을 닫는 실수로 봇이 죽는다.</p>
+
+<h2><span class="num">13강</span>백테스트</h2>
+
+<div class="card">
+<h4>구성</h4>
+<p>백테스트 코드는 분량 문제로 <strong>별도 GitHub 저장소</strong>에 공개했다(Download ZIP으로 받아 사용). 강사 본인이 <strong>"이 코드가 완벽한 건 아니다", "일단 단순하게만 구현해 둔 상황"</strong>이라고 명시하고, 기여를 요청한다.</p>
+<h4>설정 (<code>config.json</code>)</h4>
+<ul>
+<li><strong>backtest</strong> — symbol, 시작·종료일, <code>initial_capital</code>, <code>fee</code>(<strong>바이낸스 테이커 기준 0.05%</strong>)</li>
+<li><strong>ai_settings</strong> — 모델(gpt-4o 등), 시스템 프롬프트(<code>prompts/</code> 폴더의 txt 파일로 분리), <code>reasoning_effort</code>(추론 모델일 때 low/medium/high)</li>
+<li><strong>input_data</strong> — 15분봉 96 + 1시간봉 48 + 4시간봉 30</li>
+</ul>
+<h4>동작</h4>
+<p>바이낸스 API로 과거 차트를 받아 <code>data/</code>에 DB로 저장 → 과거 시점마다 AI에게 판단을 받아 SL/TP를 설정 → <strong>1분봉 단위로 도달 여부를 검사</strong> → 도달하면 종료 후 재판단 → <code>results/</code>에 <strong>HTML 리포트</strong> 생성(수익률, 샤프 비율, 승률, MDD, 자본 곡선, 진입·청산 구간 색상 표시).</p>
+<h4>강의에 나온 실측</h4>
+<p>GPT-4.5o · <strong>1월 1일~3일 (3일)</strong> · 초기 자본 $10,000 → <strong>$10,970 (+9.71%)</strong> · <strong>총 4회 거래</strong>. Buy &amp; Hold 대비 우위로 표시된다.</p>
+</div>
+
+<div class="callout danger">
+<span class="tag">강사가 스스로 밝힌 한계 — 이 문장이 핵심이다</span>
+<em>"동일한 기간, 동일한 프롬프트로 돌리더라도 결과는 다르게 나올 수 있습니다. AI가 판단할 때 똑같은 데이터를 넣더라도 똑같이 판단을 안 할 때가 있습니다."</em><br>
+재현성 확보를 위해 <strong>temperature를 0으로 낮췄지만</strong> — <em>"그래도 실행할 때마다 달라지긴 하더라고요."</em>
+</div>
+
+<div class="callout warn">
+<span class="tag">API 비용 주의</span>
+백테스트 기간이 길수록 AI 호출이 늘어 <strong>실비가 나간다.</strong> 입력 데이터를 늘려도 마찬가지다. 강사가 3일만 돌린 이유가 이것이다. 토큰 단위 과금이며 <code>tokenizer</code>로 미리 계산할 수 있다고 안내한다.
+</div>
+
+<h2><span class="num">14강</span>마무리</h2>
+<p>전 과정 요약. 강사의 마무리 메시지는 일관된다 — <strong>구현 방법론을 배워서 각자의 데이터·전략·투자 철학을 넣으라</strong>는 것.</p>
+
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+
+<p class="lead">당신은 이미 <b>실가동 트레이딩 봇</b>을 운영하고, CPCV·PBO·켈리·킬스위치·fail-closed 게이트를 쓰는 하네스를 갖고 있다. 그러니 이 강의를 <b>따라할 대상</b>이 아니라 <b>감사할 대상</b>으로 읽는 게 맞다. 아래는 그 감사 결과다.</p>
+
+<h2><span class="num">3-1</span>위험 감사 — 11항목</h2>
+
+<div class="card">
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>백테스트가 13강에 온다 — 순서가 역전됐다</b>
+<span>실거래 진입은 3강이다. 즉 <strong>검증 없이 10강 분량을 실계좌로 먼저 돌린다.</strong> 정상 순서는 research → backtest → paper(dry-run) → live다. 이 강의에는 <strong>페이퍼 트레이딩 단계가 아예 없다.</strong> 바이낸스는 Futures Testnet을 제공하는데 사용하지 않는다.</span></div></div>
+
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>백테스트가 재현되지 않는다 — 저자 본인이 인정</b>
+<span>temperature=0에도 결과가 매번 달라진다. <strong>재현 불가능한 백테스트는 통계적 결론을 지지하지 못한다.</strong> 같은 설정으로 N회 반복해 분포(평균·분산·최악값)를 내야 하는데, 단일 실행 결과 하나를 리포트로 제시한다.</span></div></div>
+
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>표본 4건 · 3일로 +9.71%를 제시</b>
+<span>거래 4회는 <strong>어떤 가설도 기각하거나 채택할 수 없는 표본</strong>이다. 3일 구간은 시장 국면(regime) 하나도 커버하지 못한다. 신뢰구간이 없고, Buy&amp;Hold 대비 우위의 유의성 검정도 없다. 당신 하네스의 <code>SCP-6 표본 함정</code>에 정확히 해당한다.</span></div></div>
+
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>켈리의 입력값 p를 LLM이 자기 느낌으로 추정한다</b>
+<span>켈리 <em>f* = (bp − q)/b</em> 는 <strong>p의 추정 오차에 극도로 민감</strong>하다. p를 과대추정하면 즉시 over-betting이 되고, 장기 파산 확률이 급상승한다. 강의에서 AI는 <strong>"성공 확률 70%"</strong>라고 스스로 답했는데, <strong>그 캘리브레이션은 한 번도 측정되지 않았다.</strong> DB로 실승률을 구하는 방법을 알면서도 "강의용이라 복잡해서" 채택하지 않았다.</span></div></div>
+
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>켈리 비율 × 레버리지가 이중으로 곱해진다</b>
+<span>실측값 기준 <strong>position_size 35% × leverage 5배 = 자본 대비 175% 노출</strong>. 켈리 f*는 <em>자본 대비 노출 비율</em>로 정의되는데 레버리지가 그 위에 곱해지면 <strong>공식의 전제가 무너진다.</strong> 게다가 투자 기준을 <strong>선물 계좌 전액</strong>으로 설정했다. 하프 켈리 같은 안전 계수도 없다.</span></div></div>
+
+<div class="risk"><span class="lv hi">치명</span><div class="body"><b>백테스트와 라이브의 로직이 다르다</b>
+<span>라이브(9-4)는 <strong>최근 10건 거래를 프롬프트에 주입하는 피드백 루프</strong>가 있다. 백테스트 도구(13강)는 <code>config.json</code>의 <code>input_data</code>만 쓴다. <strong>즉 백테스트한 것과 실제로 도는 것이 같은 시스템이 아니다.</strong> 백테-라이브 코드 경로 정합은 타협 대상이 아니다.</span></div></div>
+
+<div class="risk"><span class="lv md">높음</span><div class="body"><b>수수료는 반영, 슬리피지·펀딩비는 미반영</b>
+<span>테이커 0.05%를 넣은 건 잘한 부분이다. 그러나 <strong>슬리피지</strong>(시장가 주문이므로 반드시 발생)와 <strong>펀딩비</strong>(무기한 선물은 8시간마다 정산)가 없다. 초기 MVP의 SL/TP ±0.5% 설정에서는 <strong>왕복 수수료만으로 손익분기 승률이 50%를 크게 넘는다.</strong></span></div></div>
+
+<div class="risk"><span class="lv md">높음</span><div class="body"><b>손익비 1:1에 과매매 구조</b>
+<span>MVP의 SL 0.5% / TP 0.5%는 기대값이 구조적으로 불리하다. 게다가 <code>while True</code> + <code>sleep(1)</code>로 포지션이 닫히는 즉시 재진입한다. <strong>거래 빈도가 높을수록 수수료가 확실하게 누적되고, 엣지는 불확실하다.</strong></span></div></div>
+
+<div class="risk"><span class="lv md">높음</span><div class="body"><b>레퍼럴 이해상충이 고지되지 않는다</b>
+<span>강사는 <strong>거래량에 비례한 레퍼럴 리베이트</strong>를 받는다. 과매매를 유도하는 설계(1초 폴링, 즉시 재진입)와 이 인센티브가 같은 방향을 가리킨다. 강의 자체의 선의와 무관하게 <strong>구조적 이해상충</strong>이므로 감안하고 읽어야 한다.</span></div></div>
+
+<div class="risk"><span class="lv md">높음</span><div class="body"><b>KYC 리셋 후 재가입 안내</b>
+<span>레퍼럴 코드 미입력 시 <strong>KYC를 해제하고 새 이메일로 재가입</strong>하라고 안내한다. 거래소 약관 위반 소지가 있고, 계정 제재 위험이 있다. <strong>따라하지 말 것.</strong></span></div></div>
+
+<div class="risk"><span class="lv ok">잘함</span><div class="body"><b>인정할 부분</b>
+<span>① <strong>스톱로스를 집요하게 강조</strong>하고 본인 청산 경험까지 공개 ② <strong>API 키 IP 제한</strong>을 기본으로 교육 ③ <strong>"돈 버는 강의가 아니다"</strong> 면책을 반복 명시 ④ 백테스트에서 <strong>1분봉 단위로 SL/TP 도달을 검사</strong>(intra-bar 처리로, 봉 종가만 보는 흔한 오류를 피함) ⑤ <strong>수수료 반영</strong> ⑥ 코드 미완성을 스스로 인정 ⑦ 대시보드를 매매 로직과 <strong>별도 프로세스로 분리</strong></span></div></div>
+</div>
+
+<h2><span class="num">3-2</span>당신 하네스 규칙과의 충돌 지점</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>당신의 기존 규칙</th><th>이 강의의 상태</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td><code>SCP-6</code> 표본 대조는 불변식 검사를 대체하지 못한다</td><td>표본 4건으로 성능 주장</td><td class="n">위반</td></tr>
+<tr><td>통계 검정만으로 처치 채택 금지 — <strong>물리 정합 먼저</strong></td><td>물리 불변식 검사 없음 (동시점유·증거금≤잔고·체결≥발주)</td><td class="n">위반</td></tr>
+<tr><td>자금 직결 게이트는 <strong>fail-closed</strong></td><td>AI 응답 파싱 실패 시 처리가 명시되지 않음. 관망은 10초 후 재시도</td><td class="p">불명</td></tr>
+<tr><td>킬스위치 · 단계별 ok 플래그</td><td>없음. <code>Ctrl+C</code>로 프로세스를 죽이고 포지션은 <strong>수동 청산</strong></td><td class="n">부재</td></tr>
+<tr><td>백테-라이브 정합</td><td>반성 루프가 백테스트에 없음</td><td class="n">위반</td></tr>
+<tr><td>CPCV · PBO · Deflated Sharpe</td><td>단일 구간 단일 실행</td><td class="n">부재</td></tr>
+<tr><td>API 키 보안</td><td>IP 제한 + 출금 권한 미부여</td><td class="y">일치</td></tr>
+<tr><td>손절 강제</td><td>SL/TP 필수로 교육</td><td class="y">일치</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout danger">
+<span class="tag">결론</span>
+<strong>이 커리큘럼을 당신의 실계좌에 적용할 이유가 없다.</strong> 당신 시스템이 이미 상위 호환이고, 이 강의가 채택한 방식(LLM에게 확률·레버리지·사이징을 위임)은 <strong>당신이 이미 방어하고 있는 실패 유형</strong>을 정면으로 밟는다.
+</div>
+
+<h2><span class="num">3-3</span>그럼에도 가져갈 것 — 3가지</h2>
+
+<div class="card">
+<h4>① LLM을 <em>신호 생성기</em>가 아니라 <em>컨텍스트 요약기</em>로 쓰는 발상</h4>
+<p>강의의 8-2(뉴스), 8-3(투자 철학)은 <strong>정형화하기 어려운 정보를 프롬프트로 주입</strong>하는 패턴이다. 이걸 <strong>매매 신호</strong>로 쓰면 위험하지만, <strong>규칙 기반 신호에 붙이는 레짐 태그나 뉴스 플래그</strong>로 쓰면 검증 가능한 형태가 된다.</p>
+<p class="meta">차이는 명확하다 — LLM이 <strong>포지션 크기를 정하면</strong> 실패가 자본에 직결되고, LLM이 <strong>"오늘 규제 뉴스 있음/없음"만 태그하면</strong> 실패가 부울 값 하나로 격리된다.</p>
+</div>
+
+<div class="card">
+<h4>② <code>reason</code> 필드 — 판단 근거를 구조화해 저장하는 습관</h4>
+<p>9-2에서 추가한 <code>reason</code>은 이 커리큘럼에서 가장 재사용 가치가 높다. <strong>왜 그 결정이 나왔는지를 결정과 함께 영속화</strong>하면 사후 분석이 가능해진다. 당신의 <code>coding-decision-journal</code>·<code>trajectory-tracker</code>와 같은 발상이다.</p>
+<p class="meta">단, 주의 — LLM의 <code>reason</code>은 <strong>사후 합리화</strong>일 수 있다. 결정과 인과관계가 있다는 보장이 없다. 감사 로그로는 유용하고, 인과 근거로는 쓰면 안 된다.</p>
+</div>
+
+<div class="card">
+<h4>③ 백테스트 리포트를 HTML로 뽑아 남기는 구조</h4>
+<p>13강의 <code>results/</code> HTML 리포트(자본 곡선 + 진입·청산 구간 색상 + 샤프·승률·MDD)는 형식 자체가 좋다. 당신은 이미 <code>_report/</code>와 GitHub Pages 파이프라인을 갖고 있으므로 <strong>실험마다 리포트를 남기고 폰에서 확인</strong>하는 흐름에 바로 붙는다.</p>
+</div>
+
+<h2><span class="num">3-4</span>만약 이 구조를 실험한다면 — 최소 안전 조건</h2>
+<div class="callout warn">
+<span class="tag">전제</span>
+아래는 <strong>투자 권유가 아니라 실험 설계 조건</strong>이다. 이 조건을 전부 만족하지 못하면 실계좌에 붙이지 않는 게 맞다.
+</div>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>조건</th><th>판정 기준</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Testnet 먼저</strong> — 바이낸스 Futures Testnet에서 전 로직 검증</td><td>실계좌 코드 경로와 <strong>동일한 코드</strong>로 30일 무사고</td></tr>
+<tr><td>2</td><td><strong>재현성 측정</strong> — 동일 설정 N≥20회 반복 실행</td><td>수익률 분포의 <strong>표준편차와 최악값</strong>을 리포트. 단일 실행 결과 인용 금지</td></tr>
+<tr><td>3</td><td><strong>표본 하한</strong></td><td>거래 <strong>200건 이상</strong>, 최소 2개 이상의 시장 국면 포함</td></tr>
+<tr><td>4</td><td><strong>비용 완전 모델링</strong></td><td>테이커 수수료 + 슬리피지 + <strong>펀딩비</strong> 전부 반영</td></tr>
+<tr><td>5</td><td><strong>캘리브레이션 검증</strong> — AI가 말한 승률 p vs 실제 승률</td><td><strong>Brier score</strong> 측정. 캘리브레이션 미달이면 켈리 적용 금지</td></tr>
+<tr><td>6</td><td><strong>켈리 상한</strong></td><td><strong>하프 켈리 이하</strong> + <code>position_size × leverage ≤ 1.0</code> 하드캡</td></tr>
+<tr><td>7</td><td><strong>백테-라이브 코드 동일</strong></td><td>반성 루프 등 라이브 전용 로직을 백테스트에도 반영하거나, 라이브에서 제거</td></tr>
+<tr><td>8</td><td><strong>킬스위치</strong></td><td>일일 손실 한도 도달 시 <strong>fail-closed</strong>로 신규 진입 차단 + 포지션 정리. 단계별 ok 플래그</td></tr>
+<tr><td>9</td><td><strong>과최적화 방어</strong></td><td>CPCV + PBO + Deflated Sharpe. 프롬프트를 바꿔가며 고르는 행위는 <strong>프롬프트 오버피팅</strong>이다</td></tr>
+<tr><td>10</td><td><strong>자본 격리</strong></td><td>기존 봇 계좌와 <strong>완전 분리된 계좌</strong>. 잃어도 되는 금액만</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout danger">
+<span class="tag">특히 9번을 강조한다</span>
+13강은 <em>"다양한 모델별로 어떤 입력 데이터를 넣어야 판단을 잘 할지, 시스템 프롬프트를 어떤 식으로 바꿔보면 좋을지 테스트해 볼 수 있다"</em>고 안내한다. <strong>이것이 바로 과최적화 절차다.</strong> 3일·4거래 구간에서 프롬프트를 골라내면, 고른 것은 엣지가 아니라 <strong>노이즈</strong>다. 당신이 이미 PBO로 방어하는 바로 그 실패다.
+</div>
+
+<h2><span class="num">3-5</span>한 문단 요약</h2>
+<div class="card">
+<p>이 강의는 <strong>"LLM에 거래소 API를 붙이는 방법"</strong>을 가르치는 데는 성실하고 명확하다. 스톱로스 강조와 API 키 IP 제한은 이 장르에서 드물게 책임감 있는 부분이다.</p>
+<p>그러나 <strong>"그 시스템이 돈을 버는가"</strong>를 판정하는 방법론은 갖추고 있지 않다. 백테스트가 마지막에 오고, 재현되지 않고, 표본이 4건이고, 켈리의 확률을 LLM이 추측하고, 그 위에 레버리지가 곱해진다. 강사가 <strong>"돈 버는 강의가 아니다"</strong>라고 반복하는 것은 겸손이 아니라 <strong>정확한 자기 서술</strong>이다.</p>
+<p><strong>당신에게 이 문서의 값은 "따라할 커리큘럼"이 아니라 "검증 없는 자동매매가 어떤 모양인지에 대한 레퍼런스"에 있다.</strong> 그리고 다음 문서(해외판)가 그 빈칸을 채운다.</p>
+</div>
+
+</section>
+
+<footer>
+  조코딩 「하락장도 수익낼 수 있는 AI 비트코인 투자 자동화 선물거래 편」 전 14강 기반 · 2026-08-30 작성<br>
+  1~7강은 유튜브 자동자막, 8~14강은 오디오를 whisper(medium/ko)로 전사해 재구성했다. 전사 오차로 고유명사 일부가 부정확할 수 있다.<br>
+  <strong>이 문서는 기술 분석이며 투자 권유가 아니다.</strong> 레버리지 파생상품은 원금 전액 손실이 가능하다. 3페이지의 감사·설계 의견은 이 문서의 해석이며 강의 원문의 주장이 아니다.
+</footer>
+
+</div>
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var KEY={p1:['--a','--a-soft','--a-ink'],p2:['--b','--b-soft','--b-ink'],p3:['--c','--c-soft','--c-ink']};
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  function show(id){
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    var k=KEY[id],r=document.documentElement.style;
+    r.setProperty('--k','var('+k[0]+')');r.setProperty('--k-soft','var('+k[1]+')');r.setProperty('--k-ink','var('+k[2]+')');
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('aria-controls'));});});
+  if(location.hash==='#p2'||location.hash==='#p3') show(location.hash.slice(1));
+
+  document.querySelectorAll('pre').forEach(function(pre){
+    var box=document.createElement('div'); box.className='codebox';
+    pre.parentNode.insertBefore(box,pre); box.appendChild(pre);
+    var b=document.createElement('button'); b.className='copy'; b.type='button'; b.textContent='복사';
+    b.addEventListener('click',function(){var el=pre.querySelector('code');var t=el?el.innerText:pre.innerText;
+      navigator.clipboard.writeText(t).then(function(){b.textContent='복사됨';setTimeout(function(){b.textContent='복사';},1400);}).catch(function(){b.textContent='실패';});});
+    box.appendChild(b);
+  });
+
+  var A=document.getElementById('lvAg'),B=document.getElementById('lvBg'),
+      ba=document.getElementById('lvA'),bb=document.getElementById('lvB');
+  function set(second){A.style.display=second?'none':'';B.style.display=second?'':'none';
+    ba.classList.toggle('on',!second);bb.classList.toggle('on',second);}
+  ba.addEventListener('click',function(){set(false);});
+  bb.addEventListener('click',function(){set(true);});
+
+  var M=[
+    {t:'1단계 — 차트 데이터 가져오기',
+     r:'ccxt 라이브러리로 바이낸스에서 15분봉 96개를 받아온다. 96개 × 15분 = 1,440분 = 정확히 하루치다. OHLCV(시가·고가·저가·종가·거래량) 형태로 온다.',
+     e:'AI에게 보여줄 "어제 하루 동안의 가격 흐름"을 준비하는 단계.'},
+    {t:'2단계 — AI에게 판단 받기',
+     r:'데이터를 JSON으로 바꿔 OpenAI API에 넘긴다. 시스템 프롬프트는 "너는 암호화폐 트레이딩 전문가야. 롱 또는 숏으로만 답하고 다른 문자는 쓰지 마." 영어로 쓰는 게 정확도가 높다.',
+     e:'차트를 보여주고 "오를까 내릴까?" 한 마디만 물어보는 것.'},
+    {t:'3단계 — 실제로 주문 넣기',
+     r:'여기서부터 API 키가 필요하고 실제 돈이 움직인다. 100 USDT 고정 금액, 레버리지 5배로 시장가 주문을 넣는다. long이면 매수, short이면 매도.',
+     e:'AI가 "숏"이라고 하면 진짜로 하락에 돈을 거는 순간.'},
+    {t:'4단계 — 손절선·익절선 걸기 (가장 중요)',
+     r:'진입가 기준 ±0.5%로 STOP_MARKET과 TAKE_PROFIT_MARKET 주문을 건다. 레버리지 5배이므로 가격 0.5% 변동이 증거금 2.5% 손익이 된다.',
+     e:'"여기까지만 잃고, 여기까지만 벌고 그만" 이라고 미리 정해두는 안전벨트.'},
+    {t:'5단계 — 무한 반복',
+     r:'while True 루프로 1초마다 확인한다. 포지션이 있으면 대기, 없으면 남은 미체결 주문을 취소하고 다시 1단계로. 미체결 취소를 안 하면 다음 진입이 오염된다.',
+     e:'한 판 끝나면 자동으로 다음 판. 사람이 잠들어도 계속 돈다.'}
+  ];
+  var mSvg=document.getElementById('mSvg'),mDet=document.getElementById('mDetail'),mCnt=document.getElementById('mCount');
+  var mc=-1,mt=null;
+  function mRender(i){
+    mc=i;
+    mSvg.querySelectorAll('.bx').forEach(function(n){var s=+n.getAttribute('data-s');
+      n.classList.toggle('act',s===i);n.classList.toggle('seen',s<i);});
+    mSvg.querySelectorAll('.ed').forEach(function(e,j){e.classList.toggle('act',j<i);});
+    mCnt.textContent=(i+1)+' / '+M.length;
+    mDet.innerHTML='<div class="dt">'+M[i].t+'</div><div class="row"><b>내용</b>'+M[i].r+
+      '</div><div class="row"><b>쉽게 말하면</b><span class="e5">'+M[i].e+'</span></div>';
+  }
+  function mStop(){if(mt){clearInterval(mt);mt=null;document.getElementById('mPlay').textContent='▶ 재생';}}
+  document.getElementById('mNext').addEventListener('click',function(){mStop();mRender((mc+1)%M.length);});
+  document.getElementById('mPrev').addEventListener('click',function(){mStop();mRender((mc-1+M.length)%M.length);});
+  document.getElementById('mPlay').addEventListener('click',function(){
+    if(mt){mStop();return;}
+    this.textContent='❚❚ 정지';
+    if(mc>=M.length-1) mRender(0);
+    mt=setInterval(function(){if(mc>=M.length-1){mStop();return;}mRender(mc+1);},2500);
+  });
+  mSvg.querySelectorAll('.bx').forEach(function(n){n.addEventListener('click',function(){mStop();mRender(+n.getAttribute('data-s'));});});
+  mRender(0);
+})();
+</script>
+</body>
+</html>

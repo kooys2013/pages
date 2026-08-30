@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 선물 자동매매 — 조코딩판 &amp; 해외판</title>
+<style>
+:root{--bg:#fafaf9;--surface:#fff;--ink:#1a1a18;--muted:#6b665f;--line:#e6e3dd;
+ --i:#0369a1;--i-soft:#eff8ff;--i-ink:#075985;
+ --t:#0f766e;--t-soft:#ecfdf5;--t-ink:#0f766e;
+ --bad:#be123c;--bad-soft:#fff1f4;--bad-ink:#9f1239;}
+@media (prefers-color-scheme:dark){:root{--bg:#121316;--surface:#1b1c21;--ink:#eceaf0;--muted:#99949f;--line:#2d2e35;
+ --i:#7dd3fc;--i-soft:#0d2233;--i-ink:#bae6fd;--t:#5eead4;--t-soft:#10231f;--t-ink:#99f6e4;
+ --bad:#fda4af;--bad-soft:#2d1218;--bad-ink:#fecdd3;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+ line-height:1.85;font-size:16.5px;letter-spacing:-0.01em;word-break:keep-all}
+.wrap{max-width:720px;margin:0 auto;padding:52px 20px 90px}
+.eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(25px,5.4vw,35px);line-height:1.28;margin:.35em 0 .3em;letter-spacing:-0.035em;font-weight:800}
+.sub{color:var(--muted);font-size:15.5px;margin:0 0 26px}
+.warn{background:var(--bad-soft);border:1px solid var(--bad);border-radius:14px;padding:15px 18px;margin:0 0 28px;font-size:15px}
+.warn b{color:var(--bad-ink)}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+ border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;transition:.15s}
+a.card:hover{transform:translateY(-2px)}
+a.card.i{border-left:4px solid var(--i)}
+a.card.t{border-left:4px solid var(--t)}
+.k{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.i .k{background:var(--i-soft);color:var(--i-ink)}
+.t .k{background:var(--t-soft);color:var(--t-ink)}
+h2{font-size:20px;margin:12px 0 6px;letter-spacing:-0.025em;font-weight:800}
+p.d{margin:0;color:var(--muted);font-size:15px}
+ul.l{margin:12px 0 0;padding-left:1.15em;font-size:14.5px;color:var(--muted)}
+ul.l li{margin:.25em 0}
+footer{margin-top:40px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">2026-08-30</div>
+  <h1>AI 비트코인 선물 자동매매</h1>
+  <p class="sub">조코딩 전 14강을 자막·전사 기준으로 재구성하고, 해외 표준 커리큘럼과 대조했다.</p>
+
+  <div class="warn">
+    <b>⚠ 고위험 파생상품 문서</b><br>
+    두 문서 모두 <b>기술 분석이며 투자 권유가 아니다.</b> 레버리지 선물은 원금 전액 손실이 가능하고 실제로 흔하다. 강사 본인도 영상에서 청산 경험을 밝히며 "돈 버는 강의가 아니다"라고 명시한다.
+  </div>
+
+  <a class="card i" href="jocoding.html">
+    <span class="k">문서 1 · 3페이지</span>
+    <h2>조코딩판 — AI에게 선물거래를 맡기는 법</h2>
+    <p class="d">무료편 1~7강(82분) + 멤버십편 8~14강 전량 근거. 전 커리큘럼을 빠짐없이 정리하고, 실가동 봇 운영자 기준으로 위험을 감사했다.</p>
+    <ul class="l">
+      <li>1p — 다섯 살 설명: 레버리지 · 청산 · 스톱로스 · 5단계 순환</li>
+      <li>2p — 전 14강 상세: MVP 4단계, 켈리, 동적 SL/TP, 백테스트 실측</li>
+      <li>3p — <b>위험 감사 11항목</b> + 하네스 규칙 충돌표 + 최소 안전 조건 10</li>
+    </ul>
+  </a>
+
+  <a class="card t" href="global.html">
+    <span class="k">문서 2 · 3페이지</span>
+    <h2>해외판 — 검증부터 시작하는 커리큘럼</h2>
+    <p class="d">조코딩이 13강에 놓은 것을 1강에 놓는 커리큘럼들. Freqtrade · QuantConnect · NautilusTrader. 전부 무료·오픈소스.</p>
+    <ul class="l">
+      <li>1p — 다섯 살 설명: 순서 · 과최적화 · <b>LLM 룩어헤드 편향</b></li>
+      <li>2p — 도구 3종 상세 + 검증 개념 사전 12항 + Freqtrade 실전 순서</li>
+      <li>3p — 3자 비교(조코딩/해외/당신 시스템) + 가져올 것 3가지</li>
+    </ul>
+  </a>
+
+  <footer>1~7강은 유튜브 자동자막, 8~14강은 오디오를 whisper(medium/ko)로 전사해 재구성했다. 전사 오차로 고유명사 일부가 부정확할 수 있다.</footer>
+</div>
+</body>
+</html>
