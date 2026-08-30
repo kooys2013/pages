@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코드팩토리 영상 5편 — 교안 &amp; 교본</title>
+<style>
+:root{--bg:#faf9f7;--surface:#fff;--ink:#1a1917;--muted:#6b6560;--line:#e5e1dc;
+  --indigo:#4f46e5;--indigo-soft:#eef2ff;--indigo-ink:#3730a3;
+  --amber:#c2410c;--amber-soft:#fff3ea;--amber-ink:#9a3412;}
+@media (prefers-color-scheme:dark){:root{--bg:#141318;--surface:#1d1c24;--ink:#eceaf0;
+  --muted:#9b95a5;--line:#2e2c38;--indigo:#a5b4fc;--indigo-soft:#1f1f38;--indigo-ink:#c7d2fe;
+  --amber:#fb923c;--amber-soft:#2a1d13;--amber-ink:#fdba74;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  line-height:1.8;font-size:16.5px;letter-spacing:-0.01em;word-break:keep-all}
+.wrap{max-width:720px;margin:0 auto;padding:56px 20px 90px}
+.eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(26px,5.5vw,36px);line-height:1.28;margin:.35em 0 .3em;letter-spacing:-0.035em;font-weight:800}
+.sub{color:var(--muted);font-size:15.5px;margin:0 0 34px}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--surface);
+  border:1px solid var(--line);border-radius:16px;padding:22px 22px;margin:16px 0;transition:.15s}
+a.card:hover{transform:translateY(-2px)}
+a.card.i{border-left:4px solid var(--indigo)}
+a.card.a{border-left:4px solid var(--amber)}
+.k{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.i .k{background:var(--indigo-soft);color:var(--indigo-ink)}
+.a .k{background:var(--amber-soft);color:var(--amber-ink)}
+h2{font-size:20px;margin:12px 0 6px;letter-spacing:-0.025em;font-weight:800}
+p.d{margin:0;color:var(--muted);font-size:15px}
+ul.t{margin:12px 0 0;padding-left:1.15em;font-size:14.5px;color:var(--muted)}
+ul.t li{margin:.25em 0}
+footer{margin-top:44px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);padding-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">코드팩토리 영상 5편 정리 · 2026-08-30</div>
+  <h1>교안 &amp; 교본</h1>
+  <p class="sub">자막 원문 기준으로 재구성한 두 개의 문서.</p>
+
+  <a class="card i" href="lecture.html">
+    <span class="k">문서 1 · 2페이지 강의</span>
+    <h2>디자인 스킬과 그래프 엔지니어링</h2>
+    <p class="d">Claude <code>/design</code> 으로 디자인 시스템 전체를 한 컨텍스트에서 굴리는 법, 그리고 에이전트 워크플로를 노드·엣지로 설계하는 법.</p>
+    <ul class="t">
+      <li>1페이지 — /design 스킬: 아티팩트 직접 편집, 컨텍스트 승계, 구현 이관</li>
+      <li>2페이지 — Graph Engineering: 팬아웃/팬인, 코드 검증 노드, HITL 배치</li>
+    </ul>
+  </a>
+
+  <a class="card a" href="grok-playbook.html">
+    <span class="k">문서 2 · 교본</span>
+    <h2>Grok Bot 사용법과 Claude Max 이식 설계</h2>
+    <p class="d">그록봇이 실제로 뭘 하는지 정리한 뒤, Claude Max로 지금 재현 가능한 것과 진짜 갭을 갈라내고 이식 아이디어 10개를 우선순위로 제시.</p>
+    <ul class="t">
+      <li>팩트 시트 · 설계 원칙(진행자 실패담) · 단점 3</li>
+      <li>기능 대응표 — 보유 / 우위 / 진짜 갭 판정</li>
+      <li>도출 아이디어 10 + 실행 순서 + 즉시 사용 프롬프트</li>
+    </ul>
+  </a>
+
+  <footer>영상 자막에서 확인된 내용만 사실로 기술했다. 스폰서·프로모션 언급은 판단에서 제외했다.</footer>
+</div>
+</body>
+</html>
