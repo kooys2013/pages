@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기능재활 교본 — 남준록 · PAINLAB</title>
+<style>
+:root{
+  --bg:#fbfaf8;--surface:#fff;--raise:#f4f2ee;--ink:#1b1a18;--muted:#6d665e;--line:#e7e2da;
+  --a:#0f766e;--a-soft:#ecfdf5;--a-ink:#0f766e;
+  --b:#1d4ed8;--b-soft:#eff5ff;--b-ink:#1e40af;
+  --c:#7c3aed;--c-soft:#f5f0ff;--c-ink:#6d28d9;
+  --d:#b91c1c;--d-soft:#fef2f2;--d-ink:#991b1b;
+  --ok:#047857;--ok-soft:#ecfdf5;--warn:#b45309;--warn-soft:#fffbeb;
+  --code-bg:#f3f0ea;--k:var(--a);--k-soft:var(--a-soft);--k-ink:var(--a-ink);
+}
+@media (prefers-color-scheme:dark){
+ :root{--bg:#121414;--surface:#1b1d1e;--raise:#232628;--ink:#eaeeef;--muted:#95a0a2;--line:#2c3032;
+ --a:#5eead4;--a-soft:#10231f;--a-ink:#99f6e4;
+ --b:#93b4fd;--b-soft:#161f33;--b-ink:#bfd3ff;
+ --c:#c4b5fd;--c-soft:#221b38;--c-ink:#ddd0ff;
+ --d:#fca5a5;--d-soft:#2c1516;--d-ink:#fecaca;
+ --ok:#6ee7b7;--ok-soft:#0f231d;--warn:#fbbf24;--warn-soft:#2a2213;--code-bg:#232628;}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+ line-height:1.85;font-size:16.5px;letter-spacing:-0.01em;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:870px;margin:0 auto;padding:0 20px 100px}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--k);z-index:60;transition:width .1s linear}
+header.top{padding:42px 0 6px}
+.eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(25px,5.2vw,37px);line-height:1.26;margin:.35em 0 .3em;letter-spacing:-0.035em;font-weight:800}
+.sub{color:var(--muted);font-size:15.5px;margin:0}
+nav.tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);
+ backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;gap:5px;padding:10px 0;margin:20px 0 0}
+nav.tabs button{flex:1;appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);
+ font:inherit;font-size:13px;font-weight:700;padding:9px 5px;border-radius:11px;cursor:pointer;transition:.15s;text-align:center;line-height:1.3}
+nav.tabs button .n{display:block;font-size:10px;letter-spacing:.08em;opacity:.7;font-weight:800}
+nav.tabs button[aria-selected="true"]{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+section.page{padding-top:22px}
+h2{font-size:clamp(20px,3.8vw,26px);line-height:1.34;margin:2.4em 0 .5em;letter-spacing:-0.03em;font-weight:800}
+h2 .num{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.06em;color:var(--k-ink);
+ vertical-align:middle;margin-right:9px;padding:3px 9px;border-radius:999px;background:var(--k-soft)}
+h3{font-size:17.5px;margin:1.9em 0 .45em;font-weight:700;letter-spacing:-0.02em}
+h4{font-size:15.5px;margin:1.4em 0 .3em;font-weight:700;color:var(--k-ink)}
+p{margin:.7em 0}
+a{color:var(--k-ink)}
+ul,ol{padding-left:1.25em;margin:.7em 0}
+li{margin:.4em 0}
+li::marker{color:var(--muted)}
+.lead{font-size:17.5px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:18px 0}
+.lead b{color:var(--k-ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px 20px;margin:16px 0}
+.card>h3,.card>h4{margin-top:0}
+.callout{border-left:3px solid var(--k);background:var(--k-soft);border-radius:0 12px 12px 0;padding:13px 18px;margin:18px 0;font-size:15.5px}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.callout.ok{border-left-color:var(--ok);background:var(--ok-soft)}
+.callout.danger{border-left-color:var(--d);background:var(--d-soft)}
+.callout .tag{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.eli{background:var(--ok-soft);border:1px dashed color-mix(in srgb,var(--ok) 45%,transparent);border-radius:15px;padding:16px 18px;margin:16px 0}
+.eli .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--ok);
+ border:1px solid color-mix(in srgb,var(--ok) 45%,transparent);border-radius:999px;padding:1px 10px;margin-bottom:7px}
+.eli p{margin:.35em 0;font-size:16px}
+.eli .real{margin-top:9px;padding-top:9px;border-top:1px dashed color-mix(in srgb,var(--ok) 30%,transparent);font-size:14.5px;color:var(--muted)}
+.eli .real b{color:var(--ok)}
+.src{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.src.n{background:var(--a-soft);color:var(--a-ink);border:1px solid color-mix(in srgb,var(--a) 45%,transparent)}
+.src.p{background:var(--b-soft);color:var(--b-ink);border:1px solid color-mix(in srgb,var(--b) 45%,transparent)}
+.src.both{background:var(--c-soft);color:var(--c-ink);border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14.5px}
+th,td{padding:10px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--k-soft);font-weight:800;font-size:12.5px;color:var(--k-ink)}
+tr:last-child td{border-bottom:0}
+td.y{color:var(--ok);font-weight:800;white-space:nowrap}
+td.n{color:var(--d);font-weight:800;white-space:nowrap}
+pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:15px 17px;overflow-x:auto;margin:13px 0;font-size:13.5px;line-height:1.75}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.92em}
+p code,li code,td code{background:var(--code-bg);padding:1.5px 6px;border-radius:6px;border:1px solid var(--line)}
+pre code{background:none;border:0;padding:0;white-space:pre-wrap;word-break:break-word}
+figure{margin:20px 0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:15px 13px 11px}
+figure .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+figure svg{display:block;margin:0 auto;max-width:100%;height:auto;color:var(--ink)}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:9px;padding:0 4px;line-height:1.6}
+.ctrls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 4px 11px}
+.ctrls button{appearance:none;font:inherit;font-size:12.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--raise);color:var(--ink);border-radius:9px;padding:6px 11px;cursor:pointer;transition:.13s}
+.ctrls button:hover{border-color:var(--k)}
+.ctrls button.on{background:var(--k-soft);color:var(--k-ink);border-color:transparent}
+.ctrls .spacer{flex:1}
+.ctrls .count{font-size:12.5px;font-weight:800;color:var(--muted)}
+.ed{stroke:currentColor;stroke-opacity:.3;stroke-width:1.3;fill:none;transition:.2s}
+.ed.act{stroke:var(--k);stroke-opacity:1;stroke-width:2}
+.elab{font-size:9.5px;font-weight:700;fill:currentColor;opacity:.55}
+.bx rect{fill:var(--surface);stroke:currentColor;stroke-opacity:.3;stroke-width:1.2}
+.bx text{fill:currentColor}
+.bx{opacity:.42;transition:opacity .2s;cursor:pointer}
+.bx.act{opacity:1}.bx.act rect{fill:var(--k-soft);stroke:var(--k);stroke-width:2}
+.bx.seen{opacity:.72}
+.detail{background:var(--raise);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:11px 4px 0;font-size:15px}
+.detail .dt{font-size:16.5px;font-weight:800;letter-spacing:-0.02em}
+.detail .row{margin-top:7px}
+.detail .row b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.detail .e5{color:var(--ok);font-weight:600}
+.step{counter-reset:s;list-style:none;padding:0;margin:16px 0}
+.step>li{counter-increment:s;position:relative;padding:13px 0 13px 44px;border-bottom:1px solid var(--line)}
+.step>li:last-child{border-bottom:0}
+.step>li::before{content:counter(s);position:absolute;left:0;top:13px;width:29px;height:29px;border-radius:9px;
+ background:var(--k-soft);color:var(--k-ink);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step b{display:block;margin-bottom:2px}
+.step .why{color:var(--muted);font-size:14.5px}
+.meta{font-size:13.5px;color:var(--muted)}
+footer{margin-top:58px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+[hidden]{display:none!important}
+.red{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+.red:last-child{border-bottom:0}
+.red .ic{flex:0 0 auto;width:26px;height:26px;border-radius:8px;background:var(--d-soft);color:var(--d-ink);
+ border:1px solid var(--d);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:2px}
+.red .bd b{display:block}
+.red .bd span{font-size:14.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">기능재활 교본 · 남준록 원장(남스어프로치/치중진담) × PAINLAB</div>
+  <h1>왜 낫지 않는가</h1>
+  <p class="sub">두 임상의가 공개한 이론·실기 영상 47편을 자막 원문 기준으로 재구성한 교본. 출처가 다른 내용은 <span class="src n">남</span> <span class="src p">P</span> 로 표기해 구분했다.</p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1부</span>총론</button>
+  <button role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="n">2부</span>기전</button>
+  <button role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="n">3부</span>평가·실기</button>
+  <button role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="n">4부</span>안전·감별</button>
+</nav>
+
+<!-- ================= 1부 총론 ================= -->
+<section class="page" id="p1" role="tabpanel" aria-labelledby="t1">
+
+<div class="callout danger">
+<span class="tag">이 교본의 성격</span>
+<strong>교육 자료이며 진단·치료를 대체하지 않는다.</strong> 두 임상의가 유튜브에 공개한 내용을 정리한 것이고, 개인의 상태에 대한 판단은 직접 평가를 받아야 한다. 두 저자 모두 영상에서 <strong>"혼자 판단하지 말고 평가받으라"</strong>고 반복해 말한다. <strong>4부의 적색 신호에 해당하면 즉시 의료기관을 찾아야 한다.</strong>
+</div>
+
+<p class="lead">한 줄 요약 — <b>검사에서 아무것도 안 나오는데 아픈 이유는, 망가진 것이 「구조」가 아니라 「기능」이기 때문이다.</b> 기능은 사진에 찍히지 않는다. 그래서 없는 것 취급을 받는다.</p>
+
+<h2><span class="num">1-1</span>기능장애란 무엇인가 <span class="src n">남</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>오케스트라를 생각해 보자. 악기는 전부 멀쩡해. 바이올린도 안 부러졌고 드럼도 안 찢어졌어.</p>
+  <p>그런데 <strong>박자가 안 맞아.</strong> 첼로가 먼저 나오고 플루트가 늦게 들어와. 그러면 음악이 엉망이 되지. 이때 악기를 X선으로 찍어보면? <strong>아무 이상이 없어.</strong></p>
+  <p>몸도 똑같아. 근육이 찢어진 게 아니라 <strong>순서와 타이밍이 깨진 것</strong>이야. 사진에는 안 나오는데 아프다.</p>
+  <div class="real"><b>정의</b> — 기능장애 = <b>근육의 협응 관계가 깨지고 몸의 쓰임에 문제가 생긴 상태.</b> 오래 지속되면 그제서야 조직에 스트레스가 쌓여 구조적 변형이 생긴다. <b>구조 변형 전 단계이므로 영상 검사가 정상으로 나온다.</b></div>
+</div>
+
+<figure>
+  <div class="scroll">
+  <svg viewBox="0 0 440 175" role="img" aria-label="기능이 먼저 떨어지고 오랜 시간이 지난 뒤에야 구조 변형이 생기므로, 초기에는 영상 검사가 정상으로 나온다" style="min-width:400px">
+    <defs><marker id="am1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+    <text x="10" y="17" font-size="11" font-weight="800" fill="currentColor" opacity=".6">시간 →</text>
+    <rect x="10" y="28" width="128" height="44" rx="9" fill="var(--a-soft)" stroke="var(--a)"/>
+    <text x="74" y="47" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--a-ink)">협응 깨짐</text>
+    <text x="74" y="62" text-anchor="middle" font-size="9" fill="var(--a-ink)">보상 패턴 시작</text>
+    <path d="M138 50 H158" class="ed act" marker-end="url(#am1)"/>
+    <rect x="162" y="28" width="128" height="44" rx="9" fill="var(--warn-soft)" stroke="var(--warn)"/>
+    <text x="226" y="47" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--warn)">통증 · 증상</text>
+    <text x="226" y="62" text-anchor="middle" font-size="9" fill="var(--warn)">여기서 병원에 온다</text>
+    <path d="M290 50 H310" class="ed" marker-end="url(#am1)"/>
+    <rect x="314" y="28" width="116" height="44" rx="9" fill="var(--d-soft)" stroke="var(--d)"/>
+    <text x="372" y="47" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--d-ink)">구조 변형</text>
+    <text x="372" y="62" text-anchor="middle" font-size="9" fill="var(--d-ink)">이제야 사진에 보임</text>
+    <line x1="10" y1="88" x2="430" y2="88" stroke="currentColor" stroke-opacity=".2" stroke-dasharray="4 4"/>
+    <text x="10" y="106" font-size="11.5" font-weight="800" fill="currentColor" opacity=".7">영상 검사(MRI·X-ray)가 잡아내는 구간</text>
+    <rect x="314" y="112" width="116" height="16" rx="4" fill="var(--d)" opacity=".25"/>
+    <rect x="10" y="112" width="300" height="16" rx="4" fill="currentColor" opacity=".07"/>
+    <text x="160" y="124" text-anchor="middle" font-size="9.5" fill="currentColor" opacity=".55">사각지대 — "이상 없음"</text>
+    <text x="372" y="124" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--d-ink)">검출</text>
+    <text x="10" y="150" font-size="11.5" fill="currentColor" opacity=".7">환자는 가운데 구간에서 병원에 온다. 그런데 검사 장비는 오른쪽 구간부터 본다.</text>
+    <text x="10" y="167" font-size="11.5" font-weight="800" fill="var(--a-ink)">이 시차가 "검사는 정상인데 아프다"의 정체다.</text>
+  </svg>
+  </div>
+  <figcaption>남준록 원장의 표현 — <strong>"안 보이는 이상일 뿐이지, 이상이 없진 않다. 보는 방식이 틀린 것이다."</strong></figcaption>
+</figure>
+
+<h3>기능장애가 받는 다른 이름들 <span class="src n">남</span></h3>
+<p>영상 검사가 정상이면 진단명이 사라진다. 그 자리를 채우는 이름들이 있다.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>붙는 이름</th><th>실제로 일어난 일</th></tr></thead>
+<tbody>
+<tr><td>신경성 · 불치병</td><td>"검사에 안 나오니 고칠 게 없다"</td></tr>
+<tr><td>복합부위통증증후군(CRPS) · 섬유근통</td><td>원인 불명일 때 붙는 이름</td></tr>
+<tr><td>근막통증증후군</td><td>"근육 뭉친 것" — 왜 뭉쳤는지는 빠져 있음</td></tr>
+<tr><td>하지불안증후군</td><td>—</td></tr>
+<tr><td>파킨슨 · 강직성척추염</td><td>진단 기준을 다 만족하지 않는데 <strong>단일 소견 하나</strong>로 붙는 경우</td></tr>
+<tr><td>만성 방광염</td><td>골반기저근 문제인데 <strong>소변 배양은 무균</strong>. 항생제를 수개월 처방받는 경우</td></tr>
+<tr><td>SIBO · 장누수증후군</td><td>소화 기능 이상에 붙는 이름</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout warn">
+<span class="tag">균형을 위해 반드시 덧붙일 것</span>
+위 진단명들은 <strong>실재하는 질환이며 정당한 진단인 경우가 다수다.</strong> 이 표의 취지는 "그 병들이 가짜"가 아니라, <strong>기능장애가 그 이름으로 잘못 분류되는 일이 있다</strong>는 것이다. 자가 판단으로 기존 진단이나 처방을 임의 중단하면 안 된다. <strong>주치의와 상의할 것.</strong>
+</div>
+
+<h3>이어지는 2차 피해</h3>
+<p>진단이 없으면 주변의 <strong>비전문가 처방</strong>이 시작된다 — "운동해라", "많이 걸어라", "수영해라", "마음을 편하게 가져라". 그리고 통증은 <strong>당사자가 아니면 공감되지 않으므로</strong> "꾀병 아니냐"는 오해가 붙는다. 남준록 원장은 여기서 더 나아가 <strong>미신·부적으로 가는 경우까지</strong> 실제로 본다고 말한다.</p>
+
+<h2><span class="num">1-2</span>BPS 모델 — 만성통증을 보는 틀 <span class="src n">남</span></h2>
+
+<p><strong>Bio-Psycho-Social</strong>. 1970년대에 제안된 모델로, <strong>만성</strong>통증은 생물학적·심리적·사회적 요소를 <strong>동시에</strong> 고려해야 한다는 관점이다. (급성 외상통은 해당 없음)</p>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="bpsA" class="on">악순환</button>
+    <button type="button" id="bpsB">선순환</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 230" role="img" aria-label="생물학적 심리적 사회적 요소가 서로를 악화시키면 통증이 증폭되지만, 몸에 대한 이해와 통제 수단이 생기면 자기효능감이 올라가며 선순환으로 전환된다" style="min-width:400px">
+    <defs>
+      <marker id="ab1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--d)"/></marker>
+      <marker id="ab2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--ok)"/></marker>
+    </defs>
+    <g id="bpsAg">
+      <rect x="150" y="14" width="140" height="40" rx="10" fill="var(--d-soft)" stroke="var(--d)"/>
+      <text x="220" y="32" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--d-ink)">B · 몸</text>
+      <text x="220" y="46" text-anchor="middle" font-size="9" fill="var(--d-ink)">기능장애 · 통증 발생</text>
+      <rect x="14" y="104" width="150" height="46" rx="10" fill="var(--d-soft)" stroke="var(--d)"/>
+      <text x="89" y="122" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--d-ink)">P · 심리</text>
+      <text x="89" y="136" text-anchor="middle" font-size="9" fill="var(--d-ink)">불안 · 자기효능감 저하</text>
+      <text x="89" y="147" text-anchor="middle" font-size="9" fill="var(--d-ink)">중추 감작 · 파국화</text>
+      <rect x="276" y="104" width="150" height="46" rx="10" fill="var(--d-soft)" stroke="var(--d)"/>
+      <text x="351" y="122" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--d-ink)">S · 사회</text>
+      <text x="351" y="136" text-anchor="middle" font-size="9" fill="var(--d-ink)">업무 스트레스</text>
+      <text x="351" y="147" text-anchor="middle" font-size="9" fill="var(--d-ink)">사회적 지지 부족</text>
+      <path d="M180 56 L120 100" class="ed" stroke="var(--d)" stroke-opacity="1" marker-end="url(#ab1)"/>
+      <path d="M140 100 L200 58" class="ed" stroke="var(--d)" stroke-opacity="1" marker-end="url(#ab1)"/>
+      <path d="M260 56 L320 100" class="ed" stroke="var(--d)" stroke-opacity="1" marker-end="url(#ab1)"/>
+      <path d="M300 100 L242 58" class="ed" stroke="var(--d)" stroke-opacity="1" marker-end="url(#ab1)"/>
+      <path d="M270 132 H172" class="ed" stroke="var(--d)" stroke-opacity="1" marker-end="url(#ab1)"/>
+      <text x="220" y="126" text-anchor="middle" class="elab">가족이 이해 못 함</text>
+      <text x="14" y="182" font-size="12" font-weight="800" fill="var(--d-ink)">셋이 서로를 증폭시킨다</text>
+      <text x="14" y="200" font-size="11" fill="currentColor" opacity=".7">통증 감각은 예민해지고, 정상 감각은 둔해지고, 생각은 극단으로 간다(파국화).</text>
+      <text x="14" y="218" font-size="11" fill="currentColor" opacity=".7">"뭘 해도 낫지 않는다"는 경험이 누적되면 자기효능감이 무너진다.</text>
+    </g>
+    <g id="bpsBg" style="display:none">
+      <rect x="10" y="20" width="128" height="42" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="74" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="var(--ok)">① 기전을 이해</text>
+      <text x="74" y="53" text-anchor="middle" font-size="9" fill="var(--ok)">왜 아픈지 알게 됨</text>
+      <path d="M138 41 H160" class="ed" stroke="var(--ok)" stroke-opacity="1" marker-end="url(#ab2)"/>
+      <rect x="164" y="20" width="128" height="42" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="228" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="var(--ok)">② 무기를 얻음</text>
+      <text x="228" y="53" text-anchor="middle" font-size="9" fill="var(--ok)">이 운동을 하면 준다</text>
+      <path d="M292 41 H314" class="ed" stroke="var(--ok)" stroke-opacity="1" marker-end="url(#ab2)"/>
+      <rect x="318" y="20" width="112" height="42" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="374" y="39" text-anchor="middle" font-size="11" font-weight="800" fill="var(--ok)">③ 통제 경험</text>
+      <text x="374" y="53" text-anchor="middle" font-size="9" fill="var(--ok)">집에서 직접 확인</text>
+      <path d="M374 62 V84 H228 V96" class="ed" stroke="var(--ok)" stroke-opacity="1" marker-end="url(#ab2)"/>
+      <rect x="140" y="96" width="176" height="44" rx="10" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="1.8"/>
+      <text x="228" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="var(--ok)">자기효능감 상승</text>
+      <text x="228" y="130" text-anchor="middle" font-size="9" fill="var(--ok)">걱정·불안 감소 → 운동량 상향 가능</text>
+      <path d="M140 118 H60 V64" class="ed" stroke="var(--ok)" stroke-opacity="1" marker-end="url(#ab2)"/>
+      <text x="14" y="172" font-size="12" font-weight="800" fill="var(--ok)">몸이 좋아지면 심리가 따라오고, 심리가 안정되면 운동량을 올릴 수 있다</text>
+      <text x="14" y="192" font-size="11" fill="currentColor" opacity=".75">여기에 가족의 정서적 지지가 더해지면 회복 속도가 붙는다(S 요소).</text>
+      <text x="14" y="212" font-size="11" fill="currentColor" opacity=".75">시작점은 <tspan font-weight="800">B에 대한 정확한 이해</tspan>다 — 그게 없으면 이 고리가 시작되지 않는다.</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>남준록 원장이 가장 경계하는 것은 <strong>이분법적 사고</strong>다. "B는 모르겠으니 P겠지"로 넘어가면 <strong>B에 맞지 않는 운동을 처방</strong>하게 된다.</figcaption>
+</figure>
+
+<div class="callout danger">
+<span class="tag">실제로 벌어지는 오류 — 원문 사례</span>
+호흡 기능 저하(횡격막)로 목·어깨 통증이 생긴 환자에게, 원인을 모른 채 <strong>"기분이 좋아지니 유산소 운동을 하라"</strong>고 권한다. 심리 요소만 보고 내린 처방이다. 할 때는 모르지만 <strong>끝나고 몸이 더 나빠진다.</strong> 좌골신경통에 다리 힘 빠짐이 있는 환자에게 걷기를 권하는 것도 같은 오류다.<br>
+<strong>P를 다루려면 B를 먼저 알아야 한다.</strong> 반대도 마찬가지다 — B만 붙잡고 P·S를 방치하면 어느 지점에서 정체된다.
+</div>
+
+<h2><span class="num">1-3</span>통증은 경보기다 <span class="src both">공통</span></h2>
+<div class="card">
+<p>두 채널이 공유하는 대전제다.</p>
+<ul>
+<li><strong>아픈 곳이 원인인 경우가 오히려 드물다.</strong> 통증 부위만 치료하는 것은 경보음을 끄는 것이다</li>
+<li>뭉친 근육은 <strong>증상이지 원인이 아니다.</strong> 풀어도 또 뭉치는 이유는 왜 뭉쳤는지를 해결하지 않아서다 <span class="src p">P</span></li>
+<li>주사는 통증 신호를 차단한다. <strong>기능 저하는 그대로 남는다</strong> <span class="src p">P</span></li>
+<li>디스크는 <strong>"철저한 피해자"</strong>다. 허리에 피해를 준 요소는 다른 곳에 있다 <span class="src n">남</span></li>
+</ul>
+</div>
+
+<h2><span class="num">1-4</span>이 교본을 읽는 법</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>표기</th><th>뜻</th></tr></thead>
+<tbody>
+<tr><td><span class="src n">남</span></td><td>남준록 원장(남스어프로치 무브먼트 랩 · 前 동탄 바로본신경외과 / 치중진담) 영상 근거</td></tr>
+<tr><td><span class="src p">P</span></td><td>PAINLAB(아나파한의원) 영상 근거</td></tr>
+<tr><td><span class="src both">공통</span></td><td>두 채널이 같은 취지로 말하는 내용</td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<span class="tag">개념의 지위 구분</span>
+이 교본에 나오는 개념은 두 층으로 나뉜다.<br>
+<strong>① 학계에 자리 잡은 것</strong> — 지역 상호의존성, BPS 모델, 운동조절·운동학습, 고유수용성 감각, 신경 활주, 관절 중심화.<br>
+<strong>② 두 임상의의 임상 경험에서 나온 것</strong> — 초기부하 설정 방식, 미세외전 10도 프로토콜, 국소코어 세팅의 구체적 절차. 남준록 원장 본인이 <em>"책을 봐도 나오는 건 아니고 임상에서 알게 된 내용"</em>이라고 명시한다.<br>
+<strong>②는 검증된 표준 지침이 아니라 한 임상가의 방법론이다.</strong> 그 사실을 알고 읽는 것이 이 교본을 제대로 쓰는 법이다.
+</div>
+
+</section>
+
+<!-- ================= 2부 기전 ================= -->
+<section class="page" id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+
+<p class="lead">몸이 무너지는 방식에는 규칙이 있다. 그 규칙을 알면 <b>왜 아픈 곳과 원인이 다른 곳에 있는지</b>가 설명된다.</p>
+
+<h2><span class="num">2-1</span>지역 상호의존성 — 이 교본의 엔진 <span class="src n">남</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>네 명이 짐을 나눠 든다고 하자. 한 명이 <strong>꾀를 부리고 안 들어.</strong></p>
+  <p>그럼 짐이 사라질까? 아니야. <strong>나머지 세 명이 더 든다.</strong> 그리고 시간이 지나면 그 세 명 중 누군가의 <strong>허리가 나간다.</strong></p>
+  <p>병원에 가면 허리가 나간 사람을 치료해. 그런데 <strong>범인은 꾀부린 사람</strong>이야. 그 사람이 계속 안 들면, 치료한 사람은 또 나간다.</p>
+  <div class="real"><b>진짜 이름</b> — <b>Regional Interdependence(지역 상호의존성)</b>. 핵심 한 문장: <b>"누가 일을 안 하면 다른 누군가가 대신 움직인다."</b></div>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="riA" class="on">굴곡 — 물건 줍기</button>
+    <button type="button" id="riB">회전 — 몸통 돌리기</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 210" role="img" aria-label="물건을 주울 때 고관절이 굽지 않으면 무릎과 척추가 대신 굽어 스트레스를 받고, 몸통 회전에서 흉추가 돌지 않으면 요추가 대신 돌아 손상된다" style="min-width:400px">
+    <g id="riAg">
+      <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">목적: 바닥의 물건을 줍는다 → 어딘가는 반드시 굽어야 한다</text>
+      <rect x="10" y="30" width="98" height="40" rx="9" fill="var(--d-soft)" stroke="var(--d)" stroke-width="1.6"/>
+      <text x="59" y="48" text-anchor="middle" font-size="11" font-weight="800" fill="var(--d-ink)">고관절</text>
+      <text x="59" y="62" text-anchor="middle" font-size="9" fill="var(--d-ink)">일을 안 함 (범인)</text>
+      <text x="120" y="54" font-size="15" fill="currentColor" opacity=".45">→</text>
+      <rect x="140" y="30" width="88" height="40" rx="9" fill="var(--warn-soft)" stroke="var(--warn)"/>
+      <text x="184" y="48" text-anchor="middle" font-size="11" font-weight="800" fill="var(--warn)">무릎</text>
+      <text x="184" y="62" text-anchor="middle" font-size="9" fill="var(--warn)">대신 더 굽음</text>
+      <rect x="240" y="30" width="88" height="40" rx="9" fill="var(--warn-soft)" stroke="var(--warn)"/>
+      <text x="284" y="48" text-anchor="middle" font-size="11" font-weight="800" fill="var(--warn)">척추</text>
+      <text x="284" y="62" text-anchor="middle" font-size="9" fill="var(--warn)">대신 더 굽음</text>
+      <rect x="340" y="30" width="90" height="40" rx="9" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+      <text x="385" y="48" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">발목</text>
+      <text x="385" y="62" text-anchor="middle" font-size="9" fill="currentColor" opacity=".6">일부 분담</text>
+      <line x1="10" y1="86" x2="430" y2="86" stroke="currentColor" stroke-opacity=".2"/>
+      <text x="10" y="106" font-size="12" font-weight="800" fill="var(--d-ink)">그런데 여기에 두 번째 문제가 겹친다</text>
+      <text x="10" y="126" font-size="11" fill="currentColor" opacity=".75">척추가 대신 굽는데, <tspan font-weight="800">체간 안정성도 이미 떨어져 있다.</tspan></text>
+      <text x="10" y="144" font-size="11" fill="currentColor" opacity=".75">적절한 압박이어야 할 것이 <tspan font-weight="800">과도한 압박</tspan>이 되고, 디스크 스트레스가 급증한다.</text>
+      <text x="10" y="170" font-size="12" font-weight="800" fill="var(--a-ink)">결론 — 허리 디스크는 피해자다</text>
+      <text x="10" y="188" font-size="11" fill="currentColor" opacity=".75">디스크가 찢어진 것은 혈관 공급이 부족해 되돌아가지 않는다.</text>
+      <text x="10" y="204" font-size="11" fill="currentColor" opacity=".75">진행을 막으려면 <tspan font-weight="800">허리를 치료하는 게 아니라 가해자를 찾아야</tspan> 한다.</text>
+    </g>
+    <g id="riBg" style="display:none">
+      <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">목적: 몸통을 돌린다 (거의 모든 스포츠 · 걷기에도 미세하게 발생)</text>
+      <rect x="10" y="30" width="200" height="52" rx="10" fill="var(--a-soft)" stroke="var(--a)"/>
+      <text x="110" y="49" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--a-ink)">흉추 — 회전의 주역</text>
+      <text x="110" y="63" text-anchor="middle" font-size="9" fill="var(--a-ink)">갈비뼈가 감싸 구조적으로 튼튼</text>
+      <text x="110" y="76" text-anchor="middle" font-size="9" fill="var(--a-ink)">여기서 돌아야 정상</text>
+      <rect x="230" y="30" width="200" height="52" rx="10" fill="var(--d-soft)" stroke="var(--d)"/>
+      <text x="330" y="49" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--d-ink)">요추 — 대신 도는 곳</text>
+      <text x="330" y="63" text-anchor="middle" font-size="9" fill="var(--d-ink)">허리뼈만 있고 갈비뼈 없음</text>
+      <text x="330" y="76" text-anchor="middle" font-size="9" fill="var(--d-ink)">근육 나빠지면 불안정</text>
+      <text x="10" y="106" font-size="12" font-weight="800" fill="var(--d-ink)">코어가 약하면 표층 기립근으로 자세를 버틴다</text>
+      <text x="10" y="126" font-size="11" fill="currentColor" opacity=".75">→ 흉추가 굳어 회전하지 못한다 → <tspan font-weight="800">요추가 대신 회전한다</tspan> → 요추가 망가진다</text>
+      <line x1="10" y1="142" x2="430" y2="142" stroke="currentColor" stroke-opacity=".2"/>
+      <text x="10" y="164" font-size="12" font-weight="800" fill="var(--a-ink)">여기서 나오는 반직관적 결론</text>
+      <text x="10" y="182" font-size="11" fill="currentColor" opacity=".75"><tspan font-weight="800">"많이 걸어서 코어가 강화된다"는 것은 없다.</tspan> 걷기에도 회전이 일어나므로,</text>
+      <text x="10" y="199" font-size="11" fill="currentColor" opacity=".75">패턴이 깨진 상태로 많이 걸으면 <tspan font-weight="800">깨진 패턴을 더 강화</tspan>할 뿐이다.</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>남준록 원장의 재활 정의 — <strong>일반적인 전신 운동으로 재활하는 것이 아니다. 단순한 운동으로 특정 근육을 주인공처럼 만들어 놓고, 그다음 전신 협응으로 이어붙이는 것이다.</strong></figcaption>
+</figure>
+
+<h2><span class="num">2-2</span>동원 순서와 보상 <span class="src p">P</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>합창단에서 <strong>목소리 큰 사람 하나가 항상 먼저 튀어나와.</strong> 그러면 뒤에 있는 작은 목소리들은 아예 낼 기회가 없어져. 시간이 지나면 그 사람들은 <strong>노래하는 법을 잊어버려.</strong></p>
+  <p>그 상태에서 "더 크게 불러!"라고 시키면? 목소리 큰 사람만 더 커진다. <strong>연습할수록 나빠지는 것</strong>이야.</p>
+  <div class="real"><b>임상 관찰</b> — 어깨 환자 대다수가 <b>삼각근을 가장 먼저·과하게</b> 쓴다. 상부 승모근·광배근도 함께 과활성인 경우가 많다. 근육이 큰 보디빌더에게도 어깨 소리·불안정이 나타난다 — <b>근력의 문제가 아니라는 증거</b>다.</div>
+</div>
+
+<div class="callout danger">
+<span class="tag">가장 흔한 악화 경로</span>
+어깨를 <strong>강화 목적으로 초반부터 무겁게, 큰 범위로</strong> 움직인다 → 뇌는 익숙한 보상 패턴을 반복한다 → <strong>잘못된 방식이 강화된다.</strong> 할 때는 모르지만 점점 불편해지고, <em>"좋은 운동이라 했으니 참아야지"</em> 하며 계속하다 더 망가져서 온다.
+</div>
+
+<h3>동적 관절 중심화 <span class="src p">P</span></h3>
+<p>어깨는 소켓 안에 공이 들어 있는 구조다. 팔을 움직일 때 <strong>상완골두가 소켓 내에서 최적 위치를 유지</strong>해야 한다. 골두는 고정된 것이 아니라 각도에 따라 구르고 미끄러지며 제 위치를 유지한다 — 이것이 <strong>동적 관절 중심화</strong>다.</p>
+<ul>
+<li><strong>근육을 키운다고 관절 중심화가 이루어지지 않는다.</strong> 이것은 신경계 조절의 문제다</li>
+<li>삼각근만 과활성 → 상완골두가 <strong>위로 당겨짐</strong> → 충돌 반복</li>
+<li>회전근개가 제때 활성화되면 골두를 <strong>아래로 잡아주어</strong> 안정성이 생긴다</li>
+<li><strong>재활의 목적은 근력·근비대가 아니라 신경계 조절</strong> — 힘의 균형뿐 아니라 <strong>신호를 주고받는 타이밍</strong></li>
+</ul>
+
+<h2><span class="num">2-3</span>고유수용성 감각과 신경계 조절 <span class="src both">공통</span></h2>
+<div class="card">
+<p><strong>고유수용성 감각(Proprioception)</strong> — 근육·관절·힘줄의 수용체가 뇌에 전달하는 <strong>내 몸의 위치·움직임·힘</strong> 정보. 눈을 감고 손가락을 코에 댈 수 있는 것이 이 감각 덕분이다.</p>
+<p>이 감각이 무뎌지면 <strong>안정화 근육이 제때 반응하지 못한다.</strong> 그래서 통증과 부상이 반복된다. 재활은 <strong>이 감각을 재교육하는 과정</strong>이다.</p>
+<h4>따라오는 두 용어</h4>
+<ul>
+<li><strong>협응(Coordination)</strong> — 여러 근육이 적절한 타이밍·비율로 함께 일하는 능력. 근력이 있어도 협응이 안 되면 안정화에 실패한다</li>
+<li><strong>반사적 안정화</strong> — 의식적으로 "조여야지"가 아니라 움직임 중 <strong>자동으로</strong> 안정화가 발동하는 상태. 이것이 최종 목표다</li>
+</ul>
+</div>
+
+<h2><span class="num">2-4</span>신경 활주 — "눌려서 아프다"의 재검토 <span class="src p">P</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>고무줄을 옷 속에 넣고 다닌다고 하자. 팔을 뻗으면 고무줄도 <strong>같이 늘어나면서 따라와야</strong> 해.</p>
+  <p>그런데 고무줄 어느 한 지점이 <strong>옷에 딱 붙어버렸어.</strong> 그러면 팔을 뻗을 때마다 <strong>반대쪽이 억지로 당겨진다.</strong> 붙은 곳이 아니라 <strong>엉뚱한 곳이 아파온다.</strong></p>
+  <div class="real"><b>진짜 이름</b> — <b>신경 활주(nerve gliding)</b>. 신경은 고정된 전선이 아니라 근육·근막 사이를 미끄러지며 늘어났다 줄어든다.</div>
+</div>
+
+<div class="callout">
+<span class="tag">출발점이 된 모순</span>
+<strong>MRI에서 신경 압박이 명확한데 증상이 전혀 없는 사람</strong>이 있고, <strong>영상이 완전히 정상인데 팔이 심하게 저린 사람</strong>이 있다. 압박만으로는 이 둘이 설명되지 않는다.
+</div>
+
+<div class="card">
+<h4>기전</h4>
+<ol>
+<li>한 지점에 유착·과긴장·자세 비틀림이 생겨 신경이 <strong>붙잡힌다</strong></li>
+<li>전체 활주가 제한된다 → 움직이지 못한 신경이 <strong>비틀리고 긴장이 누적</strong></li>
+<li>고정된 반대편이 <strong>과도한 스트레스</strong>를 받아 염증이 생긴다</li>
+<li>신경 주변 혈류가 줄고 <strong>신경 내 압력이 상승</strong> → 산소 공급 부족 → 감각 이상, 자율신경 반응까지</li>
+</ol>
+<h4>임상 단서</h4>
+<ul>
+<li>흉곽출구증후군</li>
+<li>팔을 들거나 움직일 때 저림</li>
+<li><strong>누우면 괜찮은데 앉으면 증상이 커짐</strong> — 자세에 따라 신경의 길이·방향이 바뀌는데 신경이 따라가지 못하는 것</li>
+</ul>
+<h4>검출</h4>
+<p><strong>기질적 문제가 아니라 기능적 문제이므로 MRI·CT로 보이지 않는다.</strong> 움직임 검사·동작 분석으로 잡아낸다.</p>
+</div>
+
+<div class="callout warn">
+<span class="tag">수술에 대한 신중론 <span class="src p">P</span></span>
+흉곽출구증후군에서 <strong>제1늑골 절제·사각근 절제</strong>가 시행되지만 <strong>만족도가 높지 않다는 보고가 많다</strong>고 언급한다. 실제로 수술 후 증상이 그대로거나 더 불편해졌다는 환자를 본다고 한다. <strong>단, 이는 한 임상의의 의견이며 수술 여부는 담당 의사와 상의할 사안이다.</strong>
+</div>
+
+<div class="callout ok">
+<span class="tag">저자의 관점 이동 — 솔직한 기록</span>
+PAINLAB은 <strong>과거에는 신경 유착 자체를 푸는 데 집중</strong>했고, 몇 년 전에는 <strong>견갑·어깨 안정화 훈련</strong>을 했다. 지금은 그보다 <strong>체간 안정성이 더 중요할 수 있다</strong>고 말한다. 체간이 한쪽으로 무너진 채 생활하면 견갑이 불안정해지고 쇄골이 처져 <strong>흉곽출구 공간이 좁아진다</strong>는 것이다.<br>
+<strong>유착을 풀어도 왜 생겼는지를 해결하지 않으면 반복된다.</strong>
+</div>
+
+<h2><span class="num">2-5</span>호흡 — 만성 과호흡 증후군 <span class="src n">남</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>몸속에 <strong>연료 경고등</strong>이 있어. 그런데 이 경고등은 산소를 보고 켜지는 게 아니야. <strong>이산화탄소를 보고 켜진다.</strong></p>
+  <p>오랫동안 빨리 숨 쉬는 습관이 들면, 몸이 <strong>낮은 이산화탄소에 익숙해져.</strong> 그러면 정상 수치인데도 경고등이 켜져. "산소 부족!" 하고. 그래서 더 빨리 숨 쉬고, 더 낮아지고, 악순환이야.</p>
+  <div class="real"><b>가장 반직관적인 결과</b> — 혈액 속 산소는 <b>많다</b>. 그런데 조직에 전달이 안 된다. 저자는 이를 <b>"풍요 속의 빈곤"</b>이라 부른다.</div>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="hvPrev">◀ 이전</button>
+    <button type="button" id="hvPlay">▶ 재생</button>
+    <button type="button" id="hvNext">다음 ▶</button>
+    <span class="spacer"></span>
+    <span class="count" id="hvCount">1 / 4</span>
+  </div>
+  <div class="scroll">
+  <svg id="hvSvg" viewBox="0 0 440 260" role="img" aria-label="만성 과호흡에서 이산화탄소가 낮게 적응되고 중탄산염이 배출되며, 산소 해리가 방해되어 조직에 산소가 전달되지 않는 연쇄" style="min-width:400px">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+    <path class="ed" id="he1" d="M220 62 V84" marker-end="url(#ah)"/>
+    <path class="ed" id="he2" d="M220 124 V146" marker-end="url(#ah)"/>
+    <path class="ed" id="he3" d="M220 186 V208" marker-end="url(#ah)"/>
+    <g class="bx" id="h1" data-s="0"><rect x="20" y="14" width="400" height="48" rx="11"/>
+      <text x="36" y="34" font-size="10" font-weight="800" opacity=".55">1</text>
+      <text x="36" y="52" font-size="13" font-weight="700">호흡이 잦아진다 → 혈중 이산화탄소가 35 미만으로 낮게 적응</text></g>
+    <g class="bx" id="h2" data-s="1"><rect x="20" y="84" width="400" height="48" rx="11"/>
+      <text x="36" y="104" font-size="10" font-weight="800" opacity=".55">2</text>
+      <text x="36" y="122" font-size="13" font-weight="700">중탄산염이 불필요해져 소변으로 배출 — 양이온과 함께</text></g>
+    <g class="bx" id="h3" data-s="2"><rect x="20" y="146" width="400" height="48" rx="11"/>
+      <text x="36" y="166" font-size="10" font-weight="800" opacity=".55">3</text>
+      <text x="36" y="184" font-size="13" font-weight="700">근수축 재료(양이온) 고갈 → 근경련 · 불수의 수축</text></g>
+    <g class="bx" id="h4" data-s="3"><rect x="20" y="208" width="400" height="48" rx="11"/>
+      <text x="36" y="228" font-size="10" font-weight="800" opacity=".55">4</text>
+      <text x="36" y="246" font-size="13" font-weight="700">센서 오작동 — 정상 수치를 "산소 부족"으로 해석 → 수면 중 각성</text></g>
+  </svg>
+  </div>
+  <div class="detail" id="hvDetail"></div>
+  <figcaption>참고문헌으로 <strong>Leon Chaitow 『호흡 양상 장애의 인지 및 치료』</strong>를 제시한다. 더 깊이 보려면 생리학 교과서를 봐야 한다고 안내한다.</figcaption>
+</figure>
+
+<div class="callout">
+<span class="tag">PAINLAB의 대응 서술 <span class="src p">P</span></span>
+같은 연결을 증상 쪽에서 설명한다 — <strong>공황·불안 → 과호흡 → 횡격막 기능 저하 → 코어 불안정.</strong> 두근거림·어지럼·불면·소화불량·브레인포그가 <strong>하나로 연결된 시스템</strong>이라는 것. 두 채널이 서로 다른 층(생화학 / 증상)에서 같은 그림을 말한다.
+</div>
+
+<h2><span class="num">2-6</span>2부 요약 — 여섯 문장</h2>
+<div class="card">
+<ol>
+<li>누가 일을 안 하면 다른 누군가가 대신한다 — 아픈 곳은 대신 일한 쪽이다</li>
+<li>고관절과 체간이 가장 약해지기 쉽고, 그 부담은 무릎·요추로 간다</li>
+<li>회전은 흉추가 해야 한다. 흉추가 굳으면 요추가 대신 돌고 망가진다</li>
+<li>큰 근육이 먼저 튀어나오면 작은 안정화 근육은 일할 기회를 잃는다</li>
+<li>신경은 눌려서만 아픈 게 아니라 <strong>움직이지 못해서</strong> 아프다</li>
+<li>호흡은 근골격의 문제이자 자율신경의 문제다 — 산소 센서는 이산화탄소다</li>
+</ol>
+</div>
+
+</section>
+
+<!-- ================= 3부 평가·실기 ================= -->
+<section class="page" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+
+<p class="lead">기능장애는 <b>사진이 아니라 움직임으로</b> 진단한다. 그리고 그 움직임은 「동작 따라 하기」가 아니다.</p>
+
+<h2><span class="num">3-1</span>운동이 곧 검사다 <span class="src n">남</span></h2>
+
+<div class="callout">
+<span class="tag">핵심 주장</span>
+<em>"기능장애는 검사해도 안 나옵니다. 안 나와요. 근데 나오거든요. <strong>운동하면 나옵니다.</strong> 근데 운동도 그냥 단순한 운동 따라 하기가 아니고요."</em>
+</div>
+
+<div class="card">
+<h4>측정하는 것 — 양이 아니라 질</h4>
+<div class="tablewrap">
+<table>
+<thead><tr><th>측정 항목</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td><strong>초기부하</strong></td><td>정상 패턴·정상 자극이 나오는 <strong>가장 낮은</strong> 부하</td></tr>
+<tr><td><strong>최대부하</strong></td><td>정상 패턴을 유지한 채 도달 가능한 <strong>가장 높은</strong> 부하</td></tr>
+<tr><td><strong>유지 시간</strong></td><td>그 부하에서 패턴이 무너지지 않고 버티는 시간</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">이 세 값을 기록지에 남겨 방문마다 비교한다. <strong>"몇 초 버텼나"라는 양적 측정이 아니라, 개별 맞춤 세팅 하에서의 질적 평가</strong>다.</p>
+<div class="callout warn">
+<span class="tag">그래서 생기는 구조적 한계</span>
+<strong>세팅을 만들 수 있는 사람이어야 검사가 성립한다.</strong> 개별 맞춤 세팅을 못 하면 이학적 검사 자체가 불가능해진다. 남준록 원장이 <strong>중재자(mediator) 역량</strong>을 반복 강조하는 이유이고, 재활을 <strong>"2인 3각"</strong>이라 부르는 이유다.
+</div>
+</div>
+
+<h2><span class="num">3-2</span>초기부하 설정 — 이 교본의 시그니처 <span class="src n">남</span></h2>
+
+<div class="eli">
+  <span class="tag">쉽게 말하면</span>
+  <p>계단 5칸을 한 번에 뛰어오르라고 하면 못 올라가. 그런데 <strong>1칸, 2칸, 3칸, 4칸을 차례로 밟고 오면</strong> 5칸째에 서 있을 수 있어.</p>
+  <p>이상하지? 똑같은 5칸인데. 그런데 몸은 진짜로 그렇게 작동한다.</p>
+  <div class="real"><b>원문</b> — <i>"5라는 강도에서 수행했을 때는 되지 않았던 동작인데, 1·2·3·4·5를 해 버리니까 갑자기 정상 규칙 하에서 정상 활성화 자극이 들어오는 운동이 되어 버린다."</i></div>
+</div>
+
+<h3>왜 그런가 — 1형 섬유의 「활성화」 개념</h3>
+<div class="card">
+<p>안정화 훈련은 <strong>1형(지근) 섬유</strong>를 대상으로 한다. 이 섬유가 활성화되는 조건은 정해져 있다.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>조건</th><th>값</th></tr></thead>
+<tbody>
+<tr><td>강도</td><td><strong>최대 근력의 25% 미만</strong></td></tr>
+<tr><td>속도</td><td>느리게. 움직이는 것조차 힘들면 <strong>정지(isometric)</strong>로 전환</td></tr>
+<tr><td>접근 개념</td><td>근력 강화·근비대가 아니라 <strong>활성화</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h4>「활성화」란 무엇인가</h4>
+<p>근섬유가 100개 있다고 하자. 질문은 <strong>"몇 개를 한 번에 동원해서 쓸 수 있는가"</strong>다.</p>
+<ul>
+<li>잘못 움직여 2형 섬유 위주로 적응된 사람은 <strong>5개밖에 못 쓴다</strong> — 근육은 있는데 쓴 기억이 없다</li>
+<li>5개를 쓸 수 있는 부하로 설정하면, 그 5개가 지칠 때 <strong>다른 5개로 교대</strong>된다</li>
+<li>교대가 돌아가며 100개가 모두 일해 본 경험이 쌓이면, <strong>10개를 쓰는 부하</strong>로 올린다</li>
+<li>이 과정을 반복해 20개, 그다음으로 올린다</li>
+</ul>
+</div>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="loA" class="on">실패 — 바로 5에서 시작</button>
+    <button type="button" id="loB">성공 — 1부터 밟고 올라감</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 200" role="img" aria-label="부하 5에서 바로 시작하면 정상 활성화가 되지 않지만 1부터 차례로 올리면 같은 부하 5에서 정상 활성화가 이루어진다" style="min-width:400px">
+    <line x1="30" y1="160" x2="420" y2="160" stroke="currentColor" stroke-opacity=".25"/>
+    <text x="30" y="178" font-size="10" fill="currentColor" opacity=".5">부하 →</text>
+    <g id="loAg">
+      <rect x="330" y="60" width="60" height="100" rx="5" fill="var(--d-soft)" stroke="var(--d)" stroke-width="1.8"/>
+      <text x="360" y="52" text-anchor="middle" font-size="11" font-weight="800" fill="var(--d-ink)">5</text>
+      <text x="360" y="115" text-anchor="middle" font-size="22">✕</text>
+      <text x="30" y="40" font-size="12" font-weight="800" fill="var(--d-ink)">보상 패턴 발생 · 정상 자극 없음</text>
+      <text x="30" y="60" font-size="11" fill="currentColor" opacity=".7">"안 되네" → 대개 여기서 운동을 포기하거나,</text>
+      <text x="30" y="78" font-size="11" fill="currentColor" opacity=".7">보상을 쓴 채로 억지로 반복해 <tspan font-weight="800">잘못된 패턴을 강화</tspan>한다.</text>
+      <text x="30" y="196" font-size="11" fill="currentColor" opacity=".6">몸이 안 좋을수록 초기부하 수준이 낮다 — 자기 다리 무게조차 못 드는 경우가 있다.</text>
+    </g>
+    <g id="loBg" style="display:none">
+      <rect x="42" y="140" width="60" height="20" rx="4" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="72" y="132" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--ok)">1</text>
+      <rect x="114" y="120" width="60" height="40" rx="4" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="144" y="112" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--ok)">2</text>
+      <rect x="186" y="100" width="60" height="60" rx="4" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="216" y="92" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--ok)">3</text>
+      <rect x="258" y="80" width="60" height="80" rx="4" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="288" y="72" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--ok)">4</text>
+      <rect x="330" y="60" width="60" height="100" rx="4" fill="var(--a-soft)" stroke="var(--a)" stroke-width="2"/>
+      <text x="360" y="52" text-anchor="middle" font-size="11" font-weight="800" fill="var(--a-ink)">5 ✓</text>
+      <text x="30" y="30" font-size="12" font-weight="800" fill="var(--a-ink)">같은 부하 5인데 이번엔 정상 활성화가 일어난다</text>
+      <text x="30" y="196" font-size="11" fill="currentColor" opacity=".7">사람마다 첫 계단이 다르다 — 누구는 1, 누구는 2, 누구는 3에서 시작한다.</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>두 가지를 동시에 지켜야 한다 — <strong>① 초기부하를 반드시 찾을 것 ② 그 자리에 머물지 말고 상향을 반드시 시도할 것.</strong> 낮은 부하에서만 열심히 하는 것도 틀렸다고 명시한다.</figcaption>
+</figure>
+
+<h2><span class="num">3-3</span>실기 A — 국소코어 세팅 + 장골근 <span class="src n">남</span></h2>
+
+<div class="callout danger">
+<span class="tag">읽기 전에</span>
+아래는 <strong>영상에서 설명된 절차의 기록</strong>이지 개인 처방이 아니다. 원문 자체가 <em>"이 영상에 모든 걸 담을 순 없다. 해 보고 안 되면 병원이나 센터에서 배우라"</em>고 말한다. <strong>통증이 나오면 즉시 중단한다.</strong>
+</div>
+
+<h3>세팅</h3>
+<ul>
+<li><strong>베개 2~3개</strong>를 겹쳐 경추를 약간 굴곡시킨다(병원에서는 경추 굴곡 베드 사용)</li>
+<li>머리와 <strong>어깨 끝점</strong>이 베개 위에 놓이게 한다 — 어깨가 바닥으로 떨어지지 않게</li>
+<li><strong>확인 기준은 갈비뼈</strong>다. 손으로 쓸어보아 흉곽이 뜨거나 크게 튀어나오지 않아야 한다</li>
+<li>발 아래 웨지 또는 <strong>큰 수건 3단 접기</strong>. 무릎을 세운다</li>
+<li>위에서 볼 때 <strong>발·무릎·고관절이 일직선</strong>. 옆에서 볼 때 90도에 가깝게 — 단 고관절 제한이 있으면 발을 <strong>약간 멀리</strong> 둔다</li>
+</ul>
+<div class="callout">
+<span class="tag">부하 조절 원리 — 모멘트암</span>
+발(수건)이 <strong>몸에서 멀어지면 부하↑</strong>, <strong>가까워지면 부하↓</strong>. 세팅 하나로 부하를 연속적으로 조절한다.
+</div>
+<div class="callout warn">
+<span class="tag">「중립」의 정의</span>
+여기서 중립은 <strong>교과서적 정상 정렬이 아니다.</strong> <em>"대상자가 행할 수 있는 중립"</em>이며 개별적으로 다르다. 그래서 베개 개수도, 발 위치도, 무릎 각도도 사람마다 달라진다.
+</div>
+
+<h3>감각인지 연습 — 3단계</h3>
+<p>운동 전에 반드시 거친다. <strong>이것이 안 되면 집에서 "제대로 하고 있는지"를 판단할 기준 자체가 없다.</strong></p>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="scPrev">◀ 이전</button>
+    <button type="button" id="scPlay">▶ 재생</button>
+    <button type="button" id="scNext">다음 ▶</button>
+    <span class="spacer"></span>
+    <span class="count" id="scCount">1 / 3</span>
+  </div>
+  <div class="scroll">
+  <svg id="scSvg" viewBox="0 0 440 210" role="img" aria-label="감각인지 3단계. 다리 속도 인지, 골반이 눌리는 감각 인지, 척추 커브 변화 감시" style="min-width:400px">
+    <g class="bx" id="c1" data-s="0"><rect x="20" y="14" width="400" height="56" rx="11"/>
+      <text x="36" y="34" font-size="10" font-weight="800" opacity=".55">1단계</text>
+      <text x="36" y="52" font-size="13.5" font-weight="700">다리를 움직이는 속도 찾기</text>
+      <text x="36" y="66" font-size="9.5" opacity=".62">"휙"도 아니고 "찔끔찔끔"도 아닌 — 「쓱」</text></g>
+    <g class="bx" id="c2" data-s="1"><rect x="20" y="80" width="400" height="56" rx="11"/>
+      <text x="36" y="100" font-size="10" font-weight="800" opacity=".55">2단계</text>
+      <text x="36" y="118" font-size="13.5" font-weight="700">골반이 바닥에 눌리는 것을 느끼기</text>
+      <text x="36" y="132" font-size="9.5" opacity=".62">다리 무게가 늘면서 골반의 닿는 부분이 눌린다</text></g>
+    <g class="bx" id="c3" data-s="2"><rect x="20" y="146" width="400" height="56" rx="11"/>
+      <text x="36" y="166" font-size="10" font-weight="800" opacity=".55">3단계</text>
+      <text x="36" y="184" font-size="13.5" font-weight="700">척추 커브의 모양 변화를 감시하기</text>
+      <text x="36" y="198" font-size="9.5" opacity=".62">고정이 아니다 — 일정 수준 이상 변하지 않게 균형을 잡는 것</text></g>
+  </svg>
+  </div>
+  <div class="detail" id="scDetail"></div>
+  <figcaption><strong>감각인지 단계에서는 틀려도 된다.</strong> 목표는 정확히 해내는 것이 아니라 <strong>"내 몸에서 지금 무슨 일이 일어나는지 알아차리는 것"</strong>이다.</figcaption>
+</figure>
+
+<h3>구두 규칙 3가지</h3>
+<div class="tablewrap">
+<table>
+<thead><tr><th>#</th><th>규칙</th><th>이유</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>반대쪽 발로 바닥을 누르지 않는다</strong></td><td>누르면 쉬워진다. 다리-체간 협응을 만드는 훈련이므로 반대쪽은 철저히 배제</td></tr>
+<tr><td>2</td><td><strong>무릎 각도를 유지한다</strong></td><td>각도가 변하면 부하가 달라져 측정이 무의미해짐</td></tr>
+<tr><td>3</td><td><strong>발 전체를 대각선 위로 띄운다</strong></td><td>발끝만 들지 않는다</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>판정 — 장골근 스위치</h3>
+<ol class="step">
+<li><b>세팅 후 다리를 「쓱」 들고 1분 유지</b>
+<span class="why">서혜부 안쪽 <strong>장골근에 연한 자극감</strong>이 오는지 확인한다. 부하가 낮으므로 자극은 연하다.</span></li>
+<li><b>안 느껴지면 조금 더 든다</b>
+<span class="why">현재 몸 모양을 새 기준으로 삼고, 규칙을 지키며 발을 조금 더 띄운다.</span></li>
+<li><b>그래도 안 되면 부하를 낮춘다</b>
+<span class="why">벽에 베개를 대고 기대어 <strong>지지면을 넓힌다.</strong> 다리를 세우는 것조차 무거운 사람이라는 뜻이다.</span></li>
+<li><b>자극이 확인되면 = 정상 초기 활성화</b>
+<span class="why">이 지점이 그 사람의 <strong>초기부하</strong>다.</span></li>
+<li><b>부하를 올린다 — 무릎을 편다</b>
+<span class="why">모멘트가 증가해 자극이 진해져야 한다. <strong>자극이 안 늘면 즉시 되돌린다.</strong> 이것이 부하를 "맞추는" 작업이다.</span></li>
+</ol>
+<div class="callout ok">
+<span class="tag">순서</span>
+<strong>가만히 있기(isometric hold) 훈련이 먼저다.</strong> 움직이는 훈련은 그다음이다.
+</div>
+
+<h2><span class="num">3-4</span>실기 B — 미세 외전 훈련 <span class="src p">P</span></h2>
+
+<div class="callout danger">
+<span class="tag">선행 조건</span>
+<strong>어떤 자세에서도 통증이 나온다면 재활보다 치료가 우선이다.</strong> 원문의 명시적 지시다.
+</div>
+
+<div class="card">
+<h4>핵심 아이디어</h4>
+<p>삼각근이 과활성되기 <strong>직전 구간</strong>에서만 훈련한다. 팔을 옆으로 드는 외전 초기 <strong>10도</strong>에서는 삼각근뿐 아니라 <strong>극상근·하부 회전근개·전거근</strong>이 함께 반응한다. 그 구간에 머물러 조절 근육들이 <strong>제때 신호를 주고받는 연습</strong>을 시킨다.</p>
+</div>
+
+<ol class="step">
+<li><b>팔 위치 세팅</b>
+<span class="why">팔꿈치를 접어 몸에 가깝게. <strong>목·어깨·팔에 뻐근함이나 신경 증상이 없는 위치</strong>를 찾는다. 팔 무게가 부담되면 책상이나 베개로 받친다.</span></li>
+<li><b>「든다」가 아니라 「겨드랑이를 벌린다」</b>
+<span class="why">팔을 든다는 느낌이면 삼각근이 먼저 나온다. <strong>겨드랑이 안쪽을 10도 벌린다</strong>는 느낌으로.</span></li>
+<li><b>10도에서 2~3초 정지</b>
+<span class="why">그 상태에서 목이 뻐근한지, 상부 승모근·삼각근에 힘이 과하게 들어왔는지 점검한다. 과하면 <strong>5도로 줄인다.</strong></span></li>
+<li><b>내릴 때가 더 중요하다</b>
+<span class="why">올라간 <strong>역순 그대로, 같은 궤적·같은 속도</strong>로 내린다. 확 떨어뜨리면 <strong>운동 효과가 0</strong>이 된다(신장성 수축이 사라짐).</span></li>
+<li><b>힘을 주지 않는다</b>
+<span class="why">"어디에 힘을 꽉 줘야 하나요"가 가장 흔한 질문인데, 초반에는 <strong>큰 자극 없이</strong> 반복한다.</span></li>
+</ol>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>항목</th><th>기준</th></tr></thead>
+<tbody>
+<tr><td><strong>성공 신호</strong></td><td>겨드랑이 안쪽 <strong>깊은 곳에서 모를 피로감</strong> → 전거근 상부섬유 활성화 가능성</td></tr>
+<tr><td><strong>중단 기준</strong></td><td>목·어깨 <strong>신경 증상</strong>이나 불편감 발생 시 <strong>즉시 중단</strong>. 쉬거나 범위를 5도로 축소</td></tr>
+<tr><td><strong>보상 신호</strong></td><td>다른 데로 힘이 과하게 넘어가면 보상. 범위를 줄이거나 휴식</td></tr>
+<tr><td><strong>진행 속도</strong></td><td><strong>최소 1주일은 같은 범위 유지.</strong> 익숙해진 뒤 10 → 20 → 30 → 90도</td></tr>
+<tr><td><strong>시간</strong></td><td>초반 하루 30분 정도, 같은 동작을 지칠 때까지</td></tr>
+<tr><td><strong>목적</strong></td><td>근력 아님. <strong>뇌가 어깨를 움직이는 방식을 재프로그래밍하는 것</strong></td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout warn">
+<span class="tag">가장 흔한 실수 — 저자가 직접 경고</span>
+<em>"10도 연습하고 되는 것 같으면 바로 20도, 30도 늘리실 텐데 <strong>그렇게 하시면 절대 안 됩니다.</strong>"</em><br>
+그리고 이 훈련은 <strong>재미없고 짜증난다.</strong> 큰 범위 운동이 재미있는 이유는 근육이 쓰이는 맛이 있어서인데, <strong>불안정한 사람이 큰 범위로 운동하다 악화되는 원인이 바로 그것</strong>이다.
+</div>
+
+<h2><span class="num">3-5</span>두 실기의 공통 원칙</h2>
+<div class="card">
+<div class="tablewrap">
+<table>
+<thead><tr><th>원칙</th><th>국소코어 <span class="src n">남</span></th><th>미세 외전 <span class="src p">P</span></th></tr></thead>
+<tbody>
+<tr><td>목적</td><td>협응·활성화</td><td>신경계 조절·동원 순서</td></tr>
+<tr><td>강도</td><td>최대근력 25% 미만</td><td>큰 자극 없이</td></tr>
+<tr><td>범위</td><td>부하를 낮춰 시작</td><td>10도로 제한</td></tr>
+<tr><td>속도</td><td>「쓱」 · 정지 우선</td><td>부드럽게 · 2~3초 정지</td></tr>
+<tr><td>성공 신호</td><td>장골근 연한 자극</td><td>겨드랑이 깊은 곳 피로감</td></tr>
+<tr><td>진행</td><td>초기부하 → 상향 시도 필수</td><td>1주 유지 후 확대</td></tr>
+<tr><td>중단</td><td>정상 자극 소실 시 되돌림</td><td>신경 증상 시 즉시 중단</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">부위도 다르고 용어도 다르지만 <strong>구조가 동일하다</strong> — 가장 낮은 부하에서 정확한 신호를 찾고, 그 신호를 유지한 채로만 부하를 올린다.</p>
+</div>
+
+</section>
+
+<!-- ================= 4부 안전·감별 ================= -->
+<section class="page" id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+
+<p class="lead">이 부는 <b>가장 중요하다.</b> 기능적 접근이 유효한 경우와, <b>즉시 다른 경로로 가야 하는 경우</b>를 가른다.</p>
+
+<h2><span class="num">4-1</span>적색 신호 — 즉시 진료</h2>
+
+<div class="callout danger">
+<span class="tag">아래에 해당하면 재활·자가운동을 중단하고 의료기관으로</span>
+이 항목들은 기능장애가 아니라 <strong>구조적·전신적 질환</strong>을 시사하는 일반적 경고 징후다. 두 저자의 접근과 무관하게 우선한다.
+</div>
+
+<div class="card">
+<div class="red"><span class="ic">1</span><div class="bd"><b>배뇨·배변 장애, 회음부 감각 소실</b><span>말안장 부위 감각 저하, 소변을 못 보거나 새는 경우 — <strong>마미증후군 의심. 응급.</strong></span></div></div>
+<div class="red"><span class="ic">2</span><div class="bd"><b>진행하는 근력 저하</b><span>발이 끌리거나 물건을 자꾸 떨어뜨리는 등 <strong>점점 나빠지는</strong> 마비·위약</span></div></div>
+<div class="red"><span class="ic">3</span><div class="bd"><b>야간통 · 안정 시 통증</b><span>쉬어도 줄지 않고 밤에 심해지는 통증</span></div></div>
+<div class="red"><span class="ic">4</span><div class="bd"><b>설명되지 않는 체중 감소 · 발열 · 오한</b><span>종양·감염 감별 필요</span></div></div>
+<div class="red"><span class="ic">5</span><div class="bd"><b>암·결핵·면역억제·최근 감염 병력</b><span>동일 증상이라도 감별 우선순위가 달라진다</span></div></div>
+<div class="red"><span class="ic">6</span><div class="bd"><b>외상 직후 · 고령의 골다공증 + 갑작스러운 통증</b><span>골절 감별</span></div></div>
+<div class="red"><span class="ic">7</span><div class="bd"><b>흉통 · 호흡곤란 · 실신 · 갑작스러운 심한 두통</b><span>근골격 문제로 접근할 사안이 아니다</span></div></div>
+<div class="red"><span class="ic">8</span><div class="bd"><b>어떤 자세에서도 통증이 나온다</b><span>PAINLAB의 명시적 기준 — <strong>재활보다 치료가 우선</strong></span></div></div>
+</div>
+
+<h2><span class="num">4-2</span>감별 — 방사통 vs 좌골신경통 <span class="src n">남</span></h2>
+
+<p>이 감별이 중요한 이유는 <strong>치료 방향이 정반대</strong>이기 때문이다. 한쪽은 수술 적응증이 될 수 있고, 다른 쪽은 <strong>수술 적응증이 아니다.</strong></p>
+
+<figure>
+  <div class="ctrls">
+    <button type="button" id="dxA" class="on">방사통 (Radiating pain)</button>
+    <button type="button" id="dxB">좌골신경통 (심부둔근증후군)</button>
+  </div>
+  <div class="scroll">
+  <svg viewBox="0 0 440 200" role="img" aria-label="방사통은 더마톰을 따라 연속적으로 내려가지만 좌골신경통은 오금을 건너뛰고 허벅지 앞쪽에는 나타나지 않는다" style="min-width:400px">
+    <g id="dxAg">
+      <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">통증 분포 — 더마톰을 따라 연속</text>
+      <rect x="30" y="30" width="34" height="150" rx="14" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+      <rect x="34" y="34" width="26" height="142" rx="12" fill="var(--d)" opacity=".3"/>
+      <text x="80" y="52" font-size="11" font-weight="800" fill="var(--d-ink)">L4 — 허벅지 앞·안쪽</text>
+      <text x="80" y="76" font-size="11" font-weight="800" fill="var(--d-ink)">L5 — 허벅지 옆 → 발등</text>
+      <text x="80" y="100" font-size="11" font-weight="800" fill="var(--d-ink)">S1 — 엉덩이 → 종아리 뒤 → 발바닥</text>
+      <text x="80" y="130" font-size="11.5" font-weight="800" fill="currentColor">끊기지 않고 <tspan fill="var(--d-ink)">쭉 이어진다</tspan></text>
+      <text x="80" y="152" font-size="11" fill="currentColor" opacity=".7">환자는 허리보다 <tspan font-weight="800">다리 통증</tspan>을 호소한다.</text>
+      <text x="80" y="170" font-size="10.5" fill="currentColor" opacity=".6">허리도 아프지만 다리 신경통이 훨씬 강해 묻힌다.</text>
+    </g>
+    <g id="dxBg" style="display:none">
+      <text x="10" y="18" font-size="11" font-weight="800" fill="currentColor" opacity=".6">통증 분포 — 더마톰을 따르지 않고 중간이 끊긴다</text>
+      <rect x="30" y="30" width="34" height="150" rx="14" fill="var(--surface)" stroke="currentColor" stroke-opacity=".3"/>
+      <rect x="34" y="34" width="26" height="46" rx="10" fill="var(--a)" opacity=".35"/>
+      <rect x="34" y="96" width="26" height="80" rx="10" fill="var(--a)" opacity=".35"/>
+      <rect x="34" y="82" width="26" height="12" fill="none" stroke="var(--a)" stroke-dasharray="3 2"/>
+      <text x="80" y="52" font-size="11" font-weight="800" fill="var(--a-ink)">엉덩이 · 허벅지 뒤</text>
+      <text x="80" y="76" font-size="11" font-weight="800" fill="var(--a-ink)">오금(무릎 뒤) — <tspan fill="currentColor">건너뛴다</tspan></text>
+      <text x="80" y="100" font-size="11" font-weight="800" fill="var(--a-ink)">종아리 · 정강이 · 발</text>
+      <text x="80" y="128" font-size="11.5" font-weight="800" fill="currentColor">허벅지 <tspan fill="var(--a-ink)">앞쪽</tspan>은 해당 없음</text>
+      <text x="80" y="150" font-size="11" fill="currentColor" opacity=".7">범위가 국한되거나, 여기 아팠다 저기 아팠다 <tspan font-weight="800">바뀐다.</tspan></text>
+      <text x="80" y="170" font-size="10.5" fill="currentColor" opacity=".6">심하면 앉아 있는 것만으로도 심부둔근이 일해야 해 오래 못 앉는다.</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>좌골신경은 <strong>허벅지 앞쪽을 제외한 다리 전체</strong>에 가지를 친다. 그래서 앞쪽 통증은 좌골신경통으로 설명되지 않는다.</figcaption>
+</figure>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>항목</th><th>방사통</th><th>좌골신경통 (심부둔근증후군)</th></tr></thead>
+<tbody>
+<tr><td><strong>원인</strong></td><td>디스크 퇴행 변화 → <strong>신경 뿌리 직접 압박</strong></td><td>고관절 안정화 근육 협응 실패 → 심부둔근 과활성 → <strong>근육-신경 유착</strong></td></tr>
+<tr><td><strong>영상</strong></td><td>압박이 확인되어야 이 용어를 씀</td><td><strong>MRI에 이상이 거의 없다</strong></td></tr>
+<tr><td><strong>분포</strong></td><td>더마톰 따라 <strong>연속</strong></td><td>더마톰 안 따름. <strong>오금 건너뜀</strong>, 허벅지 앞 없음</td></tr>
+<tr><td><strong>주사 반응</strong></td><td>선택적 신경근차단술에 반응</td><td class="n"><strong>거의 효과 없음</strong></td></tr>
+<tr><td><strong>수술</strong></td><td>감압 수술 고려 가능</td><td class="n"><strong>적응증 아님</strong></td></tr>
+<tr><td><strong>치료 방향</strong></td><td>감압(주사·수술) + <strong>수술 후 재활</strong></td><td class="y"><strong>기능 재활이 필수</strong></td></tr>
+<tr><td><strong>약</strong></td><td colspan="2">공통 — 소염제 + 프레가발린 계열. <strong>둘 다 약으로 근본 해결되지 않는다</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<span class="tag">용어 사용에 대한 지적</span>
+<em>"X-ray만 찍고 '방사통이에요'라고 할 수는 없다."</em> 방사통은 <strong>신경 뿌리 압박이 확인됐을 때</strong> 쓰는 말이다. 확인 전에는 <strong>"다리 쪽에 신경 증상이 있다"</strong>고 표현하는 편이 정확하다.
+</div>
+
+<div class="callout">
+<span class="tag">「이상근증후군」이 「심부둔근증후군」으로 바뀐 이유</span>
+과거에는 이상근(piriformis)만 지목했으나, <strong>해부학적 다양성</strong>이 커서 심부둔근 여러 곳에서 문제가 발생한다는 것이 확인되어 명칭이 넓어졌다.
+</div>
+
+<h2><span class="num">4-3</span>자가 적용 시 중단 기준 <span class="src both">공통</span></h2>
+<div class="card">
+<ol>
+<li><strong>신경 증상(저림·찌릿함)이 나오면 즉시 중단.</strong> 참고 하는 것이 아니다</li>
+<li><strong>운동 중 또는 직후 통증이 늘면 부하가 높거나 잘못된 근육이 일하는 것.</strong> 범위·부하를 낮춘다</li>
+<li><strong>목표 부위에 아무 느낌이 없으면</strong> 부하가 너무 높거나 보상이 일어나는 것 — 더 낮춘다</li>
+<li><strong>어떤 자세에서도 아프면 운동이 아니라 치료 단계</strong></li>
+<li><strong>"좋은 운동이라고 했으니 참는다"는 태도가 가장 위험하다</strong></li>
+</ol>
+</div>
+
+<h2><span class="num">4-4</span>두 저자를 함께 읽을 때 유의점</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th></th><th>남준록 원장 <span class="src n">남</span></th><th>PAINLAB <span class="src p">P</span></th></tr></thead>
+<tbody>
+<tr><td>배경</td><td>신경외과 전문의. 근신경상위인지의학회(NMM) 대표, RMSK(국제 근골격계 초음파), 대한침도의학회 임원, CDPT academy 강사</td><td>난치성 질환 재활 특화 한의원(아나파한의원) 대표원장</td></tr>
+<tr><td>강점</td><td>의학적 감별진단, 생리·생화학 근거, 평가 체계화</td><td>부위별 실기 프로토콜, 환자 눈높이 설명, 영상 다수</td></tr>
+<tr><td>중심 개념</td><td>기능장애 · 지역상호의존성 · 초기부하 · IAP</td><td>동원 순서 · 관절 중심화 · 신경 활주 · 고유수용성</td></tr>
+<tr><td>공통</td><td colspan="2">통증은 경보기 / 안정화가 가동범위보다 먼저 / 근력보다 협응 / 낮은 부하에서 정확한 신호부터</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<span class="tag">이 교본이 하지 않는 것</span>
+<strong>두 저자 사이의 우열을 가리지 않는다.</strong> 용어와 강조점이 다르고 진료 체계도 다르다. 또한 이 교본은 <strong>두 사람의 주장을 제3의 근거로 검증하지 않았다.</strong> 자막에서 확인된 내용을 정확히 옮기고, 어느 쪽 발언인지 표시하고, 확립된 개념과 개인 방법론을 구분한 것까지가 이 문서의 범위다.
+</div>
+
+<h2><span class="num">4-5</span>마지막 — 이 교본을 쓰는 법</h2>
+<div class="card">
+<ol>
+<li><strong>1부로 틀을 잡는다.</strong> 왜 검사에 안 나오는지, 왜 아픈 곳이 원인이 아닌지</li>
+<li><strong>2부로 자기 증상을 다시 읽는다.</strong> "무엇이 일을 안 해서 여기가 대신 일하고 있나"</li>
+<li><strong>4부를 먼저 확인한다.</strong> 적색 신호가 있으면 여기서 멈추고 병원으로</li>
+<li><strong>3부는 반드시 평가를 받은 뒤에.</strong> 초기부하는 사람마다 다르고, 그것을 찾는 것이 중재자의 일이다</li>
+</ol>
+<div class="callout ok">
+<span class="tag">두 저자가 각각 다른 말로 같은 것을 말한다</span>
+<strong>남준록</strong> — <em>"양이 아닙니다. 무조건 질이에요."</em><br>
+<strong>PAINLAB</strong> — <em>"이 훈련의 목적은 근력을 키우는 게 아닙니다. 뇌가 움직이는 방식을 재프로그래밍하는 겁니다."</em>
+</div>
+</div>
+
+<h2><span class="num">부록</span>원문 출처</h2>
+<ul class="meta">
+<li><strong>남준록 원장</strong> — Nam's Approach (남스어프로치) 채널 · <a href="https://www.youtube.com/channel/UCN7-D98gFhQo3lGRfrFhTxA">youtube.com/channel/UCN7-D98gFhQo3lGRfrFhTxA</a> (채널 124편 중 이론·의학정보 26편 사용)</li>
+<li><strong>PAINLAB</strong> — <a href="https://www.youtube.com/@PAINLAB">youtube.com/@PAINLAB</a> (채널 423편 중 이론편 21편 사용)</li>
+<li>주요 근거 영상 — 만성통증 BPS 모델 / 기능장애가 불치병으로 오해받는 이유 / 초기부하 설정의 중요성 / 국소코어 세팅과 감각인지 / 허리디스크와 지역상호의존성 / 만성 과호흡 증후군의 신체 변화 / 방사통과 좌골신경통의 감별 / 재활할수록 견갑골이 망가지는 이유 / 신경이 눌려서 아프다?</li>
+<li>저자 인용 문헌 — Leon Chaitow, 『호흡 양상 장애의 인지 및 치료』</li>
+</ul>
+
+</section>
+
+<footer>
+  2026-09-04 작성 · 남스어프로치(치중진담) 26편 + PAINLAB 21편, 총 47편 자막 원문 기준<br>
+  <strong>본 문서는 교육 목적의 정리이며 의학적 진단·치료를 대체하지 않는다.</strong> 개인의 증상에 대한 판단과 운동 처방은 반드시 자격 있는 의료인의 직접 평가를 통해 받아야 한다.<br>
+  자동 생성 자막을 사용했으므로 전문 용어 일부에 전사 오차가 있을 수 있다. 확립된 개념과 저자 개인의 임상 방법론은 1부 1-4에서 구분해 표기했다.
+</footer>
+
+</div>
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;
+    prog.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var KEY={p1:['--a','--a-soft','--a-ink'],p2:['--b','--b-soft','--b-ink'],p3:['--c','--c-soft','--c-ink'],p4:['--d','--d-soft','--d-ink']};
+  var tabs=[].slice.call(document.querySelectorAll('nav.tabs button'));
+  function show(id){
+    tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;
+      t.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    var k=KEY[id],r=document.documentElement.style;
+    r.setProperty('--k','var('+k[0]+')');r.setProperty('--k-soft','var('+k[1]+')');r.setProperty('--k-ink','var('+k[2]+')');
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.getAttribute('aria-controls'));});});
+  if(location.hash&&KEY[location.hash.slice(1)]) show(location.hash.slice(1));
+
+  function toggle(aId,bId,baId,bbId){
+    var A=document.getElementById(aId),B=document.getElementById(bId),
+        ba=document.getElementById(baId),bb=document.getElementById(bbId);
+    function set(second){A.style.display=second?'none':'';B.style.display=second?'':'none';
+      ba.classList.toggle('on',!second);bb.classList.toggle('on',second);}
+    ba.addEventListener('click',function(){set(false);});
+    bb.addEventListener('click',function(){set(true);});
+  }
+  toggle('bpsAg','bpsBg','bpsA','bpsB');
+  toggle('riAg','riBg','riA','riB');
+  toggle('loAg','loBg','loA','loB');
+  toggle('dxAg','dxBg','dxA','dxB');
+
+  function stepper(svgId,detId,cntId,prevId,playId,nextId,DATA,ms){
+    var svg=document.getElementById(svgId),det=document.getElementById(detId),cnt=document.getElementById(cntId);
+    var cur=-1,timer=null;
+    function render(i){
+      cur=i;
+      svg.querySelectorAll('.bx').forEach(function(n){var s=+n.getAttribute('data-s');
+        n.classList.toggle('act',s===i);n.classList.toggle('seen',s<i);});
+      svg.querySelectorAll('.ed').forEach(function(e,j){e.classList.toggle('act',j<i);});
+      cnt.textContent=(i+1)+' / '+DATA.length;
+      det.innerHTML='<div class="dt">'+DATA[i].t+'</div><div class="row"><b>내용</b>'+DATA[i].r+
+        '</div><div class="row"><b>쉽게 말하면</b><span class="e5">'+DATA[i].e+'</span></div>';
+    }
+    function stop(){if(timer){clearInterval(timer);timer=null;document.getElementById(playId).textContent='▶ 재생';}}
+    document.getElementById(nextId).addEventListener('click',function(){stop();render((cur+1)%DATA.length);});
+    document.getElementById(prevId).addEventListener('click',function(){stop();render((cur-1+DATA.length)%DATA.length);});
+    document.getElementById(playId).addEventListener('click',function(){
+      if(timer){stop();return;}
+      this.textContent='❚❚ 정지';
+      if(cur>=DATA.length-1) render(0);
+      timer=setInterval(function(){if(cur>=DATA.length-1){stop();return;}render(cur+1);},ms);
+    });
+    svg.querySelectorAll('.bx').forEach(function(n){n.addEventListener('click',function(){stop();render(+n.getAttribute('data-s'));});});
+    render(0);
+  }
+
+  stepper('hvSvg','hvDetail','hvCount','hvPrev','hvPlay','hvNext',[
+    {t:'1 · 이산화탄소가 낮게 「적응」된다',
+     r:'만성 과호흡에서는 pH 자체는 7.4로 정상이다. 이미 몸이 그 상황에 적응했기 때문이다. 대신 혈중 이산화탄소가 정상 하한(35) 미만으로 유지된다.',
+     e:'급성이 아니라 만성이라는 게 핵심 — 몸이 이미 이상한 상태를 「정상」으로 받아들였다.'},
+    {t:'2 · 중탄산염을 버린다',
+     r:'호흡으로 산-염기 조절을 자주 하므로 대사성 조절 물질인 중탄산염이 덜 필요해진다. 몸은 이를 소변으로 배출하는데, 이때 음이온인 중탄산염이 양이온과 함께 빠져나간다.',
+     e:'안 쓰는 물건을 버리는 것. 그런데 버릴 때 쓸모 있는 것까지 딸려 나간다.'},
+    {t:'3 · 근수축 재료가 고갈된다',
+     r:'함께 배출된 양이온은 근육 수축에 쓰이는 재료다. 이것이 조금씩 부족해지면서 근경련이나 불수의 수축이 잘 일어나게 된다.',
+     e:'왜 자꾸 쥐가 나고 근육이 떨리는지가 여기서 설명된다.'},
+    {t:'4 · 센서가 오작동한다',
+     r:'산소 부족을 감지하는 센서는 산소가 아니라 혈중 이산화탄소다. 만성 환자는 35 미만에 적응돼 있어, 정상 범위인 38로 조금만 올라가도 「산소 부족」으로 해석하고 호흡을 더 빨리 한다. 자다가 산소 부족을 느껴 자주 깨는 수면 문제로 이어진다.',
+     e:'경고등이 잘못 맞춰져 있어서, 멀쩡한데도 계속 삐삐거리는 상태.'}
+  ],2600);
+
+  stepper('scSvg','scDetail','scCount','scPrev','scPlay','scNext',[
+    {t:'1단계 · 다리를 움직이는 속도',
+     r:'반대쪽 발로 바닥을 누르지 않고, 무릎 각도를 유지한 채, 발 전체를 대각선 위로 띄운다. 속도는 「휙」도 안 되고 「찔끔찔끔」도 안 된다. 너무 느리면 몸이 서서히 틀어지는 것을 알아채지 못하고, 너무 빠르면 인지할 시간이 없다.',
+     e:'구두 지시는 딱 한 글자 — 「쓱」.'},
+    {t:'2단계 · 골반이 눌리는 감각',
+     r:'다리를 들면 무게가 늘면서 골반이 바닥을 누르는 감각이 생긴다. 골반이 닿는 지점은 발 위치·도구·상체 기울기에 따라 매번 달라지므로, 지금 닿아 있는 위치가 그날의 기준일 뿐이다.',
+     e:'정해진 정답 위치가 있는 게 아니라, 오늘 내 몸이 어디에 닿아 있는지를 아는 것.'},
+    {t:'3단계 · 척추 커브의 변화 감시',
+     r:'골반 위로 이어지는 허리·등의 척추 커브가 펴지거나 회전하는 변화를 감시한다. 중요한 것은 이것이 「고정」이 아니라는 점이다. 한쪽 다리를 들면 무게가 쏠려 몸이 약간 기우는 것이 정상이다. 일정 수준 이상 변하지 않게 균형을 잡는 것이 목표다.',
+     e:'몸을 굳히는 게 아니라, 흔들리는 걸 알아차리고 붙잡는 것. 이 단계는 틀려도 된다 — 알아차리는 게 목적이다.'}
+  ],2800);
+})();
+</script>
+</body>
+</html>
