@@ -164,6 +164,32 @@ figcaption{font-size:13.5px;color:var(--dim);margin-top:9px;padding:0 4px;line-h
 footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13.5px}
 [hidden]{display:none!important}
 .pill{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--raise);color:var(--dim);margin:0 4px 4px 0;border:1px solid var(--line)}
+
+.dlrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.dlrow button{appearance:none;font:inherit;font-size:13.5px;font-weight:700;border:1px solid var(--line);
+ background:var(--card);color:var(--ink);border-radius:11px;padding:10px 16px;cursor:pointer;transition:.13s}
+.dlrow button:hover{border-color:var(--k);color:var(--k-i)}
+.dlrow button.pri{background:var(--k-s);color:var(--k-i);border-color:transparent}
+#dlMsg{font-size:13.5px;color:var(--dim);margin-top:6px;min-height:20px}
+
+@media print{
+  @page{margin:14mm 12mm}
+  #prog,.topbar,.ctl,.dlrow,#dlMsg,.q .rev,.cbar button{display:none!important}
+  body{background:#fff;color:#111;font-size:11pt;line-height:1.6}
+  .wrap{max-width:none;padding:0}
+  section.page[hidden]{display:block!important}
+  section.page{page-break-before:always;padding-top:0}
+  section.page:first-of-type{page-break-before:auto}
+  .q .ans{display:block!important;border-top:1px dashed #bbb}
+  figure,.box,.note,.eli,.tw,table,.q{page-break-inside:avoid}
+  h2,h3,h4{page-break-after:avoid}
+  .box,.note,.eli,figure,.tw{border-color:#ccc}
+  a{color:#111;text-decoration:none}
+  .det{background:#f6f6f6;border-color:#ccc}
+  table{min-width:0}
+  .sc{overflow:visible}
+  figure svg{max-width:100%}
+}
 </style>
 </head>
 <body>
@@ -176,6 +202,8 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:v
   <button role="tab" id="t2" aria-controls="p2" aria-selected="false"><span class="n">2장</span>PAINLAB 레이어</button>
   <button role="tab" id="t3" aria-controls="p3" aria-selected="false"><span class="n">3장</span>상지 실기</button>
   <button role="tab" id="t4" aria-controls="p4" aria-selected="false"><span class="n">4장</span>감별·안전</button>
+  <button class="th" id="dlBtn" title="HTML 파일로 저장 — 오프라인에서도 열림">⬇</button>
+  <button class="th" id="prBtn" title="전체 인쇄 / PDF 저장">🖨</button>
   <button class="th" id="themeBtn" title="라이트/다크 전환">🌙</button>
 </div>
 
@@ -256,6 +284,18 @@ footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:v
 </tbody>
 </table>
 </div>
+</div>
+
+<h2><span class="num">저장</span>내려받기 · 인쇄</h2>
+<div class="box">
+<p>이 교본은 <strong>파일 하나로 완결</strong>돼 있다 — 외부 이미지도, 폰트도, 스크립트도 불러오지 않는다. 저장해두면 <strong>인터넷 없이도</strong> 열리고, 카카오톡·메일로 파일 그대로 보낼 수 있다.</p>
+<div class="dlrow">
+  <button type="button" id="dlBtn2" class="pri">⬇ HTML 파일로 저장</button>
+  <button type="button" id="prBtn2">🖨 전체 인쇄 · PDF로 저장</button>
+</div>
+<div id="dlMsg"></div>
+<p class="meta"><strong>PDF로 만들려면</strong> — 인쇄 버튼 → 대상(프린터)에서 <strong>「PDF로 저장」</strong> 선택. 인쇄 시에는 <strong>4개 장이 전부 펼쳐지고 확인문제 정답도 함께</strong> 나온다.<br>
+<strong>모바일</strong> — 안드로이드 크롬은 저장 후 「다운로드」 폴더에서, 아이폰 사파리는 공유 → 「파일에 저장」.</p>
 </div>
 
 <div class="note ok">
@@ -866,6 +906,47 @@ v3.1 2.2는 <strong>IAP(압력 통의 네 벽)</strong>를 해부학으로 설�
   function onScroll(){var h=document.documentElement.scrollHeight-window.innerHeight;
     prog.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* ---------- 저장 / 인쇄 ---------- */
+  var FNAME='재활통합교본_v4_세채널이만나는곳.html';
+  function msg(s){var m=document.getElementById('dlMsg'); if(m) m.textContent=s||'';}
+  function saveBlob(text){
+    var blob=new Blob(['﻿',text],{type:'text/html;charset=utf-8'});
+    if(window.navigator&&window.navigator.msSaveOrOpenBlob){
+      window.navigator.msSaveOrOpenBlob(blob,FNAME); return true;
+    }
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download=FNAME; a.rel='noopener';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){document.body.removeChild(a); URL.revokeObjectURL(url);},1500);
+    return true;
+  }
+  function serializeSelf(){
+    /* 현재 DOM을 그대로 직렬화 — 열려 있는 탭/토글 상태는 스크립트가 초기화하므로 무방 */
+    var dt='<!doctype html>\n';
+    return dt+document.documentElement.outerHTML;
+  }
+  function doDownload(){
+    msg('저장 준비 중…');
+    /* 원본 파일을 그대로 받는 쪽이 가장 깨끗하다. 실패하면 현재 문서를 직렬화한다. */
+    if(location.protocol==='http:'||location.protocol==='https:'){
+      fetch(location.href,{cache:'no-store'})
+        .then(function(r){if(!r.ok) throw 0; return r.text();})
+        .then(function(t){saveBlob(t); msg('저장했다 — 「'+FNAME+'」. 인터넷 없이도 열린다.');})
+        .catch(function(){saveBlob(serializeSelf()); msg('저장했다 — 「'+FNAME+'」 (현재 화면 기준).');});
+    }else{
+      saveBlob(serializeSelf()); msg('저장했다 — 「'+FNAME+'」.');
+    }
+  }
+  function doPrint(){
+    /* 인쇄 시 모든 장을 펼친다 — hidden 속성은 print CSS가 무시하지만, 정답도 함께 연다 */
+    document.querySelectorAll('.q').forEach(function(q){q.classList.add('open');});
+    msg('인쇄 창을 연다. 대상에서 「PDF로 저장」을 고르면 PDF가 된다.');
+    setTimeout(function(){window.print();},120);
+  }
+  ['dlBtn','dlBtn2'].forEach(function(id){var b=document.getElementById(id); if(b) b.addEventListener('click',doDownload);});
+  ['prBtn','prBtn2'].forEach(function(id){var b=document.getElementById(id); if(b) b.addEventListener('click',doPrint);});
 
   var KEY={p0:['--n','--n-s','--n-i'],p1:['--gold','--gold-s','--gold'],p2:['--p','--p-s','--p-i'],
            p3:['--c','--c-s','--c-i'],p4:['--red','--red-s','--red-i']};
