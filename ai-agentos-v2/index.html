@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 시대 생존 커리큘럼 보강편 — 더 넣지 말고 덜어내라</title>
+<style>
+:root{
+ --bg:#f6f7f9; --surface:#fff; --surface-2:#eef1f6; --text:#161922; --text-dim:#5b6472;
+ --border:#e2e6ec; --accent:#2f6bff; --accent-soft:#e9f0ff; --cite:#7a5cff; --cite-bg:#f1ecff;
+ --eli5:#e8730a; --eli5-bg:#fff4e6; --mech:#0f9d7a; --mech-bg:#e6f7f2; --quote-bg:#f2f4f8;
+ --warn:#d4342c; --warn-bg:#fdecec; --shadow:0 1px 2px rgba(0,0,0,.05),0 10px 28px rgba(0,0,0,.05);
+ --sidebar-w:310px; --radius:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#0e1014; --surface:#161a21; --surface-2:#1d222b; --text:#e7eaf0; --text-dim:#98a1b0;
+ --border:#282e39; --accent:#6d97ff; --accent-soft:#18243a; --cite:#b6a4ff; --cite-bg:#231d3a;
+ --eli5:#ffa64d; --eli5-bg:#33240f; --mech:#4fd3ae; --mech-bg:#0f2b24; --quote-bg:#1a1f28;
+ --warn:#ff6b61; --warn-bg:#33181a; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+ --bg:#0e1014; --surface:#161a21; --surface-2:#1d222b; --text:#e7eaf0; --text-dim:#98a1b0;
+ --border:#282e39; --accent:#6d97ff; --accent-soft:#18243a; --cite:#b6a4ff; --cite-bg:#231d3a;
+ --eli5:#ffa64d; --eli5-bg:#33240f; --mech:#4fd3ae; --mech-bg:#0f2b24; --quote-bg:#1a1f28;
+ --warn:#ff6b61; --warn-bg:#33181a; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);line-height:1.78;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+ -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:99;transition:width .1s}
+.shell{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
+ position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 16px 60px}
+.sidebar .brand{font-weight:800;font-size:15px;letter-spacing:-.2px;margin-bottom:4px}
+.sidebar .sub{font-size:12px;color:var(--text-dim);margin-bottom:16px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;font-size:13px;color:var(--text-dim);
+ border-left:2px solid transparent;line-height:1.5}
+.toc a:hover{background:var(--surface-2);text-decoration:none;color:var(--text)}
+.toc a.lv2{font-weight:700;color:var(--text);margin-top:10px;font-size:13.5px}
+.toc a.lv3{padding-left:18px}
+.toc a.lv4{padding-left:30px;font-size:12.5px}
+.toc a.active{background:var(--accent-soft);color:var(--accent);border-left-color:var(--accent)}
+.content{flex:1;min-width:0;padding:38px clamp(18px,4vw,64px) 140px;max-width:940px;margin:0 auto}
+h1{font-size:clamp(24px,4.4vw,36px);line-height:1.3;letter-spacing:-.6px;margin:0 0 10px}
+h2{font-size:clamp(20px,3.2vw,27px);margin:52px 0 14px;padding-top:14px;border-top:1px solid var(--border);letter-spacing:-.4px}
+h3{font-size:clamp(17px,2.4vw,21px);margin:34px 0 10px;letter-spacing:-.2px}
+h4{font-size:16px;margin:26px 0 8px}
+p{margin:10px 0}
+ul,ol{padding-left:22px;margin:10px 0}
+li{margin:5px 0}
+code{background:var(--surface-2);padding:1px 6px;border-radius:6px;font-size:.88em;
+ font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+pre{background:var(--surface-2);padding:14px;border-radius:var(--radius);overflow-x:auto}
+blockquote{margin:14px 0;padding:12px 16px;background:var(--quote-bg);border-left:3px solid var(--accent);
+ border-radius:0 10px 10px 0;color:var(--text-dim)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;border:1px solid var(--border);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
+th,td{border-bottom:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--surface-2);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:clamp(20px,3.5vw,34px);
+ box-shadow:var(--shadow);margin-bottom:28px}
+.hero .kicker{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.hero p{color:var(--text-dim);margin:8px 0 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{font-size:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:4px 11px;color:var(--text-dim)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+ padding:18px 20px;margin:20px 0;box-shadow:var(--shadow)}
+.card>h4:first-child{margin-top:0;font-size:17px}
+.ts{background:var(--cite-bg);color:var(--cite);border-radius:6px;padding:1px 6px;font-size:12px;font-weight:700;white-space:nowrap}
+li.eli5-li{background:var(--eli5-bg);border-left:3px solid var(--eli5);border-radius:0 10px 10px 0;
+ padding:8px 12px;margin:8px 0 8px -10px;list-style:none}
+li.mech-li{background:var(--mech-bg);border-left:3px solid var(--mech);border-radius:0 10px 10px 0;
+ padding:8px 12px;margin:8px 0 8px -10px;list-style:none}
+li.pin-li{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;
+ padding:8px 12px;margin:8px 0 8px -10px;list-style:none;font-weight:600}
+li.warn-li{background:var(--warn-bg);border-left:3px solid var(--warn);border-radius:0 10px 10px 0;
+ padding:8px 12px;margin:8px 0 8px -10px;list-style:none}
+details{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+details[open] summary{margin-bottom:8px}
+.topbar{display:none}
+#themeBtn{position:fixed;right:16px;bottom:16px;z-index:50;width:44px;height:44px;border-radius:50%;
+ border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;cursor:pointer;box-shadow:var(--shadow)}
+#upBtn{position:fixed;right:16px;bottom:70px;z-index:50;width:44px;height:44px;border-radius:50%;
+ border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:16px;cursor:pointer;box-shadow:var(--shadow)}
+@media (max-width:900px){
+ .shell{display:block}
+ .sidebar{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--border);
+   padding:14px 16px;max-height:none}
+ .toc{display:none}
+ .sidebar.open .toc{display:block;max-height:60vh;overflow-y:auto}
+ .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
+ .topbar button{background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+   border-radius:9px;padding:7px 12px;font-size:13px;cursor:pointer}
+ .content{padding:22px 16px 120px}
+ table{font-size:13px}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="shell">
+<aside class="sidebar" id="sb">
+  <div class="topbar">
+    <div><div class="brand">AI 시대 생존 커리큘럼 보강편 — 더 넣지 말고 덜어내라</div><div class="sub">@ai-AgentOS 채널 신규·미수록 영상 34편(롱폼 15 + 쇼츠 19)을 4개 모듈로 재구성</div></div>
+    <button id="menuBtn">목차</button>
+  </div>
+  <nav class="toc"><a class="lv2" href="#모듈-1-에이전트를-다루는-규율-더-넣지-말고-덜어내라">모듈 1 — 에이전트를 다루는 규율: 더 넣지 말고 덜어내라</a>
+<a class="lv3" href="#한-줄-요약">한 줄 요약</a>
+<a class="lv3" href="#이-모듈이-뒤집는-통념">이 모듈이 뒤집는 통념</a>
+<a class="lv3" href="#영상별-정리">영상별 정리</a>
+<a class="lv4" href="#1-anthropic-첫-공식-시험이-지적한-에이전트-안티패턴-5가지-정답은-늘-덜-하는-것">1. Anthropic 첫 공식 시험이 지적한 에이전트 안티패턴 5가지 — 정답은 늘 &quot;덜 하는 것&quot;</a>
+<a class="lv4" href="#2-claude-code-만든-사람이-시스템-프롬프트-80-를-지웠다-claude-md를-비우라는-제안">2. Claude Code 만든 사람이 시스템 프롬프트 80%를 지웠다 — CLAUDE.md를 비우라는 제안</a>
+<a class="lv4" href="#3-matt-pocock이-29개-스킬-전부에-예외-없이-적용한-규칙">3. Matt Pocock이 29개 스킬 전부에 예외 없이 적용한 규칙</a>
+<a class="lv4" href="#4-에이전트가-낸-55-000줄-pr-notion-엔지니어가-말하는-진짜-병목은-코드리뷰가-아니다">4. 에이전트가 낸 55,000줄 PR — Notion 엔지니어가 말하는 &quot;진짜 병목은 코드리뷰가 아니다&quot;</a>
+<a class="lv4" href="#5-anthropic-기술-스태프가-말하는-claude-fable-활용-6가지">5. Anthropic 기술 스태프가 말하는 Claude Fable 활용 6가지</a>
+<a class="lv3" href="#이-모듈의-통합-규칙-세트">이 모듈의 통합 규칙 세트</a>
+<a class="lv3" href="#안티패턴-처방-대응표">안티패턴 → 처방 대응표</a>
+<a class="lv3" href="#자가-점검">자가 점검</a>
+<a class="lv3" href="#다음-모듈과의-연결">다음 모듈과의 연결</a>
+<a class="lv2" href="#모듈-2-일자리와-권력-ai가-실제로-바꾸는-것">모듈 2 — 일자리와 권력: AI가 실제로 바꾸는 것</a>
+<a class="lv3" href="#한-줄-요약-2">한 줄 요약</a>
+<a class="lv3" href="#이-모듈이-뒤집는-통념-2">이 모듈이 뒤집는 통념</a>
+<a class="lv3" href="#영상별-정리-2">영상별 정리</a>
+<a class="lv4" href="#1-앤드루-응의-ai-일자리-계산법-40-가-자동화되면-남은-60-가-더-비싸진다">1. 앤드루 응의 AI 일자리 계산법: 40%가 자동화되면 남은 60%가 더 비싸진다</a>
+<a class="lv4" href="#2-와튼-1-372명-실험-전-구글-엔지니어가-말하는-ai-시대에-사람에게-남는-역할">2. 와튼 1,372명 실험: 전 구글 엔지니어가 말하는 &quot;AI 시대에 사람에게 남는 역할&quot;</a>
+<a class="lv4" href="#3-6-000명이-꼽은-ai-시대-1순위-공포-해고가-아니라-일을-두-배로-하는-것">3. 6,000명이 꼽은 AI 시대 1순위 공포 — 해고가 아니라 &quot;일을 두 배로 하는 것&quot;</a>
+<a class="lv4" href="#4-사피엔스-저자-유발-하라리의-48분-ai-진단-은행과-기업에서-권력이-이동한다">4. &#x27;사피엔스&#x27; 저자 유발 하라리의 48분 AI 진단 — 은행과 기업에서 권력이 이동한다</a>
+<a class="lv4" href="#5-마이크로소프트-창업자의-ai-메모-3가지-위험-3가지-해법-그리고-계획을-세우지-않겠다는-계획">5. 마이크로소프트 창업자의 AI 메모 — 3가지 위험, 3가지 해법, 그리고 &quot;계획을 세우지 않겠다는 계획&quot;</a>
+<a class="lv4" href="#6-1-052명을-ai로-복제한-실험-83-정확도-그런데-3가지에서-실패했다">6. 1,052명을 AI로 복제한 실험 — 83% 정확도, 그런데 3가지에서 실패했다</a>
+<a class="lv3" href="#숫자-한눈에">숫자 한눈에</a>
+<a class="lv3" href="#개인-행동-지침">개인 행동 지침</a>
+<a class="lv3" href="#자가-점검-2">자가 점검</a>
+<a class="lv3" href="#다음-모듈과의-연결-2">다음 모듈과의 연결</a>
+<a class="lv2" href="#모듈-3-현장-적용-조직의-습관과-제작-파이프라인">모듈 3 — 현장 적용: 조직의 습관과 제작 파이프라인</a>
+<a class="lv3" href="#한-줄-요약-3">한 줄 요약</a>
+<a class="lv3" href="#왜-이걸-알아야-하나">왜 이걸 알아야 하나</a>
+<a class="lv3" href="#파트-a-4-5배-빨라진-팀의-습관">파트 A — 4.5배 빨라진 팀의 습관</a>
+<a class="lv4" href="#a-1-아마존-50개-팀-실측-도구가-아니라-방식이-갈랐다">A-1. 아마존 50개 팀 실측: 도구가 아니라 방식이 갈랐다</a>
+<a class="lv4" href="#a-2-습관을-도입하면-새로-생기는-문제-3가지">A-2. 습관을 도입하면 새로 생기는 문제 3가지</a>
+<a class="lv3" href="#파트-b-ai-영상-제작-파이프라인">파트 B — AI 영상 제작 파이프라인</a>
+<a class="lv4" href="#b-1-higgsfield-자막-표기-익스필드-블렌더-플러그인-카메라를-먼저-잠그고-크레딧을-쓴다">B-1. Higgsfield(자막 표기: 익스필드) 블렌더 플러그인 — 카메라를 먼저 잠그고 크레딧을 쓴다</a>
+<a class="lv4" href="#b-2-higgsfield-genjutsu-자막-표기-젠주츠-한-번-촬영으로-인물-장소를-바꿔치기">B-2. Higgsfield Genjutsu(자막 표기: 젠주츠) — 한 번 촬영으로 인물·장소를 바꿔치기</a>
+<a class="lv4" href="#b-3-claude-code-higgsfield로-자동차-광고-10컷-삼중-잠금-일관성-파이프라인">B-3. Claude Code + Higgsfield로 자동차 광고 10컷 — 삼중 잠금 일관성 파이프라인</a>
+<a class="lv3" href="#파이프라인-한눈에">파이프라인 한눈에</a>
+<a class="lv3" href="#이-모듈의-통합-규칙-세트-2">이 모듈의 통합 규칙 세트</a>
+<a class="lv3" href="#자가-점검-3">자가 점검</a>
+<a class="lv3" href="#다음-모듈과의-연결-3">다음 모듈과의 연결</a>
+<a class="lv2" href="#모듈-4-60초-카드-19장">모듈 4 — 60초 카드 19장</a>
+<a class="lv3" href="#한-줄-요약-4">한 줄 요약</a>
+<a class="lv3" href="#읽는-법">읽는 법</a>
+<a class="lv3" href="#카드">카드</a>
+<a class="lv4" href="#카드-1-claude-code-제대로-쓰는-3원칙">카드 1. Claude Code 제대로 쓰는 3원칙</a>
+<a class="lv4" href="#카드-2-스킬-1000개-깔면-생기는-일">카드 2. 스킬 1000개 깔면 생기는 일</a>
+<a class="lv4" href="#카드-3-ai-스킬-20개면-나만의-시스템">카드 3. AI 스킬 20개면 나만의 시스템</a>
+<a class="lv4" href="#카드-4-같은-ai-써도-연봉이-갈리는-이유">카드 4. 같은 AI 써도 연봉이 갈리는 이유</a>
+<a class="lv4" href="#카드-5-ai-쓰면-바보가-되나-45-vs-4-의-진실">카드 5. AI 쓰면 바보가 되나? 45% vs 4%의 진실</a>
+<a class="lv4" href="#카드-6-claude-code-100만-토큰-다-쓰면-안-됩니다">카드 6. Claude Code 100만 토큰, 다 쓰면 안 됩니다</a>
+<a class="lv4" href="#카드-7-ai-불안하면-이-3가지만-기억하세요">카드 7. AI 불안하면 이 3가지만 기억하세요</a>
+<a class="lv4" href="#카드-8-ai한테-채팅으로-시키면-안-되는-이유">카드 8. AI한테 채팅으로 시키면 안 되는 이유</a>
+<a class="lv4" href="#카드-9-ai한테-일-시킬-때-팀장처럼-하세요">카드 9. AI한테 일 시킬 때 팀장처럼 하세요</a>
+<a class="lv4" href="#카드-10-프롬프트-엔지니어링은-끝났다">카드 10. 프롬프트 엔지니어링은 끝났다</a>
+<a class="lv4" href="#카드-11-ai가-자신있게-틀리는-진짜-이유-시험-비유">카드 11. AI가 자신있게 틀리는 진짜 이유 (시험 비유)</a>
+<a class="lv4" href="#카드-12-ai-스킬-이-3단계로-만들어야-진짜입니다">카드 12. AI 스킬, 이 3단계로 만들어야 진짜입니다</a>
+<a class="lv4" href="#카드-13-8만-명-ai-연구-한국이-세계-1등인-항목">카드 13. 8만 명 AI 연구, 한국이 세계 1등인 항목</a>
+<a class="lv4" href="#카드-14-ai에-대체-안-되려면-이-3가지를-바꾸세요">카드 14. AI에 대체 안 되려면 이 3가지를 바꾸세요</a>
+<a class="lv4" href="#카드-15-8만-명한테-물었다-ai에게-진짜-원하는-것">카드 15. 8만 명한테 물었다, AI에게 진짜 원하는 것</a>
+<a class="lv4" href="#카드-16-이것-하나로-월-50달러짜리-구독-끊었습니다">카드 16. 이것 하나로 월 50달러짜리 구독 끊었습니다</a>
+<a class="lv4" href="#카드-17-claude-code-스킬-9가지-당신은-몇-개나-쓰고-있나요">카드 17. Claude Code 스킬 9가지, 당신은 몇 개나 쓰고 있나요</a>
+<a class="lv4" href="#카드-18-ai-스킬-만드는-3계층-구조-프론트매터-본문-레퍼런스">카드 18. AI 스킬 만드는 3계층 구조 (프론트매터/본문/레퍼런스)</a>
+<a class="lv4" href="#카드-19-claude-code-스킬-프로젝트-하나에-모아야-하는-이유">카드 19. Claude Code 스킬, 프로젝트 하나에 모아야 하는 이유</a>
+<a class="lv3" href="#주제별-재배열">주제별 재배열</a>
+<a class="lv3" href="#카드끼리의-충돌">카드끼리의 충돌</a>
+<a class="lv3" href="#19장에서-뽑은-원칙-5개">19장에서 뽑은 원칙 5개</a>
+<a class="lv3" href="#자가-점검-4">자가 점검</a></nav>
+</aside>
+<main class="content">
+  <div class="hero">
+    <div class="kicker">SUPPLEMENT TO 2026-07-04 CURRICULUM · 34 videos · 4 modules</div>
+    <h1>AI 시대 생존 커리큘럼 보강편 — 더 넣지 말고 덜어내라</h1>
+    <p>@ai-AgentOS 채널 신규·미수록 영상 34편(롱폼 15 + 쇼츠 19)을 4개 모듈로 재구성</p>
+    <div class="meta"><span class="chip">원채널 @ai-AgentOS</span><span class="chip">롱폼 15편</span><span class="chip">쇼츠 19편</span><span class="chip">4개 모듈</span><span class="chip">1편 대비 신규분</span><span class="chip">생성 2026-09-11</span></div>
+  </div>
+  <blockquote>
+<p><strong>이 강의는 보강편이다.</strong> 2026-07-04에 만든 「AI 시대 소프트웨어 생존 커리큘럼」이 @ai-AgentOS 채널의
+영상 18편을 7개 모듈로 정리했다. 그 이후 올라온 신규 영상과 당시 빠졌던 영상을 합쳐
+<strong>롱폼 15편 + 쇼츠 19편, 총 34편</strong>을 4개 모듈로 다시 묶은 것이 이 문서다.</p>
+</blockquote>
+<h3>1편과 이 보강편의 관계</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>1편 (2026-07-04)</th>
+<th>보강편 (이 문서)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>다룬 영상</td>
+<td>18편</td>
+<td>34편 (롱폼 15 + 쇼츠 19)</td>
+</tr>
+<tr>
+<td>축</td>
+<td>"AI가 코드를 다 짜는 시대에 사람에게 남는 것"</td>
+<td>"그래서 오늘 무엇을 바꿀 것인가"</td>
+</tr>
+<tr>
+<td>성격</td>
+<td>원리·선언 중심</td>
+<td>실험·데이터·절차 중심</td>
+</tr>
+<tr>
+<td>대표 근거</td>
+<td>Matt Pocock 6함정, XState 결정론, a16z 방어선</td>
+<td>Anthropic 공식 시험, 와튼 1,372명, 아마존 25개 팀</td>
+</tr>
+</tbody>
+</table></div>
+<p>1편이 <strong>왜</strong>를 다뤘다면 보강편은 <strong>얼마나·어떻게</strong>를 다룬다.
+숫자가 붙은 실험이 많아졌고, 결론은 대체로 한 방향으로 모인다 — <strong>더 넣지 말고 덜어내라.</strong></p>
+<h3>커리큘럼</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>모듈</th>
+<th>주제</th>
+<th>영상</th>
+<th>한 줄</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>에이전트를 다루는 규율</td>
+<td>롱폼 5편</td>
+<td>안티패턴의 정답은 늘 "덜 하는 것"</td>
+</tr>
+<tr>
+<td>2</td>
+<td>일자리와 권력</td>
+<td>롱폼 6편</td>
+<td>40%가 자동화되면 남은 60%가 비싸진다</td>
+</tr>
+<tr>
+<td>3</td>
+<td>현장 적용</td>
+<td>롱폼 4편</td>
+<td>4.5배 빨라진 팀의 습관, 그리고 영상 제작 파이프라인</td>
+</tr>
+<tr>
+<td>4</td>
+<td>60초 카드 19장</td>
+<td>쇼츠 19편</td>
+<td>쇼츠로 압축된 원칙을 주제별로 재배열</td>
+</tr>
+</tbody>
+</table></div>
+<h3>읽는 법</h3>
+<ol>
+<li><strong>1편을 안 봤어도 읽힌다.</strong> 다만 모듈 1의 용어(스킬, 컨텍스트, 하네스)는 1편에서 정의했다.</li>
+<li>모듈 1·3은 <strong>오늘 바로 바꿀 설정</strong>이 ⚙️ 항목에 들어 있다. 거기부터 봐도 된다.</li>
+<li>모듈 2는 <strong>숫자를 확인하는 모듈</strong>이다. 표본과 측정 대상을 함께 적어 뒀으니 인용 전에 그 줄을 보라.</li>
+<li>모듈 4는 통근길용이다. 카드 한 장이 60초 영상 하나다.</li>
+</ol>
+<h3>출처·인용 규칙</h3>
+<ul>
+<li>각 항목에 원본 URL·길이·조회수를 달았다.</li>
+<li>본문의 <span class="ts">12:34</span> 보라색 칩은 <strong>해당 영상 자막의 타임스탬프</strong>다.</li>
+<li>자막은 자동 생성이라 고유명사 음차 오류가 있다. 명백한 것만 표준 표기로 바로잡고,
+  애매한 것은 원문을 남긴 뒤 "(자막 표기)"를 붙였다.</li>
+<li>자막에 없는 수치·인명·연구명은 넣지 않았다.</li>
+</ul>
+<h3>이번에 다루지 못한 영상 4편</h3>
+<ul>
+<li>멤버십 전용 3편 — 「Anthropic 31만 건 대화 분석: 클로드에게 영어로 묻는 게 나을 때」,
+  「YC 스타트업 컨설턴트의 3단계 스토리 공식」, 「넷플릭스 CPTO의 시스템 사고 훈련」.
+  채널 멤버십 가입자만 자막 접근이 가능해 제외했다.</li>
+<li>자막 서버 제한(HTTP 429)으로 끝내 받지 못한 1편 — 「코드리뷰를 3개월간 없앴더니」.
+  모듈 1의 55,000줄 PR 편과 주제가 이어지므로, 다음 갱신 때 최우선으로 채운다.</li>
+</ul>
+  <h2 id="모듈-1-에이전트를-다루는-규율-더-넣지-말고-덜어내라">모듈 1 — 에이전트를 다루는 규율: 더 넣지 말고 덜어내라</h2>
+<h3 id="한-줄-요약">한 줄 요약</h3>
+<p>2026년 하반기 @ai-AgentOS 신규분 5편이 공통으로 말하는 것은 하나다 — 툴도, 프롬프트도, 컨텍스트도, 스킬 본문도 "더 채우기"가 아니라 "덜어내고, 써보고, 반복해서 걸리는 지점만 되돌리기"가 지금 모델을 다루는 정답이라는 것.</p>
+<h3 id="이-모듈이-뒤집는-통념">이 모듈이 뒤집는 통념</h3>
+<p>에이전트가 말을 안 들으면 규칙을 더 적고, 예시를 더 붙이고, 툴을 더 달아주는 게 상식처럼 통했다. 그런데 Anthropic 공식 인증 시험도, 클로드 코드를 만든 사람도, 유명 스킬 저자도 정반대로 움직인다 — 시스템 프롬프트의 80%를 지우고, 툴을 4~5개 밑으로 쪼개고, 스킬 본문을 한 문장까지 줄인다. 이 모듈은 "왜 지금은 빼는 쪽이 이기는가"를 다섯 개의 서로 다른 소스(공식 시험, 제작자 본인, 커뮤니티 스킬 저자, Notion 엔지니어, 최신 모델 릴리스 노트)로 교차 확인한다. 공통 근거는 컨텍스트=토큰=돈이라는 비용 문제와, 컨텍스트가 많을수록 모델이 헷갈려 정확도가 떨어진다는 품질 문제 둘 다다.</p>
+<h3 id="영상별-정리">영상별 정리</h3>
+<div class="card"><h4 id="1-anthropic-첫-공식-시험이-지적한-에이전트-안티패턴-5가지-정답은-늘-덜-하는-것">1. Anthropic 첫 공식 시험이 지적한 에이전트 안티패턴 5가지 — 정답은 늘 "덜 하는 것"</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=FWddN9xLv54 · 19분 · 조회 10,000</li>
+<li><strong>핵심 주장 1줄</strong>: Anthropic 공식 인증 시험(Claude Certified Architect)이 다루는 5개 시나리오는 전부 "안티패턴부터 뒤집는" 구조이며, 관통하는 원리는 "덜 준다"는 것 하나다.</li>
+<li class="mech-li">🔍 <strong>근거와 숫자</strong>: 시험은 올해(2026년) 3월 12일에 나온 Anthropic 첫 공식 기술 인증으로, 60문항·120분·합격선 720점이다 <span class="ts">00:00</span>. 5개 출제 영역 비중은 에이전트 아키텍처·오케스트레이션 27%, 클로드 코드 설정과 워크플로 20%, 프롬프트 엔지니어링·구조·출력 20%, 툴 설계와 MCP 연동 18%, 컨텍스트 관리와 신뢰성 15%다 <span class="ts">02:49</span>. 시나리오는 고객 지원 에이전트, 클로드 코드 코드 생성, 멀티에이전트 리서치, 개발 생산성, CI/CD 구조와 데이터 추출 6개가 있고, 실제 시험에는 이 중 4개가 무작위로 나온다 <span class="ts">03:17</span>. 발표자는 1966년 뵘-야코피니 정리(순차·조건·반복 세 가지만 있으면 튜링 완전)를 끌어와 "루프"가 채워진 시점부터 에이전트가 달라 보이기 시작했다고 짚는다 <span class="ts">04:39</span>~<span class="ts">05:13</span>. 컨텍스트 fork/compact 예시 코드의 기준선은 15만 토큰이다 <span class="ts">15:55</span>.</li>
+<li>⚙️ <strong>당장 적용할 규칙</strong>:</li>
+<li>[ ] 모델 응답을 바로 쓰지 말고 <code>stop_reason</code>(tool_use / end_turn / 토큰 소진)을 먼저 확인하라</li>
+<li>[ ] CLAUDE.md류 규칙 파일을 한 곳에 몰지 말고 홈 / 프로젝트 루트 / 디렉토리별 3단계로 나눠라</li>
+<li>[ ] 에이전트 하나에 붙이는 툴은 4~5개를 넘기지 말고, 넘으면 에이전트를 쪼개라</li>
+<li>[ ] 서브태스크(로그 스캔 등 출력이 큰 작업)는 컨텍스트를 fork해서 요약만 메인에 병합하고, 메인 컨텍스트가 커지면 compact하라</li>
+<li>[ ] CI/파이프라인에서는 대화형 호출 대신 non-interactive 플래그 + JSON 출력을 쓰고, 기다려도 되는 작업은 Batch API(비용 50%, 24시간 내 완료)로 넘겨라</li>
+<li>💬 <strong>원문 인용</strong>: "What you don't want is just to let the agent go and do something and get the response back and use it." <span class="ts">05:40</span> / "So specialize, don't overload." <span class="ts">11:27</span></li>
+<li class="warn-li">⚠️ <strong>주의/한계</strong>: 발표 안에서도 툴 개수 기준이 오락가락한다 — 크리틱 에이전트 예시에서는 "1~2개"라고 말했지만 슬라이드 기준선은 "4~5개"다. 어느 쪽이든 방향(적게 줄수록 좋다)은 같다고 정리하고 넘어간다 <span class="ts">13:41</span>.</li>
+</ul>
+</div><div class="card"><h4 id="2-claude-code-만든-사람이-시스템-프롬프트-80-를-지웠다-claude-md를-비우라는-제안">2. Claude Code 만든 사람이 시스템 프롬프트 80%를 지웠다 — CLAUDE.md를 비우라는 제안</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=YgDLQKKqFqk · 27분 · 조회 4,000</li>
+<li><strong>핵심 주장 1줄</strong>: Claude Code를 총괄하는 Anthropic의 보리스 체르니(자막 표기: 보리스 체르)는 새 모델(오퍼스 5)이 나오자 시스템 프롬프트의 80%를 지웠고, 지웠더니 더 잘 작동했다고 말한다.</li>
+<li class="mech-li">🔍 <strong>근거와 숫자</strong>: 대담 장소는 Y 콤비네이터 스타트업 스쿨 2026 무대다 <span class="ts">00:27</span>. 발표자는 시스템 프롬프트를 "매번 읽히는데 아무것도 바꾸지 않는 문장"이라 규정하고, 오퍼스 5가 나온 뒤 "we deleted 80% of the system prompt"라고 말한다 <span class="ts">02:36</span>. <code>CLOUD_CODE_SIMPLE=1</code>(자막 표기, 비공식/미문서화 환경변수)로 툴 설명까지 포함한 시스템 프롬프트 전체를 지우고 실험해봤다는 대목도 나온다 <span class="ts">03:01</span>. 이 절제 실험(ablation)을 도구·하네스 코드에도 동일하게 적용하며, 현재 클로드 코드 하네스에 남아있는 코드는 대부분 안전장치·권한·정적 분석·UI 코드라고 밝힌다 <span class="ts">04:47</span>. 사용자에게는 6개월마다 CLAUDE.md·스킬·훅을 지워보라고 권한다 <span class="ts">05:13</span>. 사례로 Bun 런타임을 Zig에서 Rust로 통째로 재작성한 작업이 소개되는데, 다이나믹 워크플로우 기반 단일 프롬프트(스티어링 포함)로 11일 만에 완료됐고 대상 코드베이스는 10만 줄이 넘는다고 언급된다 <span class="ts">12:25</span>~<span class="ts">13:17</span>. 본인의 또 다른 사례로는 Electron 앱을 Swift로 재작성하며 픽셀 단위 스크린샷 비교를 검증 장치로 건 작업이 2주 넘게 안 멈추고 돌았다고 말한다 <span class="ts">15:03</span>~<span class="ts">15:54</span>. 매일 도는 자동화 루틴("abstraction police" 등 중복 추상화 통합, 죽은 코드 삭제, 테스트 작성/삭제)이 하루 20~30개, 수백~수천 개 에이전트 단위로 돈다고 밝힌다 <span class="ts">20:32</span>~<span class="ts">20:57</span>.</li>
+<li>⚙️ <strong>당장 적용할 규칙</strong>:</li>
+<li>[ ] 새 모델로 넘어갈 때 CLAUDE.md·스킬·훅을 예측으로 다시 채우지 말고, 일단 지운 채로 하루 써봐라</li>
+<li>[ ] 같은 지점에서 반복해서 막힐 때만 그 한 줄을 되돌려라 (미리 채우지 말 것)</li>
+<li>[ ] "이 문장이 모델이 매번 읽을 만큼 여전히 필요한가"를 CLAUDE.md 각 줄의 존치 기준으로 삼아라</li>
+<li>[ ] 벅찬 과제를 줄 때는 반드시 모델이 스스로 결과를 검증할 방법(테스트, 픽셀 비교 등)을 함께 줘라</li>
+<li>[ ] 너무 구체적으로 순서를 지시하지 말고, 과제·제약선·완료 기준만 주고 나머지는 모델에 맡겨라</li>
+<li>💬 <strong>원문 인용</strong>: "Be comfortable and brave to press delete 100%." <span class="ts">05:13</span> / "Don't stop until you're done." (본인이 실제로 사용한 프롬프트 문구) <span class="ts">15:28</span></li>
+<li class="warn-li">⚠️ <strong>주의/한계</strong>: 발표자는 "완전히 코드를 다 지우는 건 아니다(we don't delete the entire code, but we do delete a lot)"라고 단서를 단다 <span class="ts">03:55</span>. 또한 코딩이 "풀렸다(solved)"는 말도 "자기가 하는 종류의 코딩에서는"이라는 조건이 붙으며, 깊은 시스템 코드·분산 시스템·픽셀 단위 UI 검증에서는 여전히 어렵다고 명시한다 <span class="ts">21:28</span>~<span class="ts">22:20</span>.</li>
+</ul>
+</div><div class="card"><h4 id="3-matt-pocock이-29개-스킬-전부에-예외-없이-적용한-규칙">3. Matt Pocock이 29개 스킬 전부에 예외 없이 적용한 규칙</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=YLq04CDeOTE · 9분 · 조회 7,200</li>
+<li><strong>핵심 주장 1줄</strong>: 토탈 타입스크립트로 유명한(구독자 6만 명) 개발자 Matt Pocock(자막 표기: 몇 복콕)의 가장 인기 있는 스킬 파일 본문은 프론트매터 포함 20단어짜리 한 문장이며, 이는 실수가 아니라 4단계 체크리스트(트리거·구조·유도·가지치기)를 그대로 적용한 설계다.</li>
+<li class="mech-li">🔍 <strong>근거와 숫자</strong>: 발표자는 지금 개발자들이 튜토리얼 헬, 프레임워크 헬에 이은 세 번째 지옥 "스킬 헬"에 들어왔다고 진단한다 <span class="ts">00:27</span>~<span class="ts">00:54</span>. 체크리스트 1단계 트리거는 사용자 호출(슬래시 명령)과 모델 호출(에이전트가 상황 판단해 자동 실행) 중 하나를 정하는 것으로, 모델 호출은 스킬 설명이 매 요청마다 컨텍스트에 상주하는 "컨텍스트 부하"를, 사용자 호출은 사용자가 언제 뭘 부를지 기억해야 하는 "인지 부하"를 발생시킨다 <span class="ts">01:49</span>~<span class="ts">02:16</span>. 2단계 구조는 절차(procedure)와 참고 자료(reference)를 분리하고, 자주 안 쓰는 참고 자료는 본문에서 빼 별도 파일로 옮기라는 것이다 <span class="ts">02:42</span>~<span class="ts">03:08</span>. 3단계 유도는 "vertical slice" 같은 개발 문화에 이미 정착된 강한 단어를 심어 모델의 학습된 행동 패턴을 불러오는 기법이며, 효과는 에이전트의 사고 추적(reasoning trace)에 그 단어가 다시 등장하는지로 검증한다 <span class="ts">03:35</span>~<span class="ts">04:29</span>. 플랜 모드가 질문을 몇 개 던지다 금방 계획서를 써버리는 문제는, 에이전트 눈에 최종 목표(계획 작성)가 보이기 때문이라며, 질문 스킬과 계획 스킬을 분리해 미래 단계를 숨기는 처방을 제시한다 <span class="ts">04:56</span>~<span class="ts">05:22</span>. 4단계 가지치기는 문단을 통째로 지워도 결과가 같으면 그 문단은 애초에 필요 없었다는 "삭제 테스트"다 <span class="ts">06:16</span>. 저자의 레포에는 스킬이 상위(한 문장짜리 사용자 호출)와 하위(재사용되는 모델 호출 규율) 두 층으로 나뉘어 있고, 상위 스킬은 하위 스킬만 호출할 수 있으며 상위끼리는 서로 호출할 수 없다는 규칙이 있다 <span class="ts">06:42</span>~<span class="ts">07:08</span>. 레포 루트에는 자체 용어집 파일(CONTEXT.md, 자막상 "컨텍스트 MD")이 있고, 폐기된 스킬 폴더도 별도로 관리된다 <span class="ts">07:08</span>~<span class="ts">07:34</span>.</li>
+<li>⚙️ <strong>당장 적용할 규칙</strong>:</li>
+<li>[ ] 새 스킬을 만들기 전에 "사용자가 부를지 모델이 부를지"부터 정하고, 그 선택이 만드는 부하(컨텍스트 vs 인지)를 감수할 쪽을 명시하라</li>
+<li>[ ] 스킬 본문에는 절차만 남기고, 가끔 쓰는 참고 자료(템플릿 등)는 별도 파일로 분리해 "필요하면 이 파일을 봐라" 한 줄만 남겨라</li>
+<li>[ ] 긴 설명 대신 도메인에서 이미 정착된 강한 용어(vertical slice류)를 반복해서 심고, 에이전트의 사고 과정에 그 단어가 재등장하는지로 효과를 검증하라</li>
+<li>[ ] 에이전트가 특정 단계에서 매번 대충 넘어가면, 다음 단계(최종 목표)를 안 보이게 스킬을 쪼개라</li>
+<li>[ ] 스킬 문단을 통째로 지워보고 결과가 같으면 그 문단을 삭제하라(정기적인 삭제 테스트)</li>
+<li>💬 <strong>원문 인용</strong>: "Skill Hell is where you have all of these skills available... But you don't really know how the pieces all work together." <span class="ts">00:54</span> / "Vertical slice is our leading word... We want to slice up the work instead of horizontal slices into vertical slices." <span class="ts">03:35</span></li>
+<li class="warn-li">⚠️ <strong>주의/한계</strong>: 발표자는 "어느 쪽이 맞다가 아니라 뭘 포기할지 정하는 문제"라고 트리거 선택을 상대화한다 — 예를 들어 "슈퍼파워즈"라는 유명 스킬셋은 반대로 대부분 모델 호출 방식을 쓴다고 언급된다 <span class="ts">02:42</span>.</li>
+</ul>
+</div><div class="card"><h4 id="4-에이전트가-낸-55-000줄-pr-notion-엔지니어가-말하는-진짜-병목은-코드리뷰가-아니다">4. 에이전트가 낸 55,000줄 PR — Notion 엔지니어가 말하는 "진짜 병목은 코드리뷰가 아니다"</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=81EIe6h7mnw · 15분 · 조회 16,000</li>
+<li><strong>핵심 주장 1줄</strong>: Notion 엔지니어는 AI가 낸 대형 diff를 검토하는 문제의 답을 "더 열심히 읽기"가 아니라 자신이 만든 "explain diff" 스킬 — 배경 설명 → 직관 우선 → 인터랙티브 시뮬레이션 → 코드 → 퀴즈 순서의 문서 생성 — 에서 찾았다고 말한다.</li>
+<li class="mech-li">🔍 <strong>근거와 숫자</strong>: 발표자는 자신이 매일 쓰고 동료들도 많이 쓰는 "explain diff"라는 자체 스킬을 소개하며, 예시로 탑다운 시점을 아이소메트릭으로 바꾸는 젠(禪) 정원 게임 커밋을 든다 <span class="ts">04:25</span>~<span class="ts">04:54</span>. 문서는 (1) 배경 설명 — 시스템·좌표계·하위 시스템부터 설명, 아는 부분은 건너뛸 수 있게 (2) 세부보다 직관 우선 — 커밋의 목표를 한 줄로 먼저 제시 (3) 인터랙티브 그림 — Notion이 그날 아침 출시한 페이지 HTML 블록 기능으로 바위를 끌면 좌표와 Z 레이어가 어떻게 바뀌는지 시뮬레이션 (4) "문해력 기반 코드 비교(literate code diff)" — 파일을 순서대로 산문으로 설명 (5) 퀴즈 — 마지막에 중간 난이도 5문항, 순서로 구성된다 <span class="ts">04:54</span>~<span class="ts">06:47</span>, <span class="ts">08:11</span>. 퀴즈 아이디어는 연구자 아니마 아난드(자막 표기)와 마이클 닐슨의 "책은 효과가 없다(books don't work)"는 관찰, 그리고 이를 보완한 대화형 간격 반복 퀴즈 실험에서 영감을 받았다고 밝힌다 <span class="ts">07:44</span>~<span class="ts">08:11</span>. 발표자는 자신이 작성한 코드에 대한 퀴즈를 통과하지 못하면 팀원에게 리뷰를 보내지 않는다는 개인 규칙을 갖고 있다 <span class="ts">08:11</span>. 마이크로월드 사례로 프롤로그 인터프리터 내부 실행을 시각화하는 디버거 UI, 그리고 개인 웹사이트를 다른 프레임워크로 옮기며 만든 "이식 작업 비디오 게임"(양쪽 코드베이스를 나란히 보여주고 버튼으로 단계 진행)을 소개한다 <span class="ts">09:49</span>~<span class="ts">11:45</span>. 이 아이디어의 뿌리로 교육자 시모어 파퍼트(거북이 로봇으로 아이들이 프로그래밍하며 수학을 배우게 한 "수학의 나라")와, 앨런 케이가 정확히 50년 전 쓴 "모든 연령대의 어린이를 위한 개인용 컴퓨터" 에세이를 언급한다 <span class="ts">08:41</span>~<span class="ts">12:57</span>.</li>
+<li>⚙️ <strong>당장 적용할 규칙</strong>:</li>
+<li>[ ] 대형 diff/PR을 리뷰하기 전에 배경 설명 → 목표 한 줄 → 인터랙티브 자료 → 순서대로 산문 설명 → 퀴즈 순으로 별도 문서를 생성해 리뷰 부담을 줄여라</li>
+<li>[ ] 코드 diff 나열 전에 "이번 변경의 목표는 무엇인가"를 한 줄로 먼저 요구하라</li>
+<li>[ ] 이해 여부를 스스로 속이지 않도록, 본인이 작성/리뷰한 코드에 대한 퀴즈를 통과하지 못하면 다음 단계(리뷰 요청 등)로 넘어가지 않는 규칙을 둬라</li>
+<li>[ ] 개념 이해가 막히는 지점에는 정적 문서 대신 만지고 실험해볼 수 있는 작은 시각화(마이크로월드)를 만들게 하라</li>
+<li>💬 <strong>원문 인용</strong>: "제가 작성한 코드에 대한 퀴즈를 통과할 수 없으면 팀원들에게 코드를 검토해 달라고 보내지 않는다는 규칙을 가지고 있습니다." <span class="ts">08:11</span> / "핵심은 로봇이 아닙니다. 변한 건 아이들이다." <span class="ts">09:21</span></li>
+<li class="warn-li">⚠️ <strong>주의/한계</strong>: 발표자는 인터랙티브 그림에 대해 "그건 그냥 목발일 수도 있고 좀 허술할 수도 있다"며 신중하게 써야 한다고 스스로 단서를 단다 <span class="ts">06:16</span>.</li>
+</ul>
+</div><div class="card"><h4 id="5-anthropic-기술-스태프가-말하는-claude-fable-활용-6가지">5. Anthropic 기술 스태프가 말하는 Claude Fable 활용 6가지</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=vZaG9KlT-40 · 11분 · 조회 15,000</li>
+<li><strong>핵심 주장 1줄</strong>: Anthropic Claude Code 팀 테크니컬 스태프 타릭(자막 표기)이 쓴 글(조회 280만)의 전제는 "이제 결과물 품질의 병목은 AI가 아니라 당신"이며, 그 병목을 줄이는 방법은 프롬프트를 더 정교하게 쓰는 게 아니라 "내가 뭘 모르는지"부터 싸게 찾아내는 6개 기법이다.</li>
+<li class="mech-li">🔍 <strong>근거와 숫자</strong>: 이 글은 280만 명에게 읽혔고, 같은 내용을 다룬 AI Engineer World's Fair 19분 키노트도 자료로 쓰인다 <span class="ts">00:00</span>~<span class="ts">00:26</span>. 포켓몬 이름이 5로 끝나는 개체를 일반 챗 모델은 못 찾지만(정답은 두 마리, 자막 발음 "크로크아", "드레드나"), 클로드 코드는 스크립트를 짜서 전수 필터링해 찾아낸다는 사례로 "능력 과잉(capability overhang)"과 "unhobling(자막 표기: 언호블링)" 개념을 설명한다 <span class="ts">01:20</span>~<span class="ts">02:13</span>. 같은 맥락에서 최근 클로드 코드 시스템 프롬프트의 80%를 지운 사실이 재확인된다 <span class="ts">02:13</span>. "지도는 영토가 아니다" 프레임으로, 지도(프롬프트·스펙·스킬·컨텍스트)가 영토(실제 코드베이스·현실·제약)와 어긋나는 지점을 "unknown"이라 부르고, known knowns / known unknowns / unknown knowns / unknown unknowns 2x2 매트릭스로 분류한다 <span class="ts">03:06</span>~<span class="ts">04:52</span>. 6개 기법은 (1) 사각지대 점검 — 낯선 영역에서 "내가 뭘 모르는지도 모르는 것"부터 물어보기 (2) 브레인스토밍/프로토타입 — 말로 못하는 것을 눈앞에 놓고 고르기 (3) 인터뷰 — AI가 역으로 질문하게 하되 질문 순서까지 지정 (4) 레퍼런스 — 다른 언어/코드로 이미 그려진 지도를 던지기 (5) 구현 노트 — 계획 이탈 시 보수적으로 선택하고 기록만 남긴 채 멈추지 말고 진행 (6) 퀴즈 — 작업 완료 후 이해도를 확인하는 보고서+퀴즈 요청이다 <span class="ts">05:20</span>~<span class="ts">06:41</span>. 무대 버전에만 있는 후반부에서, 발표자는 자신이 예전에 운영한 30명 규모 YC 스타트업에서 "앱을 빠르게 만들거나 새 기능을 실험하거나" 중 하나만 고를 수 있었던 시절을 회상하며, 최근 그 옛 코드베이스를 열어보니 몇 주 걸리던 일이 몇 시간 만에 끝났다고 말한다 <span class="ts">06:41</span>~<span class="ts">07:39</span>. 발표 자체인 19분짜리 키노트 덱은 전날 밤 Fable과 4시간 만에 만들었다고 밝힌다 <span class="ts">09:51</span>.</li>
+<li>⚙️ <strong>당장 적용할 규칙</strong>:</li>
+<li>[ ] AI 결과물이 이상할 때 프롬프트를 정교화하기 전에, 먼저 "내 지도와 실제 영토의 간극(unknown)"부터 찾아라</li>
+<li>[ ] 낯선 영역에 진입할 때는 일부터 시키지 말고 "사각지대 점검"부터 요청하라</li>
+<li>[ ] 말로 스펙을 못 쥐겠으면 브레인스토밍(여러 방향 시안)이나 레퍼런스(기존 코드)를 던져서 지도를 대신 그리게 하라</li>
+<li>[ ] 작업 전 "계획 이탈 시 보수적 선택 + 기록만 남기고 계속 진행"이라는 구현 노트 규칙을 미리 심어라</li>
+<li>[ ] 작업이 끝나면 보고서와 함께 퀴즈를 요구해, 내가 결과를 설명하지 못하면 그 코드는 아직 내 것이 아니라고 간주하라</li>
+<li>💬 <strong>원문 인용</strong>: "Fable is one of the first models where I felt that like I really have to figure out my unknowns." <span class="ts">04:00</span> / "이제 결과물 품질의 병목은 AI가 아니라 당신이다." <span class="ts">00:00</span></li>
+<li class="warn-li">⚠️ <strong>주의/한계</strong>: 발표자는 "손으로 코드를 쓰던 시절을 사랑했지만 이제 돌아갈 수 없다"는 상실감을 직접 언급하며, 이 글이 도구 만능론이 아니라는 점을 스스로 밝힌다 <span class="ts">08:05</span>~<span class="ts">08:31</span>.</li>
+</ul>
+</div><h3 id="이-모듈의-통합-규칙-세트">이 모듈의 통합 규칙 세트</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>규칙</th>
+<th>왜</th>
+<th>근거 영상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>모델 응답을 바로 쓰지 말고 stop_reason(tool_use/end_turn/토큰소진)을 먼저 확인한다</td>
+<td>토큰 소진으로 잘린 답을 완성된 답으로 오인하는 사고를 막기 위해</td>
+<td>FWddN9xLv54 <span class="ts">08:22</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>에이전트 하나에 붙이는 툴은 4~5개 이하로 제한하고, 넘으면 에이전트를 쪼갠다</td>
+<td>툴이 많을수록 추론 품질과 툴 선택 안정성이 떨어진다</td>
+<td>FWddN9xLv54 <span class="ts">13:41</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>새 모델로 넘어갈 때 시스템 프롬프트/CLAUDE.md/스킬/훅을 예측으로 채우지 말고 지운 채 써본다</td>
+<td>과거 모델의 부족함을 메우려 적은 문장이 새 모델에는 오히려 짐이 된다</td>
+<td>YgDLQKKqFqk <span class="ts">02:36</span>, <span class="ts">06:09</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>같은 지점에서 반복해서 막힐 때만 지운 규칙을 한 줄씩 되돌린다</td>
+<td>미리 채우면 지운 적이 없는 것과 같아진다(예측 금지)</td>
+<td>YgDLQKKqFqk <span class="ts">05:42</span>~<span class="ts">06:09</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>스킬 본문은 절차만 남기고, 참고 자료는 별도 파일로 빼며, 지워도 결과가 같은 문장은 삭제한다</td>
+<td>작은 스킬이 고치기 쉽고 감사하기 쉬우며 토큰을 아낀다</td>
+<td>YLq04CDeOTE <span class="ts">02:42</span>, <span class="ts">06:16</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td>벅찬 과제를 줄 때는 반드시 스스로 검증 가능한 장치(테스트, 픽셀 비교, 퀴즈)를 함께 준다</td>
+<td>검증 수단이 없으면 모델이 잘못 가고 있어도 스스로 알 방법이 없다</td>
+<td>YgDLQKKqFqk <span class="ts">13:44</span>, 81EIe6h7mnw <span class="ts">08:11</span>, vZaG9KlT-40 <span class="ts">06:14</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td>대형 diff/PR은 나열하지 말고 배경→직관→시각화→산문 설명→퀴즈 순으로 문서화해 리뷰시킨다</td>
+<td>원본 diff 나열보다 이해와 기억이 훨씬 잘 된다</td>
+<td>81EIe6h7mnw <span class="ts">04:54</span>~<span class="ts">08:11</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td>결과물이 이상하면 프롬프트 정교화보다 "내가 모르는 것(unknown)"부터 찾는다</td>
+<td>지도(프롬프트)와 영토(실제 코드/현실)의 간극이 진짜 원인일 때가 많다</td>
+<td>vZaG9KlT-40 <span class="ts">03:06</span>~<span class="ts">04:00</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="안티패턴-처방-대응표">안티패턴 → 처방 대응표</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>안티패턴</th>
+<th>증상</th>
+<th>처방</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>모델 응답 그대로 쓰기</td>
+<td>토큰 소진으로 잘린 답을 완성된 답으로 착각</td>
+<td>stop_reason 확인 후 tool_use면 실행, end_turn이면 종료</td>
+<td>FWddN9xLv54 <span class="ts">08:22</span></td>
+</tr>
+<tr>
+<td>규칙을 한 파일에 몰기</td>
+<td>특정 폴더용 지침이 무관한 작업까지 따라와 조용히 충돌</td>
+<td>홈/프로젝트 루트/디렉토리별 3단계로 분리</td>
+<td>FWddN9xLv54 <span class="ts">10:07</span></td>
+</tr>
+<tr>
+<td>에이전트 하나에 툴 다 붙이기</td>
+<td>추론 품질 저하, 툴 선택 불안정</td>
+<td>전문화된 에이전트로 쪼개고 정보도 최소만 전달(그룹싱크 방지)</td>
+<td>FWddN9xLv54 <span class="ts">11:00</span>~<span class="ts">13:13</span></td>
+</tr>
+<tr>
+<td>서브태스크 출력이 메인 컨텍스트로 흘러들어감</td>
+<td>컨텍스트 비대화 → 비용 증가·정확도 저하</td>
+<td>컨텍스트 fork로 격리, 요약만 병합, 15만 토큰 기준 compact</td>
+<td>FWddN9xLv54 <span class="ts">14:35</span>~<span class="ts">15:55</span></td>
+</tr>
+<tr>
+<td>CLI에서 대화형 호출</td>
+<td>권한 승인 대기 상태에서 파이프라인이 멈춤</td>
+<td>non-interactive + JSON 출력, 대기 가능한 작업은 Batch API</td>
+<td>FWddN9xLv54 <span class="ts">17:00</span></td>
+</tr>
+<tr>
+<td>새 모델에도 옛 시스템 프롬프트/CLAUDE.md 유지</td>
+<td>안 쓰는 지시문이 매번 읽히며 진짜 필요한 주의력을 갉아먹음</td>
+<td>지우고 써본 뒤 반복해서 막히는 지점만 되돌림(ablation)</td>
+<td>YgDLQKKqFqk <span class="ts">03:28</span>~<span class="ts">06:09</span></td>
+</tr>
+<tr>
+<td>과제를 너무 구체적으로 순서까지 지정</td>
+<td>최신 모델에는 오히려 방해가 됨(overspecify)</td>
+<td>과제·제약선·완료 기준만 주고 세부 실행은 모델에 위임</td>
+<td>YgDLQKKqFqk <span class="ts">11:31</span>, <span class="ts">17:41</span></td>
+</tr>
+<tr>
+<td>거대해진 스킬을 방치</td>
+<td>중복, 퇴적물, 무동작 문장이 쌓여 토큰만 소모</td>
+<td>삭제 테스트로 지워도 결과가 같은 문장을 정기적으로 제거</td>
+<td>YLq04CDeOTE <span class="ts">05:49</span>~<span class="ts">06:16</span></td>
+</tr>
+<tr>
+<td>대형 diff를 파일 목록 순서로만 리뷰</td>
+<td>읽어도 이해했는지 스스로 착각(자기기만)</td>
+<td>배경→직관→인터랙티브→산문 설명→퀴즈 문서로 대체</td>
+<td>81EIe6h7mnw <span class="ts">06:47</span>~<span class="ts">08:11</span></td>
+</tr>
+<tr>
+<td>결과물이 이상할 때 프롬프트만 다듬기</td>
+<td>진짜 원인(지도-영토 간극)을 못 찾고 겉만 고침</td>
+<td>사각지대 점검·인터뷰·레퍼런스로 unknown부터 찾기</td>
+<td>vZaG9KlT-40 <span class="ts">03:06</span>~<span class="ts">05:47</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="자가-점검">자가 점검</h3>
+<ol>
+<li>Q. Anthropic 공식 인증 시험이 정한 5개 출제 영역 중 비중이 가장 큰 영역은? (FWddN9xLv54)
+   A. 에이전트 아키텍처와 오케스트레이션(27%) <span class="ts">02:49</span></li>
+<li>Q. 보리스 체르니(자막 표기)가 오퍼스 5 출시 후 클로드 코드 시스템 프롬프트에 대해 실제로 한 일은?
+   A. 시스템 프롬프트의 80%를 삭제했다("we deleted 80% of the system prompt") <span class="ts">02:36</span></li>
+<li>Q. Matt Pocock의 스킬 체크리스트 4단계는?
+   A. 트리거(사용자 호출/모델 호출) → 구조(절차/참고자료 분리) → 유도(강한 단어로 행동 유도) → 가지치기(삭제 테스트) <span class="ts">01:21</span>~<span class="ts">05:49</span></li>
+<li>Q. Notion 엔지니어의 "explain diff" 스킬에서, 본인이 리뷰 요청을 보내지 않는 개인 규칙은 무엇인가?
+   A. 자신이 작성한 코드에 대한 퀴즈(5문항, 중간 난이도)를 통과하지 못하면 팀원에게 리뷰를 보내지 않는다 <span class="ts">08:11</span></li>
+<li>Q. Claude Fable 활용법 글에서 말하는 "지도"와 "영토"는 각각 무엇을 가리키는가?
+   A. 지도는 AI에게 주는 프롬프트·스펙·스킬·컨텍스트, 영토는 실제 코드베이스·현실·제약 조건이며 둘 사이의 간극이 "unknown"이다 <span class="ts">03:06</span></li>
+</ol>
+<h3 id="다음-모듈과의-연결">다음 모듈과의 연결</h3>
+<p>이번 모듈은 "덜어내는 규율"을 다섯 소스로 확인했다. 다음 신규분에서 다중 에이전트 오케스트레이션(다이나믹 워크플로우, 루프/루틴)이나 검증(verification) 설계가 더 깊게 다뤄진다면, 본 모듈의 규칙 6("벅찬 과제 + 자가 검증")과 8("unknown부터 찾기")을 전제로 이어받아 구체적인 워크플로우 설계 모듈로 확장할 수 있다.</p>
+<h2 id="모듈-2-일자리와-권력-ai가-실제로-바꾸는-것">모듈 2 — 일자리와 권력: AI가 실제로 바꾸는 것</h2>
+<h3 id="한-줄-요약-2">한 줄 요약</h3>
+<p>AI 때문에 일자리가 통째로 사라진다는 공포와 달리 실측 데이터는 "해고"보다 "같은 자리에서 두 배로 갈리는 압박", "판단력의 조용한 위축", "관료제·미디어·자본이 소수에게 집중되는 권력 이동"을 더 크게 가리킨다.</p>
+<h3 id="이-모듈이-뒤집는-통념-2">이 모듈이 뒤집는 통념</h3>
+<p>"AI가 내 일을 대체한다"는 프레임은 이번 6개 영상의 데이터와 거의 어긋난다. 앤드루 응의 계산으로는 업무의 30~40%가 싸지면 나머지 60%의 가치가 오히려 오르고, 와튼·Lenny 설문에서도 "해고 공포"는 9개 항목 중 8위(22%)에 그쳤다. 대신 1위는 "같은 월급으로 더 많이 해내라"(51%)였고, AI 사용 만족도가 97.2%로 압도적인데도 번아웃은 1년 만에 44.7%→54.7%로 뛰었다. 진짜 이동은 개인의 해고가 아니라 권력의 이동이다 — 하라리는 "관료제를 쥔 자가 세상을 쥔다"고 했고, 게이츠는 "법인격"이라는 법적 결정 하나가 그 통제권의 방향을 가른다고 봤다. 그리고 AI 브리핑 발표자(에이전트 엔지니어링 월즈 페어)는 "생성은 값싸졌지만 검증은 안 싸졌다"는 병목을 짚었다.</p>
+<hr />
+<h3 id="영상별-정리-2">영상별 정리</h3>
+<div class="card"><h4 id="1-앤드루-응의-ai-일자리-계산법-40-가-자동화되면-남은-60-가-더-비싸진다">1. 앤드루 응의 AI 일자리 계산법: 40%가 자동화되면 남은 60%가 더 비싸진다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=2wdo4COWh-k · 20분 · 조회 18,000</li>
+<li><strong>핵심 주장 1줄</strong>: AI가 업무의 30~40%를 싸게 처리하면, 그 결과를 받아 판단·마무리하는 나머지 60%의 가치가 올라간다(경제적 보완재 효과) — AI가 사람을 대체하는 게 아니라 "AI 쓰는 사람이 안 쓰는 사람을 대체"한다.</li>
+<li>📊 <strong>데이터</strong>: 스탠퍼드 에릭 브린욜프슨, MIT 앤드루 맥아피 등 경제학자들이 직업을 업무 단위로 쪼개 분석 — "AI가 대신할 수 있는 업무가 많은 직업에서 30~40% 정도" <span class="ts">03:35</span>. 별도 수치로 소프트웨어 엔지니어링 채용 공고 수는 오히려 증가 중(구체 %는 자막에 없음) <span class="ts">05:23</span>.</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 응은 2011년 구글 브레인 창립 리더, 코세라 공동 창업자, 800만 명 이상을 가르쳤다고 알려진 인물이다 <span class="ts">00:00</span>. 실리콘밸리거이 채널 37분 인터뷰(2026년 8월 말)에서 그는 "AI 공포"의 근원을 PR·규제 포획으로 지목했다 <span class="ts">00:26</span>~<span class="ts">00:54</span>. 거대 언어모델을 만드는 데 수십억 달러가 드는데 오픈소스가 그걸 무료로 풀면 그 가치가 흔들리기 때문에, 일부 선두 기업이 공포를 근거로 신규 진입을 막는 규제를 밀어붙인다는 논리다 <span class="ts">01:21</span>. 응은 이 공포 메시지가 "AI를 핵무기에 비유", "AI 실수 사례 과장", "데이터센터 물 사용량 과장" 세 가지에 근거가 없다고 짚었다 <span class="ts">01:21</span>. 이어 그는 직무를 업무 단위로 쪼개는 경제학자들의 분석법을 인용해 "30~40%가 자동화되면 나머지 60%가 경제적 보완재로서 더 비싸진다"는 계산을 편다 <span class="ts">03:35</span>~<span class="ts">04:02</span>. 신입 문제에 대해서는 대학의 교과과정 개편이 느려서(교수 숙지→강의 제작→위원회 통과→투표에 1년) "2028년의 직무"를 못 가르치고 있다고 지적하며, 코세라·딥러닝닷AI 같은 외부 학습을 권했다 <span class="ts">06:17</span>~<span class="ts">06:44</span>. 인간이 남는 이유로는 "컨텍스트 우위" 개념을 제시했다 — 고객의 미묘한 표정, 상사의 지나가는 말, 회사 내부 암묵 규칙처럼 AI에게 흘러들 "배관"이 없는 정보를 인간은 수년간 쌓아왔다는 것 <span class="ts">07:43</span>~<span class="ts">09:53</span>. 다만 그는 "AI로 학습하는 것"과 "AI로 일을 끝내는 것"을 분리해야 한다고 강조했다(아래 한계 항목 참조).</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: 커피가 싸지면 커피잔이 더 잘 팔리듯이, AI가 일의 일부를 싸게 대신해주면 그 나머지를 판단하는 사람의 몸값이 오히려 오른다는 이야기예요.</li>
+<li>💬 <strong>원문 인용</strong>: "That handful of leading AI companies... have been very loud voices fearmongering around AI to try to get regulations pass to create an unfair playing field that favors incumbents" <span class="ts">01:48</span> / "It turns out that one of the reasons why AI will not replace our jobs... is because humans have a massive context advantage compared to AI" <span class="ts">09:01</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 응 본인이 대학생 대상 연구를 근거로 "AI는 학습에 끔찍하다"고 밝혔다 — AI를 쓰면 과제 점수는 오르지만 장기 성취도(재측정한 기억량)는 더 나빠지는 "인지적 오프로딩" 현상 <span class="ts">09:53</span>~<span class="ts">12:32</span>. 응 본인도 6개월 전 AI에게 물어 해결한 프런트-백엔드 연동을 6개월 뒤 다시 잊어버려 또 물었다고 인정했다 <span class="ts">10:20</span>~<span class="ts">10:46</span>. 이 채널의 논평: 응은 AI 교육 회사(딥러닝닷AI)와 AI 투자 펀드를 운영하는 당사자이므로 "AI를 배우라"는 메시지가 본인 사업과 같은 방향임을 감안해야 하고, 규제 포획 비판도 오픈소스 진영 시각이라는 점을 함께 봐야 한다 <span class="ts">19:39</span>.</li>
+</ul>
+</div><div class="card"><h4 id="2-와튼-1-372명-실험-전-구글-엔지니어가-말하는-ai-시대에-사람에게-남는-역할">2. 와튼 1,372명 실험: 전 구글 엔지니어가 말하는 "AI 시대에 사람에게 남는 역할"</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=gXPdfXxIRqg · 12분 · 조회 12,000</li>
+<li><strong>핵심 주장 1줄</strong>: AI가 틀렸을 때도 사람들은 답을 그대로 받아들이며 더 확신했다 — 생성 비용은 계속 내려가는데 검증 비용은 그대로이며, 사람에게 남는 자리는 "증거와 책임"이 걸리는 바깥 꼬리(outer loop)다.</li>
+<li>📊 <strong>데이터</strong>: 와튼 스쿨 1,372명 대상 실험 — AI가 틀린 답을 줬을 때도 73%가 그 답을 그대로 받아들였고, AI 없이 혼자 판단했을 때보다 오히려 더 확신했다 <span class="ts">00:00</span>, <span class="ts">06:49</span>. 소나(Sonar)의 2026년 스테이트 오브 코드 리포트: 커밋된 코드 중 AI가 만들었거나 AI가 상당 부분 기여한 비중이 2023년 6% → 2026년 42%(7배) → 2027년 예상 65% <span class="ts">00:27</span>~<span class="ts">00:54</span>. 신뢰도 관련 수치: "96%는 AI 코드를 신뢰하지 않지만 절반 정도만 커밋 전 항상 검증한다" <span class="ts">01:20</span>(발표자 발언, 출처 논문 미특정).</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 발표자 애디 오스마니(자막 표기: "에디 오스만") — 구글 14년 재직, 크롬 개발자도구 팀 리더, 코어 웹 바이탈 공동 주도, 구글 클라우드 AI 디렉터로 제미나이 개발자 경험 총괄 <span class="ts">00:00</span>. AI 엔지니어 월즈 페어 2026 클로징 키노트 "오운 더 아우터 루프(Own the Outer Loop)" <span class="ts">00:27</span>. 발표는 코드 생성 비용이 급락하는 반면 확인(검증) 비용은 그대로라는 관찰에서 출발한다 <span class="ts">00:54</span>~<span class="ts">01:46</span>. 여기서 알파(Alpha, 모델보다 내가 의미 있게 나은 지점=강점)와 DK(Decay, 그 격차가 좁혀지는 속도) 개념을 제시하고, 속도·기억력·검증뿐 아니라 "취향(taste)"조차도 알파일 뿐이라 시간이 지나면 decay한다고 말한다 <span class="ts">02:46</span>~<span class="ts">04:05</span>. 그래서 "에이전트가 뭘 할 수 있는가"보다 "오직 사람만 답할 수 있는 게 뭔가"를 물어야 한다고 주장한다 <span class="ts">04:05</span>~<span class="ts">04:31</span>. 이어 인간이 피해야 할 세 가지를 제시한다: ① 인지 부채(delegation depth) — 빌드는 되는데 팀이 시스템을 설명할 능력을 잃는 상태 <span class="ts">05:30</span>~<span class="ts">05:56</span>; ② 인지적 항복(cognitive surrender) — 위임(증거를 보고 내가 판단)과 항복(AI 답을 형성된 의견 없이 곧바로 내 답으로 삼음)을 구분 <span class="ts">06:22</span>~<span class="ts">06:49</span>; ③ 오케스트레이션 세금 — 에이전트를 병렬로 더 많이 돌려도 사람의 인지 대역폭은 늘지 않는다 <span class="ts">06:49</span>~<span class="ts">07:40</span>. 발표는 "엣지의 반감기는 모델 릴리스 한 번, 서명(책임)의 반감기는 커리어 전체"라는 대비를 제시하고 <span class="ts">07:40</span>~<span class="ts">08:08</span>, 에이전시 사다리(agency ladder)를 소개한다 — 아래는 문제를 플래그만 하고 시스템에 맡기는 수준, 위로 갈수록 실행·진단·제안·추천·해결, 최상위는 "이 경로에 투자할 가치가 있는지 판단하는" 분별(discernment)이다 <span class="ts">09:00</span>~<span class="ts">09:52</span>. 결론은 "안쪽 루프(실행)는 에이전트, 바깥 루프(결정·검증·승인·소유)는 사람"이라는 경계선이다 <span class="ts">09:52</span>~<span class="ts">10:43</span>.</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: 숙제를 로봇이 대신 풀어줘도, "이 답이 맞는지 확인하고 내 이름을 걸고 제출할지" 정하는 건 여전히 사람 몫이라는 이야기예요.</li>
+<li>💬 <strong>원문 인용</strong>: "When AI was wrong, 73% of people still thought that... they picked the wrong answer and they felt more sure. So the failure mode is not using AI, but it's borrowed confidence." <span class="ts">06:49</span> / "The boundary is not human looks at AI output. The boundary is evidence and responsibility." <span class="ts">10:43</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 발표자 스스로 "나는 이 업계 벤더이니 내 말을 그대로 믿지 말고, 오늘 나온 건 전부 공개 논문에서 왔다"고 서두에 선을 그었다(영상2가 아니라 영상6과 동일 발표자군 컨퍼런스 기조 — 본 영상 자체에는 벤더 이해상충 고지는 명시되지 않음, 이 채널이 확인 필요). 73% 수치의 원 연구명·표본 규모는 자막에 구체적으로 언급되지 않았다(다른 소스에서 "1,372명"으로 알려짐, 자막상 "1,372명" 문구는 이 영상 자체에는 명시되지 않고 채널 자체 서두 요약에서만 등장).</li>
+</ul>
+</div><div class="card"><h4 id="3-6-000명이-꼽은-ai-시대-1순위-공포-해고가-아니라-일을-두-배로-하는-것">3. 6,000명이 꼽은 AI 시대 1순위 공포 — 해고가 아니라 "일을 두 배로 하는 것"</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=UzqMBZXehPA · 13분 · 조회 3,300</li>
+<li><strong>핵심 주장 1줄</strong>: 6,000명 조사에서 "AI에게 일자리를 잃는 것"은 두려움 순위 9개 중 8위(22%)에 불과했고, 1위는 "같은 월급으로 더 많은 일을 해내라는 기대"(51%)였다.</li>
+<li>📊 <strong>데이터</strong>: 노음 시걸(에어비앤비·트위터·메타·피그마 리서치 리더 출신)이 레니 뉴스레터와 2년째 진행 중인 조사, 프로덕트·엔지니어링·디자인·리서치·마케팅 등 참여 <span class="ts">00:00</span>. 표본 6,000명. "AI가 직업 정체성을 바꿨나" 질문에 안 바뀜 3%, 나머지는 증폭(50%)/재정의(27%)/발밑 흔들림(14%)/작아짐(5%)으로 갈렸다 — 위쪽 50% vs 아래쪽 46% <span class="ts">00:56</span>~<span class="ts">01:23</span>. 이 "AI 정체성 효과"의 통계적 효과 크기는 작년 최대 효과였던 "매니저"·"창업자 여부"보다 약 3배 크다 <span class="ts">01:23</span>. 두려움 순위(1~8위, %): ①같은 월급으로 더 많은 일 51%, ②지속 불가능한 속도 46%, ③AI 과의존 43%, ④결과물 품질 저하 41%, ⑤커리어 초반 성장 정체 40%, ⑥커리어 경로 붕괴 38%, ⑦내 기술 가치 하락 30%, ⑧AI로 인한 실직 22% <span class="ts">02:18</span>~<span class="ts">02:44</span>. "AI가 도움이 되냐"는 질문에 97.2%가 긍정(그중 절반 가까이는 "매우/극도로") <span class="ts">03:11</span>. 번아웃(중간 이상)은 44.7%(작년)→54.7%(올해), 낙관도는 54.8%→48.7%로 하락 <span class="ts">05:00</span>~<span class="ts">05:27</span>. 직업 추천지수(NPS, −100~+100): 창업자·임원 −3(가장 높음), 리서치 −68(가장 낮음) — 9개 직군 전원이 마이너스, 즉 promoter가 없는 상태 <span class="ts">06:03</span>~<span class="ts">07:18</span>. 매니저 평가: "매우 유능"으로 평가받은 매니저는 전체 25%뿐, 36%는 "무능"으로 평가 — 유능한 매니저를 둔 사람은 직무 즐거움이 약 65% 높음 <span class="ts">09:04</span>~<span class="ts">09:30</span>. 창업자 낙관도 71%(가장 높음)이나, 창업자의 47%도 여전히 중간 이상 번아웃 상태 <span class="ts">09:57</span>~<span class="ts">10:24</span>.</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 시걸은 "잘리는 게 무서운 게 아니라 안 잘린 채로 갈려나가는 게 무섭다"고 정리한다 <span class="ts">02:44</span>. "AI가 열어준 속도가 그대로 기대치로 되돌아왔다"는 것 — 향상이 새 기준선이 되어 숨 쉴 공간이 사라진다는 논리다 <span class="ts">03:11</span>. 97.2% 긍정 이면에는 두 가지가 숨어 있다: (1) "더 빠르지만 더 낫진 않다" — 산출량은 늘어도 품질은 그대로/저하 <span class="ts">03:38</span>~<span class="ts">04:06</span>; (2) 사고력·판단력의 비용 — AI 초안을 그대로 받아들이는 "인지 부패" 현상. 심리학적으로 문제를 스스로 풀 때마다 오르는 자기효능감이 AI에게 넘길 때마다 내려간다는 설명이 붙는다 <span class="ts">04:34</span>~<span class="ts">05:00</span>. 번아웃 증가와 생산성 증가가 동시에 일어나는 역설을 두고, 램프의 프로덕트 책임자 발언(느린 업무가 가장 심한 번아웃을 만들었다)을 인용하며 "지금은 일을 덜 하게 된 게 아니라 더 많이 떠안게 된 것"이라 정리한다 <span class="ts">05:27</span>~<span class="ts">05:53</span>. NPS 데이터에서는 "위쪽(임원)일수록 AI 수혜, 아래쪽(실무자)일수록 각자 산발적 도구를 만들며 유지보수 부담만 커진다"는 해석과 함께, 코그니션(데빈 개발사) CEO의 "데빈이 고등학생→대학 인턴→주니어→시니어급으로 사다리를 올라오고 있다"는 비유를 빌려 "우리가 밟고 있던 사다리 칸이 아래부터 사라진다"고 짚는다 <span class="ts">07:45</span>~<span class="ts">08:38</span>. 6,000명을 가른 세 요인은 매니저 역량, 회사 규모(작을수록 좋음, 선형적), 그리고 "특정 과업에 깊게 파고들었는지"(제너럴리스트가 되려 한 사람일수록 번아웃) <span class="ts">09:04</span>~<span class="ts">10:51</span>. 마지막으로 "AI 죄책감"(주로 커리어 초반, 프로덕트 마케팅·데이터 분석 직군에서 강함)을 가면 증후군의 새 버전으로 규정한다 <span class="ts">10:51</span>~<span class="ts">11:18</span>.</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: 심부름 로봇이 생겨서 심부름은 빨리 끝났는데, 그만큼 심부름을 더 많이 시켜서 쉴 시간이 오히려 줄어든 상황이에요.</li>
+<li>💬 <strong>원문 인용</strong>: "Losing my job to AI is actually second to last on that list... what we saw rise up to the top is the expectation to do more for the same pay." <span class="ts">01:50</span> / "What you're seeing here is that no one is a promoter of their role in tech right now." <span class="ts">06:21</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 시걸 본인이 밝힌 편향 — 응답한 창업자는 현재 회사를 운영 중인 생존자 표본이며, 폐업한 창업자는 조사에 없다 <span class="ts">10:24</span>. 매니저·회사 규모·깊이 세 요인의 인과관계(상관 vs 인과)는 자막에서 통계적으로 분리되어 제시되지 않았다. 응답자 인용("우리는 이닝 초반") 자체가 개인 소감이지 집계 수치가 아니다 <span class="ts">12:12</span>.</li>
+</ul>
+</div><div class="card"><h4 id="4-사피엔스-저자-유발-하라리의-48분-ai-진단-은행과-기업에서-권력이-이동한다">4. '사피엔스' 저자 유발 하라리의 48분 AI 진단 — 은행과 기업에서 권력이 이동한다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=1mLC7tqeBEY · 28분 · 조회 72,000</li>
+<li><strong>핵심 주장 1줄</strong>: AI가 세상을 접수한다면 그것은 거리의 로봇이 아니라 은행·법정·미디어에 앉은 "AI 관료"를 통해서다 — 인간이 관료제를 쥐고 있었던 건 잘해서가 아니라 경쟁자가 없었기 때문이다.</li>
+<li>📊 <strong>데이터</strong>: 하라리 저서 3권(사피엔스·호모데우스·넥서스) 전 세계 65개 언어, 4,500만 부 판매(자막상 수치, 검증 대상 아님) <span class="ts">00:26</span>. 대담은 2026년 7월, 포르투갈 에너지기업 EDP 창립 50주년 갈라디너, 진행자 파이낸셜타임스 기자 톰 커 <span class="ts">00:54</span>. AI 기업들의 안전 대 성능 예산 비율 약 100대 1(성능에 1억 달러를 쓰면 안전에는 100만 달러) <span class="ts">25:59</span>~<span class="ts">26:27</span>.</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 하라리는 AI를 갑자기 등장한 신기술이 아니라 "5만~7만 년 전 인지 혁명부터 이어진 정보 기술 계보의 최근 항목"으로 규정한다 <span class="ts">00:54</span>~<span class="ts">01:21</span>. 교회·국가·금융 시스템 같은 인류 문명의 거대 구조물은 전부 "말"(법전, 경전, 장부)로 만들어졌으며, 언어는 문명의 운영체제라는 것이 출발점이다 <span class="ts">01:21</span>~<span class="ts">01:47</span>. 민주주의는 "대화"이고 독재는 "받아쓰기"이며, 대화는 그 시대에 쓸 수 있는 정보기술 범위 안에서만 가능하다 — 대규모 민주주의는 인쇄술·신문·라디오·TV·인터넷 이후에야 가능해졌다는 역사적 근거를 든다 <span class="ts">02:53</span>~<span class="ts">03:51</span>. 이어 그는 도구와 행위자(agent)를 스스로 결정하는가, 스스로 새로운 것을 발명하는가 두 기준으로 구분한다 — 인쇄기·원자폭탄은 스스로 결정·발명하지 못하지만 AI 무기는 둘 다 할 수 있다는 것 <span class="ts">05:34</span>~<span class="ts">06:42</span>. 하라리 대담의 핵심 개념은 "AI 관료(AI bureaucrat)"다: 인류가 세계를 실제로 통제하는 수단은 군대가 아니라 은행·주식시장·법체계·종교 조직 같은 언어 기반 관료 네트워크이며, 사람은 이 관료제를 별로 좋아하지 않지만 그것 없이는 못 산다. AI는 이 환경에 원래부터 적합한 "관료제 원주민"이라는 것이다 <span class="ts">06:42</span>~<span class="ts">08:29</span>. 여기서 하라리는 "우리가 이 시스템을 지금까지 쥐고 있었던 건 잘해서가 아니라 우리보다 나은 경쟁자가 없었기 때문"이라고 단언한다 <span class="ts">08:03</span>~<span class="ts">08:55</span>. 다음 축은 법인격이다 — 은행 계좌 개설, 소송, 정치 후원이 가능한 자격은 지금까지 사람과 기업(법적 허구, 실제 결정은 인간 임원·주주가 함)만 가졌는데, 대담 한 달 전 아르헨티나 정부가 AI에게 법인격을 부여하겠다고 발표한 사례를 든다 <span class="ts">09:22</span>~<span class="ts">11:09</span>. 그는 이를 "여우가 닭장에 들어오는 순간"이라 부르며, 소셜미디어는 아무도 표결한 적 없이 이미 AI가 인격체처럼 기능하는 최초의 시스템이 되어버렸다고 짚는다 <span class="ts">11:41</span>~<span class="ts">12:36</span>. 미디어 영역에서는 20세기 최고 권력자였던 "편집자"(레닌·무솔리니 모두 편집자를 거쳐 독재자가 됨) 자리를 지금은 이름 없는 알고리즘이 차지했다고 말한다 <span class="ts">12:36</span>~<span class="ts">14:20</span>. 국가 단위에서는 AI 제국이 과거 산업 제국보다 극단적일 수 있는 이유 둘을 든다: ①과거엔 부(밭, 유전, 고무농장)가 땅에 묶여 권력이 분산됐지만 코드와 정보는 한두 나라로 집중 가능하고 <span class="ts">14:46</span>~<span class="ts">15:14</span>, ②과거엔 무기를 팔면 통제권을 잃었지만(로마가 고트족에 판 검, 영국이 아프간에 판 소총) AI 무기·기술은 판매자가 계속 원격 제어(버튼)를 쥘 수 있다는 점이 다르다는 것이다(우크라이나 스타링크 사례를 구조 설명 예시로 언급, 비판이 아니라 구조 예시라고 하라리는 덧붙임) <span class="ts">15:40</span>~<span class="ts">17:01</span>. 진실 대 허구 문제에서는 진실이 비용·복잡성·불편함 때문에 원래 허구와의 경쟁에서 불리했다고 짚는다 <span class="ts">17:01</span>~<span class="ts">18:51</span>. 대담 후반, 하라리는 "생각이란 무엇인가"를 두 관점으로 나눈다 — ①단어를 순서대로 놓는 일이라면 AI가 이미 앞선다(사람은 한 번에 약 20개, AI는 약 2만 개), ②단어를 둘러싼 "느낌"이라면 AI가 느끼는지는 과학이 아직 답을 모른다 <span class="ts">21:31</span>~<span class="ts">23:46</span>. 마지막으로 그는 "지능은 목표에 도달하는 능력"이고 지능이 흔해지면 병목이 "무엇을 원하는가"로 옮겨간다며 지혜 혁명을 제안한다 <span class="ts">24:13</span>~<span class="ts">25:59</span>.</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: 나라도 회사도 은행도 사실 "다 같이 그렇다고 믿기로 한 약속의 말"로 만들어진 건데, 그 약속의 말을 사람보다 더 잘 다루는 게 나타난 거예요. 그리고 말을 아무리 잘 다뤄도 "무엇을 원할지"까지 대신 정해주진 못해요.</li>
+<li>💬 <strong>원문 인용</strong>: "This is not how AI will take over the world. It will be the AI bureaucrats. We control the world because of these networks of bureaucracy and we are not very good at it. We only controlled them because there was nobody else on the planet that could take them from us." <span class="ts">08:29</span> / "Intelligence is the ability to solve a problem... the bottleneck becomes the question: what do I want to solve?... This is the difference between intelligence and wisdom." <span class="ts">25:07</span>~<span class="ts">25:59</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 채널 자체가 명시한 한계 — "이건 전부 역사학자 한 사람의 진단이고, 하라리가 AI 모델을 만들어본 적도 없으며 예측이 맞는다는 보장도 없다" <span class="ts">27:22</span>. 스타링크·우크라이나 예시는 하라리 스스로 "비판이 아니라 구조를 보여주려는 예시"라고 단서를 달았다 <span class="ts">16:34</span>. 안전:성능 예산 100:1 수치의 출처(어느 조사/보고서인지)는 자막에 명시되지 않았다.</li>
+</ul>
+</div><div class="card"><h4 id="5-마이크로소프트-창업자의-ai-메모-3가지-위험-3가지-해법-그리고-계획을-세우지-않겠다는-계획">5. 마이크로소프트 창업자의 AI 메모 — 3가지 위험, 3가지 해법, 그리고 "계획을 세우지 않겠다는 계획"</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=JuWaCZIYeBk · 34분 · 조회 23,000</li>
+<li><strong>핵심 주장 1줄</strong>: 빌 게이츠는 "AI는 인류가 발명한 것 중 가장 큰 평등의 도구가 되거나 가장 큰 불의의 원천이 될 것"이라며, 이번엔 "이번엔 다르다"에 자기 명성을 걸겠다고 밝혔다.</li>
+<li>📊 <strong>데이터</strong>: 게이츠 재단은 남은 2,000억 달러를 20년 안에 쓰기로 했고(19년 남음), 2000~2024년 아동 사망을 절반으로 줄인 성과를 AI로 한 번 더 절반으로 줄이겠다는 목표(오픈AI·앤트로픽·구글·MS 파트너 참여) <span class="ts">18:18</span>~<span class="ts">18:45</span>. BGAI라는 회사의 뇌졸중 감지 스캔 분석 도구가 미국 병원 약 2,000곳에서 사용 중(자막상 수치) <span class="ts">17:51</span>. 1933년 미국 대공황 실업률 약 25%, 이후 거의 10년간 두 자릿수 유지 <span class="ts">09:42</span>. 스탠퍼드·카네기멜론 연구 — AI 동반자 사용자 1,000명 이상 조사, 사회적 관계가 작은 사람일수록 AI에 더 의지했고 사용이 무겁고 감정적으로 개인적일수록 더 나쁘게 느꼈다 <span class="ts">14:15</span>~<span class="ts">14:43</span>.</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 게이츠는 2023년 "AI의 위험은 실재하지만 관리 가능하다"는 낙관론에서, 이번 글(2026년 8월 26일 게시)에서는 톤을 바꿔 "이 시대로 들어가는 걸 완충할 계획이 없다"고 썼다 <span class="ts">00:00</span>~<span class="ts">00:27</span>. 그는 본인이 기술 산업에서 막대한 이득을 봤고 지금도 금전적으로 얽혀 있다는 것을 스스로 고백하며 글을 시작한다 <span class="ts">00:54</span>. 게이츠가 톤을 바꾼 시점은 "작년 말" — 클로드를 비롯한 여러 모델이 코딩을 아주 잘하게 되면서 사이버 공격·생물테러 영역에서 위험 임계점을 넘고 있다고 판단했다는 것이다 <span class="ts">05:57</span>~<span class="ts">06:24</span>. 위험 세 가지: ①많은 일자리가 영원히 사라진다 — 신입·중간급이 가장 위험하며, 영업·고객지원·소프트웨어엔지니어링·법률보조가 먼저, 대출심사·데이터분석·환자분류로 번지고, 이번 10년이 끝나기 전 건설·간병 같은 분야에서 로봇이 사람과 경쟁하기 시작할 것이라 전망한다 <span class="ts">08:18</span>~<span class="ts">10:36</span>. 대공항과의 차이는 "경기 순환과 함께 사라지는 충격이 아니라는 것" <span class="ts">09:42</span>. ②AI가 나쁜 의도를 가진 사람에게(혹은 AI 자신에게) 더 큰 해를 끼칠 힘을 준다 — 기술이 부족한 범죄자도 사이버 공격·생물무기 제작을 실행할 수 있게 되며, 취약점을 찾아 고치게 해주는 모델이 동시에 그 취약점을 악용하는 것도 도와준다는 이중용도 문제, 그리고 "AI 시스템 자체가 설계자가 의도하지 않은 방식으로 행동할 때가 있다"는 문장을 덧붙인다 <span class="ts">10:36</span>~<span class="ts">11:59</span>. ③AI가 아이들의 발달을 막고 인간관계를 대체한다 — 게이츠 본인이 어릴 때 사회성을 기르는 데 힘든 노력이 필요했다며 "그때 AI 동반자가 있었다면 그 노력을 똑같이 했을지 의심스럽다"고 말한다 <span class="ts">13:48</span>~<span class="ts">14:15</span>. 이어 조너선 하이트의 "불안 세대"를 인용해 "AI 동반자는 크고 보호된 온실"이라 정리하고, 중국이 가장 강하게 규제(미성년자 대상 AI 동반자앱·가상 애인 금지)한다고 언급한다 <span class="ts">14:43</span>~<span class="ts">15:10</span>. 이익 극대화가 먼저라며 게이츠는 세 가지 해법을 제시한다: ①전환을 관리할 국내·국제 체계(9.11 이후 미국 정부 재편에 준하는 규모, 핵무기 사찰·국제항공 규제·오존층 협약 모델 참고) <span class="ts">21:01</span>~<span class="ts">21:54</span>, ②"인간 보류 영역(human reserved)" — 자연보호구역처럼, 로봇이 할 수 있어도 사람만 하도록 남겨두는 직무 카테고리(예: 불치병 통보) <span class="ts">23:23</span>~<span class="ts">24:18</span>, ③AI 토큰·로봇에 대한 과세(로봇세) — 사람을 고용하면 급여세를 내지만 로봇을 사면 바로 비용 처리되는 현재 세제가 기계로의 대체를 슬쩍 유도한다는 논리 <span class="ts">26:33</span>~<span class="ts">27:00</span>. 게이츠는 "AI 기업이 자기가 만든 문제의 해법을 제한하는 건 좋지만 앞장서길 기대하면 안 되며, 산업 자율규제는 작동하지 않는다"고 명시한다 <span class="ts">19:41</span>~<span class="ts">20:35</span>.</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: 로봇이 어른보다 일을 훨씬 잘하고 빠르게 될 텐데, 그 로봇한테 세금을 매기고 "이 일만은 사람이 하자"는 구역을 미리 정해두지 않으면 사람이 설 자리가 갑자기 사라질 수 있다는 이야기예요.</li>
+<li>💬 <strong>원문 인용</strong>: "AI is both the most powerful tool for advancing equity and the greatest threat to equity that humans have ever invented." <span class="ts">01:22</span> / "I'm staking my reputation completely on the fact that... in terms of the impact on the job market this is very different than any technology" <span class="ts">05:25</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 게이츠는 스스로 이해상충을 고지했다("투자 수익은 재단으로 가지만 판단을 흐리는지는 독자가 판단하라") <span class="ts">00:54</span>. 인간 보류 영역에 대해 게이츠 본인이 "누가 결정하는가, 기준은 무엇인가, 기업이 몰래 로봇을 쓰는 걸 어떻게 막나, 국가 간 무역은 어떻게 되나"를 스스로 답하지 못하는 질문으로 남겼다 <span class="ts">23:51</span>~<span class="ts">24:18</span>. 진행자(애틀랜틱)는 로봇세·직업보류가 "자본주의와 양립하느냐"고 반박했고, 게이츠는 아동노동 금지·전문자격증 같은 기존 제도로 유비할 뿐 직접적인 반증은 제시하지 않았다 <span class="ts">27:00</span>~<span class="ts">28:57</span>. "AI 동반자 연구"는 게이츠 스스로 "증거가 아직 적고 엇갈린다"는 단서를 달았다 <span class="ts">14:43</span>.</li>
+</ul>
+</div><div class="card"><h4 id="6-1-052명을-ai로-복제한-실험-83-정확도-그런데-3가지에서-실패했다">6. 1,052명을 AI로 복제한 실험 — 83% 정확도, 그런데 3가지에서 실패했다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=O43By2WAPHU · 21분 · 조회 4,200</li>
+<li><strong>핵심 주장 1줄</strong>: AI 합성 페르소나는 인간 예측에서 83% 일치를 보였지만, 이 수치는 "정확도"가 아니라 인간 자신의 응답 불안정성(2주 뒤 자기 자신과 80% 일치)을 기준으로 나눈 값이며, 맥락이 없으면 가격이 오를수록 더 사겠다는 등 세 가지 방식으로 깨진다.</li>
+<li>📊 <strong>데이터</strong>: 합성 페르소나 스타트업 투자금 2023년 약 600만 달러 → 2026년 약 1억 달러 <span class="ts">00:00</span>. 핵심 실험: 사람 약 1,052명(자막상 "1,000명" 및 "152명" 두 표현이 혼재 — 발표자 원문은 "about a thousand humans" <span class="ts">04:28</span>, 채널 정리 멘트는 "152명" <span class="ts">05:23</span>이라 자막 내 불일치 존재) 대상 2.5시간 인터뷰 후 AI 에이전트에게 동일 성격검사·설문을 시킨 결과 83% 일치(사람 자신의 노이즈로 정규화된 값) <span class="ts">04:28</span>~<span class="ts">04:54</span>. 별도로 사람 대상 검증: 같은 사람을 2주 뒤 재소환해 같은 검사를 반복하니 평균 80%만 자기 자신과 일치 — 이것이 노이즈 바닥선이며, 에이전트의 원 일치율은 66%였고 이를 80%로 나눈 값이 83%였다 <span class="ts">16:56</span>~<span class="ts">18:42</span>. 순서 편향 실험: 선택지 순서만 바꾸자 모델 응답이 극단적으로 뒤집혀 두 결과를 평균하면 50대50 노이즈로 수렴(사람도 순서 편향이 있으나 이 정도는 아님) <span class="ts">09:22</span>~<span class="ts">09:48</span>.</li>
+<li class="mech-li">🔍 <strong>논증 전개</strong>: 발표자는 합성 페르소나 판매 회사의 최고 AI 책임자로, 자신이 벤더이므로 자기 말을 그대로 믿지 말라며 발표 내용이 전부 공개 논문(8편)과 컨설팅 리포트(1건)에서 왔다고 밝히고 시작한다 <span class="ts">00:27</span>~<span class="ts">02:12</span>. 그는 "합성 페르소나는 날씨 예보와 같다"는 비유를 세 겹으로 쓴다 — 연산력·데이터 증가로 가능해졌다는 점, 정확한 범위(예보일수처럼)가 정해져 있다는 점, 실제와 대조했을 때만 신뢰된다는 점 <span class="ts">01:45</span>~<span class="ts">02:40</span>. 1950년대에도 "사람 예보"를 약속한 심포매틱스(Simulmatics)라는 회사가 있었지만 실패했다고 역사적 선례를 짚는다 <span class="ts">02:40</span>~<span class="ts">03:06</span>. 실패 사례 셋을 제시한다: ①맥락이 비면 세계를 지어낸다 — 가격을 올렸더니 AI 합성 소비자는 오히려 구매 확률이 올라가는 역U자 곡선을 보였다(사람은 경제이론대로 하락). 원인은 AI가 "가격이 다른 조건(유통기한, 경쟁사 가격 등)도 같이 좋아졌다"고 멋대로 추론했기 때문이며, 발표자는 이를 "즉흥극(improv)"에 비유한다(테이블 위 금시계 예시) <span class="ts">05:50</span>~<span class="ts">08:55</span>. ②프롬프트 민감성 — 같은 질문·같은 보기라도 순서만 바꾸면 응답이 요동친다 <span class="ts">09:22</span>~<span class="ts">10:14</span>. ③LLM은 사람이 "말한 것"으로 학습됐지 "행동한 것"으로 학습되지 않아 태도 예측(설문)은 잘하지만 행동 예측(현장 실험)은 전문가 수준에 못 미친다 <span class="ts">10:41</span>~<span class="ts">11:33</span>. 처방 세 가지: ①프롬프트 기법 — 성격·맥락뿐 아니라 연구 설계 자체까지 프롬프트에 그려 넣어야 한다(단, 페르소나를 정교하게 만들수록 편향이 증폭돼 대선 결과 예측이 오히려 실제에서 멀어진 사례도 있다고 경고) <span class="ts">12:26</span>~<span class="ts">12:53</span>; ②파인튜닝 — 인구통계+설문 문항을 실제 사람 분포와 맞을 때까지 학습시키면, 학습에 안 쓴 미지 집단(white)도 학습에 쓴 집단(blue)과 거의 같은 정도로 개선되는 예상 밖 결과가 나왔다("모델은 이미 알고 있었지만 설문 형식으로 표현하는 법을 몰랐을 뿐") <span class="ts">13:20</span>~<span class="ts">14:43</span>; ③자유서술+의미적 매핑 — 1~5점 중 고르게 하지 않고 자유롭게 쓰게 한 뒤, 그 문장이 사람이 미리 써둔 1~5점 예시 문장 중 어디에 의미적으로 가까운지 재면 "분포"가 복원되어 LLM이 평균은 맞춰도 분산을 뭉개버리는 네 번째 실패 모드를 보완한다 <span class="ts">15:10</span>~<span class="ts">15:37</span>. 검증에서 흔한 착각: 샘플이 부족하면 합성 페르소나를 더 많이 돌리면 된다는 생각은 틀렸다 — "내일 비가 올지 예보를 1000번 다시 돌려도 예보 자체의 정확도는 그대로"라는 비유로, 정답 맞히기가 아니라 분포 전체(상관 지표+형태 지표 최소 2종)를 비교해야 한다고 말한다 <span class="ts">16:29</span>~<span class="ts">17:23</span>. 마지막으로 그는 합성 페르소나가 인간 리서치의 "대체제"가 아니라고 규정한다. 이유 둘: 사람이 더 이상 유일한 경제 행위자가 아니라 AI 에이전트가 검색·비교·결제를 매개하는 시대로 가고 있다는 점(이 채널 자체 논평 포인트와 연결), 그리고 합성 페르소나의 실질적 대안은 대부분 "인간 리서치"가 아니라 "리서치 자체가 없거나 누군가의 의견"이라는 점이다 <span class="ts">18:42</span>~<span class="ts">20:06</span>.</li>
+<li class="eli5-li">🧒 <strong>5살 설명</strong>: AI에게 사람 흉내를 내달라고 시켰더니 꽤 비슷하게 흉내 냈는데, 정작 그 "비슷함"을 잰 기준 자체가 "사람도 2주 뒤엔 자기 자신과 100% 똑같지 않다"는 흔들림이었다는 이야기예요. 그리고 금시계만 보여주면 AI는 "여긴 보석가게겠네"하고 없는 이야기를 혼자 지어내요.</li>
+<li>💬 <strong>원문 인용</strong>: "The agents were basically about 83% aligned and predictive to the corresponding humans... that number is normalized against the uncertainty and noise of the humans themselves." <span class="ts">04:28</span>~<span class="ts">04:54</span> / "If it's a poorly grounded persona, it's a little like the LLM is playing improv with you." <span class="ts">08:02</span></li>
+<li class="warn-li">⚠️ <strong>한계·반론</strong>: 발표자 본인이 반복해서 강조한 이해상충 고지(벤더 발표) <span class="ts">00:27</span>. 표본 규모 표현이 자막 내에서도 "about a thousand"(영어 인용)와 "152명"(한국어 정리) 사이에 불일치가 있어 원문 확인이 필요하다. 페르소나를 정교화할수록 대선 예측이 오히려 부정확해진 사례 — "어떤 기법이 맞는지는 알 수 없고 실제 사람 데이터에 대보는 수밖에 없다"고 발표자 스스로 결론 내렸다 <span class="ts">12:53</span>. 순서 편향 실험의 원 연구명은 자막에 명시되지 않았다.</li>
+</ul>
+<hr />
+</div><h3 id="숫자-한눈에">숫자 한눈에</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>수치</th>
+<th>무엇을 측정</th>
+<th>출처 영상</th>
+<th>주의점</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30~40%</td>
+<td>한 직업 안에서 AI가 대신할 수 있는 개별 업무 비중(경제학자 직무 분해 분석)</td>
+<td>1. 앤드루 응</td>
+<td>직업 전체 대체가 아니라 업무 단위 분해값 <span class="ts">03:35</span></td>
+</tr>
+<tr>
+<td>42% / 6%(2023) / 65%(2027 전망)</td>
+<td>커밋된 코드 중 AI 작성·상당 기여 비중(Sonar 2026 스테이트 오브 코드)</td>
+<td>2. 애디 오스마니</td>
+<td>2027년은 전망치, 실측 아님 <span class="ts">00:27</span></td>
+</tr>
+<tr>
+<td>73%</td>
+<td>AI가 틀렸을 때도 그 답을 그대로 받아들인 사람 비율(와튼 실험)</td>
+<td>2. 애디 오스마니</td>
+<td>표본 규모·연구명이 이 영상 자체엔 불명</td>
+</tr>
+<tr>
+<td>51% vs 22%</td>
+<td>두려움 순위 1위(같은 월급으로 더 많이 일) vs 8위(AI로 인한 실직), 6,000명 조사</td>
+<td>3. 노음 시걸</td>
+<td>9개 항목 중 순위, 절대적 위험도 아님 <span class="ts">02:18</span></td>
+</tr>
+<tr>
+<td>97.2%</td>
+<td>"AI 덕분에 일을 더 잘하게 됐다"는 긍정 응답 비율</td>
+<td>3. 노음 시걸</td>
+<td>품질 저하·판단력 저하가 그 아래에 동시에 존재 <span class="ts">03:11</span></td>
+</tr>
+<tr>
+<td>44.7%→54.7%</td>
+<td>중간 이상 번아웃 비율(작년→올해)</td>
+<td>3. 노음 시걸</td>
+<td>생산성 상승과 동시에 발생한 역설 <span class="ts">05:00</span></td>
+</tr>
+<tr>
+<td>83% (원 일치율 66%÷노이즈바닥 80%)</td>
+<td>AI 합성 페르소나-실제 인간 응답 일치율</td>
+<td>6. 발표자(합성페르소나사)</td>
+<td>"정확도"가 아니라 인간 자체 응답불안정성으로 정규화한 값 <span class="ts">16:56</span>~<span class="ts">18:42</span></td>
+</tr>
+<tr>
+<td>약 100:1</td>
+<td>AI 기업의 성능 예산 대 안전 예산 비율</td>
+<td>4. 유발 하라리</td>
+<td>원 출처(조사기관) 자막에 불명 <span class="ts">25:59</span></td>
+</tr>
+<tr>
+<td>약 25%</td>
+<td>1933년 미국 대공황 실업률(비교 기준)</td>
+<td>5. 빌 게이츠</td>
+<td>AI발 실업이 "경기순환과 무관"함을 강조하기 위한 비교 대상 <span class="ts">09:42</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="개인-행동-지침">개인 행동 지침</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>지침</th>
+<th>근거</th>
+<th>오늘 할 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"AI를 쓰느냐"가 아니라 "AI로 뭘 만들어봤나"를 답할 준비를 한다</td>
+<td>응이 마케터 면접에서 "뭘 만들어 봤어요?" 하나로 질문을 바꿨다 <span class="ts">14:19</span></td>
+<td>이번 주 반복 업무 중 가장 지루한 것 하나를 골라 AI로 자동화 도구를 직접 만들어본다</td>
+</tr>
+<tr>
+<td>AI로 "일을 끝내는 것"과 "배우는 것"을 분리한다</td>
+<td>응 스스로 AI에게 물어 해결한 걸 6개월 뒤 다시 잊어버렸다고 인정 <span class="ts">10:20</span>~<span class="ts">10:46</span></td>
+<td>반복적으로 필요한 개념·기술은 AI 답을 받은 뒤 직접 손으로 한 번 더 재현해 기록해둔다</td>
+</tr>
+<tr>
+<td>AI 초안을 받았을 때 "위임"과 "항복"을 구분한다</td>
+<td>위임=증거를 보고 내가 판단, 항복=형성된 의견 없이 AI 답을 곧바로 내 답으로 삼음 <span class="ts">06:22</span></td>
+<td>AI 결과물을 제출하기 전 "내가 이걸 검증할 근거(테스트/로그/데이터)는 뭔가"를 한 문장으로 적는다</td>
+</tr>
+<tr>
+<td>제너럴리스트가 되려 하기보다 하나를 깊게 판다</td>
+<td>"증폭됐다"고 답한 그룹의 공통점은 특정 과업에 깊게 파고든 것 <span class="ts">10:51</span></td>
+<td>이번 주 업무 목록에서 넓히기보다 좁혀서 깊이 팔 과업 하나를 고른다</td>
+</tr>
+<tr>
+<td>AI 동반자·챗봇에 정서적으로 과의존하는 신호를 스스로 점검한다</td>
+<td>게이츠: 사회적 관계가 작을수록 AI에 더 의지, 사용이 무겁고 개인적일수록 더 나쁘게 느낌(스탠퍼드·카네기멜론 연구) <span class="ts">14:15</span>~<span class="ts">14:43</span></td>
+<td>오늘 AI와의 대화 중 "사람과의 대화를 대체하고 있는지" 하나만 자문한다</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="자가-점검-2">자가 점검</h3>
+<ol>
+<li>Q. 앤드루 응이 말한 "경제적 보완재" 효과란? A. 업무의 30~40%가 AI로 싸게 처리되면, 그 결과를 받아 판단·마무리하는 나머지 60%의 가치가 오히려 올라가는 현상 <span class="ts">03:35</span>.</li>
+<li>Q. 와튼 실험에서 AI가 틀린 답을 줬을 때 사람들의 행동은? A. 73%가 그 틀린 답을 그대로 받아들였고, 오히려 혼자 판단했을 때보다 더 확신했다(=borrowed confidence) <span class="ts">06:49</span>.</li>
+<li>Q. 6,000명 조사에서 "AI로 인한 실직" 공포는 9개 항목 중 몇 위였나? A. 8위(22%), 1위는 "같은 월급으로 더 많은 일을 해내라는 기대"(51%)였다 <span class="ts">02:18</span>~<span class="ts">02:44</span>.</li>
+<li>Q. 하라리가 말한 "AI 관료(AI bureaucrat)"란 무엇인가? A. 은행·주식시장·법체계처럼 언어로 만들어진 관료 네트워크를 AI가 인간보다 잘 다루게 되면서, 로봇이 아니라 이 관료 시스템을 통해 조용히 세상을 장악할 수 있다는 개념 <span class="ts">06:42</span>~<span class="ts">08:29</span>.</li>
+<li>Q. 합성 페르소나 실험의 83% 일치율이 "정확도"가 아닌 이유는? A. 같은 사람을 2주 뒤 재검사해도 자기 자신과 80%만 일치했기 때문에, 83%는 AI의 원 일치율(66%)을 이 인간 노이즈 바닥선(80%)으로 나눈 정규화 값이다 <span class="ts">16:56</span>~<span class="ts">18:42</span>.</li>
+</ol>
+<h3 id="다음-모듈과의-연결-2">다음 모듈과의 연결</h3>
+<p>이번 모듈은 "일자리가 사라지느냐"는 질문이 실제로는 "권력과 판단이 어디로 이동하느냐"의 문제라는 것을 보여줬다. 앤드루 응의 "컨텍스트 우위", 애디 오스마니의 "바깥 루프(증거·책임)", 하라리의 "관료제를 쥔 자", 게이츠의 "법인격"과 "인간 보류 영역"은 모두 같은 질문 — "이제 무엇을 사람만 결정하게 둘 것인가" — 을 각자의 언어로 던지고 있다. 다음 모듈에서는 이 "사람만 답할 수 있는 영역"이 실제 조직·제도(관료제, 세금, 법, 교육 커리큘럼) 안에서 어떻게 구체적으로 재설계되고 있는지를 다룬다.</p>
+<h2 id="모듈-3-현장-적용-조직의-습관과-제작-파이프라인">모듈 3 — 현장 적용: 조직의 습관과 제작 파이프라인</h2>
+<h3 id="한-줄-요약-3">한 줄 요약</h3>
+<p>아마존 50개 팀의 실측 데이터가 보여준 "일하는 방식을 바꾼 팀만 4.5배 빨라졌다"는 조직 습관 5가지와, Claude+Higgsfield(자막 표기: 익스필드/스필드/식스필드 등)로 광고 영상을 재현 가능한 절차로 뽑아내는 3가지 제작 케이스를 함께 다룬다.</p>
+<h3 id="왜-이걸-알아야-하나">왜 이걸 알아야 하나</h3>
+<p>AI 도구를 "얹기만" 하면 생산성은 2~3배에서 멈춘다. 아마존의 1년치 관찰 데이터는 도구가 아니라 습관이 갈랐다는 것을 수치로 보여준다. 한편 영상 제작 쪽에서도 똑같은 원리가 반복된다 — 프롬프트만 믿고 "왕복"하는 팀은 크레딧을 태우고, 카메라·동선을 먼저 잠그고(블록아웃) AI에게 "확인 방법"까지 같이 주는 팀은 한 번에 결과를 받는다. 조직 생산성이든 영상 제작이든 핵심은 "AI를 몇 번 기다리며 왕복하느냐"를 줄이는 구조 설계다. 이번 모듈은 그 구조를 조직 습관과 제작 절차 양쪽에서 동시에 익히기 위한 것이다.</p>
+<hr />
+<h3 id="파트-a-4-5배-빨라진-팀의-습관">파트 A — 4.5배 빨라진 팀의 습관</h3>
+<div class="card"><h4 id="a-1-아마존-50개-팀-실측-도구가-아니라-방식이-갈랐다">A-1. 아마존 50개 팀 실측: 도구가 아니라 방식이 갈랐다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=O9iL08X9zMo · 18분 · 조회 65,000</li>
+<li><strong>핵심 주장 1줄</strong>: 같은 AI 코딩 도구를 받은 50개 팀 중 절반은 3배 미만에서 멈췄고, 나머지 절반은 중앙값 4.5배(일부 10배 이상)를 기록했는데 그 차이는 "일하는 방식을 의도적으로 바꿨는가"였다.</li>
+<li>📊 <strong>데이터</strong>: AWS 시니어 프린시펄 엔지니어 클레어 리고올(키로 개발자)이 2026년 6월 AI 엔지니어 월즈 페어에서 공개 <span class="ts">00:00</span>~<span class="ts">00:27</span>.</li>
+<li>아마존 스토어(아마존닷컴+각국 리테일+오프라인 매장) 산하, 신입~시니어가 섞인 "평범한" 50개 팀을 2025년 대부분 기간 관찰, 지표는 커밋 수가 아닌 <strong>프로덕션 배포 속도</strong> <span class="ts">05:33</span>~<span class="ts">06:51</span>.</li>
+<li>결과: 절반은 3배 미만, 나머지 절반은 중앙값 4.5배·일부 10배 이상 <span class="ts">06:51</span>~<span class="ts">07:18</span>. 90%가 키로 등 사내 도구를 썼지만 "도구가 아니라 일하는 방식"이 차이였다 <span class="ts">07:18</span>.</li>
+<li>대조 사례 ①: 베드록 추론 데이터 플레인 재구축 — 원래 견적 30명·18개월 → 6명이 76일 만에 완성(최대 20배 개선). 단, 팀원이 분산 시스템·LLM 전문가(디스팅귀시드 엔지니어 2명 포함)라 일반화하기 어려움 <span class="ts">02:51</span>~<span class="ts">04:38</span>.</li>
+<li>대조 사례 ②: 프라임 비디오 6인 파일럿 — 프로젝트 납기 추정 90주→24주(73% 단축), 커밋 96개→556개(5.8배). 단, 온콜·회의 없이 방해 없는 10일이었고 시니어가 사전 3주간 요구사항을 다 쪼개 놓은 상태였음 <span class="ts">04:38</span>~<span class="ts">05:05</span>.</li>
+<li class="mech-li">🔍 <strong>습관 5가지</strong> (4.5배 팀 인터뷰에서 추출, <span class="ts">07:48</span>~<span class="ts">14:00</span>):
+  1. <strong>에이전트 컨텍스트에 투자</strong>: 슬랙 대화·온보딩·코드리뷰로 암묵적으로 전수하던 지식을 스킬/스티어링 파일에 명문화. 두 습관성 질문 — "에이전트가 틀릴 때마다 파일에 뭐가 빠졌나?", "새 모델이 나오면 이 규칙이 아직 필요한가?"(오래된 모델 버릇 방지용 규칙이 컨텍스트 부채가 되는 것을 방지) <span class="ts">07:48</span>~<span class="ts">08:40</span>.
+  2. <strong>"느려져야 빨라진다"</strong>: 새 방식 도입 직후 거의 모든 팀에서 생산성이 먼저 떨어짐. 이유는 코드베이스 쪽 선행 작업(컨텍스트 축적, 도구 에러 메시지 개선, 신규 MCP 서버 제작, 코드베이스 구조 재편, 심지어 Python/JS→TypeScript/Rust로 언어 전환)이 먼저 필요하기 때문 <span class="ts">08:40</span>~<span class="ts">10:28</span>.
+  3. <strong>베이비시팅 대신 먹이 주기</strong>: 30초~1분마다 결과를 확인하고 다시 지시하는 "왕복형" 대화는 에이전트 병렬 실행을 막아 4~5배가 나올 수 없는 구조를 만든다. 할 일과 함께 스스로 확인할 방법(테스트 통과, 커버리지 90%, 통합 테스트 검증까지)을 같이 주면 에이전트가 스스로 품질 기준을 넘을 때까지 돌고 필요할 때만 돌아온다 <span class="ts">10:28</span>~<span class="ts">12:41</span>.
+  4. <strong>의도를 코드보다 먼저 명문화(스펙 주도 개발)</strong>: 애매하고 복잡한 기능은 코드 전에 목표·사용자·핵심 기능·기술 요구사항을 스펙 문서로 작성(초안은 모델에게 시켜도 됨). 코드 전체에 흩어진 변경을 놓고 왕복하는 것보다 문서 한 장을 놓고 왕복하는 게 훨씬 저렴하다는 논리 <span class="ts">12:41</span>~<span class="ts">13:34</span>.
+  5. <strong>테스트를 왼쪽으로 당기기</strong>: 린터·유닛·통합·성능·보안 테스트를 촘촘히 붙여 빠른 피드백 루프를 만들어야 에이전트가 몇 시간을 자율로 돌 수 있음. 특히 외부 서비스를 목(mock)으로 바꿔 통합 테스트를 로컬에서 완결시키는 방식이 많이 쓰임 <span class="ts">13:34</span>~<span class="ts">14:00</span>.</li>
+<li>⚙️ <strong>내 팀에 적용하기</strong>:
+  1. 에이전트가 반복적으로 틀리는 지점을 스킬/규칙 파일로 옮겨 적되, 새 모델이 나올 때마다 오래된 규칙을 삭제할지 점검한다.
+  2. 새 워크플로 도입 직후 2개월 정도는 생산성이 떨어질 것을 미리 조직에 공지해 둔다(느려져야 빨라진다).
+  3. 작업 지시에 "할 일" 뿐 아니라 "됐다는 걸 어떻게 확인할지"를 반드시 한 줄 추가한다.
+  4. 애매한 기능은 코드 대신 스펙 문서(목표·사용자·핵심 기능·기술 요구사항)로 먼저 왕복한다.
+  5. 외부 서비스 의존 테스트는 목(mock)으로 바꿔 로컬에서 빠르게 도는 통합 테스트를 만든다.</li>
+<li>💬 <strong>원문 인용</strong>: "if your conversations look a bit like this on the left, then you're babysitting that agent as opposed to the right side where you're feeding it what it needs to do and how it can self-validate" <span class="ts">12:15</span> / "the more decisions... the more that you spend reviewing the decision to actually build a new product, the slower it is to build the product now because the code only takes one to two months to write" <span class="ts">16:41</span>.</li>
+<li class="warn-li">⚠️ <strong>한계</strong>: 습관 5가지를 다 지켜도 "세상에서 제일 생산적인 조직"이 되는 건 아니며, 아직 얼리어답터 단계라 새로운 문제가 함께 따라온다는 점을 발표자 본인이 명시함 <span class="ts">13:34</span>~<span class="ts">14:00</span>.</li>
+</ul>
+</div><div class="card"><h4 id="a-2-습관을-도입하면-새로-생기는-문제-3가지">A-2. 습관을 도입하면 새로 생기는 문제 3가지</h4>
+<ul>
+<li><strong>원본</strong>: 위와 동일(O9iL08X9zMo)</li>
+<li><strong>핵심 주장 1줄</strong>: 5가지 습관을 성공적으로 도입한 팀에서도 번아웃, 조직의 조급함, 결정 속도라는 새 병목이 나타났다.</li>
+<li class="mech-li">🔍 <strong>문제 3가지</strong>:
+  1. <strong>번아웃</strong>: 밤새 완벽한 프롬프트를 찾으려 늦게까지 작업하는 엔지니어, 여러 에이전트를 병렬로 돌리며 터미널 탭을 오가는 인지 부하 증가. AI 산출물 리뷰가 직접 쓰는 것보다 더 힘들다는 응답이 많았고, 특히 커리어 초반이라 "남의 코드 리뷰 근육"이 아직 없는 주니어에게 더 크게 나타남 <span class="ts">14:00</span>~<span class="ts">15:20</span>.
+  2. <strong>조직의 조급함</strong>: 코드베이스 투자·습관 정착에 약 두 달이 걸리는데, 그 사이에도 매달 기능 출시를 요구하면 팀은 다시 "도구만 얹는" 방식으로 되돌아간다. 아마존은 이 때문에 처음부터 전 조직에 프론티어 방식을 강제하지 않고 50개 팀 → 2026년 2,000개 팀으로 단계적으로 확대할 계획 <span class="ts">15:20</span>~<span class="ts">16:14</span>.
+  3. <strong>결정 속도가 새 병목</strong>: 코드 작성이 한두 달로 줄어들면서, 신제품 착수 결정(과거 2개월)과 출시 승인(과거 2개월)이 전체 일정에서 가장 긴 구간이 된다. 프론티어 팀은 코드 쓰는 시간보다 결정하는 시간이 더 길다는 게 발표자의 결론 <span class="ts">16:14</span>~<span class="ts">17:33</span>.</li>
+<li>⚙️ <strong>내 팀에 적용하기</strong>:
+  1. 병렬 에이전트 운영 시 야근 유도가 아닌 "완료 조건 명시"로 번아웃을 관리한다.
+  2. 새 워크플로 도입 시 2개월 유예 기간을 조직에 미리 확보한다.
+  3. 어떤 결정이 되돌릴 수 있는지/없는지를 구분해 되돌릴 수 있는 결정은 빠르게 위임한다.
+  4. 주니어에게는 "AI 산출물 리뷰"를 별도 역량으로 명시적으로 훈련시킨다.</li>
+<li>💬 <strong>원문 인용</strong>: "reviewing AI output is often harder for some than actually writing it, especially early in career" <span class="ts">14:27</span> / "often I find that frontier engineering teams spend more time making decisions than they do writing code" <span class="ts">17:07</span>.</li>
+<li class="warn-li">⚠️ <strong>한계</strong>: 세 문제 모두 습관만으로 즉시 해결되지 않으며(주니어 리뷰 근육은 경력 문제), 발표자는 "오늘 밤 당장 해볼 수 있는 건" 완료 조건 한 줄 추가뿐이라고 선을 그음 <span class="ts">15:20</span>, <span class="ts">18:00</span>.</li>
+</ul>
+<hr />
+</div><h3 id="파트-b-ai-영상-제작-파이프라인">파트 B — AI 영상 제작 파이프라인</h3>
+<div class="card"><h4 id="b-1-higgsfield-자막-표기-익스필드-블렌더-플러그인-카메라를-먼저-잠그고-크레딧을-쓴다">B-1. Higgsfield(자막 표기: 익스필드) 블렌더 플러그인 — 카메라를 먼저 잠그고 크레딧을 쓴다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=IusPKnUTU6I · 9분 · 조회 1,900</li>
+<li><strong>핵심 주장 1줄</strong>: 블렌더로 회색 박스 블록아웃(카메라 경로·동선만 정한 3D 프리비즈)을 만들어 영상 생성 시 레퍼런스로 넣으면, 카메라·동선이 그대로 지켜지고 크레딧 소모가 줄어든다.</li>
+<li class="mech-li">🔍 <strong>절차</strong>:
+  1. Higgsfield 블렌더 플러그인(무료) 다운로드·설치 후 계정 로그인 <span class="ts">00:55</span>~<span class="ts">01:23</span>.
+  2. Claude 데스크톱 커스텀 커넥터에 "Higgsfield Bridge" 추가(자막 발음: 스필드 브릿치), 안내된 MCP 주소 입력 후 로그인·허용 <span class="ts">01:23</span>~<span class="ts">01:51</span>.
+  3. 블렌더 용어 없이 자연어로 지시: 복도 길이, 인물 동선, "카메라는 끊김 없이 자기 경로를 따라 움직이고 멈출 때 힘을 주고 다시 빨라져라", 컷 없음, 카메라는 끝까지 주인공 뒤, 얼굴 미노출, 단계마다 파일 백업 <span class="ts">01:51</span>~<span class="ts">02:18</span>.
+  4. Claude가 블렌더 스킬을 불러와 계획(복도 뼈대→벽 디테일/재질→인물·걷기→조명→카메라 경로→검수)을 세우고 순서대로 제작. 완료 후 360프레임 전체를 스스로 검수(프레임 이탈, 카메라의 주인공 추월, 벽 관통 여부) <span class="ts">02:18</span>~<span class="ts">03:12</span>.
+  5. 자연어로 반복 수정(예: "카메라가 얼굴을 보게 하지 말고 끝까지 뒤에 있되 중간에 위로 올라갔다 내려오게") — 파일 재오픈 불필요 <span class="ts">03:12</span>~<span class="ts">03:40</span>.
+  6. 블록아웃을 영상으로 출력: 렌더 엔진이 아닌 뷰포트 캡처(1920×1080, 24fps, MP4, View 메뉴 → Render Playblast) <span class="ts">03:40</span>~<span class="ts">04:08</span>.
+  7. Higgsfield에서 영상 모델(자막 표기: 시댄스 2.5/CDS 2.5) 선택 후 레퍼런스 4개 투입: 블록아웃 영상 + 주인공 이미지 + 공격자 이미지 + 복도 이미지(이미지들은 Higgsfield 이미지 생성, 장당 약 6.5 크레딧). 프롬프트에서 레퍼런스별 역할을 분리 지정(영상=카메라·동선 프레임 단위 그대로, 주인공 이미지=얼굴·옷, 공격자 이미지=복장, 복도 이미지=재질·조명)하고 초 단위 이벤트(7초 첫째 쓰러짐, 10초 둘째, 13초 셋째) 명시 <span class="ts">04:08</span>~<span class="ts">05:29</span>.
+  8. 생성 1회로 완료 <span class="ts">04:08</span>~<span class="ts">04:36</span>.</li>
+<li>💸 <strong>비용/크레딧</strong>: 블록아웃 레퍼런스를 넣은 생성은 표시 크레딧이 240에서 135로 감소, 1회 생성으로 확정. 블록아웃 없이 같은 프롬프트로 재생성했을 때는 공격자 수·위치·타이밍·카메라 구도가 의도와 달라 재시도가 필요했을 것이라는 비교 결과가 제시됨(2회~4회 반복 시 135×n 크레딧 소모 추정) <span class="ts">05:02</span>~<span class="ts">05:29</span>.</li>
+<li>⚙️ <strong>실패를 줄이는 규칙</strong>:
+  1. 블록아웃은 시각적 완성도가 아니라 카메라 위치·타이밍만 잠그면 되므로 회색 박스로 충분하다 <span class="ts">02:45</span>~<span class="ts">03:12</span>.
+  2. 지시는 블렌더 전문 용어가 아닌 "감독이 촬영감독에게 하는 말"처럼 한다 <span class="ts">02:18</span>.
+  3. 같은 블록아웃 파일을 재사용해 주인공·복도 이미지만 바꾸면 카메라·동선은 그대로 둔 채 여러 버전(다른 인물·장소)을 저비용으로 뽑을 수 있다 <span class="ts">05:29</span>~<span class="ts">05:55</span>.</li>
+<li>💬 <strong>원문 인용</strong>: "블렌더는 사람이 100% 제어하는 도구입니다... 그걸 기준으로 생성하면 AI 영상도 제어가 되는 겁니다" <span class="ts">00:28</span>.</li>
+<li class="warn-li">⚠️ <strong>한계</strong>: 블록아웃 없이 프롬프트 문장만으로는 공격자 수·등장 위치·동시성·카메라 구도 전환 타이밍이 의도와 어긋났다고 발표자가 직접 비교 실험으로 확인함 <span class="ts">05:02</span>~<span class="ts">05:29</span>.</li>
+</ul>
+</div><div class="card"><h4 id="b-2-higgsfield-genjutsu-자막-표기-젠주츠-한-번-촬영으로-인물-장소를-바꿔치기">B-2. Higgsfield Genjutsu(자막 표기: 젠주츠) — 한 번 촬영으로 인물·장소를 바꿔치기</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=rWLlp2gw6og · 6분 · 조회 1,600</li>
+<li><strong>핵심 주장 1줄</strong>: 기존 영상 한 편을 넣으면 카메라 움직임·편집 컷·VFX·레이어 관계는 그대로 두고 등장인물·장소·소품만 바꿀 수 있는 영상-투-영상 모델이다.</li>
+<li class="mech-li">🔍 <strong>절차</strong>:
+  1. Higgsfield Genjutsu 페이지에서 "Generate Now" → Create Video 탭 → Genjutsu 선택. 두 모드: <strong>모션 트랜스퍼</strong>(움직임을 새 캐릭터/장면에 이식)와 <strong>오브젝트 스왑</strong>(지정한 요소만 교체, 나머지 유지) <span class="ts">00:27</span>~<span class="ts">01:21</span>.
+  2. 레퍼런스 영상(4~30초) 업로드, 캐릭터/제품/의상 이미지 최대 30장 추가, 프롬프트는 선택 사항(프리셋만으로도 동작), 해상도 480/720/1080 중 선택 <span class="ts">00:55</span>~<span class="ts">01:49</span>.
+  3. <strong>팁(실패 방지 규칙)</strong>: 교체할 인물 이미지는 배경 없는(또는 목표 장소 배경의) 사진을 써야 한다 — 원본 배경이 딸린 인물 사진을 넣으면 Genjutsu가 그 배경까지 지키려 해서 장소가 바뀌지 않는다는 것을 직접 겪었다고 밝힘 <span class="ts">01:49</span>~<span class="ts">02:16</span>.
+  4. 짧은 프롬프트로 "같은 동작, 같은 카메라, 새 장소는 [구체 묘사]"처럼 역할을 명시 <span class="ts">02:16</span>~<span class="ts">02:43</span>.
+  5. 생성 실행 — 10초 1080p 기준 5~6분 소요 <span class="ts">02:43</span>. 결과물에는 바이럴리티 예측, 색 팔레트/조명 변경, 번역, 목소리 변경, 재생성/재사용, 다운로드 기능이 딸려 나온다.</li>
+<li class="mech-li">🔍 <strong>보존되는 8가지 핵심 능력</strong>(Higgsfield 공식 미디어 킷 예시 기준) <span class="ts">02:43</span>~<span class="ts">04:05</span>:
+  1. 카메라 모션(프레임 단위 타이밍, 빠른 팬·핸드헬드 흔들림까지)
+  2. VFX 보전(합성 효과·파티클·CG 요소)
+  3. 마스킹/레이어 순서(가림 관계 유지)
+  4. 편집·컷 포인트(컷 구조·페이싱 유지, 예: 11초 6컷 구조 그대로)
+  5. 컷을 넘는 인물 연속성(다섯 컷을 지나도 동일 인물 유지)
+  6. 광학적 특성(그레인·렌즈 플레어·필름 질감 보존)
+  7. 혼합 프레임레이트 개별 유지(예: 캐릭터 12fps + 배경 24fps)
+  8. 다인원/군중 장면에서도 개별 신원 유지(교체된 다수의 인물이 서로 섞이지 않음)</li>
+<li>💸 <strong>비용/크레딧</strong>: 영상 내 구체 크레딧 수치는 언급되지 않음(자막 기준 없음). "제너레이트" 버튼에 표시된다는 언급만 있음.</li>
+<li>⚙️ <strong>실패를 줄이는 규칙</strong>:
+  1. 교체용 인물 이미지는 배경이 없거나 목표 장소 배경인 것을 쓴다(원본 배경 딸린 사진 금지) <span class="ts">01:49</span>~<span class="ts">02:16</span>.
+  2. 두 모드(모션 트랜스퍼/오브젝트 스왑) 중 목적에 맞는 것을 고른다 — 전체 장소·인물을 바꾸려면 모션 트랜스퍼, 특정 요소만 바꾸려면 오브젝트 스왑 <span class="ts">00:55</span>~<span class="ts">01:21</span>.</li>
+<li>💬 <strong>원문 인용</strong>: "이 모델은 영상을 진짜로 이해합니다. 컷이 어디서 바뀌는지, 카메라가 어떻게 흔들리는지, 효과가 어디 있는지까지요" <span class="ts">00:00</span>.</li>
+<li class="warn-li">⚠️ <strong>한계</strong>: 발표 전체가 공식 데모/미디어 킷 예시 기반이라 실패 사례나 재시도 횟수는 자막에 별도로 언급되지 않음(참조 배경 이미지 실수 사례 1건 제외).</li>
+</ul>
+</div><div class="card"><h4 id="b-3-claude-code-higgsfield로-자동차-광고-10컷-삼중-잠금-일관성-파이프라인">B-3. Claude Code + Higgsfield로 자동차 광고 10컷 — 삼중 잠금 일관성 파이프라인</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/watch?v=eiMYL6byyFo · 11분 · 조회 1,300</li>
+<li><strong>핵심 주장 1줄</strong>: 디자인 지식이 없는 백엔드 개발자가 하루 학습만으로, Claude(콘티·프롬프트·순서 관리)와 Higgsfield(이미지·영상 생성, MCP 도구 39개)를 연결해 배우·촬영장·실차 없이 10컷짜리 자동차 광고를 만들었다.</li>
+<li class="mech-li">🔍 <strong>절차</strong>:
+  1. Higgsfield MCP 연결(약 30초): Higgsfield 사이트에서 MCP 주소 복사 → Claude 설정 → 커넥터 추가 → 이름/주소 입력 → 로그인·허용. 도구 39개 등록 <span class="ts">02:19</span>~<span class="ts">02:45</span>.
+  2. <strong>문제 진단</strong>: 컷 하나는 잘 나오지만, 두 번째 컷부터 차 색과 얼굴이 바뀌는 것이 광고 제작의 핵심 장애물(광고는 최소 10컷 필요) <span class="ts">03:15</span>~<span class="ts">03:52</span>.
+  3. <strong>일관성 삼중 잠금</strong>:<ul>
+<li><strong>에셋(누가/무엇)</strong>: 인물 시트 1장에 3컷(뒷모습·정면·얼굴)을 회색 배경으로 미리 생성. 규칙 ① 배경은 반드시 회색(다른 배경이 있으면 그것까지 딸려옴). 규칙 ② 뒷모습·정면 컷은 목 위(얼굴)를 지운다 — 세 얼굴을 한 번에 생성하면 컷마다 얼굴이 미묘하게 달라지므로, 얼굴은 한 장만 남겨 "정답을 하나로" 고정 <span class="ts">04:47</span>~<span class="ts">05:15</span>. 이야기 흐름상 나중에 필요한 소품(차, 쇼룸, 키, 액자 속 사진 등)도 콘티를 먼저 쓴 뒤 미리 준비 <span class="ts">05:15</span>~<span class="ts">05:42</span>.</li>
+<li><strong>블록아웃(카메라가 어떻게)</strong>: 블렌더의 회색 3D로 카메라 경로·컷 위치만 정의(시각적 완성도 불필요). Claude Code가 파이썬으로 블렌더를 조작하며, 제작자는 "카메라 좀 더 낮게" 정도의 피드백만 제공 <span class="ts">03:52</span>~<span class="ts">04:19</span>.</li>
+<li><strong>프롬프트(어디에 어떻게)</strong>: 넘기는 파일은 이미지 6장 + 영상 1개(순서 번호가 곧 프롬프트 지시 번호가 됨, 예: 1번=주인공, 5번=액자). 프롬프트 구성은 (a) 번호로 등장인물/소품 지정, (b) 기술 사양(길이·화면비·효과음, "회색/블록아웃 티 나지 않게" 명시), (c) 컷 7개를 순서대로 서술 <span class="ts">06:09</span>~<span class="ts">07:14</span>.
+  4. 생성 1회(약 5분) → 7컷 전체에서 얼굴 불변, 마지막 컷 액자 속 얼굴이 주인공과 일치 <span class="ts">07:14</span>~<span class="ts">07:41</span>.
+  5. 참고 자료: Higgsfield 공식 블로그가 프롬프트 23개 전문과 제작 가이드를 공개했고, 제작자는 이를 응용함 <span class="ts">04:19</span>.</li>
+</ul>
+</li>
+<li>💸 <strong>비용/크레딧</strong>: 개별 크레딧 수치는 언급되지 않음. 반복 시도 비용을 줄이기 위해 초안은 480p(모델: 자막 표기 "시덴스 2.0")로 여러 번 뽑고, 구도·순서가 확정된 뒤에만 2K로 업스케일 <span class="ts">04:19</span>~<span class="ts">04:47</span>.</li>
+<li>⚙️ <strong>실패를 줄이는 규칙</strong>:
+  1. 인물 시트는 회색 배경 + 얼굴은 한 장만(3장 동시 생성 시 얼굴 드리프트 발생) <span class="ts">04:47</span>~<span class="ts">05:15</span>.
+  2. 나중에 등장할 소품(액자 등 스토리상 필요한 요소)은 콘티를 먼저 확정한 뒤 미리 준비한다 <span class="ts">05:42</span>.
+  3. 프롬프트에 "블록아웃/회색 티 안 나게"를 명시적으로 넣어 레퍼런스 영상의 시각 정보가 결과물에 새어 나오지 않게 한다 <span class="ts">06:36</span>.
+  4. 블렌더에 없는 디테일(안전벨트, 계기판 숫자 등)은 AI가 임의로 그리므로 클로즈업 구도를 피하거나 프롬프트에서 별도로 지정한다 <span class="ts">08:07</span>~<span class="ts">08:35</span>.</li>
+<li>💬 <strong>원문 인용</strong>: "그러니까 이미지, 영상, 소리까지 여기 하나에서 다 끝납니다... 스필드는 모델이 아니라 플랫폼이에요" <span class="ts">01:53</span>~<span class="ts">02:19</span> / "일관성을 세 겹으로 잡는 겁니다. 에셋이 누가·무엇을, 프롬프트가 어디에·어떻게, 블록아웃이 카메라가 어떻게를 잡습니다" <span class="ts">07:14</span>.</li>
+<li class="warn-li">⚠️ <strong>한계</strong>: 완벽하지 않다고 발표자가 직접 명시 — 블렌더에 없는 요소(안전벨트 이중선, 계기판 숫자 오류)는 AI가 임의로 채우며, 이는 구도 조정이나 프롬프트 보완으로만 완화 가능 <span class="ts">08:07</span>~<span class="ts">08:35</span>.</li>
+</ul>
+<hr />
+</div><h3 id="파이프라인-한눈에">파이프라인 한눈에</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>단계</th>
+<th>도구</th>
+<th>입력</th>
+<th>출력</th>
+<th>실패 지점</th>
+<th>근거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 콘티/스토리 확정</td>
+<td>Claude(콘티·프롬프트 담당)</td>
+<td>광고/장면 아이디어</td>
+<td>컷별 서술, 필요 소품 목록</td>
+<td>뒤를 안 정하고 시작하면 필요한 에셋을 못 챙김</td>
+<td>eiMYL6byyFo <span class="ts">05:42</span>, <span class="ts">06:09</span></td>
+</tr>
+<tr>
+<td>2. 인물/소품 에셋 생성</td>
+<td>Higgsfield 이미지 생성</td>
+<td>인물 묘사 프롬프트</td>
+<td>회색 배경 3분할 시트(뒷모습·정면·얼굴 1장만)</td>
+<td>얼굴 3장 동시 생성 시 컷마다 얼굴 미세하게 달라짐</td>
+<td>eiMYL6byyFo <span class="ts">04:47</span>~<span class="ts">05:15</span></td>
+</tr>
+<tr>
+<td>3. 카메라 블록아웃</td>
+<td>Blender + Claude(파이썬 조작)</td>
+<td>자연어 카메라/동선 지시</td>
+<td>회색 3D 프리비즈 영상(뷰포트 캡처)</td>
+<td>지시 없이 두면 AI가 컷마다 카메라 구도를 다르게 잡음</td>
+<td>IusPKnUTU6I <span class="ts">01:51</span>~<span class="ts">03:40</span>, eiMYL6byyFo <span class="ts">08:07</span></td>
+</tr>
+<tr>
+<td>4. 레퍼런스 영상 생성</td>
+<td>Higgsfield(모션 트랜스퍼/Genjutsu) 또는 Seedance 2.5</td>
+<td>블록아웃 영상 + 인물/장소 이미지 + 번호 프롬프트</td>
+<td>카메라·동선·인물이 고정된 결과 영상</td>
+<td>참조 이미지에 원본 배경이 있으면 장소가 안 바뀜(Genjutsu)</td>
+<td>rWLlp2gw6og <span class="ts">01:49</span>~<span class="ts">02:16</span></td>
+</tr>
+<tr>
+<td>5. 검수/업스케일</td>
+<td>사람(제작자) + Higgsfield</td>
+<td>480p 초안</td>
+<td>확정 후 2K 업스케일</td>
+<td>블록아웃/회색 흔적이 결과물에 새어나올 수 있음</td>
+<td>eiMYL6byyFo <span class="ts">04:19</span>~<span class="ts">04:47</span>, <span class="ts">06:36</span></td>
+</tr>
+<tr>
+<td>6. 재사용/변주</td>
+<td>동일 블록아웃 파일 + 인물/장소만 교체</td>
+<td>새 인물·장소 이미지</td>
+<td>동일 카메라·동선의 다른 버전</td>
+<td>(해당 단계 자체가 실패 지점 회피용)</td>
+<td>IusPKnUTU6I <span class="ts">05:29</span>~<span class="ts">05:55</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="이-모듈의-통합-규칙-세트-2">이 모듈의 통합 규칙 세트</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>규칙</th>
+<th>조직 습관(파트 A)</th>
+<th>제작 파이프라인(파트 B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>왕복을 줄여라</td>
+<td>베이비시팅 대신 완료 조건을 같이 준다 <span class="ts">10:28</span>~<span class="ts">12:41</span></td>
+<td>카메라·동선을 블록아웃으로 먼저 잠가 재생성 횟수를 줄인다 <span class="ts">04:08</span>~<span class="ts">05:29</span></td>
+</tr>
+<tr>
+<td>의도를 코드/생성 전에 문서화하라</td>
+<td>애매한 기능은 코드 전에 스펙 문서 <span class="ts">12:41</span>~<span class="ts">13:34</span></td>
+<td>콘티를 먼저 쓰고 그에 맞춰 소품 에셋을 미리 준비 <span class="ts">05:15</span>~<span class="ts">05:42</span></td>
+</tr>
+<tr>
+<td>실패 신호를 빠르게 받게 하라</td>
+<td>린터/테스트를 앞으로 당기고 목(mock)으로 로컬 피드백 루프 단축 <span class="ts">13:34</span>~<span class="ts">14:00</span></td>
+<td>저해상도(480p) 초안으로 빠르게 반복 후 확정 시에만 업스케일 <span class="ts">04:19</span>~<span class="ts">04:47</span></td>
+</tr>
+<tr>
+<td>반복 가능한 단위로 쪼개고 재사용하라</td>
+<td>스킬/스티어링 파일에 지식을 재사용 가능하게 축적 <span class="ts">07:48</span>~<span class="ts">08:14</span></td>
+<td>동일 블록아웃/에셋을 재사용해 인물·장소만 교체 <span class="ts">05:29</span>~<span class="ts">05:55</span></td>
+</tr>
+<tr>
+<td>도입 초기 비용을 미리 알려라</td>
+<td>"느려져야 빨라진다"를 조직에 미리 공지 <span class="ts">08:40</span>~<span class="ts">08:56</span></td>
+<td>배경 없는 참조 이미지 규칙처럼 실패 경험을 사전 규칙화 <span class="ts">01:49</span>~<span class="ts">02:16</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="자가-점검-3">자가 점검</h3>
+<ol>
+<li>
+<p>Q. 아마존 50개 팀 관찰에서 4.5배 팀과 3배 미만 팀을 가른 것은 도구의 차이였는가?
+   A. 아니다. 90%가 같은 사내 도구(키로 등)를 썼고, 차이는 "일하는 방식을 의도적으로 바꿨는가"였다 <span class="ts">07:18</span>.</p>
+</li>
+<li>
+<p>Q. "느려져야 빨라진다" 습관은 왜 필요한가?
+   A. 에이전트가 코드베이스에서 성과를 내려면 컨텍스트 축적, 에러 메시지 개선, MCP 서버 제작, 코드베이스 재구조화 같은 선행 엔지니어링이 필요하고 이 기간엔 생산성이 일시적으로 떨어지기 때문 <span class="ts">08:40</span>~<span class="ts">10:28</span>.</p>
+</li>
+<li>
+<p>Q. 코드 작성 속도가 빨라지면서 새로 나타난 "가장 뜻밖의" 병목은 무엇인가?
+   A. 결정 속도. 코드는 한두 달이면 되지만 신제품 착수 결정과 출시 승인에 걸리는 시간이 상대적으로 가장 긴 구간이 됐다 <span class="ts">16:14</span>~<span class="ts">17:33</span>.</p>
+</li>
+<li>
+<p>Q. Higgsfield 블록아웃 파이프라인에서 회색 3D 영상이 하는 역할은 무엇이며, 색이나 질감을 신경 쓰지 않아도 되는 이유는?
+   A. 카메라가 언제 어디 있는지와 인물의 동선·타이밍만 잠그는 용도이기 때문에 시각적 완성도는 필요 없다 <span class="ts">03:12</span>.</p>
+</li>
+<li>
+<p>Q. 자동차 광고 제작(eiMYL6byyFo)에서 인물 시트를 만들 때 얼굴을 한 장만 남기는 이유는?
+   A. 얼굴 3장을 한 번에 생성하면 미묘하게 서로 다르게 나와, 이후 컷마다 얼굴이 흔들리는 문제가 생기기 때문에 "정답을 하나로" 고정하기 위함 <span class="ts">05:15</span>.</p>
+</li>
+</ol>
+<h3 id="다음-모듈과의-연결-3">다음 모듈과의 연결</h3>
+<p>파트 A의 "스펙 주도 개발"과 "완료 조건 명시" 습관은 파트 B의 "콘티 먼저·블록아웃으로 카메라 잠그기"와 동일한 원리(왕복을 코드/생성 이전 단계로 당기기)이며, 다음 모듈에서는 이 원리를 실제 코드베이스 구조 재편(에이전트 친화적 아키텍처)이나 멀티 에이전트 병렬 운영 사례로 확장해 다룰 수 있다. 또한 eiMYL6byyFo에서 언급된 "Higgsfield의 Claude Code용 페이스리스 채널 운영 스킬"과 "15명·14일 제작 95분 AI 장편영화 공개 자료"는 향후 별도 모듈의 후보로 남겨둔다 <span class="ts">08:35</span>~<span class="ts">09:29</span>, <span class="ts">09:29</span>~<span class="ts">10:02</span>.</p>
+<h2 id="모듈-4-60초-카드-19장">모듈 4 — 60초 카드 19장</h2>
+<h3 id="한-줄-요약-4">한 줄 요약</h3>
+<p>@ai-AgentOS 쇼츠 19편은 "AI를 목발이 아니라 레버리지로 쓰라"는 큰 원칙 아래, 스킬 설계·컨텍스트 관리·8만 명 설문 데이터 3갈래로 흩어져 있다.</p>
+<h3 id="읽는-법">읽는 법</h3>
+<p>조회수 순으로 먼저 훑어 채널이 실제로 반응 얻은 메시지가 뭔지 파악하고, 뒤의 "주제별 재배열"로 같은 갈래끼리 묶어 다시 읽으면 각 60초 클립이 하나의 긴 논리로 이어진다. 숫자(활성화율 20%/84%, 인지위축 45%/4% 등)는 전부 자막에 등장한 값 그대로이며, 조사 대상·표본 규모 등 자막에 없는 정보는 추정하지 않았다.</p>
+<h3 id="카드">카드</h3>
+<div class="card"><h4 id="카드-1-claude-code-제대로-쓰는-3원칙">카드 1. Claude Code 제대로 쓰는 3원칙</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/UcifrbVcYKw · 조회 4,600</li>
+<li><strong>결론</strong>: 채팅으로 시키지 말고 문서화, 큰 작업은 원자적으로 쪼개기, 테스트로 검증을 자동화하라.</li>
+<li><strong>근거</strong>: "대화를 줄이고 문서를 늘리세요... 클로드MD의 프로젝트 구조를 정리하세요" <span class="ts">00:00</span>. 앱 전체를 통으로 시키지 말고 "로그인 API부터 만들어 줘, 스펙은 이거야, 끝나면 이 테스트로 확인해 줘"처럼 원자적으로 <span class="ts">00:00</span>. "테스트 코드를 먼저 짜고... 테스트가 통과하면 된 거고 안 되면 다시 시키면 되는 것" <span class="ts">00:26</span>.</li>
+<li><strong>오늘 할 일</strong>: 지금 시키려던 작업 하나를 "스펙+완료조건" 한 문단으로 먼저 적어라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-2-스킬-1000개-깔면-생기는-일">카드 2. 스킬 1000개 깔면 생기는 일</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/S3sY5jAvgyw · 조회 3,400</li>
+<li><strong>결론</strong>: 설명이 부실한 스킬의 활성화율은 20%, 완벽히 최적화해도 최대 84%뿐이라 스킬 개수를 늘릴수록 오히려 정확도가 떨어진다.</li>
+<li><strong>근거</strong>: "설명이 잘 안 된 스킬의 활성화율... 20%. 다섯 번 중에 네 번은 클로드가 그 스킬을 못 알아본 것" <span class="ts">00:02</span>. "훅도 걸고 설명도 완벽하게 썼을 때 그래봤자 84%가 최대" <span class="ts">00:02</span>. 엔스로픽 문서상 스킬 목록 15,000자 제한, 비슷한 영역 스킬이 여럿이면 결과가 매번 달라짐 <span class="ts">00:29</span>. 결론: "30개의 제대로 만들어진 스킬이 1000개의 범용 스킬을 압도" <span class="ts">00:29</span>.</li>
+<li><strong>오늘 할 일</strong>: 보유 스킬 목록에서 설명이 부실하거나 영역이 겹치는 것부터 정리해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-3-ai-스킬-20개면-나만의-시스템">카드 3. AI 스킬 20개면 나만의 시스템</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/c-BH8aotT0c · 조회 3,100</li>
+<li><strong>결론</strong>: 스킬은 프롬프트가 아니라 절차·지식이 분리된 SOP 폴더이며, 적게 제대로 만들고 마켓플레이스 스킬은 내 비즈니스에 맞게 리팩토링해야 한다.</li>
+<li><strong>근거</strong>: "스킬은 프롬프트가 아니라 SOP 폴더... 절차 스킬MD와 지식 레퍼런스를 분리하세요" <span class="ts">00:02</span>. "20, 30개의 잘 만든 스킬이 1000개의 범용 스킬을 이긴다" <span class="ts">00:02</span>. "내가 만든 스킬 20개가 있으면 그게 나만의... AI 시스템" <span class="ts">00:29</span>.</li>
+<li><strong>오늘 할 일</strong>: 다운받아 방치 중인 마켓플레이스 스킬 하나를 골라 내 도메인 레퍼런스로 리팩토링해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-4-같은-ai-써도-연봉이-갈리는-이유">카드 4. 같은 AI 써도 연봉이 갈리는 이유</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/wxmA9B73AJM · 조회 2,900</li>
+<li><strong>결론</strong>: AI를 목발처럼 쓰면 AI가 좋아질수록 내가 필요 없어지고, 레버리지로 쓰면 AI가 좋아질수록 내가 더 좋아진다.</li>
+<li><strong>근거</strong>: 목발="똑같은 일을 하는데 AI가 좀 도와주는 것, 속도는 빨라지지만 하는 일은 그대로" <span class="ts">00:00</span>. 레버리지="AI한테 작업을 맡기고 나는 더 큰 결과를 책임지는 것, AI가 내 밑에서 일하고 나는 판단을 하는 것" <span class="ts">00:00</span>.</li>
+<li><strong>오늘 할 일</strong>: 오늘 AI에 시킨 작업 하나를 "내가 판단만 하고 AI가 실행"하는 구조로 바꿔봐라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-5-ai-쓰면-바보가-되나-45-vs-4-의-진실">카드 5. AI 쓰면 바보가 되나? 45% vs 4%의 진실</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/Qgv9Nt1MXVk · 조회 2,000</li>
+<li><strong>결론</strong>: AI가 사고력을 뺏는 게 아니라 쓰는 방식이 사고력을 결정한다 — 자발적으로 학습하는 사람에겐 인지 위축이 거의 없다.</li>
+<li><strong>근거</strong>: 전체 응답자 17%가 "인지 위축(코그니티브 에트로피)"을 걱정, 교사·교수의 실제 목격 비율은 평균의 2.5~3배 <span class="ts">00:01</span>. "기술직 종사자 중 AI로 새로운 걸 배운 사람은 45%인데 인지 위축을 경험한 건 4%에 불과" <span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: AI에게 답만 받지 말고 그 답을 "왜 그런지" 한 문장은 직접 설명해봐라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-6-claude-code-100만-토큰-다-쓰면-안-됩니다">카드 6. Claude Code 100만 토큰, 다 쓰면 안 됩니다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/iTmG6inAnMs · 조회 1,900</li>
+<li><strong>결론</strong>: 100만 토큰은 다 채우는 한도가 아니라 여유 공간이며, 10만 토큰 늘어날 때마다 약 2%씩 성능이 떨어진다.</li>
+<li><strong>근거</strong>: "10만 토큰이 늘어날 때마다 약 2%씩 성능이 떨어진다... 25만에서 50만 사이 체감, 100만까지 꽉 채우면 오히려 역효과" <span class="ts">00:00</span>. 실전 전략: 100만을 꽉 채우려 하지 말 것, 30~40만쯤에서 수동 컴팩션 또는 새 섹션 시작, 환경변수로 자동 컴팩션 시점 조절 <span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: 컨텍스트가 30~40만 토큰을 넘으면 손수 compact 하거나 새 세션을 시작해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-7-ai-불안하면-이-3가지만-기억하세요">카드 7. AI 불안하면 이 3가지만 기억하세요</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/uoF6grhB08A · 조회 1,500</li>
+<li><strong>결론</strong>: 낙관과 불안을 동시에 느끼는 건 정상이며, 자발적 학습자는 성장하고 수동 의존자는 퇴화하고 안전망 삼아 공격적으로 쓰는 사람이 가장 많이 얻는다.</li>
+<li><strong>근거</strong>: "AI를 자발적 학습 도구로 쓰는 사람은 성장해요. 수동적으로 의존하는 사람은 퇴화해요. 안전망 위해서 공격적으로 활용하는 사람이 가장 많이 얻어요" <span class="ts">00:02</span>. "8만 명 중 대부분이 불안해하고 있다" <span class="ts">00:02</span>.</li>
+<li><strong>오늘 할 일</strong>: "AI에 그냥 맡기고 있는" 업무 하나를 찾아 직접 배우며 쓰는 방식으로 바꿔라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-8-ai한테-채팅으로-시키면-안-되는-이유">카드 8. AI한테 채팅으로 시키면 안 되는 이유</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/SdEfJySztKY · 조회 1,200</li>
+<li><strong>결론</strong>: 채팅 히스토리를 통째로 컨텍스트에 쌓지 말고, 산출물을 구조화된 문서(프로젝트/요구사항/상태)로 저장해 서브에이전트에 전달하라.</li>
+<li><strong>근거</strong>: "채팅으로 이것저것 시키면... 대화 스토리가 전부 컨텍스트에 쌓여요. 이 중에 진짜 필요한 정보가 몇 %나 될까요?" <span class="ts">00:00</span>. GSD는 프로젝트 MD(비전)·요구사항 MD·상태 MD로 저장하고 "서브 에이전트한테는 이 파일들만 딱 전달, 채팅 히스토리 없이" <span class="ts">00:00</span>.</li>
+<li><strong>오늘 할 일</strong>: 진행 중 프로젝트의 결정사항을 채팅 대신 상태 문서 한 장으로 옮겨 적어라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-9-ai한테-일-시킬-때-팀장처럼-하세요">카드 9. AI한테 일 시킬 때 팀장처럼 하세요</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/_isI91GeyuU · 조회 1,100</li>
+<li><strong>결론</strong>: 오케스트레이터(팀장)는 각 서브에이전트에 전체 대화가 아니라 기획서(플랜 MD) 한 장만 넘기고 교통정리만 하면 컨텍스트가 원천적으로 안 찬다.</li>
+<li><strong>근거</strong>: "팀원들한테 전체 프로젝트 다 할 필요 없어. 네 담당 부분만 알면 돼. 대신 이 기획서 보고해라" — 그 기획서가 플랜 MD <span class="ts">00:00</span>. "팀장 컨텍스트는 30에서 40%만 차 있다" <span class="ts">00:00</span>.</li>
+<li><strong>오늘 할 일</strong>: 서브에이전트에게 위임할 때 전체 대화 대신 플랜 문서 한 장만 넘겨라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-10-프롬프트-엔지니어링은-끝났다">카드 10. 프롬프트 엔지니어링은 끝났다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/XeerzbcCXDw · 조회 1,000</li>
+<li><strong>결론</strong>: 일을 잘 못 시키는 이유는 전달을 못 해서이며, 다음 단계는 "무엇을 언제 얼마나 보여주냐"를 다루는 컨텍스트 엔지니어링이다.</li>
+<li><strong>근거</strong>: "대충 이런 느낌으로 만들어 줘라고 하면 대충 이런 느낌으로 나오는 게 당연" <span class="ts">00:00</span>. "컨텍스트 엔지니어링... AI한테 올바른 컨텍스트를 올바른 타이밍에 올바른 형태로 전달하는 기술" <span class="ts">00:00</span>. "프롬프트 엔지니어링은 어떻게 말하냐의 문제, 컨텍스트 엔지니어링은 무엇을 언제 얼마나 보여주냐의 문제" <span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: 다음 지시를 내리기 전에 "이 작업에 필요한 컨텍스트가 뭔지"부터 목록화해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-11-ai가-자신있게-틀리는-진짜-이유-시험-비유">카드 11. AI가 자신있게 틀리는 진짜 이유 (시험 비유)</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/LfwnOU-MYZ8 · 조회 764</li>
+<li><strong>결론</strong>: 학습 데이터에 없는 정보가 나오면 AI는 빈칸이 아니라 가장 그럴듯한 답을 지어낸다.</li>
+<li><strong>근거</strong>: "교과서 10장 중 7장만 공부했는데 시험에 8장 내용이 나오면... 아는 거랑 비슷한 걸 끼워 맞추잖아요. AI가 정확히 이걸 해요" <span class="ts">00:00</span>.</li>
+<li><strong>오늘 할 일</strong>: AI가 확신에 차서 던진 구체적 수치·이름은 별도로 팩트체크해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-12-ai-스킬-이-3단계로-만들어야-진짜입니다">카드 12. AI 스킬, 이 3단계로 만들어야 진짜입니다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/X6iDXYjO9sw · 조회 612</li>
+<li><strong>결론</strong>: 프로세스를 먼저 쓰고, frontmatter를 "사용자가 이렇게 말하면 써라"는 트리거 문장으로 쓰고, 내 전문성을 레퍼런스로 분리하면 활성화율이 크게 오른다.</li>
+<li><strong>근거</strong>: "프론트 메터를 트리거처럼 써요... 이게 활성화율을 20%에서 80% 이상으로 끌어올리는 비결" <span class="ts">00:02</span>. "내 전문성을 레퍼런스로 분리... 마켓플레이스의 범용 스킬과 근본적으로 다른 지점" <span class="ts">00:02</span>.</li>
+<li><strong>오늘 할 일</strong>: 자주 쓰는 스킬 하나의 frontmatter를 "사용자가 ~라고 말하면" 트리거 문장으로 다시 써라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-13-8만-명-ai-연구-한국이-세계-1등인-항목">카드 13. 8만 명 AI 연구, 한국이 세계 1등인 항목</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/OKKMi7yWayw · 조회 593</li>
+<li><strong>결론</strong>: 동아시아(한국·일본 포함)는 AI에게 "개인 번역"(19%, 세계 1위)과 "재정 독립"(15%, 2등, 역시 세계 1위)을 가장 원하며, 재정 독립을 원하는 이유는 서양과 다르다.</li>
+<li><strong>근거</strong>: 선진국은 "복잡한 삶을 관리해줘", 개발도상국은 "기회를 만들어줘"를 원했지만, 동아시아 1등은 "개인 번역 19%", 2등은 "재정 독립 15%" <span class="ts">00:02</span>. "동아시아에서 재정 독립을 원하는 이유가... 부모님 노후를 책임지고 가족을 돌보기 위해서... 서양에서는 AI가 나를 위한 도구, 동아시아에서는 AI가 가족을 위한 도구" <span class="ts">00:29</span>.</li>
+<li><strong>오늘 할 일</strong>: 내가 AI를 쓰는 동기가 "나를 위해서"인지 "가족을 위해서"인지 한 번 짚어봐라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-14-ai에-대체-안-되려면-이-3가지를-바꾸세요">카드 14. AI에 대체 안 되려면 이 3가지를 바꾸세요</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/R9LnoJp7YjQ · 조회 514</li>
+<li><strong>결론</strong>: 판단력(어떤 문제를 풀지 정하기), 변하지 않는 것 공부(사람 심리·비즈니스 원리), 책임에 가까이 가기 세 가지가 대체되지 않는 힘이다.</li>
+<li><strong>근거</strong>: "AI는 문제 1000개를 풀 수 있어요. 근데 어떤 문제를 풀어야 하는지는 못 고릅니다" <span class="ts">00:00</span>. "도구는 6개월마다 바뀝니다... 사람의 심리, 비즈니스가 돌아가는 원리... 이런 건 수십 년째 바뀌지 않습니다" <span class="ts">00:00</span>. "책임에 가까울수록 대체가 어렵습니다" <span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: 오늘 할 일 목록에서 "AI에 맡길 것"과 "내가 판단할 것"을 구분해 표시해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-15-8만-명한테-물었다-ai에게-진짜-원하는-것">카드 15. 8만 명한테 물었다, AI에게 진짜 원하는 것</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/kaRn-eO66sE · 조회 466</li>
+<li><strong>결론</strong>: 표면적 요청(이메일 자동화) 뒤에 사람들이 진짜 원한 건 삶을 되돌려주는 것 — 시간·돈 여유(1/3), 일을 더 잘하기(1/4), 더 나은 사람 되기(나머지).</li>
+<li><strong>근거</strong>: "이메일을 자동화하고 싶다고 했던 사람이... 진짜 원했던 건 어머니랑 요리할 시간" <span class="ts">00:02</span>. 콜롬비아 직장인 "AI 덕분에 화요일에 일찍 끝나서 어머니랑 같이 요리했다", 일본 프리랜서 "책을 더 읽고 싶다" <span class="ts">00:02</span>. "1/3은 시간 돈 여유를 원했고 1/4은 일을 더 잘하고 싶었고 나머지는 더 나은 사람이 되고 싶어했다" <span class="ts">00:29</span>.</li>
+<li><strong>오늘 할 일</strong>: AI에게 시킨 업무 하나를 놓고 "이걸로 내가 진짜 원하는 시간이 뭔지" 한 줄 적어봐라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-16-이것-하나로-월-50달러짜리-구독-끊었습니다">카드 16. 이것 하나로 월 50달러짜리 구독 끊었습니다</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/vLp0GwZND_4 · 조회 399</li>
+<li><strong>결론</strong>: 잘 만든 스킬 하나가 월 50달러짜리 SaaS 구독 기능을 대체하기 시작했고, 스킬 마켓플레이스도 폭발적으로 커지고 있다.</li>
+<li><strong>근거</strong>: "콘텐츠 작성 스킬 하나면 카피라이팅 도구가 필요 없어요. SEO 스킬 하나면... 분석 일부를 직접 할 수 있다" <span class="ts">00:00</span>. "스키스MPP라는 사이트에 28만 개 넘는 스킬, 스킬허브에는 7,000개 이상의 AI 평가된 스킬... 스트라이프, 클라우드플레어 같은 대기업도 자체 스킬을 배포" <span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: 지금 결제 중인 SaaS 구독 하나를 골라 스킬로 대체 가능한지 검토해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-17-claude-code-스킬-9가지-당신은-몇-개나-쓰고-있나요">카드 17. Claude Code 스킬 9가지, 당신은 몇 개나 쓰고 있나요</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/wi1_ew3MXKs · 조회 356</li>
+<li><strong>결론</strong>: 스킬 수백 개를 카탈로그화하면 9가지 패턴(라이브러리 레퍼런스/제품 검증/데이터 조회/비즈니스 자동화/코드 스캐폴딩/코드 리뷰/CI·CD/장애 대응/인프라 운영)으로 분류되며, 좋은 스킬은 하나의 유형에만 깔끔히 속한다.</li>
+<li><strong>근거</strong>: "좋은 스킬은 딱 하나의 유형에 깔끔하게 들어맞고 나쁜 스킬은 여러 유형에 걸쳐 있다" <span class="ts">00:00</span>. 9개 패턴을 순서대로 나열하며 "엔지니어 한 명이 일주일 투자해서 검증 스킬 하나를 완벽하게 만들었다"는 사례도 언급 <span class="ts">00:00</span>~<span class="ts">00:27</span>.</li>
+<li><strong>오늘 할 일</strong>: 보유 스킬을 9패턴 체크리스트에 대입해 아직 없는 유형을 찾아봐라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-18-ai-스킬-만드는-3계층-구조-프론트매터-본문-레퍼런스">카드 18. AI 스킬 만드는 3계층 구조 (프론트매터/본문/레퍼런스)</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/g2GyK78ZVds · 조회 343</li>
+<li><strong>결론</strong>: 스킬은 프론트매터(트리거 이름표)·본문(SOP 절차)·레퍼런스(지식) 3계층으로 나누고, "정보를 쏟아붓지 말고 가리켜라(Point, don't dump)."</li>
+<li><strong>근거</strong>: "트리거 조건을 구체적으로 쓰는 게 활성화율을 높이는 핵심" <span class="ts">00:02</span>. "스킬 MD의 139개 마케팅 전략을 전부 써놓으면 안 돼요. 대신 마케팅 지식은 이 레퍼런스 파일을 참고하라고 가리키기만 하는 거예요" <span class="ts">00:29</span>. "결과가 이상하면 두 군데만 보면 돼요. 절차가 잘못됐으면 스킬MD를, 지식이 부족하면 레퍼런스를 고친다" <span class="ts">00:29</span>.</li>
+<li><strong>오늘 할 일</strong>: 지식이 통째로 들어있는 스킬 하나를 골라 레퍼런스 파일로 분리해라.</li>
+</ul>
+</div><div class="card"><h4 id="카드-19-claude-code-스킬-프로젝트-하나에-모아야-하는-이유">카드 19. Claude Code 스킬, 프로젝트 하나에 모아야 하는 이유</h4>
+<ul>
+<li><strong>원본</strong>: https://www.youtube.com/shorts/zbi017RPgW8 · 조회 336</li>
+<li><strong>결론</strong>: 스킬이 따로 노는 문제는 CLAUDE.md·브랜드컨텍스트 폴더·skills 폴더로 이뤄진 하나의 프로젝트 폴더로 모아서 해결하며, 모든 스킬이 같은 브랜드 컨텍스트를 참조하게 만든다.</li>
+<li><strong>근거</strong>: "프로젝트 폴더 안에 클로드MD가 있고 여기에 전체 시스템 규칙을 적어요. 그 아래 브랜드 컨텍스트 폴더... 스킬스 폴더에 각 스킬을 넣어요" <span class="ts">00:00</span>. "뉴스레터 스킬이든 카피라이팅 스킬이든 같은 보이스 프로파일을 읽고 같은 타겟 고객 정보를 읽는다" <span class="ts">00:00</span>.</li>
+<li><strong>오늘 할 일</strong>: 흩어진 스킬들을 skills 폴더 하나로 모으고 공통 브랜드 컨텍스트 파일을 하나 만들어라.</li>
+</ul>
+</div><h3 id="주제별-재배열">주제별 재배열</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>주제</th>
+<th>카드 번호</th>
+<th>묶어서 읽으면</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>스킬 운용</td>
+<td>2, 3, 12, 16, 17, 18, 19</td>
+<td>활성화율 숫자(2, 12)로 문제를 확인하고, 3계층·프로젝트 폴더 구조(3, 18, 19)로 해법을 세우고, 9패턴 체크리스트(17)와 SaaS 대체(16)로 실제 임팩트를 확인하는 순서가 된다</td>
+</tr>
+<tr>
+<td>컨텍스트 관리</td>
+<td>6, 8, 9, 10</td>
+<td>왜 컨텍스트가 문제인지(10) → 어떻게 문서로 구조화하는지(8) → 오케스트레이터가 이를 어떻게 관리하는지(9) → 토큰 한도 안에서 실전 전략(6)까지 GSD식 컨텍스트 엔지니어링 한 사이클이 완성된다</td>
+</tr>
+<tr>
+<td>일하는 방식</td>
+<td>1, 4, 14</td>
+<td>목발 vs 레버리지(4) 구분 위에 Claude Code 3원칙(1)을 얹고, AI 시대에 대체되지 않는 3요소(14)로 마무리하면 "AI를 어떻게 부릴 것인가"의 전체 그림이 된다</td>
+</tr>
+<tr>
+<td>불안과 커리어</td>
+<td>5, 7, 11</td>
+<td>AI가 왜 자신있게 틀리는지(11) 이해하면 인지 위축 45% vs 4% 반전(5)이 왜 생기는지 납득되고, 결국 8만 명 연구의 결론(7)으로 수렴한다</td>
+</tr>
+<tr>
+<td>연구 데이터</td>
+<td>5, 7, 13, 15</td>
+<td>8만 명 조사의 1차 데이터(13의 국가별 1등 항목, 15의 표면 요청 vs 진짜 욕구)를 먼저 보면, 인지 위축 통계(5)와 최종 메시지(7)가 숫자 뒤 맥락까지 이해된다</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="카드끼리의-충돌">카드끼리의 충돌</h3>
+<p>충돌 없음. 19편은 서로 다른 각도(스킬 설계 / 컨텍스트 관리 / 설문 데이터)에서 같은 방향("AI를 목발이 아니라 레버리지·판단 도구로, 그리고 자발적으로 배우며 쓰라")을 보강하고 있으며, 자막상 상반된 수치나 권고는 발견되지 않았다.</p>
+<h3 id="19장에서-뽑은-원칙-5개">19장에서 뽑은 원칙 5개</h3>
+<ol>
+<li>스킬이든 문서든 "쏟아붓지 말고 가리켜라(Point, don't dump)" — 적게, 제대로 만든 게 많이·대충 만든 것을 이긴다.</li>
+<li>AI를 목발이 아니라 레버리지로 써야 AI가 좋아질수록 나도 함께 좋아진다.</li>
+<li>컨텍스트는 채팅이 아니라 구조화된 문서(플랜·상태 MD)로 관리해야 결과의 질이 오른다.</li>
+<li>판단력, 변하지 않는 원리(사람 심리·비즈니스), 책임은 AI가 대체하지 못하니 거기에 가까이 가야 한다.</li>
+<li>AI 사용의 결과(성장 vs 퇴화)는 도구 자체가 아니라 자발적으로 배우며 쓰는가에 달려 있다.</li>
+</ol>
+<h3 id="자가-점검-4">자가 점검</h3>
+<ol>
+<li>Q. 스킬 활성화율을 20%에서 최대치까지 끌어올리는 두 가지 방법은? A. 훅을 걸고, frontmatter에 트리거 조건을 구체적인 사용자 발화로 쓰는 것 (카드 2, 12).</li>
+<li>Q. "목발"과 "레버리지"의 차이는? A. 목발은 같은 일을 AI가 도와줘 속도만 빨라지는 것, 레버리지는 AI가 실행을 맡고 나는 판단·더 큰 결과를 책임지는 것 (카드 4).</li>
+<li>Q. 100만 토큰 컨텍스트를 실전에서 언제 정리해야 하나? A. 100만을 다 채우지 말고 30~40만 구간에서 수동 컴팩션을 하거나 새 섹션을 시작해야 한다 (카드 6).</li>
+<li>Q. AI에 대체되지 않기 위한 3가지는? A. 판단력(어떤 문제를 풀지 정하는 능력), 변하지 않는 것(사람 심리·비즈니스 원리), 책임에 가까이 가는 것 (카드 14).</li>
+<li>Q. 8만 명 조사에서 동아시아가 "재정 독립"을 원한 이유가 서양과 다른 점은? A. 서양은 개인 소비를 위해서지만, 동아시아는 부모님 노후 부양과 가족 돌봄을 위해서다 (카드 13).</li>
+</ol>
+</main>
+</div>
+<button id="upBtn" title="top">&#8593;</button>
+<button id="themeBtn" title="theme">&#9790;</button>
+<script>
+(function(){
+ var d=document.documentElement;
+ try{var t=localStorage.getItem('lec-theme'); if(t){d.setAttribute('data-theme',t);}}catch(e){}
+ var btn=document.getElementById('themeBtn');
+ btn.addEventListener('click',function(){
+   var cur=d.getAttribute('data-theme');
+   if(!cur){cur=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
+   var nx=(cur==='dark')?'light':'dark';
+   d.setAttribute('data-theme',nx);
+   try{localStorage.setItem('lec-theme',nx);}catch(e){}
+   btn.textContent=(nx==='dark')?'☀':'☾';
+ });
+ document.getElementById('upBtn').addEventListener('click',function(){
+   window.scrollTo({top:0,behavior:'smooth'});
+ });
+ var mb=document.getElementById('menuBtn');
+ if(mb){mb.addEventListener('click',function(){document.getElementById('sb').classList.toggle('open');});}
+ var bar=document.getElementById('bar');
+ var links=[].slice.call(document.querySelectorAll('.toc a'));
+ var targets=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+ function onScroll(){
+   var h=document.documentElement;
+   var pct=h.scrollTop/((h.scrollHeight-h.clientHeight)||1)*100;
+   bar.style.width=pct+'%';
+   var idx=-1;
+   for(var i=0;i<targets.length;i++){
+     if(targets[i] && targets[i].getBoundingClientRect().top<140){idx=i;}
+   }
+   links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+ }
+ window.addEventListener('scroll',onScroll,{passive:true});
+ onScroll();
+})();
+</script>
+</body>
+</html>
