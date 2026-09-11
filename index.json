@@ -206,14 +206,14 @@
       "deployed": "2026-09-04 17:52"
     },
     {
-      "slug": "donpictures-eli5",
-      "url": "https://kooys2013.github.io/pages/donpictures-eli5/",
-      "deployed": "2026-09-11 19:31"
-    },
-    {
       "slug": "ai-agentos-v2",
       "url": "https://kooys2013.github.io/pages/ai-agentos-v2/",
       "deployed": "2026-09-11 19:31"
+    },
+    {
+      "slug": "donpictures-eli5",
+      "url": "https://kooys2013.github.io/pages/donpictures-eli5/",
+      "deployed": "2026-09-11 19:34"
     }
   ]
 }
