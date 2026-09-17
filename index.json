@@ -214,6 +214,11 @@
       "slug": "ai-agentos-v2",
       "url": "https://kooys2013.github.io/pages/ai-agentos-v2/",
       "deployed": "2026-09-11 21:36"
+    },
+    {
+      "slug": "gpt-yondae-prompts",
+      "url": "https://kooys2013.github.io/pages/gpt-yondae-prompts/",
+      "deployed": "2026-09-18 07:17"
     }
   ]
 }
