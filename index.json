@@ -256,13 +256,13 @@
       "deployed": "2026-09-18 22:04"
     },
     {
-      "slug": "ai-courses",
-      "url": "https://kooys2013.github.io/pages/ai-courses/",
-      "deployed": "2026-09-18 22:04"
-    },
-    {
       "slug": "techbridge-agent-engineering",
       "url": "https://kooys2013.github.io/pages/techbridge-agent-engineering/",
+      "deployed": "2026-09-18 22:57"
+    },
+    {
+      "slug": "ai-courses",
+      "url": "https://kooys2013.github.io/pages/ai-courses/",
       "deployed": "2026-09-18 22:57"
     }
   ]
