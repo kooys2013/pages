@@ -246,14 +246,14 @@
       "deployed": "2026-09-18 20:30"
     },
     {
-      "slug": "ai-courses",
-      "url": "https://kooys2013.github.io/pages/ai-courses/",
-      "deployed": "2026-09-18 20:31"
-    },
-    {
       "slug": "builder-design-marketing",
       "url": "https://kooys2013.github.io/pages/builder-design-marketing/",
       "deployed": "2026-09-18 21:21"
+    },
+    {
+      "slug": "ai-courses",
+      "url": "https://kooys2013.github.io/pages/ai-courses/",
+      "deployed": "2026-09-18 21:22"
     }
   ]
 }
