@@ -329,6 +329,11 @@
       "slug": "gamedev-tech",
       "url": "https://kooys2013.github.io/pages/gamedev-tech/",
       "deployed": "2026-10-02 13:25"
+    },
+    {
+      "slug": "gamedev-craft",
+      "url": "https://kooys2013.github.io/pages/gamedev-craft/",
+      "deployed": "2026-10-02 13:25"
     }
   ]
 }
