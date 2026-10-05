@@ -339,6 +339,11 @@
       "slug": "gamedev-insight",
       "url": "https://kooys2013.github.io/pages/gamedev-insight/",
       "deployed": "2026-10-02 13:25"
+    },
+    {
+      "slug": "gamedev-webhack",
+      "url": "https://kooys2013.github.io/pages/gamedev-webhack/",
+      "deployed": "2026-10-05 11:50"
     }
   ]
 }
